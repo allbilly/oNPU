@@ -1,0 +1,16 @@
+[Unit]
+Description=oNPU local inference appliance
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/oNPU
+ExecStart=%h/oNPU/.venv/bin/python -m onpu
+Environment=ONPU_BACKEND=%h/tinygrad
+Restart=on-failure
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=15
+
+[Install]
+WantedBy=default.target
