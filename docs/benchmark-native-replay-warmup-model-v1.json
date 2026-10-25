@@ -1,0 +1,2877 @@
+{
+  "schema": "onpu-native-replay-warmup-model-v1",
+  "updated_utc": "2026-10-24T15:40:57.764750+00:00",
+  "complete": true,
+  "scope": "Same pooled Qwen3.5-2B INT8 candidate, three full warmups/three measured128-input64-output requests atcontext512. Native replay compilation now occurs during existing warmup, without executing that graph twice. Profiling/source capture diagnostic; no timing-table promotion or quality/API qualification.",
+  "setup_fix_integrated": true,
+  "profiling_diagnostic_only": true,
+  "promote_to_timing_table": false,
+  "API_qualified": false,
+  "model_quality_qualified": false,
+  "native_constructor_events": [
+    {
+      "trial": 0,
+      "complete": true,
+      "phase": "decode",
+      "labels": 1495,
+      "seconds": 6.3575727480929345
+    },
+    {
+      "trial": 2,
+      "complete": true,
+      "phase": "prefill",
+      "labels": 1721,
+      "seconds": 10.01402214099653
+    }
+  ],
+  "constructors_only_during_warmup": true,
+  "measured_TTFT_ms": [
+    1799.9707472044975,
+    1801.7116819974035,
+    1801.7854718491435
+  ],
+  "all_six_IDs_match_INT8_control": true,
+  "phases": {
+    "prefill": {
+      "category_shares_percent": {
+        "CPU": 88.43823007949115,
+        "ROCKCHIP": 9.239397437513103,
+        "COPY": 2.322372482995765
+      },
+      "accounted_fraction_of_timed_requests": 0.9919752451860387,
+      "native_ms_per_invocation": 1786.7021320000001,
+      "top_labels": [
+        {
+          "label": "CPU:E_toks_1536_4",
+          "category": "CPU",
+          "delta_ms": 837.566058,
+          "calls": 72,
+          "mean_ms_per_call": 11.632861916666666,
+          "share_percent": 15.625922250816455
+        },
+        {
+          "label": "CPU:rockchip_cpu_gated_delta_scan",
+          "category": "CPU",
+          "delta_ms": 695.372317,
+          "calls": 54,
+          "mean_ms_per_call": 12.87726512962963,
+          "share_percent": 12.97310660696818
+        },
+        {
+          "label": "CPU:r_8_toks_28start_pos2Btoks29_64_4",
+          "category": "CPU",
+          "delta_ms": 651.583826,
+          "calls": 18,
+          "mean_ms_per_call": 36.199101444444445,
+          "share_percent": 12.156173364137828
+        },
+        {
+          "label": "CPU:E_16_32_32_4_4",
+          "category": "CPU",
+          "delta_ms": 519.358248,
+          "calls": 108,
+          "mean_ms_per_call": 4.808872666666667,
+          "share_percent": 9.689327219093506
+        },
+        {
+          "label": "CPU:r_32_16_4_32_4",
+          "category": "CPU",
+          "delta_ms": 479.720411,
+          "calls": 108,
+          "mean_ms_per_call": 4.441855657407408,
+          "share_percent": 8.949830013784673
+        },
+        {
+          "label": "CPU:r_32_8_64_4_4_28start_pos2Btoks29",
+          "category": "CPU",
+          "delta_ms": 455.045455,
+          "calls": 18,
+          "mean_ms_per_call": 25.280303055555557,
+          "share_percent": 8.489485494906956
+        },
+        {
+          "label": "CPU:E_32_16_32_4_4",
+          "category": "CPU",
+          "delta_ms": 275.52531,
+          "calls": 54,
+          "mean_ms_per_call": 5.102320555555555,
+          "share_percent": 5.140295539760401
+        },
+        {
+          "label": "CPU:E_16_32_128_4",
+          "category": "CPU",
+          "delta_ms": 239.712912,
+          "calls": 54,
+          "mean_ms_per_call": 4.439128,
+          "share_percent": 4.472167048379612
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_128_12288_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 192.248894,
+          "calls": 72,
+          "mean_ms_per_call": 2.6701235277777777,
+          "share_percent": 3.5866619017761754
+        },
+        {
+          "label": "CPU:rockchip_quantize",
+          "category": "CPU",
+          "delta_ms": 130.269685,
+          "calls": 627,
+          "mean_ms_per_call": 0.2077666427432217,
+          "share_percent": 2.430356328322405
+        },
+        {
+          "label": "CPU:rockchip_dequantize",
+          "category": "CPU",
+          "delta_ms": 112.30968,
+          "calls": 555,
+          "mean_ms_per_call": 0.20235978378378378,
+          "share_percent": 2.095288259274322
+        },
+        {
+          "label": "COPY:ROCKCHIP->CPU",
+          "category": "COPY",
+          "delta_ms": 106.197597,
+          "calls": 627,
+          "mean_ms_per_call": 0.16937415789473684,
+          "share_percent": 1.9812591234989358
+        }
+      ]
+    },
+    "decode": {
+      "category_shares_percent": {
+        "ROCKCHIP": 77.7688059223937,
+        "CPU": 21.42196881270733,
+        "COPY": 0.8092252648989727
+      },
+      "accounted_fraction_of_timed_requests": 0.9591483688489731,
+      "native_ms_per_invocation": 90.76930491534391,
+      "top_labels": [
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_12288_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 3884.952272,
+          "calls": 4536,
+          "mean_ms_per_call": 0.8564709594356261,
+          "share_percent": 22.645654327336704
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_24576_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 3124.453693,
+          "calls": 1890,
+          "mean_ms_per_call": 1.6531501021164021,
+          "share_percent": 18.212655739274574
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_2048_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 2302.436492,
+          "calls": 12474,
+          "mean_ms_per_call": 0.18457884335417668,
+          "share_percent": 13.421060867148213
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_2048_4096",
+          "category": "ROCKCHIP",
+          "delta_ms": 1654.982844,
+          "calls": 4536,
+          "mean_ms_per_call": 0.3648551243386243,
+          "share_percent": 9.647008966625627
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_6144_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 1535.9031469999998,
+          "calls": 3402,
+          "mean_ms_per_call": 0.45147064873603754,
+          "share_percent": 8.952885212493186
+        },
+        {
+          "label": "CPU:rockchip_cpu_gated_delta_scan",
+          "category": "CPU",
+          "delta_ms": 1075.7395579999998,
+          "calls": 3402,
+          "mean_ms_per_call": 0.3162079829512051,
+          "share_percent": 6.270559963448109
+        },
+        {
+          "label": "CPU:r_8_28start_pos2B129_64_4",
+          "category": "CPU",
+          "delta_ms": 611.497114,
+          "calls": 1134,
+          "mean_ms_per_call": 0.539239077601411,
+          "share_percent": 3.5644587877212426
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_5120_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 433.890295,
+          "calls": 1134,
+          "mean_ms_per_call": 0.3826193077601411,
+          "share_percent": 2.5291764090316087
+        },
+        {
+          "label": "CPU:E_16_32_4",
+          "category": "CPU",
+          "delta_ms": 389.82059,
+          "calls": 10206,
+          "mean_ms_per_call": 0.0381952371154223,
+          "share_percent": 2.2722910637648233
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_32_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 363.77601899999996,
+          "calls": 6804,
+          "mean_ms_per_call": 0.053465023368606694,
+          "share_percent": 2.120475465869164
+        },
+        {
+          "label": "CPU:r_8_64_4_28start_pos2B129",
+          "category": "CPU",
+          "delta_ms": 349.19726699999995,
+          "calls": 1134,
+          "mean_ms_per_call": 0.3079340978835978,
+          "share_percent": 2.035494916508127
+        },
+        {
+          "label": "CPU:r_16_32_4",
+          "category": "CPU",
+          "delta_ms": 277.415867,
+          "calls": 10206,
+          "mean_ms_per_call": 0.027181644816774445,
+          "share_percent": 1.6170761927446438
+        }
+      ]
+    }
+  },
+  "generated_CPU_sources": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/00d364b849c3123d9131d6ad0e04cf4049dbe98cdba45b8af9c96b9f3d252ab6.c",
+      "sha256": "00d364b849c3123d9131d6ad0e04cf4049dbe98cdba45b8af9c96b9f3d252ab6",
+      "function_names": [
+        "store_rows",
+        "cpu_gated_delta_scan_part",
+        "scan_pool_part",
+        "cpu_gated_delta_scan",
+        "cpu_gated_delta_scan_pooled",
+        "rockchip_cpu_gated_delta_scan"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/01da366b7e821df3ea81b0fb829c17ac9fcd3cd3f1560e36b78d55e8aaf1401e.c",
+      "sha256": "01da366b7e821df3ea81b0fb829c17ac9fcd3cd3f1560e36b78d55e8aaf1401e",
+      "function_names": [
+        "r_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/024f2665d4572544289f203752de515de03d5a90311357b13646a06470cc649d.c",
+      "sha256": "024f2665d4572544289f203752de515de03d5a90311357b13646a06470cc649d",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/0315605461a420a17412302c913703b6a6574e5dbeacbb0f739a8fc9f688cc3a.c",
+      "sha256": "0315605461a420a17412302c913703b6a6574e5dbeacbb0f739a8fc9f688cc3a",
+      "function_names": [
+        "E_512_32_2"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/0617469935855086cc4051e326be2ed3cd402453d918e39cfafaf523d3918558.c",
+      "sha256": "0617469935855086cc4051e326be2ed3cd402453d918e39cfafaf523d3918558",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/072afe877949dee7fe1f5eeb19bcac7a1f540b4a6b728f81b370a1f47253e749.c",
+      "sha256": "072afe877949dee7fe1f5eeb19bcac7a1f540b4a6b728f81b370a1f47253e749",
+      "function_names": [
+        "E_384_64_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/07c00ffeeb6d18d303919bb570c741bfa61a2b4db62f48066e1b9558bb64e2da.c",
+      "sha256": "07c00ffeeb6d18d303919bb570c741bfa61a2b4db62f48066e1b9558bb64e2da",
+      "function_names": [
+        "E_32768_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/0d92bcac1fa05adfd09bfaeec12261638009cf3e6ee701c87e93264fdf40bf5b.c",
+      "sha256": "0d92bcac1fa05adfd09bfaeec12261638009cf3e6ee701c87e93264fdf40bf5b",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/118badd9f092e79244c9d6b003053dc87afe0d48361d3314074a8a796f05a42c.c",
+      "sha256": "118badd9f092e79244c9d6b003053dc87afe0d48361d3314074a8a796f05a42c",
+      "function_names": [
+        "E_2_28start_pos2B129_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/133a4b1c391521aa1294984c890ed798c06369c68911f5ea9248da9cd1624a39.c",
+      "sha256": "133a4b1c391521aa1294984c890ed798c06369c68911f5ea9248da9cd1624a39",
+      "function_names": [
+        "r_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1638250ac38f8afbaf956742a6187443cbdaf99cb8626228501ac015ce01a67b.c",
+      "sha256": "1638250ac38f8afbaf956742a6187443cbdaf99cb8626228501ac015ce01a67b",
+      "function_names": [
+        "E_8_toks_32_2_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/176e323be5aa2d366dbe3b405ce08eef1e951754797b5ae5e5c2ed5189b2aaba.c",
+      "sha256": "176e323be5aa2d366dbe3b405ce08eef1e951754797b5ae5e5c2ed5189b2aaba",
+      "function_names": [
+        "E_2_toks_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1a6ddc7a48fb88f9264f9217a447f7a3e48249f062b0cae0b981b63750f10308.c",
+      "sha256": "1a6ddc7a48fb88f9264f9217a447f7a3e48249f062b0cae0b981b63750f10308",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1a9d402b74a396006907def8bccc52dcc5029003ceff692494462b8c3bb11531.c",
+      "sha256": "1a9d402b74a396006907def8bccc52dcc5029003ceff692494462b8c3bb11531",
+      "function_names": [
+        "E_1310720_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1abb8d909a43b0a05d21f6498e5ba592443f6e29b8c50ad0efe776d2dc4eacbe.c",
+      "sha256": "1abb8d909a43b0a05d21f6498e5ba592443f6e29b8c50ad0efe776d2dc4eacbe",
+      "function_names": [
+        "r_8_28start_pos2B129_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1b0883ae4775631e32c7c72c05727a13ee156bd1acecc070b2a5a701f3551dc3.c",
+      "sha256": "1b0883ae4775631e32c7c72c05727a13ee156bd1acecc070b2a5a701f3551dc3",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1c9850cad47ad96418e87821cead98c5845b6e17ac58c45d83cabe6dc4f2e189.c",
+      "sha256": "1c9850cad47ad96418e87821cead98c5845b6e17ac58c45d83cabe6dc4f2e189",
+      "function_names": [
+        "E_16_32_32_4_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1df2686ebff849579e17c26533cf2e64811a7d0baf6fe3b6596e6cd404ab5838.c",
+      "sha256": "1df2686ebff849579e17c26533cf2e64811a7d0baf6fe3b6596e6cd404ab5838",
+      "function_names": [
+        "E_8_toks_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1e23cd95744a70195cc479cbf92788b01a4fef28e155b45e6d6553a519386f41.c",
+      "sha256": "1e23cd95744a70195cc479cbf92788b01a4fef28e155b45e6d6553a519386f41",
+      "function_names": [
+        "r_8_toks_28start_pos2Btoks29_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1e77034fff58961bef29e75ba6b2dbf1c4a667b6496872038c6f0a1d8bb28e09.c",
+      "sha256": "1e77034fff58961bef29e75ba6b2dbf1c4a667b6496872038c6f0a1d8bb28e09",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1ea02751db6efad79e07927541ff1cbbc1d5eca6da3730885dd0a3bc36ef4b7a.c",
+      "sha256": "1ea02751db6efad79e07927541ff1cbbc1d5eca6da3730885dd0a3bc36ef4b7a",
+      "function_names": [
+        "E"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1efdb8f8dca399b76df526255155fd75839e64ad7b5ed3b2dfcc2e0c0514ce48.c",
+      "sha256": "1efdb8f8dca399b76df526255155fd75839e64ad7b5ed3b2dfcc2e0c0514ce48",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/1f23e2fb0ab3032022061c2bb3deb6ba0ec45b4336c11321eb189d4603c3ac5c.c",
+      "sha256": "1f23e2fb0ab3032022061c2bb3deb6ba0ec45b4336c11321eb189d4603c3ac5c",
+      "function_names": [
+        "E_80_64_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/2072f94bfa6784312fe90de41ac1962dadfc866bd68d25e91dae6cab60d0d18a.c",
+      "sha256": "2072f94bfa6784312fe90de41ac1962dadfc866bd68d25e91dae6cab60d0d18a",
+      "function_names": [
+        "E_163840_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/215fc0a07980def813c4bd070ffd0b09edcbbda7828e2d27830659b81ad6e539.c",
+      "sha256": "215fc0a07980def813c4bd070ffd0b09edcbbda7828e2d27830659b81ad6e539",
+      "function_names": [
+        "E_8192_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/24c930b1e93e8fc68ac3323c08f7698c0a0acd0aab995c343b05158ffffefa95.c",
+      "sha256": "24c930b1e93e8fc68ac3323c08f7698c0a0acd0aab995c343b05158ffffefa95",
+      "function_names": [
+        "r_8_toks_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/2515c0f77730219fa99d1365dde806bde08bd03564e3a33e57c575f398e9d216.c",
+      "sha256": "2515c0f77730219fa99d1365dde806bde08bd03564e3a33e57c575f398e9d216",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/293906127dc619f236650e52f53148dc2d86edc1ca3f7d2b3e65e2e7b11d31e1.c",
+      "sha256": "293906127dc619f236650e52f53148dc2d86edc1ca3f7d2b3e65e2e7b11d31e1",
+      "function_names": [
+        "r_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/295b78b07be548f99929bf3c4f42c5b73a4f855b37b21cac446b31fbbc4d9d39.c",
+      "sha256": "295b78b07be548f99929bf3c4f42c5b73a4f855b37b21cac446b31fbbc4d9d39",
+      "function_names": [
+        "store_rows",
+        "cpu_gated_delta_scan_part",
+        "scan_pool_part",
+        "cpu_gated_delta_scan",
+        "cpu_gated_delta_scan_pooled",
+        "rockchip_cpu_gated_delta_scan"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/2b6996919c5bcb9ca685716775f5154ffbba19dc88e70d0fec7f34d66439a374.c",
+      "sha256": "2b6996919c5bcb9ca685716775f5154ffbba19dc88e70d0fec7f34d66439a374",
+      "function_names": [
+        "E_64_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/2f1b044f54667190523d89a3fd142149d1c3a19a6997ff97203c36ec435bd839.c",
+      "sha256": "2f1b044f54667190523d89a3fd142149d1c3a19a6997ff97203c36ec435bd839",
+      "function_names": [
+        "E_2_toks_28start_pos2Btoks29_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/3103806b19109147a0b6751f583273a8c69153282be69e98c1b41234e5cfa3ca.c",
+      "sha256": "3103806b19109147a0b6751f583273a8c69153282be69e98c1b41234e5cfa3ca",
+      "function_names": [
+        "E_128_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/3226c25cb32576e4f680a3e72f1616f635c0f4596e4a2e5bab7cd72bcc7e203e.c",
+      "sha256": "3226c25cb32576e4f680a3e72f1616f635c0f4596e4a2e5bab7cd72bcc7e203e",
+      "function_names": [
+        "E_6144_3"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/328ff8904cd4376abac6f70ecd496a5f21e6849a72597ac45784de00d2359c84.c",
+      "sha256": "328ff8904cd4376abac6f70ecd496a5f21e6849a72597ac45784de00d2359c84",
+      "function_names": [
+        "E_2048_1024_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/344e54de8cd8b3cde5669f7625d9fd5b28fa25b63a777838c4e22c5ffa2f1cec.c",
+      "sha256": "344e54de8cd8b3cde5669f7625d9fd5b28fa25b63a777838c4e22c5ffa2f1cec",
+      "function_names": [
+        "r_32_16_4_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/34ff7ae009ac911c1b95de549a73bd4538c0aa5632874e735d767c4d13f3c31b.c",
+      "sha256": "34ff7ae009ac911c1b95de549a73bd4538c0aa5632874e735d767c4d13f3c31b",
+      "function_names": [
+        "E_8192_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/354995144fcd86641dc62fc34ef026deeb84e2959e09180c76a471d1b1bb7497.c",
+      "sha256": "354995144fcd86641dc62fc34ef026deeb84e2959e09180c76a471d1b1bb7497",
+      "function_names": [
+        "E_2621440_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/360f543dd12b9106ab9b64d629b50773cc9187dfc2e0e4f65c8ec36081544e6c.c",
+      "sha256": "360f543dd12b9106ab9b64d629b50773cc9187dfc2e0e4f65c8ec36081544e6c",
+      "function_names": [
+        "E"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/385af7d2626cc70bad2e9d80f167c5d7da9ae97751498b9680b71247446f2bab.c",
+      "sha256": "385af7d2626cc70bad2e9d80f167c5d7da9ae97751498b9680b71247446f2bab",
+      "function_names": [
+        "r_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/3bfd778de010213f7487d24b79de1f58aeff07c000b53e8503dc12cf4c7323a8.c",
+      "sha256": "3bfd778de010213f7487d24b79de1f58aeff07c000b53e8503dc12cf4c7323a8",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/3c3ee737819dd44c247c9dc9bc7b27a6fd1df5e21a519c7ecd009aebffc3502f.c",
+      "sha256": "3c3ee737819dd44c247c9dc9bc7b27a6fd1df5e21a519c7ecd009aebffc3502f",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/3e29924a7b0ca34feee5742f3b78acfad4c9ebc66e15641442cc7b16df537975.c",
+      "sha256": "3e29924a7b0ca34feee5742f3b78acfad4c9ebc66e15641442cc7b16df537975",
+      "function_names": [
+        "E_2048_3"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/41bb3997679aa05201fc0af5872b3c09f881b26daa63d452b242cabfe1ca2306.c",
+      "sha256": "41bb3997679aa05201fc0af5872b3c09f881b26daa63d452b242cabfe1ca2306",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/42597cb3a90e318df083a70fc04c2dbb49f9b285038ffd6644a9841b475e2ca9.c",
+      "sha256": "42597cb3a90e318df083a70fc04c2dbb49f9b285038ffd6644a9841b475e2ca9",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/436fa7d382c7a520c51b1a693b0bf00bf7772f269b1612fd9eb0a40f85e12a22.c",
+      "sha256": "436fa7d382c7a520c51b1a693b0bf00bf7772f269b1612fd9eb0a40f85e12a22",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/4696dddaee4652e6d6fdb60b995504d7d4a059bc7e43e5256cf0e65e4015638b.c",
+      "sha256": "4696dddaee4652e6d6fdb60b995504d7d4a059bc7e43e5256cf0e65e4015638b",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/477adfbb5766654d15a8675dc1ba747ee863b367abd2be2cf76ca9024d067b13.c",
+      "sha256": "477adfbb5766654d15a8675dc1ba747ee863b367abd2be2cf76ca9024d067b13",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/48694d1ecce9f273063536e760fe448f1d398063c9171ddd82d3a26ed5a422a5.c",
+      "sha256": "48694d1ecce9f273063536e760fe448f1d398063c9171ddd82d3a26ed5a422a5",
+      "function_names": [
+        "E_toks"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/4d15ff9957f076cc02ab9f9d3d2b4b94e9b50cad7bd0645e5aeff961ee4eae69.c",
+      "sha256": "4d15ff9957f076cc02ab9f9d3d2b4b94e9b50cad7bd0645e5aeff961ee4eae69",
+      "function_names": [
+        "E_4_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/4fa7b2ffe7320e54b2d062c1355383faa565300c268afc40a024f5214610c7c9.c",
+      "sha256": "4fa7b2ffe7320e54b2d062c1355383faa565300c268afc40a024f5214610c7c9",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/505154f1e51d7de0d11006f5aa1ddc9f3d73d9e026dab1658a6981a053c4c9b9.c",
+      "sha256": "505154f1e51d7de0d11006f5aa1ddc9f3d73d9e026dab1658a6981a053c4c9b9",
+      "function_names": [
+        "E_65536_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/529bf11f24f9e9e7778f69f7995588f3e79a7545ad33fed9c22cd9ddd5fdf2c5.c",
+      "sha256": "529bf11f24f9e9e7778f69f7995588f3e79a7545ad33fed9c22cd9ddd5fdf2c5",
+      "function_names": [
+        "E_64_1024_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/52a3f43038788e87b018e42e4c9458eb429860d954eb5213a23b6c1cafb114ee.c",
+      "sha256": "52a3f43038788e87b018e42e4c9458eb429860d954eb5213a23b6c1cafb114ee",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/544f86d1ebcbb312457cde00fccb07c6728ba6faa18dd39cc221d81f035022b5.c",
+      "sha256": "544f86d1ebcbb312457cde00fccb07c6728ba6faa18dd39cc221d81f035022b5",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/551424cf9c8d65dc6ef5a18d69cdab8f279093f308a7e9178640c1a58144e4ae.c",
+      "sha256": "551424cf9c8d65dc6ef5a18d69cdab8f279093f308a7e9178640c1a58144e4ae",
+      "function_names": [
+        "r_32_16_4_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5732b1833b9d9067f89a90a02745f10dfa827af64f21bc4494f8a4b42a0a4d2c.c",
+      "sha256": "5732b1833b9d9067f89a90a02745f10dfa827af64f21bc4494f8a4b42a0a4d2c",
+      "function_names": [
+        "E_28toks2A204829"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/57ee886b0700abff672ffcf8562d1c8db88b93ae4fe4253a25d0d7f03e2ca492.c",
+      "sha256": "57ee886b0700abff672ffcf8562d1c8db88b93ae4fe4253a25d0d7f03e2ca492",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/591ea65c3c86fade4d786628daff87cae896ea0e3a7b57f445f9a425e5e38602.c",
+      "sha256": "591ea65c3c86fade4d786628daff87cae896ea0e3a7b57f445f9a425e5e38602",
+      "function_names": [
+        "E_62080_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5a457e4f690d180c15494b270b1da93a3b15730965997efd363a45d62b6c1cbe.c",
+      "sha256": "5a457e4f690d180c15494b270b1da93a3b15730965997efd363a45d62b6c1cbe",
+      "function_names": [
+        "E_12582912_2"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5a49918e3cad8188a89b265877635755acc167474e407baeaa914cd85d21d977.c",
+      "sha256": "5a49918e3cad8188a89b265877635755acc167474e407baeaa914cd85d21d977",
+      "function_names": [
+        "E_toks_28start_pos2Btoks29"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5a60615a27c94dddadf869db547a3f5e1c73c905eb3294c2364b4bba3004cb21.c",
+      "sha256": "5a60615a27c94dddadf869db547a3f5e1c73c905eb3294c2364b4bba3004cb21",
+      "function_names": [
+        "all_finite_half",
+        "finite_half"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5aff7c90420c2a3cac69735aaa45eb313209b554cbf236650c090103830e7503.c",
+      "sha256": "5aff7c90420c2a3cac69735aaa45eb313209b554cbf236650c090103830e7503",
+      "function_names": [
+        "E_4194304_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5c82b9963617467267c9deba81db37285dc9090f013fb65ec8ddc159a304270c.c",
+      "sha256": "5c82b9963617467267c9deba81db37285dc9090f013fb65ec8ddc159a304270c",
+      "function_names": [
+        "E_64_64_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5d6886354e2b495ec1b05c6413074a46d4ad50bd3027d460d362a6fabb42b950.c",
+      "sha256": "5d6886354e2b495ec1b05c6413074a46d4ad50bd3027d460d362a6fabb42b950",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/5dfe1fa53ee48b11f7ba19479cc8ad7df1196646f4d15987e3c1d22d8ea80bd7.c",
+      "sha256": "5dfe1fa53ee48b11f7ba19479cc8ad7df1196646f4d15987e3c1d22d8ea80bd7",
+      "function_names": [
+        "E_32_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/602837ef952c3da94df04f9a5b11b79c46c9d097cf81671eb2d5994207700051.c",
+      "sha256": "602837ef952c3da94df04f9a5b11b79c46c9d097cf81671eb2d5994207700051",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/62b7f770dcd3fa1962d1adfb56ede842fb53db6be06e334c5d3c9decacdc6689.c",
+      "sha256": "62b7f770dcd3fa1962d1adfb56ede842fb53db6be06e334c5d3c9decacdc6689",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/6525bbdff8d7d5df56601778a4cab49be863704ff9a1a0d595ffa1ce6750998e.c",
+      "sha256": "6525bbdff8d7d5df56601778a4cab49be863704ff9a1a0d595ffa1ce6750998e",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/6a51d17ed3483837641d4d6904df53f367f47d342a0b85ee8c5a67a9592f6b6c.c",
+      "sha256": "6a51d17ed3483837641d4d6904df53f367f47d342a0b85ee8c5a67a9592f6b6c",
+      "function_names": [
+        "r_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/6a969319b3f8b4a25b70982439423453e156c7838bc3e0733722edc58fef9445.c",
+      "sha256": "6a969319b3f8b4a25b70982439423453e156c7838bc3e0733722edc58fef9445",
+      "function_names": [
+        "E"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/6bd960468b289e4503f55493f4e52e2bf8d1660c98374173e9814d0ddbc60623.c",
+      "sha256": "6bd960468b289e4503f55493f4e52e2bf8d1660c98374173e9814d0ddbc60623",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/6d29fa7937f24d51c5796d6f355e77425aed090a09c45bea3f13b0fd51d65c71.c",
+      "sha256": "6d29fa7937f24d51c5796d6f355e77425aed090a09c45bea3f13b0fd51d65c71",
+      "function_names": [
+        "part",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/6f7f3c2ec09cc729d4c522606c0e384075da3b68a41f6e60ea1e4f3cbeab3ce0.c",
+      "sha256": "6f7f3c2ec09cc729d4c522606c0e384075da3b68a41f6e60ea1e4f3cbeab3ce0",
+      "function_names": [
+        "r_2_4_28start_pos2B129"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/71372248e6b248eaef54702fbf20e1819cdc29f3d01fa2011f24f3f620826d66.c",
+      "sha256": "71372248e6b248eaef54702fbf20e1819cdc29f3d01fa2011f24f3f620826d66",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/739f622b10f78ef3b4611774156a0993c93d5b76a57c2d3a40e2460566e4c55a.c",
+      "sha256": "739f622b10f78ef3b4611774156a0993c93d5b76a57c2d3a40e2460566e4c55a",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/73ac4f212f2944ec56db7c1c47e32c7d390e2e24382b5cbe3bf045559ff29110.c",
+      "sha256": "73ac4f212f2944ec56db7c1c47e32c7d390e2e24382b5cbe3bf045559ff29110",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/75175680546915885c0028f347603582d0a0e8b4fa621c4dadf6c5282287c5d2.c",
+      "sha256": "75175680546915885c0028f347603582d0a0e8b4fa621c4dadf6c5282287c5d2",
+      "function_names": [
+        "gpt2_argmax"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/75843bc594a9d537403be060c90f0fb481b8c828558b6807ccf9731054a0ffee.c",
+      "sha256": "75843bc594a9d537403be060c90f0fb481b8c828558b6807ccf9731054a0ffee",
+      "function_names": [
+        "r_8_64_4_28start_pos2B129"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7708035d9586581dd82ec11ffcc69839225bc2746368bfba96105552fcec1596.c",
+      "sha256": "7708035d9586581dd82ec11ffcc69839225bc2746368bfba96105552fcec1596",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/77236c70fb2a0d230e1e839c712726db83a77a510f0ae71a3004409e22e82040.c",
+      "sha256": "77236c70fb2a0d230e1e839c712726db83a77a510f0ae71a3004409e22e82040",
+      "function_names": [
+        "E_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/78587ac875c5c9c62d152f40f8ff922fa0919fbfbb35e5a93abd3282eadd88ce.c",
+      "sha256": "78587ac875c5c9c62d152f40f8ff922fa0919fbfbb35e5a93abd3282eadd88ce",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7aae7cd7d650546ebd74b6a3960ef5c88d0832dcf8c3c1648e8e475a54edac08.c",
+      "sha256": "7aae7cd7d650546ebd74b6a3960ef5c88d0832dcf8c3c1648e8e475a54edac08",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7ada2d409edac2868900c5342c481c5733f8b300fea0c246730dc06b9c1c515b.c",
+      "sha256": "7ada2d409edac2868900c5342c481c5733f8b300fea0c246730dc06b9c1c515b",
+      "function_names": [
+        "E_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7c4ab630d66c4450d2ec2dade1c3a9ecaa12d479976a7fd0290abbfe5647d919.c",
+      "sha256": "7c4ab630d66c4450d2ec2dade1c3a9ecaa12d479976a7fd0290abbfe5647d919",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7d12e75c77a50ddb72645c9f41f10da0f24586f972d3ddb5fa6624c862176ea9.c",
+      "sha256": "7d12e75c77a50ddb72645c9f41f10da0f24586f972d3ddb5fa6624c862176ea9",
+      "function_names": [
+        "E_6144_3"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7d5f442e85cffe1ad737188b45d8c68a2b4c92120ad929abf7c5a724532a647c.c",
+      "sha256": "7d5f442e85cffe1ad737188b45d8c68a2b4c92120ad929abf7c5a724532a647c",
+      "function_names": [
+        "E_1024_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7eb457fcaa6ccb0812f6f05330876e09f28ec1902974efacdbbab6c4b8e79aa7.c",
+      "sha256": "7eb457fcaa6ccb0812f6f05330876e09f28ec1902974efacdbbab6c4b8e79aa7",
+      "function_names": [
+        "E_1048576_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7f0c46b4c860b867deaa49894e5e90f10dcc227512238120c80f394f47ce63ac.c",
+      "sha256": "7f0c46b4c860b867deaa49894e5e90f10dcc227512238120c80f394f47ce63ac",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/7f48738924bfe137f2007b217beed9004611b55b4fcf8eca44f6390a459ce5bb.c",
+      "sha256": "7f48738924bfe137f2007b217beed9004611b55b4fcf8eca44f6390a459ce5bb",
+      "function_names": [
+        "r_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/80c3c7d250884cc385ed6d91418dac8b0e7b0b00b274612d1aba35930051fe38.c",
+      "sha256": "80c3c7d250884cc385ed6d91418dac8b0e7b0b00b274612d1aba35930051fe38",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/82947353d09c1477317c3f6af0e1cde22258725cac671d3b6d7822a8bfd520ef.c",
+      "sha256": "82947353d09c1477317c3f6af0e1cde22258725cac671d3b6d7822a8bfd520ef",
+      "function_names": [
+        "E_65536_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/83323d3cdd84ca4359df5d90f23ba5c185b74690b7e23767497eb0584131f499.c",
+      "sha256": "83323d3cdd84ca4359df5d90f23ba5c185b74690b7e23767497eb0584131f499",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/83354ce2e4847a52341bc5f6b0f111feb43fdba47d9621d73e4a27f63c49db79.c",
+      "sha256": "83354ce2e4847a52341bc5f6b0f111feb43fdba47d9621d73e4a27f63c49db79",
+      "function_names": [
+        "r_2_toks_4_28start_pos2Btoks29"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8402c9a5ffa3afd95683895f8d69f991bea3faba448fcba0b2abab955fa9a53a.c",
+      "sha256": "8402c9a5ffa3afd95683895f8d69f991bea3faba448fcba0b2abab955fa9a53a",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/84e355e76b12ed86221ff73b42195210a063199be5ed8c03c4d95533dd73a8c3.c",
+      "sha256": "84e355e76b12ed86221ff73b42195210a063199be5ed8c03c4d95533dd73a8c3",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/84fc994a4daebe0e6e2cdce24fbad34658fe1028db03d3c09eee6cfc1eeefc18.c",
+      "sha256": "84fc994a4daebe0e6e2cdce24fbad34658fe1028db03d3c09eee6cfc1eeefc18",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8692da12b5d28d0f5513ab03e2bf285bfd4a838f36d56ac82f1a8d29a06e6b86.c",
+      "sha256": "8692da12b5d28d0f5513ab03e2bf285bfd4a838f36d56ac82f1a8d29a06e6b86",
+      "function_names": [
+        "E_2048_512_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8890e559d145f1c7ed256360fb0365ca928c21ed301f616aafccf08934c91409.c",
+      "sha256": "8890e559d145f1c7ed256360fb0365ca928c21ed301f616aafccf08934c91409",
+      "function_names": [
+        "E_16_32_32_4_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/89a28d05411162990fe977bb42b53945454e69d0b281d2446d7e3cd71e4b6d66.c",
+      "sha256": "89a28d05411162990fe977bb42b53945454e69d0b281d2446d7e3cd71e4b6d66",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8aa7e333295f91bc5cd6eba8bb0ac0629ed750775fe67e25ce0f08cdd21c553c.c",
+      "sha256": "8aa7e333295f91bc5cd6eba8bb0ac0629ed750775fe67e25ce0f08cdd21c553c",
+      "function_names": [
+        "E_64_1024_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8b7af297b60fcec0d6b19a3f862e469bdec0785553d3200d430841ea8dcca288.c",
+      "sha256": "8b7af297b60fcec0d6b19a3f862e469bdec0785553d3200d430841ea8dcca288",
+      "function_names": [
+        "r_28start_pos2Btoks29_28start_pos2Btoks29"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8cc88a3d2bb2a926dbb4f60c53124fad61968980d172ce6fb64b57d819b5a4b1.c",
+      "sha256": "8cc88a3d2bb2a926dbb4f60c53124fad61968980d172ce6fb64b57d819b5a4b1",
+      "function_names": [
+        "r_2_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8de690cd3443138ccf35b121fa0bea9df37915c3b11ac25ffa566c7f7fc02fe3.c",
+      "sha256": "8de690cd3443138ccf35b121fa0bea9df37915c3b11ac25ffa566c7f7fc02fe3",
+      "function_names": [
+        "r_toks_toks"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8f094bdba7ad6057c0d4a748dee875c1091d85126113543f60f7e1cd0224ac06.c",
+      "sha256": "8f094bdba7ad6057c0d4a748dee875c1091d85126113543f60f7e1cd0224ac06",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/8f1414858efd7f3ecf0f65c522978f6a25c3d3851f80a761cbdd806331a4f084.c",
+      "sha256": "8f1414858efd7f3ecf0f65c522978f6a25c3d3851f80a761cbdd806331a4f084",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/91a5940f7940a7b4f90b0eecf1bf114c3a37300c82335c5e6b2da596b87362a4.c",
+      "sha256": "91a5940f7940a7b4f90b0eecf1bf114c3a37300c82335c5e6b2da596b87362a4",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/92b8b7b237e29f0e0d0efd90fe56cf146980e07156d6f3acbc46dcf40559aa26.c",
+      "sha256": "92b8b7b237e29f0e0d0efd90fe56cf146980e07156d6f3acbc46dcf40559aa26",
+      "function_names": [
+        "E_768_64_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/9503846e8e3303d9715b94b30edcfd3c32eeed3f8174a2ca8dc382852aa4cf83.c",
+      "sha256": "9503846e8e3303d9715b94b30edcfd3c32eeed3f8174a2ca8dc382852aa4cf83",
+      "function_names": [
+        "norm_part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_cpu_rmsnorm",
+        "norm_part"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/97eb13138b77640d8a92b89e4aa1391c68c5dec1f9b6e133c3d7296d2357e280.c",
+      "sha256": "97eb13138b77640d8a92b89e4aa1391c68c5dec1f9b6e133c3d7296d2357e280",
+      "function_names": [
+        "r_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/993677fd9f2eca2e547325767d1fdbb2576344a9e9f097b60d1012c4266a5606.c",
+      "sha256": "993677fd9f2eca2e547325767d1fdbb2576344a9e9f097b60d1012c4266a5606",
+      "function_names": [
+        "E_64_128_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/9aa87d355b96b85a4d5e142aad68af159bbf68bee92549d18075d74016b883bf.c",
+      "sha256": "9aa87d355b96b85a4d5e142aad68af159bbf68bee92549d18075d74016b883bf",
+      "function_names": [
+        "E_6144_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/9ad68fc661883f93dc91e8c117f164961284fa04d5c908353f904d5b0d20e3ec.c",
+      "sha256": "9ad68fc661883f93dc91e8c117f164961284fa04d5c908353f904d5b0d20e3ec",
+      "function_names": [
+        "r_512_4_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/9b412fc2eef607d2d7fb527a9d41a265aed36937207d4f9c0470c2b37432e7d9.c",
+      "sha256": "9b412fc2eef607d2d7fb527a9d41a265aed36937207d4f9c0470c2b37432e7d9",
+      "function_names": [
+        "E_8_32_2_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/9dfa4f33eaf5a850305f82d59008c3d5d2bb8d24aa10fccab8d14a6cff2db0a1.c",
+      "sha256": "9dfa4f33eaf5a850305f82d59008c3d5d2bb8d24aa10fccab8d14a6cff2db0a1",
+      "function_names": [
+        "E_28toks2A204829"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/9e0c23169713604ba1e1be2d3e82a57570db573b96f3006384499c724380a554.c",
+      "sha256": "9e0c23169713604ba1e1be2d3e82a57570db573b96f3006384499c724380a554",
+      "function_names": [
+        "E_393216_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a052e91af9ffe982112b90a2a77d5ebf8a064f08aad45e0548cb90e6260d6b58.c",
+      "sha256": "a052e91af9ffe982112b90a2a77d5ebf8a064f08aad45e0548cb90e6260d6b58",
+      "function_names": [
+        "r_8_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a0c92dc8e0d8880bdfe199fb07d06e44ed86edcaf4e838a84cad945babe4b235.c",
+      "sha256": "a0c92dc8e0d8880bdfe199fb07d06e44ed86edcaf4e838a84cad945babe4b235",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a0f3b1a8264dae3558e82f833d25b3bb8152ea7fc09dee61080896f2d9b4430d.c",
+      "sha256": "a0f3b1a8264dae3558e82f833d25b3bb8152ea7fc09dee61080896f2d9b4430d",
+      "function_names": [
+        "E_toks_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a198cf20c370c7b015ee4b64eebaddf9ef940388b861cd6b39114ca806762620.c",
+      "sha256": "a198cf20c370c7b015ee4b64eebaddf9ef940388b861cd6b39114ca806762620",
+      "function_names": [
+        "all_finite_half",
+        "replay"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a1eba0660a07ec1e82f2be117531fc3365b992a66ed0a6be36e06c6959b3b1f1.c",
+      "sha256": "a1eba0660a07ec1e82f2be117531fc3365b992a66ed0a6be36e06c6959b3b1f1",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a2cab94c159fe1b93ee6d5492fcf0241546bc37ff843fc090a0c3e99b3696756.c",
+      "sha256": "a2cab94c159fe1b93ee6d5492fcf0241546bc37ff843fc090a0c3e99b3696756",
+      "function_names": [
+        "r_2_toks_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a3271f6d68ce70200cb6e3bd85c5f9fc98b2bde96dc76817fef32be6fc395ca2.c",
+      "sha256": "a3271f6d68ce70200cb6e3bd85c5f9fc98b2bde96dc76817fef32be6fc395ca2",
+      "function_names": [
+        "E_160_64_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a48f242c51df512d0f3a860de6be33ae2d3c07f9f518e1e925059975d74637ab.c",
+      "sha256": "a48f242c51df512d0f3a860de6be33ae2d3c07f9f518e1e925059975d74637ab",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a6da3fe9f383a9d22a91705a6cc48b299fd0e7ed2d78e8b58343338a851faafd.c",
+      "sha256": "a6da3fe9f383a9d22a91705a6cc48b299fd0e7ed2d78e8b58343338a851faafd",
+      "function_names": [
+        "E_toks_1024_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a6e89c545ae068c4e476c250b414d868e6edd11481a243f5be84b1624e6c70e6.c",
+      "sha256": "a6e89c545ae068c4e476c250b414d868e6edd11481a243f5be84b1624e6c70e6",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a7e23bfa1f5f72a9efcd7872f66e302ab2640ff0cb513b93d7bd3c362c0f41d2.c",
+      "sha256": "a7e23bfa1f5f72a9efcd7872f66e302ab2640ff0cb513b93d7bd3c362c0f41d2",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/a7f88f4febf68f521fb05cb54d0bc4475e73fa19d4efbf5b43b65e26228d7e01.c",
+      "sha256": "a7f88f4febf68f521fb05cb54d0bc4475e73fa19d4efbf5b43b65e26228d7e01",
+      "function_names": [
+        "E_1024_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/aa9e5ef402d6bbc5076d54cb0ff7750113011b4b86d0fc73e895b24f609dd8fb.c",
+      "sha256": "aa9e5ef402d6bbc5076d54cb0ff7750113011b4b86d0fc73e895b24f609dd8fb",
+      "function_names": [
+        "all_finite_half",
+        "replay"
+      ],
+      "trial_first_observed": 2
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ab850e721f2c04fcfa8c5941366a94df22d975f0f03c700e68da72983ea273f2.c",
+      "sha256": "ab850e721f2c04fcfa8c5941366a94df22d975f0f03c700e68da72983ea273f2",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/adbd4425f32c3cc22aed86d2d2cf3b51240df4a413d091b7263e2dafd3e80be3.c",
+      "sha256": "adbd4425f32c3cc22aed86d2d2cf3b51240df4a413d091b7263e2dafd3e80be3",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/afdd4b2561729a8ea6daceab2dbae189cbbbe8ee9855026b30b9dc200af4208d.c",
+      "sha256": "afdd4b2561729a8ea6daceab2dbae189cbbbe8ee9855026b30b9dc200af4208d",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b1c26198f0593a898a32a1722b739a0b20bb111de8303b28052767454cf4c783.c",
+      "sha256": "b1c26198f0593a898a32a1722b739a0b20bb111de8303b28052767454cf4c783",
+      "function_names": [
+        "E_2_32_2_4_2"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b1d2596bf6bc4f83c7e27e0779e87a340709f4796ccfe47b33729fb14b8386af.c",
+      "sha256": "b1d2596bf6bc4f83c7e27e0779e87a340709f4796ccfe47b33729fb14b8386af",
+      "function_names": [
+        "E_toks_1536_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b28d3019f0b516bb201967ba17f5533903094e4e68b5737adf5b54dc9d3e129c.c",
+      "sha256": "b28d3019f0b516bb201967ba17f5533903094e4e68b5737adf5b54dc9d3e129c",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b3aedb17304612cf4617fb2204a7257c0c6bc5412d9be7f7237cc5d5f2a5aaa4.c",
+      "sha256": "b3aedb17304612cf4617fb2204a7257c0c6bc5412d9be7f7237cc5d5f2a5aaa4",
+      "function_names": [
+        "E_16_32_128_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b44d3371c54ea69b0452161a9a1b5dcb4f19cf6cd403e79be4f0550dca38f453.c",
+      "sha256": "b44d3371c54ea69b0452161a9a1b5dcb4f19cf6cd403e79be4f0550dca38f453",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b54f21f931fe4efb4aea3f5365225ba447a4a5d99e8b143fcd6c3412f4c1fddd.c",
+      "sha256": "b54f21f931fe4efb4aea3f5365225ba447a4a5d99e8b143fcd6c3412f4c1fddd",
+      "function_names": [
+        "E_2048_64_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b5eb39b2688ece4e09633c0d8920501e875feaf2a4c5ac2433e0409bc874347c.c",
+      "sha256": "b5eb39b2688ece4e09633c0d8920501e875feaf2a4c5ac2433e0409bc874347c",
+      "function_names": [
+        "r_2_toks_4_28start_pos2Btoks29"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b60b475dffb7d8363874557396273b5f654b846997f8b263362e3f92b68bc599.c",
+      "sha256": "b60b475dffb7d8363874557396273b5f654b846997f8b263362e3f92b68bc599",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b82c92a4aa402d29119b2c04e7cd5b3c80e3bb438685b4e69b36d7d392a691c7.c",
+      "sha256": "b82c92a4aa402d29119b2c04e7cd5b3c80e3bb438685b4e69b36d7d392a691c7",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b92b84d2502974075d0a537ec28c424cc6d5136cf265b8cfe3d59748e27d386e.c",
+      "sha256": "b92b84d2502974075d0a537ec28c424cc6d5136cf265b8cfe3d59748e27d386e",
+      "function_names": [
+        "E_64_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b935a376edf06010406dd3f1c0073b9ea0b257547168a115425e21a56ae9aa44.c",
+      "sha256": "b935a376edf06010406dd3f1c0073b9ea0b257547168a115425e21a56ae9aa44",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b9f1e5a3f37c82258e32c72530547c9d75c72dc78a066979f0094579e27b5520.c",
+      "sha256": "b9f1e5a3f37c82258e32c72530547c9d75c72dc78a066979f0094579e27b5520",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/bb654aa0e1e29d8d28e763e9e9695396681d0dba8b4cc491a0027456ea73aa62.c",
+      "sha256": "bb654aa0e1e29d8d28e763e9e9695396681d0dba8b4cc491a0027456ea73aa62",
+      "function_names": [
+        "E_131_1536_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/bbcff8190f9a4eb4f237e6da1a62eac4a91b2fc64ef67d2d18e3ec6245b68ae5.c",
+      "sha256": "bbcff8190f9a4eb4f237e6da1a62eac4a91b2fc64ef67d2d18e3ec6245b68ae5",
+      "function_names": [
+        "E_131072_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/bcade576d6529656ce45bdf8e69ed6680e001a7cda5a59c4a66f36b1ce3996aa.c",
+      "sha256": "bcade576d6529656ce45bdf8e69ed6680e001a7cda5a59c4a66f36b1ce3996aa",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/be08fac5c23766875137b1354bdaa1069afc4af48d2f40f7349bf7eacb6a911c.c",
+      "sha256": "be08fac5c23766875137b1354bdaa1069afc4af48d2f40f7349bf7eacb6a911c",
+      "function_names": [
+        "r_2_4_28start_pos2B129"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/bef3a299e771f44e7b0d42e942fc385fdb2159bcf099de0b7a50bd49a5cb9bcf.c",
+      "sha256": "bef3a299e771f44e7b0d42e942fc385fdb2159bcf099de0b7a50bd49a5cb9bcf",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/bfcf501c943f5480f89b4659d2a2b75e5d0a5cdb3f819ce39be12183a2778a05.c",
+      "sha256": "bfcf501c943f5480f89b4659d2a2b75e5d0a5cdb3f819ce39be12183a2778a05",
+      "function_names": [
+        "r_32_8_64_4_4_28start_pos2Btoks29"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/c2b7ea5573ae8d8cfe5be1b09159d954603380422d57acd453d5bc9de05e11c6.c",
+      "sha256": "c2b7ea5573ae8d8cfe5be1b09159d954603380422d57acd453d5bc9de05e11c6",
+      "function_names": [
+        "E_131072_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/c62d4630a01963d200751e5d3f108ddfac940bcbc4277a02974292d51f542c66.c",
+      "sha256": "c62d4630a01963d200751e5d3f108ddfac940bcbc4277a02974292d51f542c66",
+      "function_names": [
+        "E_192_64_32_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/c6555da6d5afbf117d6f91d5dbf29d9516616feda320f566f6f024b856d241d8.c",
+      "sha256": "c6555da6d5afbf117d6f91d5dbf29d9516616feda320f566f6f024b856d241d8",
+      "function_names": [
+        "E_6144_3"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/c69d92c185b321c944c90f74943467667325d88cd22b7ac8846347d48ad227a0.c",
+      "sha256": "c69d92c185b321c944c90f74943467667325d88cd22b7ac8846347d48ad227a0",
+      "function_names": [
+        "E_4_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/c712dc7c0cba354f1e67c9454145cecd55541d75b38b4cfafd98560edafdb72a.c",
+      "sha256": "c712dc7c0cba354f1e67c9454145cecd55541d75b38b4cfafd98560edafdb72a",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/c97a802ff89155dd2e892f6cd8b7f4ccf3b5499ecf53af0f009577b7850c167b.c",
+      "sha256": "c97a802ff89155dd2e892f6cd8b7f4ccf3b5499ecf53af0f009577b7850c167b",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/c9f9edf8e9b04b3f79a4f5a8794765fd4affbf23a9a93f931ea6b2136be581f0.c",
+      "sha256": "c9f9edf8e9b04b3f79a4f5a8794765fd4affbf23a9a93f931ea6b2136be581f0",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ce690800373712fcdbab82bed92d0fdfb6b505c2356daaf07d9d175462ee3bc5.c",
+      "sha256": "ce690800373712fcdbab82bed92d0fdfb6b505c2356daaf07d9d175462ee3bc5",
+      "function_names": [
+        "E_6144_3"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/d0909a5872fcfe29d41012d60c75a7dc887e157162d06c94c03cea9f81f4401e.c",
+      "sha256": "d0909a5872fcfe29d41012d60c75a7dc887e157162d06c94c03cea9f81f4401e",
+      "function_names": [
+        "E_1024_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/d12584685f553c3bffe92efe672ab6825662f0de52c44fc7fe1674fdf16a693b.c",
+      "sha256": "d12584685f553c3bffe92efe672ab6825662f0de52c44fc7fe1674fdf16a693b",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/d5714fc215909afbabc03bf67c083ca2ec08a464c7c26f654be7e3a7ae82502a.c",
+      "sha256": "d5714fc215909afbabc03bf67c083ca2ec08a464c7c26f654be7e3a7ae82502a",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/d57e280329017855c4ae76b974967c178eeee40086e5ab58edae4dc2131e44c2.c",
+      "sha256": "d57e280329017855c4ae76b974967c178eeee40086e5ab58edae4dc2131e44c2",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/d619e3947c8d62d62fb70ba370f7b03d8fa0f15b6d5c5c281ecd4b887854b41f.c",
+      "sha256": "d619e3947c8d62d62fb70ba370f7b03d8fa0f15b6d5c5c281ecd4b887854b41f",
+      "function_names": [
+        "E_2_toks_32_2_4_2"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/d9b09e0f65b3a38b8dcb3fa2881a730f517d198e19aba797df0ae0aae0309c89.c",
+      "sha256": "d9b09e0f65b3a38b8dcb3fa2881a730f517d198e19aba797df0ae0aae0309c89",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/dad46e59b40c54b84bbf01a1a1cf67228c5cc58df3ca1e4980b3525c3b837a51.c",
+      "sha256": "dad46e59b40c54b84bbf01a1a1cf67228c5cc58df3ca1e4980b3525c3b837a51",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/dadd790dd0786fdf792e8b53daa69e3140f7894fcf6dac8f603a0e1d271d847d.c",
+      "sha256": "dadd790dd0786fdf792e8b53daa69e3140f7894fcf6dac8f603a0e1d271d847d",
+      "function_names": [
+        "E_128_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/dd8a809ab6de9a02bd70d0e7c4e441e837dad487de044284c80b3d2a1b3c8827.c",
+      "sha256": "dd8a809ab6de9a02bd70d0e7c4e441e837dad487de044284c80b3d2a1b3c8827",
+      "function_names": [
+        "part",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/df78a17c490179b9a821138341cee3fa089202441f0848aa3fa48f8a7f1553c1.c",
+      "sha256": "df78a17c490179b9a821138341cee3fa089202441f0848aa3fa48f8a7f1553c1",
+      "function_names": [
+        "E_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/e06d283f73439e4e6bee90da60c8b78680416551c0f22de8f07b5d0d1bda5ef5.c",
+      "sha256": "e06d283f73439e4e6bee90da60c8b78680416551c0f22de8f07b5d0d1bda5ef5",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/e7cb914d96a667fff46049e94cdf12b6bd6fa3e6ebebf41a8dcec55a15fc13c2.c",
+      "sha256": "e7cb914d96a667fff46049e94cdf12b6bd6fa3e6ebebf41a8dcec55a15fc13c2",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/e8410c4b1c0326403d631b3fa6020fbe9a57ff14b64f057dc88e1ca19bd22c3b.c",
+      "sha256": "e8410c4b1c0326403d631b3fa6020fbe9a57ff14b64f057dc88e1ca19bd22c3b",
+      "function_names": [
+        "E_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/e896750f0a27bf174fb88897d483c6e1860917e641f6b28f1b9f775c4b74a465.c",
+      "sha256": "e896750f0a27bf174fb88897d483c6e1860917e641f6b28f1b9f775c4b74a465",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/eb5843683602c012893c847d7213c0ca4b357e8c107759a07d5ebcf7445d6831.c",
+      "sha256": "eb5843683602c012893c847d7213c0ca4b357e8c107759a07d5ebcf7445d6831",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ec9651c516b2225e2cbdabba4c53c1486d70fec003a77d55764bd3b2f0f8e745.c",
+      "sha256": "ec9651c516b2225e2cbdabba4c53c1486d70fec003a77d55764bd3b2f0f8e745",
+      "function_names": [
+        "E_262144_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ed34b5457a413c33a49fa116b36a910f4b3a8e839a347c0dfedc33f95198764c.c",
+      "sha256": "ed34b5457a413c33a49fa116b36a910f4b3a8e839a347c0dfedc33f95198764c",
+      "function_names": [
+        "E_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ee59191140c1a4df603f3b77e2e869095d01a37ad5d4afe27acb2726467df82c.c",
+      "sha256": "ee59191140c1a4df603f3b77e2e869095d01a37ad5d4afe27acb2726467df82c",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_quantize"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ef4172af31bb3059b95710e287f5ae2525993eabf4abdfb479988f2803c99940.c",
+      "sha256": "ef4172af31bb3059b95710e287f5ae2525993eabf4abdfb479988f2803c99940",
+      "function_names": [
+        "E_28toks2A204829"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/eff9999a942c3532f7963ecc06b510e1fcb01c397b8634d3f9b5d0b4e45e803e.c",
+      "sha256": "eff9999a942c3532f7963ecc06b510e1fcb01c397b8634d3f9b5d0b4e45e803e",
+      "function_names": [
+        "E_128_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f0a8023e91a1e92ed643b7bfef9173ce43619710bf24a3bd05b457cc409dc7c1.c",
+      "sha256": "f0a8023e91a1e92ed643b7bfef9173ce43619710bf24a3bd05b457cc409dc7c1",
+      "function_names": [
+        "r_128_16_32_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f2351933a072f755edcc50bb7adc0a0dbf64193f524bc335c78cd309b97bf7ba.c",
+      "sha256": "f2351933a072f755edcc50bb7adc0a0dbf64193f524bc335c78cd309b97bf7ba",
+      "function_names": [
+        "E_16777216_3"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f551b2d570437c2d44b4450eaa37501a60ab009c5aa9116f00919f07d51f708a.c",
+      "sha256": "f551b2d570437c2d44b4450eaa37501a60ab009c5aa9116f00919f07d51f708a",
+      "function_names": [
+        "part",
+        "pthread_create",
+        "pthread_join",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f691e54939d00c27361d7855ac7dbb1c22f95e896dfff40c841408d4729fcab1.c",
+      "sha256": "f691e54939d00c27361d7855ac7dbb1c22f95e896dfff40c841408d4729fcab1",
+      "function_names": [
+        "E_128_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f69ea2b505750fb92cb39468216b23a209307ff7235f2556f8e563a10fe8d50b.c",
+      "sha256": "f69ea2b505750fb92cb39468216b23a209307ff7235f2556f8e563a10fe8d50b",
+      "function_names": [
+        "part",
+        "rockchip_dequantize"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f7286406a9387636ba0bc0b8dc80195477c86a56bf43b0e00e24b50c06a98deb.c",
+      "sha256": "f7286406a9387636ba0bc0b8dc80195477c86a56bf43b0e00e24b50c06a98deb",
+      "function_names": [
+        "E_524288_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f9bc249971d08bf9f9892044897080a30d3a869ed143f82ba0cb75187fd6e066.c",
+      "sha256": "f9bc249971d08bf9f9892044897080a30d3a869ed143f82ba0cb75187fd6e066",
+      "function_names": [
+        "E_toks_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/f9c6c521b3b6908a4d7877f2805032176873eb2e7240cc26abe09b61269011de.c",
+      "sha256": "f9c6c521b3b6908a4d7877f2805032176873eb2e7240cc26abe09b61269011de",
+      "function_names": [
+        "E_131072_8_4"
+      ],
+      "trial_first_observed": null
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/fbcc4d7732156c54276ca2af310bd8a1eb8d7dd22f78f666bb013a87155fcd92.c",
+      "sha256": "fbcc4d7732156c54276ca2af310bd8a1eb8d7dd22f78f666bb013a87155fcd92",
+      "function_names": [
+        "E_2_toks_28start_pos2Btoks29_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/fca20361c99cac26a0cdf3c8b99e52adab43f49299c30166533db40d3ebb7a38.c",
+      "sha256": "fca20361c99cac26a0cdf3c8b99e52adab43f49299c30166533db40d3ebb7a38",
+      "function_names": [
+        "E_128_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/fd7f99241a78af57d6a1fb1358670a5f2b44e54ec46a0ede3683f4a1d469c3bf.c",
+      "sha256": "fd7f99241a78af57d6a1fb1358670a5f2b44e54ec46a0ede3683f4a1d469c3bf",
+      "function_names": [
+        "E_4_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ff47a51c76651e19a6fdba1464b98f350049ea5ca6c0a45b34091121cd953ccc.c",
+      "sha256": "ff47a51c76651e19a6fdba1464b98f350049ea5ca6c0a45b34091121cd953ccc",
+      "function_names": [
+        "E_512_4"
+      ],
+      "trial_first_observed": 0
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/ff85503ed8e06c5161ad9329d101bda45fb3086f32f853c06b3446a25d352526.c",
+      "sha256": "ff85503ed8e06c5161ad9329d101bda45fb3086f32f853c06b3446a25d352526",
+      "function_names": [
+        "E_32_16_32_4_4"
+      ],
+      "trial_first_observed": 0
+    }
+  ],
+  "source_sha256": {
+    "tinygrad/__init__.py": "fc24d5d0df1b1a14bbee0bd2641a61ca5f34ec7d83f1b0b755adf6eb83d5c0be",
+    "tinygrad/codegen/__init__.py": "b8fc262121b861659cf777d19544138e5a4d9582c5277dd6f93e914e30423727",
+    "tinygrad/codegen/decomp/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/codegen/decomp/dtype.py": "b3a04ebdd9f5686936964fefa99a46ac27515edb7be4c9f07201269c42371502",
+    "tinygrad/codegen/decomp/op.py": "2d5ff52711a92c45f8814056d799da3c0aade9498822cc5cdee2a83dc3276ae1",
+    "tinygrad/codegen/decomp/transcendental.py": "1d737c265c9f96b8f09d82b85eb660dbb91b558a5af88512075c5a20540d00c5",
+    "tinygrad/codegen/gpudims.py": "15d368b1a45c237c8d3ea0b28af5f3b80fa49dbe73694bd8b315d835c4335ae5",
+    "tinygrad/codegen/late/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/codegen/late/coalesce.py": "36d59f15f202ae20444cd76795e0068b79f4158833e691da3c0ac72848e0d475",
+    "tinygrad/codegen/late/gater.py": "c194d9ffe8d022e62894367d4c0ce0fdf57ff02f34f128efcdac3072334275b9",
+    "tinygrad/codegen/late/linearizer.py": "9c1d7ae56a0381bdb4fd1340fe32eee77ad66617b06a215b8c4c46bf3f97fbe8",
+    "tinygrad/codegen/late/regalloc.py": "e120e26baee8021becfd716e39cb85dc0f5c5992bd30d5a50e48e7a0f528c9e5",
+    "tinygrad/codegen/opt/__init__.py": "6bddcc6a2052b1a39e9a421731275524fa6f0f861abfdefeafae5403747f8778",
+    "tinygrad/codegen/opt/heuristic.py": "029537ca82fadbbc34c9780fee3853466eb5a157a51b7c43dd45a94b3cde2a89",
+    "tinygrad/codegen/opt/postrange.py": "2ee24512630396f82016e709036c8991af7ec7482347060951fe01ebd719d3dd",
+    "tinygrad/codegen/opt/search.py": "670111d23c6360c6bd57f473a0e8877fe9b6615455aa27473f52c6bb99ef81b7",
+    "tinygrad/codegen/simplify.py": "a05ecef8e0f13d104516be51e4289653b00ca3104893000ed09a3b9b639a629f",
+    "tinygrad/device.py": "7a221075b3968b25db62edbc46450616a1e64e20c363466e26aab2a5a2f080f9",
+    "tinygrad/dtype.py": "7800592dcccbdd5a5beaee889342b5f62790d37445938fe601416c8b76057926",
+    "tinygrad/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/engine/jit.py": "7e91838fb3f3593661d771459775ef3e2811ba1038c58f06c9d5c359cac0bec8",
+    "tinygrad/engine/realize.py": "a00765bf85f23399020a9b6ee1e397aed12c3d2a2c4f1362001b67130b41a1db",
+    "tinygrad/engine/worker.py": "b9d47164d0b2fa09f4f396efcfd856b8ebe93a4e446ff683692ea9d605bb017d",
+    "tinygrad/function.py": "0749f1a4a71c5abfd193f44c6defa36afd8bdb1163befeaca201d845fa19cc27",
+    "tinygrad/helpers.py": "eda095ab2c35d045e40523cf8f025543c45b012ff217ddeaed6143610330f308",
+    "tinygrad/llm/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/llm/__main__.py": "2b2aeb15c8e098d5268709723bf52e22845634a68075e5904a474ec01f4165f0",
+    "tinygrad/llm/chatglm.py": "789feb35a21226616e674caf42d687fdc4efb7ffff97445f286931880342bac6",
+    "tinygrad/llm/cli.py": "801120b53b59f15221d014a710df2cf8224728e9699f70629ac87b5db28baf49",
+    "tinygrad/llm/dflash2.py": "dec7ed180b0b69c56e263fbae5c4a58aa5ef22cd05b4fed4801a190520dc30f5",
+    "tinygrad/llm/dflash2_config.py": "f46fda13e52e26ff9fe7bfeb40d56c5f0f7536424358b4e4bc16bee3ef745a5d",
+    "tinygrad/llm/dflash2_selector.py": "54455105954ca47e44d32dec4974d0f222c8c239d61492c43a1a922b54c95342",
+    "tinygrad/llm/gemma3n.py": "8e975e4111115585fc174132acc87b0ca1a6f71a4f881653390c3e1fa161bd0c",
+    "tinygrad/llm/gemma4.py": "b637f22c2c07480a66e8ac54f603e4e4f35f7eac52e62203cc5f9febfdddb677",
+    "tinygrad/llm/gguf.py": "3ad6a11141155e2ff3249a4e9d4e6d3947af3670fac2a302a85234fc96708bbb",
+    "tinygrad/llm/kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/llm/kernels/amd.py": "05a05aa63391251eea4b8c2dfcc1c56718bdecb712ad9041e56ab84a31edd92c",
+    "tinygrad/llm/kernels/mali.py": "8a52d608e7c22dbaf1605d4aa32b49a8b7af3b88e3678a9c5c3373d95ab961c4",
+    "tinygrad/llm/kernels/mali_attention.py": "aee062ac18b5bb749304decf245a7c52d0a10fcf5d22bddc25e88e172439e778",
+    "tinygrad/llm/kernels/mali_copy.py": "9846f3db9c43b24c6db7f860f612005d00b00989af45bbf80fe3b8917ceb3249",
+    "tinygrad/llm/kernels/mali_half_prefill.py": "352996d9b939565f76875960ddb121f648c813d38e5aef313e412c76fe2c8a76",
+    "tinygrad/llm/kernels/mali_linear.py": "e3e95ef134d6eb316cde13e0167d32ef3d86ee74f1e615e045f75fc056c12d08",
+    "tinygrad/llm/kernels/mali_q8.py": "1976d4ddc6320a79fc6eab55e8bd4dcfc5f6dab66b795936543c6d7f1073db78",
+    "tinygrad/llm/kernels/mali_q8_checkpoint.py": "f96c43dc0489f33db4b2ce084a371af44d0cceb520479d15dc5f63bf65a46387",
+    "tinygrad/llm/kernels/mali_recurrent.py": "35d74bdd1619a786dbf44514a787ce713ad43b9911b4fb7c01812024ca0c281d",
+    "tinygrad/llm/kernels/mali_rows.py": "26dc2d4534ce7cfc6bb6f97e6531b26f1c47de758208ef34f237a95573ca3d58",
+    "tinygrad/llm/kernels/mali_state.py": "c9710fe99c1c78ec06eae0cd8617ef8259a108fe111ace074d6091bbbc6e2c22",
+    "tinygrad/llm/kernels/rockchip.py": "eccd4425baca12d4922e410396bd1b6dd0726d3039cec89f3485cd751af86776",
+    "tinygrad/llm/kernels/rockchip_attention.py": "ed1d797b3e2822e779886ffe5f0f8279c9d0669c85a71fa57206a701f65a07fd",
+    "tinygrad/llm/kernels/rockchip_cache.c": "1f64febcecc53033c60a63eca82e0b2fd54c7b57f6ee75daa20e3dea63433611",
+    "tinygrad/llm/kernels/rockchip_cache.py": "d3e3163591ea9833c2da102eab34652db3381d92cd13a261d7df36d4f8b1b2c9",
+    "tinygrad/llm/kernels/rockchip_cpu.py": "ecb35341c2d254cc39401be1c0e758f17bc2170388f5851f521084721a33a1c9",
+    "tinygrad/llm/kernels/rockchip_decode.py": "a560368faa8346ef53ce9905d7844d516a78e77ac90e032175ae7cde9f3a3803",
+    "tinygrad/llm/kernels/rockchip_dot_attention.py": "8d880c2518f699175f664a039133f98281b6781737073841d376a69f9a95b02e",
+    "tinygrad/llm/kernels/rockchip_gpt2.py": "cb9a53386a3e6aa7f13bbb6a20488eaa3685f0ec86f6a054f1f7e38dabea0698",
+    "tinygrad/llm/kernels/rockchip_gpt2_decode.py": "8153cb1d439880dfa85914d92974e848dd8977f41c13519cad23980f94438359",
+    "tinygrad/llm/kernels/rockchip_greedy.py": "0a3ada8dada26d123cec102251df2008595f538356af4e5276358c3665c48870",
+    "tinygrad/llm/kernels/rockchip_idle.c": "4fb7c8022cefd7929907f4abeedaf8894a96f9261763c32015bbd648eeb09b57",
+    "tinygrad/llm/kernels/rockchip_idle.py": "e0fa42189a9c076df1a2da6a1160a63c1a97814e1411ffe2a5297dced29498dc",
+    "tinygrad/llm/kernels/rockchip_int8.py": "7d100532b88c6be9f7a265f3fc8d8f4d2c23c64b7e6246f43b3ef3c6ab3558fa",
+    "tinygrad/llm/kernels/rockchip_packed_attention.py": "aace3f08085c69a0deb29ce21244c58e1f95b50b99e31cfa3f9ae6abc04e8822",
+    "tinygrad/llm/kernels/rockchip_pool.c": "6b93a5024aa53552da934e475daaa10d84171cc6be6fd7911c5827a646e031a8",
+    "tinygrad/llm/kernels/rockchip_pool.py": "31fff31283e4660faa5b484e5a456be2c0486823e62ef0688cb600552e487709",
+    "tinygrad/llm/kernels/rockchip_qkv.py": "dd284ef8f885495ae38f7c670b127cdf2ae2ba414a0543777cd102f37cf0085d",
+    "tinygrad/llm/kernels/rockchip_recurrent.c": "ea57f11597a64f495e096f4d729948dbfd410827cecf390efbde409796ce3e01",
+    "tinygrad/llm/kernels/rockchip_recurrent.py": "af44165eae7f6c981de046dc55cac90a39adae9c2f6f2a0dc3d1484c9dbcc2e7",
+    "tinygrad/llm/kernels/rockchip_replay.py": "7cc7e578dfbed6dfff5b4eaa311313a482d4e763afb3737279362387f9729327",
+    "tinygrad/llm/kernels/rockchip_softmax.py": "3e6dd1006494230b5b592a3dd001a0c18102866ec994df478dc1c83237790d86",
+    "tinygrad/llm/kernels/rockchip_vision.py": "94f26b16273eec73d419fd068483721846f20cb9c1f4225fa6a9f214c038e47c",
+    "tinygrad/llm/kernels/rockchip_vision_mlp.py": "b1644c2dd0ca7da816211d18e7f1c9e9d1f0094c8028a62b137b4e080b716a9b",
+    "tinygrad/llm/kernels/rockchip_vision_pipeline.py": "26cee5cdecf29ff41058296870177930911a8e17e9219774be3a959c15d1aa94",
+    "tinygrad/llm/kernels/rockchip_vision_prepared.py": "5862b754d3bd51a08cf07aa1776cf6363a41a1adaa5b572b9c211dc42de4a410",
+    "tinygrad/llm/kernels/vision_embed.py": "12102e073bfbdd1484728a7a6e279c4cdd7f59dbd7713ef0d39adb6fa221990f",
+    "tinygrad/llm/model.py": "ab627299127b52973d25f28a0f54b6e993a81d3a66b2d4d282c9a6e561ee274d",
+    "tinygrad/llm/rwkv.py": "4d9912c91212e94983ecc38dde5434cccd54a5cd4b6e17ac50debef99cdd5ee5",
+    "tinygrad/llm/serve.py": "4750c7971d126c91c776886b03f2dbf47815317907d7c05d418388f371e16c00",
+    "tinygrad/llm/speculative.py": "ecca3c080ac2659921ace1797a3c9d571845eb953961858b1fc3d4d7f12f3237",
+    "tinygrad/llm/speculative_adaptive.py": "45fca683c722dffd5931427ec08df372bfcab449d9cd9d402fda9504b4f28cf6",
+    "tinygrad/llm/speculative_budget.py": "79a64b2bc8777d995928a1675d09617f82f4ec20a850796e6c0bb54d30169e0b",
+    "tinygrad/llm/speculative_policy.py": "b6379199d6a3ad09b5d143c0010bc8be19105312a940ad78ea35d806198d7890",
+    "tinygrad/llm/speculative_sampling.py": "fbffa90eca44034b57004b67e4b44f6c0ed06fc6a0d536359220b9a1523e0d67",
+    "tinygrad/llm/speculative_trace.py": "bdd913c8ed34c65c76027109bf2efd1d39c540123f79f4e972d73fd508d7d9da",
+    "tinygrad/llm/vision.py": "d96c9e65478ae86377112ba2831547d093a5e52d00ab93db9faf9f2826fc062a",
+    "tinygrad/mixin/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/mixin/creation.py": "4099d41e065e5638f8bb17f6c016ec6b286bac52e5ca6c9a86b89d73cbebbebb",
+    "tinygrad/mixin/dtype.py": "99027a5281c17bfbd572f12a090bf0d31db36bd239202606c1d3d6237486ec64",
+    "tinygrad/mixin/elementwise.py": "951d9d8a83e5cd3ae5a26571d685f2cef44fa8b41b1e4c3e028f1bf4d31076de",
+    "tinygrad/mixin/gradient.py": "c88b1b5557ab5edb450ed0f7e10bd2adebfcfb572f9977446fa04c2f39cc58d6",
+    "tinygrad/mixin/movement.py": "e6412a4f11b8dadb72cab73b260405c0b39389979e4786f0d981be321f121a50",
+    "tinygrad/mixin/op.py": "c09ecfca6522014dbd7b5ac1faae8c85fdc936484cd95084ac41a3ef135e82c7",
+    "tinygrad/mixin/rand.py": "19623f666365a318b6730123dd0fad27469ced754740415b86563ce0857c0363",
+    "tinygrad/mixin/reduce.py": "6981c71968b41ee79e8e97dfdc89db4b62216fd508707b57dfa0cd42b414e79e",
+    "tinygrad/nn/__init__.py": "992c14aec20683a93469d289d5817d1a023f0e3f39ddd5b93181dc8ef5b0691e",
+    "tinygrad/nn/datasets.py": "bc5ff2d74e07452c4f82afc5d6f7e2656978e189cb64689a1e8a1670825dff67",
+    "tinygrad/nn/onnx.py": "670eaffe1386d496e8337f4be5a472cd7b3786fa610a47ba767d89871346503b",
+    "tinygrad/nn/optim.py": "981bdfa9de9baf3b82f7e80f5c32bab954c56d4f8ef902bf9940770e783dee4b",
+    "tinygrad/nn/state.py": "8b709853bca9edf31b99eb7e76c756968cb9bf521747f7dc50a86110ff974e6b",
+    "tinygrad/nn/torch.py": "377d20ff02d4c70e112830be326c8ad9a188cb490c9d15ca7d4bcffc0820d4ca",
+    "tinygrad/renderer/__init__.py": "119d64c9f98c132f9971c8b7c744bcd53ca8d3ec9e2dd0fca2d76f26ad0e8ff7",
+    "tinygrad/renderer/amd/__init__.py": "daa2583cf98a69bf59aa3f842bacb704598445fb23b9166bebc3adb9a9b7112f",
+    "tinygrad/renderer/amd/dsl.py": "dd45cbdf0d63570742eb54a21ef09266eaed95b8f3708de5363ef1c64d86606f",
+    "tinygrad/renderer/amd/elf.py": "faa631ce5f4d71fae646fa4e44b7ef6012f08b9738ba45691b9d901dcfbe77fc",
+    "tinygrad/renderer/amd/generate.py": "2bbf3599176b8dc500b253a97714977e443b7397063e38a775bcc9bd1c709824",
+    "tinygrad/renderer/amd/sqtt.py": "1bb1807a141e2bf5446af8b092e65520ddb775ff08af272271fb22b02362e49b",
+    "tinygrad/renderer/cstyle.py": "aa6c775081a9fcfbcc675e38e0f3b029c788c5a92f1c0fd46bc0c367d661a492",
+    "tinygrad/renderer/isa/__init__.py": "3fd9ff060c1bb591d79e07b5990e264e5ec2b8efd03fc18fb6fe3a5585022d8b",
+    "tinygrad/renderer/isa/x86.py": "523c94a6eeb89dd5f888967f11380b9f298745ec9b1800e3cd2726668b2c8181",
+    "tinygrad/renderer/llvmir.py": "108235c5ad3fd43aa22b6e094136c35314c4fe7c58f7b508c34d666a3a526b4f",
+    "tinygrad/renderer/nir.py": "a3d8186dcb5b6df0ef3c8aaaee3361b6d9433fe35a6b46d4a4aa0dc1193f05a7",
+    "tinygrad/renderer/ptx.py": "906bd04176ef07274e0fc9d9bf99bc86bb8d8bc9674a3099aee2eceff3d3d3e0",
+    "tinygrad/renderer/tc.py": "f8836d7fa6dee7f0f84f6adf29c192a29ffae62ca40e0372f74b128cde4e6654",
+    "tinygrad/renderer/wgsl.py": "8a5f1823834fef671a28822e21775912393f8b718b0b8e3ff7e319d9a926ef8d",
+    "tinygrad/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/__init__.py": "89955c8ec8c5cb2d446db169379100b421f51232563eb076b9111e4845a9f5bb",
+    "tinygrad/runtime/autogen/am/__init__.py": "fb2a32843680df3df2ebef7692b0ce5aa4f8ce5da778c6abe456160c0112de74",
+    "tinygrad/runtime/autogen/am/am.py": "075d9d29b885c546897143ade1b18f36d4a4450d1fb1d899d2df8f08aa5853e1",
+    "tinygrad/runtime/autogen/am/fw.py": "c60f58eb1ee6d61cee3817c5af23ef1fdb8c9ac9d4353d07972114cef09c7c02",
+    "tinygrad/runtime/autogen/am/navi_offsets.py": "9080f1a21706918dc9392709804115aa60201c8865ac86ef2b49252a2441c7cf",
+    "tinygrad/runtime/autogen/am/pm4_nv.py": "9bb32046114fd7ddbb976cc25bd5300bad08298b87682539a1a3e860954aad16",
+    "tinygrad/runtime/autogen/am/pm4_soc15.py": "f1ace5672c822d7a728f72b376a4ee5842aa4805944ea5f24dc8289dd341fac8",
+    "tinygrad/runtime/autogen/am/pmc.py": "b65aa28d165f88fd1f17c965e48e5fcbeb7f33bb3da4cba498b819f648ea8b3e",
+    "tinygrad/runtime/autogen/am/regs.py": "81d38816611a1e086e21feca4c2e021174decab385650405e520457aacbfd10f",
+    "tinygrad/runtime/autogen/am/sdma_4_0_0.py": "e2538620e5e73b0a745ce2ba0284c709f158e2893dd478f98bbd86c04c50292b",
+    "tinygrad/runtime/autogen/am/sdma_5_0_0.py": "33e42eb0e8c9be08f698ce8dded66446ad600cf03f64179696556a69617ee5bd",
+    "tinygrad/runtime/autogen/am/sdma_6_0_0.py": "523636d23466359b244b9e5454a8d0a80a5bf8e67882a9238e571ee90d580e88",
+    "tinygrad/runtime/autogen/am/smu_13_0_0.py": "5a2254c980525c8d5c8acc15f56f2ae72520d510aa1c2499b4c2b3586570c125",
+    "tinygrad/runtime/autogen/am/smu_13_0_12.py": "0e558c4f37ef3608d5c0498c96b123bb3362ed0a093ce50acd7a0f2102342919",
+    "tinygrad/runtime/autogen/am/smu_13_0_6.py": "acd6efb5ad0b972a5553c53db400d1f806c1d37d97ee0a583d8e45947060183d",
+    "tinygrad/runtime/autogen/am/smu_14_0_2.py": "f1b5e7d9d10f0a4cfb28dad0b8afe42cd5a276206959bd525bb8e871888991d4",
+    "tinygrad/runtime/autogen/am/soc_11.py": "da4af42a9f6bd4e980cd7a8a2ae3fc34ada4995bb693506f65148ddd7f45ef6c",
+    "tinygrad/runtime/autogen/am/soc_12.py": "8e81635ccab1b30c312778ccd8804e6b5d4df81c0b391a1e9c7f1bb3375e7933",
+    "tinygrad/runtime/autogen/am/soc_9.py": "b5386d6f41ce2ec65e1f9de20bb4439eceedcccfebf0dbd269891367c7cd8d2d",
+    "tinygrad/runtime/autogen/am/vega_offsets.py": "aeedb84cc5ee439c578ab015f0a2c424d95faf3304965041fcb7b116cce2a1eb",
+    "tinygrad/runtime/autogen/amd/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/cdna/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/cdna/enum.py": "6273f0c16e079332c354b849f38268527f7bc99bf943a9e5e2831ec3f705eb4a",
+    "tinygrad/runtime/autogen/amd/cdna/ins.py": "d98fad08ef7bd7af6e1ce6459d6bc5f1f7e0f81c6be93561857049675255a3dd",
+    "tinygrad/runtime/autogen/amd/cdna/operands.py": "ae871116dbad3aa9644975ed0f1b6042c9d53d64078f01f6688c7d73ae01f381",
+    "tinygrad/runtime/autogen/amd/cdna/str_pcode.py": "e67649d19bb728278d97065a843518535a87126358710aa85f5a5cd61760fb1a",
+    "tinygrad/runtime/autogen/amd/common.py": "c05fa9bd4e9efb05483d29ddeefb5994ac21560e0d13b4cb18548a57177c7d44",
+    "tinygrad/runtime/autogen/amd/rdna3/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/rdna3/enum.py": "4c495befe2c1f11f3b2f2820fbd0d3d9b3faf4d4969312ad757c6fa7569cc9dc",
+    "tinygrad/runtime/autogen/amd/rdna3/ins.py": "652a5df671664024650c5f5b6c2eddf7af0354a556e84473a3eb207bacfc4746",
+    "tinygrad/runtime/autogen/amd/rdna3/operands.py": "96fd869a40884dec0247633c49af6e80dffc375afdbf222eb70f6b7d04bcf806",
+    "tinygrad/runtime/autogen/amd/rdna3/str_pcode.py": "b7705c1430b06c5ce1a90ac625a515708ebe11c184068bf89746f3fd5466ae39",
+    "tinygrad/runtime/autogen/amd/rdna4/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/rdna4/enum.py": "e7f785ef907c6ae1109baf9188a4b63b964e3137bf2f1328196b081396a71388",
+    "tinygrad/runtime/autogen/amd/rdna4/ins.py": "927770e3b602975581ca933998b8e8cd87e8fc9bb2213133835e0059a77c0a0b",
+    "tinygrad/runtime/autogen/amd/rdna4/operands.py": "5cca92ffc1d5f92ab3c31fbf73a8ba47d5d49dc3bdb52f257556b6ce6638d6a8",
+    "tinygrad/runtime/autogen/amd/rdna4/str_pcode.py": "b8a9001477cc9b6cfdf0b5dd8aec0bc2a49b073a6bcec0d0a811cc6fa67d3490",
+    "tinygrad/runtime/autogen/amd_gpu.py": "478e889f08e47ebf4410ea089602dd1cfe62718b92a5fe085d56ef11633ad8b6",
+    "tinygrad/runtime/autogen/amdgpu_drm.py": "c9e226465de3421c70f8986814244ce832b78b3b7643047823053e901f4a68ff",
+    "tinygrad/runtime/autogen/amdgpu_kd.py": "bbb71ab4ab4a69a8acf468222b8562ed6466c72eb3abb6df5186a78f320bd68a",
+    "tinygrad/runtime/autogen/avcodec.py": "b5dd616799a3ed4e69bf0a35b5d05c2c80759a24e6573ad68c849c0dfcc6af05",
+    "tinygrad/runtime/autogen/bnxt.py": "a2c0a2f1b9d85b04701fe1b6279ac3b50064ba5d712c1519443eb27cfe083a8c",
+    "tinygrad/runtime/autogen/comgr.py": "ed3f777f3841706da31d6b186f09e719bdc429d85d08b2c79b5db37e59f257ed",
+    "tinygrad/runtime/autogen/comgr_3.py": "8afed852b5fa28ec802a2de73bcc455ea966973058c63f41371bda444db9a62d",
+    "tinygrad/runtime/autogen/corefoundation.py": "56795809f590e21234877a256681371ee32d8cf5a597417e784988e31622087f",
+    "tinygrad/runtime/autogen/cuda.py": "64bab6b381449254db3cb8d1d60b69e10c9ffa4befa6d8294305c2ae1fa18129",
+    "tinygrad/runtime/autogen/ggml_common.py": "7edaed6afd77bd84459ebaab381c6998bb2e2788eb620a0f4c07b26242a8b891",
+    "tinygrad/runtime/autogen/hip.py": "d69dcb6f55bd4dcac2178065ebe462ad55fbed8acf17a8c3561e918fdf59aa77",
+    "tinygrad/runtime/autogen/hsa.py": "b8457e9fd6ce160d072af0e4ba1e1c34e443dd71cabd767c6511457a72f3d901",
+    "tinygrad/runtime/autogen/io_uring.py": "d8b1658c94ab9727973700f14fe40661eb87272bb9e40a02904563f304ca05ef",
+    "tinygrad/runtime/autogen/iokit.py": "d0033fb9bd4ecf4a796ac01e280d6fb3289614c8008d6e62b312d09894189162",
+    "tinygrad/runtime/autogen/kfd.py": "248a7e74aa98b54f5e9cac56bf7a2495e8f6994386705a3c6c19ab0c7c053197",
+    "tinygrad/runtime/autogen/kgsl.py": "9f050c287acacb79a4e6d15cd32eb12a137c556de9c18d77baaea80b2e8b070d",
+    "tinygrad/runtime/autogen/libc.py": "edc96d14bdacf6992407318faabdf20690ceedbb915084626e59d1514b26f04e",
+    "tinygrad/runtime/autogen/libclang.py": "8f6f44f8065512c002a2e86d3ddd1933aaa89af58b7678077f3ae9d0369f3cfa",
+    "tinygrad/runtime/autogen/libusb.py": "f234ee7c90cc4ac1c7d97724db665f2dba466580bc1205deab1a58de99992a6e",
+    "tinygrad/runtime/autogen/llvm.py": "18ccc5041f5f9227d7b8f43200da1e8cff680d40c6eadb38fc5f883aba1de1bd",
+    "tinygrad/runtime/autogen/llvm_qcom.py": "a0032f4677216211f658b92e11fc7a1060d556133d8b5e9482c7554698f08ea6",
+    "tinygrad/runtime/autogen/mesa.py": "355cc3facb9c31ce6c808a850fa9e3962e9690cf759d776cb05c1da354b61df7",
+    "tinygrad/runtime/autogen/metal.py": "842e5f17ad86aef820af1c14409660cad373c0b7d2559d81dbe978cd028fdb99",
+    "tinygrad/runtime/autogen/mlx5.py": "7b1782a5ec4aed44cf849b3e574d15b85924390b24f9368cc17014ac4ffc1e99",
+    "tinygrad/runtime/autogen/nv.py": "261256ac4322e046ff2db28235ae2ca8f68df081af1ce1509b407e814194aed6",
+    "tinygrad/runtime/autogen/nv_570.py": "411e74f3a283d3f4bed0294fb6a54a34ddf6fe624a3db8ec58df97ab66909abf",
+    "tinygrad/runtime/autogen/nv_580.py": "57157c789576e3107e187bc26242bbaf34b4cfc1a8f67245a8e587e984cd692c",
+    "tinygrad/runtime/autogen/nv_610.py": "9615048a5619c64fbb95ce61b1bea809ca42f1d301366f77a55a813d1047b41c",
+    "tinygrad/runtime/autogen/nv_regs/__init__.py": "cc89dd8a3df44879f7013b61d9d741df9bd77d50a292c6ef81ab5130c66cc8a3",
+    "tinygrad/runtime/autogen/nv_regs/dev_bus.py": "7ba8a3407e27a809be0504d285991c7a1aef1826d9e689b3aa59bb80aae65e6e",
+    "tinygrad/runtime/autogen/nv_regs/dev_falcon_second_pri.py": "391295f032d2c0fbe905d236e52a6e018f9438d2bdd76282d57f0eca5d2bfc0d",
+    "tinygrad/runtime/autogen/nv_regs/dev_falcon_v4.py": "6b3c9aedf59a7a37ba67d9b5b77f77cd5cadaac1b82040b0926e9acf1dedcee9",
+    "tinygrad/runtime/autogen/nv_regs/dev_fb.py": "6cbeb46bc9577e576926fcc982fcc0b8fa31e10206d1615311075eb28b48fe41",
+    "tinygrad/runtime/autogen/nv_regs/dev_fbif_v4.py": "8d2c87027939226d3a910157d41e660427774c3b11a17bd25c0ed1b2a9651c23",
+    "tinygrad/runtime/autogen/nv_regs/dev_fsp_pri.py": "f461181260b8e072b8df132322b03960058ce435d6da71c169153ace417edd1a",
+    "tinygrad/runtime/autogen/nv_regs/dev_gc6_island.py": "16329261e64d0f54104b062155166378319885968a7ff9ae9c2b47979b15f14f",
+    "tinygrad/runtime/autogen/nv_regs/dev_gsp.py": "8425f6b358af1acdf4dbb5549429feb05f95f649d451bccd6dc44eadd4674bc8",
+    "tinygrad/runtime/autogen/nv_regs/dev_mmu.py": "d36ae887aa8026067486e2f3fea295ca1f17c9e7867f2842d4cedea1bbf46355",
+    "tinygrad/runtime/autogen/nv_regs/dev_riscv_pri.py": "bb48da8a9f2f5b92a2aede932076709a4f2ae7266f895c77386b8aa373ab9207",
+    "tinygrad/runtime/autogen/nv_regs/dev_sec_pri.py": "ad4e6690236365ab4edad12c15d49a8a55f787a9ceecdd96d47794e25979808c",
+    "tinygrad/runtime/autogen/nv_regs/dev_therm.py": "af124c35f2ede3c96477d405b588dff2689bbd15fb5e7f1fdb40c7d2e8bdb10a",
+    "tinygrad/runtime/autogen/nv_regs/dev_vm.py": "724a62f3a9b748c63fbe5d04f3ed19cc9ffc2f3e29a8f9f4a9dca37e61887a7b",
+    "tinygrad/runtime/autogen/nv_regs/nv_ref.py": "7486129fa0586428ed6570add35d49db5f9edc4cda83457a5094b58066ba55ef",
+    "tinygrad/runtime/autogen/nvjitlink.py": "272066e86e6d51d0a064e711f22c5baa6fd065a09b640da789d60a3cac2f56d7",
+    "tinygrad/runtime/autogen/nvrtc.py": "26c305997b4f63950e8b0712d9f3cd513dc92b1753595e63235e035b7597592b",
+    "tinygrad/runtime/autogen/opencl.py": "e0da74f9804788dbb88724d5ce1e0f26c027ea4125039d62c08ad98c1f074c9a",
+    "tinygrad/runtime/autogen/pci.py": "baceb6b8c4e45429c8dc3b7eff17259aaed30d30d6ea50935ce28d69534d8bac",
+    "tinygrad/runtime/autogen/qcom_dsp.py": "4838000bcc679270d8beee74bb06d6dcd7d1a52faea0dd3d8c84f7acc160a87f",
+    "tinygrad/runtime/autogen/rockchip.py": "6d6c11176fd78201fa013b5b4485d9a1a67158ba749eca0d892a12e22c8f1f56",
+    "tinygrad/runtime/autogen/rocprof.py": "b7561632d83083620e34fc14472f5c4f1e30878eb8c856df1bf74a764a317c73",
+    "tinygrad/runtime/autogen/sqtt.py": "9f47e053dacbfe732d653db926a3957dd65c33b879b02d809b38baa8eaad98c3",
+    "tinygrad/runtime/autogen/vfio.py": "c501177743326af85725911c225ebe7dbc50f56e8882913ae22ad2d50fa33c27",
+    "tinygrad/runtime/autogen/webgpu.py": "d54d4b783bc925ad3e6b017f96aa5a27159fc2d95742bcf75e0addcb9f8ac4d6",
+    "tinygrad/runtime/ops_amd.py": "719be92c917e2c3a08ad802732dd7d116668649dfd08aef10ddea5dcc84b6436",
+    "tinygrad/runtime/ops_cl.py": "0aa8f63d58c069c6994e37750c8d41b8926f8ec27e8e54745e99bf68bef9fc8a",
+    "tinygrad/runtime/ops_cpu.py": "308017e40f4dfdf57624b535fb8eb1f6288fe8fbbd65a2d5fbbbbde9d9683232",
+    "tinygrad/runtime/ops_cuda.py": "d564db6c6927dfdfcc925f8c2cfd9938f800df2d4219dd96294f402cb92d789a",
+    "tinygrad/runtime/ops_disk.py": "d0133e07537a0e5b358bd40c0992e0abe0eb5c42c858795e9eda4140a3e1708e",
+    "tinygrad/runtime/ops_dsp.py": "67783322e6352f5f52d10e501f6b717e27fcfa716466072e03e46f7875f1676e",
+    "tinygrad/runtime/ops_hip.py": "5a023a90196ae106a0543f59045bb902425f9b3dca4ca6c67a1741b14afcabb3",
+    "tinygrad/runtime/ops_metal.py": "105ab56af475dd0a86b1e06191fbbdd4613697c257093ba61c5401feeef89e04",
+    "tinygrad/runtime/ops_npy.py": "53de851f9d707e6fceb871914b812c138cd5b1ebb669be02b55115c68266710c",
+    "tinygrad/runtime/ops_null.py": "5e1e53e866d17ab1ccf6116ac11b0283e1b329ee6b215b2e5cf4927dbed38cb1",
+    "tinygrad/runtime/ops_nv.py": "e711ef90bab87f8cd444ca2a10fbb0c9e8a602c22d8fa7c165b746b088314f30",
+    "tinygrad/runtime/ops_python.py": "62decc9aa674b47a578e06bec68d46695920524da27b10fb63da75d420df8d7b",
+    "tinygrad/runtime/ops_qcom.py": "618d7f7c97af087f97d3c5b5d1f720fd9d217a9d2c0485589d7d604b8098663b",
+    "tinygrad/runtime/ops_rdma.py": "e6e0d69734269c6501a5b8439651a0364d90285c4671fa6301c9c54f16737769",
+    "tinygrad/runtime/ops_rockchip.py": "953220e5d160f42809690bccf9e387e0fcc29070701c8a55c1a481bd2706a1b4",
+    "tinygrad/runtime/ops_webgpu.py": "52c7689d7fd2acb9ad1f37ec9ce3dd88a16fa51d6de93b74eb8f637ce3802e15",
+    "tinygrad/runtime/support/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/am/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/am/amdev.py": "dae42e13b5dbf01cff0fd29767eec3df2f7d86f0d4d78d89b0aa731a7c88c09c",
+    "tinygrad/runtime/support/am/ip.py": "972086c5373e7cd83a2b39d598551840c4a7b3e59cd2f19745581fee287bdede",
+    "tinygrad/runtime/support/amd.py": "3c888308b57f5f9b4922ffb008829610f6333a547c9fd9168f9f770fc6315c10",
+    "tinygrad/runtime/support/autogen.py": "3571a0c1e955e2c7173e3066a79040efb0f333e3302013f28e6d478ccdaf763c",
+    "tinygrad/runtime/support/c.py": "a3113a746068d0d0cd8fdbe18dbe54c20692a2cc85691618cf72dcef1cd801ae",
+    "tinygrad/runtime/support/compiler_amd.py": "230b53fbae926583d6a4a1fa4ea085773924e042496ed786aa8fbc2f8aa6ebec",
+    "tinygrad/runtime/support/compiler_cpu.py": "7980be156006d76fbc0e893154e7fb2900597d0c4d5171b4497a44d888d4fe48",
+    "tinygrad/runtime/support/compiler_cuda.py": "44e2eb882f867db26cb0a0c27716cc5c1000e4a7ea2401d3346d226573078bda",
+    "tinygrad/runtime/support/compiler_llvm.py": "4f4128c0cf88860e5445345139e81d360c7c4189912a67159d6822d2649735e5",
+    "tinygrad/runtime/support/compiler_mesa.py": "2301ed834ceea0798128e765fceff5231ec88851ca73b10a34e423952ae7eee0",
+    "tinygrad/runtime/support/compiler_qcom.py": "9c99f6e4c9e594e44c46846558e66f85d8ca700b73d371e0da54a997f72cfe34",
+    "tinygrad/runtime/support/compileserver.py": "f977fbab9038e6b895174f07c540fb26247137c63c989e373745433cd52157ec",
+    "tinygrad/runtime/support/elf.py": "155aaeb2cfdd748814150feafcb10c1ef34eb01cbd702bdbe5e0c9b03be3f388",
+    "tinygrad/runtime/support/hcq2.py": "08ccbd5ba6d0494af350eb4d8851a15d9ed1e5153cc30e7225439e4380d3bd69",
+    "tinygrad/runtime/support/memory.py": "5cd20a3b98a69caa855a7e660a0a53a64bd969fee282b853a5f68097977a5bcb",
+    "tinygrad/runtime/support/nv/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/nv/ip.py": "5ad88909badc5d30ab2527569d791b58ac28d56a8d9019f1e7c43eb764b4fe8a",
+    "tinygrad/runtime/support/nv/nvdev.py": "5329dffaa57b690eb516f0d33a219c552d92dcad3f2af8a5563bc8df2b51073b",
+    "tinygrad/runtime/support/objc.py": "c00586d4e58f14adeb899275ab215dbcb75b9c7a3e8d6210c001fd2941f4628b",
+    "tinygrad/runtime/support/rdma/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/rdma/bnxtdev.py": "c682c931db0c51c861ce7016a00d7aad5dc0e88bc8bef930bade4117910660f3",
+    "tinygrad/runtime/support/rockchip_int8.py": "48a90c3b3884c4db8158e525c6030dd49c56636de2d443841212e50fbb1217d7",
+    "tinygrad/runtime/support/system.py": "681f819e98ede6ac6451c0e499fd038eb00cc2e0a25f872e58321a39f38d9869",
+    "tinygrad/runtime/support/usb.py": "d57b34b46593c83edc2674d5e5d71ba9ca495e7009f08e116e06a35352d9b6bc",
+    "tinygrad/schedule/__init__.py": "a72195d925810318695055cc87eb1489811a51cc49d7ad9215bf68e2e92d735d",
+    "tinygrad/schedule/allreduce.py": "d736bb1070049ad4c14e9354a66be534bb6ebdc53e75f80328f2ad4f846a8ea1",
+    "tinygrad/schedule/indexing.py": "44feb97662961d7f350667b61ed33b6575c50d50848f6299adea55c7e3cbd1ab",
+    "tinygrad/schedule/memory.py": "24122dbab59fe1856939520e74fdb3828040ed7652fe897a3fac2d14f45785c6",
+    "tinygrad/schedule/multi.py": "5c88ce3832852af4a583d35bcb5ad6834eaf3d0366bf61e6b242ed6818cb72d0",
+    "tinygrad/schedule/prepare.py": "237d5580d8a0279cf49c875907fdb266e206b21d15d5570c90cdf4b2f2dd0a23",
+    "tinygrad/schedule/rangeify.py": "6af2c0e74f67d8380bbe88e6a186f0caad8641680e9f69bb17208a31cc459918",
+    "tinygrad/tensor.py": "5680ec3b2a716e435ae8f8ca42f39697ed46de7a3d50018a7becb9a368bcc56d",
+    "tinygrad/uop/__init__.py": "22495f25f31b744f0362575fe42f2608a349d4642cba4a2d0a71150f234c7db3",
+    "tinygrad/uop/divandmod.py": "40c04f04dc9057eb17c9680304fb797ce78add201e394736f6558d4e145f075c",
+    "tinygrad/uop/movement.py": "7508947bf142145b2e2ec2234d21ac424cd801ef0acb18bd79a2292c886f7a09",
+    "tinygrad/uop/ops.py": "017e94e1ecfc1ada2cb68f9e71d274dec1d744ee9ffff40ebe324387b7b00bc9",
+    "tinygrad/uop/render.py": "03d3fcad5396a0879cd8f8fcddf04c7abed04b76c7a50f5075554260a1ded89a",
+    "tinygrad/uop/spec.py": "13a8e64ad12f24a4c3806b1bce8e3d04be4478e37d84d82b45ae860e776fd4c6",
+    "tinygrad/uop/symbolic.py": "e552dae03bd8057dd5c7708493bf11e5acbcbd17d03b818d5b9c1770727021c2",
+    "tinygrad/uop/upat.py": "f89095353c93afb851b080aff975f861c070f87cc82aab90df481eade4e8c6bd",
+    "tinygrad/uop/validate.py": "9f0f248f17fb9d31e19e6537cc593d5e3e6a4ee41efc657338efc32dac7eef43",
+    "tinygrad/uop/weak.py": "856defae2c4afe2425cf5c58e2c3b2ef17ee63831c878dcdc298816721a3c97d",
+    "tinygrad/viz/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/viz/cli.py": "997ee8b2c57f6f17a3773937432f7931591bdd081c98abfb29174ff5d0c91db9",
+    "tinygrad/viz/serve.py": "77c9b2341762caedaa8e6204bec29b95605119400373c5029480127115fa6d87",
+    "extra/rockchip/benchmark_inference.py": "78c7f4f508c8c1ab7beb3e44fad5e8e844a8993845748e13aa2fb7e44a2a787d"
+  },
+  "summary": {
+    "scope": "Native profile label walltime deltas only; CPU/ROCKCHIP/COPY/other are label-prefix categories, not pure hardware attribution.",
+    "diagnostic_only": true,
+    "promotion_claim": false,
+    "sdk_win_claim": false,
+    "quality_claim": false,
+    "exclusion_notes": [
+      "Warmups excluded: snapshots after trials 2 and 5 delimit measured trials 3 through 5.",
+      "Counter observer reads add overhead; decode timing includes the first observer read after the first-token timestamp.",
+      "Timed request comparisons use first-token time for prefill and 63/decode_tps for decode."
+    ],
+    "phases": {
+      "prefill": {
+        "measured_requests": 3,
+        "native_runs_delta": 3,
+        "sum_ms": 5360.106396,
+        "per_request_ms": 1786.7021320000001,
+        "ms_per_native_invocation": 1786.7021320000001,
+        "timed_request_comparison_ms": 5403.4679010510445,
+        "accounted_fraction": 0.9919752451860387,
+        "labels": [
+          {
+            "label": "CPU:E_toks_1536_4",
+            "category": "CPU",
+            "delta_ms": 837.566058,
+            "calls": 72,
+            "mean_ms_per_call": 11.632861916666666,
+            "share_percent": 15.625922250816455
+          },
+          {
+            "label": "CPU:rockchip_cpu_gated_delta_scan",
+            "category": "CPU",
+            "delta_ms": 695.372317,
+            "calls": 54,
+            "mean_ms_per_call": 12.87726512962963,
+            "share_percent": 12.97310660696818
+          },
+          {
+            "label": "CPU:r_8_toks_28start_pos2Btoks29_64_4",
+            "category": "CPU",
+            "delta_ms": 651.583826,
+            "calls": 18,
+            "mean_ms_per_call": 36.199101444444445,
+            "share_percent": 12.156173364137828
+          },
+          {
+            "label": "CPU:E_16_32_32_4_4",
+            "category": "CPU",
+            "delta_ms": 519.358248,
+            "calls": 108,
+            "mean_ms_per_call": 4.808872666666667,
+            "share_percent": 9.689327219093506
+          },
+          {
+            "label": "CPU:r_32_16_4_32_4",
+            "category": "CPU",
+            "delta_ms": 479.720411,
+            "calls": 108,
+            "mean_ms_per_call": 4.441855657407408,
+            "share_percent": 8.949830013784673
+          },
+          {
+            "label": "CPU:r_32_8_64_4_4_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 455.045455,
+            "calls": 18,
+            "mean_ms_per_call": 25.280303055555557,
+            "share_percent": 8.489485494906956
+          },
+          {
+            "label": "CPU:E_32_16_32_4_4",
+            "category": "CPU",
+            "delta_ms": 275.52531,
+            "calls": 54,
+            "mean_ms_per_call": 5.102320555555555,
+            "share_percent": 5.140295539760401
+          },
+          {
+            "label": "CPU:E_16_32_128_4",
+            "category": "CPU",
+            "delta_ms": 239.712912,
+            "calls": 54,
+            "mean_ms_per_call": 4.439128,
+            "share_percent": 4.472167048379612
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_12288_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 192.248894,
+            "calls": 72,
+            "mean_ms_per_call": 2.6701235277777777,
+            "share_percent": 3.5866619017761754
+          },
+          {
+            "label": "CPU:rockchip_quantize",
+            "category": "CPU",
+            "delta_ms": 130.269685,
+            "calls": 627,
+            "mean_ms_per_call": 0.2077666427432217,
+            "share_percent": 2.430356328322405
+          },
+          {
+            "label": "CPU:rockchip_dequantize",
+            "category": "CPU",
+            "delta_ms": 112.30968,
+            "calls": 555,
+            "mean_ms_per_call": 0.20235978378378378,
+            "share_percent": 2.095288259274322
+          },
+          {
+            "label": "COPY:ROCKCHIP->CPU",
+            "category": "COPY",
+            "delta_ms": 106.197597,
+            "calls": 627,
+            "mean_ms_per_call": 0.16937415789473684,
+            "share_percent": 1.9812591234989358
+          },
+          {
+            "label": "CPU:E_131_1536_4",
+            "category": "CPU",
+            "delta_ms": 85.927921,
+            "calls": 54,
+            "mean_ms_per_call": 1.5912577962962962,
+            "share_percent": 1.6031010329221083
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_64_2048_4096",
+            "category": "ROCKCHIP",
+            "delta_ms": 83.7177,
+            "calls": 144,
+            "mean_ms_per_call": 0.5813729166666666,
+            "share_percent": 1.561866385011959
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_2048_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 79.362868,
+            "calls": 198,
+            "mean_ms_per_call": 0.4008225656565657,
+            "share_percent": 1.4806211320585885
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_6144_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 63.302477,
+            "calls": 54,
+            "mean_ms_per_call": 1.1722680925925926,
+            "share_percent": 1.180992919230852
+          },
+          {
+            "label": "CPU:E_128_512_4",
+            "category": "CPU",
+            "delta_ms": 50.281768,
+            "calls": 414,
+            "mean_ms_per_call": 0.1214535458937198,
+            "share_percent": 0.938074065796958
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_24576_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 49.55641,
+            "calls": 30,
+            "mean_ms_per_call": 1.6518803333333334,
+            "share_percent": 0.9245415359102137
+          },
+          {
+            "label": "CPU:E_toks_1024_4",
+            "category": "CPU",
+            "delta_ms": 44.181941,
+            "calls": 72,
+            "mean_ms_per_call": 0.6136380694444444,
+            "share_percent": 0.8242735821992441
+          },
+          {
+            "label": "CPU:E_28toks2A204829",
+            "category": "CPU",
+            "delta_ms": 26.760053,
+            "calls": 141,
+            "mean_ms_per_call": 0.189787609929078,
+            "share_percent": 0.49924481013977245
+          },
+          {
+            "label": "CPU:E_toks_512_4",
+            "category": "CPU",
+            "delta_ms": 25.38661,
+            "calls": 75,
+            "mean_ms_per_call": 0.33848813333333333,
+            "share_percent": 0.473621382197653
+          },
+          {
+            "label": "CPU:rockchip_cpu_rmsnorm",
+            "category": "CPU",
+            "delta_ms": 22.917401,
+            "calls": 144,
+            "mean_ms_per_call": 0.15914861805555558,
+            "share_percent": 0.42755496452649144
+          },
+          {
+            "label": "COPY:CPU->ROCKCHIP",
+            "category": "COPY",
+            "delta_ms": 18.284039,
+            "calls": 627,
+            "mean_ms_per_call": 0.02916114673046252,
+            "share_percent": 0.34111335949682886
+          },
+          {
+            "label": "CPU:r_128_16_32_4",
+            "category": "CPU",
+            "delta_ms": 14.66888,
+            "calls": 54,
+            "mean_ms_per_call": 0.2716459259259259,
+            "share_percent": 0.27366770202447305
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_5120_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 14.546387,
+            "calls": 18,
+            "mean_ms_per_call": 0.8081326111111111,
+            "share_percent": 0.2713824302229392
+          },
+          {
+            "label": "CPU:E_2_toks_28start_pos2Btoks29_4",
+            "category": "CPU",
+            "delta_ms": 12.955076,
+            "calls": 36,
+            "mean_ms_per_call": 0.3598632222222222,
+            "share_percent": 0.24169438147100542
+          },
+          {
+            "label": "CPU:E_16_32_4",
+            "category": "CPU",
+            "delta_ms": 12.730199,
+            "calls": 108,
+            "mean_ms_per_call": 0.11787221296296296,
+            "share_percent": 0.23749899833145027
+          },
+          {
+            "label": "CPU:E_64_1024_4",
+            "category": "CPU",
+            "delta_ms": 11.914426,
+            "calls": 144,
+            "mean_ms_per_call": 0.08273906944444445,
+            "share_percent": 0.22227965491302906
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_32_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 11.906262,
+            "calls": 108,
+            "mean_ms_per_call": 0.11024316666666667,
+            "share_percent": 0.2221273445035549
+          },
+          {
+            "label": "CPU:E_8_toks_32_2_4",
+            "category": "CPU",
+            "delta_ms": 6.8742,
+            "calls": 18,
+            "mean_ms_per_call": 0.3819,
+            "share_percent": 0.1282474542880324
+          },
+          {
+            "label": "CPU:r_8_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 6.189957,
+            "calls": 18,
+            "mean_ms_per_call": 0.3438865,
+            "share_percent": 0.11548198007075529
+          },
+          {
+            "label": "CPU:E_8_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 4.768688,
+            "calls": 18,
+            "mean_ms_per_call": 0.2649271111111111,
+            "share_percent": 0.08896629372056218
+          },
+          {
+            "label": "CPU:r_2_toks_4_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 4.7681,
+            "calls": 36,
+            "mean_ms_per_call": 0.13244722222222222,
+            "share_percent": 0.08895532378906158
+          },
+          {
+            "label": "CPU:E_2_toks_32_2_4_2",
+            "category": "CPU",
+            "delta_ms": 4.040112,
+            "calls": 18,
+            "mean_ms_per_call": 0.22445066666666666,
+            "share_percent": 0.07537372771210192
+          },
+          {
+            "label": "CPU:r_28start_pos2Btoks29_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 2.272635,
+            "calls": 18,
+            "mean_ms_per_call": 0.12625750000000002,
+            "share_percent": 0.04239906509497578
+          },
+          {
+            "label": "CPU:r_toks_toks",
+            "category": "CPU",
+            "delta_ms": 2.252513,
+            "calls": 18,
+            "mean_ms_per_call": 0.1251396111111111,
+            "share_percent": 0.04202366209896405
+          },
+          {
+            "label": "CPU:r_2_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 1.540855,
+            "calls": 18,
+            "mean_ms_per_call": 0.08560305555555556,
+            "share_percent": 0.028746724153644956
+          },
+          {
+            "label": "CPU:E_62080_4",
+            "category": "CPU",
+            "delta_ms": 1.479313,
+            "calls": 3,
+            "mean_ms_per_call": 0.49310433333333337,
+            "share_percent": 0.0275985753026086
+          },
+          {
+            "label": "CPU:E_2_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 1.180064,
+            "calls": 18,
+            "mean_ms_per_call": 0.06555911111111111,
+            "share_percent": 0.0220156823916896
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2560_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 0.600535,
+            "calls": 3,
+            "mean_ms_per_call": 0.20017833333333335,
+            "share_percent": 0.011203788798822195
+          },
+          {
+            "label": "CPU:E_6144_3",
+            "category": "CPU",
+            "delta_ms": 0.366329,
+            "calls": 54,
+            "mean_ms_per_call": 0.006783870370370371,
+            "share_percent": 0.006834360606598675
+          },
+          {
+            "label": "CPU:gpt2_argmax",
+            "category": "CPU",
+            "delta_ms": 0.31062,
+            "calls": 3,
+            "mean_ms_per_call": 0.10354000000000001,
+            "share_percent": 0.005795034222302031
+          },
+          {
+            "label": "CPU:E_toks_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 0.128332,
+            "calls": 18,
+            "mean_ms_per_call": 0.007129555555555556,
+            "share_percent": 0.0023942062063500875
+          },
+          {
+            "label": "CPU:r_512_4",
+            "category": "CPU",
+            "delta_ms": 0.00875,
+            "calls": 3,
+            "mean_ms_per_call": 0.002916666666666667,
+            "share_percent": 0.00016324302828260503
+          },
+          {
+            "label": "CPU:E",
+            "category": "CPU",
+            "delta_ms": 0.007583,
+            "calls": 108,
+            "mean_ms_per_call": 7.021296296296296e-05,
+            "share_percent": 0.00014147107239622785
+          },
+          {
+            "label": "CPU:E_512_4",
+            "category": "CPU",
+            "delta_ms": 0.006999,
+            "calls": 3,
+            "mean_ms_per_call": 0.002333,
+            "share_percent": 0.00013057576627999455
+          }
+        ]
+      },
+      "decode": {
+        "measured_requests": 3,
+        "native_runs_delta": 189,
+        "sum_ms": 17155.398629,
+        "per_request_ms": 5718.466209666666,
+        "ms_per_native_invocation": 90.76930491534391,
+        "timed_request_comparison_ms": 17886.073923669755,
+        "accounted_fraction": 0.9591483688489731,
+        "labels": [
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_12288_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 3884.952272,
+            "calls": 4536,
+            "mean_ms_per_call": 0.8564709594356261,
+            "share_percent": 22.645654327336704
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_24576_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 3124.453693,
+            "calls": 1890,
+            "mean_ms_per_call": 1.6531501021164021,
+            "share_percent": 18.212655739274574
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2048_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 2302.436492,
+            "calls": 12474,
+            "mean_ms_per_call": 0.18457884335417668,
+            "share_percent": 13.421060867148213
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2048_4096",
+            "category": "ROCKCHIP",
+            "delta_ms": 1654.982844,
+            "calls": 4536,
+            "mean_ms_per_call": 0.3648551243386243,
+            "share_percent": 9.647008966625627
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_6144_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 1535.9031469999998,
+            "calls": 3402,
+            "mean_ms_per_call": 0.45147064873603754,
+            "share_percent": 8.952885212493186
+          },
+          {
+            "label": "CPU:rockchip_cpu_gated_delta_scan",
+            "category": "CPU",
+            "delta_ms": 1075.7395579999998,
+            "calls": 3402,
+            "mean_ms_per_call": 0.3162079829512051,
+            "share_percent": 6.270559963448109
+          },
+          {
+            "label": "CPU:r_8_28start_pos2B129_64_4",
+            "category": "CPU",
+            "delta_ms": 611.497114,
+            "calls": 1134,
+            "mean_ms_per_call": 0.539239077601411,
+            "share_percent": 3.5644587877212426
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_5120_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 433.890295,
+            "calls": 1134,
+            "mean_ms_per_call": 0.3826193077601411,
+            "share_percent": 2.5291764090316087
+          },
+          {
+            "label": "CPU:E_16_32_4",
+            "category": "CPU",
+            "delta_ms": 389.82059,
+            "calls": 10206,
+            "mean_ms_per_call": 0.0381952371154223,
+            "share_percent": 2.2722910637648233
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_32_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 363.77601899999996,
+            "calls": 6804,
+            "mean_ms_per_call": 0.053465023368606694,
+            "share_percent": 2.120475465869164
+          },
+          {
+            "label": "CPU:r_8_64_4_28start_pos2B129",
+            "category": "CPU",
+            "delta_ms": 349.19726699999995,
+            "calls": 1134,
+            "mean_ms_per_call": 0.3079340978835978,
+            "share_percent": 2.035494916508127
+          },
+          {
+            "label": "CPU:r_16_32_4",
+            "category": "CPU",
+            "delta_ms": 277.415867,
+            "calls": 10206,
+            "mean_ms_per_call": 0.027181644816774445,
+            "share_percent": 1.6170761927446438
+          },
+          {
+            "label": "CPU:E_512_4",
+            "category": "CPU",
+            "delta_ms": 158.490697,
+            "calls": 29673,
+            "mean_ms_per_call": 0.005341242779631315,
+            "share_percent": 0.9238531871365705
+          },
+          {
+            "label": "CPU:rockchip_quantize",
+            "category": "CPU",
+            "delta_ms": 142.82050999999998,
+            "calls": 34965,
+            "mean_ms_per_call": 0.00408467067067067,
+            "share_percent": 0.8325105879998143
+          },
+          {
+            "label": "CPU:E_2048_3",
+            "category": "CPU",
+            "delta_ms": 124.14185599999999,
+            "calls": 4536,
+            "mean_ms_per_call": 0.027368134038800705,
+            "share_percent": 0.7236314275446033
+          },
+          {
+            "label": "CPU:E_2048_64_4",
+            "category": "CPU",
+            "delta_ms": 121.97130600000001,
+            "calls": 189,
+            "mean_ms_per_call": 0.6453508253968254,
+            "share_percent": 0.7109791421215714
+          },
+          {
+            "label": "COPY:ROCKCHIP->CPU",
+            "category": "COPY",
+            "delta_ms": 119.48102,
+            "calls": 34965,
+            "mean_ms_per_call": 0.003417160589160589,
+            "share_percent": 0.6964630935361986
+          },
+          {
+            "label": "CPU:rockchip_dequantize",
+            "category": "CPU",
+            "delta_ms": 99.499909,
+            "calls": 34965,
+            "mean_ms_per_call": 0.002845700243100243,
+            "share_percent": 0.5799918215354225
+          },
+          {
+            "label": "CPU:E_62080_4",
+            "category": "CPU",
+            "delta_ms": 93.050028,
+            "calls": 189,
+            "mean_ms_per_call": 0.4923281904761905,
+            "share_percent": 0.5423950210209948
+          },
+          {
+            "label": "CPU:E_6144_4",
+            "category": "CPU",
+            "delta_ms": 66.665903,
+            "calls": 3402,
+            "mean_ms_per_call": 0.01959609141681364,
+            "share_percent": 0.38860013947624605
+          },
+          {
+            "label": "CPU:r_512_4_64_4",
+            "category": "CPU",
+            "delta_ms": 61.87886,
+            "calls": 189,
+            "mean_ms_per_call": 0.32740137566137567,
+            "share_percent": 0.36069613617370644
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2560_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 41.15390300000001,
+            "calls": 189,
+            "mean_ms_per_call": 0.21774551851851856,
+            "share_percent": 0.23988893461462457
+          },
+          {
+            "label": "CPU:r_512_4",
+            "category": "CPU",
+            "delta_ms": 27.310138,
+            "calls": 9261,
+            "mean_ms_per_call": 0.002948940503185401,
+            "share_percent": 0.15919267509082607
+          },
+          {
+            "label": "CPU:gpt2_argmax",
+            "category": "CPU",
+            "delta_ms": 19.606450000000002,
+            "calls": 189,
+            "mean_ms_per_call": 0.1037378306878307,
+            "share_percent": 0.11428734723107321
+          },
+          {
+            "label": "COPY:CPU->ROCKCHIP",
+            "category": "COPY",
+            "delta_ms": 19.3448,
+            "calls": 34965,
+            "mean_ms_per_call": 0.0005532618332618332,
+            "share_percent": 0.11276217136277422
+          },
+          {
+            "label": "CPU:E_1024_4",
+            "category": "CPU",
+            "delta_ms": 12.202270000000002,
+            "calls": 9072,
+            "mean_ms_per_call": 0.0013450473985890654,
+            "share_percent": 0.07112787212867744
+          },
+          {
+            "label": "CPU:E_6144_3",
+            "category": "CPU",
+            "delta_ms": 10.22976,
+            "calls": 3402,
+            "mean_ms_per_call": 0.003006984126984127,
+            "share_percent": 0.05962997550349724
+          },
+          {
+            "label": "CPU:E_4_4",
+            "category": "CPU",
+            "delta_ms": 8.643407000000002,
+            "calls": 6804,
+            "mean_ms_per_call": 0.001270342004703116,
+            "share_percent": 0.05038301462368194
+          },
+          {
+            "label": "CPU:r_2_4_28start_pos2B129",
+            "category": "CPU",
+            "delta_ms": 8.360202,
+            "calls": 2268,
+            "mean_ms_per_call": 0.003686156084656084,
+            "share_percent": 0.048732193176016694
+          },
+          {
+            "label": "CPU:E_2_28start_pos2B129_4",
+            "category": "CPU",
+            "delta_ms": 6.3923700000000006,
+            "calls": 1134,
+            "mean_ms_per_call": 0.0056370105820105825,
+            "share_percent": 0.0372615649349829
+          },
+          {
+            "label": "CPU:E_2_32_2_4_2",
+            "category": "CPU",
+            "delta_ms": 3.332274,
+            "calls": 1134,
+            "mean_ms_per_call": 0.0029385132275132277,
+            "share_percent": 0.019424054620141698
+          },
+          {
+            "label": "CPU:r_8_64_4",
+            "category": "CPU",
+            "delta_ms": 2.659395,
+            "calls": 1134,
+            "mean_ms_per_call": 0.0023451455026455028,
+            "share_percent": 0.01550179659191643
+          },
+          {
+            "label": "CPU:E_8_32_2_4",
+            "category": "CPU",
+            "delta_ms": 2.556988,
+            "calls": 1134,
+            "mean_ms_per_call": 0.0022548395061728396,
+            "share_percent": 0.014904859136747724
+          },
+          {
+            "label": "CPU:r_2_64_4",
+            "category": "CPU",
+            "delta_ms": 0.8513710000000001,
+            "calls": 1134,
+            "mean_ms_per_call": 0.000750768077601411,
+            "share_percent": 0.004962700187921119
+          },
+          {
+            "label": "CPU:E",
+            "category": "CPU",
+            "delta_ms": 0.6900540000000001,
+            "calls": 6804,
+            "mean_ms_per_call": 0.00010141887125220459,
+            "share_percent": 0.004022372285966658
+          }
+        ]
+      }
+    },
+    "input_report_sha256": "0072e9e51f242361cb180da5d1ab879c0d59ed3af2460d5221deaa6f1d409840",
+    "helper_sha256": "6ec0c3feed0be123c118bd0b4453242f801e8c7445637350ecdbd3c37c9f5dea",
+    "metadata": {
+      "input_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/pooled.json"
+    }
+  },
+  "normal_models_restored_fresh": true,
+  "provenance": {
+    "owner_actual_terminal_exec_session": 97866,
+    "owner_exit_code": 0,
+    "verifier_actual_terminal_exec_session": 42342,
+    "verifier_exit_code": 0,
+    "owner_sha256": "6409dbdf3efb3c26af3a9aa84490c2fea3b91120f34fd2b0e10f1d7aa21259f9",
+    "job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/job.json",
+    "job_sha256": "518bf14bf2813e4d395a780801dcc586ed07b234b47dfbcc61bdb780b7e6252f",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/pooled.json",
+    "report_sha256": "0072e9e51f242361cb180da5d1ab879c0d59ed3af2460d5221deaa6f1d409840",
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/serving-verification.json",
+    "receipt_sha256": "94889b459a48797009aa8edc6ddd42d32ee68d0e61a9aa1ae4b1b562122c4143",
+    "regression_evidence": "benchmark-native-replay-warmup-preflight-v1.json",
+    "validation": {
+      "valid": true,
+      "gates": {
+        "complete": {
+          "passed": true
+        },
+        "checkpoint": {
+          "passed": true
+        },
+        "input_context": {
+          "passed": true
+        },
+        "source_cohort": {
+          "passed": true
+        },
+        "wrapper": {
+          "passed": true
+        },
+        "workload": {
+          "passed": true
+        },
+        "scan_pool_placement": {
+          "passed": true
+        },
+        "INT8_NPU": {
+          "passed": true
+        },
+        "native_replay": {
+          "passed": true
+        },
+        "six_complete_stable_NPU_trials": {
+          "passed": true
+        },
+        "actual_pool_calls_both_phases": {
+          "passed": true
+        },
+        "timing_medians": {
+          "passed": true
+        },
+        "profiling_diagnostic_only": {
+          "passed": true
+        },
+        "six_profile_snapshots": {
+          "passed": true
+        },
+        "measured_profile_delta_prefill": {
+          "passed": true
+        },
+        "measured_profile_delta_decode": {
+          "passed": true
+        },
+        "all_constructors_during_warmup": {
+          "passed": true
+        },
+        "captured_source_files": {
+          "passed": true
+        }
+      },
+      "scope": "Native compilation prepared in warmup, matching model IDs, warmup-excluded profile and generated CPU source capture. Diagnostic only; no timing promotion or quality/API qualification."
+    }
+  }
+}

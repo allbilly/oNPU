@@ -1,0 +1,171 @@
+{
+  "kind": "Trained v8 NPU draft-head diagnostic summary",
+  "status": "complete_diagnostic_without_formal_speed_win",
+  "recorded_utc": "2026-10-23T01:15:18.001974+00:00",
+  "complete": true,
+  "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-dflash2-probe-v8.json",
+  "raw_sha256": "d863a44951120796a584f9c244296b14d52c2e763872768011714d3ada91aad3",
+  "natural_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/natural-spec-workloads-v8.json",
+  "natural_report_sha256": "d29e1ceb189c7344caa82f7d02ce08ec68458c4abb21ab1748282e69ef4f186d",
+  "measured_source_cohort": {
+    "probe_program_sha256": "2b8c64fdcf7aac2ffb3d1772708ee91a2bc93d78cb4eed0bd617b40da64076a7",
+    "all_sources_canonical_sha256": "17c81e4e2e144fd2826498b937ecc6a8184fc7628f829bc14dbdc4be749f2791",
+    "full_hashes_location": "raw_report.source_sha256",
+    "selected_source_sha256": {
+      "tinygrad/llm/dflash2.py": "fc51f5ae3ef155c5f7df20f4a8d8ee2459aeda237691fab17479d8afae7d39ef",
+      "tinygrad/llm/kernels/mali_linear.py": "92bcdb928795e57cc63392d551cb2bac9b3516afab94c37d720c45ffc3120417",
+      "tinygrad/llm/kernels/rockchip.py": "be19042e524b8cb9f338db244158783e050d747d8bba6e780eff67a0739747d1",
+      "tinygrad/runtime/ops_rockchip.py": "953220e5d160f42809690bccf9e387e0fcc29070701c8a55c1a481bd2706a1b4"
+    },
+    "target_checkpoint_sha256": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1",
+    "draft_checkpoint_sha256": "a9f6d56744e3a23ea50eaf20fe2115832ae5364ad607a416a48f96b8800fbb8e",
+    "scope": "Pinned v8 measured cohort; all 259 source hashes match at publication. Later source/API changes require separate qualification.",
+    "source_count": 259
+  },
+  "configuration": {
+    "device": "CL",
+    "context": 512,
+    "input_tokens": 128,
+    "draft_compute_dtype": "float16",
+    "npu_head_enabled": true,
+    "prefix_trace": true,
+    "prepared_observation": true,
+    "prepared_dynamic_rows": true,
+    "npu_exclusive_lease_required": true
+  },
+  "strict_gate": {
+    "complete": true,
+    "expected_counts_per_engine": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "ordinary_counts": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "speculative_counts": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "exact_ids_match_reference": true,
+    "exact_ids_match_between_engines": true,
+    "all_counts_and_correctness_gates_passed": true
+  },
+  "strict_totals_seconds": {
+    "last_8_token_ordinary": 10.017287184018642,
+    "last_8_token_speculative": 14.138399667106569,
+    "single_64_token_ordinary": 33.37568818917498,
+    "single_64_token_speculative": 65.11409223405644
+  },
+  "natural_fixed_32": {
+    "complete": true,
+    "execution_finished": true,
+    "completed_pairs": 3,
+    "ignore_eos": true,
+    "counting": {
+      "ordinary_seconds": 20.14541377709247,
+      "speculative_seconds": 23.43685474805534,
+      "exact_ids_equal": true
+    },
+    "short_code": {
+      "ordinary_seconds": 19.992945961188525,
+      "speculative_seconds": 35.207920521032065,
+      "exact_ids_equal": true
+    },
+    "explanation": {
+      "ordinary_seconds": 19.940451350994408,
+      "speculative_seconds": 50.16192205203697,
+      "exact_ids_equal": true
+    },
+    "first_end_token_positions_location": "Pinned natural report; do not copy raw IDs.",
+    "completed_answer_latency_measured": false
+  },
+  "npu_head_execution": {
+    "actual_calls": 61,
+    "actual_submissions": 1281,
+    "submissions_per_call": 21,
+    "activation_domain": "R8 FP16 draft head; target remains CL",
+    "shape_dtype_gate_passed": true,
+    "proposal_gate_passed": true,
+    "target_greedy_verification_passed": true,
+    "ordinary_npu_submissions_zero": true,
+    "strict_submissions": 630,
+    "natural_submissions": 651,
+    "target_head_identity_unchanged": true
+  },
+  "single_long_cost_seconds": {
+    "prefill": 7.11857289285399,
+    "draft": 10.741097633959725,
+    "observation": 9.980298534268513,
+    "verification": 34.47066122479737,
+    "replay": 0.0,
+    "restore": 1.6193390197586268
+  },
+  "memory_setup_cleanup": {
+    "model_peak_rss_bytes": 8527826944,
+    "process_peak_rss_bytes": 8687177728,
+    "npu_packed_weight_bytes": 1017118720,
+    "trace_workspace_bytes": 155860992,
+    "npu_preparation_seconds": 2.919109622016549,
+    "setup_included_in_request_totals": false,
+    "cleanup_seconds": 0.4688932038843632,
+    "cleanup_complete": true,
+    "npu_finalized": true,
+    "orphan_process_count": 0,
+    "npu_acquisition_seconds": 0.10985886096023023,
+    "cleanup_scope": "Owned prelude/trained process groups; original serving restoration is separate.",
+    "resident_loading_scope": "Resident loading is outside request totals and not separately timed in this summary."
+  },
+  "restoration_provenance": {
+    "parent_job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-probe-job-v8.json",
+    "parent_job_sha256": "c8b984e206ed63069da0cd2e5b558f16394f133288460786bb6a9c9fdd2a8d52",
+    "child_exit_code": 0,
+    "parent_complete": true,
+    "parent_restored": true,
+    "parent_error": null,
+    "restoration_verified": true,
+    "original_ids_options_profiles_selection_settings_preserved": true,
+    "serving_verification_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/post-v8-serving-verification.json",
+    "serving_verification_sha256": "90582079db6a7182168ac9b569781f88b93ba5a7f65904da700c13883326bae5",
+    "verification_source": "Terminal parent job plus fresh real replies from both restored original workers; profiles/full options/selection/global settings match."
+  },
+  "qualification": {
+    "formal_warmed_speed_qualification": false,
+    "trained_npu_output_gate_passed": true,
+    "broad_output_quality_qualified": false,
+    "model_maximum_context_qualified": false,
+    "published_rkllm_win_claimed": false,
+    "api_promotion": false
+  },
+  "publication_gates": {
+    "raw_terminal": true,
+    "raw_and_source_pins_verified": true,
+    "strict_gate_passed": true,
+    "all_three_natural_pairs_reported": true,
+    "cleanup_and_restoration_verified": true
+  },
+  "official_freshness": {
+    "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/freshness-v8/report.json",
+    "report_sha256": "aa9794052ee33636859b9d40bbae66bec3f691ace80c4709f8599d9c2ca6f452",
+    "head_change_since_previous_check": false
+  },
+  "limits": [
+    "All reported whole-request pairs remain slower than ordinary; exact diagnostic IDs do not establish broad output quality.",
+    "Keep IDs, all clocks and per-block traces in pinned raw reports.",
+    "Record fixed-output/EOS policy and cold captures; do not infer answer latency or a formal warmed win.",
+    "Do not extrapolate the earlier synthetic NPU micro speedup into trained-model performance.",
+    "Compute this summary digest only after its final write, then update and verify the linking digest."
+  ],
+  "comparison_v7": {
+    "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-dflash2-probe-v7.json",
+    "raw_sha256": "949f2f484ffb724d60c6d1d153b03995566c276ae810d8ec423b45af1ac818bd",
+    "single_64_token_speculative_seconds": 70.90145781892352,
+    "scope": "Separate diagnostic cohorts; no formal warmed, API or RKLLM win."
+  }
+}

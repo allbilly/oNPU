@@ -1,0 +1,100 @@
+{
+  "updated_utc": "2026-10-22T16:11:56.953295+00:00",
+  "model": "Qwen3.5-0.8B",
+  "device": "Mali OpenCL GPU",
+  "workload": {
+    "context": 512,
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "warmups": 3,
+    "measured_runs": 3,
+    "greedy": true,
+    "eos_ignored": true
+  },
+  "comparison": {
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-0.8b-mali-recurrent-cl-baseline.json",
+    "sha256": "b96b88c139eea524696b24c3f3ecb47be183b25c54734bb748843747c1aa4532",
+    "initial_report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-0.8b-cl-baseline.json",
+    "initial_sha256": "7186a7e3c92e6be2c5e5ce99052ca1043255de6cdbc5b4a6ae39dbe7472cfef2",
+    "initial_ttft_ms": 41215.1083399076,
+    "candidate_ttft_ms": 2253.721789922565,
+    "initial_prefill_proxy_tps": 3.105657249384461,
+    "candidate_prefill_proxy_tps": 56.79494273532222,
+    "initial_decode_tps": 3.1396796911995635,
+    "candidate_decode_tps": 4.543780363632382,
+    "prefill_speedup": 18.28757592183714,
+    "decode_speedup": 1.447211438914764,
+    "all_64_greedy_ids_match": true,
+    "fused_gated_delta_blocks": 18,
+    "candidate_actual_chunk_size": 128,
+    "cpu_clock_change": false,
+    "rkllm_quality_qualified": false,
+    "timing_limit": "Initial and candidate measurements are separate runs; clock snapshots and CPU affinity are recorded in the raw reports. This is not a matched SDK speed/quality qualification."
+  },
+  "measured_ranges_separated": {
+    "ttft": true,
+    "decode": true
+  },
+  "all_six_requests_match_initial_64_ids": true,
+  "validation": {
+    "updated_utc": "2026-10-22T16:06:33.745332+00:00",
+    "checks": {
+      "mali_hardware_tests": true,
+      "cpu_fallback_tests": true,
+      "mypy": true,
+      "ruff": true
+    },
+    "test_counts": {
+      "mali": 5,
+      "cpu_fallback": 3,
+      "workers": 12
+    },
+    "logs": {
+      "mali_hardware_tests": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-tests.log",
+      "cpu_fallback_tests": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-fallback-tests.log",
+      "mypy": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-mypy.log",
+      "ruff": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-ruff.log"
+    },
+    "source_sha256": {
+      "tinygrad/llm/kernels/mali_recurrent.py": "1e31c56b0af245f6b5744f1e88af6662a94112169022c7d97f2a944263bd21aa",
+      "tinygrad/llm/kernels/mali.py": "d4c77cd0df1aa3ca372158d247df2bc03617420e2d4dfb1507d74fa7d75fce9e",
+      "tinygrad/llm/model.py": "e617403b368e41a75d6e7dc160bd15e05e1b9dabeeecd5a707775b969e191b6d",
+      "extra/rockchip/benchmark_inference.py": "e3363dcbf488f22b292b6a5e5a75e0426cf604a734b538f129f90416e34e05b0",
+      "test/models/test_mali_recurrent.py": "6c038c34fe15aeb2dbe9a82bd39d0aca5a2f3f83ddd5edb930fa6bf88e7d03e0"
+    },
+    "intent": "INTENT: Mali GatedDeltaNet uses a one-token fallback; oNPU needs faster bulk prefill and block verification; preserve the existing recurrence, reset behavior and cache state while executing the scan in one OpenCL kernel.",
+    "twin_search": "TWINS: searched contiguous_view_offset in OpenCL recurrent kernels - found 0 other sites: none.",
+    "default_enabled": false,
+    "full_model_qualification_pending": false,
+    "rkllm_quality_qualified": false,
+    "full_model_workload_checked": "Qwen3.5-0.8B, context512, 128 input and64 output tokens, 3 warmups and3 measured requests",
+    "full_model_qualification_scope": "Local 128/64 workload agreement with initial oNPU outputs only; does not qualify RKLLM parity, other model sizes or maximum context."
+  },
+  "configuration": {
+    "cli_flag": "--gpu-recurrent-scan",
+    "default_enabled": false,
+    "enabled_in_app_worker": false,
+    "actual_prefill_chunk": 128,
+    "fused_gated_delta_blocks": 18
+  },
+  "main_table_updated": true,
+  "limits": [
+    "Only the 0.8B full checkpoint is measured here; 2B/4B bulk-path timing and full outputs remain unqualified.",
+    "The local initial and optimized measurements are separate runs, with clocks recorded and unchanged host clock policy.",
+    "This checks agreement with existing oNPU outputs; held-out comparable-quality RKLLM qualification remains unfinished.",
+    "No trained draft runtime, target intermediate-feature API, block-logit verifier, acceptance sampler or cache rollback coordinator is implemented.",
+    "Steady allocated memory rises from 1711.20 MiB to 2910.21 MiB with the measured packing configuration; lifetime peak RSS alone hides this increase."
+  ],
+  "serving_restoration": {
+    "complete": true,
+    "ready_idle_sessions": 2,
+    "settings_restored": true,
+    "selection_restored": true,
+    "snapshot": "/home/orangepi/vlm-bench/baseline-20261021/sessions-after-mali-recurrent.json"
+  },
+  "steady_allocated_mib": {
+    "initial": 1711.1954307556152,
+    "candidate": 2910.20597076416
+  },
+  "app_enablement_followup": "Reduce or avoid additional persistent packed projection weights, then qualify 2B/4B and serving before enabling the path in the app."
+}

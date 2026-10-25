@@ -1,0 +1,1199 @@
+diff --git a/README.md b/README.md
+index a9fbbcd..77da501 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,6 @@
+ # oNPU
+ 
+-oNPU is a local web app for managing and chatting with GGUF language models on Rockchip boards. It uses an existing [tinygrad](https://github.com/tinygrad/tinygrad) checkout as its inference backend. CPU inference is supported; GPU and NPU acceleration are experimental.
++oNPU is a local web app for managing and chatting with GGUF language models on Rockchip boards. It uses an existing [tinygrad](https://github.com/tinygrad/tinygrad) checkout as its inference backend. Mali OpenCL is the default execution profile. Optional NPU assistance is measured per inference phase; CPU inference remains available.
+ 
+ ## Run
+ 
+@@ -16,6 +16,56 @@ Open <http://127.0.0.1:8080>. Import a local GGUF model or download one from the
+ 
+ The API provides OpenAI-compatible chat completions at `/v1/chat/completions`. See <http://127.0.0.1:8080/docs> while the app is running for the API reference.
+ 
++## GPU-first serving and optional NPU assistance
++
++Use `~/tinygrad` on its `oNPU` branch as the backend. It contains the Mali queue
++workaround and the retained Rockchip kernels; no separate OpenCL checkout or
++reference worktree is needed.
++
++Choose **Mali GPU · OpenCL** for normal loading. The prefill and decode NPU
++controls default to **Off**. **Auto** compares the original layer with the NPU
++path, including transfers, verifies numerical agreement, and selects an NPU
++candidate only when its measured median is at least 10% faster. Most surrounding
++operations remain on the GPU. Bulk prefill, single-row decode, and the final
++vocabulary projection are measured separately.
++
++The **Rockchip NPU + CPU** profile prepares FP16 weights and places supported
++dense decode projections on the NPU. Its prefill control defaults to Auto in
++the load form; Auto selects supported prefill work only when it wins. Other
++operations use the CPU. It is an
++inference profile, not a claim that the complete model runs on the NPU or that
++quantized GGUF weights execute with native quantized arithmetic.
++
++A GPU-only model and a different NPU-assisted model can remain loaded and serve
++requests concurrently. Each model has its own worker, request admission, KV
++state and cancellation. Use its **Chat** button to select it; API requests route
++by `model` ID. Unloading one model preserves the other. NPU assistance on a GPU
++model reserves the same physical NPU, so disable assistance when assigning that
++NPU to a separate model.
++
++For explicit API loading:
++
++```bash
++curl http://127.0.0.1:8080/api/models/GPU_MODEL_ID/load \
++  -H 'Content-Type: application/json' \
++  -d '{"profile":"CL","context":512,"realize":true}'
++curl http://127.0.0.1:8080/api/models/SMALL_MODEL_ID/load \
++  -H 'Content-Type: application/json' \
++  -d '{"profile":"ROCKCHIP","context":512,"realize":true,"npu_prefill":"auto"}'
++```
++
++For measured assistance on one GPU model, add `"npu_prefill":"auto"` and/or
++`"npu_decode":"auto"` to its load options. Actual execution devices and placement
++measurements are reported in `/api/status`. Saved user profile preferences remain
++in effect; select OpenCL to change an existing CPU preference.
++
++CPU/NPU serving selects a suitable prefill chunk and reuses its prepared graph.
++Cold preparation currently takes about 150 seconds while compiling prompt sizes
++and greedy/sampled paths; steady-state latency excludes that one-time load.
++The tested Qwen3-0.6B FP16 path beats matched RKLLM prefill and decode at 128 and
++256 input tokens. This does not establish W8A8 or all-model performance. See the
++[verification record](VERIFICATION.md) for measurements and limitations.
++
+ ## Development
+ 
+ ```bash
+@@ -23,4 +73,10 @@ uv sync --extra test --python ~/tinygrad/.venv/bin/python
+ .venv/bin/python -m pytest -q
+ ```
+ 
++With a ready model, exercise GPU serving, streaming and cancellation through the real API:
++
++```bash
++.venv/bin/python scripts/smoke.py --model MODEL_ID --profile CL --context 1024
++```
++
+ See [VERIFICATION.md](VERIFICATION.md) for current device and backend limitations, and [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES) for attribution.
+diff --git a/VERIFICATION.md b/VERIFICATION.md
+index cd357e2..307429b 100644
+--- a/VERIFICATION.md
++++ b/VERIFICATION.md
+@@ -1,6 +1,114 @@
+-# oNPU verification · 2026-10-10
+-
+-The application works on CPU through the user's existing `~/tinygrad` checkout. OpenCL device access works, but full-model GPU generation failed on this board image. NPU assistance remains disabled and unqualified.
++# Current oNPU verification · 2026-10-18
++
++The selective inference port is verified on the current tinygrad `oNPU` branch.
++OpenCL remains the default. CPU/NPU serving uses measured per-phase assistance,
++adaptive prefill chunks and guarded native replay. A GPU model and a different
++small NPU model serve real requests concurrently.
++
++| Matched Qwen3-0.6B FP16 input | tinygrad prefill | RKLLM prefill | tinygrad decode | RKLLM decode |
++| ---: | ---: | ---: | ---: | ---: |
++| 128 tokens | 280.353 ms | 326.310 ms | 18.7022 tokens/s | 16.6705 tokens/s |
++| 256 tokens | 631.830 ms | 655.672 ms | 17.0492 tokens/s | 16.5525 tokens/s |
++
++The final comparison uses immutable current-source copies, four complete warmups,
++three measurements per fresh process, bracketing/reversed engine order, identical
++raw IDs and 32 greedy output IDs. Every generated sequence agrees. Source hashes
++and clock samples match the recorded conditions. Current-source full-vocabulary
++logit checks pass 128/256 prefill and a stateful decode step; the SDK EOS mask is
++recorded separately. This is matched FP16 evidence, not W8A8 or universal coverage.
++
++- Eighteen backend tests, 24 generation/parser/tokenizer checks and 23 app unit
++  tests pass. Backend mypy (219 files), Ruff, changed-app Python lint, JavaScript
++  syntax and whitespace checks pass. Optional SDK fixtures cannot start because
++  the `openai` client package is absent; no dependency or test was weakened.
++- Fresh GPU and NPU HTTP generation, SSE, limits, context/busy errors, Stop,
++  disconnect and recovery pass. Short/long prompt switching works in greedy and
++  sampled modes. Both workers report `/home/orangepi/tinygrad`.
++- Real concurrent GPU/NPU requests overlap, return nonempty text and record NPU
++  submissions. GPU-only sessions use CL with assistance Off.
++- Chromium passes real chat/history, Stop, all navigation, import, per-model
++  unload/reload, settings, themes and desktop/mobile layouts without console
++  errors. The corrected Rockchip form exposes prefill Auto/Off and performs an
++  actual Auto load while preserving the GPU session.
++- Both final sessions are left ready at <http://127.0.0.1:8091>. Warming four
++  prompt sizes and both sampling modes takes about 150 seconds on cold NPU load.
++- Runtime code has no reference-worktree dependency. Both reference folders stay
++  intact, including their uncommitted work. No commits, pushes, driver changes or
++  kernel-module insertions were performed.
++
++The summary is [verification-20261018.json](docs/verification-20261018.json).
++[Exported evidence](docs/rk3588-verification-20261018/completion-audit.json) includes
++raw logs, compressed benchmark/quality reports, screenshots, source checksums and
++a reviewable source archive. Earlier studies below are historical and should not
++be mixed with this matched FP16 comparison.
++
++---
++
++# Historical placement study · 2026-10-18
++
++The app now uses `/home/orangepi/tinygrad`, branch `oNPU`, for CPU, OpenCL and
++optional NPU-assisted inference. OpenCL is the default profile. The earlier
++isolated `tinygrad-opencl` setup described below is historical; it is no longer
++required by the current application.
++
++## Current integration
++
++Raw HTTP, concurrent-session, browser-control, hardware and source-hash evidence
++is retained in [verification-20261018.json](docs/verification-20261018.json).
++
++- Qwen3-0.6B Q8 GGUF, prepared into FP16 weights, serves on Mali OpenCL.
++- SmolLM2-135M F16 serves with dense decode projections on the Rockchip NPU and
++  surrounding operations on CPU. Both models remain loaded independently and
++  real requests were observed active concurrently.
++- Each worker reports `/home/orangepi/tinygrad` as its imported backend. No
++  retained execution path reads `tinygrad-1500` or `tinygrad-1500-clean`.
++- GPU and NPU HTTP checks pass real non-streaming generation, SSE, usage counts,
++  one-token limits, context rejection, per-model request admission, Stop,
++  disconnect cancellation, and generation after cancellation.
++- Chromium checks pass model selection, chat and persisted history, Stop,
++  per-model unload/reload while preserving the other session, saved settings,
++  themes, and desktop/mobile navigation without console errors.
++- The app unit suite passes **22 tests** with `-n12`. Tinygrad's tokenizer/native
++  tests and existing custom-kernel/JIT regressions pass; mypy and Ruff pass in
++  the backend. Changed app Python files pass Ruff with the backend configuration.
++
++## Observed placement comparison
++
++The same Qwen3 model at context 512 ran three deterministic 16-token chat
++requests per mode, GPU-only / auto GPU+NPU / GPU-only. Median decode rates were
++**1.644 / 1.816 / 1.766 tokens/s**; median first-text latencies were
++**4730 / 4619 / 4629 ms**. All three responses matched exactly across modes.
++These are modest diagnostic gains on this board, with drift between the two GPU
++controls. They do not establish a general speed or model-quality guarantee.
++
++Auto compares numerical outputs and measures each candidate including transfers.
++In this run it selected 141 decode layers and the final vocabulary projection
++for prefill. Bulk prefill stayed on the GPU. Both assistance controls default to
++Off. The detailed retained implementation, limits and raw benchmark are in
++`~/tinygrad/docs/rockchip-onpu.md` and `rockchip-onpu-benchmark.json`.
++
++The SmolLM2 eight-token greedy response matched the CPU reference. Its observed
++NPU-assisted decode sample was 6.26 tokens/s, versus 4.29 tokens/s for CPU; these
++were diagnostic samples, not a paired throughput study.
++
++The smaller model was downloaded through the application's existing downloader:
++`bartowski/SmolLM2-135M-Instruct-GGUF`, revision
++`09816acd5d99df7be770d85ea30822623dab342c`, file
++`SmolLM2-135M-Instruct-f16.gguf`, 270,885,952 bytes, locally computed SHA-256
++`f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57`.
++The file and its registered model remain in `.data`.
++
++NPU support is the bounded finite-FP16 dense matrix path, accumulating in FP32.
++It does not qualify arbitrary NPU operators, all models, larger contexts or native
++GGUF quantized arithmetic. GPU assistance occupies the same NPU resource as a
++separate NPU-assisted model; GPU-only serving can coexist with that second model.
++No kernel modules were inserted. The two reference worktrees remain intact.
++
++---
++
++# oNPU verification · 2026-10-11
++
++Qwen3-0.6B model serving now passes on Mali OpenCL through the isolated `~/tinygrad-opencl` checkout with a local queue workaround. The default 1024-token context, FP16 weight preparation, real generation, streaming and cancellation were exercised on 2026-10-11. CPU checks through the user's existing `~/tinygrad` checkout passed on 2026-10-10. NPU assistance remains disabled and unqualified.
+ 
+ ## Environment actually tested
+ 
+@@ -9,16 +117,25 @@ The application works on CPU through the user's existing `~/tinygrad` checkout.
+ | Board | Orange Pi 5, RK3588S, aarch64 |
+ | Memory | 16,739,618,816 bytes reported by Linux |
+ | Kernel | `6.1.99-rockchip-rk3588` |
+-| Backend | `/home/orangepi/tinygrad` |
+-| Backend HEAD | `805a8d5ec710e872cdd8866e9d60f2bbb444a461` |
+-| Backend Python | Existing tinygrad virtual environment, Python 3.12.12 |
+-| Backend worktree | Existing uncommitted changes; oNPU did not edit or reset it |
++| GPU backend | `/home/orangepi/tinygrad-opencl` |
++| GPU backend HEAD | `8a4e8c237b9b744a8bddf213d1a5b874d0e531a0` |
++| GPU backend Python | oNPU virtual environment, Python 3.12; no backend virtual environment |
++| GPU backend worktree | Detached upstream master plus a local seven-line `ops_cl.py` patch |
+ | App | Python 3.12, locked FastAPI/Uvicorn dependencies, buildless HTML/CSS/JS |
+ | Mali device | `Mali-LODX r0p0`, OpenCL driver version `2.1` |
+ 
+-The checkout differs from the GitHub default branch revision `078eee94d8f1912bb63ce786c250d2c24984844a`. Tests deliberately used the user's local checkout as requested.
++The latest upstream master fetched on 2026-10-11 was still `8a4e8c2`, committed on 2026-10-10. The original CPU validation used `/home/orangepi/tinygrad` at `805a8d5ec710e872cdd8866e9d60f2bbb444a461`; its existing NPU work remains in that checkout. The GPU patch is also retained in [patches/tinygrad-mali-opencl.patch](patches/tinygrad-mali-opencl.patch), and `git apply --check` succeeded against a fresh worktree at the tested master commit.
++
++## GPU repair checks · 2026-10-11
++
++- An ordinary `./run.sh --backend ~/tinygrad-opencl` server used oNPU's own Python environment. A load request containing only `{"profile":"CL"}` reached `ready` in **29.37 seconds**, with actual device `CL`, context **1024** and `realize=true`. No diagnostic monkey patches, altered JIT flags or per-kernel waits were used.
++- `scripts/smoke.py --profile CL --context 1024` passed real non-streaming and SSE generation, usage accounting, normal EOS, a one-token cap, HTTP 400 context errors, HTTP 409 overlapping-request rejection, Stop, disconnect cancellation and generation after cancellation. The deterministic short prompt returned `Hello!`. The verifier now checks the actual execution device and the requested context.
++- The worker was unloaded, zero worker RSS was observed, and a new default-options GPU load reached readiness in **28.81 seconds**. A new chat request after that reload succeeded.
++- Kernel-log snapshots before and after the default load, chat checks and reload showed **zero new `CS_CONFIG_FAULT` reports** (10 historical reports before and after). The driver still emitted two GPU activity timing warnings; the serving checks completed successfully.
++- Twelve tinygrad tests passed on the actual CL device: compile caching, invalid-kernel errors, unaligned buffer copies, FP16 and small matrix products against reference results, JIT input copies, JIT assignment and JIT cloning. Tests ran with `-n12` against the isolated patched checkout.
++- `python -m mypy tinygrad/` passed for **213 source files**, and `python -m ruff check .` passed in the isolated backend. The oNPU suite was rerun: **17 passed**.
+ 
+-## Checks that passed
++## Earlier application checks · 2026-10-10
+ 
+ - `python -m pytest -q`: **17 passed**. Coverage includes malformed and truncated GGUF metadata, model references, memory estimates, immutable-revision download resumption, traversal rejection, persisted settings, invalid generation settings, authentication, cross-origin protection, single-request admission, context errors and recoverable startup timeout. The suite uses fixtures and mock HTTP where appropriate; these are not substitutes for real inference.
+ - `node --check onpu/static/app.js`, `bash -n run.sh`, and Python compilation passed.
+@@ -31,26 +148,30 @@ The checkout differs from the GitHub default branch revision `078eee94d8f1912bb6
+ 
+ Screenshots of the real app are in `docs/screenshots/`: `overview.png`, `chat.png`, `dark.png` and `mobile.png`.
+ 
+-## Observed performance and GPU failure
++## GPU workaround and observed performance
+ 
+ The CPU short-request samples were around **0.8 decode tokens/s**, with approximately 7.7 seconds to first emitted text on a fresh short prefix. These are diagnostic observations on the current shared board, not a controlled performance comparison or a quality certification. The Q8 model's worker RSS was around 2 GB after preparation. The application makes these costs visible; it does not imply tinygrad currently achieves the native qwen3.c engine's speeds.
+ 
+-Full-model Mali testing failed. The FP16 model with context 512 and Q8 model with context 128 stalled during warmup; a process trace placed the wait inside OpenCL buffer copy. The kernel logged `CS_CONFIG_FAULT` (`0x40`) for the tested Mali contexts. A bounded alternate run with `REALIZE=0`, `JIT=0`, and `PARALLEL=0` also failed to establish serving readiness and produced a corresponding GPU driver fault.
++Before the repair, the FP16 model with context 512 and Q8 model with context 128 stalled during warmup; a process trace placed the wait inside OpenCL buffer copy. The kernel logged `CS_CONFIG_FAULT` (`0x40`) for the tested Mali contexts. A bounded alternate run with `REALIZE=0`, `JIT=0`, and `PARALLEL=0` also failed to establish serving readiness and produced a corresponding GPU driver fault.
++
++Unmodified latest master reproduced the fault: weights loaded, but the process segfaulted inside `clEnqueueReadBuffer` during warmup. Finishing the queue before that read also crashed. Diagnostic runs with waits after every kernel and after batches of 8, 16 and 32 kernels completed warmup. Deferring buffer releases did not fix the failure.
++
++The local workaround drains the OpenCL queue after each batch of 32 kernel dispatches, only for the observed `Mali-LODX r0p0` / driver `2.1` pair. It resets the dispatch count on ordinary synchronization. This avoids the observed native driver crash while preserving asynchronous execution within each batch. The exact defect inside the closed driver has not been established; 32 is a tested batch size, not a proven hardware limit.
+ 
+-The app stayed responsive and could unload the failed GPU workers and return to CPU. OpenCL remains selectable as **experimental**, with **Tensor OK** indicating the scope of the successful check. Startup has a five-minute bound, and cancellation has a separate 45-second bound; the startup watchdog's recovery behavior is covered by the automated suite.
++The fresh GPU short-request sample took **5.57 seconds** to first emitted text and measured approximately **1.78 decode tokens/s**. Prepared model allocation was approximately **1.58 GB**, and worker RSS after warmup was approximately **2.66 GB**. These are diagnostic measurements on the shared board, not a controlled CPU/GPU comparison. The Q8 GGUF was prepared into FP16 GPU weights, so this does not claim native Q8 arithmetic.
+ 
+-GPU repair was not attempted in the user's dirty tinygrad checkout or in system drivers. The source and driver fault require a separate investigation before GPU model serving can be qualified. No NPU submissions or acceleration claims are made by this implementation.
++OpenCL remains labelled **experimental** for general hardware/model coverage. The profile's **Tensor OK** indicator still describes its startup probe, while the separate real-model checks above establish the tested model's serving behavior. Startup has a five-minute bound, and cancellation has a separate 45-second bound. No system drivers were changed, and no NPU submissions were made by this session.
+ 
+ ## Limits
+ 
+-Only the two Qwen3 artifacts and bounded context-512 CPU serving were exercised end to end. Long-running stress tests, numerical logit comparisons, other architectures, larger contexts, quantized GPU qualification and hybrid NPU placement remain unverified. The optional systemd unit is supplied for review and installation; it was not enabled during QA. The preview server is stopped after verification, and the saved library/download data remains in `.data` for the documented launch command.
++CPU serving was exercised with two Qwen3 artifacts at context 512. GPU serving was exercised with Qwen3-0.6B Q8 GGUF and FP16 weight preparation at contexts 128 and 1024. Long-running stress tests, full-model numerical logit comparisons, other architectures, larger contexts, on-the-fly GPU dequantization (`realize=false`) and hybrid NPU placement remain unverified. The optional systemd unit is supplied for review and installation; it was not enabled during QA. The preview server is stopped after verification, and the saved library/download data remains in `.data` for the documented launch command.
+ 
+-Owned temporary research snapshots, diagnostic logs, duplicate build output and initial QA screenshots were removed. The intended wheel, final screenshots, source, environment and saved model library were retained.
++Owned temporary research snapshots, diagnostic logs, duplicate build output and initial QA screenshots were removed. The intended wheel, final screenshots, source, environment, saved model library and persistent GPU backend worktree were retained.
+ 
+ ## Fixes checked during implementation
+ 
+ The worker passes a copy of prompt IDs to tinygrad's streaming handler so that generated tokens do not inflate recorded prompt counts. The browser click delegate preserves native navigation and form submission; only explicit form/keyboard handlers prevent defaults. Disconnect cleanup is shielded from HTTP task cancellation. The model worker runs in its own process group so unload can also terminate compiler children.
+ 
+-INTENT: oNPU is empty; the task expects a working local model appliance; tinygrad’s CLI documents GGUF loading, CPU/OpenCL execution, and streaming chat as the integration points.
++INTENT: model warmup crashes with an unbounded Mali OpenCL queue; the task expects usable GPU chat; tinygrad’s runtime documentation specifies CL acceleration on OpenCL 2.0 compatible devices.
+ 
+-TWINS: searched `len(ids)`/`run_model(ids)` and document click handlers using `preventDefault()` - found 0 other incorrect sites: none.
++TWINS: searched clEnqueueNDRangeKernel/clEnqueueReadBuffer - found 0 other implementation sites: none. The only additional matches were autogenerated API declarations.
+diff --git a/onpu/app.py b/onpu/app.py
+index 2caef8e..1a0f532 100644
+--- a/onpu/app.py
++++ b/onpu/app.py
+@@ -9,7 +9,6 @@ import time
+ import uuid
+ from contextlib import asynccontextmanager
+ from pathlib import Path
+-from urllib.parse import urlparse
+ 
+ import httpx
+ from fastapi import FastAPI, HTTPException, Request
+@@ -20,15 +19,17 @@ from pydantic import BaseModel, ConfigDict, Field
+ from . import __version__, hardware
+ from .hardware import backend_info
+ from .library import CATALOG, Downloads, estimated_memory, register
+-from .runtime import EngineError, Runtime
++from .runtime import EngineError, RuntimePool
+ from .store import Store
+ 
+ 
+ class LoadOptions(BaseModel):
+     model_config = ConfigDict(extra="forbid")
+-    profile: str = Field(default="CPU", pattern="^(CPU|CL)$")
++    profile: str = Field(default="CL", pattern="^(CPU|CL|ROCKCHIP)$")
+     context: int = Field(default=1024, ge=64, le=32768)
+     realize: bool = True
++    npu_prefill: str = Field(default="off", pattern="^(off|auto)$")
++    npu_decode: str = Field(default="off", pattern="^(off|auto)$")
+ 
+ 
+ class Settings(BaseModel):
+@@ -36,7 +37,7 @@ class Settings(BaseModel):
+     context: int = Field(default=1024, ge=64, le=32768)
+     max_tokens: int = Field(default=128, ge=1, le=32768)
+     temperature: float = Field(default=0.6, ge=0, le=2)
+-    profile: str = Field(default="CPU", pattern="^(CPU|CL)$")
++    profile: str = Field(default="CL", pattern="^(CPU|CL|ROCKCHIP)$")
+     realize: bool = True
+     idle_timeout: int = Field(default=600, ge=0, le=86400)
+     memory_fraction: float = Field(default=0.8, ge=0.2, le=0.9)
+@@ -77,11 +78,11 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+     data = (data or Path(os.environ.get("ONPU_DATA_DIR", ".data"))).expanduser().resolve()
+     api_key = api_key if api_key is not None else os.environ.get("ONPU_API_KEY", "")
+     store = Store(data)
+-    runtime = Runtime(store, backend)
++    runtime = RuntimePool(store, backend)
+     downloads = Downloads(store)
+     profiles = {"CPU": {"available": None, "name": "CPU", "reason": "Checking device"},
+                 "CL": {"available": None, "name": "Mali OpenCL", "reason": "Checking device"},
+-                "ROCKCHIP": {"available": False, "name": "Rockchip NPU assist", "reason": "Experimental: selective LLM offload is not yet qualified."}}
++                "ROCKCHIP": {"available": None, "name": "Rockchip NPU + CPU", "reason": "Checking device"}}
+     bench_tasks: dict[str, asyncio.Task] = {}
+     started = time.monotonic()
+     identity = {"path": str(backend), "available": (backend / "tinygrad/llm/model.py").is_file()}
+@@ -90,10 +91,10 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+         identity.update(await backend_info(backend))
+         if identity["available"]:
+             # Serial checks avoid competing with a device during initial discovery.
+-            for profile in ("CPU", "CL"):
++            for profile in ("CPU", "CL", "ROCKCHIP"):
+                 profiles[profile] = await runtime.probe(profile)
+         else:
+-            for profile in ("CPU", "CL"):
++            for profile in ("CPU", "CL", "ROCKCHIP"):
+                 profiles[profile] = {"available": False, "name": profile, "reason": "tinygrad checkout not found"}
+ 
+     async def housekeeping():
+@@ -101,9 +102,10 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+             await asyncio.sleep(5)
+             await runtime.check_startup_timeout()
+             timeout = store.settings()["idle_timeout"]
+-            if timeout and runtime.state == "ready" and not runtime.active and time.monotonic() - runtime.last_used > timeout:
+-                with contextlib.suppress(EngineError):
+-                    await runtime.unload()
++            for key, session in list(runtime.sessions.items()):
++                if timeout and session.state == "ready" and not session.active and time.monotonic() - session.last_used > timeout:
++                    with contextlib.suppress(EngineError):
++                        await runtime.unload(key)
+ 
+     @asynccontextmanager
+     async def lifespan(app):
+@@ -145,7 +147,8 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+         response = await call_next(request)
+         response.headers["X-Content-Type-Options"] = "nosniff"
+         response.headers["Referrer-Policy"] = "same-origin"
+-        response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'"
++        response.headers["Content-Security-Policy"] = ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
++                                                     "img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'")
+         return response
+ 
+     @app.exception_handler(EngineError)
+@@ -200,7 +203,8 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+     @app.get("/api/models")
+     async def models():
+         settings = store.settings()
+-        return {"models": [{**item, "state": runtime.state if runtime.model and runtime.model["id"] == item["id"] else "installed",
++        return {"models": [{**item, "state": session.state if (session := runtime.for_model(item["id"])) else "installed",
++                            "profile": session.profile if session else None,
+                             "estimated_bytes": estimated_memory(item, settings["context"], settings["realize"]),
+                             "present": Path(item["path"]).is_file()} for item in store.list("models")], "catalog": CATALOG}
+ 
+@@ -218,6 +222,8 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+             raise HTTPException(404, "Model not found")
+         if not Path(model["path"]).is_file():
+             raise HTTPException(400, "Model file is missing")
++        if not identity["available"]:
++            raise EngineError("tinygrad checkout not found", 400)
+         if profiles[body.profile]["available"] is False:
+             raise EngineError(profiles[body.profile].get("reason", "Device is unavailable"), 400)
+         if body.context > model.get("context_limit", body.context):
+@@ -226,13 +232,20 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+         return runtime.status()
+ 
+     @app.post("/api/models/unload")
+-    async def unload():
+-        await runtime.unload()
++    async def unload(model: str | None = None):
++        await runtime.unload(model)
++        return runtime.status()
++
++    @app.post("/api/models/{key}/select")
++    async def select_model(key: str):
++        if not runtime.for_model(key):
++            raise EngineError("Load the model before selecting it", 404)
++        runtime.selected = key
+         return runtime.status()
+ 
+     @app.delete("/api/models/{key}")
+     async def remove(key: str):
+-        if runtime.model and runtime.model["id"] == key:
++        if runtime.for_model(key):
+             raise EngineError("Unload the model before removing it")
+         if not store.get("models", key):
+             raise HTTPException(404, "Model not found")
+@@ -309,7 +322,7 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+                                                "owned_by": "local", "name": item["name"]} for item in store.list("models")]}
+ 
+     async def start_request(body: ChatBody):
+-        if not runtime.model or body.model not in (runtime.model["id"], runtime.model["name"]):
++        if not runtime.for_model(body.model):
+             raise EngineError("Load the requested model before sending a chat request", 404)
+         for message in body.messages:
+             if message.get("role") not in ("system", "user", "assistant", "tool"):
+@@ -350,7 +363,8 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+                 await asyncio.shield(runtime.release(key))
+ 
+         if body.stream:
+-            return StreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no", "X-Request-ID": key})
++            return StreamingResponse(events(), media_type="text/event-stream",
++                                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no", "X-Request-ID": key})
+         output, reasoning, tool_calls, usage, finish, base = [], [], [], {}, "stop", {}
+         try:
+             while True:
+@@ -383,8 +397,8 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+             await asyncio.shield(runtime.release(key))
+ 
+     @app.post("/api/chat/stop")
+-    async def stop():
+-        await runtime.cancel()
++    async def stop(model: str | None = None):
++        await runtime.cancel(model=model)
+         return {"ok": True}
+ 
+     @app.get("/api/metrics")
+@@ -396,7 +410,7 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
+         try:
+             for index in range(body.repeats):
+                 # Unique suffix prevents reused prefixes from masquerading as uncached prefill.
+-                request = ChatBody(model=runtime.model["id"], messages=[{"role": "user", "content": f"Trial {uuid.uuid4().hex[:8]}: {body.prompt}"}],
++                request = ChatBody(model=job["model_id"], messages=[{"role": "user", "content": f"Trial {uuid.uuid4().hex[:8]}: {body.prompt}"}],
+                                    temperature=0, max_tokens=body.max_tokens)
+                 key, channel, _ = await start_request(request)
+                 while True:
+diff --git a/onpu/runtime.py b/onpu/runtime.py
+index 0fb1c96..5a26bca 100644
+--- a/onpu/runtime.py
++++ b/onpu/runtime.py
+@@ -29,7 +29,7 @@ class Runtime:
+         self.state = "idle"
+         self.message = "Choose a model to get started"
+         self.model: dict | None = None
+-        self.profile = "CPU"
++        self.profile = "CL"
+         self.info: dict = {}
+         self.logs = deque(maxlen=160)
+         self.requests: dict[str, asyncio.Queue] = {}
+@@ -42,10 +42,13 @@ class Runtime:
+         self.load_started = 0.0
+         self.startup_timeout = max(30, float(os.environ.get("ONPU_STARTUP_TIMEOUT", "300")))
+ 
+-    def environment(self, profile: str, realize=True) -> dict:
++    def environment(self, profile: str, realize=True, npu_prefill="off", npu_decode="off") -> dict:
+         env = dict(os.environ)
+-        env.update(DEV=profile, PYTHONPATH=os.pathsep.join([str(self.backend), str(Path(__file__).resolve().parent.parent)]),
+-                   DEBUG="0", REALIZE=str(int(realize)), HALF="1", PYTHONUNBUFFERED="1", BEAM="0")
++        env.update(DEV="CPU" if profile == "ROCKCHIP" else profile,
++                   PYTHONPATH=os.pathsep.join([str(self.backend), str(Path(__file__).resolve().parent.parent)]),
++                   DEBUG="0", REALIZE=str(int(realize)), HALF="1", PYTHONUNBUFFERED="1", BEAM="0",
++                   ONPU_PROFILE=profile, ONPU_NPU_PREFILL=npu_prefill,
++                   ONPU_NPU_DECODE="on" if profile == "ROCKCHIP" else npu_decode)
+         return env
+ 
+     @property
+@@ -54,8 +57,8 @@ class Runtime:
+         return str(candidate) if candidate.exists() else sys.executable
+ 
+     async def probe(self, profile: str) -> dict:
+-        if profile not in ("CPU", "CL"):
+-            return {"available": False, "name": "Rockchip NPU", "reason": "Selective LLM offload is not qualified for this checkout."}
++        if profile not in ("CPU", "CL", "ROCKCHIP"):
++            return {"available": False, "name": profile, "reason": "Unknown device profile"}
+         proc = await asyncio.create_subprocess_exec(self.python, "-m", "onpu.worker", "--model", "probe", "--context", "64", "--probe",
+                                                     env=self.environment(profile), stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+                                                     cwd=str(self.backend))
+@@ -78,8 +81,12 @@ class Runtime:
+         async with self.lifecycle:
+             if self.active or self.state in ("loading", "preparing"):
+                 raise EngineError("Stop the current request or finish loading first")
+-            if options["profile"] not in ("CPU", "CL"):
+-                raise EngineError("NPU-assisted profiles require model-level qualification and are not enabled", 400)
++            if options["profile"] not in ("CPU", "CL", "ROCKCHIP"):
++                raise EngineError("Unknown device profile", 400)
++            if options["profile"] == "ROCKCHIP" and not options["realize"]:
++                raise EngineError("NPU inference requires prepared FP16 weights", 400)
++            if not options["realize"] and any(options.get(k, "off") != "off" for k in ("npu_prefill", "npu_decode")):
++                raise EngineError("NPU assistance requires prepared FP16 weights", 400)
+             available = hardware.memory()
+             need = estimated_memory(model, options["context"], options["realize"])
+             if available["total"] and need > available["total"] * options["memory_fraction"]:
+@@ -94,7 +101,8 @@ class Runtime:
+             try:
+                 self.process = await asyncio.create_subprocess_exec(
+                     self.python, "-m", "onpu.worker", "--model", model["path"], "--context", str(options["context"]),
+-                    "--realize", str(int(options["realize"])), env=self.environment(self.profile, options["realize"]),
++                    "--realize", str(int(options["realize"])),
++                    env=self.environment(self.profile, options["realize"], options.get("npu_prefill", "off"), options.get("npu_decode", "off")),
+                     cwd=str(self.backend), stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+                     limit=2 * 1024 * 1024, start_new_session=True)
+                 self.readers = [asyncio.create_task(self._events(self.process)), asyncio.create_task(self._logs(self.process))]
+@@ -243,5 +251,101 @@ class Runtime:
+         return {"state": self.state, "message": self.message, "model_id": self.model["id"] if self.model else None,
+                 "model_name": self.model["name"] if self.model else None, "selected_profile": self.profile,
+                 "actual_device": self.info.get("device"), "context": self.info.get("context"), "load_seconds": self.info.get("load_seconds"),
++                "base_device": self.info.get("base_device"), "placement": self.info.get("placement"),
++                "backend_path": self.info.get("backend_path"),
+                 "rss_bytes": hardware.rss(self.process.pid if self.process else None), "active_request": self.active,
+                 "last_metrics": self.last_metrics, "options": self.options}
++
++
++class RuntimePool:
++    """Independent model owners, retaining the selected session for the existing UI.
++
++    Requests route by model ID. A GPU-only model and an NPU-assisted model can run
++    simultaneously; two workers never compete for the same NPU owner lock.
++    """
++    def __init__(self, store: Store, backend: Path):
++        self.store, self.backend = store, backend
++        self.sessions: dict[str, Runtime] = {}
++        self.selected: str | None = None
++        self.lifecycle = asyncio.Lock()
++        self.idle = Runtime(store, backend)
++
++    @property
++    def current(self):
++        return self.sessions.get(self.selected, self.idle)
++
++    def __getattr__(self, name):
++        return getattr(self.current, name)
++
++    @property
++    def active(self):
++        return next((r.active for r in self.sessions.values() if r.active), None)
++
++    def for_model(self, key):
++        return next((r for r in self.sessions.values() if r.model and key in (r.model["id"], r.model["name"])), None)
++
++    async def probe(self, profile):
++        existing = next((r for r in self.sessions.values() if r.profile == profile), None)
++        if existing:
++            return {"available": existing.state != "error", "name": profile, "device": existing.info.get("device"), "loaded": True}
++        return await self.idle.probe(profile)
++
++    @staticmethod
++    def uses_npu(options, placement=None):
++        if options["profile"] == "ROCKCHIP":
++            return True
++        if placement is not None:
++            return bool(placement["decode_layers"] or placement["prefill_layers"])
++        return any(options.get(k, "off") != "off" for k in ("npu_prefill", "npu_decode"))
++
++    async def load(self, model, options):
++        async with self.lifecycle:
++            key = model["id"]
++            for other_key, other in self.sessions.items():
++                if other_key == key:
++                    continue
++                if other.profile == options["profile"]:
++                    raise EngineError("A model is already loaded on this profile. Unload it first.")
++                if self.uses_npu(options) and self.uses_npu(other.options, other.info.get("placement")):
++                    raise EngineError("The NPU is already assigned to another model. Use GPU-only mode or unload that model.")
++            session = self.sessions.get(key) or Runtime(self.store, self.backend)
++            # Runtime's admission check also accounts for memory held by other workers.
++            await session.load(model, options)
++            self.sessions[key], self.selected = session, key
++
++    async def generate(self, body):
++        session = self.for_model(body["model"])
++        if session is None:
++            raise EngineError("Load the requested model before sending a chat request", 404)
++        return await session.generate(body)
++
++    async def release(self, key):
++        for session in self.sessions.values():
++            if key in session.requests:
++                await session.release(key)
++                return
++
++    async def cancel(self, key=None, model=None):
++        session = self.for_model(model) if model else next((r for r in self.sessions.values() if key and r.active == key), self.current)
++        if session is not None:
++            await session.cancel(key)
++
++    async def unload(self, model=None):
++        async with self.lifecycle:
++            key = model or self.selected
++            if key in self.sessions:
++                await self.sessions[key].unload()
++                del self.sessions[key]
++            self.selected = next(reversed(self.sessions), None)
++
++    async def check_startup_timeout(self):
++        for session in self.sessions.values():
++            await session.check_startup_timeout()
++
++    async def _stop(self):
++        await asyncio.gather(*(session.unload() for session in self.sessions.values()))
++        self.sessions.clear()
++        self.selected = None
++
++    def status(self):
++        return {**self.current.status(), "sessions": [session.status() for session in self.sessions.values()]}
+diff --git a/onpu/static/app.js b/onpu/static/app.js
+index b68cccb..6b8b578 100644
+--- a/onpu/static/app.js
++++ b/onpu/static/app.js
+@@ -117,7 +117,7 @@ function renderLibrary() {
+   $('model-count').textContent = modelList.length; $('library-count').textContent = modelList.length;
+   const query = $('model-search').value.toLowerCase();
+   const visible = modelList.filter((m) => `${m.name} ${m.architecture}`.toLowerCase().includes(query));
+-  $('model-library').innerHTML = visible.length ? visible.map((m) => `<article class="card model-card"><div class="model-card-top"><div class="model-glyph">${escape(m.architecture.slice(0, 2).toUpperCase())}</div>${badge(m.state, m.present ? m.state : 'File missing')}</div><h3>${escape(m.name)}</h3><div class="model-meta">${badge('', m.architecture)}${badge('', m.quantization)}${badge('', 'GGUF')}</div><dl class="model-properties"><div><dt>FILE SIZE</dt><dd>${bytes(m.size)}</dd></div><div><dt>WEIGHT PARAMETERS</dt><dd>${(m.parameters / 1e9).toFixed(2)}B</dd></div><div><dt>ESTIMATED MEMORY</dt><dd>${bytes(m.estimated_bytes)}</dd></div><div><dt>MODEL CONTEXT LIMIT</dt><dd>${m.context_limit.toLocaleString()}</dd></div></dl><div class="model-card-actions">${m.state === 'installed' || m.state === 'error' ? `<button class="button primary small" data-action="load" data-id="${m.id}" ${!m.present ? 'disabled' : ''}>${icon('play')} Load model</button>` : `<button class="button secondary small" data-action="unload" ${status?.runtime.active_request ? 'disabled' : ''}>Unload</button>`}<button class="text-button" data-action="remove" data-id="${m.id}" ${m.state !== 'installed' ? 'disabled' : ''} aria-label="Remove ${escape(m.name)} from library">Remove reference</button></div></article>`).join('') : `<div class="empty-state"><div class="model-glyph">${icon('models')}</div><h3>${query ? 'No matching models' : 'Your model library starts here'}</h3><p>${query ? 'Try another search.' : 'Import a GGUF already on your board, or download a small model.'}</p>${query ? '' : '<button class="button primary" data-action="import">Import model</button> <button class="button secondary" data-action="discover">Discover models</button>'}</div>`;
++  $('model-library').innerHTML = visible.length ? visible.map((m) => `<article class="card model-card"><div class="model-card-top"><div class="model-glyph">${escape(m.architecture.slice(0, 2).toUpperCase())}</div>${badge(m.state, m.present ? m.state : 'File missing')}</div><h3>${escape(m.name)}</h3><div class="model-meta">${badge('', m.architecture)}${badge('', m.quantization)}${badge('', 'GGUF')}</div><dl class="model-properties"><div><dt>FILE SIZE</dt><dd>${bytes(m.size)}</dd></div><div><dt>WEIGHT PARAMETERS</dt><dd>${(m.parameters / 1e9).toFixed(2)}B</dd></div><div><dt>ESTIMATED MEMORY</dt><dd>${bytes(m.estimated_bytes)}</dd></div><div><dt>MODEL CONTEXT LIMIT</dt><dd>${m.context_limit.toLocaleString()}</dd></div></dl><div class="model-card-actions">${m.state === 'installed' || m.state === 'error' ? `<button class="button primary small" data-action="load" data-id="${m.id}" ${!m.present ? 'disabled' : ''}>${icon('play')} Load model</button>` : `<button class="button primary small" data-action="select-model" data-id="${m.id}" ${sending ? 'disabled' : ''}>Chat · ${escape(m.profile || '')}</button><button class="button secondary small" data-action="unload" data-id="${m.id}" ${(status?.runtime.sessions || []).find((r) => r.model_id === m.id)?.active_request ? 'disabled' : ''}>Unload</button>`}<button class="text-button" data-action="remove" data-id="${m.id}" ${m.state !== 'installed' ? 'disabled' : ''} aria-label="Remove ${escape(m.name)} from library">Remove reference</button></div></article>`).join('') : `<div class="empty-state"><div class="model-glyph">${icon('models')}</div><h3>${query ? 'No matching models' : 'Your model library starts here'}</h3><p>${query ? 'Try another search.' : 'Import a GGUF already on your board, or download a small model.'}</p>${query ? '' : '<button class="button primary" data-action="import">Import model</button> <button class="button secondary" data-action="discover">Discover models</button>'}</div>`;
+ }
+ function renderCatalog() {
+   $('model-catalog').innerHTML = catalog.map((m) => `<article class="card model-card"><div class="model-card-top"><div class="model-glyph">${escape(m.name.slice(0, 2).toUpperCase())}</div>${badge('', m.parameters)}</div><h3>${escape(m.name)}</h3><div class="model-meta">${badge('', m.quantization)}${badge('', 'GGUF')}</div><p>${escape(m.description)}</p><div class="model-card-actions"><small>Hugging Face</small><button class="button primary small" data-action="download" data-id="${escape(m.id)}">${icon('download')} Download</button></div></article>`).join('');
+@@ -155,15 +155,19 @@ document.addEventListener('click', action(async (event) => {
+     case 'load': {
+       selectedModel = modelList.find((m) => m.id === id);
+       $('load-model-title').textContent = selectedModel.name;
+-      $('load-profile').value = settings.profile || 'CPU';
++      $('load-profile').value = settings.profile || 'CL';
+       $('load-profile').querySelector('[value=CL]').disabled = status?.profiles.CL.available === false;
++      $('load-profile').querySelector('[value=ROCKCHIP]').disabled = status?.profiles.ROCKCHIP.available === false;
++      $('load-npu-prefill').value = 'off'; $('load-npu-decode').value = 'off';
+       $('load-context').value = Math.min(settings.context || 1024, selectedModel.context_limit);
+       $('load-context').max = Math.min(32768, selectedModel.context_limit);
+       $('load-realize').checked = settings.realize ?? true;
++      updatePlacementControls();
+       $('load-estimate').textContent = `Conservative footprint: ${bytes(selectedModel.estimated_bytes)}. Available RAM: ${bytes(status?.hardware.memory.available)}.`;
+       $('model-dialog').showModal(); break;
+     }
+-    case 'unload': await post('/api/models/unload'); await refreshStatus(); await refreshAll(); toast('Model unloaded'); break;
++    case 'select-model': await post(`/api/models/${id}/select`); await refreshStatus(); location.hash = 'chat'; renderChat(); break;
++    case 'unload': await post('/api/models/unload' + (id ? `?model=${encodeURIComponent(id)}` : '')); await refreshStatus(); await refreshAll(); toast('Model unloaded'); break;
+     case 'remove': await api(`/api/models/${id}`, { method: 'DELETE' }); await refreshAll(); toast('Reference removed. The model file is preserved.'); break;
+     case 'download': await post('/api/downloads', { catalog_id: id }); await refreshAll(); toast('Download started'); break;
+     case 'pause': case 'resume': await post(`/api/downloads/${id}/${button.dataset.action}`); await refreshAll(); break;
+@@ -175,8 +179,20 @@ document.addEventListener('click', action(async (event) => {
+   }
+ }, false));
+ $('import-form').onsubmit = action(async () => { await post('/api/models/import', { path: $('import-path').value.trim() }); $('import-dialog').close(); await refreshAll(); toast('Model added to your library'); });
++function updatePlacementControls() {
++  const profile = $('load-profile').value;
++  $('load-npu-prefill').closest('label').hidden = profile === 'CPU';
++  $('load-npu-prefill').disabled = profile === 'CPU';
++  $('load-npu-prefill').value = profile === 'ROCKCHIP' ? 'auto' : 'off';
++  $('load-npu-decode').closest('label').hidden = profile !== 'CL';
++  $('load-npu-decode').disabled = profile !== 'CL';
++  $('load-npu-decode').value = 'off';
++  $('load-realize').disabled = profile === 'ROCKCHIP';
++  if (profile === 'ROCKCHIP') $('load-realize').checked = true;
++}
++$('load-profile').onchange = updatePlacementControls;
+ $('load-form').onsubmit = action(async () => {
+-  await post(`/api/models/${selectedModel.id}/load`, { profile: $('load-profile').value, context: Number($('load-context').value), realize: $('load-realize').checked });
++  await post(`/api/models/${selectedModel.id}/load`, { profile: $('load-profile').value, context: Number($('load-context').value), realize: $('load-realize').checked, npu_prefill: $('load-npu-prefill').value, npu_decode: $('load-npu-decode').value });
+   $('model-dialog').close(); await refreshStatus(); await refreshAll(); toast('Preparing model. Progress appears in Overview.');
+ });
+ $('settings-form').onsubmit = action(async () => {
+diff --git a/onpu/static/index.html b/onpu/static/index.html
+index 986526b..aae7bd5 100644
+--- a/onpu/static/index.html
++++ b/onpu/static/index.html
+@@ -63,14 +63,14 @@
+       </section>
+       <section id="view-settings" class="view" hidden>
+         <div class="page-heading"><div><div class="eyebrow">A WORKSPACE THAT FITS YOUR BOARD</div><h1>Settings</h1><p>Set conservative defaults. Model preparation uses these settings on the next load.</p></div></div>
+-        <form id="settings-form" class="settings-layout"><article class="card settings-card"><h2>Inference defaults</h2><div class="form-grid"><label>Execution profile<select id="setting-profile"><option value="CPU">CPU</option><option value="CL">Mali GPU · OpenCL</option></select></label><label>Context capacity<input id="setting-context" type="number" min="64" max="32768" value="1024"><small>Prompt and generated tokens share this budget.</small></label><label>Maximum reply tokens<input id="setting-max-tokens" type="number" min="1" max="32768" value="128"></label><label>Temperature<input id="setting-temperature" type="number" min="0" max="2" step="0.1" value="0.6"><small>Use 0 for deterministic sampling.</small></label></div><label class="toggle-row"><div><strong>Prepare FP16 weights once</strong><small>Faster repeated inference, with a larger memory footprint.</small></div><input id="setting-realize" type="checkbox" checked></label></article><article class="card settings-card"><h2>Resources & lifecycle</h2><div class="form-grid"><label>Idle unload (seconds)<input id="setting-idle" type="number" min="0" max="86400" value="600"><small>Set 0 to keep the model loaded.</small></label><label>Model RAM budget (%)<input id="setting-memory" type="number" min="20" max="90" value="80"><small>Admission uses a conservative estimated footprint.</small></label></div><div class="settings-actions"><span id="settings-saved" role="status"></span><button class="button primary" type="submit">Save settings</button></div></article></form>
++        <form id="settings-form" class="settings-layout"><article class="card settings-card"><h2>Inference defaults</h2><div class="form-grid"><label>Execution profile<select id="setting-profile"><option value="CL">Mali GPU · OpenCL</option><option value="ROCKCHIP">Rockchip NPU + CPU</option><option value="CPU">CPU</option></select></label><label>Context capacity<input id="setting-context" type="number" min="64" max="32768" value="1024"><small>Prompt and generated tokens share this budget.</small></label><label>Maximum reply tokens<input id="setting-max-tokens" type="number" min="1" max="32768" value="128"></label><label>Temperature<input id="setting-temperature" type="number" min="0" max="2" step="0.1" value="0.6"><small>Use 0 for deterministic sampling.</small></label></div><label class="toggle-row"><div><strong>Prepare FP16 weights once</strong><small>Faster repeated inference, with a larger memory footprint.</small></div><input id="setting-realize" type="checkbox" checked></label></article><article class="card settings-card"><h2>Resources & lifecycle</h2><div class="form-grid"><label>Idle unload (seconds)<input id="setting-idle" type="number" min="0" max="86400" value="600"><small>Set 0 to keep the model loaded.</small></label><label>Model RAM budget (%)<input id="setting-memory" type="number" min="20" max="90" value="80"><small>Admission uses a conservative estimated footprint.</small></label></div><div class="settings-actions"><span id="settings-saved" role="status"></span><button class="button primary" type="submit">Save settings</button></div></article></form>
+         <article class="card settings-card"><div class="card-heading"><h2>API connection</h2><span class="badge" id="auth-status">No API key required</span></div><div class="api-info"><div><span>Base URL</span><code id="settings-endpoint"></code></div><div><span>Model ID</span><code id="settings-model-id">Load a model first</code></div></div><pre id="api-example"></pre><p class="muted">Set ONPU_API_KEY to enable authentication. Inference clients send it as a Bearer token.</p></article>
+         <article class="card settings-card"><div class="card-heading"><h2>Backend & diagnostics</h2><button class="text-button" id="show-logs">View worker logs</button></div><dl id="backend-info" class="diagnostic-grid"></dl><pre id="worker-logs" hidden></pre></article>
+       </section>
+     </main>
+     <footer class="footer"><span>oNPU · Made for Rockchip</span><span>CPU / Mali GPU / Experimental NPU</span></footer>
+   </div>
+-  <dialog id="model-dialog"><form id="load-form"><div class="dialog-heading"><h2 id="load-model-title">Load model</h2><button class="icon-button" type="button" data-close="model-dialog" aria-label="Close dialog">×</button></div><p>Choose the execution profile and context for this session.</p><label>Execution profile<select id="load-profile"><option value="CPU">CPU</option><option value="CL">Mali GPU · OpenCL</option></select></label><label>Context capacity<input id="load-context" type="number" min="64" max="32768" value="1024"></label><label class="check-label"><input type="checkbox" id="load-realize" checked>Prepare FP16 weights once</label><p id="load-estimate" class="muted"></p><div class="dialog-actions"><button type="button" class="button secondary" data-close="model-dialog">Cancel</button><button class="button primary">Load model</button></div></form></dialog>
++  <dialog id="model-dialog"><form id="load-form"><div class="dialog-heading"><h2 id="load-model-title">Load model</h2><button class="icon-button" type="button" data-close="model-dialog" aria-label="Close dialog">×</button></div><p>Choose the execution profile and context for this session.</p><label>Execution profile<select id="load-profile"><option value="CL">Mali GPU · OpenCL</option><option value="ROCKCHIP">Rockchip NPU + CPU</option><option value="CPU">CPU</option></select></label><label>NPU help for prefill<select id="load-npu-prefill"><option value="off">Off</option><option value="auto">Auto · use only if faster</option></select></label><label>NPU help for decode<select id="load-npu-decode"><option value="off">Off</option><option value="auto">Auto · use only if faster</option></select></label><p class="muted">GPU is the primary path. Auto measures transfers and matrix execution before choosing NPU work. A separate NPU model can remain loaded alongside a GPU-only model.</p><label>Context capacity<input id="load-context" type="number" min="64" max="32768" value="1024"></label><label class="check-label"><input type="checkbox" id="load-realize" checked>Prepare FP16 weights once</label><p id="load-estimate" class="muted"></p><div class="dialog-actions"><button type="button" class="button secondary" data-close="model-dialog">Cancel</button><button class="button primary">Load model</button></div></form></dialog>
+   <dialog id="import-dialog"><form id="import-form"><div class="dialog-heading"><h2>Import a local model</h2><button type="button" class="icon-button" data-close="import-dialog" aria-label="Close dialog">×</button></div><p>Add an existing GGUF file on this board to your library.</p><label>Model file path<input id="import-path" placeholder="/home/orangepi/models/model.gguf" required></label><small>The file stays in its current location.</small><div class="dialog-actions"><button class="button secondary" type="button" data-close="import-dialog">Cancel</button><button class="button primary">Add to library</button></div></form></dialog>
+   <dialog id="login-dialog"><form id="login-form"><div class="dialog-heading"><h2>Connect to oNPU</h2></div><p>Enter the API key configured on this board.</p><label>API key<input id="login-key" type="password" autocomplete="current-password" required></label><p id="login-error" role="alert"></p><div class="dialog-actions"><button class="button primary">Connect</button></div></form></dialog>
+   <div id="toast" class="toast" role="status" hidden></div>
+diff --git a/onpu/store.py b/onpu/store.py
+index 6873afa..4d1f9a6 100644
+--- a/onpu/store.py
++++ b/onpu/store.py
+@@ -7,7 +7,7 @@ import time
+ from pathlib import Path
+ 
+ DEFAULTS = {"context": 1024, "max_tokens": 128, "temperature": 0.6,
+-            "profile": "CPU", "realize": True, "idle_timeout": 600, "memory_fraction": 0.8}
++            "profile": "CL", "realize": True, "idle_timeout": 600, "memory_fraction": 0.8}
+ 
+ 
+ class Store:
+diff --git a/onpu/worker.py b/onpu/worker.py
+index 72df6a5..6dc1133 100644
+--- a/onpu/worker.py
++++ b/onpu/worker.py
+@@ -6,19 +6,33 @@ sets cancellation flags. No changes are made to the user's tinygrad checkout.
+ from __future__ import annotations
+ 
+ import argparse
++import itertools
+ import json
++import os
+ import queue
+ import sys
+ import threading
+ import time
+ import traceback
+ from types import SimpleNamespace
++from pathlib import Path
+ 
+ 
+ class Cancelled(Exception):
+     pass
+ 
+ 
++def prefill_chunks(context: int) -> list[int]:
++    return sorted({min(32, context), *(size for size in (64, 128, 256) if size <= context)})
++
++
++def prefill_chunk(remaining: int, context: int) -> int:
++    if remaining <= 1:
++        return 1
++    buckets = prefill_chunks(context)
++    return next((size for size in buckets if remaining <= size), buckets[-1])
++
++
+ def main():
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--model", required=True)
+@@ -36,9 +50,18 @@ def main():
+             protocol.flush()
+ 
+     try:
++        import tinygrad
+         from tinygrad import Device, Tensor
+         from tinygrad.helpers import GlobalCounters
+         if args.probe:
++            if os.environ.get("ONPU_PROFILE") == "ROCKCHIP":
++                from tinygrad.llm.kernels.rockchip import pack_weight, packed_matmul
++                weight = pack_weight(Tensor.ones(32, 32, device="CPU")).realize()
++                result = packed_matmul(Tensor.ones(1, 32, device="CPU"), weight, 32).tolist()
++                if result != [[32.0] * 32]:
++                    raise ValueError("NPU matmul smoke test failed")
++                emit("probe", available=True, device="ROCKCHIP", name="RK3588 NPU dense projections + CPU")
++                return
+             result = (Tensor([1., 2., 3.]) + 1).tolist()
+             if result != [2., 3., 4.]:
+                 raise ValueError("Tensor smoke test failed")
+@@ -59,6 +82,25 @@ def main():
+         start = time.perf_counter()
+         emit("state", state="loading", message="Reading model weights")
+         model, kv = Transformer.from_gguf(args.model, args.context, realize=bool(args.realize))
++        placement = None
++        npu_prefill, npu_decode = os.environ.get("ONPU_NPU_PREFILL", "off"), os.environ.get("ONPU_NPU_DECODE", "off")
++        if npu_prefill != "off" or npu_decode != "off":
++            from tinygrad.llm.kernels.rockchip import configure
++            cpu_npu = Device.DEFAULT == "CPU"
++            if cpu_npu and hasattr(os, "sched_getaffinity"):
++                cores = os.sched_getaffinity(0).intersection({4, 5, 6, 7})
++                if cores:
++                    os.sched_setaffinity(0, cores)
++            emit("state", state="preparing", message="Preparing NPU weights and measuring optional placement")
++            placement = configure(model, prefill=npu_prefill, decode=npu_decode, tile_columns=24576,
++                                  fuse_projections=True, cpu_attention=cpu_npu,
++                                  native_replay=cpu_npu, fused_ffn=cpu_npu, fused_qkv=cpu_npu,
++                                  cpu_norm=cpu_npu, split_down=cpu_npu)
++            if not placement["decode_layers"] and not placement["prefill_layers"]:
++                if os.environ.get("ONPU_PROFILE") == "ROCKCHIP":
++                    raise ValueError("This model has no supported NPU projections. Choose the GPU or CPU profile.")
++                if placement["layers"]:
++                    Device["ROCKCHIP"].finalize()
+         tok = SimpleTokenizer.from_gguf_kv(kv)
+         template = FallbackTemplate(tok)
+         if source := kv.get("tokenizer.chat_template"):
+@@ -81,16 +123,45 @@ def main():
+                     raise Cancelled()
+                 return jit(*a, **kw)
+             return run
+-        model.prefill_jit = checkpoint(model.prefill_jit)
+-        model.rollout_jit = checkpoint(model.rollout_jit)
++        for attr in ("prefill_jit", "rollout_jit", "greedy_prefill_jit", "greedy_rollout_jit"):
++            if hasattr(model, attr):
++                setattr(model, attr, checkpoint(getattr(model, attr)))
++
++        adaptive_prefill = bool(placement and placement.get("native_replay") and placement["prefill_layers"])
++        if adaptive_prefill:
++            original_generate = model.generate
++            def generate(tokens, chunk_size=None, **kwargs):
++                if chunk_size is None:
++                    chunk_size = prefill_chunk(len(tokens) - model.get_start_pos(tokens), model.max_context)
++                return original_generate(tokens, chunk_size=chunk_size, **kwargs)
++            model.generate = generate
+ 
+         emit("state", state="preparing", message="Compiling and warming the model")
+         model.warmup()
++        # Warm the separate sampling/greedy prompt and token graphs before ready.
++        # Optional CPU/NPU placement also prepares each adaptive prompt size.
++        chunks_to_warm = prefill_chunks(model.max_context) if adaptive_prefill else [min(32, model.max_context)]
++        native = bool(placement and placement.get("native_replay") and (placement["decode_layers"] or placement["prefill_layers"]))
++        stages = len(chunks_to_warm) * 2
++        stage = 0
++        for temperature in (0.0, 0.6):
++            for chunk in chunks_to_warm:
++                stage += 1
++                emit("state", state="preparing", message=f"Preparing inference ({stage}/{stages})")
++                prompt_length = min(chunk, model.max_context - 2)
++                for _ in range(4 if native else 2):
++                    model._cached_tokens = []
++                    list(itertools.islice(model.generate([0] * prompt_length, chunk_size=chunk, temperature=temperature), 2))
++        model._cached_tokens = []
+         actual_device = nn.state.get_parameters(model)[0].device
++        base_device = actual_device
++        if placement and (placement["decode_layers"] or placement["prefill_layers"]):
++            actual_device = f"{base_device}+ROCKCHIP"
+         handler = object.__new__(Handler)
+         handler.server = SimpleNamespace(model=model, tok=tok)
+         emit("ready", device=actual_device, context=model.max_context, name=kv.get("general.name", args.model),
+-             load_seconds=time.perf_counter() - start, weight_bytes=GlobalCounters.mem_used)
++             load_seconds=time.perf_counter() - start, weight_bytes=GlobalCounters.mem_used,
++             base_device=base_device, placement=placement, backend_path=str(Path(tinygrad.__file__).resolve().parents[1]))
+ 
+         def input_loop():
+             try:
+@@ -127,8 +198,10 @@ def main():
+                 ids = tok.encode(rendered)
+                 limit = body["max_tokens"]
+                 if len(ids) + limit > model.max_context:
+-                    raise ValueError(f"Prompt ({len(ids)} tokens) + reply limit ({limit}) exceeds context ({model.max_context}). Reduce the reply limit or start a new chat.")
++                    raise ValueError(f"Prompt ({len(ids)} tokens) + reply limit ({limit}) exceeds context ({model.max_context}). "
++                                     "Reduce the reply limit or start a new chat.")
+                 cached = model.get_start_pos(ids)
++                npu_before = Device["ROCKCHIP"].submit_count if placement else 0
+                 if active_cancel.is_set():
+                     raise Cancelled()
+                 emit("started", id=key, prompt_tokens=len(ids), cached_tokens=cached, preparation_seconds=time.perf_counter() - prep)
+@@ -156,6 +229,8 @@ def main():
+                            "decode_tps": (tokens - 1) / (last - first) if tokens > 1 and first and last and last > first else None,
+                            "prefill_tps": (len(ids) - cached) / (first - started) if first and first > started else None,
+                            "device": actual_device, "allocated_bytes": GlobalCounters.mem_used}
++                if placement:
++                    metrics["npu_submissions"] = Device["ROCKCHIP"].submit_count - npu_before
+                 emit("done", id=key, metrics=metrics)
+             except Cancelled:
+                 model._cached_tokens = []
+diff --git a/scripts/browser_check.py b/scripts/browser_check.py
+index 2210852..33157e9 100644
+--- a/scripts/browser_check.py
++++ b/scripts/browser_check.py
+@@ -28,6 +28,17 @@ def main():
+             page.locator(f"#view-{route}").wait_for(state="visible")
+             assert page.locator("h1:visible").inner_text().lower() == route
+             assert not page.evaluate("document.documentElement.scrollWidth > innerWidth"), route
++        # Switching chats must retain each independently loaded model session.
++        runtime = page.request.get(args.url + "/api/status").json()["runtime"]
++        loaded = {session["model_id"] for session in runtime.get("sessions", [])}
++        for model_id in sorted(loaded):
++            page.locator('nav [data-view="models"]').click()
++            page.locator(f'#model-library [data-action="select-model"][data-id="{model_id}"]').click()
++            page.locator("#view-chat").wait_for(state="visible")
++            current = page.request.get(args.url + "/api/status").json()["runtime"]
++            assert current["model_id"] == model_id
++            assert {s["model_id"] for s in current["sessions"]} == loaded
++        page.locator('nav [data-view="settings"]').click()
+         page.locator("#setting-context").fill("512")
+         page.locator("#setting-max-tokens").fill("64")
+         page.locator("#setting-idle").fill("0")
+@@ -68,26 +79,33 @@ def main():
+         # Exercise imports and the manager's actual load/unload forms.
+         runtime = page.request.get(args.url + "/api/status").json()["runtime"]
+         model_id = runtime["model_id"]
++        profile = runtime["selected_profile"]
++        other_ids = {s["model_id"] for s in runtime.get("sessions", [])} - {model_id}
+         model = next(item for item in page.request.get(args.url + "/api/models").json()["models"] if item["id"] == model_id)
+         page.locator('[data-view="models"]').click()
+         page.locator("#view-models").wait_for(state="visible")
+-        page.locator('#model-library [data-action="unload"]').click()
++        page.locator(f'#model-library [data-action="unload"][data-id="{model_id}"]').click()
+         page.locator(f'#model-library [data-action="load"][data-id="{model_id}"]').wait_for()
+-        assert page.request.get(args.url + "/api/status").json()["runtime"]["rss_bytes"] == 0
++        remaining = page.request.get(args.url + "/api/status").json()["runtime"]
++        assert {s["model_id"] for s in remaining.get("sessions", [])} == other_ids
+         page.locator("#import-open").click()
+         page.locator("#import-path").fill(model["path"])
+         page.locator('#import-form button[type="submit"], #import-form button.button.primary').click()
+         page.locator("#import-dialog").wait_for(state="hidden")
+         page.locator(f'#model-library [data-action="load"][data-id="{model_id}"]').click()
+-        page.locator("#load-profile").select_option("CPU")
++        page.locator("#load-profile").select_option(profile)
++        if profile == "ROCKCHIP":
++            page.locator("#load-npu-prefill").select_option("auto")
++            assert page.locator("#load-npu-decode").is_disabled()
+         page.locator("#load-context").fill("512")
+         page.locator("#load-form button.button.primary").click()
+         page.locator("#model-dialog").wait_for(state="hidden")
+-        for _ in range(240):
++        for _ in range(600):
+             state = page.request.get(args.url + "/api/status").json()["runtime"]
+             assert state["state"] != "error", state
+             if state["state"] == "ready":
+-                assert state["actual_device"] == "CPU"
++                assert ("ROCKCHIP" in state["actual_device"] if profile == "ROCKCHIP" else state["actual_device"] == profile)
++                assert other_ids <= {s["model_id"] for s in state.get("sessions", [])}
+                 break
+             time.sleep(0.5)
+         else:
+@@ -109,7 +127,8 @@ def main():
+         page.screenshot(path=str(out / "mobile.png"), full_page=True, animations="disabled")
+         assert not errors, errors
+         browser.close()
+-        print("PASS: real browser chat, Stop, model lifecycle, history, saved settings, themes, desktop/mobile navigation; no console errors.", flush=True)
++        print("PASS: real browser chat, Stop, model lifecycle, history, saved settings, themes, "
++              "desktop/mobile navigation; no console errors.", flush=True)
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/scripts/smoke.py b/scripts/smoke.py
+index 380a9f2..dd55357 100644
+--- a/scripts/smoke.py
++++ b/scripts/smoke.py
+@@ -17,13 +17,15 @@ async def main():
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--url", default="http://127.0.0.1:8080")
+     parser.add_argument("--model", required=True)
+-    parser.add_argument("--profile", default="CPU", choices=["CPU", "CL"])
++    parser.add_argument("--profile", default="CL", choices=["CPU", "CL", "ROCKCHIP"])
++    parser.add_argument("--context", type=int, default=512)
+     args = parser.parse_args()
+     async with httpx.AsyncClient(base_url=args.url, timeout=300, trust_env=False) as client:
+         async def status():
+             response = await client.get("/api/status")
+             response.raise_for_status()
+-            return response.json()["runtime"]
++            runtime = response.json()["runtime"]
++            return next((s for s in runtime.get("sessions", []) if s["model_id"] == args.model), runtime)
+ 
+         async def wait_ready(limit=300):
+             end = time.monotonic() + limit
+@@ -31,18 +33,26 @@ async def main():
+                 state = await status()
+                 assert state["model_id"] == args.model, "Model changed during verification"
+                 if state["state"] == "ready":
++                    if args.profile == "ROCKCHIP":
++                        assert "ROCKCHIP" in (state["actual_device"] or ""), state
++                        assert state["placement"]["decode_layers"] > 0, state
++                    else:
++                        assert (state["actual_device"] or "").split(":")[0] == args.profile, state
++                    assert state["context"] == args.context, state
+                     return state
+                 assert state["state"] != "error", state
+                 await asyncio.sleep(0.5)
+             raise AssertionError("Worker did not become ready")
+ 
+         state = await status()
+-        if state["model_id"] != args.model or state["selected_profile"] != args.profile or state["state"] != "ready":
+-            result = await client.post(f"/api/models/{args.model}/load", json={"profile": args.profile, "context": 512, "realize": True})
++        if (state["model_id"] != args.model or state["selected_profile"] != args.profile
++                or state["state"] != "ready" or state["context"] != args.context):
++            result = await client.post(f"/api/models/{args.model}/load", json={"profile": args.profile, "context": args.context, "realize": True})
+             assert result.status_code == 202, result.text
+         state = await wait_ready()
+         print("ready", json.dumps(state), flush=True)
+-        payload = {"model": args.model, "messages": [{"role": "user", "content": "Reply with exactly the word hello."}], "temperature": 0, "max_tokens": 8}
++        payload = {"model": args.model, "messages": [{"role": "user", "content": "Reply with exactly the word hello."}],
++                   "temperature": 0, "max_tokens": 8}
+         result = await client.post("/v1/chat/completions", json=payload)
+         assert result.status_code == 200, result.text
+         body = result.json()
+@@ -56,13 +66,14 @@ async def main():
+         assert result.status_code == 200, result.text
+         assert result.json()["usage"]["completion_tokens"] <= 1
+         print("one-token limit passed", flush=True)
+-        result = await client.post("/v1/chat/completions", json={**payload, "max_tokens": 512})
++        result = await client.post("/v1/chat/completions", json={**payload, "max_tokens": state["context"]})
+         assert result.status_code == 400, result.text
+         await wait_ready()
+         print("context validation passed", flush=True)
+ 
+         collected, usage, saw_done = "", None, False
+-        async with client.stream("POST", "/v1/chat/completions", json={**payload, "stream": True, "stream_options": {"include_usage": True}}) as response:
++        streaming = {**payload, "stream": True, "stream_options": {"include_usage": True}}
++        async with client.stream("POST", "/v1/chat/completions", json=streaming) as response:
+             assert response.status_code == 200
+             async for line in response.aiter_lines():
+                 if not line.startswith("data: "):
+@@ -79,7 +90,8 @@ async def main():
+         print("streaming", repr(collected), usage, flush=True)
+         await wait_ready()
+ 
+-        long = {**payload, "messages": [{"role": "user", "content": "Count every number from 1 to 100 and explain each."}], "max_tokens": 128, "stream": True}
++        long = {**payload, "messages": [{"role": "user", "content": "Count every number from 1 to 100 and explain each."}],
++                "max_tokens": 128, "stream": True}
+         async with client.stream("POST", "/v1/chat/completions", json=long) as response:
+             assert response.status_code == 200
+             # Header/role delta arrives while prefill is still in progress.
+@@ -87,7 +99,7 @@ async def main():
+                 if line.startswith("data: "):
+                     concurrent = await client.post("/v1/chat/completions", json=payload)
+                     assert concurrent.status_code == 409
+-                    stop = await client.post("/api/chat/stop")
++                    stop = await client.post("/api/chat/stop", params={"model": args.model})
+                     assert stop.status_code == 200
+                     break
+         await wait_ready(45)
+@@ -99,6 +111,11 @@ async def main():
+                     break
+         await wait_ready(45)
+         print("client disconnect cancellation passed", flush=True)
++        result = await client.post("/v1/chat/completions", json=payload)
++        assert result.status_code == 200, result.text
++        assert result.json()["choices"][0]["message"]["content"], result.text
++        await wait_ready()
++        print("generation after cancellation passed", flush=True)
+         print("PASS", args.profile, flush=True)
+ 
+ 
+diff --git a/tests/test_api.py b/tests/test_api.py
+index 852ee75..21817d9 100644
+--- a/tests/test_api.py
++++ b/tests/test_api.py
+@@ -1,8 +1,7 @@
+-from pathlib import Path
+-
+ from fastapi.testclient import TestClient
+ 
+ from onpu.app import create_app
++from onpu.runtime import Runtime
+ 
+ 
+ def client(tmp_path, base_url="http://127.0.0.1", **kwargs):
+@@ -17,7 +16,9 @@ def test_model_import_remove_and_validation(tmp_path, gguf):
+         assert result.status_code == 200
+         key = result.json()["id"]
+         assert c.get("/v1/models").json()["data"][0]["id"] == key
+-        assert c.post(f"/api/models/{key}/load", json={"profile": "ROCKCHIP"}).status_code == 422
++        # NPU is a recognized profile; this fixture has no backend/device to run it.
++        assert c.post(f"/api/models/{key}/load", json={"profile": "ROCKCHIP"}).status_code == 400
++        assert c.post(f"/api/models/{key}/load", json={"profile": "UNKNOWN"}).status_code == 422
+         assert c.post(f"/api/models/{key}/load", json={"context": 0}).status_code == 422
+         assert c.post("/v1/chat/completions", json={"model": key, "messages": [{"role": "user", "content": "Hello"}]}).status_code == 404
+         assert c.delete(f"/api/models/{key}").status_code == 200
+@@ -37,6 +38,40 @@ def test_settings_survive_restart(tmp_path):
+         assert settings["idle_timeout"] == 0
+ 
+ 
++def test_gpu_is_default_and_npu_placement_is_validated(tmp_path):
++    with client(tmp_path) as c:
++        assert c.get("/api/settings").json()["settings"]["profile"] == "CL"
++        assert c.post("/api/models/missing/load", json={"npu_decode": "always"}).status_code == 422
++
++
++def test_benchmark_keeps_its_model_when_chat_selection_changes(tmp_path, monkeypatch):
++    called = []
++    async def generate(self, body):
++        called.append(body["model"])
++        pool.selected = "npu"
++        channel = asyncio.Queue()
++        await channel.put({"event": "done", "metrics": {"model": body["model"]}})
++        return "request", channel, {"event": "started"}
++    monkeypatch.setattr(Runtime, "generate", generate)
++    with client(tmp_path) as c:
++        pool = c.app.state.runtime
++        for key, profile in [("gpu", "CL"), ("npu", "ROCKCHIP")]:
++            session = Runtime(pool.store, pool.backend)
++            session.model, session.profile, session.state = {"id": key, "name": key}, profile, "ready"
++            session.info = {"context": 512}
++            pool.sessions[key] = session
++        pool.selected = "gpu"
++        response = c.post("/api/benchmarks", json={"max_tokens": 8, "repeats": 2})
++        assert response.status_code == 202
++        for _ in range(30):
++            jobs = c.get("/api/benchmarks").json()["jobs"]
++            if jobs[0]["state"] != "running":
++                break
++        assert jobs[0]["state"] == "complete", jobs
++        assert called == ["gpu", "gpu"]
++        assert [r["model"] for r in jobs[0]["results"]] == ["gpu", "gpu"]
++
++
+ def test_unsupported_sampling_is_rejected(tmp_path):
+     with client(tmp_path) as c:
+         payload = {"model": "test", "messages": [{"role": "user", "content": "Hello"}], "top_p": 0.9}
+@@ -73,3 +108,4 @@ def test_lan_access_without_api_key(tmp_path):
+         assert c.get("/v1/models").status_code == 200
+         assert c.post("/api/models/unload", headers={"Origin": base_url}).status_code == 200
+         assert c.post("/api/models/unload", headers={"Origin": "https://evil.example"}).status_code == 403
++import asyncio
+diff --git a/tests/test_runtime.py b/tests/test_runtime.py
+index 89f653f..02985d8 100644
+--- a/tests/test_runtime.py
++++ b/tests/test_runtime.py
+@@ -3,7 +3,7 @@ import time
+ 
+ import pytest
+ 
+-from onpu.runtime import EngineError, Runtime
++from onpu.runtime import EngineError, Runtime, RuntimePool
+ from onpu.store import Store
+ 
+ 
+@@ -69,3 +69,84 @@ def test_context_error_is_reported_before_streaming(tmp_path):
+         finally:
+             store.close()
+     asyncio.run(run())
++
++
++def test_gpu_and_npu_sessions_route_and_cancel_independently(tmp_path, monkeypatch):
++    async def load(self, model, options):
++        self.model, self.profile, self.options, self.state = model, options["profile"], options, "ready"
++    monkeypatch.setattr(Runtime, "load", load)
++
++    async def run():
++        store = Store(tmp_path / "data")
++        pool = RuntimePool(store, tmp_path)
++        try:
++            await pool.load({"id": "gpu", "name": "GPU model"}, {"profile": "CL"})
++            gpu = pool.sessions["gpu"]
++            await pool.load({"id": "npu", "name": "NPU model"}, {"profile": "ROCKCHIP"})
++            npu = pool.sessions["npu"]
++            commands = {"gpu": [], "npu": []}
++            for name, session in pool.sessions.items():
++                async def send(command, name=name, session=session):
++                    commands[name].append(command)
++                    if command["op"] == "generate":
++                        await session.requests[command["id"]].put({"event": "started", "prompt_tokens": 5})
++                session.send = send
++            gpu_key, _, _ = await pool.generate({"model": "gpu"})
++            npu_key, _, _ = await pool.generate({"model": "npu"})
++            assert gpu.active == gpu_key and npu.active == npu_key
++            with pytest.raises(EngineError, match="busy"):
++                await pool.generate({"model": "gpu"})
++            await pool.cancel(npu_key)
++            assert commands["npu"][-1] == {"op": "cancel", "id": npu_key}
++            assert len(commands["gpu"]) == 1
++            gpu.active = npu.active = None
++            await pool.release(gpu_key)
++            await pool.release(npu_key)
++            assert not gpu.requests and not npu.requests
++            gpu_state = gpu.state
++            await pool.unload("npu")
++            assert pool.sessions == {"gpu": gpu}
++            assert gpu.state == gpu_state
++        finally:
++            await pool._stop()
++            store.close()
++    asyncio.run(run())
++
++
++def test_npu_owner_conflict_preserves_loaded_models(tmp_path, monkeypatch):
++    async def load(self, model, options):
++        self.model, self.profile, self.options, self.state = model, options["profile"], options, "ready"
++    monkeypatch.setattr(Runtime, "load", load)
++
++    async def run():
++        store = Store(tmp_path / "data")
++        pool = RuntimePool(store, tmp_path)
++        try:
++            await pool.load({"id": "npu", "name": "Small model"}, {"profile": "ROCKCHIP"})
++            with pytest.raises(EngineError, match="already assigned"):
++                await pool.load({"id": "gpu", "name": "GPU model"}, {"profile": "CL", "npu_decode": "auto"})
++            assert list(pool.sessions) == ["npu"]
++            assert pool.sessions["npu"].state == "ready"
++        finally:
++            await pool._stop()
++            store.close()
++    asyncio.run(run())
++
++
++def test_unused_npu_auto_placement_does_not_reserve_second_model(tmp_path, monkeypatch):
++    async def load(self, model, options):
++        self.model, self.profile, self.options, self.state = model, options["profile"], options, "ready"
++    monkeypatch.setattr(Runtime, "load", load)
++
++    async def run():
++        store = Store(tmp_path / "data")
++        pool = RuntimePool(store, tmp_path)
++        try:
++            await pool.load({"id": "gpu", "name": "GPU model"}, {"profile": "CL", "npu_decode": "auto"})
++            pool.sessions["gpu"].info["placement"] = {"decode_layers": 0, "prefill_layers": 0}
++            await pool.load({"id": "npu", "name": "Small model"}, {"profile": "ROCKCHIP"})
++            assert set(pool.sessions) == {"gpu", "npu"}
++        finally:
++            await pool._stop()
++            store.close()
++    asyncio.run(run())

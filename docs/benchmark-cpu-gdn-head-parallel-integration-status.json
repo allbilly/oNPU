@@ -1,0 +1,60 @@
+{
+  "updated_utc": "2026-10-24T16:37:25.977091+00:00",
+  "status": "opt_in_backend_model_candidates_verified",
+  "production_code_present": true,
+  "enabled_in_app_worker": false,
+  "activation": "Explicit cpu_recurrent_scan=True and cpu_pool=True; optional fused_ffn=True adds pooled prefill sigmoid on supported CPU+NPU shapes. App worker does not autoenable this model profile.",
+  "operator_speed_evidence": "benchmark-cpu-gdn-head-parallel-perf-v1.json",
+  "model_speed_measured": true,
+  "model_quality_qualified": false,
+  "CPU_integration_tests_passed": true,
+  "changed_source": {
+    "tinygrad/llm/kernels/rockchip.py": {
+      "V37": "66f0ca51b7b12c9c894cd29ca1ce9bea2c8ef937f7d67e630f752b0d644a71e2",
+      "current": "e9e1b7863655296974978ca509320216cc68e201996f46e232cc6b41f034b7e3"
+    },
+    "tinygrad/llm/kernels/rockchip_int8.py": {
+      "V37": "7d100532b88c6be9f7a265f3fc8d8f4d2c23c64b7e6246f43b3ef3c6ab3558fa",
+      "current": "03c85fe87aaa9b579f744ab692816e4e04d4925c96e74c4195be64e7acda4b47"
+    },
+    "tinygrad/llm/kernels/rockchip_recurrent.c": {
+      "V37": "6e7a0413d95a6dd24a97e9949f634b38af7b010b4a209ee200f4e575b2967681",
+      "current": "ea57f11597a64f495e096f4d729948dbfd410827cecf390efbde409796ce3e01"
+    },
+    "tinygrad/llm/kernels/rockchip_recurrent.py": {
+      "V37": "4e5bbd41f0e7bd76b1162bca98ec5de45c88e3c3343a11d8de433ca63f7f23b2",
+      "current": "af44165eae7f6c981de046dc55cac90a39adae9c2f6f2a0dc3d1484c9dbcc2e7"
+    },
+    "tinygrad/llm/kernels/rockchip_replay.py": {
+      "V37": "dbdd3be7d7b4eb5c1a4c534634487ecb2bfc7bb128d9360762a963c0cae97fda",
+      "current": "7cc7e578dfbed6dfff5b4eaa311313a482d4e763afb3737279362387f9729327"
+    },
+    "tinygrad/llm/kernels/rockchip_sigmoid.c": {
+      "V37": null,
+      "current": "b6ead2a0abe50364a3fb84ec072cdd9e5bab1caff97bc67f4cb60a3a079dec01"
+    },
+    "tinygrad/llm/kernels/rockchip_sigmoid.py": {
+      "V37": null,
+      "current": "3e8ab4e113436a4d620d01b5de16a3dc7bb8550ffe2389861e87dfbbedbecb92"
+    }
+  },
+  "GPU_API_scope": "V37 CL/NPU-off worker does not call Rockchip configure or CPU scan. Its executed GPU path is unchanged; no new whole-package HTTP cohort is claimed.",
+  "static_review": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-integration-review-v1.json",
+  "regression_evidence": "benchmark-cpu-sigmoid-backend-preflight-v4.json",
+  "normal_models_restored_fresh": true,
+  "model_candidate_timings_valid": true,
+  "model_evidence": "benchmark-cpu-gdn-head-parallel-model-v1.json",
+  "model_evidence_sha256": "d59ad20551213a0a2718bd0eb1b4ceb505c918de4e644094b30edd13801a4d73",
+  "latest_model_followup": {
+    "evidence": "benchmark-cpu-sigmoid-backend-model-v1.json",
+    "sha256": "43842a358d591dcba3aa4b23da873271df3c737ddeb8f9190ee6b867db5ca647",
+    "app_enabled": false,
+    "quality_qualified": false,
+    "timings": {
+      "ttft_ms": 1602.5326091330498,
+      "prefill_proxy_tokens_per_second": 79.87356966748177,
+      "decode_tokens_per_second": 10.733178885207103,
+      "peak_rss_mib": 6326.9375
+    }
+  }
+}

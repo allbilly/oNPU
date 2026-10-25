@@ -1,0 +1,774 @@
+{
+  "updated_utc": "2026-10-25T08:43:42.643767+00:00",
+  "status": "shared_Q8_table_short_API44_verified",
+  "scope": "V42 pinned experimental Qwen3.5-2B/DFlash2 OpenCL short API with retain_target_features=False:10requests,31of55prompttokens reused,force/ordinary/auto cached response parity,cachefalse0,sampled scoped cancellation andgreedyrecovery. Allforcedtelemetry reportsno retained projectedhistory. Actual8Ktrained-draft component parity is separate. Newlayoutfull8KAPI boundary/modelmax/RKLLMquality/general speed remain open. Both original workers restored/fresh; normalservernotrestarted.",
+  "request_controls": {
+    "auto": "Uses measured startup prompt-observation cost and available reply budget; cached prefix selects ordinary.",
+    "off": "Ordinary decoding.",
+    "force": "Explicit speculative experiment bypassing upfront cost routing; retains per-block fallback."
+  },
+  "measurement": "Startup warmups separately record prompt_observe_seconds and trace preparation. Cost extrapolation is an estimate, not a runtime bound.",
+  "historical_API_evidence": "speculative-api-half-decode-v36.json",
+  "historical_API_source_matches_current": false,
+  "production_server_restarted": false,
+  "modelmax_context_qualified": false,
+  "general_speed_qualified": false,
+  "checks": {
+    "App": {
+      "methods": 279,
+      "subtests": 21,
+      "junit_counts": {
+        "tests": 300,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "xml": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/speculation-routing-app-tests-v1.xml",
+      "sha256": "96de573cfb4f5252680ce880f9b44f8447aeb2198244b003dc93ca5452b4b01e"
+    },
+    "core_coordinator": {
+      "methods": 15,
+      "subtests": 20,
+      "actual_exec_session": 73283,
+      "exit_code": 0
+    },
+    "mypy": {
+      "source_files": 262,
+      "actual_exec_session": 18739,
+      "exit_code": 0
+    },
+    "Ruff": "whole_backend_and_changed_app_files_passed"
+  },
+  "changed_source_sha256": {
+    "/home/orangepi/oNPU/onpu/speculation.py": "01fa0e7fc3e43a09dbd5c0d6db90ea029ae2e5a207204bb17a3c662cd752695e",
+    "/home/orangepi/oNPU/onpu/worker.py": "a800d6ba496d84c43b15af65bf80722d7e224f2688503f78b13392b229202f1b",
+    "/home/orangepi/oNPU/onpu/app.py": "28c81a19c805d48c2154180e4a2be33e7e4f9aa20d23a7a9a4a12a2e0c3f1128",
+    "/home/orangepi/tinygrad/tinygrad/llm/speculative.py": "ecca3c080ac2659921ace1797a3c9d571845eb953961858b1fc3d4d7f12f3237"
+  },
+  "regression_evidence": "speculative-vocabulary-row-tiling-preflight-v2.json",
+  "regression_evidence_sha256": "1e8eef38e89240747a9992e93f3fd570609a4fc1cc5cb4811c0f176506be300f",
+  "normal_models_restored_fresh": true,
+  "normal_server_restarted": false,
+  "HTTP_run": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/draft-feature-history-http-v42/results/http.json",
+  "HTTP_owner_exec": 35125,
+  "API_qualified": true,
+  "current_fresh_probability_audit": {
+    "evidence": "speculative-prefix-reuse-matched-v4.json",
+    "executed_in_current_HTTP_run": false,
+    "scope": "Reused unchanged-backend fixed-case cached probe parity; not a new HTTP probability audit."
+  },
+  "partial_current_source_routing_evidence": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/speculation-routing-http-v37/results/auto-routing-progress.json",
+    "sha256": "e9f20418768f607f1acde2e6db2d92032fc6f3e9488639e75e028c59dcdef258",
+    "API_qualified": false,
+    "recorded_during_incomplete_cohort": true,
+    "completed_evidence": "speculative-api-routing-v37.json"
+  },
+  "current_source_HTTP_qualified": true,
+  "evidence": "speculative-shared-q8-table-api-v44.json",
+  "evidence_sha256": "c592b4c57d0177e9ba51e7e10d4a0b034316e8c56bb90ce150499224b62074c5",
+  "qualification_scope": "Short real chat-template forced-prefix HTTP bridge, cached automatic ordinary routing, sampled cancellation/recovery, and shared Q8 target-table qualification only.",
+  "whole_backend_source_map_matches_V37": false,
+  "CPU_only_source_delta_since_V37": {
+    "status": "opt_in_backend_model_candidates_verified",
+    "evidence": "benchmark-cpu-sigmoid-backend-model-v1.json",
+    "evidence_sha256": "43842a358d591dcba3aa4b23da873271df3c737ddeb8f9190ee6b867db5ca647",
+    "CPU_regressions_passed": true,
+    "whole_model_quality_qualified": false,
+    "GPU_profile_unchanged_by_static_review": true,
+    "native_replay_warmup_evidence": "benchmark-native-replay-warmup-model-v1.json",
+    "changed_files": [
+      "tinygrad/llm/kernels/rockchip.py",
+      "tinygrad/llm/kernels/rockchip_int8.py",
+      "tinygrad/llm/kernels/rockchip_recurrent.c",
+      "tinygrad/llm/kernels/rockchip_recurrent.py",
+      "tinygrad/llm/kernels/rockchip_replay.py",
+      "tinygrad/llm/kernels/rockchip_sigmoid.c",
+      "tinygrad/llm/kernels/rockchip_sigmoid.py"
+    ],
+    "source_delta": {
+      "tinygrad/llm/kernels/rockchip.py": {
+        "V37": "66f0ca51b7b12c9c894cd29ca1ce9bea2c8ef937f7d67e630f752b0d644a71e2",
+        "current": "e9e1b7863655296974978ca509320216cc68e201996f46e232cc6b41f034b7e3"
+      },
+      "tinygrad/llm/kernels/rockchip_int8.py": {
+        "V37": "7d100532b88c6be9f7a265f3fc8d8f4d2c23c64b7e6246f43b3ef3c6ab3558fa",
+        "current": "03c85fe87aaa9b579f744ab692816e4e04d4925c96e74c4195be64e7acda4b47"
+      },
+      "tinygrad/llm/kernels/rockchip_recurrent.c": {
+        "V37": "6e7a0413d95a6dd24a97e9949f634b38af7b010b4a209ee200f4e575b2967681",
+        "current": "ea57f11597a64f495e096f4d729948dbfd410827cecf390efbde409796ce3e01"
+      },
+      "tinygrad/llm/kernels/rockchip_recurrent.py": {
+        "V37": "4e5bbd41f0e7bd76b1162bca98ec5de45c88e3c3343a11d8de433ca63f7f23b2",
+        "current": "af44165eae7f6c981de046dc55cac90a39adae9c2f6f2a0dc3d1484c9dbcc2e7"
+      },
+      "tinygrad/llm/kernels/rockchip_replay.py": {
+        "V37": "dbdd3be7d7b4eb5c1a4c534634487ecb2bfc7bb128d9360762a963c0cae97fda",
+        "current": "7cc7e578dfbed6dfff5b4eaa311313a482d4e763afb3737279362387f9729327"
+      },
+      "tinygrad/llm/kernels/rockchip_sigmoid.c": {
+        "V37": null,
+        "current": "b6ead2a0abe50364a3fb84ec072cdd9e5bab1caff97bc67f4cb60a3a079dec01"
+      },
+      "tinygrad/llm/kernels/rockchip_sigmoid.py": {
+        "V37": null,
+        "current": "3e8ab4e113436a4d620d01b5de16a3dc7bb8550ffe2389861e87dfbbedbecb92"
+      }
+    },
+    "CPU_regression_evidence": "benchmark-cpu-sigmoid-backend-preflight-v4.json"
+  },
+  "GPU_profile_applicability": "V38 verified the current two-row-tiled Qwen3.5-2B/DFlash2 OpenCL profile at context 8192: 36 short off/force responses, short auto routing, 27 fresh probability comparisons with zero error/TV, the actual 8176-input plus 16-output off/force/auto boundary, sampled scoped cancellation and exact greedy recovery. Private processes ended and both original workers answered fresh replies. Counting and code favored speculation; explanation favored ordinary. Model maximum 262144, general quality/speed and RKLLM parity remain open. The normal server was not restarted.",
+  "optional_extra_cost_fallback": {
+    "status": "trained_core_comparison_measured_default_retained",
+    "core_default": null,
+    "app_enabled": false,
+    "CPU_App_evidence": "speculative-extra-budget-preflight-v1.json",
+    "changed_core_files": [
+      "tinygrad/llm/speculative.py",
+      "tinygrad/llm/speculative_adaptive.py"
+    ],
+    "V37_default_rate_policy_retained": true,
+    "whole_package_HTTP_requalified": false,
+    "GPU_comparison_measured": true,
+    "general_speedup_qualified": false,
+    "new_API_cohort_qualified": false,
+    "model_evidence": "speculative-extra-budget-model-v2.json",
+    "model_evidence_sha256": "fc1a81ade83a293705f90bf5b8380fd57694152b7784a9e228f78a882e29424e"
+  },
+  "tiled_FP32_GEMV_candidate": {
+    "status": "core_and_API_verified_within_V38_scope",
+    "source": "tinygrad/llm/kernels/mali_linear.py",
+    "source_sha256": "31e10be28dea06d51b13383c69a63e24966e7029f7aa4749d3b5e79fe810f96d",
+    "operator_evidence": "speculative-vocabulary-row-tiles-v2.json",
+    "model_qualified": false,
+    "new_API_qualified": true,
+    "production_server_restarted": false,
+    "preflight_evidence": "speculative-vocabulary-row-tiling-preflight-v2.json",
+    "preflight_sha256": "1e8eef38e89240747a9992e93f3fd570609a4fc1cc5cb4811c0f176506be300f",
+    "model_comparison_measured": true,
+    "frozen_greedy_output_parity_within_scope": true,
+    "model_evidence": "speculative-vocabulary-row-tiling-model-v1.json",
+    "model_evidence_sha256": "13b0883e18ef3124224d9370f2ed4b35153b465a76124f3d26f4c3ec659556a8",
+    "API_evidence": "speculative-api-tiled-v38.json",
+    "API_evidence_sha256": "cbef2dfaf919a3a0fd457cd5cf913c27473e1735f005fb1d3a8f5f65604427b7"
+  },
+  "verified_HTTP_cohorts": {
+    "tiled_gemv_v38": {
+      "report": "speculative-api-tiled-v38.json",
+      "sha256": "cbef2dfaf919a3a0fd457cd5cf913c27473e1735f005fb1d3a8f5f65604427b7",
+      "scope": "V38 verified the current two-row-tiled Qwen3.5-2B/DFlash2 OpenCL profile at context 8192: 36 short off/force responses, short auto routing, 27 fresh probability comparisons with zero error/TV, the actual 8176-input plus 16-output off/force/auto boundary, sampled scoped cancellation and exact greedy recovery. Private processes ended and both original workers answered fresh replies. Counting and code favored speculation; explanation favored ordinary. Model maximum 262144, general quality/speed and RKLLM parity remain open. The normal server was not restarted.",
+      "API_functional_qualified_within_scope": true,
+      "HTTP_cohort_complete": true,
+      "current_backend_source_matches": true,
+      "context": 8192,
+      "actual_prompt_tokens": 8176,
+      "reply_tokens": 16,
+      "short_greedy_requests": 36,
+      "probability_comparisons": 27,
+      "maximum_probability_error": 0.0,
+      "maximum_total_variation": 0.0,
+      "probability_audit_reused": false,
+      "probability_audit_executed_in_current_HTTP_run": true,
+      "normal_models_restored_with_fresh_replies": true,
+      "modelmax_context_qualified": false,
+      "general_speed_qualified": false,
+      "RKLLM_quality_qualified": false,
+      "upfront_cost_routing_verified_within_scope": true
+    },
+    "prefix_cache_v40": {
+      "report": "speculative-prefix-reuse-api-v40.json",
+      "sha256": "95a6e7feb97a6c41fcaaf17cf9035e177d8ed12b0dbae652c6fa0d63d29d303a",
+      "scope": "V40 verifies the pinned experimental Qwen3.5-2B/DFlash2 OpenCL short chat path: 31 cached tokens in a 55-token follow-up, forced/ordinary cached response parity, automatic cached ordinary routing, cache disabling, sampled scoped cancellation and exact greedy recovery. Corrected offline validation resolves an obsolete controller alias while preserving the raw run and original failure. Both original workers answered fresh replies. Full8192boundary/modelmax/RKLLM quality and speed remain open.",
+      "API_functional_qualified_within_scope": true,
+      "current_backend_source_matches": true,
+      "current_app_source_matches": true,
+      "configured_context": 8192,
+      "actual_seed_prompt_tokens": 30,
+      "actual_followup_prompt_tokens": 55,
+      "cached_prefix_tokens": 31,
+      "max_greedy_reply_tokens": 8,
+      "nonstream_requests": 10,
+      "full_8192_boundary_requalified": false,
+      "modelmax_context_qualified": false,
+      "general_speed_qualified": false,
+      "RKLLM_quality_qualified": false,
+      "normal_models_restored_with_fresh_replies": true,
+      "normal_server_restarted": false,
+      "original_controller_exit_code": 1,
+      "raw_probe_exit_code": 0,
+      "validation_corrected_offline": true,
+      "probability_audit_executed_in_current_HTTP_run": false,
+      "matched_core_probability_evidence": "speculative-prefix-reuse-matched-v4.json"
+    },
+    "long_prefix_v41": {
+      "report": "speculative-prefix-reuse-long-api-v41.json",
+      "sha256": "2330a9548282329a48d9f4e866497b88d70b365ea3bb364dd99e3a658826cce0",
+      "scope": "V41 current-source context8192 long conversation:8048 cold seed,8081 forced follow-up reused8049,8114 sampled scoped cancellation and cold recovery,8191+1 cached ordinary boundary reused8115,8191+2 HTTP400 before generation. Both original workers restored with fresh replies. Single-output functional cases; forced exact8191 boundary, complete sampled long generation, modelmax262144, broad quality and RKLLM performance remain open.",
+      "API_functional_qualified_within_scope": true,
+      "current_backend_source_matches": true,
+      "current_app_source_matches": true,
+      "configured_context": 8192,
+      "actual_max_prompt_tokens": 8191,
+      "cached_ordinary_exact_8191_plus1_boundary_qualified": true,
+      "forced_long_cached_prompt_tokens": 8081,
+      "forced_cached_tokens": 8049,
+      "forced_exact_8191_plus1_boundary_qualified": false,
+      "sampled_complete_long_generation_qualified": false,
+      "modelmax_context_qualified": false,
+      "general_speed_qualified": false,
+      "RKLLM_quality_qualified": false,
+      "normal_models_restored_with_fresh_replies": true,
+      "normal_server_restarted": false,
+      "owner_exit_code": 0,
+      "fresh_exit_code": 0,
+      "probability_audit_executed_in_current_HTTP_run": false,
+      "complementary_short_API_evidence": "speculative-prefix-reuse-api-v40.json"
+    },
+    "feature_history_free_v42": {
+      "report": "speculative-draft-feature-history-api-v42.json",
+      "sha256": "7e1f250bffbcad158f6c4fefe9f7f36643429f7eb94bcc29a55f330f809b6b94",
+      "scope": "V42 pinned experimental Qwen3.5-2B/DFlash2 OpenCL short API with retain_target_features=False:10requests,31of55prompttokens reused,force/ordinary/auto cached response parity,cachefalse0,sampled scoped cancellation andgreedyrecovery. Allforcedtelemetry reportsno retained projectedhistory. Actual8Ktrained-draft component parity is separate. Newlayoutfull8KAPI boundary/modelmax/RKLLMquality/general speed remain open. Both original workers restored/fresh; normalservernotrestarted.",
+      "API_functional_qualified_within_scope": true,
+      "current_backend_source_matches": true,
+      "current_app_source_matches": true,
+      "configured_context": 8192,
+      "actual_followup_prompt_tokens": 55,
+      "cached_prefix_tokens": 31,
+      "retain_target_features": false,
+      "projected_history_bytes": 0,
+      "nonstream_requests": 10,
+      "new_layout_full_8192_API_boundary_qualified": false,
+      "modelmax_context_qualified": false,
+      "RKLLM_quality_qualified": false,
+      "general_speed_qualified": false,
+      "normal_models_restored_with_fresh_replies": true,
+      "normal_server_restarted": false,
+      "owner_exit_code": 0,
+      "fresh_exit_code": 0,
+      "component_evidence": "speculative-draft-feature-history-component-v1.json",
+      "prior_retaining_long_API_evidence": "speculative-prefix-reuse-long-api-v41.json"
+    },
+    "shared_Q8_table_v44": {
+      "report": "speculative-shared-q8-table-api-v44.json",
+      "sha256": "c592b4c57d0177e9ba51e7e10d4a0b034316e8c56bb90ce150499224b62074c5",
+      "scope": "Short real chat-template forced-prefix HTTP bridge, cached automatic ordinary routing, sampled cancellation/recovery, and shared Q8 target-table qualification only.",
+      "API_functional_qualified_within_scope": true,
+      "current_backend_source_matches": true,
+      "current_app_source_matches": true,
+      "configured_context": 8192,
+      "actual_followup_prompt_tokens": 55,
+      "cached_prefix_tokens": 31,
+      "nonstream_requests": 10,
+      "shared_Q8_target_table": true,
+      "logical_dense_weight_realized": false,
+      "retain_target_features": false,
+      "projected_history_bytes": 0,
+      "new_layout_full_8192_API_boundary_qualified": false,
+      "modelmax_context_qualified": false,
+      "RKLLM_quality_qualified": false,
+      "general_speed_qualified": false,
+      "normal_models_restored_fresh": true,
+      "normal_server_restarted": false,
+      "owner_exec": 12278,
+      "owner_exit_code": 0,
+      "fresh_exec": 86514,
+      "fresh_exit_code": 0,
+      "core_model_evidence": "benchmark-mali-q8-shared-table-model-v1.json",
+      "component_evidence": "benchmark-mali-q8-shared-table-component-v1.json"
+    }
+  },
+  "whole_backend_source_map_matches_V38": false,
+  "additional_API_regressions": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/speculation-tiled-http-v38/results/api-regressions.json",
+    "sha256": "3a03fb6e0010dcde597e3c56d774ccc7ad9251c558393a06123ba7da99eb45eb",
+    "script": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/speculation-tiled-http-v38/api_regressions.py",
+    "script_sha256": "c9a639c10ad5709f2215f9875f9a43e6a31559c421c746c511be31b5aedf0220",
+    "executed_in_current_run": true
+  },
+  "current_source_HTTP_requalification_pending": false,
+  "current_source_note": "Backend opt-in retain_fallback_prefix candidate; defaultFalse and App unchanged. Previous API44 current-source byte cohort is historical; trained candidate overhead/reuse and API qualification pending.",
+  "prefix_reuse_candidate": {
+    "status": "long_API41_verified_within_scope",
+    "API_enabled": true,
+    "current_source_HTTP_qualified": true,
+    "source_sha256": {
+      "tinygrad/llm/speculative.py": "a2de2ebcbb23d064b5435e5c7dab468710d38e07e9c00ec571d4ed9a15c4caba",
+      "tinygrad/llm/dflash2.py": "508fee334c5a930bd004c7dc47c967c663c8a3426c378a863a7ac40fb717a3fa",
+      "tinygrad/llm/model.py": "1a018c80d2cf11a11f787346e501ef9381b48cc91ee67b28e69e7a44eaa34294"
+    },
+    "scope": "One 30-token seed, eight outputs, two-token strict extension and eight-output continuation, repeated six times. 42 states/common probe logits bits equal to ordinary cached;18temperature comparisons0error/TV. Coldreplaygate remainsfalse. NoAPI/modelmax/RKLLM/generalquality qualification.",
+    "GPU_run": "speculative-prefix-reuse-model-v3",
+    "evidence": "speculative-prefix-reuse-core-v1.json",
+    "evidence_sha256": "d66105d33b45009739e2b239ccc1615a716f2c9cfed706bba3865b6f474e455b",
+    "normal_models_restored_fresh": true,
+    "next_action": "Reduce context-scaled cache/workspace overhead and cold-prefill latency, then extend beyond current8192 app cap under unchanged memory/numerical guards.",
+    "GPU_qualified_within_scope": true,
+    "matched_cache_evidence": "speculative-prefix-reuse-matched-v4.json",
+    "matched_cache_evidence_sha256": "784f81056a1c40ad169891d54052820d7a815aef555eaadc733ea0e36e92e24d",
+    "matched_probability_error": 0.0,
+    "matched_total_variation": 0.0,
+    "cold_state_gate_passed": false,
+    "current_source_HTTP_qualified_within_scope": true,
+    "API_evidence": "speculative-prefix-reuse-long-api-v41.json",
+    "API_evidence_sha256": "2330a9548282329a48d9f4e866497b88d70b365ea3bb364dd99e3a658826cce0",
+    "API_scope": "V41 current-source context8192 long conversation:8048 cold seed,8081 forced follow-up reused8049,8114 sampled scoped cancellation and cold recovery,8191+1 cached ordinary boundary reused8115,8191+2 HTTP400 before generation. Both original workers restored with fresh replies. Single-output functional cases; forced exact8191 boundary, complete sampled long generation, modelmax262144, broad quality and RKLLM performance remain open."
+  },
+  "API_qualified_within_scope": true,
+  "full_8192_boundary_requalified": false,
+  "original_owner_exit_code": 0,
+  "raw_probe_exit_code": 0,
+  "validation_corrected_offline": false,
+  "whole_backend_source_map_matches_V40": true,
+  "owner_exit_code": 0,
+  "cached_ordinary_exact8191_plus1_qualified": true,
+  "forced_exact8191_plus1_qualified": false,
+  "whole_backend_source_map_matches_V41": false,
+  "default_API_execution_layout_unchanged": true,
+  "feature_history_memory_option": {
+    "status": "enabled_and_short_API42_verified",
+    "API_enabled": true,
+    "default_retain_target_features": true,
+    "source_sha256": "971391c98b45f8b4b5147badd1f4ffe28c5dfa8f38f88a94714850b2ee0035c4",
+    "scope": "Actual trained draft and shared embedding/head, synthetic six target taps through8192, exact KV/proposal/sample parity; no full target/API/modelmax/speed qualification.",
+    "component_qualified": true,
+    "evidence": "speculative-draft-feature-history-component-v1.json",
+    "evidence_sha256": "e7eddd16b0bf96abcc59a1ea322c1bd2426f39ab7a925035fa7a5f9814027dea",
+    "saved_retained_history_bytes8192": 33554432,
+    "native_copy_bytes_control": 2406746112,
+    "native_copy_bytes_candidate": 1284069376,
+    "API_evidence": "speculative-draft-feature-history-api-v42.json",
+    "API_evidence_sha256": "7e1f250bffbcad158f6c4fefe9f7f36643429f7eb94bcc29a55f330f809b6b94",
+    "API_scope": "V42 pinned experimental Qwen3.5-2B/DFlash2 OpenCL short API with retain_target_features=False:10requests,31of55prompttokens reused,force/ordinary/auto cached response parity,cachefalse0,sampled scoped cancellation andgreedyrecovery. Allforcedtelemetry reportsno retained projectedhistory. Actual8Ktrained-draft component parity is separate. Newlayoutfull8KAPI boundary/modelmax/RKLLMquality/general speed remain open. Both original workers restored/fresh; normalservernotrestarted."
+  },
+  "whole_backend_source_map_matches_V42": false,
+  "new_layout_long_API_requalification_pending": false,
+  "reusable_proposal_inputs_candidate": {
+    "status": "full_target_no_speed_gain_API_off",
+    "enabled_in_API": false,
+    "default_reuse_prefix_inputs": false,
+    "source_sha256": {
+      "tinygrad/llm/dflash2.py": "bfb3c2be289b022e1c62c30b9a914505fbe454cb6fe6b8d03e3f4bd0a7aa1492",
+      "tinygrad/llm/kernels/mali_copy.py": "5f9622c02ac6681b4614b777295531ec6de33da9a43253dd4466a3e90d9617e5"
+    },
+    "report": "speculative-draft-reusable-inputs-model-v1.json",
+    "sha256": "2de7eed04ef9ae98dc2ce2d148f2d40e3ac6dcd93b51413811f86f626fa20204",
+    "scope": "54 short greedy core requests on one real Qwen3.5-2B/DFlash2 pair, context8192 configured, prompts30/36/27 and outputbudget32,3warm3measured perworkload/mode. Exact frozen IDs, API-matching128prefill and adaptivefallback. Candidate wall medians0.3-1.1percent higher; no generation gain. Originalcontrollerexit2from269versus270source map retained; independent full-map correction passes. Originalsrestored/fresh.",
+    "component_qualified": true,
+    "API_qualified": false,
+    "modelmax_qualified": false,
+    "general_speed_qualified": false,
+    "operator_staging_only_timings": [
+      {
+        "committed_prefix_tokens": 128,
+        "control_ms": 16.5493794484064,
+        "candidate_ms": 1.4473760966211557,
+        "ratio_control_over_candidate": 11.434056073635798
+      },
+      {
+        "committed_prefix_tokens": 2048,
+        "control_ms": 16.099052038043737,
+        "candidate_ms": 2.86718993447721,
+        "ratio_control_over_candidate": 5.614923463722037
+      },
+      {
+        "committed_prefix_tokens": 4096,
+        "control_ms": 14.621926471590996,
+        "candidate_ms": 2.840940374881029,
+        "ratio_control_over_candidate": 5.146861440977381
+      },
+      {
+        "committed_prefix_tokens": 8086,
+        "control_ms": 16.06915646698326,
+        "candidate_ms": 2.8403574833646417,
+        "ratio_control_over_candidate": 5.657441558359054
+      }
+    ],
+    "CPU_methods": 61,
+    "CPU_subtests": 56,
+    "GPU_fixture_methods": 3,
+    "owner_exec_session": 80827,
+    "owner_exit_code": 0,
+    "fresh_exec_session": 16101,
+    "fresh_exit_code": 0,
+    "normal_models_restored_fresh": true,
+    "prior_slower_result": "speculative-draft-reusable-inputs-component-v1.json",
+    "native_copy_commands": 304,
+    "native_copy_bytes": 503361536,
+    "full_target_core_qualified_within_scope": true,
+    "decision": "Keep native reusable proposal inputs optional and disabled in the app; prioritize matrix/prefill bottlenecks.",
+    "summary": [
+      {
+        "workload": "counting",
+        "modes": {
+          "ordinary": {
+            "median_wall_seconds": 10.273841174086556,
+            "range_wall_seconds": [
+              10.22491684393026,
+              10.303822985850275
+            ],
+            "median_TTFT_ms": 1762.8839099779725,
+            "median_prefill_proxy_tps": 17.01756980717741,
+            "median_decode_full_cost_tps": 3.408188209728928,
+            "measured_proposal_calls": 0,
+            "measured_native_input_copy_commands": 0
+          },
+          "control": {
+            "median_wall_seconds": 7.371815151069313,
+            "range_wall_seconds": [
+              7.369655387941748,
+              7.380385588156059
+            ],
+            "median_TTFT_ms": 1730.4055150598288,
+            "median_prefill_proxy_tps": 17.3369766444386,
+            "median_decode_full_cost_tps": 5.142527934336708,
+            "measured_proposal_calls": 12,
+            "measured_native_input_copy_commands": 0
+          },
+          "candidate": {
+            "median_wall_seconds": 7.454645907972008,
+            "range_wall_seconds": [
+              7.4161648019216955,
+              7.460987238911912
+            ],
+            "median_TTFT_ms": 1763.7416911311448,
+            "median_prefill_proxy_tps": 17.00929345314734,
+            "median_decode_full_cost_tps": 5.118407543958456,
+            "measured_proposal_calls": 12,
+            "measured_native_input_copy_commands": 72
+          }
+        },
+        "native_wall_reduction_percent": -1.123614133090145,
+        "control_native_sample_ranges_overlap": false
+      },
+      {
+        "workload": "short_code",
+        "modes": {
+          "ordinary": {
+            "median_wall_seconds": 8.134691394167021,
+            "range_wall_seconds": [
+              8.129722627811134,
+              8.14653348410502
+            ],
+            "median_TTFT_ms": 3129.5375858899206,
+            "median_prefill_proxy_tps": 11.50329689674041,
+            "median_decode_full_cost_tps": 3.3998741761501123,
+            "measured_proposal_calls": 0,
+            "measured_native_input_copy_commands": 0
+          },
+          "control": {
+            "median_wall_seconds": 7.463598495116457,
+            "range_wall_seconds": [
+              7.442956648999825,
+              7.485991192050278
+            ],
+            "median_TTFT_ms": 3168.8703461550176,
+            "median_prefill_proxy_tps": 11.360515283839549,
+            "median_decode_full_cost_tps": 3.960412060300995,
+            "measured_proposal_calls": 9,
+            "measured_native_input_copy_commands": 0
+          },
+          "candidate": {
+            "median_wall_seconds": 7.503987367032096,
+            "range_wall_seconds": [
+              7.47830617101863,
+              7.524203676963225
+            ],
+            "median_TTFT_ms": 3144.2540120333433,
+            "median_prefill_proxy_tps": 11.449456647657842,
+            "median_decode_full_cost_tps": 3.922426259858427,
+            "measured_proposal_calls": 9,
+            "measured_native_input_copy_commands": 48
+          }
+        },
+        "native_wall_reduction_percent": -0.541144756675549,
+        "control_native_sample_ranges_overlap": true
+      },
+      {
+        "workload": "explanation",
+        "modes": {
+          "ordinary": {
+            "median_wall_seconds": 10.804287063889205,
+            "range_wall_seconds": [
+              10.802158510079607,
+              10.849243956850842
+            ],
+            "median_TTFT_ms": 1710.713032167405,
+            "median_prefill_proxy_tps": 15.782892567195844,
+            "median_decode_full_cost_tps": 3.408965794694437,
+            "measured_proposal_calls": 0,
+            "measured_native_input_copy_commands": 0
+          },
+          "control": {
+            "median_wall_seconds": 13.157506837975234,
+            "range_wall_seconds": [
+              13.156103065935895,
+              13.200859877979383
+            ],
+            "median_TTFT_ms": 1725.5335811059922,
+            "median_prefill_proxy_tps": 15.647333842494199,
+            "median_decode_full_cost_tps": 2.7118934142160698,
+            "measured_proposal_calls": 6,
+            "measured_native_input_copy_commands": 0
+          },
+          "candidate": {
+            "median_wall_seconds": 13.202151068951935,
+            "range_wall_seconds": [
+              13.184801219962537,
+              13.292635346995667
+            ],
+            "median_TTFT_ms": 1724.3083061184734,
+            "median_prefill_proxy_tps": 15.658452670090478,
+            "median_decode_full_cost_tps": 2.700593810885841,
+            "measured_proposal_calls": 6,
+            "measured_native_input_copy_commands": 24
+          }
+        },
+        "native_wall_reduction_percent": -0.3393061582749768,
+        "control_native_sample_ranges_overlap": true
+      }
+    ],
+    "original_controller_exit_code": 2,
+    "corrected_offline_validation": true,
+    "owner_exec": 51256,
+    "fresh_exec": 41981,
+    "operator_component_evidence": "speculative-draft-reusable-inputs-component-v2.json"
+  },
+  "Q8_short_projection_operator": {
+    "status": "public_operator_bitwise_qualified_single_row_gain_model_integration_pending",
+    "report": "benchmark-mali-q8-short-head-operator-v4.json",
+    "sha256": "038d81441740868c5f7ce9c7a3207e2a2324e49176f62516d5731e3db9300145",
+    "scope": "Real248320x2048tiedhead M1/3/8,6warm12measuredpairs percapacity,all54F32outputsbit-identical,actualpublickernel names t1/t3/t8_g2 verified. M1latency35.2percent lower; pairedM3/M8are3.0/5.0percent higherthanDense. Mixed-gridM8win didnotreproduce. No fullmodel/API/W8A8/RKLLM/modelmax orRAMfitqualification.",
+    "CPU_methods": 7,
+    "CPU_subtests": 24,
+    "GPU_fixture_methods": 3,
+    "mypy_sources": 263,
+    "ruff_passed": true,
+    "API_enabled": false,
+    "default_model_dispatch_changed": false,
+    "full_model_qualified": false,
+    "modelmax_qualified": false,
+    "general_speed_qualified": false,
+    "source_sha256": {
+      "tinygrad/llm/kernels/mali_q8.py": "5dca7c02ab13ab4489230f7f544bf7963315f30c17ff3d4d948d25de365f2749"
+    },
+    "results": [
+      {
+        "rows": 1,
+        "median_ms": {
+          "dense": 53.696278017014265,
+          "q8": 34.77378247771412
+        },
+        "range_ms": {
+          "dense": [
+            53.208617959171534,
+            54.08302298747003
+          ],
+          "q8": [
+            34.64311710558832,
+            34.933030139654875
+          ]
+        },
+        "q8_latency_reduction_percent": 35.23986435950801,
+        "dense_over_q8_throughput_ratio": 1.5441598293607324,
+        "output_bits_equal_all_pairs": true,
+        "runtime_q8_kernel_names": [
+          "mali_gemv_q8_rows_t1"
+        ]
+      },
+      {
+        "rows": 3,
+        "median_ms": {
+          "dense": 55.38675549905747,
+          "q8": 57.02998302876949
+        },
+        "range_ms": {
+          "dense": [
+            55.14525808393955,
+            55.82250002771616
+          ],
+          "q8": [
+            56.83631915599108,
+            57.344979140907526
+          ]
+        },
+        "q8_latency_reduction_percent": -2.9668239544018427,
+        "dense_over_q8_throughput_ratio": 0.9711866032139082,
+        "output_bits_equal_all_pairs": true,
+        "runtime_q8_kernel_names": [
+          "mali_gemv_q8_rows_t3"
+        ]
+      },
+      {
+        "rows": 8,
+        "median_ms": {
+          "dense": 113.43391193076968,
+          "q8": 119.06008655205369
+        },
+        "range_ms": {
+          "dense": [
+            113.25322696939111,
+            113.61955595202744
+          ],
+          "q8": [
+            118.86656796559691,
+            119.2926880903542
+          ]
+        },
+        "q8_latency_reduction_percent": -4.959870047255133,
+        "dense_over_q8_throughput_ratio": 0.952745082048767,
+        "output_bits_equal_all_pairs": true,
+        "runtime_q8_kernel_names": [
+          "mali_gemv_q8_rows_t8_g2"
+        ]
+      }
+    ],
+    "normal_models_restored_fresh": true
+  },
+  "shared_Q8_target_table_API44": {
+    "report": "speculative-shared-q8-table-api-v44.json",
+    "sha256": "c592b4c57d0177e9ba51e7e10d4a0b034316e8c56bb90ce150499224b62074c5",
+    "scope": "Short real chat-template forced-prefix HTTP bridge, cached automatic ordinary routing, sampled cancellation/recovery, and shared Q8 target-table qualification only.",
+    "API_functional_qualified_within_scope": true,
+    "current_backend_source_matches": false,
+    "current_app_source_matches": true,
+    "configured_context": 8192,
+    "actual_followup_prompt_tokens": 55,
+    "cached_prefix_tokens": 31,
+    "nonstream_requests": 10,
+    "shared_Q8_target_table": true,
+    "logical_dense_weight_realized": false,
+    "retain_target_features": false,
+    "projected_history_bytes": 0,
+    "new_layout_full_8192_API_boundary_qualified": false,
+    "modelmax_context_qualified": false,
+    "RKLLM_quality_qualified": false,
+    "general_speed_qualified": false,
+    "normal_models_restored_fresh": true,
+    "normal_server_restarted": false,
+    "owner_exec": 12278,
+    "owner_exit_code": 0,
+    "fresh_exec": 86514,
+    "fresh_exit_code": 0,
+    "core_model_evidence": "benchmark-mali-q8-shared-table-model-v1.json",
+    "component_evidence": "benchmark-mali-q8-shared-table-component-v1.json"
+  },
+  "whole_backend_source_map_matches_V44": true,
+  "latest_long_API_attempt": {
+    "report": "speculative-shared-q8-long-api-v47-attempt.json",
+    "sha256": "0d62fd15d6aa9ed7fc227a27c4f07905168292bee3d0b5786790582e84969594",
+    "API_functional_qualified": false,
+    "scope": "Actual16-output/proposals and adaptivefallback observed; complete longAPI cohort failed",
+    "prompt_tokens": 8081,
+    "cached_tokens": 8049,
+    "visible_output_tokens": 16,
+    "proposed_tokens": 14,
+    "accepted_tokens": 8,
+    "fallback_tokens": 6,
+    "original_serving_restored_fresh": true
+  },
+  "fallback_prefix_retention_candidate": {
+    "report": "speculative-fallback-prefix-retention-model-v1.json",
+    "sha256": "2e4dace3a8250adfdf4309ae1e8213e8d429c3db70021762e27256d1e2d2cce7",
+    "CPU_verified": true,
+    "trained_model_qualified_within_scope": true,
+    "API_qualified": false,
+    "App_enabled": false,
+    "default": false,
+    "decision": "Keep disabled in App: combined cost improves counting vs discarded-force but regresses explanation; cached ordinary fastest combined on both.",
+    "current_backend_source_matches": false
+  },
+  "fallback_prefix_batching_candidate": {
+    "report": "speculative-forced-batched-retention-api-v48.json",
+    "sha256": "cf34da17add98ca3dab6845ff619ae3f3e778af52235c8cbd84e2b918c3e5118",
+    "API_qualified_within_scope": true,
+    "App_enabled": true,
+    "App_enabled_for": "Explicitforce on measuredsharedtable/backend capabilities only",
+    "App_enabled_by_default": false,
+    "batch_size": 8,
+    "trained_core_reference": {
+      "report": "speculative-fallback-prefix-retention-model-v2.json",
+      "sha256": "a372e6ee854b288c787f8b575232f16a189fdfd131099163aabc0f5d455be36c"
+    },
+    "modelmax_context_qualified": false,
+    "general_speedup_claim": false
+  },
+  "forced_batched_retention_API48": {
+    "report": "speculative-forced-batched-retention-api-v48.json",
+    "sha256": "cf34da17add98ca3dab6845ff619ae3f3e778af52235c8cbd84e2b918c3e5118",
+    "scope": "Current shared-Q8/no-feature-history near8K API: actual proposals, matched cached ordinary, scoped cancellation/recovery and exact8192 budget.",
+    "API_functional_qualified_within_scope": true,
+    "current_backend_source_matches": true,
+    "current_app_source_matches": true,
+    "configured_context": 8192,
+    "actual_followup_prompt_tokens": 8081,
+    "cached_prefix_tokens": 8049,
+    "nonstream_requests": 19,
+    "short_nonstream_requests": 13,
+    "long_nonstream_requests": 6,
+    "sustained_long_decode_qualified": true,
+    "shared_Q8_target_table": true,
+    "logical_dense_weight_realized": false,
+    "retain_target_features": false,
+    "projected_history_bytes": 0,
+    "forced_fallback_prefix_retention": true,
+    "forced_observation_batch_size": 8,
+    "automatic_scalar_reset_exercised": true,
+    "cached_ordinary_8192_boundary_qualified": true,
+    "forced_exact_8192_boundary_qualified": false,
+    "full8192_all_modes_qualified": false,
+    "modelmax_context_qualified": false,
+    "RKLLM_quality_qualified": false,
+    "general_speedup_claim": false,
+    "original_serving_restored_fresh": true,
+    "normal_server_restarted": false
+  },
+  "current_HTTP_cohort": {
+    "report": "speculative-forced-batched-retention-api-v48.json",
+    "sha256": "cf34da17add98ca3dab6845ff619ae3f3e778af52235c8cbd84e2b918c3e5118",
+    "scope": "Current shared-Q8/no-feature-history near8K API: actual proposals, matched cached ordinary, scoped cancellation/recovery and exact8192 budget.",
+    "API_functional_qualified_within_scope": true,
+    "current_backend_source_matches": true,
+    "current_app_source_matches": true,
+    "configured_context": 8192,
+    "actual_followup_prompt_tokens": 8081,
+    "cached_prefix_tokens": 8049,
+    "nonstream_requests": 19,
+    "short_nonstream_requests": 13,
+    "long_nonstream_requests": 6,
+    "sustained_long_decode_qualified": true,
+    "shared_Q8_target_table": true,
+    "logical_dense_weight_realized": false,
+    "retain_target_features": false,
+    "projected_history_bytes": 0,
+    "forced_fallback_prefix_retention": true,
+    "forced_observation_batch_size": 8,
+    "automatic_scalar_reset_exercised": true,
+    "cached_ordinary_8192_boundary_qualified": true,
+    "forced_exact_8192_boundary_qualified": false,
+    "full8192_all_modes_qualified": false,
+    "modelmax_context_qualified": false,
+    "RKLLM_quality_qualified": false,
+    "general_speedup_claim": false,
+    "original_serving_restored_fresh": true,
+    "normal_server_restarted": false
+  },
+  "context_capacity_characterization": {
+    "report": "speculative-context-capacity-allocation-v1.json",
+    "sha256": "37a22de9b855ebf332f0316a73588bd0ee65327f066c16ba54ad0a1b2c2ae98e",
+    "configured_capacity_small_requests_verified": [
+      8192,
+      16384,
+      32768,
+      65536
+    ],
+    "actual_prompt_lengths": [
+      30,
+      27
+    ],
+    "API_cap_unchanged": 8192,
+    "fullprefix_larger_context_qualified": false,
+    "modelmax_fit_qualified": false,
+    "source_only_allocation_accounting": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/modelmax-memory-plan-v1/allocations-v2.json"
+  }
+}

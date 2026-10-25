@@ -1,0 +1,146 @@
+{
+  "updated_utc": "2026-10-22T14:57:35.500275+00:00",
+  "scope": "Three full warmups and three measured 128/64 runs, context512. Same 64 greedy IDs. Faster prefill does not establish a both-phase or comparable-quality RKLLM win. ChatGLM3 GPU clock snapshots vary.",
+  "models": [
+    {
+      "model": "Gemma4",
+      "size": "E2B",
+      "initial": {
+        "ttft_ms": 63315.40328799747,
+        "prefill_proxy_tps": 2.0216249656940053,
+        "decode_tps": 2.8788580582755556,
+        "decode_dispatches": {
+          "PROGRAM:CL": 1032
+        },
+        "gpu_frequency_snapshots_hz": [
+          1000000000
+        ]
+      },
+      "optimized": {
+        "ttft_ms": 12415.180561132729,
+        "prefill_proxy_tps": 10.309958793569217,
+        "decode_tps": 2.868373309009262,
+        "decode_dispatches": {
+          "PROGRAM:CL": 1032
+        },
+        "gpu_frequency_snapshots_hz": [
+          1000000000
+        ]
+      },
+      "initial_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-cl-baseline.json",
+      "optimized_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-prefill-policy-cl-baseline.json",
+      "optimized_report_sha256": "e8ee873d89634acf61812787ca61eba641f36653aa206593b7b0940e127ec1ac",
+      "comparison": {
+        "baseline_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-cl-baseline.json",
+        "candidate_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-prefill-policy-cl-baseline.json",
+        "matched_all_64_greedy_ids": true,
+        "ttft_ratio": 5.0998374913864915,
+        "decode_ratio": 0.9963580179869742,
+        "faster_both_local_medians": false,
+        "decode_dispatches_initial": {
+          "PROGRAM:CL": 1032
+        },
+        "decode_dispatches_candidate": {
+          "PROGRAM:CL": 1032
+        },
+        "rkllm_quality_qualified": false
+      },
+      "qualified_rkllm_win": false
+    },
+    {
+      "model": "Gemma3n",
+      "size": "2B",
+      "initial": {
+        "ttft_ms": 71678.78386285156,
+        "prefill_proxy_tps": 1.7857445830123468,
+        "decode_tps": 2.2240546092126787,
+        "decode_dispatches": {
+          "PROGRAM:CL": 1287
+        },
+        "gpu_frequency_snapshots_hz": [
+          700000000,
+          1000000000
+        ]
+      },
+      "optimized": {
+        "ttft_ms": 15495.510550914332,
+        "prefill_proxy_tps": 8.260457090421406,
+        "decode_tps": 2.2155859609166995,
+        "decode_dispatches": {
+          "PROGRAM:CL": 1287
+        },
+        "gpu_frequency_snapshots_hz": [
+          400000000,
+          1000000000
+        ]
+      },
+      "initial_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma3n-e2b-cl-baseline.json",
+      "optimized_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma3n-e2b-prefill-policy-cl-baseline.json",
+      "optimized_report_sha256": "b26327ab594fe1d48f6563b33eb8bc2a5539da5b4551cb43b903c081312cb2c6",
+      "comparison": {
+        "baseline_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma3n-e2b-cl-baseline.json",
+        "candidate_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma3n-e2b-prefill-policy-cl-baseline.json",
+        "matched_all_64_greedy_ids": true,
+        "ttft_ratio": 4.625777487442778,
+        "decode_ratio": 0.9961922480406283,
+        "faster_both_local_medians": false,
+        "decode_dispatches_initial": {
+          "PROGRAM:CL": 1287
+        },
+        "decode_dispatches_candidate": {
+          "PROGRAM:CL": 1287
+        },
+        "rkllm_quality_qualified": false
+      },
+      "qualified_rkllm_win": false
+    },
+    {
+      "model": "ChatGLM3",
+      "size": "6B",
+      "initial": {
+        "ttft_ms": 300759.87745588645,
+        "prefill_proxy_tps": 0.4255886825155866,
+        "decode_tps": 1.5068216586502508,
+        "decode_dispatches": {
+          "PROGRAM:CL": 625
+        },
+        "gpu_frequency_snapshots_hz": [
+          300000000,
+          1000000000
+        ]
+      },
+      "optimized": {
+        "ttft_ms": 35476.75130702555,
+        "prefill_proxy_tps": 3.6079966537029513,
+        "decode_tps": 1.3941524804765768,
+        "decode_dispatches": {
+          "PROGRAM:CL": 625
+        },
+        "gpu_frequency_snapshots_hz": [
+          300000000,
+          800000000,
+          1000000000
+        ]
+      },
+      "initial_report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-fileloadfix-cl-baseline.json",
+      "optimized_report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-prefill-policy-cl-baseline.json",
+      "optimized_report_sha256": "81e1606644671d80fb4c159121a1d6807c5f78df268044e0e4a4f518f8d5a200",
+      "comparison": {
+        "baseline_report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-fileloadfix-cl-baseline.json",
+        "candidate_report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-prefill-policy-cl-baseline.json",
+        "matched_all_64_greedy_ids": true,
+        "ttft_ratio": 8.477661183038657,
+        "decode_ratio": 0.9252272639387209,
+        "faster_both_local_medians": false,
+        "decode_dispatches_initial": {
+          "PROGRAM:CL": 625
+        },
+        "decode_dispatches_candidate": {
+          "PROGRAM:CL": 625
+        },
+        "rkllm_quality_qualified": false
+      },
+      "qualified_rkllm_win": false
+    }
+  ]
+}

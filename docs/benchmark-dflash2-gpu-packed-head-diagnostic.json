@@ -1,0 +1,173 @@
+{
+  "kind": "GPU-only shared packed-head trained diagnostic v9",
+  "status": "complete_diagnostic_without_formal_speed_win",
+  "complete": true,
+  "recorded_utc": "2026-10-23T01:54:37.274367+00:00",
+  "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-dflash2-probe-v9.json",
+  "raw_sha256": "17dcd2b392eb37cad66ca44b411e1edc98c0c764209d540f864ab6b9096928ba",
+  "natural_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/natural-spec-workloads-v9.json",
+  "natural_report_sha256": "32468e2ce9e9a3166306bfcad47e972d2f7a2f24a918d56dcc0acbbff7f76c87",
+  "source_cohort": {
+    "measured_probe_sha256": "4b92b99984984818784f9fc2a72628ecb872cbe38a135530077ad498872dde23",
+    "all_sources_canonical_sha256": "ccc49e5fc19736294e244ca292181c6ca308754cdfbb1a5451788943bad06e2e",
+    "full_source_hashes_location": "Pinned raw report; no copied IDs/clocks/traces.",
+    "selected_measured_source_sha256": {
+      "tinygrad/llm/kernels/mali.py": "c72be1279a1e8ef63adf9de0239bcb32878980cf0b82eac483c4a6141f22f10e",
+      "tinygrad/llm/kernels/mali_linear.py": "92bcdb928795e57cc63392d551cb2bac9b3516afab94c37d720c45ffc3120417",
+      "tinygrad/llm/dflash2.py": "fc51f5ae3ef155c5f7df20f4a8d8ee2459aeda237691fab17479d8afae7d39ef",
+      "tinygrad/llm/speculative.py": "c9ff4f4e37b643d72efcdd02e03153763d427b70b1f23f1d76bacd444574b366"
+    },
+    "v8_reference_raw": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-dflash2-probe-v8.json",
+    "v8_reference_sha256": "d863a44951120796a584f9c244296b14d52c2e763872768011714d3ada91aad3",
+    "v8_mali_source_sha256": "060d606c56b995de2eb3f433322bcc9365917baaed999d5131d5fd4b5a88607a",
+    "scope": "Measured v9 cohort only; v8 historical Mali source and later API/current edits remain distinct.",
+    "measured_mali_source_sha256": "c72be1279a1e8ef63adf9de0239bcb32878980cf0b82eac483c4a6141f22f10e"
+  },
+  "preflight_attempts": {
+    "original_v9": {
+      "status": "failed_before_unload",
+      "reason": "System Python 3.10 versus venv Python 3.12 AST-hash metadata mismatch.",
+      "job_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-probe-job-v9.json",
+      "job_sha256": "ebcbccab366919ddc5176d374c13792f124f3e147b69e83dc194a4b6e11fb6c9",
+      "before_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sessions-before-trained-probe-v9.json",
+      "failed_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-probe-job-v9-failed.json",
+      "raw_log_natural_created": false,
+      "observed_error": "MaliLinear execution class differs from the qualified head-micro cohort"
+    },
+    "retry1": {
+      "status": "complete_restored",
+      "runtime_interpreter": "3.12.12 (main, Jan 13 2026, 17:36:14) [Clang 21.1.4 ]",
+      "same_interpreter_old_new_ast_equal": true,
+      "child_program_sha256": "4b92b99984984818784f9fc2a72628ecb872cbe38a135530077ad498872dde23",
+      "wrapper_sha256": "908d616ab887c07643ac9b9fd715f440d151acd5529595eb22a0b0e5659d69d3",
+      "old_source_whole_file_sha256": "060d606c56b995de2eb3f433322bcc9365917baaed999d5131d5fd4b5a88607a",
+      "new_source_whole_file_sha256": "c72be1279a1e8ef63adf9de0239bcb32878980cf0b82eac483c4a6141f22f10e",
+      "runtime_AST_sha256": "8240f08011d03c6dd89bb9c684a874c79d0c5b175694111f79addafa5ad4e88f",
+      "mandatory_pin_maps_location": "Pinned parent source_pins_before/source_pins_after; equal, retained as mandatory gates.",
+      "before_after_numerical_file_pins_unchanged": true
+    }
+  },
+  "configuration": {
+    "compute_device": "CL",
+    "context": 512,
+    "input_tokens": 128,
+    "pack_output_requested": true,
+    "pack_output_default": false,
+    "api_enabled": false,
+    "npu_compute_requested": false,
+    "original_npu_worker_preserved": true,
+    "target_draft_share_one_packed_head": true,
+    "no_ROCKCHIP_device_opened": true
+  },
+  "strict_gate": {
+    "complete": true,
+    "expected_counts_per_engine": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "ordinary_counts": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "speculative_counts": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "exact_ids_match_reference": true,
+    "exact_ids_match_between_engines": true
+  },
+  "strict_total_seconds": {
+    "last_8_ordinary": 10.032051242887974,
+    "last_8_speculative": 13.463786866050214,
+    "single_64_ordinary": 33.507822080980986,
+    "single_64_speculative": 63.17553271492943
+  },
+  "natural_fixed_32": {
+    "complete": true,
+    "completed_pairs": 3,
+    "ignore_eos": true,
+    "counting": {
+      "ordinary_seconds": 20.062080601928756,
+      "speculative_seconds": 22.364633422112092,
+      "exact_ids_equal": true
+    },
+    "short_code": {
+      "ordinary_seconds": 20.085272158961743,
+      "speculative_seconds": 32.91862474405207,
+      "exact_ids_equal": true
+    },
+    "explanation": {
+      "ordinary_seconds": 20.090406297007576,
+      "speculative_seconds": 48.12445627292618,
+      "exact_ids_equal": true
+    }
+  },
+  "protocol_and_cost_scope": {
+    "ordinary_short_draft_resident": true,
+    "v8_ordinary_short_was_before_draft_residency": true,
+    "residency_difference_limits_cross_version_comparison": true,
+    "request_totals_include_final_sync_and_iterator_cleanup": true,
+    "load_and_packing_outside_request_totals": true,
+    "capture_and_compilation_included": true,
+    "formal_warmed_speed_qualification": false,
+    "completed_answer_latency_measured": false,
+    "setup_scope": "Unlike v7, the draft is resident before the first ordinary cohort; output packing precedes all target/draft JIT capture.",
+    "decode_policy": "Single-row Mali GEMV still uses the unchanged original weight; the packed copy serves multirow GEMM."
+  },
+  "memory_setup_cleanup": {
+    "packed_head_bytes": 1017118720,
+    "packed_head_copy_count": 1,
+    "packing_seconds": 0.7673048858996481,
+    "model_peak_rss_bytes": 8469671936,
+    "process_peak_rss_bytes": 8622792704,
+    "trace_workspace_bytes": 155860992,
+    "cleanup_seconds": 0.050210896180942655,
+    "cleanup_complete": true,
+    "orphan_process_count": 0,
+    "packed_output_released": true,
+    "memory_return_scope": "Freed allocation caches may retain scratch until process exit; no immediate return is claimed.",
+    "target_load_seconds": 17.9224982149899,
+    "draft_load_seconds": 26.434812737861648
+  },
+  "restoration": {
+    "parent_job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-probe-job-v9-retry1.json",
+    "parent_job_sha256": "89f0cf2c003b525b66d5497e9953f662451ba0af840ae6f258cfd74b190cdb2e",
+    "child_exit_code": 0,
+    "parent_complete": true,
+    "parent_restored": true,
+    "original_ids_profiles_full_options_selection_settings_preserved": true,
+    "npu_worker_never_unloaded": true,
+    "supplemental_recovery_report": null,
+    "supplemental_recovery_sha256": null,
+    "original_failed_job_preserved": true,
+    "serving_verification_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/post-v9-serving-verification.json",
+    "serving_verification_sha256": "873d990e74b4a2daa9d901add2e891dcb44487396f39317328f9589b5f01050f"
+  },
+  "qualification": {
+    "trained_gpu_packing_output_gate_passed": true,
+    "broad_output_quality_qualified": false,
+    "model_max_context_qualified": false,
+    "published_rkllm_win_claimed": false,
+    "api_promotion": false
+  },
+  "publication_gates": {
+    "raw_terminal_and_pins_verified": true,
+    "strict_and_all_three_natural_gates_passed": true,
+    "restoration_and_serving_verified": true
+  },
+  "limits": [
+    "Every v9 whole-request pair remains slower than ordinary; exact diagnostic IDs do not establish broad quality or formal wins.",
+    "Preserve the original metadata-preflight failure; no unload or model run occurred in that attempt.",
+    "V9 ordinary-short draft residency differs from v8; report that context instead of attributing all timing changes to packing.",
+    "Both FP16/FP32-input packed-head micros are separately pinned by raw v9; projection results alone do not qualify trained performance.",
+    "Fixed 32/EOS-ignored natural output is not completed-answer latency.",
+    "Keep v8 historical Mali source 060d separate from the new candidate; pack_output stays default False/API-off.",
+    "Pin raw details rather than duplicating token IDs, clocks or trace rows; link the final compact digest only after its final write."
+  ]
+}

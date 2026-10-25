@@ -1,0 +1,139 @@
+{
+  "updated_utc": "2026-10-22T06:02:46.439104+00:00",
+  "model": "RWKV7",
+  "size": "1.5B",
+  "full_model_baseline_complete": true,
+  "implemented": [
+    "Biased LayerNorm for token embeddings, block inputs and output",
+    "Shared first-layer value residual mixing",
+    "RWKV7 decay, in-context correction and FP32 matrix-state update",
+    "Per-head GroupNorm and output gate correction",
+    "Token-shifted squared-ReLU channel mixing",
+    "Recurrent reset and exact-prefix-only state reuse",
+    "Longest-byte-prefix tokenizer with escaped GGUF byte vocabulary"
+  ],
+  "checks": {
+    "targeted_regression": {
+      "passed": 44,
+      "subtests_passed": 22,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/rwkv7-regression.log"
+    },
+    "rwkv_generation_and_cache": {
+      "passed": 4,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/rwkv7-generation-tests.log"
+    },
+    "tokenizer_equivalence": {
+      "passed": true,
+      "cases": 95,
+      "failures": [],
+      "vocab_sha256": "e6dee3d4e31b4d5c40ac99508ac6c701ceef4bed681bf2167ce9a908552bca89",
+      "reference": "Official pinned HF TRIE/RWKV_TOKENIZER classes with literal-data parser; canonical AddedToken 0 wrapper"
+    },
+    "mypy": {
+      "passed": true,
+      "source_files": 242,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/rwkv7-mypy.log"
+    },
+    "ruff": {
+      "passed": true,
+      "scope": "whole tinygrad checkout"
+    },
+    "tokenizer_report_regression": {
+      "passed": 37,
+      "subtests_passed": 31,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/rwkv7-tokenizer-report-regression.log"
+    },
+    "distinct_test_union": {
+      "tests": 68,
+      "note": "31 model checks plus 37 tokenizer/report/download checks, verified in overlapping targeted runs; not a single full-suite run."
+    },
+    "live_api_recovery": {
+      "passed": true,
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/api-after-spark26.json"
+    }
+  },
+  "gpu_mode": "Ordinary OpenCL body; prepared embedding/output head. Prepared body projections remain disabled after assignment-order/scheduling verification failures.",
+  "prefill": "One-token generic prompt fallback; actual chunk size is recorded in the benchmark report.",
+  "quality_status": "Small independent decoder checks pass; full-model baseline recorded; full-model and matched RKLLM output-quality qualification pending.",
+  "source_evidence": [
+    {
+      "url": "https://raw.githubusercontent.com/BlinkDL/RWKV-LM/main/RWKV-v7/rwkv_v7_demo_fast.py",
+      "sha256": "0098fddd68ba5a05c9f48a131837ed305b833d024723bf4fad27882b699c4334"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/fla-org/flash-linear-attention/main/fla/layers/rwkv7.py",
+      "sha256": "c127576063d46d5f454418bb2530cdc8d0e9767906c06241c921536f3a12ad5d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/rwkv.py",
+      "sha256": "0d9c40c1966c5eff5f90c088c42bd7e36ad0a9d789d558b9069d0209743a057e"
+    },
+    {
+      "url": "https://huggingface.co/RWKV/RWKV7-Goose-World3-1.5B-HF/resolve/7e046eaf58c0cfec2da891f86220d4037cbacd44/hf_rwkv_tokenizer.py",
+      "sha256": "aaca5e6a0f56d043ca1654e9dcaf906fcf3c0e03b5172863ad75060e8685a10e"
+    }
+  ],
+  "intent": [
+    "INTENT: the downloader stops after one pass; the campaign needs retries after connection failures; its docstring promises verified, resumable artifacts.",
+    "INTENT: the generic decoder cannot run RWKV7; its benchmark row needs recurrent time and channel mixing; the published implementation defines those state updates and normalization rules."
+  ],
+  "twin_search": {
+    "patterns": [
+      "else pack_weight",
+      "pack_weight(weight)",
+      "pool.map(lambda row:fetch"
+    ],
+    "sites": [
+      "extra/rockchip/fetch_benchmark_checkpoints.py:129"
+    ],
+    "note": "The sole remaining pool.map is the intentional per-pass scheduler; the unrequested per-call GEMM packing fallback was removed."
+  },
+  "pending": [
+    "Implement a qualified prepared recurrent GPU body and bulk prefill",
+    "Measure optional NPU placement and output quality against actual W8A8 reference"
+  ],
+  "test_memory_incident": {
+    "worker": "GPU Qwen3-0.6B 40960 context",
+    "killed_pid": 3127907,
+    "kernel_time": "2026-10-21 22:35:26 Asia/Shanghai",
+    "reason": "Global OOM while regression tests ran alongside serving workers",
+    "correction": "Unload serving workers before further hardware measurements; restore saved options afterward",
+    "recovery_verified": true,
+    "recovery_report": "/home/orangepi/vlm-bench/baseline-20261021/api-after-spark26.json"
+  },
+  "baseline": {
+    "context": 512,
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "warmups": 3,
+    "runs": 3,
+    "ttft_ms": 160077.03708601184,
+    "prefill_proxy_tps": 0.7996149999404577,
+    "decode_tps": 0.8042997006634768,
+    "peak_rss_mib": 6501.56640625,
+    "device": "CL",
+    "precision": "FP16",
+    "placement": null,
+    "gpu_kernels": {
+      "linear_layers": 1,
+      "bounded_masks": 0,
+      "attention_blocks": 0,
+      "direct_embedding": true,
+      "prefill_chunk": 128,
+      "fused_qkv": 0,
+      "fused_gate_up": 0,
+      "q8_output_head": false,
+      "pack_weights": false,
+      "generic_recurrent_blocks": 24
+    },
+    "checkpoint_sha256": "dfad28509a04d6ea719f441834fa33b1f53ef5471e927a7bcae847894ff07d1c",
+    "input_sha256": "7278092b3df5529b86c0355c6461fb7df2878d9f44630c1c5344eb6965bde1b9",
+    "qualified_win": false,
+    "quality_status": "not qualified against matched level-0 RKLLM",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/rwkv7-1.5b-cl-baseline.json",
+    "report_sha256": "81b80a258c599b6dceea24bdd844ba9f4469a3099112b1d69d05b6f52e7d0bff"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "omlx-eagle-selected-doc-refresh-v48",
+  "checked_utc": "2026-10-25T08:11:16.737290+00:00",
+  "manifest": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/upstream-check-v48/manifest.json",
+  "manifest_sha256": "86aa21c86c305c3e93252264255fa40d322be0d56205179e4ca571a0f80462ea",
+  "repositories": {
+    "omlx": {
+      "repo": "jundot/omlx",
+      "api_head_url": "https://api.github.com/repos/jundot/omlx/commits/HEAD",
+      "head_sha": "78fa08bc1aef7290c93c83bb70811547763ebf33",
+      "prior_ref": "98de1482882fe22edd1310a0c428bddd94b9f006",
+      "head_changed": true,
+      "documents": {
+        "README.md": {
+          "url": "https://raw.githubusercontent.com/jundot/omlx/78fa08bc1aef7290c93c83bb70811547763ebf33/README.md",
+          "status": "ok",
+          "bytes": 25589,
+          "sha256": "616fe46a467e8930aebf1e1480a5c30cb8d7b300f1c18243c3d16749e816784a",
+          "saved_as": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/upstream-check-v48/omlx/README.md"
+        },
+        "docs/experimental/dflash_mlx_integration.md": {
+          "url": "https://raw.githubusercontent.com/jundot/omlx/78fa08bc1aef7290c93c83bb70811547763ebf33/docs/experimental/dflash_mlx_integration.md",
+          "status": "ok",
+          "bytes": 5734,
+          "sha256": "e149ab3cf4edde708ca603767431a488fdef543bcc1fe5ddfd1477dc792c01b9",
+          "saved_as": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/upstream-check-v48/omlx/docs/experimental/dflash_mlx_integration.md"
+        }
+      }
+    },
+    "EAGLE-4": {
+      "repo": "eagle-hq/EAGLE-4",
+      "api_head_url": "https://api.github.com/repos/eagle-hq/EAGLE-4/commits/HEAD",
+      "head_sha": "60bab6b469e795d47bda82b16243b82bb7b6206f",
+      "prior_ref": "60bab6b469e795d47bda82b16243b82bb7b6206f",
+      "head_changed": false,
+      "documents": {
+        "README.md": {
+          "url": "https://raw.githubusercontent.com/eagle-hq/EAGLE-4/60bab6b469e795d47bda82b16243b82bb7b6206f/README.md",
+          "status": "ok",
+          "bytes": 10341,
+          "sha256": "871ce17ed541a9020b8ec132e08a4cb21ac5a5f217d579c470d76889a6d11a94",
+          "saved_as": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/upstream-check-v48/EAGLE-4/README.md"
+        },
+        "docs/support-matrix.md": {
+          "url": "https://raw.githubusercontent.com/eagle-hq/EAGLE-4/60bab6b469e795d47bda82b16243b82bb7b6206f/docs/support-matrix.md",
+          "status": "ok",
+          "bytes": 33788,
+          "sha256": "c90369fc2e6d305ba929d76513d152cb410b91654127b87ff244a21e11f7f087",
+          "saved_as": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/upstream-check-v48/EAGLE-4/docs/support-matrix.md"
+        }
+      }
+    }
+  },
+  "scope": "Selected official pages and commit metadata; no full head code audit, upstreamengine execution or globalcheckpointabsence claim.",
+  "facts": {
+    "omlx": "Current selected docs describe standard text/VLM batched engines, scheduler/continuousbatching andsharedpagedhotRAM/SSDprefixcache; Qwen3.5families concurrentrows. ExternalDFlash L1/L2cacheengine settings removed.",
+    "onpu_gaps": [
+      "Continuousbatching withinone model",
+      "Sharedpaged RAM/SSD prefixcache",
+      "Moretrainedpairs andmodel-maximumqualification",
+      "Broader Responses/structured/speech/multimodal API coverage"
+    ],
+    "eagle4": "Inspectedmatrix at60bab6b lists no matchedsmallQwen3.5-2Bpair. Thisdoesnotestablishglobalcheckpointabsence; oNPUimplementsDFlash2distincttrainedweights."
+  }
+}

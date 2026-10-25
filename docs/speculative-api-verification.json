@@ -1,0 +1,108 @@
+{
+  "kind": "Isolated live experimental DFlash2 HTTP verification",
+  "complete": true,
+  "updated_utc": "2026-10-22T21:55:52.921072+00:00",
+  "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/speculative-http-probe.json",
+  "raw_sha256": "03445389079c9bae0c4ccb5c3c04d18572261417d1f2c433d3f942710510e2a4",
+  "restoration_job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/speculative-http-job.json",
+  "restoration_job_sha256": "48ebbaf177094378ba42824e6c80401fb6d0a40cb3d3eb5b8e0f4bcc91f2f813",
+  "scope": {
+    "base_url": "http://127.0.0.1:8092",
+    "profile": "CL",
+    "context": 512,
+    "mode": "dflash2-experimental",
+    "greedy_only": true,
+    "target": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Qwen3.5-2B/Qwen3.5-2B-Q8_0.gguf",
+    "draft": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/DFlash2-Qwen3.5-2B",
+    "prompt_tokens": 21,
+    "greedy_output_tokens": 8,
+    "primary_port_8091_restarted": false,
+    "primary_service_scope": "Existing process kept its running binary; this verification used a fresh isolated server."
+  },
+  "checks": {
+    "load_and_ready": {
+      "passed": true,
+      "reported_mode": "dflash2-experimental"
+    },
+    "nonstream_greedy": {
+      "passed": true,
+      "text": "One, two, three, four,",
+      "generation_mode": "dflash2-experimental",
+      "total_seconds": 54.63947786297649,
+      "first_token_ms": 37267.678959993646
+    },
+    "sse_greedy": {
+      "passed": true,
+      "text": "One, two, three, four,",
+      "same_as_nonstream": true,
+      "done_observed": true,
+      "first_content_seconds": 13.37146649393253,
+      "total_seconds": 17.95553971384652,
+      "timing_scope": "Elapsed interval recorded by the streaming helper; phase-event interval also includes surrounding bookkeeping."
+    },
+    "sampled_fallback": {
+      "passed": true,
+      "temperature": 0.6,
+      "output_tokens": 2,
+      "generation_mode": "ordinary"
+    },
+    "post_cancel_recovery": {
+      "passed": true,
+      "generation_mode": "ordinary",
+      "text": "One,"
+    },
+    "owned_server_shutdown": {
+      "passed": true,
+      "left_orphans": []
+    },
+    "original_sessions_restored": {
+      "passed": true,
+      "probe_exit_code": 0,
+      "sessions": [
+        {
+          "model_id": "b4b92c783d8643a1",
+          "state": "ready"
+        },
+        {
+          "model_id": "55a95dc3c1b93b72",
+          "state": "ready"
+        }
+      ]
+    },
+    "stop_with_stream_open": {
+      "passed": true,
+      "error": "Generation stopped",
+      "done_observed": true,
+      "worker_ready_while_stream_open": true,
+      "cancelled_before_disconnect": true,
+      "request_scope_verified": false,
+      "scope_note": "The original probe sent model/request_id in the JSON body, while the stop endpoint binds query parameters. This proves Stop for the selected worker with the stream open, not request-scoped routing."
+    }
+  },
+  "assertion_evidence": {
+    "program": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/probe-speculative-http.py",
+    "stream_contract": "The probe requires [DONE], requires the Generation stopped error for Stop, and checks worker readiness before leaving the open response context.",
+    "recorded_probe_program_sha256": "eb82f8da12e3d5524371575ae8f094857089e641c4eb3bdfced7c84e83b1048a"
+  },
+  "source_sha256": {
+    "/home/orangepi/oNPU/onpu/app.py": "1894022b309683cbfbd806c3f31515a8be5e68be4c550bf3f93905358392dbac",
+    "/home/orangepi/oNPU/onpu/runtime.py": "2faf00b19480df91149ab8de418509ce3f47deac08464f55d3e78ba8ab752e0f",
+    "/home/orangepi/oNPU/onpu/speculation.py": "13ea5a35d17dd358d8b0f793395ac1174ba11b3493be9e918b282c5c20b1e809",
+    "/home/orangepi/oNPU/onpu/worker.py": "8db958e44fdd39f279905d48c35a30a0415109451392abe421af4d742dbdeb4a",
+    "/home/orangepi/tinygrad/tinygrad/llm/dflash2.py": "8191fb9fa02b29942843bf4251e19bc768536134b9258b7c1b9e1ff557b01654",
+    "/home/orangepi/tinygrad/tinygrad/llm/dflash2_config.py": "f46fda13e52e26ff9fe7bfeb40d56c5f0f7536424358b4e4bc16bee3ef745a5d",
+    "/home/orangepi/tinygrad/tinygrad/llm/dflash2_selector.py": "dd90b4f2f7357cc2f80eb24e202f991c90f34bfefa90472c23f2d1151d312071",
+    "/home/orangepi/tinygrad/tinygrad/llm/speculative.py": "80009b873fc37f0d83002f959f156c67704717f3c8c88a5c458215917429b07e"
+  },
+  "benchmark_qualification": false,
+  "speed_win_claimed": false,
+  "limits": [
+    "One pinned Qwen3.5-2B pair at context512 and one short prompt; not model-maximum context or representative quality qualification.",
+    "Compilation/capture and request-order effects are included; HTTP timings are diagnostics, not a formal ordinary-versus-speculative benchmark.",
+    "No published RKLLM speed win or comparable-quality certification is established by this API check.",
+    "Sampled requests use ordinary fallback; trained sampled speculation is not implemented.",
+    "The mode remains opt-in/default-off, with no automatic measured API cost router.",
+    "Original Stop request identifiers were sent in JSON rather than query parameters, so request scope was not tested; selected-worker Stop while open and recovery passed."
+  ],
+  "source_hashes_scope": "Historical HTTP-test cohort captured by the raw report. These hashes were checked when the initial compact record was written; evolving current source is not implied to match."
+}

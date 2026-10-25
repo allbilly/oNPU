@@ -1,0 +1,156 @@
+{
+  "updated_utc": "2026-10-22T15:45:04.571841+00:00",
+  "model": "Qwen3-0.6B",
+  "device": "CPU+Rockchip NPU",
+  "precision": "dynamic W8A8 projections, INT32 accumulation, FP32 host operations",
+  "workload": {
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "context": 512,
+    "warmups_per_setting": 5,
+    "measured_runs_per_setting": 3,
+    "fresh_history": true,
+    "eos_ignored": true
+  },
+  "measurements": [
+    {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen3-copy-borrow-off-timing.json",
+      "sha256": "ada69be4634a9cbaa29355da57a5aa399db14a2bc3a2a29973cc2e85fed43a5c",
+      "checkpoint_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+      "borrow_outputs_enabled": false,
+      "profiling": false,
+      "median_first_token_ms": 225.14962498098612,
+      "prefill_proxy_tps": 568.51082923549,
+      "median_decode_tps": 34.21389932166399,
+      "copy_sites": {
+        "prefill": {
+          "direct_inputs": 29,
+          "borrowed_outputs": 0
+        },
+        "decode": {
+          "direct_inputs": 28,
+          "borrowed_outputs": 0
+        }
+      }
+    },
+    {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen3-copy-borrow-off-profile.json",
+      "sha256": "d92bda454517c3448a5ff472bcc7faca030f4ab716e936c5e5763459480414f0",
+      "checkpoint_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+      "borrow_outputs_enabled": false,
+      "profiling": true,
+      "median_first_token_ms": 226.4174830634147,
+      "prefill_proxy_tps": 565.327369018363,
+      "median_decode_tps": 32.97038193882379,
+      "copy_sites": {
+        "prefill": {
+          "direct_inputs": 29,
+          "borrowed_outputs": 0
+        },
+        "decode": {
+          "direct_inputs": 28,
+          "borrowed_outputs": 0
+        }
+      }
+    },
+    {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen3-copy-borrow-on-timing.json",
+      "sha256": "327bf56e6525ce8badc2b99a7a310872c4095d5500e7c708bffb580f820d636c",
+      "checkpoint_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+      "borrow_outputs_enabled": true,
+      "profiling": false,
+      "median_first_token_ms": 224.05151510611176,
+      "prefill_proxy_tps": 571.2971855574315,
+      "median_decode_tps": 34.41509757622518,
+      "copy_sites": {
+        "prefill": {
+          "direct_inputs": 29,
+          "borrowed_outputs": 0
+        },
+        "decode": {
+          "direct_inputs": 28,
+          "borrowed_outputs": 0
+        }
+      }
+    },
+    {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen3-copy-borrow-on-profile.json",
+      "sha256": "1d90c4219c800a270a560f3a159d21348b5607e6940e35ae8b82b2642444fd47",
+      "checkpoint_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+      "borrow_outputs_enabled": true,
+      "profiling": true,
+      "median_first_token_ms": 226.40056582167745,
+      "prefill_proxy_tps": 565.3696117562628,
+      "median_decode_tps": 33.21256809670251,
+      "copy_sites": {
+        "prefill": {
+          "direct_inputs": 29,
+          "borrowed_outputs": 0
+        },
+        "decode": {
+          "direct_inputs": 28,
+          "borrowed_outputs": 0
+        }
+      }
+    }
+  ],
+  "all_64_measured_ids_match": true,
+  "optimization": "Borrow read-only private NPU outputs for an adjacent sole CPU consumer; retain FROM_DEVICE driver synchronization.",
+  "correctness_checks": {
+    "updated_utc": "2026-10-22T15:38:02.365306+00:00",
+    "checks": {
+      "replay_tests": true,
+      "int8_replay_tests": true,
+      "fp16_replay_tests": true,
+      "mypy": true,
+      "ruff": true
+    },
+    "logs": {
+      "replay_tests": "/home/orangepi/vlm-bench/baseline-20261021/copy-borrow-replay-tests.log",
+      "int8_replay_tests": "/home/orangepi/vlm-bench/baseline-20261021/copy-borrow-int8-tests.log",
+      "fp16_replay_tests": "/home/orangepi/vlm-bench/baseline-20261021/copy-borrow-fp16-tests.log",
+      "mypy": "/home/orangepi/vlm-bench/baseline-20261021/copy-borrow-mypy.log",
+      "ruff": "/home/orangepi/vlm-bench/baseline-20261021/copy-borrow-ruff.log"
+    },
+    "source_sha256": {
+      "tinygrad/llm/kernels/rockchip_replay.py": "065bd58c7e596c6cedeb07d74cdb1b8c085adc10265c8b4941cc80d7cbd27447",
+      "extra/rockchip/benchmark_inference.py": "5d17844684f5ee71d51d0c31e50a6196a088ad13d117d30abe2bbb7e9152efe8",
+      "test/runtime/test_rockchip_replay.py": "1c2ba1c56f6e0b323ca9b056763299df8b45cfe99022dd40793d15d8608919b9"
+    },
+    "intent": "INTENT: Native replay copies private NPU results into CPU scratch buffers before CPU-only readers; borrow the mapped result for an immediately following sole reader while preserving driver synchronization and fallback guards.",
+    "twin_search": "TWINS: searched scratch-copy lifetime guards - found 1 other site: tinygrad/llm/kernels/rockchip_replay.py input upload aliases; tightened matching-range checks, while output borrowing additionally requires a full COPY overwrite.",
+    "verified": [
+      "Hardware numerical comparison against NumPy and exact bits against copying replay",
+      "Dynamic inputs and scalar positions",
+      "Returned CPU tensors retain materialized storage",
+      "Multiple readers retain copies",
+      "Partial writes retain copies and preserve the unwritten suffix",
+      "Scratch release and native replay rewarming",
+      "Existing INT8 finite guards and recovery",
+      "Existing FP16 packed-weight mutation fallback",
+      "Driver FROM_DEVICE synchronization remains present"
+    ],
+    "performance_pending": true,
+    "rkllm_quality_qualified": false
+  },
+  "current_source_sha256": {
+    "tinygrad/llm/kernels/rockchip_replay.py": "8f3a5e3cd585028d850a178a21113fb34eaf06a8be6e3507fe5fa836fdb5d6e0",
+    "extra/rockchip/benchmark_inference.py": "5d17844684f5ee71d51d0c31e50a6196a088ad13d117d30abe2bbb7e9152efe8",
+    "test/runtime/test_rockchip_replay.py": "a031ea4b76c63737897a9cadf59c18740f7cb06630ea8aaa9c71fac461028008"
+  },
+  "configuration_change_after_hardware_tests": "Default changed from enabled to disabled. The explicit enabled and disabled arithmetic branches were both hardware-tested before this configuration-only change. The negative test class now enables the option explicitly. Mypy and Ruff passed afterward.",
+  "default_enabled": false,
+  "experimental_environment": "ONPU_REPLAY_BORROW_OUTPUTS=1",
+  "performance_conclusion": "No attributable speed gain. All captured Qwen3 graphs report zero borrowed output copies. Small timing differences are treated as variation.",
+  "rkllm_quality_qualified": false,
+  "rkllm_both_phase_win": false,
+  "next_action": "Inspect full-model output-copy lifetime exclusions before changing any borrowing guard.",
+  "cpu_clock_change": false,
+  "serving_restoration": {
+    "complete": true,
+    "ready_idle_sessions": 2,
+    "settings_restored": true,
+    "selection_restored": true,
+    "snapshot": "/home/orangepi/vlm-bench/baseline-20261021/sessions-after-copy-borrow.json"
+  }
+}

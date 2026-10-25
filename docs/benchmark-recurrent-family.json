@@ -1,0 +1,315 @@
+{
+  "updated_utc": "2026-10-22T17:19:07.463688+00:00",
+  "complete_measured_models": 3,
+  "workload": {
+    "context": 512,
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "warmups_per_model": 3,
+    "measured_runs_per_model": 3,
+    "greedy": true,
+    "fresh_history": true,
+    "eos_ignored": true
+  },
+  "models": [
+    {
+      "size": "0.8b",
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-0.8b-mali-recurrent-unpacked-cl-baseline.json",
+      "sha256": "2116ff6f8852928baee36be4de27bc6270b837965e9e4f5578894a4c79d44bbf",
+      "initial_report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-0.8b-cl-baseline.json",
+      "initial_sha256": "7186a7e3c92e6be2c5e5ce99052ca1043255de6cdbc5b4a6ae39dbe7472cfef2",
+      "checkpoint_sha256": "0ad885ffd4bb022fc4f0d33a3308fa108ef8613159d3b3a67e23abca056b7a6c",
+      "initial_ttft_ms": 41215.1083399076,
+      "candidate_ttft_ms": 2735.6940919999033,
+      "initial_prefill_proxy_tps": 3.105657249384461,
+      "candidate_prefill_proxy_tps": 46.78885712196966,
+      "initial_decode_tps": 3.1396796911995635,
+      "candidate_decode_tps": 4.543756707174523,
+      "prefill_speedup": 15.065686057675288,
+      "decode_speedup": 1.4472039042423814,
+      "all_64_greedy_ids_match": true,
+      "fused_gated_delta_blocks": 18,
+      "candidate_actual_chunk_size": 128,
+      "candidate_global_pack_weights": true,
+      "candidate_recurrent_pack_weights": false,
+      "steady_allocated_mib": 2169.95597076416,
+      "peak_rss_mib": 2466.36328125,
+      "timing_ranges_separated": {
+        "ttft": true,
+        "decode": true
+      },
+      "cpu_clock_change": false,
+      "rkllm_quality_qualified": false
+    },
+    {
+      "size": "2b",
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-2b-mali-recurrent-unpacked-cl-baseline.json",
+      "sha256": "f02062a0116f1a0fdcb7e20efc109f9b0bfe1c33fc650d3e40b85c12092fdf17",
+      "initial_report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-2b-cl-baseline.json",
+      "initial_sha256": "7d5bcba7eaa483473ed0bc139ec9c249fce99b42cad04b7c4abfe2888f83be80",
+      "checkpoint_sha256": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1",
+      "initial_ttft_ms": 101525.93007590622,
+      "candidate_ttft_ms": 7096.234050113708,
+      "initial_prefill_proxy_tps": 1.2607616586649377,
+      "candidate_prefill_proxy_tps": 18.037736508697733,
+      "initial_decode_tps": 1.2657096014327882,
+      "candidate_decode_tps": 2.398410783592172,
+      "prefill_speedup": 14.307015433669271,
+      "decode_speedup": 1.8949139525189362,
+      "all_64_greedy_ids_match": true,
+      "fused_gated_delta_blocks": 18,
+      "candidate_actual_chunk_size": 128,
+      "candidate_global_pack_weights": true,
+      "candidate_recurrent_pack_weights": false,
+      "steady_allocated_mib": 4899.02823638916,
+      "peak_rss_mib": 5208.03515625,
+      "timing_ranges_separated": {
+        "ttft": true,
+        "decode": true
+      },
+      "cpu_clock_change": false,
+      "rkllm_quality_qualified": false
+    },
+    {
+      "size": "4b",
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-4b-mali-recurrent-unpacked-cl-baseline.json",
+      "sha256": "c196513d6be41e9306212f712f7ba965996fff1dc7275705e1ff0fa262c53fb3",
+      "initial_report": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-4b-cl-baseline.json",
+      "initial_sha256": "2b4d3e7791db7231fa2a2bb9c75a21757b63b5f31424effa4bcfbb7138c4dfa5",
+      "checkpoint_sha256": "10cc391b403021dd11c614679d2fd92f611c3681d29e29651b717316965d61e1",
+      "initial_ttft_ms": 480831.2421499286,
+      "candidate_ttft_ms": 23436.570073943585,
+      "initial_prefill_proxy_tps": 0.26620566381601335,
+      "candidate_prefill_proxy_tps": 5.461550030407752,
+      "initial_decode_tps": 0.26631837984975004,
+      "candidate_decode_tps": 0.600226721438534,
+      "prefill_speedup": 20.516280353007343,
+      "decode_speedup": 2.253793830441468,
+      "all_64_greedy_ids_match": true,
+      "fused_gated_delta_blocks": 24,
+      "candidate_actual_chunk_size": 128,
+      "candidate_global_pack_weights": false,
+      "candidate_recurrent_pack_weights": false,
+      "steady_allocated_mib": 9513.160972595215,
+      "peak_rss_mib": 9830.328125,
+      "timing_ranges_separated": {
+        "ttft": true,
+        "decode": true
+      },
+      "cpu_clock_change": false,
+      "rkllm_quality_qualified": false
+    }
+  ],
+  "validation": {
+    "updated_utc": "2026-10-22T16:39:59.364136+00:00",
+    "checks": {
+      "recurrent_and_gemm_tests": true,
+      "ordinary_mali_control_tests": true,
+      "serving_options_tests": true,
+      "mypy": true,
+      "ruff": true
+    },
+    "logs": {
+      "recurrent_and_gemm_tests": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-memory-core-tests.log",
+      "ordinary_mali_control_tests": "/home/orangepi/vlm-bench/baseline-20261021/mali-current-memory-control-tests.log",
+      "serving_options_tests": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-options-tests.log",
+      "mypy": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-memory-mypy.log",
+      "ruff": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-memory-ruff.log"
+    },
+    "source_sha256": {
+      "tinygrad/llm/kernels/mali.py": "44d240625f513baf82f3162b1bdaa84a03ec61cf5ed47d711ba3c5be9e3dc7c6",
+      "tinygrad/llm/kernels/mali_recurrent.py": "1e31c56b0af245f6b5744f1e88af6662a94112169022c7d97f2a944263bd21aa",
+      "tinygrad/llm/model.py": "e617403b368e41a75d6e7dc160bd15e05e1b9dabeeecd5a707775b969e191b6d",
+      "extra/rockchip/benchmark_inference.py": "e3363dcbf488f22b292b6a5e5a75e0426cf604a734b538f129f90416e34e05b0",
+      "test/models/test_mali_recurrent.py": "9ad93c6406e8e3b245af6e9ccda7409f42a5a5772d597e87fbd502cfcb18272d"
+    },
+    "tests": {
+      "recurrent_and_gemm": 7,
+      "ordinary_controlled_startup": 9,
+      "serving_policy": 2,
+      "workers": 12
+    },
+    "intent": "INTENT: Recurrent Mali projections retain packed weight copies; serving needs the measured speed gain within memory limits; the GEMM interface already supports direct row-major weights, so use that path without changing recurrence or outputs.",
+    "twin_search": "TWINS: searched prepare_gemm and packed_weight configuration - found 3 other sites: existing projections, wrapped sources and joint projections in tinygrad/llm/kernels/mali.py; all use the same packing policy.",
+    "known_other_failure": {
+      "test": "test_mali.py::TestMaliAttention::test_two_layers_share_scratch_without_corrupting_dependent_attention",
+      "default_suite_run": "8 passed, 1 numerical mismatch; isolated test passes",
+      "controlled_previous_policy": "9 passed",
+      "controlled_current_policy": "9 passed",
+      "shared_vs_separate_gpu_workspaces": "bitwise identical in diagnostic",
+      "root_cause": "Import/order-sensitive interaction remains unresolved; no test or tolerance changed.",
+      "default_suite_log": "/home/orangepi/vlm-bench/baseline-20261021/mali-recurrent-memory-existing-tests.log",
+      "previous_control_log": "/home/orangepi/vlm-bench/baseline-20261021/mali-before-memory-existing-tests.log",
+      "current_control_log": "/home/orangepi/vlm-bench/baseline-20261021/mali-current-memory-control-tests.log"
+    },
+    "full_model_validation_pending": true,
+    "trained_speculation_implemented": false,
+    "rkllm_quality_qualified": false
+  },
+  "worker_validation": {
+    "complete": true,
+    "checks": {
+      "qualified_recurrent_policy_active": true,
+      "allocated_memory_below_previous_packed_run": true,
+      "streaming_completion": true,
+      "context_limit_rejected": true,
+      "cancellation": true,
+      "same_greedy_output_after_rejection_and_cancel": true
+    },
+    "requests": {
+      "first": {
+        "terminal": {
+          "event": "done",
+          "id": "first",
+          "metrics": {
+            "prompt_tokens": 18,
+            "cached_tokens": 0,
+            "completion_tokens": 9,
+            "ttft_ms": 2592.8340149112046,
+            "total_seconds": 4.544725727057084,
+            "decode_tps": 4.614945556237968,
+            "prefill_tps": 6.942210683940151,
+            "device": "CL",
+            "allocated_bytes": 2801103024
+          }
+        },
+        "content": "Hello! How can I help you today?",
+        "reasoning": "",
+        "chunks": 12,
+        "seconds": 4.5459460450802
+      },
+      "context-limit": {
+        "terminal": {
+          "event": "error",
+          "id": "context-limit",
+          "message": "Prompt (524 tokens) + reply limit (16) exceeds context (512). Reduce the reply limit or start a new chat.",
+          "status": 400
+        },
+        "content": "",
+        "reasoning": "",
+        "chunks": 0,
+        "seconds": 0.0029694209806621075
+      },
+      "cancel": {
+        "terminal": {
+          "event": "cancelled",
+          "id": "cancel"
+        },
+        "content": "",
+        "reasoning": "",
+        "chunks": 1,
+        "seconds": 2.5968516732100397
+      },
+      "recovery": {
+        "terminal": {
+          "event": "done",
+          "id": "recovery",
+          "metrics": {
+            "prompt_tokens": 18,
+            "cached_tokens": 0,
+            "completion_tokens": 9,
+            "ttft_ms": 2594.2687049973756,
+            "total_seconds": 4.559464916819707,
+            "decode_tps": 4.577881147464634,
+            "prefill_tps": 6.938371482231718,
+            "device": "CL",
+            "allocated_bytes": 2801103024
+          }
+        },
+        "content": "Hello! How can I help you today?",
+        "reasoning": "",
+        "chunks": 12,
+        "seconds": 4.560492736985907
+      }
+    },
+    "scope": "Qwen3.5-0.8B real worker protocol at context512; not a maximum-context or RKLLM quality qualification.",
+    "worker_pid": 199268,
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "4-7",
+      "/home/orangepi/tinygrad/.venv/bin/python",
+      "-u",
+      "-m",
+      "onpu.worker",
+      "--model",
+      "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Qwen3.5-0.8B/Qwen3.5-0.8B-Q8_0.gguf",
+      "--context",
+      "512",
+      "--realize",
+      "1"
+    ],
+    "ready": {
+      "event": "ready",
+      "device": "CL",
+      "context": 512,
+      "name": "Qwen3.5-0.8B",
+      "supports_images": false,
+      "load_seconds": 71.5023809929844,
+      "weight_bytes": 2801103024,
+      "base_device": "CL",
+      "placement": null,
+      "gpu_kernels": {
+        "linear_layers": 187,
+        "bounded_masks": 6,
+        "attention_blocks": 0,
+        "direct_embedding": true,
+        "prefill_chunk": 128,
+        "fused_qkv": 0,
+        "fused_gate_up": 0,
+        "q8_output_head": false,
+        "pack_weights": true,
+        "segmented_embedding_chunks": 0,
+        "fused_gated_delta_blocks": 18,
+        "recurrent_pack_weights": false,
+        "generic_recurrent_blocks": 0
+      },
+      "backend_path": "/home/orangepi/tinygrad"
+    },
+    "worker_returncode": 0
+  },
+  "serving_policy": {
+    "maximum_checked_context": 512,
+    "requires_realize": true,
+    "profile": "CL",
+    "npu_prefill": "off",
+    "npu_decode": "off",
+    "checkpoint_hashes": [
+      "0ad885ffd4bb022fc4f0d33a3308fa108ef8613159d3b3a67e23abca056b7a6c",
+      "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1",
+      "10cc391b403021dd11c614679d2fd92f611c3681d29e29651b717316965d61e1"
+    ],
+    "global_pack_weights": {
+      "0.8B": true,
+      "2B": true,
+      "4B": false
+    },
+    "recurrent_pack_weights": false,
+    "source_sha256": {
+      "/home/orangepi/oNPU/onpu/worker.py": "d7a3299d2a73a4d49cac0fafe7b494455e184ebe102dec113e12afd05c774ec9",
+      "/home/orangepi/oNPU/tests/test_mali_options.py": "51cdf6aecfdf70561546b2812841aeeef1712e883247bc5c7664c37786ae77a0",
+      "/home/orangepi/tinygrad/tinygrad/llm/kernels/mali.py": "44d240625f513baf82f3162b1bdaa84a03ec61cf5ed47d711ba3c5be9e3dc7c6"
+    }
+  },
+  "memory_tradeoff_0_8b": {
+    "earlier_packed_prefill_tps": 56.79494273532222,
+    "earlier_packed_allocated_mib": 2910.21,
+    "current_prefill_tps": 46.78885712196966,
+    "current_allocated_mib": 2169.95597076416,
+    "decode_tps": 4.543756707174523
+  },
+  "limits": [
+    "RKLLM matched output quality and speed qualification remain unfinished.",
+    "Maximum-context inference is not qualified by these context512 results.",
+    "The app generic RAM admission estimate can still reject larger models before the worker starts.",
+    "The existing ordinary attention test has an unresolved import/order-sensitive suite failure; controlled old/current startup runs both pass and the test is not weakened.",
+    "Trained speculative decoding is not implemented."
+  ],
+  "serving_restoration": {
+    "complete": true,
+    "ready_idle_sessions": 2,
+    "settings_restored": true,
+    "selection_restored": true,
+    "snapshot": "/home/orangepi/vlm-bench/baseline-20261021/sessions-after-mali-recurrent-family.json"
+  }
+}

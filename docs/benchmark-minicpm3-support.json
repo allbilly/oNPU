@@ -1,0 +1,129 @@
+{
+  "updated_utc": "2026-10-22T08:08:43.467168+00:00",
+  "model": "MiniCPM3",
+  "size": "4B",
+  "full_model_baseline_complete": true,
+  "full_model_quality_qualified": false,
+  "implemented": [
+    "Fused latent K/V projection splitting with transposed key projection",
+    "Value-head width inferred from the output projection",
+    "FP32 rotary-factor tensors consumed despite absent scaling.type metadata",
+    "Published embedding, residual and output scaling defaults",
+    "Preserve the original MiniCPM3 Q/K rotary layout"
+  ],
+  "checks": {
+    "cpu_regression": {
+      "passed": 13,
+      "skipped": 2,
+      "subtests_passed": 5,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/stream-minicpm3-regression.log",
+      "scope": "MiniCPM3, MiniCPM, Phi3, streamed GGUF and TeleChat2 conversion checks"
+    },
+    "opencl": {
+      "passed": 2,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/stream-minicpm3-gpu.log",
+      "scope": "MiniCPM3 full-K/V reference equations plus streamed Q8 weights and matmul on small models"
+    },
+    "actual_checkpoint_schema": {
+      "passed": true,
+      "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/MiniCPM3-4B/MiniCPM3-4B.Q8_0.gguf",
+      "checkpoint_sha256": "a7741eca9cf158d51c7a55da432b0609382b16fe9134aa7e1308f09784f56215",
+      "config": {
+        "blocks": 62,
+        "query_head_dim": 96,
+        "value_head_dim": 64,
+        "kv_lora_rank": 256,
+        "rope_factors": [
+          1.0591233968734741,
+          1.1241891384124756,
+          1.2596936225891113,
+          1.5380380153656006,
+          2.093982458114624,
+          3.144693613052368,
+          4.937952518463135,
+          7.524541854858398,
+          10.475458145141602,
+          13.062047004699707,
+          14.855306625366211,
+          15.906017303466797,
+          16.46196174621582,
+          16.740306854248047,
+          16.875810623168945,
+          16.940876007080078
+        ],
+        "embedding_scale": 12.0,
+        "residual_scale": 0.1778001778002667,
+        "logit_scale": 10.0
+      },
+      "scope": "Actual GGUF metadata, tensor shapes and rotary factors; all other weight values replaced with NULL-device tensors. This is not full-model inference or output-quality validation."
+    },
+    "mypy": {
+      "passed": true,
+      "source_files": 242,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/stream-minicpm3-mypy.log"
+    },
+    "ruff": {
+      "passed": true,
+      "scope": "whole tinygrad checkout"
+    }
+  },
+  "sources": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/model-conversion-source/minicpm3-hf.py",
+      "url": "https://huggingface.co/openbmb/MiniCPM3-4B/resolve/d6b14ddaefdb11c624dd75c3c779549bc90b08cb/modeling_minicpm.py",
+      "sha256": "a964ac7a8a2fc5a6192b9abbf4b78c548dd1c6097c83f60d57705b5f8da44846"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/model-conversion-source/minicpm3-llama.cpp",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/src/models/minicpm3.cpp",
+      "sha256": "f417766c873f5ca7820b1d8f59a2fa869e82214078bc3f36f1de0529bd02a262"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/model-conversion-source/minicpm.py",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/minicpm.py",
+      "sha256": "b257b106a065e6034699235e16e807309fd9d14558eddac4ef45c6da5d0d9548"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/model-conversion-source/base.py",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/base.py",
+      "sha256": "d7722c684b685e47493586ba0ce03c554c16ebc04e792956a9552098c7535bbc"
+    }
+  ],
+  "pending": [
+    "Full-model output quality and matched RKLLM qualification"
+  ],
+  "baseline": {
+    "context": 512,
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "warmups": 3,
+    "runs": 3,
+    "ttft_ms": 388796.2682999205,
+    "prefill_proxy_tps": 0.3292212668596392,
+    "decode_tps": 0.19103321806409448,
+    "peak_rss_mib": 12899.05078125,
+    "device": "CL",
+    "precision": "FP16",
+    "placement": null,
+    "gpu_kernels": {
+      "linear_layers": 1,
+      "bounded_masks": 0,
+      "attention_blocks": 0,
+      "direct_embedding": true,
+      "prefill_chunk": 128,
+      "fused_qkv": 0,
+      "fused_gate_up": 0,
+      "q8_output_head": false,
+      "pack_weights": false,
+      "generic_recurrent_blocks": 0
+    },
+    "checkpoint_sha256": "a7741eca9cf158d51c7a55da432b0609382b16fe9134aa7e1308f09784f56215",
+    "input_sha256": "b606d8d07d9ea95f6e845a945dd77fbfdf1144a92f9bad6860a55bf591becddb",
+    "qualified_win": false,
+    "quality_status": "not qualified against matched level-0 RKLLM",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/minicpm3-4b-cl-baseline.json",
+    "report_sha256": "5a046421668cf4ac1cd811237178cd4a19b7aaa51881cc5f604ae8843ba7f22d"
+  }
+}

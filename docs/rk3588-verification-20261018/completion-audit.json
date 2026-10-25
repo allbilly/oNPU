@@ -1,0 +1,69 @@
+{
+  "complete": true,
+  "scope": "Selective oNPU inference; OpenCL default; optional NPU; matched prefill/decode parity",
+  "requirements": [
+    {
+      "requirement": "selective inference scope",
+      "proved": true,
+      "evidence": "docs/rockchip-onpu.md"
+    },
+    {
+      "requirement": "prefill and decode win at128/256 matchedFP16",
+      "proved": true,
+      "evidence": "paired-final-v7-comparison.json.gz"
+    },
+    {
+      "requirement": "generated IDs and current source hashes",
+      "proved": true,
+      "evidence": "paired-final-v7-comparison.json.gz"
+    },
+    {
+      "requirement": "independent full-vocabulary outputs",
+      "proved": true,
+      "evidence": "full-logits-final.json.gz"
+    },
+    {
+      "requirement": "GPU remains default and GPU-only HTTP works",
+      "proved": true,
+      "evidence": "final-gpu-http.log"
+    },
+    {
+      "requirement": "optional NPU prefill/decode form",
+      "proved": true,
+      "evidence": "final-npu-form.log"
+    },
+    {
+      "requirement": "streaming/cancellation/context/recovery",
+      "proved": true,
+      "evidence": "final-npu-http.log"
+    },
+    {
+      "requirement": "independent simultaneous GPU/NPU sessions",
+      "proved": true,
+      "evidence": "final-dual.json.gz"
+    },
+    {
+      "requirement": "browser/history/lifecycle/themes/mobile",
+      "proved": true,
+      "evidence": "final-browser-pass.log"
+    },
+    {
+      "requirement": "tests, typecheck and lint",
+      "proved": true,
+      "evidence": "audit-mypy.log/audit-ruff.log/ownership-backend-tests.log"
+    },
+    {
+      "requirement": "reference folders retained and runtime independent",
+      "proved": true,
+      "evidence": "source-manifest.json"
+    }
+  ],
+  "limitations": [
+    "Tested matched FP16; W8A8 parity and all-model/context coverage not established",
+    "CPU/OpenCL still execute surrounding operators; arbitrary pure-NPU inference not claimed",
+    "Cold preparation compiles multiple prompt variants and sampling modes"
+  ],
+  "optional_sdk_fixture_limit": "openai client missing; 11 setup errors in broader server fixture attempt, no dependency or test weakened",
+  "source_review": "source-review.tar.gz",
+  "current_source_matches_bench_and_quality": true
+}

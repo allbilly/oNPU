@@ -1,0 +1,185 @@
+{
+  "schema": "context-capacity-allocation-small-request-v1-v2",
+  "updated_utc": "2026-10-25T09:35:57.746087+00:00",
+  "scope": "Configured8K/16K/32K/64K allocations andfrozen30/27-token requests only; no fullprefix/contextlimit/longquality/API/modelmax qualification.",
+  "configured_capacity_small_requests_verified": [
+    8192,
+    16384,
+    32768,
+    65536
+  ],
+  "total_frozen_requests": 16,
+  "served_API_cap_unchanged": 8192,
+  "model_context_maximum": 262144,
+  "API_context_extension_qualified": false,
+  "actual_long_prefix_qualified_beyond8192": false,
+  "modelmax_fit_qualified": false,
+  "modelmax_quality_qualified": false,
+  "general_speedup_claim": false,
+  "ordinary_and_spec_prefill_chunk_in_probe": 128,
+  "configured_default_prefill_chunk": {
+    "8192": 128,
+    "16384": 64,
+    "32768": 64,
+    "65536": 64
+  },
+  "memory_reserve_bytes": 2147483648,
+  "observations": [
+    {
+      "configured_context": 8192,
+      "actual_prompt_tokens": [
+        30,
+        27
+      ],
+      "completed_frozen_requests": 4,
+      "target_FP16_KV_logical_bytes": 100663296,
+      "prepared_attention_workspace_logical_bytes": 18237440,
+      "workspace_capacities": [
+        128,
+        1,
+        8
+      ],
+      "reported_realized_workspace_capacities": [
+        128,
+        1,
+        8
+      ],
+      "draft_fixed_proposal_input_bytes": 29360128,
+      "parent_observed_min_available_bytes": 5157158912,
+      "parent_observed_peak_owned_RSS_bytes": 8305373184,
+      "lifetime_peak_process_RSS_bytes": 8362012672,
+      "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v1/results/context-8192.json",
+      "raw_sha256": "19c2a1774616f8cf16f83406fee709af85b772998539726037c1e0896eb74fba",
+      "original_validator_passed": true,
+      "corrected_workspace_contract_passed": true
+    },
+    {
+      "configured_context": 16384,
+      "actual_prompt_tokens": [
+        30,
+        27
+      ],
+      "completed_frozen_requests": 4,
+      "target_FP16_KV_logical_bytes": 201326592,
+      "prepared_attention_workspace_logical_bytes": 53514240,
+      "workspace_capacities": [
+        64,
+        1,
+        128,
+        8
+      ],
+      "reported_realized_workspace_capacities": [
+        1,
+        128,
+        8
+      ],
+      "draft_fixed_proposal_input_bytes": 46137344,
+      "parent_observed_min_available_bytes": 4838813696,
+      "parent_observed_peak_owned_RSS_bytes": 8429486080,
+      "lifetime_peak_process_RSS_bytes": 8490885120,
+      "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v1/results/context-16384.json",
+      "raw_sha256": "cfdd0d10b9edcc3bb372e7ab680abd0a55940bcc7e15366ebfd8e71f299a4c99",
+      "original_validator_passed": false,
+      "corrected_workspace_contract_passed": true
+    },
+    {
+      "configured_context": 32768,
+      "actual_prompt_tokens": [
+        30,
+        27
+      ],
+      "completed_frozen_requests": 4,
+      "target_FP16_KV_logical_bytes": 402653184,
+      "prepared_attention_workspace_logical_bytes": 107028480,
+      "workspace_capacities": [
+        64,
+        1,
+        128,
+        8
+      ],
+      "reported_realized_workspace_capacities": [
+        1,
+        128,
+        8
+      ],
+      "draft_fixed_proposal_input_bytes": 79691776,
+      "parent_observed_min_available_bytes": 4462092288,
+      "parent_observed_peak_owned_RSS_bytes": 8842907648,
+      "lifetime_peak_process_RSS_bytes": 8843337728,
+      "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v2/results/context-32768.json",
+      "raw_sha256": "39363531691310c6215a93aa9eb4e29ccaeb8e273a6eaf5b43a2a6c50aab1ec8",
+      "original_validator_passed": true,
+      "corrected_workspace_contract_passed": true
+    },
+    {
+      "configured_context": 65536,
+      "actual_prompt_tokens": [
+        30,
+        27
+      ],
+      "completed_frozen_requests": 4,
+      "target_FP16_KV_logical_bytes": 805306368,
+      "prepared_attention_workspace_logical_bytes": 214056960,
+      "workspace_capacities": [
+        64,
+        1,
+        128,
+        8
+      ],
+      "reported_realized_workspace_capacities": [
+        1,
+        128,
+        8
+      ],
+      "draft_fixed_proposal_input_bytes": 146800640,
+      "parent_observed_min_available_bytes": 3475906560,
+      "parent_observed_peak_owned_RSS_bytes": 9830162432,
+      "lifetime_peak_process_RSS_bytes": 9830907904,
+      "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v2/results/context-65536.json",
+      "raw_sha256": "fffe506466bee4182bc28284b91f600f2f7d58c9c95106029c859370ab2b4ea7",
+      "original_validator_passed": true,
+      "corrected_workspace_contract_passed": true
+    }
+  ],
+  "evidence": [
+    {
+      "run": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v1",
+      "owner": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-context-capacity-small-request-v1.py",
+      "owner_sha256": "8cc9f1e72f62f349a19af1229d3ce76720493cd7606cc19d0c6a762fde8d1f87",
+      "owner_terminal_exit_code": 1,
+      "independent_audit": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/context-capacity-small-request-v1/independent-audit.json",
+      "independent_audit_sha256": "62d87445da204790c1280340800f7c91f69258f2cdea8812ef6091d69eb5c471",
+      "frozen_pins": 322,
+      "fresh_serving_receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v1/serving-verification.json",
+      "fresh_serving_receipt_sha256": "6b95972c65f91e09ddd2eceba14e9a215c272e5ee6052ffed19ce796a7ac6482",
+      "fresh_helper_terminal_exit_code": 0
+    },
+    {
+      "run": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v2",
+      "owner": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-context-capacity-small-request-v2.py",
+      "owner_sha256": "a8e5244995bde9445dfcc8802c483e8462b35a016b04f7bcdf1c6652c62dc353",
+      "owner_terminal_exit_code": 0,
+      "independent_audit": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/context-capacity-small-request-v2/independent-audit.json",
+      "independent_audit_sha256": "1c33f724478c0866009c3968c1cd486bf7c1117da71b34aa2cb567e81415ca37",
+      "frozen_pins": 322,
+      "fresh_serving_receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context-capacity-small-request-v2/serving-verification.json",
+      "fresh_serving_receipt_sha256": "2833fa8618560a90f881b77834971c95fdcdd3b1fe848d0429ee8d81c467d302",
+      "fresh_helper_terminal_exit_code": 0
+    }
+  ],
+  "preserved_failure": "v1 child16K exited0 withcorrectoutputs andmemory, butfrozenchecker omittedsource-configuredQ64workspace; parentexit1 andcasevalidFalsepreserved. Standalonecorrecteddata contractandindependentauditpass. Remaining32K/64K usedcorrectedcontractin v2 andparentexited0.",
+  "corrected_validator": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/validate-context-capacity-v1-corrected.py",
+  "corrected_validator_sha256": "f128751a7c4efb4f42360a8b5401ee74ce220a7f97e230d63c2c055b189719d2",
+  "offline_revalidation": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/context-capacity-small-request-v1/workspace-contract-offline-revalidation.json",
+  "offline_revalidation_sha256": "3831152c5e22916916275ffcc77771faa7eb6a43b06eb7f1754bf7fb7be04b0c",
+  "allocation_accounting": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/modelmax-memory-plan-v1/allocations-v2.json",
+  "limits": [
+    "All prompt positions exercised here are early; no actual16K/32K/64Kprefix or endposition inference wasrun.",
+    "Ordinarygenerationwasexplicitlywrappedto128tomatchspec/calibration;default64prefillpathatlargercontextsnotqualified.",
+    "Logicalpreparedworkspace64reportsunrealizedhere;logicalbytesarenotphysicalRAMmeasurements.",
+    "Best-effortbufferinventoryexcludesunknownruntimearenas;RSS/GCounter/availableareseparatemetricsandnotinterchangeable.",
+    "ObservedcoreprocesspeakdoesnotcoverprivateAPIserver/tokenizer/longprefixandfullsamplingoverheads;futureadmissionmustinclude them.",
+    "Metadataaccountinghasremainingexcludedbuffersandcannotprove262144fit."
+  ],
+  "next_step": "AlignqualifiedprefillchunkandprepareDFlash64-rowobservationsifusingcontextdefault64; measuretrue16KprefixandmemorybeforechangingAPIcap. Preserve2GiBreserve and addscaledadmission beforelargercap."
+}

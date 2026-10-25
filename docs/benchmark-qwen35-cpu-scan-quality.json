@@ -1,0 +1,82 @@
+{
+  "updated_utc": "2026-10-23T11:04:29.135259+00:00",
+  "model": "Qwen3.5-0.8B",
+  "context": 512,
+  "scored_positions": 256,
+  "quality_limit_vs_local_fp16": 1.02,
+  "reference_kind": "local GPU FP16 from the same Q8_0 checkpoint; not an RKLLM quality comparison",
+  "manifest_sha256": "5788919ba31bc967ac2b85485e23b26753421fe535072bc0581ceaa3e901e4e1",
+  "checkpoint_sha256": "0ad885ffd4bb022fc4f0d33a3308fa108ef8613159d3b3a67e23abca056b7a6c",
+  "variants": [
+    {
+      "role": "int8-serial-control",
+      "quality_passed_on_fixed_subset": true,
+      "perplexity_ratio_vs_local_fp16": 0.997317822917952,
+      "perplexity": {
+        "fp16": 10.582307340259506,
+        "onpu": 10.553923718036275
+      },
+      "timing_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-hardware-v2/results/qwen35-08b-shared-control.json",
+      "timing_report_sha256": "8cdf114f77a2542f6d8193793c318946930fbe0be08e82d0287f9ba0c7fb3051",
+      "quality_comparison": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/quality-qwen35-08b-v1/control-vs-fp16.json",
+      "quality_comparison_sha256": "7df2b594b43db123645ce53cdf190f4c44fef592b70841c8aad3189cb2568c5c",
+      "quality_report_sha256": "a76d3ba0e990af640356943d9422634ad31fa29299f2d471cda8eac4b2932b5f",
+      "observed_timing_medians": {
+        "median_first_token_ms": 16462.366496911272,
+        "median_decode_tps": 8.058095010630083,
+        "median_prefill_tps": 7.775309827054076,
+        "median_peak_rss_mib": 2650.05078125
+      },
+      "timing_gates_failed": {},
+      "stable_measured_ids": true,
+      "source_checkpoint_and_placement_bound": true,
+      "measured_ttft_range_ms": [
+        16355.409077135846,
+        16530.524597037584
+      ]
+    },
+    {
+      "role": "int8-scan",
+      "quality_passed_on_fixed_subset": true,
+      "perplexity_ratio_vs_local_fp16": 1.0087513013748342,
+      "perplexity": {
+        "fp16": 10.582307340259506,
+        "onpu": 10.674916301035237
+      },
+      "timing_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-hardware-v2/results/qwen35-08b-cpu-scan.json",
+      "timing_report_sha256": "124565bdef452925f95f122448d60974d50506ccc8b8cfeece981ac2d976a4e6",
+      "quality_comparison": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/quality-qwen35-08b-v1/scan-vs-fp16.json",
+      "quality_comparison_sha256": "99097012d70d8718d1af52e88e8bdf1602d4b3fbfe1c9d5a856cd6d79b935a23",
+      "quality_report_sha256": "c0386bf60d1c15c1b0597c661b91be6cd2d6dc7516f3b3c8ef37ba0f294a80b5",
+      "observed_timing_medians": {
+        "median_first_token_ms": 1551.129343919456,
+        "median_decode_tps": 17.31547147848609,
+        "median_prefill_tps": 82.52051996938208,
+        "median_peak_rss_mib": 2702.41015625
+      },
+      "timing_gates_failed": {
+        "expected_generated_ids": {
+          "passed": false,
+          "detail": "when supplied, each of the three measured INT8 sequences must equal the expected prior INT8 control sequence"
+        }
+      },
+      "stable_measured_ids": true,
+      "source_checkpoint_and_placement_bound": true,
+      "measured_ttft_range_ms": [
+        1545.994620071724,
+        6424.617216922343
+      ]
+    }
+  ],
+  "prior_id_gate_for_scan_passed": false,
+  "sdk_quality_parity_qualified": false,
+  "api_scan_qualified": false,
+  "api_scan_default": "off",
+  "main_table_preference_changed": false,
+  "interpretation": "Both variants meet the fixed local FP16 perplexity limit. Prior scan token-identity failures remain failed. Timings are separately reported experimental observations, not a certified RKLLM win.",
+  "published_rkllm_reference": {
+    "ttft_ms": 587.74,
+    "prefill_proxy_tps": 217.78337360057168,
+    "decode_tps": 27.05
+  }
+}

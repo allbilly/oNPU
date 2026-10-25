@@ -1,0 +1,178 @@
+{
+  "updated_utc": "2026-10-22T12:56:54.215397+00:00",
+  "implementation": "tinygrad.llm.gguf.gguf_shard(stream=True, cast_dtypes=..., chunk_size=...)",
+  "enabled_in_transformer_loader": true,
+  "cpu_verified": true,
+  "gpu_verified": true,
+  "full_model_memory_verified": true,
+  "checks": {
+    "focused_tests": {
+      "passed": 4,
+      "subtests_passed": 2,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/gguf-stream-tests.log"
+    },
+    "mypy": {
+      "passed": true,
+      "source_files": 245,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-fileloadfix-mypy.log"
+    },
+    "ruff": {
+      "passed": true,
+      "scope": "whole tinygrad checkout"
+    },
+    "gpu": {
+      "passed": 2,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/stream-minicpm3-gpu.log",
+      "scope": "Small streamed-weight and MiniCPM3 OpenCL checks"
+    },
+    "asynchronous_staging": {
+      "passed": 5,
+      "skipped": 1,
+      "subtests_passed": 2,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/gguf-upload-staging-tests.log",
+      "scope": "CPU value, memory, and simulated asynchronous staging regression. Latest synchronization change still awaits its hardware test.",
+      "latest_hardware_regression": {
+        "passed": true,
+        "log": "/home/orangepi/vlm-bench/baseline-20261021/remaining-baselines-tests.log",
+        "scope": "Actual Mali Q8 chunk loading, exact decoded values and matrix multiplication; full ChatGLM3 fit remains pending."
+      }
+    },
+    "layout_conversion_regression": {
+      "passed": 13,
+      "subtests_passed": 2,
+      "workers": 12,
+      "mali_tests_enabled": true,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-layoutfix-tests.log",
+      "scope": "Small exact-value streamed GGUF and ChatGLM3 decoder fixtures, plus retained-allocation bound on actual Mali."
+    },
+    "fileloadfix": {
+      "passed": 15,
+      "subtests_passed": 2,
+      "workers": 12,
+      "mali_tests_enabled": true,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-fileloadfix-tests.log"
+    }
+  },
+  "coverage": [
+    "Q8_0 chunk/tail values against independent NumPy and the original loader",
+    "Native FP16 and BF16 conversion",
+    "Preserving FP32 rotary factors while storing FP16 weights",
+    "Malformed packed storage and unsupported tensor parallelism",
+    "Live allocator count bounded by resident FP16 weights plus chunk scratch"
+  ],
+  "test_observer_correction": "The memory observer uses a plain function replacement: a Mock call history retained each input chunk and invalidated the earlier failed memory observation. Native slice transfers were independently confirmed to use bounded destination buffers.",
+  "pending": [
+    "Qualify full-model outputs and matched RKLLM performance separately."
+  ],
+  "intent": "INTENT: GGUF loading retains all packed weights during decoding; larger benchmark models need bounded loading memory; the loader must return the same decoded weights on the selected devices.",
+  "twin_search": {
+    "patterns": [
+      "ggml_data_to_tensor(",
+      "side_effect=observe"
+    ],
+    "other_sites": [
+      "The existing non-streamed decode path already reshapes its output.",
+      "The small functional test deliberately records decoder call arguments; it does not measure peak memory."
+    ]
+  },
+  "verified_full_model": {
+    "model": "Gemma2",
+    "size": "2B",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/gemma2-2b-normfix-cl-baseline.json",
+    "peak_rss_mib": 10090.47265625,
+    "streamed": true,
+    "scope": "Successful full 128/64 requests on Gemma2; does not establish memory fit for every larger model."
+  },
+  "asynchronous_upload_fix": {
+    "cause": "OpenCL _copyin retains host staging until synchronize; realizing a chunk alone did not drain it.",
+    "change": "Synchronize after every decoded chunk and weight before releasing allocator cache.",
+    "incident": "ChatGLM3 load was killed by OOM while a cold typecheck was also running. No full ChatGLM3 result was produced.",
+    "intent": "INTENT: streamed uploads leave OpenCL staging buffers queued; bounded loading requires completing each chunk; the allocator retains those buffers until synchronization.",
+    "twin_search": "TWINS: searched ggml_data_to_tensor( - found 2 other sites: tinygrad/llm/gguf.py non-streamed loading and tinygrad/llm/kernels/amd.py expected-value calculation."
+  },
+  "sequential_layout_realization": {
+    "updated_utc": "2026-10-22T11:35:27.853905+00:00",
+    "source_sha256": {
+      "tinygrad/llm/model.py": "aaba35cbf62aac6fc5618aa68ec1d8d17e757a1f0c2207401a6bbc4261322870",
+      "test/models/test_chatglm3.py": "16e83185039a2434af37c10eb7cdbb56c52fa3f2e5bc754c57c3430762401c88"
+    },
+    "intent": "INTENT: streamed GGUF loading batches all final layout conversions; the 6B benchmark needs bounded loading memory; gguf_shard documents bounded decoding chunks with uploads released between weights.",
+    "twin_search": "TWINS: searched Tensor.realize(*params) - found 3 other sites: examples/gradaccum_mnist.py and tinygrad/engine/jit.py (two calls); none is a streamed GGUF loader.",
+    "regression_before": {
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-layout-mali-regression-before-context.log",
+      "passed": false,
+      "observed_retained_bytes": 2963584,
+      "bound_bytes": 2044032
+    },
+    "regression_after": {
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-layout-mali-regression-after.log",
+      "passed": true,
+      "bound_bytes": 2044032,
+      "workers": 12
+    },
+    "scope": "Actual small Mali fixture, exact gate/up values and retained allocator bytes. CPU fixtures did not reproduce the Mali copies. Full 6B memory fit remains pending.",
+    "change": "Single-device streamed loading realizes each compact parameter, synchronizes and frees allocator cache before the next parameter. Non-streamed/tensor-parallel path remains batched.",
+    "full_6b_attempt": {
+      "passed": false,
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-layoutfix-cl-baseline.json",
+      "exit_code": -9,
+      "requests_completed": 0,
+      "conclusion": "The small Mali conversion bound passes, but the full 6B load still OOMs. Full memory fit is not established."
+    }
+  },
+  "six_b_memory_fit_verified": true,
+  "file_entry_and_source_page_fix": {
+    "updated_utc": "2026-10-22T12:11:09.173133+00:00",
+    "checks": {
+      "mypy": true,
+      "ruff": true,
+      "focused_cpu_gpu_tests": true
+    },
+    "source_sha256": {
+      "tinygrad/llm/chatglm.py": "789feb35a21226616e674caf42d687fdc4efb7ffff97445f286931880342bac6",
+      "tinygrad/llm/gguf.py": "3ad6a11141155e2ff3249a4e9d4e6d3947af3670fac2a302a85234fc96708bbb",
+      "tinygrad/llm/model.py": "0c1286497b7af72f76e07cd0888ccf62fd268f1acd58a395498a5e7be26033d6",
+      "tinygrad/llm/kernels/mali.py": "129dcc902e9957aa3b337142a04ac3a4d298aedf9dbfb9f1c150944d22f92367",
+      "test/models/test_chatglm3.py": "3bb992b1838e7f36c53ff3dfc42e02acfe85a6597fdbcc9dda96e3478734ac5a",
+      "test/models/test_gguf_stream.py": "afa430ad490e3c1125b6e638efae00a4ea9f63d59e1ce867a5f973b9b85d62fb"
+    },
+    "intent": "INTENT: streamed loading retains source pages and splits fused FFN weights after GPU allocation; the 6B load must fit RAM without changing precision; bounded GGUF loading and separate gate/up projections are required.",
+    "twin_search": "TWINS: searched fused FFN splits and mapping advice - found one other fused FFN split in tinygrad/llm/model.py for Phi3; its separate model qualification remains pending. Existing DiskDevice advice requests huge pages rather than releasing completed input pages.",
+    "test_evidence": {
+      "passed": 15,
+      "subtests_passed": 2,
+      "workers": 12,
+      "mali_enabled": true,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-fileloadfix-tests.log",
+      "mypy_source_files": 245,
+      "mypy_log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-fileloadfix-mypy.log",
+      "ruff_passed": true
+    },
+    "load_only_experiment": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-load-diagnostic-v6.json",
+      "observer": "/home/orangepi/vlm-bench/baseline-20261021/diagnose-chatglm-load-v6.py",
+      "observer_sha256": "1a8237592c59e0e3bd733063b869b63940c70c04d02cf1cf1edee9bdfcd17431",
+      "load_success": true,
+      "peak_rss_bytes": 12809506816,
+      "allocated_fp16_weight_bytes": 12487168000,
+      "parameter_dtypes": [
+        "dtypes.f16"
+      ],
+      "scope": "Experimental full 6B load under the 13 GiB guard. No inference timing or full-model output quality claimed."
+    },
+    "benchmark_pending": true
+  },
+  "six_b_load_only_verified": true,
+  "six_b_request_memory_fit_verified": true,
+  "six_b_production_load_verified": true,
+  "actual_six_b_requests": {
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-fileloadfix-cl-baseline.json",
+    "completed": 6,
+    "warmups": 3,
+    "measured": 3,
+    "full_benchmark_complete": true,
+    "peak_rss_mib": 12611.859375
+  }
+}

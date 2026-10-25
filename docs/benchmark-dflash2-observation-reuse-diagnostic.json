@@ -1,0 +1,198 @@
+{
+  "kind": "V13 compact diagnostic",
+  "scope": "Read-only extraction; V10 source reports are preserved unchanged. Exact ID arrays are space-separated strings.",
+  "cohort": {
+    "kind": "GPU-only V13 padded decode observation reuse; one shared packed head plus selective GDN gate/up; fixed strict8/64 and natural32",
+    "target": {
+      "num_blocks": 24,
+      "dim": 2048,
+      "hidden_dim": 6144
+    },
+    "draft": {
+      "num_layers": 4,
+      "hidden_size": 2048,
+      "block_size": 8,
+      "compute_dtype": "float16"
+    },
+    "device": "CL",
+    "context": 512,
+    "input_tokens": 128,
+    "checkpoint_sha256": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1",
+    "reference_sha256": "f02062a0116f1a0fdcb7e20efc109f9b0bfe1c33fc650d3e40b85c12092fdf17",
+    "v13_probe_source_sha256": "e4c193bb270deda2689c23a6701c1908f502942471c3031b2971f61d85797fc1",
+    "v10_comparator": {
+      "strict_report": "trained-dflash2-probe-v10.json",
+      "natural_report": "natural-spec-workloads-v10.json",
+      "scope": "Same V10 workload and residency order, enabling only padded decode observation graph reuse; no formal speed qualification."
+    }
+  },
+  "strict_trials_v13": [
+    {"engine":"ordinary","request":0,"tokens":8,"seconds":24.13625818793662,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23","first_token_ms":15746.888567926362,"decode_tps":0.8343990177135185,"decode_full_cost_tps":0.8343892708343255,"output_tps":0.33145154222780177},
+    {"engine":"ordinary","request":1,"tokens":8,"seconds":11.919423504034057,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23","first_token_ms":8986.166361020878,"decode_tps":2.3865115232744127,"decode_full_cost_tps":2.3864256213177653,"output_tps":0.6711734000635557},
+    {"engine":"ordinary","request":2,"tokens":8,"seconds":8.949186153942719,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23","first_token_ms":6016.1185909528285,"decode_tps":2.386666019564197,"decode_full_cost_tps":2.386579868915255,"output_tps":0.8939360364601938},
+    {"engine":"speculative","request":0,"tokens":8,"seconds":38.91922581894323,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23","first_token_ms":28419.284191913903,"decode_tps":0.6667171909311137,"decode_full_cost_tps":0.6666703729076309,"output_tps":0.20555393463418134,"prefill_seconds":9.372184294043109,"verify_first_three":false},
+    {"engine":"speculative","request":1,"tokens":8,"seconds":14.310935243032873,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23","first_token_ms":10823.215910000727,"decode_tps":2.0074600743681983,"decode_full_cost_tps":2.0070422335028764,"output_tps":0.5590130808463211,"prefill_seconds":8.707147519104183,"verify_first_three":false},
+    {"engine":"speculative","request":2,"tokens":8,"seconds":11.682066055946052,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23","first_token_ms":8141.278400784358,"decode_tps":1.977333590571101,"decode_full_cost_tps":1.9769612531820515,"output_tps":0.6848103718715134,"prefill_seconds":6.086547552840784,"verify_first_three":false},
+    {"engine":"ordinary","request":3,"tokens":64,"seconds":32.50982339400798,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23 4383 361 3022 29 641 361 3022 29 557 1048 264 8376 383 279 220 17 15 15 23 4383 361 3022 29 641 361 3022 29 557 264 8376 383 279 220 17 15 15 23 4383 361 3022 29 641 361 3022 29 557 264 8376 383 279 220 17 15 15 23 4383","first_token_ms":6102.6858349796385,"decode_tps":2.385728035483715,"decode_full_cost_tps":2.385718628502426,"output_tps":1.9686357327858048},
+    {"engine":"speculative","request":3,"tokens":64,"seconds":55.33636133605614,"ids_match_reference":true,"ids":"10771 383 279 220 17 15 15 23 4383 361 3022 29 641 361 3022 29 557 1048 264 8376 383 279 220 17 15 15 23 4383 361 3022 29 641 361 3022 29 557 264 8376 383 279 220 17 15 15 23 4383 361 3022 29 641 361 3022 29 557 264 8376 383 279 220 17 15 15 23 4383","first_token_ms":8091.221787035465,"decode_tps":1.3334903425242057,"decode_full_cost_tps":1.333470503026716,"output_tps":1.1565632154837544,"prefill_seconds":6.069457575911656,"verify_first_three":false}
+  ],
+  "phase_costs_seconds_vs_v10_spec64": {
+    "v10": {
+      "prefill_seconds": 6.014905584976077,
+      "draft_seconds": 13.209231247426942,
+      "observe_seconds": 9.921598225366324,
+      "verify_seconds": 25.302564222132787,
+      "snapshot_seconds": 1.1182852440979332,
+      "restore_seconds": 1.5964131550863385,
+      "replay_seconds": 0.0,
+      "reset_seconds": 0.00011899927631020546,
+      "total_seconds": 57.210998655995354
+    },
+    "v13": {
+      "prefill_seconds": 6.069457575911656,
+      "draft_seconds": 12.502218393143266,
+      "observe_seconds": 8.221520353574306,
+      "verify_seconds": 25.78166016819887,
+      "snapshot_seconds": 1.1178962169215083,
+      "restore_seconds": 1.5944605467375368,
+      "replay_seconds": 0.0,
+      "reset_seconds": 0.00016537285409867764,
+      "total_seconds": 55.33578588603996
+    },
+    "v13_minus_v10": {
+      "prefill_seconds": 0.05455199093557894,
+      "draft_seconds": -0.7070128542836756,
+      "observe_seconds": -1.7000778717920184,
+      "verify_seconds": 0.4790959460660815,
+      "snapshot_seconds": -0.00038902717642486095,
+      "restore_seconds": -0.001952608348801732,
+      "replay_seconds": 0.0,
+      "reset_seconds": 4.6373577788472176e-05,
+      "total_seconds": -1.8752127699553967
+    }
+  },
+  "observation_graph_counts": {
+    "v10": {
+      "graphs": 8,
+      "captured_graphs": 5,
+      "graph_calls": {
+        "128": 4,
+        "1": 11,
+        "2": 7,
+        "5": 6,
+        "3": 4,
+        "6": 1,
+        "7": 1,
+        "8": 1
+      }
+    },
+    "v13_setup": {
+      "graphs": 0,
+      "captured_graphs": 0,
+      "graph_calls": {},
+      "decode_capacity": 8
+    },
+    "v13_after_strict": {
+      "graphs": 2,
+      "captured_graphs": 2,
+      "graph_calls": {
+        "128": 4,
+        "8": 31
+      },
+      "pad_decode_rows": true,
+      "decode_capacity": 8,
+      "weight_copies": 0
+    },
+    "graph_reused": true
+  },
+  "natural_pairs_v13": [
+    {"name":"counting","tokens":32,"ordinary_seconds":19.122199255041778,"speculative_seconds":19.420441003050655,"ordinary_first_token_ms":6158.039042027667,"speculative_first_token_ms":9070.41896902956,"speculative_prefill_seconds":5.875847785035148,"ordinary_ids":"16 11 220 17 11 220 18 11 220 19 11 220 20 11 220 21 11 220 22 11 220 23 11 220 24 11 220 16 15 248046 198 248044","speculative_ids":"16 11 220 17 11 220 18 11 220 19 11 220 20 11 220 21 11 220 22 11 220 23 11 220 24 11 220 16 15 248046 198 248044","ids_equal":true},
+    {"name":"short_code","tokens":32,"ordinary_seconds":18.949966298881918,"speculative_seconds":29.950657803099602,"ordinary_first_token_ms":6005.089365877211,"speculative_first_token_ms":9117.433831095695,"speculative_prefill_seconds":5.944460563128814,"ordinary_ids":"71093 12305 198 727 884 11331 2007 1590 198 262 460 830 478 220 16 198 71093 248046 198 248044 248045 846 198 7734 264 12654 709 6725 884 11331 421 4829","speculative_ids":"71093 12305 198 727 884 11331 2007 1590 198 262 460 830 478 220 16 198 71093 248046 198 248044 248045 846 198 7734 264 12654 709 6725 884 11331 421 4829","ids_equal":true},
+    {"name":"explanation","tokens":32,"ordinary_seconds":18.985092698130757,"speculative_seconds":45.03921950189397,"ordinary_first_token_ms":6075.711700133979,"speculative_first_token_ms":9341.206504963338,"speculative_prefill_seconds":5.946263913996518,"ordinary_ids":"29108 4009 5435 660 7736 314 279 9155 19142 11 694 22602 6105 89661 43000 777 6497 974 279 33470 303 8964 579 16078 13 1061 69377 1817 11 3750 430 12870","speculative_ids":"29108 4009 5435 660 7736 314 279 9155 19142 11 694 22602 6105 89661 43000 777 6497 974 279 33470 303 8964 579 16078 13 1061 69377 1817 11 3750 430 12870","ids_equal":true}
+  ],
+  "scope_and_qualification": {
+    "verify_first_three": false,
+    "padded_decode_observation_enabled_in_probe": true,
+    "default_enabled": false,
+    "api_status": "Backend-only option; the application worker does not enable it",
+    "qualified_speed_win": false,
+    "qualified_rkllm_win": false,
+    "natural_qualified_rkllm_win": false,
+    "all_three_natural_spec_slower": true
+  },
+  "verification": {
+    "child_report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-dflash2-probe-v13.json",
+    "child_exit_code": 0,
+    "child_report_complete": true,
+    "wrapper_phase": "restored",
+    "wrapper_complete": true,
+    "wrapper_restored": true,
+    "post_serving_complete": true,
+    "post_serving_reply_count": 2,
+    "post_serving_runtime_state": "ready",
+    "post_serving_model_id": "55a95dc3c1b93b72",
+    "post_serving_device": "CL"
+  },
+  "check_logs": {
+    "cpu": {
+      "path": "observation-row-reuse-cpu-v1.log",
+      "result": "26 passed, 6 skipped, 15 subtests"
+    },
+    "mypy": {
+      "path": "observation-row-reuse-mypy-v1.log",
+      "result": "255 source files passed"
+    },
+    "prelude": {
+      "path": "padded-observation-rows-mali-v13-luna.log",
+      "result": "1 passed in 12.59s",
+      "final_exit_code": 0
+    }
+  },
+  "sha256": {
+    "trained-dflash2-probe-v13.json": "486ff928a90f14983e6d2ed7a728a3b3be418f5f3076c53dcaa5e3ec657a49dc",
+    "natural-spec-workloads-v13.json": "bdb083f9a5485894cf87983f056fcbfd210aa05c2f378aebfb77caccbb5f20c7",
+    "trained-probe-job-v13-luna.json": "88f3e80508d1594641cb69fa3551cf497fab63fe0b16966ed233c3e877e77938",
+    "post-v13-serving-verification.json": "30dc49e17286e65c7536bd2e1561c582fb9a31e5d54f3aae6755d596be926157",
+    "trained-dflash2-probe-v10.json": "cda646e6cd847ac3326f5ac72e4d75b95b09b850a9140bafe13d47df7deb822f",
+    "natural-spec-workloads-v10.json": "3eb12dfd6a7c3d490085f40116f5404f363c75a9f1e50e1bd880b6f2d9bc54ed",
+    "probe-trained-dflash2-v13-luna.py": "e4c193bb270deda2689c23a6701c1908f502942471c3031b2971f61d85797fc1",
+    "observation-row-reuse-cpu-v1.log": "282b023ab1a155984631ccbe68de69a08839a42ba58685111c86c45d1ccfbb6b",
+    "observation-row-reuse-mypy-v1.log": "76d1406540ce3ccd3b7419689f1524e5fa6251d449e0c1fbd8024a6eacd404cd",
+    "padded-observation-rows-mali-v13-luna.log": "8daedd7c8d7245164abbd740542c4bb01708c14cdf228cb31d10b5f574ff0a3f",
+    "padded-observation-rows-mali-v13-luna.json": "7de17e5a32ae09f82848560992cd69faee6e0aa2f51ed80e91f3137fe41c4221"
+  },
+  "strict64_wall_times_seconds": {
+    "v10": {
+      "ordinary": 32.53165053902194,
+      "speculative": 57.21153969084844
+    },
+    "v13": {
+      "ordinary": 32.50982339400798,
+      "speculative": 55.33636133605614
+    }
+  },
+  "model_pair": {
+    "target": "Qwen3.5-2B Q8_0",
+    "draft": "rasyosef/Qwen3.5-2B-DFlash2",
+    "draft_revision": "c9aefeb3bccf819f3575521801d95b3ace87f8e7"
+  },
+  "selected_measured_source_sha256": {
+    "tinygrad/llm/dflash2.py": "82edbaa8541ab5f5aa9a0cecee4bcac9ba0cec3faab7f1fe96b7ba5dfd8b0175",
+    "tinygrad/llm/speculative.py": "b9a0d491263f2582afcb9c911ebccee4be36332d5e6249b71c56221968f0e0d0",
+    "tinygrad/llm/kernels/mali.py": "31ecba509259304d9ff5620f3d7900330171f83d1ba0fc34c55f0f3b15064281",
+    "tinygrad/llm/kernels/mali_linear.py": "92bcdb928795e57cc63392d551cb2bac9b3516afab94c37d720c45ffc3120417"
+  },
+  "all_measured_sources_sha256_canonical_json": "f5635ebc619f59986da97c408e9fc7904dacc70ded2964788ef1fb8970e9e5b3",
+  "prefill_tps_via_first_token_64": {
+    "ordinary": 20.974371524472726,
+    "speculative": 15.819613325282212,
+    "definition": "128 prompt tokens divided by time to first token; includes the work needed to deliver that token."
+  },
+  "spec64_wall_reduction_vs_v10_percent": 3.277622600134725,
+  "graph_snapshot_scope": "After strict synthetic trials, before natural workloads.",
+  "limitations": [
+    "One 64-token request per engine after three short requests; not repeated warmed 64-token speed qualification.",
+    "Context512 only; sampled decoding, model-maximum context and broad quality remain unqualified.",
+    "All request pairs remain slower than ordinary decoding; no option was promoted into the application worker."
+  ]
+}

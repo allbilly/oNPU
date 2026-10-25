@@ -1,0 +1,191 @@
+{
+  "updated_utc": "2026-10-22T13:40:47.804365+00:00",
+  "model": "Gemma4",
+  "size": "E2B",
+  "scope": "Dense text decoder; vision/audio encoders and connectors are not included.",
+  "integrated_in_generic_loader": true,
+  "gpu_verified": true,
+  "full_model_baseline_complete": true,
+  "full_model_quality_qualified": false,
+  "implemented": [
+    "Vocabulary-row segmentation of the auxiliary embedding table",
+    "Per-head Q/K norms and unscaled V norm with unit attention scaling",
+    "Selective global RoPE with FP32 factors and independent sliding-layer frequencies",
+    "Full-length shared K/V cache dependencies across late layers",
+    "Per-layer projected/identity inputs, GELU gating and post-norm residual",
+    "Double-width late-layer FFNs and learned block output scales",
+    "BPE tokenizer route and both published EOS IDs"
+  ],
+  "checks": {
+    "cpu_decoder": {
+      "passed": 5,
+      "skipped": 1,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-tests.log",
+      "scope": "Independent NumPy equations; cached and chunked generation; embedding-input mode; mixed metadata/storage loader fixture"
+    },
+    "tokenizer_regression": {
+      "passed": 30,
+      "subtests_passed": 29,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-tokenizer-regression.log"
+    },
+    "official_tokenizer": {
+      "passed": true,
+      "cases": 254,
+      "failures": [],
+      "streaming_decode_checked": true,
+      "eos_ids": [
+        1,
+        106
+      ],
+      "reference_sha256": "95229de3859a828fde7fdc562ce39c0c8094e99fd040f8d883ffb143cd8f4d70"
+    },
+    "actual_checkpoint_schema": {
+      "passed": true,
+      "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Gemma4-E2B/google_gemma-4-E2B-it-Q8_0.gguf",
+      "sha256": "bb145c0e8c2ede3b6992b881f7eefe6b33275eeb9998f450b5c72f4eb1d78732",
+      "blocks": 35,
+      "shared_blocks": 20,
+      "parameter_tensors": 556,
+      "per_layer_embedding_chunks": 16,
+      "largest_embedding_chunk_shape": [
+        16384,
+        8960
+      ],
+      "scope": "Real GGUF tensor directory and rotary factors; other weight values replaced by NULL tensors. Not full-model inference, GPU validation or measured memory fit."
+    },
+    "mypy": {
+      "passed": true,
+      "source_files": 245,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/remaining-baselines-mypy.log"
+    },
+    "ruff": {
+      "passed": true,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/remaining-baselines-ruff.log",
+      "scope": "whole tinygrad checkout"
+    },
+    "actual_embedding_rows": {
+      "model": "Gemma4-E2B",
+      "passed": true,
+      "checkpoint_sha256": "bb145c0e8c2ede3b6992b881f7eefe6b33275eeb9998f450b5c72f4eb1d78732",
+      "rows": [
+        0,
+        16383,
+        16384,
+        262143
+      ],
+      "width": 8960,
+      "scope": "Selected real Q8 embedding rows against independent file seeks and NumPy dequantization; not whole-model output quality."
+    },
+    "isolated_cpu_gpu_regression": {
+      "passed": 16,
+      "subtests_passed": 2,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/remaining-baselines-tests.log",
+      "scope": "Combined streamed GGUF, Gemma4 and Gemma3n tests, including three actual Mali hardware tests. Small independent numeric fixtures; full-model output quality remains unqualified."
+    },
+    "actual_model_progress": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-cl-baseline.json",
+      "complete": true,
+      "warmups_completed": 3,
+      "measured_completed": 3,
+      "load_seconds": 69.0887663429603,
+      "peak_rss_mib_observed": 12862.51953125,
+      "scope": "Actual full 128/64 baseline; full-model output quality remains unqualified."
+    },
+    "baseline_validation": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-baseline-validation.json"
+  },
+  "sources": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/gemma-source/gemma4.py",
+      "url": "https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/models/gemma4/modeling_gemma4.py",
+      "sha256": "8c8ee26ac3e003dd7bea51c7d74df4fd0d25efa57740cbe7c8c68be8c5577c14"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/gemma-source/rope_utils.py",
+      "url": "https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/modeling_rope_utils.py",
+      "sha256": "8b08f3f372207816eae420e7d33b982e44858dc9e4be7728d95f606b07c23fd0"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/model-conversion-source/gemma.py",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/gemma.py",
+      "sha256": "e0704e560cdbedea9a89a7d5b49a570e7482971301dc80389ce39ac9ac3c9aac"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/gemma-source/gemma4-tokenizer.json",
+      "url": "https://huggingface.co/google/gemma-4-E2B-it/resolve/3e22461f65e89153144f8adb70e3b8c2cc9845a7/tokenizer.json",
+      "sha256": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f"
+    }
+  ],
+  "pending": [
+    "Full-model and RKLLM quality qualification",
+    "Vision/audio frontend and API qualification"
+  ],
+  "integration_queued": {
+    "patch": "/home/orangepi/vlm-bench/baseline-20261021/google-decoder-integration.patch",
+    "controller": "/home/orangepi/vlm-bench/baseline-20261021/remaining-baselines-job.json",
+    "applied": true
+  },
+  "baseline": {
+    "ttft_ms": 63315.40328799747,
+    "prefill_proxy_tps": 2.0216249656940053,
+    "decode_tps": 2.8788580582755556,
+    "peak_rss_mib": 12862.51953125,
+    "checkpoint_sha256": "bb145c0e8c2ede3b6992b881f7eefe6b33275eeb9998f450b5c72f4eb1d78732",
+    "report_sha256": "d1d867c59c3c41d032d0bf0f750115e927ca250d6c8577452a62067fc4c7b73e"
+  },
+  "performance_candidate": {
+    "patch": "/home/orangepi/vlm-bench/baseline-20261021/mali-segmented-embedding.patch",
+    "manifest": "/home/orangepi/vlm-bench/baseline-20261021/mali-segmented-embedding-candidate.json",
+    "applied": true,
+    "reason": "Direct auxiliary lookups plus tiled row-major GEMM. The latter avoids a persistent second weight copy while preserving FP32 accumulation order; both changes await hardware/full-model qualification.",
+    "next": "Apply and qualify after the remaining baseline reports, with hardware, exact-value and full-model before/after checks."
+  },
+  "gpu_tuning": {
+    "candidate_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-gpu-perf-retry-cl-baseline.json",
+    "comparison": {
+      "baseline_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-cl-baseline.json",
+      "candidate_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-gpu-perf-retry-cl-baseline.json",
+      "matched_all_64_greedy_ids": true,
+      "ttft_ratio": 5.086773628268783,
+      "decode_ratio": 0.9905966138589215,
+      "faster_both_local_medians": false,
+      "rkllm_quality_qualified": false
+    },
+    "baseline_decode_dispatches": {
+      "PROGRAM:CL": 1032
+    },
+    "candidate_decode_dispatches": {
+      "PROGRAM:CL": 1064
+    },
+    "conclusion": "Faster prefill, slightly slower decode; not promoted as a both-phase improvement. Prefill-only auxiliary lookup policy is now under full-model remeasurement.",
+    "prefill_only_policy_validation": {
+      "updated_utc": "2026-10-22T13:40:47.804365+00:00",
+      "checks": {
+        "mypy": true,
+        "ruff": true,
+        "gpu_numeric_and_policy_tests": true
+      },
+      "source_sha256": {
+        "tinygrad/llm/kernels/mali.py": "ebd4ce65bee4247f1322948f4890024f6e56dac2e6f0bee0a39f587c09ec4118",
+        "tinygrad/llm/kernels/mali_linear.py": "8b8a790c1dbfad6ef9065d5b389f28c3ed1f4a18b2d90d6c042155677a14d73c",
+        "tinygrad/llm/model.py": "0c1286497b7af72f76e07cd0888ccf62fd268f1acd58a395498a5e7be26033d6",
+        "tinygrad/llm/gguf.py": "3ad6a11141155e2ff3249a4e9d4e6d3947af3670fac2a302a85234fc96708bbb",
+        "test/models/test_mali.py": "f3ec5b80c41a8b37fe54cdb5acdffa251d40cf2ab1bcdb9ad037b8db3f5bf547",
+        "test/models/test_mali_gemm.py": "407ec8c3c92c6ddc376bad8f79eccae0582c4c1bde1eb21740f97bd70ed0a0c5"
+      },
+      "intent": "INTENT: auxiliary direct lookups add 32 decode dispatches; single-token decode needs the fused ordinary lookup; prepared Mali operations retain ordinary OpenCL fallbacks.",
+      "twin_search": "TWINS: searched MaliEmbedding preparation - found one other site for the main token embedding; its existing direct decode path remains unchanged.",
+      "tests": {
+        "passed": 13,
+        "workers": 12,
+        "mali_enabled": true,
+        "log": "/home/orangepi/vlm-bench/baseline-20261021/gpu-prefill-policy-tests.log",
+        "mypy_source_files": 245,
+        "mypy_log": "/home/orangepi/vlm-bench/baseline-20261021/gpu-prefill-policy-mypy.log"
+      },
+      "full_model_measurements_pending": true
+    }
+  }
+}

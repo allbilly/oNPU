@@ -1,0 +1,3 @@
+browser reply: 'Hello!'
+browser Stop, import, unload and load passed
+PASS: real browser chat, Stop, model lifecycle, history, saved settings, themes, desktop/mobile navigation; no console errors.

@@ -1,0 +1,829 @@
+{
+  "schema": "onpu-cpu-gdn-head-parallel-operator-v1",
+  "updated_utc": "2026-10-24T13:09:56.510254+00:00",
+  "complete": true,
+  "operator_numerical_verified_within_scope": true,
+  "production_applied": false,
+  "model_quality_qualified": false,
+  "speed_measured": false,
+  "API_qualification": false,
+  "scope": "Staged C scan splits independent flattened batch/head work across the existing four CPU groups. Exact serial-baseline C output/state/history bits across tested geometries and both real pool entry points, plus no-replay dispatcher failure checks. No model integration, timing improvement, NPU inference or API qualification from this experiment.",
+  "coverage": {
+    "serial_baseline_shapes": 12,
+    "fake_pooled_shapes": 12,
+    "null_dispatch_fallback_shapes": 12,
+    "dispatcher_control_cases": [
+      {
+        "name": "success",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "busy",
+        "dispatch_status": 2,
+        "return_code": 0,
+        "callbacks": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "error_after_all",
+        "dispatch_status": 4,
+        "return_code": 5,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "partial",
+        "dispatch_status": 3,
+        "return_code": 5,
+        "callbacks": 1,
+        "processed_batch_heads": [
+          0,
+          4
+        ],
+        "callback_groups_completed": [
+          0
+        ],
+        "untouched_groups_preserved": true,
+        "serial_replay_absent": true
+      }
+    ],
+    "real_pool_cases": {
+      "cases": [
+        {
+          "name": "actual_pool_small_h2_heads3_rows8",
+          "dispatcher_kind": "parallel",
+          "batch": 2,
+          "heads": 3,
+          "rows": 8,
+          "capacity": 16,
+          "key_dim": 5,
+          "value_dim": 3,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        },
+        {
+          "name": "actual_pool_small_h2_heads3_rows8",
+          "dispatcher_kind": "parallel_parked",
+          "batch": 2,
+          "heads": 3,
+          "rows": 8,
+          "capacity": 16,
+          "key_dim": 5,
+          "value_dim": 3,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        },
+        {
+          "name": "model_h16_k128_v128_rows3",
+          "dispatcher_kind": "parallel",
+          "batch": 1,
+          "heads": 16,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 128,
+          "value_dim": 128,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        },
+        {
+          "name": "model_h16_k128_v128_rows3",
+          "dispatcher_kind": "parallel_parked",
+          "batch": 1,
+          "heads": 16,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 128,
+          "value_dim": 128,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        }
+      ],
+      "case_names": [
+        "actual_pool_small_h2_heads3_rows8",
+        "actual_pool_small_h2_heads3_rows8",
+        "model_h16_k128_v128_rows3",
+        "model_h16_k128_v128_rows3"
+      ],
+      "case_pairs": [
+        [
+          "actual_pool_small_h2_heads3_rows8",
+          "parallel"
+        ],
+        [
+          "actual_pool_small_h2_heads3_rows8",
+          "parallel_parked"
+        ],
+        [
+          "model_h16_k128_v128_rows3",
+          "parallel"
+        ],
+        [
+          "model_h16_k128_v128_rows3",
+          "parallel_parked"
+        ]
+      ],
+      "pool_parked_after_exit": true,
+      "affinity_restored": true
+    },
+    "scalar_oracle_tolerances": {
+      "atol": 2e-06,
+      "rtol": 0.0002
+    },
+    "normal_models_restored_fresh": true,
+    "NPU_never_unloaded_by_owner": true
+  },
+  "raw_operator_report": {
+    "complete": true,
+    "source_before": {
+      "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_recurrent.c": "6e7a0413d95a6dd24a97e9949f634b38af7b010b4a209ee200f4e575b2967681",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/scan.c": "4c1a43bcbd40565df46675de3e20a097c98ec03cae422f95b4972670996a9b54",
+      "/home/orangepi/tinygrad/test/models/cpu_gdn_reference.py": "4ef0feb2b57d937805ffd7900f3e50af2a41b928bffa72c9b1d0c1ea37506750",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/check.py": "043260794c1cd03370a10a9b75d12c294bc79bb54d2dd3633d9dcd8aeb3b42b9"
+    },
+    "source_after": {
+      "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_recurrent.c": "6e7a0413d95a6dd24a97e9949f634b38af7b010b4a209ee200f4e575b2967681",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/scan.c": "4c1a43bcbd40565df46675de3e20a097c98ec03cae422f95b4972670996a9b54",
+      "/home/orangepi/tinygrad/test/models/cpu_gdn_reference.py": "4ef0feb2b57d937805ffd7900f3e50af2a41b928bffa72c9b1d0c1ea37506750",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/check.py": "043260794c1cd03370a10a9b75d12c294bc79bb54d2dd3633d9dcd8aeb3b42b9"
+    },
+    "source_sha256": {
+      "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_recurrent.c": "6e7a0413d95a6dd24a97e9949f634b38af7b010b4a209ee200f4e575b2967681",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/scan.c": "4c1a43bcbd40565df46675de3e20a097c98ec03cae422f95b4972670996a9b54",
+      "/home/orangepi/tinygrad/test/models/cpu_gdn_reference.py": "4ef0feb2b57d937805ffd7900f3e50af2a41b928bffa72c9b1d0c1ea37506750",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/check.py": "043260794c1cd03370a10a9b75d12c294bc79bb54d2dd3633d9dcd8aeb3b42b9"
+    },
+    "scope": "CPU GDN C operator parity and dispatcher control-flow checks only; no model, speed, or quality qualification.",
+    "commands": {
+      "baseline": [
+        "clang",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-math-errno",
+        "-fno-fast-math",
+        "-ffixed-x18",
+        "-mcpu=native",
+        "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_recurrent.c",
+        "-o",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/results/operator/baseline.so"
+      ],
+      "candidate": [
+        "clang",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-math-errno",
+        "-fno-fast-math",
+        "-ffixed-x18",
+        "-mcpu=native",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/scan.c",
+        "-o",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/results/operator/candidate.so"
+      ],
+      "candidate_with_fake_dispatchers": [
+        "clang",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-math-errno",
+        "-fno-fast-math",
+        "-ffixed-x18",
+        "-mcpu=native",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/scan.c",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/results/operator/fake-dispatchers.c",
+        "-o",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/results/operator/candidate-with-dispatchers.so"
+      ]
+    },
+    "sources": {
+      "baseline": "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_recurrent.c",
+      "baseline_sha256": "6e7a0413d95a6dd24a97e9949f634b38af7b010b4a209ee200f4e575b2967681",
+      "candidate": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-gdn-head-parallel-v1/scan.c",
+      "candidate_sha256": "4c1a43bcbd40565df46675de3e20a097c98ec03cae422f95b4972670996a9b54",
+      "scalar_oracle": "/home/orangepi/tinygrad/test/models/cpu_gdn_reference.py",
+      "scalar_oracle_sha256": "4ef0feb2b57d937805ffd7900f3e50af2a41b928bffa72c9b1d0c1ea37506750",
+      "fake_dispatchers": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/results/operator/fake-dispatchers.c",
+      "fake_dispatchers_sha256": "1e7d58bd91e3cd837cd7b139ad046711ed8fba7146e6f4d72360662060273326"
+    },
+    "compile_flags": [
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-math-errno",
+      "-fno-fast-math",
+      "-ffixed-x18",
+      "-mcpu=native"
+    ],
+    "matrix_cases": [
+      {
+        "name": "scalar_h3_rows1",
+        "dims": {
+          "batch": 2,
+          "heads": 3,
+          "rows": 1,
+          "capacity": 128,
+          "key_dim": 5,
+          "value_dim": 3,
+          "alpha_dim": 1,
+          "start": 0
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": true,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "per_key_h7_rows1",
+        "dims": {
+          "batch": 2,
+          "heads": 7,
+          "rows": 1,
+          "capacity": 128,
+          "key_dim": 8,
+          "value_dim": 5,
+          "alpha_dim": 8,
+          "start": 0
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": true,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "scalar_h3_rows3",
+        "dims": {
+          "batch": 2,
+          "heads": 3,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 5,
+          "value_dim": 3,
+          "alpha_dim": 1,
+          "start": 13
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": true,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "per_key_h7_rows3",
+        "dims": {
+          "batch": 2,
+          "heads": 7,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 8,
+          "value_dim": 5,
+          "alpha_dim": 8,
+          "start": 13
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": true,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "scalar_h3_rows8",
+        "dims": {
+          "batch": 2,
+          "heads": 3,
+          "rows": 8,
+          "capacity": 128,
+          "key_dim": 5,
+          "value_dim": 3,
+          "alpha_dim": 1,
+          "start": 0
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "per_key_h7_rows8",
+        "dims": {
+          "batch": 2,
+          "heads": 7,
+          "rows": 8,
+          "capacity": 128,
+          "key_dim": 8,
+          "value_dim": 5,
+          "alpha_dim": 8,
+          "start": 0
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "scalar_h3_rows127",
+        "dims": {
+          "batch": 2,
+          "heads": 3,
+          "rows": 127,
+          "capacity": 128,
+          "key_dim": 5,
+          "value_dim": 3,
+          "alpha_dim": 1,
+          "start": 29
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "per_key_h7_rows127",
+        "dims": {
+          "batch": 2,
+          "heads": 7,
+          "rows": 127,
+          "capacity": 128,
+          "key_dim": 8,
+          "value_dim": 5,
+          "alpha_dim": 8,
+          "start": 29
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows1",
+        "dims": {
+          "batch": 1,
+          "heads": 16,
+          "rows": 1,
+          "capacity": 128,
+          "key_dim": 128,
+          "value_dim": 128,
+          "alpha_dim": 1,
+          "start": 0
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows3",
+        "dims": {
+          "batch": 1,
+          "heads": 16,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 128,
+          "value_dim": 128,
+          "alpha_dim": 1,
+          "start": 13
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows127",
+        "dims": {
+          "batch": 1,
+          "heads": 16,
+          "rows": 127,
+          "capacity": 128,
+          "key_dim": 128,
+          "value_dim": 128,
+          "alpha_dim": 1,
+          "start": 29
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      },
+      {
+        "name": "odd_h7_k129_v127_rows3",
+        "dims": {
+          "batch": 2,
+          "heads": 7,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 129,
+          "value_dim": 127,
+          "alpha_dim": 129,
+          "start": 13
+        },
+        "baseline_candidate_bits_equal": true,
+        "scalar_oracle_checked": false,
+        "valid_rows_finite": true,
+        "unused_output_rows_zero": true,
+        "history_bits_equal": true
+      }
+    ],
+    "fake_pooled_matrix_cases": [
+      {
+        "name": "scalar_h3_rows1",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows1",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "scalar_h3_rows3",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows3",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "scalar_h3_rows8",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows8",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "scalar_h3_rows127",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows127",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows1",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows3",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows127",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "odd_h7_k129_v127_rows3",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      }
+    ],
+    "null_dispatch_fallback_cases": [
+      {
+        "name": "scalar_h3_rows1",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows1",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "scalar_h3_rows3",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows3",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "scalar_h3_rows8",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows8",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "scalar_h3_rows127",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "per_key_h7_rows127",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows1",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows3",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "model_h16_k128_v128_rows127",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "odd_h7_k129_v127_rows3",
+        "dispatch_status": 0,
+        "return_code": 0,
+        "matches_baseline_bits": true
+      }
+    ],
+    "dispatcher_cases": [
+      {
+        "name": "success",
+        "dispatch_status": 1,
+        "return_code": 0,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "busy",
+        "dispatch_status": 2,
+        "return_code": 0,
+        "callbacks": 0,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "error_after_all",
+        "dispatch_status": 4,
+        "return_code": 5,
+        "callbacks": 4,
+        "matches_baseline_bits": true
+      },
+      {
+        "name": "partial",
+        "dispatch_status": 3,
+        "return_code": 5,
+        "callbacks": 1,
+        "processed_batch_heads": [
+          0,
+          4
+        ],
+        "callback_groups_completed": [
+          0
+        ],
+        "untouched_groups_preserved": true,
+        "serial_replay_absent": true
+      }
+    ],
+    "actual_pool": {
+      "cases": [
+        {
+          "name": "actual_pool_small_h2_heads3_rows8",
+          "dispatcher_kind": "parallel",
+          "batch": 2,
+          "heads": 3,
+          "rows": 8,
+          "capacity": 16,
+          "key_dim": 5,
+          "value_dim": 3,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        },
+        {
+          "name": "actual_pool_small_h2_heads3_rows8",
+          "dispatcher_kind": "parallel_parked",
+          "batch": 2,
+          "heads": 3,
+          "rows": 8,
+          "capacity": 16,
+          "key_dim": 5,
+          "value_dim": 3,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        },
+        {
+          "name": "model_h16_k128_v128_rows3",
+          "dispatcher_kind": "parallel",
+          "batch": 1,
+          "heads": 16,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 128,
+          "value_dim": 128,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        },
+        {
+          "name": "model_h16_k128_v128_rows3",
+          "dispatcher_kind": "parallel_parked",
+          "batch": 1,
+          "heads": 16,
+          "rows": 3,
+          "capacity": 128,
+          "key_dim": 128,
+          "value_dim": 128,
+          "dispatcher_calls": 1,
+          "callbacks_expected": 4,
+          "dispatch_status": 1,
+          "return_code": 0,
+          "matches_baseline_bits": true,
+          "pool_parked_after_context": true,
+          "affinity_restored_after_context": true
+        }
+      ],
+      "case_names": [
+        "actual_pool_small_h2_heads3_rows8",
+        "actual_pool_small_h2_heads3_rows8",
+        "model_h16_k128_v128_rows3",
+        "model_h16_k128_v128_rows3"
+      ],
+      "case_pairs": [
+        [
+          "actual_pool_small_h2_heads3_rows8",
+          "parallel"
+        ],
+        [
+          "actual_pool_small_h2_heads3_rows8",
+          "parallel_parked"
+        ],
+        [
+          "model_h16_k128_v128_rows3",
+          "parallel"
+        ],
+        [
+          "model_h16_k128_v128_rows3",
+          "parallel_parked"
+        ]
+      ],
+      "pool_parked_after_exit": true,
+      "affinity_restored": true
+    },
+    "actual_pool_requested": true,
+    "scalar_oracle_tolerances": {
+      "atol": 2e-06,
+      "rtol": 0.0002
+    },
+    "hardware_qualification": false,
+    "production_integration": false,
+    "API_qualified": false,
+    "model_performance_qualified": false,
+    "quality_qualified": false
+  },
+  "provenance": {
+    "owner": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-cpu-gdn-head-parallel-v1.py",
+    "owner_sha256": "8f4f0399195c7c4990c187afb4332d4e4bdfa77302de79c3e420497226956ec5",
+    "owner_actual_terminal_exec_session": 67223,
+    "owner_exit_code": 0,
+    "fresh_verifier_actual_terminal_exec_session": 50149,
+    "fresh_verifier_exit_code": 0,
+    "job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/job.json",
+    "job_sha256": "fc4ed525158d57cc20e79a3edc8204748af73d6ae5e410160e0dd0158ffc29f3",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/results/operator/report.json",
+    "report_sha256": "acf4137814fd320b5020946b6b8e6523ac900e8093ef70148522999bfa1035be",
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-gdn-head-parallel-v1/serving-verification.json",
+    "receipt_sha256": "1ee70ad3c0a9e064f6b3073591f0a36feb4770c926f3cc6b6a93c2f16895f342",
+    "validation": {
+      "valid": true,
+      "gates": {
+        "complete": {
+          "passed": true
+        },
+        "scope_only": {
+          "passed": true
+        },
+        "actual_pool_requested": {
+          "passed": true
+        },
+        "source_before_after_expected": {
+          "passed": true
+        },
+        "source_paths_and_hashes": {
+          "passed": true
+        },
+        "compile_flags": {
+          "passed": true
+        },
+        "commands_recorded": {
+          "passed": true
+        },
+        "matrix_12_exact_bits": {
+          "passed": true
+        },
+        "fake_pooled_12": {
+          "passed": true
+        },
+        "null_fallback_12": {
+          "passed": true
+        },
+        "dispatcher_cases_4": {
+          "passed": true
+        },
+        "actual_pool_4_pair_contexts": {
+          "passed": true
+        }
+      },
+      "scope": "CPU GDN C operator parity and dispatcher control-flow checks only; no model, speed, API, or production integration qualification."
+    }
+  }
+}

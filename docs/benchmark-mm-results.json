@@ -1,0 +1,67 @@
+{
+  "model": "SmolVLM-256M",
+  "context": 512,
+  "input_positions": 128,
+  "image_positions": 64,
+  "output_tokens": 64,
+  "vision_ms": 1230.357135180384,
+  "prefill_ms": 99.10313901491463,
+  "prefill_tps": 1291.5837103881897,
+  "decode_tps": 105.74239463533962,
+  "image_to_answer_ms": 1925.441759172827,
+  "configuration": {
+    "checkpoint": "/home/orangepi/vlm-bench/hf",
+    "fixture": "/home/orangepi/vlm-bench/baseline-20261021/smolvlm128",
+    "device": "CPU",
+    "vision_device": "CPU",
+    "vision_npu": "on",
+    "vision_precision": "fp16",
+    "text_npu": "on",
+    "precision": "int8",
+    "float32": false,
+    "cpu_vision_attention": false,
+    "staged_vision": true,
+    "staged_attention": "ROCKCHIP",
+    "reset_before_vision": true,
+    "vision_calibration": null,
+    "npu_connector": true,
+    "fused_vision_mlp": true,
+    "shared_gpu_softmax": false,
+    "prepared_vision_mlp": false,
+    "batch_vision_prefill": false,
+    "native_generation_loop": true,
+    "context": 512,
+    "tokens": 64,
+    "warmups": 3,
+    "runs": 3,
+    "verify_only": false,
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/smolvlm128-cpu-npu-baseline.json"
+  },
+  "parity_vs_fp32": {
+    "vision": {
+      "finite": true,
+      "max_abs": 0.12735557556152344,
+      "normalized_rmse": 0.0029735653464219173,
+      "cosine": 0.9999955895300053
+    },
+    "image_embeddings": {
+      "finite": true,
+      "max_abs": 0.08806991577148438,
+      "normalized_rmse": 0.0014378476682665711,
+      "cosine": 0.9999989669420616
+    },
+    "logits": {
+      "finite": true,
+      "max_abs": 2.6309577226638794,
+      "normalized_rmse": 0.1147369278561973,
+      "cosine": 0.9936476691887774
+    },
+    "first_token": 378,
+    "greedy_first_token": 378
+  },
+  "qualified_win": false,
+  "quality_status": "Matched level0 RKLLM output quality and clocks pending",
+  "report": "/home/orangepi/vlm-bench/baseline-20261021/smolvlm128-cpu-npu-baseline.json",
+  "report_sha256": "a242ca63e16d175103bb2e104e0d35e109ca82a3f475e48063474fbf2307a6aa",
+  "checkpoint_sha256": "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e"
+}

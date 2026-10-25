@@ -1,0 +1,9 @@
+{
+  "checked_utc": "2026-10-25T01:11:00.240428+00:00",
+  "source": "https://raw.githubusercontent.com/jundot/omlx/98de1482882fe22edd1310a0c428bddd94b9f006/docs/experimental/dflash_mlx_integration.md",
+  "source_commit": "98de1482882fe22edd1310a0c428bddd94b9f006",
+  "scope": "Official documentation interpretation; no upstream engine execution or code audit.",
+  "clarification": "The supported-target table explicitly lists concurrent-row speculation for Qwen3.5/Qwen3.6/Qwen3.8, GLM-5.3 and MiniCPM-V 4.7. The following single-row paragraph explains the targets labeled single row; it does not revoke the concurrent-row entries.",
+  "local_gap": "oNPU still allows one active request per worker and has no per-model continuous batching. Existing two-model independent serving is a different capability.",
+  "corrects": "The finding in omlx-eagle-freshness-20261025.json saying the prose limits actual speculation to single-row requests was overly broad. The original dated source record is preserved."
+}

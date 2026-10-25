@@ -1,0 +1,75 @@
+{
+  "schema": "fallback-prefix-batching-CPU-v1",
+  "updated_utc": "2026-10-25T07:08:55.232642+00:00",
+  "status": "CPU_verified_candidate",
+  "option": "fallback_observation_batch_size",
+  "default": 1,
+  "maximum": 8,
+  "requires_for_batching": "retain_fallback_prefix=True, reuse_prefix=True and feature-only draft observer",
+  "app_enabled": false,
+  "trained_model_qualified": false,
+  "API_qualified": false,
+  "modelmax_qualified": false,
+  "general_speedup_claim": false,
+  "backend_source": "/home/orangepi/tinygrad/tinygrad/llm/speculative.py",
+  "backend_source_sha256": "ba6a69a248efa202655d813cf91702b403c4073f85fc51808db51079ffb1a60b",
+  "additional_backend_sources": {
+    "/home/orangepi/tinygrad/tinygrad/llm/dflash2.py": "11762efb95eba0537f6b216238c4b2df89e5a1a80263093545aa1c1efd14248a"
+  },
+  "implementation_diff": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-batching-v1/implementation.diff",
+  "implementation_diff_sha256": "140f4ea973284b1270637330ea1cd9209e2801b7a21cda5566a9975580a8bb63",
+  "test_source": "/home/orangepi/tinygrad/test/models/test_speculative_fallback_batch.py",
+  "test_source_sha256": "ddd640b573a357ff514f739079ab7078001aaa288590b48c08524a57b67bdd2a",
+  "behavior": "Clone only completed target feature rows immediately from expiring graph buffers; batch at most8 rows via DFlash2.observe_features; normal tail flush precedes retain. Final pending input stays unprocessed. Cancel/close/errors discard queued rows. Normal reset failure preserves valid target prefix and original reset call count.",
+  "final_targeted_backend_tests": {
+    "xml": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-batching-v1/backend-full-v2.xml",
+    "sha256": "61ec0219019e530d735464e6c68986df815dcf8526615edea5acbcadbc8e72d0",
+    "junit": {
+      "tests": 633,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 35
+    },
+    "pytest_methods_passed": 305,
+    "pytest_subtests_passed": 293,
+    "skipped": 35,
+    "exec_session": 86393,
+    "terminal_exit_code": 0
+  },
+  "application_regression": {
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-batching-App-preflight-v1.json",
+    "sha256": "9baa7918a13facb2b2651e18a3b320d46602ab08fd733715474868c4617c5c2d",
+    "junit": {
+      "tests": 330,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_paths": 304,
+    "before_after_equal": true,
+    "GPU_only_lease_parent_exit": 0,
+    "fresh_helper_exit": 0,
+    "fresh_serving_receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/fallback-prefix-batching-App-lease-v1/serving-verification.json",
+    "fresh_serving_receipt_sha256": "79a79fe606000f3e1520eb3624784e10b5100dc4d2e7417836f44ce39cc4e863",
+    "NPU_never_unloaded": true,
+    "minimum_available_GiB": 8.72
+  },
+  "mypy": {
+    "command": ".venv/bin/python -m mypy tinygrad/",
+    "sources": 264,
+    "terminal_exit_code": 0
+  },
+  "ruff": {
+    "command": ".venv/bin/python -m ruff check .",
+    "terminal_exit_code": 0
+  },
+  "test_scope": [
+    "Mutable target feature buffers overwritten every call; immediate ownedcopies preserve all rows",
+    "Only features cloned; bounded8-row queue; fullbatch andpartialtail",
+    "Scalar/batch outputs, target/recurrent/conv/KV state andcoldcachedcontinuation parity with identicaltargetcalls",
+    "EOS/budget/earlyanchor; cancelclose/error andduringbatchflush",
+    "Failure counters count delivered tokens only; legacy cleanup/reset failures preserveprimaryexception andvalidtargetprefix",
+    "Feature-only DFlash API matches wrapped API for1..8rows inretained/appendonly modes"
+  ],
+  "next_step": "Trained scalar-retention vs batch8 vs cachedordinary, identicalfrozenEOS-awareinputs andbalanced3warm3measured. Appstays off until measuredcost/quality/APIqualification."
+}

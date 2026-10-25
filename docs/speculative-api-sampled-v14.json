@@ -1,0 +1,729 @@
+{
+  "coverage": {
+    "greedy_measured_phase_medians_and_same_output_speedups": {
+      "counting": {
+        "ordinary": {
+          "completion_token_counts": [
+            29,
+            29,
+            29
+          ],
+          "expected_completion_tokens": 29,
+          "medians": {
+            "decode_tps": 2.5018079518672023,
+            "prefill_tps": 8.35841547802813,
+            "ttft_ms": 3589.1970288939774,
+            "wall_seconds": 15.191205088980496
+          },
+          "trial_count": 3
+        },
+        "same_output_speedup_ratios": {
+          "decode_tps_speculative_over_ordinary": 1.4095025012711362,
+          "prefill_tps_speculative_over_ordinary": 1.0146445107035318,
+          "ttft_ms_ordinary_over_speculative": 1.0146445107035316,
+          "wall_seconds_ordinary_over_speculative": 1.3217524226890145
+        },
+        "speculative": {
+          "completion_token_counts": [
+            29,
+            29,
+            29
+          ],
+          "expected_completion_tokens": 29,
+          "medians": {
+            "decode_tps": 3.52630456585684,
+            "prefill_tps": 8.480820382960678,
+            "ttft_ms": 3537.393630016595,
+            "wall_seconds": 11.493230372201651
+          },
+          "trial_count": 3
+        }
+      },
+      "explanation": {
+        "ordinary": {
+          "completion_token_counts": [
+            32,
+            32,
+            32
+          ],
+          "expected_completion_tokens": 32,
+          "medians": {
+            "decode_tps": 2.502077265488081,
+            "prefill_tps": 7.694818448316262,
+            "ttft_ms": 3508.854715852067,
+            "wall_seconds": 15.90992584102787
+          },
+          "trial_count": 3
+        },
+        "same_output_speedup_ratios": {
+          "decode_tps_speculative_over_ordinary": 0.7216381651811675,
+          "prefill_tps_speculative_over_ordinary": 0.9930186286851975,
+          "ttft_ms_ordinary_over_speculative": 0.9930186286851975,
+          "wall_seconds_ordinary_over_speculative": 0.7673774672599121
+        },
+        "speculative": {
+          "completion_token_counts": [
+            32,
+            32,
+            32
+          ],
+          "expected_completion_tokens": 32,
+          "medians": {
+            "decode_tps": 1.8055944470083318,
+            "prefill_tps": 7.641098063528574,
+            "ttft_ms": 3533.523555845022,
+            "wall_seconds": 20.732855106936768
+          },
+          "trial_count": 3
+        }
+      },
+      "short_code": {
+        "ordinary": {
+          "completion_token_counts": [
+            17,
+            17,
+            17
+          ],
+          "expected_completion_tokens": 17,
+          "medians": {
+            "decode_tps": 2.5032014601724453,
+            "prefill_tps": 8.380316403467468,
+            "ttft_ms": 4295.780525077134,
+            "wall_seconds": 11.102235081139952
+          },
+          "trial_count": 3
+        },
+        "same_output_speedup_ratios": {
+          "decode_tps_speculative_over_ordinary": 1.579568696932136,
+          "prefill_tps_speculative_over_ordinary": 0.9943945327086466,
+          "ttft_ms_ordinary_over_speculative": 0.9943945327086466,
+          "wall_seconds_ordinary_over_speculative": 1.074519715681623
+        },
+        "speculative": {
+          "completion_token_counts": [
+            17,
+            17,
+            17
+          ],
+          "expected_completion_tokens": 17,
+          "medians": {
+            "decode_tps": 3.95397866860321,
+            "prefill_tps": 8.333340813976639,
+            "ttft_ms": 4319.996122037992,
+            "wall_seconds": 10.332276755012572
+          },
+          "trial_count": 3
+        }
+      }
+    },
+    "numeric_probability_comparisons": 27,
+    "sampled_grouped_counts_medians_and_rates": [
+      {
+        "acceptance_rate": 0.8571428571428571,
+        "accepted_tokens": [
+          6
+        ],
+        "accepted_tokens_median": 6,
+        "completion_token_counts": [
+          8
+        ],
+        "completion_tokens_median": 8,
+        "end_to_end_visible_tokens_per_wall_second": 0.9117161475538251,
+        "engine": "speculative",
+        "phase": "boundary",
+        "rejected_blocks": [
+          1
+        ],
+        "residual_draw_rate": 0.14285714285714285,
+        "residual_draws_median": 1,
+        "row_count": 1,
+        "row_indices": [
+          36
+        ],
+        "sampling_acceptance_tests": [
+          7
+        ],
+        "sampling_residual_draws": [
+          1
+        ],
+        "temperature": 1.0,
+        "ttft_ms_median": 3559.322601184249,
+        "wall_seconds_median": 8.774660865077749,
+        "workload": "counting"
+      },
+      {
+        "acceptance_rate": 0.3333333333333333,
+        "accepted_tokens": [
+          1
+        ],
+        "accepted_tokens_median": 1,
+        "completion_token_counts": [
+          8
+        ],
+        "completion_tokens_median": 8,
+        "end_to_end_visible_tokens_per_wall_second": 0.6855829034053141,
+        "engine": "speculative",
+        "phase": "boundary",
+        "rejected_blocks": [
+          2
+        ],
+        "residual_draw_rate": 0.6666666666666666,
+        "residual_draws_median": 2,
+        "row_count": 1,
+        "row_indices": [
+          37
+        ],
+        "sampling_acceptance_tests": [
+          3
+        ],
+        "sampling_residual_draws": [
+          2
+        ],
+        "temperature": 2.0,
+        "ttft_ms_median": 3557.5877900701016,
+        "wall_seconds_median": 11.668902419041842,
+        "workload": "counting"
+      },
+      {
+        "completion_token_counts": [
+          20,
+          29,
+          29
+        ],
+        "completion_tokens_median": 29,
+        "end_to_end_visible_tokens_per_wall_second": 1.8506980720967312,
+        "engine": "ordinary",
+        "phase": "measured",
+        "row_count": 3,
+        "row_indices": [
+          6,
+          9,
+          10
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3514.2437799368054,
+        "wall_seconds_median": 15.233357993885875,
+        "workload": "counting"
+      },
+      {
+        "acceptance_rate": 1.0,
+        "accepted_tokens": [
+          26,
+          26,
+          26
+        ],
+        "accepted_tokens_median": 26,
+        "completion_token_counts": [
+          29,
+          29,
+          29
+        ],
+        "completion_tokens_median": 29,
+        "end_to_end_visible_tokens_per_wall_second": 2.422755522525493,
+        "engine": "speculative",
+        "phase": "measured",
+        "rejected_blocks": [
+          0,
+          0,
+          0
+        ],
+        "residual_draw_rate": 0.0,
+        "residual_draws_median": 0,
+        "row_count": 3,
+        "row_indices": [
+          7,
+          8,
+          11
+        ],
+        "sampling_acceptance_tests": [
+          26,
+          26,
+          26
+        ],
+        "sampling_residual_draws": [
+          0,
+          0,
+          0
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3632.6620900072157,
+        "wall_seconds_median": 12.014047734905034,
+        "workload": "counting"
+      },
+      {
+        "completion_token_counts": [
+          29,
+          29,
+          29
+        ],
+        "completion_tokens_median": 29,
+        "end_to_end_visible_tokens_per_wall_second": 1.9005314205212627,
+        "engine": "ordinary",
+        "phase": "warmup",
+        "row_count": 3,
+        "row_indices": [
+          0,
+          2,
+          4
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3534.8127160687,
+        "wall_seconds_median": 15.25964643782936,
+        "workload": "counting"
+      },
+      {
+        "acceptance_rate": 1.0,
+        "accepted_tokens": [
+          26,
+          26,
+          26
+        ],
+        "accepted_tokens_median": 26,
+        "completion_token_counts": [
+          29,
+          29,
+          29
+        ],
+        "completion_tokens_median": 29,
+        "end_to_end_visible_tokens_per_wall_second": 2.4281841076452952,
+        "engine": "speculative",
+        "phase": "warmup",
+        "rejected_blocks": [
+          0,
+          0,
+          0
+        ],
+        "residual_draw_rate": 0.0,
+        "residual_draws_median": 0,
+        "row_count": 3,
+        "row_indices": [
+          1,
+          3,
+          5
+        ],
+        "sampling_acceptance_tests": [
+          26,
+          26,
+          26
+        ],
+        "sampling_residual_draws": [
+          0,
+          0,
+          0
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3557.5621239840984,
+        "wall_seconds_median": 12.00237130583264,
+        "workload": "counting"
+      },
+      {
+        "completion_token_counts": [
+          32,
+          32,
+          32
+        ],
+        "completion_tokens_median": 32,
+        "end_to_end_visible_tokens_per_wall_second": 1.9935597547519577,
+        "engine": "ordinary",
+        "phase": "measured",
+        "row_count": 3,
+        "row_indices": [
+          30,
+          33,
+          34
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3507.5845348183066,
+        "wall_seconds_median": 16.060012073023245,
+        "workload": "explanation"
+      },
+      {
+        "acceptance_rate": 0.5,
+        "accepted_tokens": [
+          1,
+          4,
+          1
+        ],
+        "accepted_tokens_median": 1,
+        "completion_token_counts": [
+          32,
+          32,
+          32
+        ],
+        "completion_tokens_median": 32,
+        "end_to_end_visible_tokens_per_wall_second": 1.4672006423157375,
+        "engine": "speculative",
+        "phase": "measured",
+        "rejected_blocks": [
+          2,
+          2,
+          2
+        ],
+        "residual_draw_rate": 0.5,
+        "residual_draws_median": 2,
+        "row_count": 3,
+        "row_indices": [
+          31,
+          32,
+          35
+        ],
+        "sampling_acceptance_tests": [
+          3,
+          6,
+          3
+        ],
+        "sampling_residual_draws": [
+          2,
+          2,
+          2
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3548.2449559494853,
+        "wall_seconds_median": 21.757500175153837,
+        "workload": "explanation"
+      },
+      {
+        "completion_token_counts": [
+          32,
+          32,
+          32
+        ],
+        "completion_tokens_median": 32,
+        "end_to_end_visible_tokens_per_wall_second": 1.9895025520931708,
+        "engine": "ordinary",
+        "phase": "warmup",
+        "row_count": 3,
+        "row_indices": [
+          24,
+          26,
+          28
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3535.764703992754,
+        "wall_seconds_median": 16.06837987806648,
+        "workload": "explanation"
+      },
+      {
+        "acceptance_rate": 0.4,
+        "accepted_tokens": [
+          1,
+          1,
+          2
+        ],
+        "accepted_tokens_median": 1,
+        "completion_token_counts": [
+          32,
+          32,
+          32
+        ],
+        "completion_tokens_median": 32,
+        "end_to_end_visible_tokens_per_wall_second": 1.46217548949927,
+        "engine": "speculative",
+        "phase": "warmup",
+        "rejected_blocks": [
+          2,
+          2,
+          2
+        ],
+        "residual_draw_rate": 0.6,
+        "residual_draws_median": 2,
+        "row_count": 3,
+        "row_indices": [
+          25,
+          27,
+          29
+        ],
+        "sampling_acceptance_tests": [
+          3,
+          3,
+          4
+        ],
+        "sampling_residual_draws": [
+          2,
+          2,
+          2
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 3551.453246967867,
+        "wall_seconds_median": 22.030513192992657,
+        "workload": "explanation"
+      },
+      {
+        "completion_token_counts": [
+          12,
+          12,
+          12
+        ],
+        "completion_tokens_median": 12,
+        "end_to_end_visible_tokens_per_wall_second": 1.3031613674887952,
+        "engine": "ordinary",
+        "phase": "measured",
+        "row_count": 3,
+        "row_indices": [
+          18,
+          21,
+          22
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 4337.959938915446,
+        "wall_seconds_median": 9.200394656974822,
+        "workload": "short_code"
+      },
+      {
+        "acceptance_rate": 0.9375,
+        "accepted_tokens": [
+          15,
+          10,
+          20
+        ],
+        "accepted_tokens_median": 15,
+        "completion_token_counts": [
+          17,
+          12,
+          22
+        ],
+        "completion_tokens_median": 17,
+        "end_to_end_visible_tokens_per_wall_second": 1.5039586851458946,
+        "engine": "speculative",
+        "phase": "measured",
+        "rejected_blocks": [
+          2,
+          1,
+          0
+        ],
+        "residual_draw_rate": 0.0625,
+        "residual_draws_median": 1,
+        "row_count": 3,
+        "row_indices": [
+          19,
+          20,
+          23
+        ],
+        "sampling_acceptance_tests": [
+          17,
+          11,
+          20
+        ],
+        "sampling_residual_draws": [
+          2,
+          1,
+          0
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 4390.1112920138985,
+        "wall_seconds_median": 10.816471764119342,
+        "workload": "short_code"
+      },
+      {
+        "completion_token_counts": [
+          17,
+          17,
+          17
+        ],
+        "completion_tokens_median": 17,
+        "end_to_end_visible_tokens_per_wall_second": 1.4858702861246345,
+        "engine": "ordinary",
+        "phase": "warmup",
+        "row_count": 3,
+        "row_indices": [
+          12,
+          14,
+          16
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 4369.043027982116,
+        "wall_seconds_median": 11.349471264053136,
+        "workload": "short_code"
+      },
+      {
+        "acceptance_rate": 0.9487179487179487,
+        "accepted_tokens": [
+          11,
+          11,
+          15
+        ],
+        "accepted_tokens_median": 11,
+        "completion_token_counts": [
+          12,
+          12,
+          17
+        ],
+        "completion_tokens_median": 12,
+        "end_to_end_visible_tokens_per_wall_second": 1.2529134726210793,
+        "engine": "speculative",
+        "phase": "warmup",
+        "rejected_blocks": [
+          0,
+          0,
+          2
+        ],
+        "residual_draw_rate": 0.05128205128205128,
+        "residual_draws_median": 0,
+        "row_count": 3,
+        "row_indices": [
+          13,
+          15,
+          17
+        ],
+        "sampling_acceptance_tests": [
+          11,
+          11,
+          17
+        ],
+        "sampling_residual_draws": [
+          0,
+          0,
+          2
+        ],
+        "temperature": 0.6,
+        "ttft_ms_median": 4341.339435894042,
+        "wall_seconds_median": 11.540195118868724,
+        "workload": "short_code"
+      }
+    ],
+    "sampled_pairwise_winner_or_speedup_claim": false,
+    "v13_nonstream": {
+      "complete": false,
+      "failed_gate_names": [
+        "app_preflight",
+        "cancellation",
+        "complete",
+        "recovery",
+        "sampled_cancel",
+        "sampled_stream",
+        "suite_checks"
+      ],
+      "greedy_requests": 36,
+      "positive_residual_rows": 11,
+      "residual_draws_total": 20,
+      "sampled_requests": 38,
+      "validator_valid": false
+    },
+    "v14_focused": {
+      "composite_coverage_valid": true,
+      "greedy_cancellation": true,
+      "recovery": true,
+      "sampled_cancellation": true,
+      "sampled_stream": true,
+      "single_run_full_suite": false,
+      "stream": true
+    }
+  },
+  "pair": {
+    "checkpoint_path": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Qwen3.5-2B/Qwen3.5-2B-Q8_0.gguf",
+    "checkpoint_sha256_manifest": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1",
+    "context": 512,
+    "draft": "DFlash2 trained draft",
+    "gpu_kernel_layout": {
+      "attention_blocks": 0,
+      "bounded_masks": 6,
+      "consistent_decode": true,
+      "direct_embedding": true,
+      "fused_gate_up": 0,
+      "fused_gated_delta_blocks": 18,
+      "fused_qkv": 0,
+      "gdn_gate_up_packed_bytes": 905969664,
+      "gdn_gate_up_packed_layers": 36,
+      "gdn_gate_up_packed_scope": "ffn_gate,ffn_up",
+      "generic_recurrent_blocks": 0,
+      "linear_layers": 187,
+      "pack_gdn_gate_up": true,
+      "pack_output": true,
+      "pack_weights": true,
+      "packed_output_bytes": 1017118720,
+      "packed_output_head": true,
+      "prefill_chunk": 128,
+      "q8_output_head": false,
+      "q8_projection_checkpoint": null,
+      "q8_projection_fp16_bytes_replaced": 0,
+      "q8_projection_layers": 0,
+      "q8_projection_resident_bytes": 0,
+      "q8_projection_skipped": [],
+      "recurrent_pack_weights": false,
+      "segmented_embedding_chunks": 0
+    },
+    "max_output_tokens": 32,
+    "npu_assistance": "off",
+    "runtime_weights": "FP16 weights dequantized from Q8_0 source",
+    "target": "Qwen3.5-2B Q8_0",
+    "temperatures": [
+      0.0,
+      0.6,
+      1.0,
+      2.0
+    ],
+    "workloads": [
+      {
+        "expected_raw_target_output_tokens": 30,
+        "expected_visible_completion_tokens": 29,
+        "name": "counting",
+        "prompt_tokens": 30
+      },
+      {
+        "expected_raw_target_output_tokens": 18,
+        "expected_visible_completion_tokens": 17,
+        "name": "short_code",
+        "prompt_tokens": 36
+      },
+      {
+        "expected_raw_target_output_tokens": 32,
+        "expected_visible_completion_tokens": 32,
+        "name": "explanation",
+        "prompt_tokens": 27
+      }
+    ]
+  },
+  "provenance": {
+    "app_source_map": {
+      "file_count": 11,
+      "sha256": "4503bcd839c3021d338334c599a8d1fd1f562e878ac73af077169a98d8e74f5f"
+    },
+    "backend_source_map": {
+      "file_count": 265,
+      "sha256": "37fac80e6ff31abd2a50fbd0a67aca905d133e0d65408cf79b71f085941941d8"
+    },
+    "checkpoint": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Qwen3.5-2B/Qwen3.5-2B-Q8_0.gguf",
+      "sha256_manifest": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1",
+      "sha256_report_metadata": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1"
+    },
+    "source_maps_identical_v13_v14": true,
+    "v13": {
+      "complete": false,
+      "failed_gate_names": [
+        "app_preflight",
+        "cancellation",
+        "complete",
+        "recovery",
+        "sampled_cancel",
+        "sampled_stream",
+        "suite_checks"
+      ],
+      "http_report_sha256": "1929ef28e102fa176027f6b86f0aa690f6d86a3d019b5f5dd1d3617e387a59db",
+      "job_sha256": "307ce426704f8587080491e725608505524b56d27c6aabe85dd45bf93a49b335",
+      "serving_receipt_parent_job_sha256": "307ce426704f8587080491e725608505524b56d27c6aabe85dd45bf93a49b335",
+      "serving_receipt_sha256": "6dd9db8ce416a10cd485ee2d1669ce6cb767c71d727b9269330904df206b60d5"
+    },
+    "v14": {
+      "http_report_complete": true,
+      "http_report_sha256": "8352aa918adfd8f63d30f6bcbf2de6cda0f5b99a84c602f6e23cab659118a513",
+      "job_phase": "restored",
+      "job_restored": true,
+      "job_sha256": "b7b2a153ff8a43e78291d208d27a4834c6ec28d2435d54ffdb3f38264a09a408",
+      "probability_audit_sha256": "b0e0a5fccb6072da4434bb478507085e881d43eed0af7fcd7d349caf283f296e",
+      "serving_receipt_parent_job_sha256": "b7b2a153ff8a43e78291d208d27a4834c6ec28d2435d54ffdb3f38264a09a408",
+      "serving_receipt_sha256": "0ebdc9a6784d5ab9ed83a55bb79ad45245c646d2c4eb40fd53ac179f15eaccab",
+      "validator_sha256": "3de3f337317aac0f5f1a58db818fa2e87250726270d4855c289e13beb3439107"
+    }
+  },
+  "qualification": {
+    "RKLLM_quality_qualified": false,
+    "api_functional_qualified": true,
+    "api_functional_scope": "This tested Qwen3.5-2B/DFlash2 pair, context 512, frozen prompts, nonstream plus sampled HTTP rows from V13 and focused greedy/sampled SSE, cancellation, and recovery from V14.",
+    "coverage_across_two_runs": true,
+    "general_speedup_claim": false,
+    "modelmax_context_qualified": false,
+    "single_run_full_suite": false
+  },
+  "schema": "sampled_api_evidence_v14"
+}

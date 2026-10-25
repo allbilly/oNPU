@@ -1,0 +1,172 @@
+{
+  "kind": "GPU combined-head/GDN-packing and observation-copy trained diagnostic v10",
+  "status": "complete_diagnostic_without_formal_speed_win",
+  "complete": true,
+  "recorded_utc": "2026-10-23T03:13:30.100593+00:00",
+  "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-dflash2-probe-v10.json",
+  "raw_sha256": "cda646e6cd847ac3326f5ac72e4d75b95b09b850a9140bafe13d47df7deb822f",
+  "natural_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/natural-spec-workloads-v10.json",
+  "natural_report_sha256": "3eb12dfd6a7c3d490085f40116f5404f363c75a9f1e50e1bd880b6f2d9bc54ed",
+  "source_cohort": {
+    "measured_probe_sha256": "71fe0ed6bb63671623fadab8831aefc43a00373c56a8deb7c4f1e72ec5293367",
+    "all_sources_canonical_sha256": "d4f2b411f5cc09fb3657bfdb831758a0f8ee761f840889d1eb97893e34109175",
+    "selected_measured_source_sha256": {
+      "tinygrad/llm/kernels/mali.py": "31ecba509259304d9ff5620f3d7900330171f83d1ba0fc34c55f0f3b15064281",
+      "tinygrad/llm/kernels/mali_linear.py": "92bcdb928795e57cc63392d551cb2bac9b3516afab94c37d720c45ffc3120417",
+      "tinygrad/llm/dflash2.py": "befcf4d436593416a310c3fa7965f9c573543b064b4ee7f5961d7cbda51bad7d",
+      "tinygrad/llm/speculative.py": "c9ff4f4e37b643d72efcdd02e03153763d427b70b1f23f1d76bacd444574b366"
+    },
+    "candidate_mali_sha256_at_template_creation": "31ecba509259304d9ff5620f3d7900330171f83d1ba0fc34c55f0f3b15064281",
+    "candidate_dflash2_sha256_at_template_creation": "befcf4d436593416a310c3fa7965f9c573543b064b4ee7f5961d7cbda51bad7d",
+    "source_checks_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/v10-source-checks.json",
+    "source_checks_report_sha256": "b338fd37c14ac1873f1e87d23ea6f9cc9e194069359af13e2d64e0038c66e204",
+    "scope": "Pinned v10 measured cohort; source-check report is dated pre-run evidence, not a substitute for terminal raw/restoration proofs."
+  },
+  "packing_protocol": {
+    "expected_head_bytes": 1017118720,
+    "expected_gdn_gate_up_bytes": 905969664,
+    "expected_gdn_gate_up_layers": 36,
+    "explicit_headroom_bytes": 2147483648,
+    "combined_required_available_bytes": 4070572032,
+    "required_order": "Both models resident; allocator cache cleanup; combined admission; all packing; then capture/execution.",
+    "actual_admission_passed": true,
+    "order_and_no_prior_capture_gate_passed": true,
+    "head_shared_by_target_and_draft": true,
+    "actual_available_bytes": 4837621760,
+    "swap_counted_as_available": false,
+    "actual_gdn_gate_up_layers": 36
+  },
+  "configuration": {
+    "device": "CL",
+    "context": 512,
+    "input_tokens": 128,
+    "pack_output_requested": true,
+    "pack_gdn_gate_up_requested": true,
+    "pack_output_default": false,
+    "pack_gdn_gate_up_default": false,
+    "batched_pure_copy_realize_enabled": true,
+    "math_and_transaction_gates_passed": true,
+    "no_npu_device_opened": true,
+    "api_enabled": false
+  },
+  "prelude_and_harness_provenance": {
+    "actual_gpu_observation_prelude_passed": true,
+    "actual_prelude_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/prepared-observation-mali-v10.json",
+    "pre_run_cpu_checks": "26 passed, 11 hardware-skipped, 13 subtests; mypy (255 sources), Ruff and diff passed.",
+    "combined_rollback_cpu_review": "P2 fixed; staged v2 review closed before the actual run.",
+    "profiling_parent_failed_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dispatch-profile-v1-job.json",
+    "profiling_parent_failed_sha256": "fac1db59dd532e863c08b6008400ce8c2774d48f2d84ec6fe34f96302062fc3f",
+    "profiling_parent_failure_scope": "Earlier metadata missing-flag failure; preserved, with corrected five schema checks and no profiling rerun.",
+    "canceled_m8_reconfirmation_executed": false,
+    "cancellation_reason": "Earlier M16 result was already best; no fabricated M8 measurement.",
+    "v10_parent_schema_checks_passed": 8,
+    "checker_fixture_v1_failure_preserved": true,
+    "checker_fixture_v2_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/trained-v10/check_v10_parent_contract_v2.py",
+    "checker_failure_scope": "Checker 578ffaff had eight missing-self-file fixture errors; version e562f115 passed 8 schema cases. These are harness checks, not a failed trained V10 run.",
+    "actual_prelude_test_seconds": 11.13
+  },
+  "strict_gate": {
+    "complete": true,
+    "expected_counts_per_engine": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "ordinary_counts": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "speculative_counts": [
+      8,
+      8,
+      8,
+      64
+    ],
+    "exact_ids_match_reference": true,
+    "exact_ids_match_between_engines": true
+  },
+  "strict_total_seconds": {
+    "last_8_ordinary": 8.95817887596786,
+    "last_8_speculative": 11.823167856084183,
+    "single_64_ordinary": 32.53165053902194,
+    "single_64_speculative": 57.21153969084844
+  },
+  "natural_fixed_32": {
+    "complete": true,
+    "completed_pairs": 3,
+    "ignore_eos": true,
+    "counting": {
+      "ordinary_seconds": 18.97149189701304,
+      "speculative_seconds": 20.7567537331488,
+      "exact_ids_equal": true
+    },
+    "short_code": {
+      "ordinary_seconds": 19.070019057020545,
+      "speculative_seconds": 29.898796192137524,
+      "exact_ids_equal": true
+    },
+    "explanation": {
+      "ordinary_seconds": 18.93197189318016,
+      "speculative_seconds": 43.68998727411963,
+      "exact_ids_equal": true
+    }
+  },
+  "setup_memory_cleanup": {
+    "target_and_draft_load_seconds": 23.80502851307392,
+    "allocator_cleanup_before_admission_seconds": 0.3168048979714513,
+    "head_packed_bytes": 1017118720,
+    "gate_up_packed_bytes": 905969664,
+    "packing_seconds": 1.178214053856209,
+    "model_peak_rss_bytes": 9382256640,
+    "process_peak_rss_bytes": 9541693440,
+    "trace_workspace_bytes": 155860992,
+    "cleanup_seconds": 0.04894770891405642,
+    "cleanup_complete": true,
+    "packed_allocations_released": true,
+    "orphan_process_count": 0
+  },
+  "restoration": {
+    "parent_job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/trained-probe-job-v10.json",
+    "parent_job_sha256": "1443611387e2713bea376338e3bf8334c0fbbc750f88a066302ac6043837774e",
+    "child_exit_code": 0,
+    "parent_complete": true,
+    "parent_restored": true,
+    "original_ids_profiles_full_options_selection_settings_preserved": true,
+    "original_npu_worker_preserved": true,
+    "supplemental_recovery_report": null,
+    "supplemental_recovery_sha256": null,
+    "serving_verification_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/post-v10-serving-verification.json",
+    "serving_verification_sha256": "1d97954a9b8b9991322478883afae6fee205b172550b093c5403cf2aa2041f88"
+  },
+  "qualification": {
+    "trained_combined_packing_output_gate_passed": true,
+    "formal_warmed_speed_qualification": false,
+    "broad_quality_qualified": false,
+    "model_max_context_qualified": false,
+    "published_rkllm_win_claimed": false,
+    "api_promotion": false
+  },
+  "publication_gates": {
+    "raw_terminal_and_source_pins_verified": true,
+    "strict_and_all_three_natural_gates_passed": true,
+    "actual_restoration_and_serving_verified": true
+  },
+  "limits": [
+    "All reported v10 whole-request pairs remain slower than ordinary; no formal speed, broad-quality or model-maximum-context qualification.",
+    "Do not conflate canceled profiling, schema mocks, fixture failures or CPU checks with a device/model run.",
+    "Report residency, cache cleanup, combined admission and setup/capture costs before attributing cross-cohort timing changes.",
+    "Fixed 32/EOS-ignored outputs are not completed-answer latency; pin raw data instead of duplicating IDs/clocks/traces.",
+    "Keep both options default-off/API-unpromoted unless separately authorized and qualified.",
+    "Finalize the compact first, then compute and verify its linking digest."
+  ],
+  "long_cost_comparison": {
+    "v10_verification_seconds": 25.302564222132787,
+    "v9_verification_seconds": 29.827685174997896,
+    "v10_observation_seconds": 9.921598225366324,
+    "v9_observation_seconds": 9.935740953311324,
+    "attribution": "Observation is essentially unchanged; combined changes and diagnostic cohorts do not isolate a cache-batching benefit or unique cause."
+  }
+}

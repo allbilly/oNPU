@@ -1,0 +1,72 @@
+{
+  "checked_utc": "2026-10-24T16:46:08Z",
+  "scope": "Primary-source freshness check of default-branch metadata plus selected official README/DFlash integration/support-matrix pages only. No code audit, install, model download or inference.",
+  "repositories": [
+    {
+      "repository": "jundot/omlx",
+      "default_branch": "main",
+      "commit_sha": "98de1482882fe22edd1310a0c428bddd94b9f006",
+      "commit_author_utc": "2026-10-24T16:28:19Z",
+      "commit_committer_utc": "2026-10-24T16:28:19Z",
+      "commit_subject": "chore: bump version to 0.7.3.dev1",
+      "previous_recorded_sha": "3df94603c047ec77f5381d11d1d6daff75794870",
+      "inspected_sources": [
+        {
+          "url": "https://raw.githubusercontent.com/jundot/omlx/98de1482882fe22edd1310a0c428bddd94b9f006/README.md",
+          "bytes": 25589,
+          "findings": [
+            "README advertises continuous batching and tiered hot-RAM/cold-SSD KV with prefix sharing and copy-on-write.",
+            "README lists DFlash-MLX as a related project and Lightning MTP/MTPLX references; detailed DFlash behavior is documented in the separately inspected integration page."
+          ]
+        },
+        {
+          "url": "https://raw.githubusercontent.com/jundot/omlx/98de1482882fe22edd1310a0c428bddd94b9f006/docs/experimental/dflash_mlx_integration.md",
+          "bytes": 5734,
+          "findings": [
+            "DFlash is described as running inside BatchedEngine/VLMBatchedEngine and using the scheduler, continuous batching and paged hot/SSD prefix cache.",
+            "Table lists Qwen3.5/Qwen3.6/Qwen3.8 text/VLM families with concurrent-row support; the prose limits actual speculation to single-row requests because multi-row ragged rollback is not supported.",
+            "Adaptive verify mode lets Lightning MTP depth controllers use measured cost and acceptance; off and full-block modes are also listed.",
+            "DFlash is described as mutually exclusive with Lightning MTP, VLM MTP and expert offload."
+          ]
+        }
+      ],
+      "directly_relevant_oNPU_gaps": "The inspected current oNPU comparison describes one active request per worker and a recent RAM prefix cache, with continuous batching and shared paged/SSD KV as gaps. The inspected oMLX DFlash page advertises scheduler-integrated batched serving and a paged hot/SSD prefix cache for DFlash requests. This is a source-feature comparison only, not an implementation or performance equivalence claim."
+    },
+    {
+      "repository": "eagle-hq/EAGLE-4",
+      "default_branch": "main",
+      "commit_sha": "60bab6b469e795d47bda82b16243b82bb7b6206f",
+      "commit_author_utc": "2026-10-24T08:32:05Z",
+      "commit_committer_utc": "2026-10-24T08:34:15Z",
+      "commit_subject": "docs(tokenspeed): add the TP8 row measured on 0.1.2",
+      "previous_recorded_sha": "6d185dc71693c8853bdb3033ef4362ea626cacd1",
+      "previous_recorded_committer_utc": "2026-10-24T05:30:48Z",
+      "inspected_source": {
+        "url": "https://raw.githubusercontent.com/eagle-hq/EAGLE-4/60bab6b469e795d47bda82b16243b82bb7b6206f/docs/support-matrix.md",
+        "bytes": 33788,
+        "findings": [
+          "Matrix sections are released 0.1.0, 0.1.1, current released 0.1.2, and unreleased candidates.",
+          "The matrix describes 0.1.2 runs on NVIDIA B300 with named engines/configurations; rows from unreleased candidates are kept separate.",
+          "The default measured pair in the matrix is Qwen3.8-27B with its EAGLE-4 draft. Nemotron 3.5 Super 120B-A12B also has a named section.",
+          "The new-head commit subject concerns a TokenSpeed TP8 0.1.2 row.",
+          "No Qwen3.5-2B-target-compatible EAGLE-4 draft is named in this inspected support matrix. This is scoped to this matrix, not a global absence claim."
+        ]
+      },
+      "small_pair_finding": "No compatible small 2B target/draft pair appears in the inspected current support matrix; do not infer that no such draft exists elsewhere."
+    }
+  ],
+  "comparison_summary": {
+    "eagle4_head_changed_since_oct24_record": true,
+    "eagle4_observed_change": "TokenSpeed TP8 row for 0.1.2, per commit subject; current support matrix remains configuration- and hardware-scoped.",
+    "omlx_head_changed_since_previous_refresh_v5": true,
+    "omlx_observed_commit_subject": "Version bump to 0.7.3.dev1. The inspected DFlash integration page documents scheduler/continuous-batching/paged-cache integration.",
+    "new_small_eagle4_pair_in_inspected_matrix": false,
+    "onpu_qualification_changed_by_this_check": false
+  },
+  "limits": [
+    "Only the named README, DFlash integration page and EAGLE support matrix were inspected.",
+    "No full repository audit.",
+    "No claim of EAGLE-4 support or compatibility on RK3588.",
+    "The missing-small-pair finding is limited to the inspected current EAGLE support matrix."
+  ]
+}

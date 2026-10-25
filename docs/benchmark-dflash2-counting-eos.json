@@ -1,0 +1,288 @@
+{
+  "kind": "Clean EOS-aware trained DFlash2 counting qualification",
+  "scope": "One prompt, greedy EOS-inclusive output; not a general model/API/RKLLM qualification.",
+  "target": "Qwen3.5-2B Q8_0",
+  "draft": "Pinned community DFlash2-Qwen3.5-2B, FP16",
+  "device": "CL",
+  "context": 512,
+  "prompt": {
+    "prompt_sha256": "5e14c8561d4e1f4cd6967d19e1e8ae95dc11975be8dd5933cb14b7c8648dd067"
+  },
+  "prompt_token_count": 30,
+  "requested_max_tokens": 32,
+  "actual_eos_inclusive_tokens": 30,
+  "end_token_ids": [
+    248046
+  ],
+  "protocol": {
+    "warmups_per_engine": 3,
+    "measured_per_engine": 3,
+    "warmup_order": [
+      "ordinary",
+      "speculative"
+    ],
+    "measured_orders": [
+      [
+        "ordinary",
+        "speculative"
+      ],
+      [
+        "speculative",
+        "ordinary"
+      ],
+      [
+        "ordinary",
+        "speculative"
+      ]
+    ],
+    "fresh_history_every_request": true,
+    "loading_and_packing_separate": true,
+    "generation_includes_close_and_final_sync": true
+  },
+  "engines": {
+    "ordinary": {
+      "first_token_ms": 5914.953502127901,
+      "total_seconds": 17.944699411047623,
+      "decode_full_cost_tps": 2.410310141345686,
+      "output_tps": 1.6718028712997306,
+      "all_total_seconds": [
+        17.944699411047623,
+        17.922032542992383,
+        18.01574118179269
+      ],
+      "prefill_proxy_tps": 5.071891095882245
+    },
+    "speculative": {
+      "first_token_ms": 8214.449719991535,
+      "total_seconds": 13.662258489057422,
+      "decode_full_cost_tps": 5.2833524607058715,
+      "output_tps": 2.1958302153357767,
+      "all_total_seconds": [
+        13.27236543991603,
+        13.918534209951758,
+        13.662258489057422
+      ],
+      "prefill_proxy_tps": 3.6521009955163395
+    }
+  },
+  "full_request_speedup": 1.3134504390632162,
+  "decode_speedup": 2.191980347290973,
+  "all_12_requests_match_exact_eos_ids": true,
+  "measured_total_ranges_separated": true,
+  "specific_workload_speedup_verified": true,
+  "native_counters": {
+    "native_cache_copy": true,
+    "native_copy_appends": 168,
+    "native_copy_commands": 336,
+    "native_copy_bytes": 12730368,
+    "native_copy_fallbacks": 48
+  },
+  "selected_measured_source_sha256": {
+    "tinygrad/llm/dflash2.py": "744bef350eb081fa4fff995e5f10d4e3d09c1081c4a1987bf98deeb19ba05b90",
+    "tinygrad/llm/speculative.py": "b9a0d491263f2582afcb9c911ebccee4be36332d5e6249b71c56221968f0e0d0",
+    "tinygrad/llm/kernels/mali_copy.py": "9846f3db9c43b24c6db7f860f612005d00b00989af45bbf80fe3b8917ceb3249",
+    "tinygrad/llm/kernels/mali.py": "31ecba509259304d9ff5620f3d7900330171f83d1ba0fc34c55f0f3b15064281",
+    "tinygrad/llm/kernels/mali_linear.py": "92bcdb928795e57cc63392d551cb2bac9b3516afab94c37d720c45ffc3120417"
+  },
+  "trials": [
+    {
+      "engine": "ordinary",
+      "warmup": true,
+      "paired_round": 1,
+      "order_index": 1,
+      "first_token_ms": 15507.32775987126,
+      "total_seconds": 33.116049975855276,
+      "decode_full_cost_tps": 1.646911095779326,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "speculative",
+      "warmup": true,
+      "paired_round": 1,
+      "order_index": 2,
+      "first_token_ms": 27954.208960058168,
+      "total_seconds": 37.921737438067794,
+      "decode_full_cost_tps": 2.909447418583236,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "ordinary",
+      "warmup": true,
+      "paired_round": 2,
+      "order_index": 1,
+      "first_token_ms": 8631.087726913393,
+      "total_seconds": 20.676915631862357,
+      "decode_full_cost_tps": 2.407472548074965,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "speculative",
+      "warmup": true,
+      "paired_round": 2,
+      "order_index": 2,
+      "first_token_ms": 10859.147845068946,
+      "total_seconds": 16.251840859185904,
+      "decode_full_cost_tps": 5.377647109539517,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "ordinary",
+      "warmup": true,
+      "paired_round": 3,
+      "order_index": 1,
+      "first_token_ms": 6008.786972146481,
+      "total_seconds": 18.06025942810811,
+      "decode_full_cost_tps": 2.406344959586599,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "speculative",
+      "warmup": true,
+      "paired_round": 3,
+      "order_index": 2,
+      "first_token_ms": 7934.118584031239,
+      "total_seconds": 13.461770400870591,
+      "decode_full_cost_tps": 5.2463507038657635,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "ordinary",
+      "warmup": false,
+      "paired_round": 1,
+      "order_index": 1,
+      "first_token_ms": 5914.953502127901,
+      "total_seconds": 17.944699411047623,
+      "decode_full_cost_tps": 2.4106909837968655,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "speculative",
+      "warmup": false,
+      "paired_round": 1,
+      "order_index": 2,
+      "first_token_ms": 7783.4263211116195,
+      "total_seconds": 13.27236543991603,
+      "decode_full_cost_tps": 5.2833524607058715,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "speculative",
+      "warmup": false,
+      "paired_round": 2,
+      "order_index": 1,
+      "first_token_ms": 8214.449719991535,
+      "total_seconds": 13.918534209951758,
+      "decode_full_cost_tps": 5.084076165253686,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "ordinary",
+      "warmup": false,
+      "paired_round": 2,
+      "order_index": 2,
+      "first_token_ms": 5890.385867096484,
+      "total_seconds": 17.922032542992383,
+      "decode_full_cost_tps": 2.410310141345686,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "ordinary",
+      "warmup": false,
+      "paired_round": 3,
+      "order_index": 1,
+      "first_token_ms": 5972.51782589592,
+      "total_seconds": 18.01574118179269,
+      "decode_full_cost_tps": 2.4079932043941223,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    },
+    {
+      "engine": "speculative",
+      "warmup": false,
+      "paired_round": 3,
+      "order_index": 2,
+      "first_token_ms": 8280.077354051173,
+      "total_seconds": 13.662258489057422,
+      "decode_full_cost_tps": 5.388150133294674,
+      "actual_token_count": 30,
+      "exact_ids": true,
+      "finish_reason": "eos"
+    }
+  ],
+  "limits": {
+    "first_token_slower": true,
+    "default_enabled": false,
+    "prepared_native_options_enabled_in_app_worker": false,
+    "general_speed_qualification": false,
+    "qualified_rkllm_win": false,
+    "sampled_speculation_qualified": false,
+    "model_max_context_qualified": false
+  },
+  "restoration": {
+    "complete": true,
+    "fresh_gpu_and_npu_API_replies": true,
+    "npu_preserved": true
+  },
+  "evidence": {
+    "counting-eos-v1.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/counting-eos-v1.json",
+      "sha256": "2ec82858a0fb53f35f6fb8ea0679266b3806fd7dc51b2fb76ccc9afa51cea4d8"
+    },
+    "counting-eos-v1-job.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/counting-eos-v1-job.json",
+      "sha256": "65bdb83d6cd74494a4097b2ee39930a489ccdc886a80bbfdc534d530f3745d32"
+    },
+    "post-counting-eos-v1-serving-verification.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/post-counting-eos-v1-serving-verification.json",
+      "sha256": "fed187003de055d9271042ed2f167d97ba831cdd0fa8d8e898bc7c37e36c5be1"
+    },
+    "counting-eos-python-contract-v2.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/counting-eos-python-contract-v2.json",
+      "sha256": "ffe1d299451139b3c4d1c8f4bda62261a81887e5d00b91387503668eed6cb142"
+    },
+    "counting-eos-v1-parent-checks-v4.log": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/counting-eos-v1-parent-checks-v4.log",
+      "sha256": "38f118d475bbd96c84414e0dbba110b4c39f31f18818130f190224f2d21c4443"
+    }
+  },
+  "interpretation": "The clean repeated EOS workload is faster end to end, with slower TTFT. Fixed-length synthetic/code/explanation results do not establish general gains; no serving option was promoted.",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Count from 1 to 10, separated by commas. Output only the numbers."
+    }
+  ],
+  "compute_precision": "FP16 resident weights/draft activations with FP32 Mali accumulation and target arithmetic; this is not the CPU+NPU W8A8 path.",
+  "backend_options": {
+    "prepared_target": true,
+    "prepared_draft": true,
+    "prefix_trace": true,
+    "pad_decode_rows": true,
+    "native_cache_copy": true,
+    "pack_output": true,
+    "pack_gdn_gate_up": true,
+    "additional_packed_bytes": 1923088384,
+    "explicit_headroom_bytes": 2147483648
+  }
+}

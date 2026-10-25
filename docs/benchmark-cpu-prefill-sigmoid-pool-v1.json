@@ -1,0 +1,4514 @@
+{
+  "schema": "onpu-cpu-prefill-sigmoid-pool-v1",
+  "updated_utc": "2026-10-24T15:56:42.564708+00:00",
+  "complete": true,
+  "operator_bit_parity_verified": true,
+  "operator_timing_measured": true,
+  "model_speed_qualified": false,
+  "API_qualified": false,
+  "quality_qualified": false,
+  "production_applied": false,
+  "scope": "Exact captured 6144-wide gate-half sigmoid C arithmetic, original/candidate serial/parked row dispatch at1,3,8,16,32,64,128 rows. Normal and special outputs bit-identical; disjoint buffers and row guards verified. No whole-model gain implied.",
+  "profiles": [
+    {
+      "rows": 1,
+      "medians_ms": {
+        "original_serial": 0.09158200000000001,
+        "candidate_serial": 0.091874,
+        "parallel_parked": 0.0947905
+      },
+      "original_over_parked": 0.9661516713172734
+    },
+    {
+      "rows": 3,
+      "medians_ms": {
+        "original_serial": 0.2719755,
+        "candidate_serial": 0.27182949999999995,
+        "parallel_parked": 0.1423315
+      },
+      "original_over_parked": 1.9108595075580599
+    },
+    {
+      "rows": 8,
+      "medians_ms": {
+        "original_serial": 0.7265315,
+        "candidate_serial": 0.721428,
+        "parallel_parked": 0.23755900000000002
+      },
+      "original_over_parked": 3.0583202488644927
+    },
+    {
+      "rows": 16,
+      "medians_ms": {
+        "original_serial": 1.446793,
+        "candidate_serial": 1.442272,
+        "parallel_parked": 0.419848
+      },
+      "original_over_parked": 3.445992359139498
+    },
+    {
+      "rows": 32,
+      "medians_ms": {
+        "original_serial": 2.8842525,
+        "candidate_serial": 2.8838155000000003,
+        "parallel_parked": 0.783115
+      },
+      "original_over_parked": 3.683051020603615
+    },
+    {
+      "rows": 64,
+      "medians_ms": {
+        "original_serial": 5.764714000000001,
+        "candidate_serial": 5.769817499999999,
+        "parallel_parked": 1.5217500000000002
+      },
+      "original_over_parked": 3.788213569903072
+    },
+    {
+      "rows": 128,
+      "medians_ms": {
+        "original_serial": 11.573906000000001,
+        "candidate_serial": 11.544302,
+        "parallel_parked": 2.97846
+      },
+      "original_over_parked": 3.88586920757707
+    }
+  ],
+  "raw_operator_report": {
+    "complete": true,
+    "operator_only": true,
+    "API_qualified": false,
+    "model_quality_qualified": false,
+    "model_speed_qualified": false,
+    "production_applied": false,
+    "source_sha256": {
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b1d2596bf6bc4f83c7e27e0779e87a340709f4796ccfe47b33729fb14b8386af.c": "b1d2596bf6bc4f83c7e27e0779e87a340709f4796ccfe47b33729fb14b8386af",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-prefill-sigmoid-pool-v1/sigmoid.c": "ee49b97a1e867c8b48cc48ef43b9cd0d0225ba330afcc94d9872eb28b6fd8d6b",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-prefill-sigmoid-pool-v1/check.py": "1536443d3282693456f633e60631239d5bafea850102bb5df4f895fa5bd64fc0"
+    },
+    "scope": "Captured 6144-wide FP32 sigmoid C parity and parked CPU row-dispatch timings only.",
+    "commands": [
+      [
+        "clang",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-math-errno",
+        "-fno-fast-math",
+        "-ffixed-x18",
+        "-mcpu=native",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b1d2596bf6bc4f83c7e27e0779e87a340709f4796ccfe47b33729fb14b8386af.c",
+        "-o",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-prefill-sigmoid-pool-v1/results/operator/baseline.so"
+      ],
+      [
+        "clang",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-math-errno",
+        "-fno-fast-math",
+        "-ffixed-x18",
+        "-mcpu=native",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-prefill-sigmoid-pool-v1/sigmoid.c",
+        "-o",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-prefill-sigmoid-pool-v1/results/operator/candidate.so"
+      ]
+    ],
+    "compile_flags": [
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-math-errno",
+      "-fno-fast-math",
+      "-ffixed-x18",
+      "-mcpu=native"
+    ],
+    "modes": [
+      "original_serial",
+      "candidate_serial",
+      "parallel_parked"
+    ],
+    "protocol": {
+      "warmups": 6,
+      "runs": 12,
+      "orders": [
+        [
+          "original_serial",
+          "candidate_serial",
+          "parallel_parked"
+        ],
+        [
+          "original_serial",
+          "parallel_parked",
+          "candidate_serial"
+        ],
+        [
+          "candidate_serial",
+          "original_serial",
+          "parallel_parked"
+        ],
+        [
+          "candidate_serial",
+          "parallel_parked",
+          "original_serial"
+        ],
+        [
+          "parallel_parked",
+          "original_serial",
+          "candidate_serial"
+        ],
+        [
+          "parallel_parked",
+          "candidate_serial",
+          "original_serial"
+        ]
+      ],
+      "caller_cpu": 4,
+      "worker_cpus": [
+        5,
+        6,
+        7
+      ],
+      "allocation_and_hashes_outside_timer": true
+    },
+    "profiles": [
+      {
+        "rows": 1,
+        "depth": 6144,
+        "trials": [
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 9.5957e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 9.3916e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000113457,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 9.304e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 9.5666e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 9.2166e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 9.2165e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 9.4791e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 9.2166e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 9.4499e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 9.5082e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 9.4791e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 9.4791e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 9.479e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 9.1583e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 9.479e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 9.6832e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 9.4791e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 9.4498e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 9.4791e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 9.1583e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 9.479e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 9.4791e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 9.4499e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 9.4499e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 9.5373e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 9.1582e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 9.5082e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 9.1874e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 9.5082e-05,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "a60f029580573c8e59583517da234d0a301db96d9e86cd27c5e2ac889e522dcb",
+            "baseline_bits_equal": true
+          }
+        ],
+        "medians_seconds": {
+          "original_serial": 9.1582e-05,
+          "candidate_serial": 9.1874e-05,
+          "parallel_parked": 9.47905e-05
+        },
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 3,
+        "depth": 6144,
+        "trials": [
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000275329,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000287579,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000150789,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000270955,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000140873,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000272997,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000139998,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000271829,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 9.8582e-05,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000275038,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000142331,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000274163,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.000271538,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000141457,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000271538,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000270954,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000270663,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000271538,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000141456,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000271247,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000108499,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000271829,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000272413,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000142332,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000271829,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000143206,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000270955,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000142331,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000274163,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000146123,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000271538,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000271246,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000270955,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000142332,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000272121,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000142915,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.000271538,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000271538,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000275913,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000146415,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000141457,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000141457,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000272704,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000141748,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.00027183,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000272121,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "c3870fd7b6d832fcab67ff2acae8d04bc14c1fd7fdb49ce2cf8e249a3a52e3d6",
+            "baseline_bits_equal": true
+          }
+        ],
+        "medians_seconds": {
+          "original_serial": 0.0002719755,
+          "candidate_serial": 0.00027182949999999997,
+          "parallel_parked": 0.0001423315
+        },
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 8,
+        "depth": 6144,
+        "trials": [
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000723032,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000723323,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000316162,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000720407,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000235372,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.000729157,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000721282,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000725949,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000198914,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000733531,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000194831,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000720407,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000231871,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000726532,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.000720699,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000235664,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000720699,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000718074,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.00072799,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000721574,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000238872,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000718657,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.00024033,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00072099,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000721282,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000717782,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000241205,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000722449,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000235955,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000728282,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.00023158,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000729157,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.000721574,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000237706,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000721574,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000724199,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000725073,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.00072099,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.00023683,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.000747823,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000237705,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00072099,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000721574,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.00072799,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000237413,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.000720991,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.00023683,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000748407,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000242371,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.000718073,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.000721282,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000235081,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.000727115,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.000719532,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e4bf8f369446b62800920d256d80b3a382367af9fa04f79498dfb30c1f1a802a",
+            "baseline_bits_equal": true
+          }
+        ],
+        "medians_seconds": {
+          "original_serial": 0.0007265315,
+          "candidate_serial": 0.000721428,
+          "parallel_parked": 0.000237559
+        },
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 16,
+        "depth": 6144,
+        "trials": [
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.001460939,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.001444022,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000455869,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.001449272,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000425828,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.001445772,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.001441689,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.001439356,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000421161,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.001445772,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.00041912,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.001440814,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000419702,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.001470563,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.001442855,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000423202,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.001448689,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.001453939,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.001487772,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.00144548,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000424952,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.001435856,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000428744,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.001441106,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.001444606,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.001451313,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000419994,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.001442564,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000418828,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.001459772,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000419702,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.001437314,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00144198,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000417661,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.001442564,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.001440231,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.001440522,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.001445481,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000421453,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.001449856,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000423785,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.001441105,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.001446647,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.001456856,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.00042087,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.001439648,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000416203,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.001437606,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000417661,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.001444314,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.001441105,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000417661,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.001439939,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.001449272,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "50bedd923b1eebb44e09181d0887f1197a8a205b67fb734a8a1ab238ebe85dc0",
+            "baseline_bits_equal": true
+          }
+        ],
+        "medians_seconds": {
+          "original_serial": 0.001446793,
+          "candidate_serial": 0.001442272,
+          "parallel_parked": 0.000419848
+        },
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 32,
+        "depth": 6144,
+        "trials": [
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.002899711,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.002890669,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000838822,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.002887461,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000784281,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00288192,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.002887461,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.002898253,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000790114,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.002884544,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000793323,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.002880169,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000781656,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.002885128,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.002880753,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000780781,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.002883378,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.00288017,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.002883961,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.002884545,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000787198,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.002892419,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000782531,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.002883086,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.002880752,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.002888919,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000783115,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.002880752,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000781364,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.00288717,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000779906,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.002878419,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.002890086,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000786031,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.002885419,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.002876378,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.002886586,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.002882795,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000783115,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.002879586,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000789823,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.002886002,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.002894461,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.002886003,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.000788364,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.002886003,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.000781073,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.002884253,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000788656,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.002883377,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.002883086,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.000779906,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.002881044,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.002884252,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "e458536fa3f4d621d09e4f83f54fc5e3b0d91f424904d93c1dea9c5074350e2d",
+            "baseline_bits_equal": true
+          }
+        ],
+        "medians_seconds": {
+          "original_serial": 0.0028842525,
+          "candidate_serial": 0.0028838155000000002,
+          "parallel_parked": 0.000783115
+        },
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 64,
+        "depth": 6144,
+        "trials": [
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.005774339,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.005785714,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.001514313,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.005823338,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.001507022,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.005767339,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.00577463,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.005759172,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.001538229,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.005765881,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.001505563,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.00577813,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.00150673,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.005758005,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.005766464,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.001521313,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.005776089,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.005734089,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.005824504,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.005766172,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.00151373,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.005823338,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.001520146,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.005765297,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.005772297,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.005756256,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.00153123,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.005760338,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.001505563,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.005742256,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.00152773,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.00576238,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.00576938,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.001535312,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.005772297,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.005746048,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.005767048,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.005781922,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.001528604,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.005820713,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.00151723,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.005766756,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.005770255,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.005775505,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.001526854,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.005772588,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.001509938,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.005761797,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.001518396,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.005776089,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.005772297,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.001523354,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.005768797,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.005757422,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "44243efe0bca638be4ab245de3c1dd60c810f6b5d505101a023245534e4cbaed",
+            "baseline_bits_equal": true
+          }
+        ],
+        "medians_seconds": {
+          "original_serial": 0.005764714000000001,
+          "candidate_serial": 0.0057698175,
+          "parallel_parked": 0.00152175
+        },
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 128,
+        "depth": 6144,
+        "trials": [
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.011888173,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.011547802,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.003001793,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.011653968,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.00298196,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.011541678,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.011541969,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.011507262,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.002981377,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.011548969,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.002961252,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.011611093,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.002958335,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.011539344,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.011548969,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.002958918,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.011557136,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "warmup",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.011803882,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.011514553,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.011545761,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 0,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.002992752,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.011511637,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.002970877,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 1,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.011548677,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.011540803,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.011597968,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 2,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.002965043,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.011541969,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.002991002,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 3,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.011506386,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.00298546,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.011547511,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 4,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.011538761,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.002981085,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.011532928,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 5,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.011650467,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.011576385,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.01154576,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 6,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.002968835,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 0,
+            "mode": "original_serial",
+            "seconds": 0.011571427,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.00296971,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 7,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.011549553,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.011544302,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.011689842,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 8,
+            "position": 2,
+            "mode": "parallel_parked",
+            "seconds": 0.00297671,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 0,
+            "mode": "candidate_serial",
+            "seconds": 0.011543427,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 1,
+            "mode": "parallel_parked",
+            "seconds": 0.002980501,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 9,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.011536136,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.00297846,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 1,
+            "mode": "original_serial",
+            "seconds": 0.011612551,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 10,
+            "position": 2,
+            "mode": "candidate_serial",
+            "seconds": 0.011544302,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 0,
+            "mode": "parallel_parked",
+            "seconds": 0.00297846,
+            "pool_calls": 1,
+            "dispatch_status": 1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 1,
+            "mode": "candidate_serial",
+            "seconds": 0.011545178,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          },
+          {
+            "phase": "measured",
+            "round": 11,
+            "position": 2,
+            "mode": "original_serial",
+            "seconds": 0.011631801,
+            "pool_calls": 0,
+            "dispatch_status": -1,
+            "output_sha256": "80c3171a86e5b8cd7d3261ae207ff6467426136ed636e5b6679c963e216817d7",
+            "baseline_bits_equal": true
+          }
+        ],
+        "medians_seconds": {
+          "original_serial": 0.011573906,
+          "candidate_serial": 0.011544302,
+          "parallel_parked": 0.00297846
+        },
+        "inputs_unchanged": true
+      }
+    ],
+    "special_value_checks": [
+      {
+        "rows": 1,
+        "serial_and_pooled_bits_equal": true,
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 3,
+        "serial_and_pooled_bits_equal": true,
+        "inputs_unchanged": true
+      },
+      {
+        "rows": 128,
+        "serial_and_pooled_bits_equal": true,
+        "inputs_unchanged": true
+      }
+    ],
+    "guard_checks": [
+      {
+        "kind": "invalid_rows",
+        "rows": 0,
+        "rejected_before_write": true
+      },
+      {
+        "kind": "invalid_rows",
+        "rows": -1,
+        "rejected_before_write": true
+      },
+      {
+        "kind": "invalid_rows",
+        "rows": 129,
+        "rejected_before_write": true
+      },
+      {
+        "kind": "overlap",
+        "rejected_before_write": true
+      }
+    ],
+    "source_sha256_after": {
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/native-replay-warmup-model-v1/results/cpu-kernels/b1d2596bf6bc4f83c7e27e0779e87a340709f4796ccfe47b33729fb14b8386af.c": "b1d2596bf6bc4f83c7e27e0779e87a340709f4796ccfe47b33729fb14b8386af",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-prefill-sigmoid-pool-v1/sigmoid.c": "ee49b97a1e867c8b48cc48ef43b9cd0d0225ba330afcc94d9872eb28b6fd8d6b",
+      "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-prefill-sigmoid-pool-v1/check.py": "1536443d3282693456f633e60631239d5bafea850102bb5df4f895fa5bd64fc0"
+    },
+    "affinity_restored": true,
+    "pool_parked_after": true
+  },
+  "normal_models_restored_fresh": true,
+  "provenance": {
+    "owner_actual_terminal_exec_session": 54809,
+    "owner_exit_code": 0,
+    "verifier_actual_terminal_exec_session": 26201,
+    "verifier_exit_code": 0,
+    "job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-prefill-sigmoid-pool-v1/job.json",
+    "job_sha256": "e5542a2f7ca1a3b0cfe2e7241380608dd9b7ef5ebc526c989ca3b5d43b390ded",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-prefill-sigmoid-pool-v1/results/operator/report.json",
+    "report_sha256": "097af856ce2d88b4e12d01241e8bb703cbe23e5e99a6901bdd1b2a41e5ad9d74",
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-prefill-sigmoid-pool-v1/serving-verification.json",
+    "receipt_sha256": "8c9f318a11ddfcedb9478843a7c8f25371612ac2d5d86cb7fd15b3ebe3788922",
+    "validation": {
+      "valid": true,
+      "gates": {
+        "complete": {
+          "passed": true
+        },
+        "scope": {
+          "passed": true
+        },
+        "sources": {
+          "passed": true
+        },
+        "protocol": {
+          "passed": true
+        },
+        "cleanup": {
+          "passed": true
+        },
+        "seven_exact_balanced_profiles": {
+          "passed": true
+        },
+        "special_values": {
+          "passed": true
+        },
+        "range_and_overlap_guards": {
+          "passed": true
+        }
+      },
+      "scope": "Captured-source sigmoid C parity/timing only; no model/API/quality qualification."
+    }
+  }
+}

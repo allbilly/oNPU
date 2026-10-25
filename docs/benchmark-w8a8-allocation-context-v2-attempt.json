@@ -1,0 +1,53 @@
+{
+  "schema": "onpu-w8a8-allocation-context-v2-attempt",
+  "complete": false,
+  "diagnostic_only": true,
+  "model_timing_valid": false,
+  "performance_qualified": false,
+  "quality_qualified": false,
+  "original_errno14_captured": false,
+  "scope": "Explicit unused CPU cache reclamation improved preparation headroom but2GiBreserve stillinterrupted. Last snapshot is before_driver_call; no driver cause or benchmark validity claim.",
+  "reserve_bytes": 2147483648,
+  "minimum_available_bytes": 2142195712,
+  "last_pre_driver_snapshot": {
+    "phase": "before_driver_call",
+    "attempt": 108,
+    "aligned_request_bytes": 20971520,
+    "allocation_flags": 1027,
+    "allocate_request": {
+      "allocator_requested_bytes": 20971520,
+      "allocator_flags_before_OR": 0,
+      "device_successful_allocate_calls": 107
+    },
+    "live_user_MEM_CREATE_handles": 107,
+    "live_driver_reported_bytes": 2271313920,
+    "CPU_cached": {
+      "logical_bytes": 0,
+      "storages": 0
+    }
+  },
+  "CPU_cache_reclamation": {
+    "events": 345,
+    "reclaimed_events": 129,
+    "maximum_cached_logical_bytes": 440516608,
+    "first_reclaim_available_increase_bytes": 439341056,
+    "last_cache_state": {
+      "logical_bytes": 0,
+      "storages": 0
+    }
+  },
+  "serving": {
+    "restored": true,
+    "both_models_fresh_replies": true,
+    "owner_exec_terminal_exit1": 97006,
+    "verifier_exec_terminal_exit0": 23714,
+    "normal_server_restarted": false
+  },
+  "provenance": {
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-w8a8-allocation-context-v2.py": "8a96359f5ee895218d1e711203102b5da400a67dc7a008fe334b8a11d67f8b4a",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/w8a8-allocation-context-v2/job.json": "0619274693413cb14a4b33e8a2896bcb63f85d6d58dea9332a8353344987d4e6",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/w8a8-allocation-context-v2/results/diagnostic.json": "a657fbf472ca606ca071d7d96fa5c565c26d8cd6aeeac5f414536622e2a32575",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/w8a8-allocation-context-v2/serving-verification.json": "ca442250168d4cbc9edfc9f60aadfd6b5b3dde8b64dbc740cff3e89829096daf"
+  },
+  "followup": "Defer eager weight realization with existing loader switch, keepingunusedcachepolicy and2GiBreserve. No inference/numerical qualification implied."
+}

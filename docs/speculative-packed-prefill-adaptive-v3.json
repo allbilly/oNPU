@@ -1,0 +1,248 @@
+{
+  "schema": "onpu-packed-prefill-adaptive-v3",
+  "recorded_utc": "2026-10-24T04:47:18.643610+00:00",
+  "scope": "Isolated trained6144x2048 projection with symbolic max128-row FP32inputs and FP16packedweight; no full-model/API speed or quality qualification.",
+  "adopted": false,
+  "selected_default": "existing4rows/thread kernel",
+  "reason": "Fixed8 wins full chunks but regresses short/remainder chunks. Both adaptive alternatives preserve exact outputs and runtime row bindings but lose the full-chunk timing advantage. No register-reuse candidate is enabled.",
+  "original_static_full_chunk_evidence": "speculative-packed-prefill-register-v1.json",
+  "cohorts": {
+    "2": {
+      "policy": "short<=32 uses4rows/thread; otherwise8, dual Kloops",
+      "warmups": 3,
+      "measured_runs": 9,
+      "trial_sets": 144,
+      "candidate_bit_comparisons": 288,
+      "compound_bit_comparisons": 6,
+      "all_exact": true,
+      "row_cases": [
+        {
+          "rows": 128,
+          "median_ms": {
+            "legacy": 34.06067308969796,
+            "r8": 31.011046841740608,
+            "adaptive": 35.3801550809294
+          }
+        },
+        {
+          "rows": 30,
+          "median_ms": {
+            "legacy": 9.205752052366734,
+            "r8": 15.740749891847372,
+            "adaptive": 9.174545062705874
+          }
+        },
+        {
+          "rows": 1,
+          "median_ms": {
+            "legacy": 9.124669944867492,
+            "r8": 15.4403371270746,
+            "adaptive": 8.93596513196826
+          }
+        },
+        {
+          "rows": 64,
+          "median_ms": {
+            "legacy": 17.471767961978912,
+            "r8": 15.962120844051242,
+            "adaptive": 18.15105089917779
+          }
+        },
+        {
+          "rows": 112,
+          "median_ms": {
+            "legacy": 33.93146605230868,
+            "r8": 30.894380994141102,
+            "adaptive": 35.25940701365471
+          }
+        },
+        {
+          "rows": 32,
+          "median_ms": {
+            "legacy": 9.202253073453903,
+            "r8": 15.71566704660654,
+            "adaptive": 9.182128123939037
+          }
+        },
+        {
+          "rows": 65,
+          "median_ms": {
+            "legacy": 25.530702900141478,
+            "r8": 30.515220016241074,
+            "adaptive": 34.91816087625921
+          }
+        },
+        {
+          "rows": 13,
+          "median_ms": {
+            "legacy": 9.030755143612623,
+            "r8": 15.554084908217192,
+            "adaptive": 8.997214026749134
+          }
+        },
+        {
+          "rows": 36,
+          "median_ms": {
+            "legacy": 17.29414612054825,
+            "r8": 15.755333006381989,
+            "adaptive": 17.94630312360823
+          }
+        },
+        {
+          "rows": 63,
+          "median_ms": {
+            "legacy": 17.514059087261558,
+            "r8": 15.99274598993361,
+            "adaptive": 18.199758138507605
+          }
+        },
+        {
+          "rows": 33,
+          "median_ms": {
+            "legacy": 17.24835392087698,
+            "r8": 15.763789881020784,
+            "adaptive": 17.914220923557878
+          }
+        },
+        {
+          "rows": 128,
+          "median_ms": {
+            "legacy": 34.05338106676936,
+            "r8": 30.993838096037507,
+            "adaptive": 35.52161087282002
+          }
+        }
+      ],
+      "restored_and_both_fresh": true,
+      "owner_actual_terminal_exit": 0,
+      "fresh_verifier_actual_terminal_exit": 0,
+      "provenance": {
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/packed-prefill-adaptive-v2/job.json": "e31009af82a6a68bcf6a33a2e2a07ab4e1602f20995ebf119f76b7142e61a5b5",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/packed-prefill-adaptive-v2/results/operator.json": "d7cb2fcc8e283bfa219515ff2cabc101962f08227cb58fe4a8fb33ae935dfc1c",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/packed-prefill-adaptive-v2/serving-verification.json": "b3300058030e722e1a385092afb3d877a0986f6a02875f5dc13c1485f7a5cb5a"
+      }
+    },
+    "3": {
+      "policy": "8rows/thread only33..64or97..128, single Kloop",
+      "warmups": 3,
+      "measured_runs": 9,
+      "trial_sets": 144,
+      "candidate_bit_comparisons": 288,
+      "compound_bit_comparisons": 6,
+      "all_exact": true,
+      "row_cases": [
+        {
+          "rows": 128,
+          "median_ms": {
+            "legacy": 34.03588104993105,
+            "r8": 31.0247540473938,
+            "adaptive": 34.347377019003034
+          }
+        },
+        {
+          "rows": 30,
+          "median_ms": {
+            "legacy": 9.235793957486749,
+            "r8": 15.719166025519371,
+            "adaptive": 9.891160065308213
+          }
+        },
+        {
+          "rows": 1,
+          "median_ms": {
+            "legacy": 8.973298128694296,
+            "r8": 15.459002926945686,
+            "adaptive": 9.639746975153685
+          }
+        },
+        {
+          "rows": 64,
+          "median_ms": {
+            "legacy": 17.45543396100402,
+            "r8": 15.914288815110922,
+            "adaptive": 17.673889873549342
+          }
+        },
+        {
+          "rows": 112,
+          "median_ms": {
+            "legacy": 33.94429897889495,
+            "r8": 30.91013105586171,
+            "adaptive": 34.79624609462917
+          }
+        },
+        {
+          "rows": 32,
+          "median_ms": {
+            "legacy": 9.213043842464685,
+            "r8": 15.697873895987868,
+            "adaptive": 9.877159958705306
+          }
+        },
+        {
+          "rows": 65,
+          "median_ms": {
+            "legacy": 25.52632801234722,
+            "r8": 30.53446882404387,
+            "adaptive": 27.60063298046589
+          }
+        },
+        {
+          "rows": 13,
+          "median_ms": {
+            "legacy": 9.045629994943738,
+            "r8": 15.536877093836665,
+            "adaptive": 9.722579037770629
+          }
+        },
+        {
+          "rows": 36,
+          "median_ms": {
+            "legacy": 17.299687024205923,
+            "r8": 15.790040837600827,
+            "adaptive": 17.56685017608106
+          }
+        },
+        {
+          "rows": 63,
+          "median_ms": {
+            "legacy": 17.5009339582175,
+            "r8": 15.989246079698205,
+            "adaptive": 17.60593196377158
+          }
+        },
+        {
+          "rows": 33,
+          "median_ms": {
+            "legacy": 17.25185406394303,
+            "r8": 15.722374897450209,
+            "adaptive": 17.51143392175436
+          }
+        },
+        {
+          "rows": 128,
+          "median_ms": {
+            "legacy": 34.05308909714222,
+            "r8": 31.01775492541492,
+            "adaptive": 34.2905018478632
+          }
+        }
+      ],
+      "restored_and_both_fresh": true,
+      "owner_actual_terminal_exit": 0,
+      "fresh_verifier_actual_terminal_exit": 0,
+      "provenance": {
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/packed-prefill-adaptive-v3/job.json": "516e3890dc9b39236c991fd549398f05cf3aa4f75b761781230426ac948a4bb6",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/packed-prefill-adaptive-v3/results/operator.json": "c0a02f13e23175db232ceb1da581f5a7c8cacf530362d327c40499ce9330a1e8",
+        "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/packed-prefill-adaptive-v3/serving-verification.json": "d05b22afb7d734ba2091272ff316bef9714fffcec869a7baa20f3efd0e6e93d4"
+      }
+    }
+  },
+  "failed_v1": {
+    "failure": "Renderer constructor omitted requiredTarget before any timingcases.",
+    "preserved": true,
+    "no_product_change": true,
+    "normal_models_restored_with_fresh_replies": true
+  },
+  "next_action": "Inspect generated FP16 recurrent projection kernels, whose measured total cost is larger than this narrow static-shape improvement."
+}

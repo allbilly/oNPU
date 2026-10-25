@@ -1,0 +1,77 @@
+{
+  "schema": "shared-q8-long-api-v46-observed-attempt",
+  "updated_utc": "2026-10-25T05:28:08.200376+00:00",
+  "status": "functional_qualification_failed",
+  "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/q8-shared-table-long-http-v46/results/http.json",
+  "raw_sha256": "7f72ea8f1d1c1bea55648135e09c42f8d0454b1979727dd6b55822b0c62807d1",
+  "owner": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-q8-shared-table-long-http-v46.py",
+  "owner_sha256": "70f5419c6d77c9ee42826bba265bd4f6997ef2dfe1190b5c40e94d138abec7c2",
+  "source_pins": 327,
+  "source_pins_unchanged": true,
+  "API_functional_qualified": false,
+  "sustained_long_decode_qualified": false,
+  "modelmax_context_qualified": false,
+  "quality_qualified": false,
+  "general_speedup_claim": false,
+  "observed_cases": [
+    {
+      "name": "seed_force",
+      "prompt_tokens": 8048,
+      "cached_tokens": 0,
+      "completion_tokens": 1,
+      "finish_reason": "length",
+      "content": "1",
+      "wall_seconds": 428.21621403703466,
+      "ttft_ms": 424362.9566610325,
+      "prefill_proxy_tps": 18.964897556853632,
+      "proposed_tokens": 0,
+      "accepted_tokens": 0,
+      "blocks": 0,
+      "decoder_output_tokens_including_EOS": 1,
+      "cached_prefix_rows": 8049,
+      "target_table": {
+        "enabled": true,
+        "shared_table": true,
+        "retained_raw_bytes": 540344320,
+        "raw_realized": true,
+        "logical_fp16_bytes": 1017118720,
+        "logical_weight_realized": false
+      },
+      "retained_projected_history_bytes": 0
+    },
+    {
+      "name": "force_cached",
+      "prompt_tokens": 8081,
+      "cached_tokens": 8049,
+      "completion_tokens": 1,
+      "finish_reason": "stop",
+      "content": "2",
+      "wall_seconds": 7.212780003901571,
+      "ttft_ms": 1961.4593810401857,
+      "prefill_proxy_tps": 16.31438321349791,
+      "proposed_tokens": 7,
+      "accepted_tokens": 0,
+      "blocks": 1,
+      "decoder_output_tokens_including_EOS": 2,
+      "cached_prefix_rows": 8083,
+      "target_table": {
+        "enabled": true,
+        "shared_table": true,
+        "retained_raw_bytes": 540344320,
+        "raw_realized": true,
+        "logical_fp16_bytes": 1017118720,
+        "logical_weight_realized": false
+      },
+      "retained_projected_history_bytes": 0
+    }
+  ],
+  "reason": "The harness required exactly16 visible tokens for a16-token upper budget, but target emitted EOS after one visible token; test stopped before ordinary comparison/cancellation/recovery/boundary.",
+  "unresolved": "Whether long-context ordinary target also stops after2 is unmeasured; actual7-token draft proposal is proved, but token equivalence and remaining API controls are unqualified.",
+  "next_test_requirements": [
+    "Keep upper budget16 and require positive proposed_tokens/blocks; allow earlier EOS only when exact matched ordinary response also stops. Record visible and decoder EOS-token counts separately.",
+    "Run cancellation after completed forced branch before ordinary control invalidates decoder cache identity.",
+    "Derive retained prefix from actual visible text plus validated EOS when finished stop, not assume visible output count equals cached processed token count.",
+    "Matched ordinary control must repeat same seed first; exact8191+1 boundary must extend the actual currently cached branch.",
+    "Keep independent tokenizer, nonzero-proposal negative controls, unchanged8192cap/admission/2GiBreserve."
+  ]
+}

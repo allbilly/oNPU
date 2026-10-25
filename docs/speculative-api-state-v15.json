@@ -1,0 +1,2576 @@
+{
+  "coverage": {
+    "app_tests": {
+      "log_sha256": "2d561d91731d5ed8cb54818f14eac4e012681683a0fd6d57c9fda2e9ebe3ab71",
+      "passed": 245,
+      "subtests_passed": 4
+    },
+    "greedy_requests": 36,
+    "measured_greedy_medians": {
+      "counting": {
+        "ordinary": {
+          "backend_raw_output_basis": "not exposed by ordinary API row",
+          "backend_raw_output_observation_count": 0,
+          "backend_raw_output_token_counts": [
+            null,
+            null,
+            null
+          ],
+          "backend_raw_output_token_median": null,
+          "medians": {
+            "decode_tps": 2.498631926957777,
+            "prefill_tps": 8.550361445482643,
+            "ttft_ms": 3508.6236051283777,
+            "visible_completion_tokens": 29,
+            "wall_seconds": 15.134833721909672
+          },
+          "trial_count": 3,
+          "visible_completion_token_counts": [
+            29,
+            29,
+            29
+          ]
+        },
+        "speculative": {
+          "backend_raw_output_basis": "speculation.stats.output_tokens",
+          "backend_raw_output_observation_count": 3,
+          "backend_raw_output_token_counts": [
+            30,
+            30,
+            30
+          ],
+          "backend_raw_output_token_median": 30,
+          "medians": {
+            "decode_tps": 3.655382108547695,
+            "prefill_tps": 8.482705624076205,
+            "ttft_ms": 3536.607461050153,
+            "visible_completion_tokens": 29,
+            "wall_seconds": 11.208720244001597
+          },
+          "trial_count": 3,
+          "visible_completion_token_counts": [
+            29,
+            29,
+            29
+          ]
+        }
+      },
+      "explanation": {
+        "ordinary": {
+          "backend_raw_output_basis": "not exposed by ordinary API row",
+          "backend_raw_output_observation_count": 0,
+          "backend_raw_output_token_counts": [
+            null,
+            null,
+            null
+          ],
+          "backend_raw_output_token_median": null,
+          "medians": {
+            "decode_tps": 2.5013097115933913,
+            "prefill_tps": 7.698758139383069,
+            "ttft_ms": 3507.0591270923615,
+            "visible_completion_tokens": 32,
+            "wall_seconds": 15.935578990960494
+          },
+          "trial_count": 3,
+          "visible_completion_token_counts": [
+            32,
+            32,
+            32
+          ]
+        },
+        "speculative": {
+          "backend_raw_output_basis": "speculation.stats.output_tokens",
+          "backend_raw_output_observation_count": 3,
+          "backend_raw_output_token_counts": [
+            32,
+            32,
+            32
+          ],
+          "backend_raw_output_token_median": 32,
+          "medians": {
+            "decode_tps": 1.9456537959526734,
+            "prefill_tps": 7.637979514289367,
+            "ttft_ms": 3534.966276027262,
+            "visible_completion_tokens": 32,
+            "wall_seconds": 19.483818829990923
+          },
+          "trial_count": 3,
+          "visible_completion_token_counts": [
+            32,
+            32,
+            32
+          ]
+        }
+      },
+      "short_code": {
+        "ordinary": {
+          "backend_raw_output_basis": "not exposed by ordinary API row",
+          "backend_raw_output_observation_count": 0,
+          "backend_raw_output_token_counts": [
+            null,
+            null,
+            null
+          ],
+          "backend_raw_output_token_median": null,
+          "medians": {
+            "decode_tps": 2.495962794603557,
+            "prefill_tps": 8.384672930428836,
+            "ttft_ms": 4293.548513902351,
+            "visible_completion_tokens": 17,
+            "wall_seconds": 11.122309670085087
+          },
+          "trial_count": 3,
+          "visible_completion_token_counts": [
+            17,
+            17,
+            17
+          ]
+        },
+        "speculative": {
+          "backend_raw_output_basis": "speculation.stats.output_tokens",
+          "backend_raw_output_observation_count": 3,
+          "backend_raw_output_token_counts": [
+            18,
+            18,
+            18
+          ],
+          "backend_raw_output_token_median": 18,
+          "medians": {
+            "decode_tps": 4.075677277701671,
+            "prefill_tps": 8.332017058123887,
+            "ttft_ms": 4320.682464865968,
+            "visible_completion_tokens": 17,
+            "wall_seconds": 10.18512407084927
+          },
+          "trial_count": 3,
+          "visible_completion_token_counts": [
+            17,
+            17,
+            17
+          ]
+        }
+      }
+    },
+    "native_snapshot_summary": {
+      "greedy": {
+        "native_snapshot_calls": 222,
+        "native_snapshot_restores": 0,
+        "reported_snapshot_and_restore_timing_fields": {
+          "restore_seconds": {
+            "median": 0.053880428429692984,
+            "observation_count": 18,
+            "sum": 1.5134700858034194
+          },
+          "snapshot_seconds": {
+            "median": 0.03809127653948963,
+            "observation_count": 18,
+            "sum": 1.7541315730195493
+          },
+          "trace_restore_seconds": {
+            "median": 0.053880428429692984,
+            "observation_count": 18,
+            "sum": 1.5134700858034194
+          }
+        },
+        "rollback_count": 24,
+        "row_count": 18,
+        "snapshot_calls": 222,
+        "trace_restore_calls": 24
+      },
+      "sampled": {
+        "native_snapshot_calls": 262,
+        "native_snapshot_restores": 0,
+        "reported_snapshot_and_restore_timing_fields": {
+          "restore_seconds": {
+            "median": 0.10573949094396085,
+            "observation_count": 20,
+            "sum": 2.034985719015822
+          },
+          "snapshot_seconds": {
+            "median": 0.04360881249886006,
+            "observation_count": 20,
+            "sum": 1.9218125033657998
+          },
+          "trace_restore_seconds": {
+            "median": 0.10573949094396085,
+            "observation_count": 20,
+            "sum": 2.034985719015822
+          }
+        },
+        "rollback_count": 30,
+        "row_count": 20,
+        "snapshot_calls": 262,
+        "trace_restore_calls": 30
+      }
+    },
+    "observed_memory": {
+      "minimum_available_bytes": 4337201152,
+      "peak_rss_bytes": 9739493376,
+      "scope": "Observed RSS of all owned processes carrying the run token during the child run; not total system or GPU memory"
+    },
+    "probability_comparisons": {
+      "all_comparisons_complete": true,
+      "case_count": 9,
+      "comparison_count": 27,
+      "limits": {
+        "maximum_probability_error": 5e-05,
+        "maximum_total_variation": 0.0001
+      },
+      "maximum_probability_error": 0.0,
+      "maximum_total_variation": 0.0,
+      "sha256": "f226cd256ee8e65fd95f12952c6cfe5b9c5dcbbd13e6ee7195aaba1de90be889"
+    },
+    "sampled_descriptive_groups": [
+      {
+        "backend_raw_output_basis": "not exposed by ordinary API row",
+        "backend_raw_output_observation_count": 0,
+        "backend_raw_output_token_counts": [],
+        "backend_raw_output_token_median": null,
+        "count": 6,
+        "engine": "ordinary",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 0.6,
+        "ttft_ms_median": 3555.7422754354775,
+        "visible_completion_token_counts": [
+          29,
+          29,
+          29,
+          29,
+          29,
+          29
+        ],
+        "wall_seconds_median": 15.289803810999729,
+        "workload": "counting"
+      },
+      {
+        "backend_raw_output_basis": "speculation.stats.output_tokens",
+        "backend_raw_output_observation_count": 6,
+        "backend_raw_output_token_counts": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ],
+        "backend_raw_output_token_median": 30.0,
+        "count": 6,
+        "engine": "speculative",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 0.6,
+        "ttft_ms_median": 3590.8951974706724,
+        "visible_completion_token_counts": [
+          29,
+          29,
+          29,
+          29,
+          29,
+          29
+        ],
+        "wall_seconds_median": 11.780006409971975,
+        "workload": "counting"
+      },
+      {
+        "backend_raw_output_basis": "speculation.stats.output_tokens",
+        "backend_raw_output_observation_count": 1,
+        "backend_raw_output_token_counts": [
+          8
+        ],
+        "backend_raw_output_token_median": 8,
+        "count": 1,
+        "engine": "speculative",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 1.0,
+        "ttft_ms_median": 3558.2105370704085,
+        "visible_completion_token_counts": [
+          8
+        ],
+        "wall_seconds_median": 5.737635480007157,
+        "workload": "counting"
+      },
+      {
+        "backend_raw_output_basis": "speculation.stats.output_tokens",
+        "backend_raw_output_observation_count": 1,
+        "backend_raw_output_token_counts": [
+          8
+        ],
+        "backend_raw_output_token_median": 8,
+        "count": 1,
+        "engine": "speculative",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 2.0,
+        "ttft_ms_median": 3616.0670740064234,
+        "visible_completion_token_counts": [
+          8
+        ],
+        "wall_seconds_median": 12.014976653037593,
+        "workload": "counting"
+      },
+      {
+        "backend_raw_output_basis": "not exposed by ordinary API row",
+        "backend_raw_output_observation_count": 0,
+        "backend_raw_output_token_counts": [],
+        "backend_raw_output_token_median": null,
+        "count": 6,
+        "engine": "ordinary",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 0.6,
+        "ttft_ms_median": 3544.0245859790593,
+        "visible_completion_token_counts": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "wall_seconds_median": 16.072249004035257,
+        "workload": "explanation"
+      },
+      {
+        "backend_raw_output_basis": "speculation.stats.output_tokens",
+        "backend_raw_output_observation_count": 6,
+        "backend_raw_output_token_counts": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "backend_raw_output_token_median": 32.0,
+        "count": 6,
+        "engine": "speculative",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 0.6,
+        "ttft_ms_median": 3625.9149748366326,
+        "visible_completion_token_counts": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "wall_seconds_median": 20.236428060452454,
+        "workload": "explanation"
+      },
+      {
+        "backend_raw_output_basis": "not exposed by ordinary API row",
+        "backend_raw_output_observation_count": 0,
+        "backend_raw_output_token_counts": [],
+        "backend_raw_output_token_median": null,
+        "count": 6,
+        "engine": "ordinary",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 0.6,
+        "ttft_ms_median": 4338.437422993593,
+        "visible_completion_token_counts": [
+          17,
+          12,
+          17,
+          12,
+          12,
+          17
+        ],
+        "wall_seconds_median": 10.229744797456078,
+        "workload": "short_code"
+      },
+      {
+        "backend_raw_output_basis": "speculation.stats.output_tokens",
+        "backend_raw_output_observation_count": 6,
+        "backend_raw_output_token_counts": [
+          18,
+          18,
+          18,
+          18,
+          18,
+          18
+        ],
+        "backend_raw_output_token_median": 18.0,
+        "count": 6,
+        "engine": "speculative",
+        "interpretation": "descriptive only; sampled outputs may differ; no paired winner",
+        "temperature": 0.6,
+        "ttft_ms_median": 4392.373267910443,
+        "visible_completion_token_counts": [
+          17,
+          17,
+          17,
+          17,
+          17,
+          17
+        ],
+        "wall_seconds_median": 12.741144504048862,
+        "workload": "short_code"
+      }
+    ],
+    "sampled_pairwise_winner_claim": false,
+    "sampled_requests": 38,
+    "strict_validation_gates": {
+      "actual_probability_rejection": {
+        "passed": true
+      },
+      "app_preflight": {
+        "passed": true
+      },
+      "audit_startup_warmup": {
+        "passed": true
+      },
+      "boundary_1.0_correction": {
+        "passed": true
+      },
+      "boundary_1.0_mode": {
+        "passed": true
+      },
+      "boundary_1.0_raw_count": {
+        "passed": true
+      },
+      "boundary_1.0_response_shape": {
+        "passed": true
+      },
+      "boundary_1.0_scope": {
+        "passed": true
+      },
+      "boundary_1.0_temperature": {
+        "passed": true
+      },
+      "boundary_1.0_timing": {
+        "passed": true
+      },
+      "boundary_1.0_uncached": {
+        "passed": true
+      },
+      "boundary_1.0_usage": {
+        "passed": true
+      },
+      "boundary_2.0_correction": {
+        "passed": true
+      },
+      "boundary_2.0_mode": {
+        "passed": true
+      },
+      "boundary_2.0_raw_count": {
+        "passed": true
+      },
+      "boundary_2.0_response_shape": {
+        "passed": true
+      },
+      "boundary_2.0_scope": {
+        "passed": true
+      },
+      "boundary_2.0_temperature": {
+        "passed": true
+      },
+      "boundary_2.0_timing": {
+        "passed": true
+      },
+      "boundary_2.0_uncached": {
+        "passed": true
+      },
+      "boundary_2.0_usage": {
+        "passed": true
+      },
+      "boundary_count": {
+        "passed": true
+      },
+      "cancellation": {
+        "passed": true
+      },
+      "checkpoint": {
+        "passed": true
+      },
+      "cleanup": {
+        "passed": true
+      },
+      "complete": {
+        "passed": true
+      },
+      "consistent_decode_readiness": {
+        "passed": true
+      },
+      "frozen_references": {
+        "passed": true
+      },
+      "greedy_cancellation_raw": {
+        "passed": true
+      },
+      "greedy_stream_raw": {
+        "passed": true
+      },
+      "greedy_stream_route": {
+        "passed": true
+      },
+      "native_counter_summary": {
+        "details": {
+          "greedy_speculative_rows": 20,
+          "native_snapshot_restores": 0,
+          "sampled_snapshot_calls": 266,
+          "sampled_speculative_rows": 21,
+          "snapshot_restore_events": 0
+        },
+        "passed": true
+      },
+      "native_greedy_snapshot_calls": {
+        "passed": true
+      },
+      "native_native_restore_accounting": {
+        "passed": true
+      },
+      "native_sampled_snapshot_calls": {
+        "passed": true
+      },
+      "native_snapshot_audit_layout": {
+        "passed": true
+      },
+      "native_snapshot_layout": {
+        "passed": true
+      },
+      "no_general_claim": {
+        "passed": true
+      },
+      "probability_audit": {
+        "passed": true
+      },
+      "recovery": {
+        "passed": true
+      },
+      "request_0_mode": {
+        "passed": true
+      },
+      "request_0_order": {
+        "passed": true
+      },
+      "request_0_response": {
+        "passed": true
+      },
+      "request_0_timing": {
+        "passed": true
+      },
+      "request_0_tokens": {
+        "passed": true
+      },
+      "request_0_uncached": {
+        "passed": true
+      },
+      "request_10_mode": {
+        "passed": true
+      },
+      "request_10_order": {
+        "passed": true
+      },
+      "request_10_response": {
+        "passed": true
+      },
+      "request_10_timing": {
+        "passed": true
+      },
+      "request_10_tokens": {
+        "passed": true
+      },
+      "request_10_uncached": {
+        "passed": true
+      },
+      "request_11_actual_output_count": {
+        "passed": true
+      },
+      "request_11_calibration": {
+        "passed": true
+      },
+      "request_11_captured": {
+        "passed": true
+      },
+      "request_11_draft_prepared": {
+        "passed": true
+      },
+      "request_11_fallback": {
+        "passed": true
+      },
+      "request_11_mode": {
+        "passed": true
+      },
+      "request_11_observation": {
+        "passed": true
+      },
+      "request_11_order": {
+        "passed": true
+      },
+      "request_11_response": {
+        "passed": true
+      },
+      "request_11_target_prepared": {
+        "passed": true
+      },
+      "request_11_timing": {
+        "passed": true
+      },
+      "request_11_tokens": {
+        "passed": true
+      },
+      "request_11_uncached": {
+        "passed": true
+      },
+      "request_12_mode": {
+        "passed": true
+      },
+      "request_12_order": {
+        "passed": true
+      },
+      "request_12_response": {
+        "passed": true
+      },
+      "request_12_timing": {
+        "passed": true
+      },
+      "request_12_tokens": {
+        "passed": true
+      },
+      "request_12_uncached": {
+        "passed": true
+      },
+      "request_13_actual_output_count": {
+        "passed": true
+      },
+      "request_13_calibration": {
+        "passed": true
+      },
+      "request_13_draft_prepared": {
+        "passed": true
+      },
+      "request_13_fallback": {
+        "passed": true
+      },
+      "request_13_mode": {
+        "passed": true
+      },
+      "request_13_observation": {
+        "passed": true
+      },
+      "request_13_order": {
+        "passed": true
+      },
+      "request_13_response": {
+        "passed": true
+      },
+      "request_13_target_prepared": {
+        "passed": true
+      },
+      "request_13_timing": {
+        "passed": true
+      },
+      "request_13_tokens": {
+        "passed": true
+      },
+      "request_13_uncached": {
+        "passed": true
+      },
+      "request_14_mode": {
+        "passed": true
+      },
+      "request_14_order": {
+        "passed": true
+      },
+      "request_14_response": {
+        "passed": true
+      },
+      "request_14_timing": {
+        "passed": true
+      },
+      "request_14_tokens": {
+        "passed": true
+      },
+      "request_14_uncached": {
+        "passed": true
+      },
+      "request_15_actual_output_count": {
+        "passed": true
+      },
+      "request_15_calibration": {
+        "passed": true
+      },
+      "request_15_draft_prepared": {
+        "passed": true
+      },
+      "request_15_fallback": {
+        "passed": true
+      },
+      "request_15_mode": {
+        "passed": true
+      },
+      "request_15_observation": {
+        "passed": true
+      },
+      "request_15_order": {
+        "passed": true
+      },
+      "request_15_response": {
+        "passed": true
+      },
+      "request_15_target_prepared": {
+        "passed": true
+      },
+      "request_15_timing": {
+        "passed": true
+      },
+      "request_15_tokens": {
+        "passed": true
+      },
+      "request_15_uncached": {
+        "passed": true
+      },
+      "request_16_mode": {
+        "passed": true
+      },
+      "request_16_order": {
+        "passed": true
+      },
+      "request_16_response": {
+        "passed": true
+      },
+      "request_16_timing": {
+        "passed": true
+      },
+      "request_16_tokens": {
+        "passed": true
+      },
+      "request_16_uncached": {
+        "passed": true
+      },
+      "request_17_actual_output_count": {
+        "passed": true
+      },
+      "request_17_calibration": {
+        "passed": true
+      },
+      "request_17_captured": {
+        "passed": true
+      },
+      "request_17_draft_prepared": {
+        "passed": true
+      },
+      "request_17_fallback": {
+        "passed": true
+      },
+      "request_17_mode": {
+        "passed": true
+      },
+      "request_17_observation": {
+        "passed": true
+      },
+      "request_17_order": {
+        "passed": true
+      },
+      "request_17_response": {
+        "passed": true
+      },
+      "request_17_target_prepared": {
+        "passed": true
+      },
+      "request_17_timing": {
+        "passed": true
+      },
+      "request_17_tokens": {
+        "passed": true
+      },
+      "request_17_uncached": {
+        "passed": true
+      },
+      "request_18_mode": {
+        "passed": true
+      },
+      "request_18_order": {
+        "passed": true
+      },
+      "request_18_response": {
+        "passed": true
+      },
+      "request_18_timing": {
+        "passed": true
+      },
+      "request_18_tokens": {
+        "passed": true
+      },
+      "request_18_uncached": {
+        "passed": true
+      },
+      "request_19_actual_output_count": {
+        "passed": true
+      },
+      "request_19_calibration": {
+        "passed": true
+      },
+      "request_19_captured": {
+        "passed": true
+      },
+      "request_19_draft_prepared": {
+        "passed": true
+      },
+      "request_19_fallback": {
+        "passed": true
+      },
+      "request_19_mode": {
+        "passed": true
+      },
+      "request_19_observation": {
+        "passed": true
+      },
+      "request_19_order": {
+        "passed": true
+      },
+      "request_19_response": {
+        "passed": true
+      },
+      "request_19_target_prepared": {
+        "passed": true
+      },
+      "request_19_timing": {
+        "passed": true
+      },
+      "request_19_tokens": {
+        "passed": true
+      },
+      "request_19_uncached": {
+        "passed": true
+      },
+      "request_1_actual_output_count": {
+        "passed": true
+      },
+      "request_1_calibration": {
+        "passed": true
+      },
+      "request_1_draft_prepared": {
+        "passed": true
+      },
+      "request_1_fallback": {
+        "passed": true
+      },
+      "request_1_mode": {
+        "passed": true
+      },
+      "request_1_observation": {
+        "passed": true
+      },
+      "request_1_order": {
+        "passed": true
+      },
+      "request_1_response": {
+        "passed": true
+      },
+      "request_1_target_prepared": {
+        "passed": true
+      },
+      "request_1_timing": {
+        "passed": true
+      },
+      "request_1_tokens": {
+        "passed": true
+      },
+      "request_1_uncached": {
+        "passed": true
+      },
+      "request_20_actual_output_count": {
+        "passed": true
+      },
+      "request_20_calibration": {
+        "passed": true
+      },
+      "request_20_captured": {
+        "passed": true
+      },
+      "request_20_draft_prepared": {
+        "passed": true
+      },
+      "request_20_fallback": {
+        "passed": true
+      },
+      "request_20_mode": {
+        "passed": true
+      },
+      "request_20_observation": {
+        "passed": true
+      },
+      "request_20_order": {
+        "passed": true
+      },
+      "request_20_response": {
+        "passed": true
+      },
+      "request_20_target_prepared": {
+        "passed": true
+      },
+      "request_20_timing": {
+        "passed": true
+      },
+      "request_20_tokens": {
+        "passed": true
+      },
+      "request_20_uncached": {
+        "passed": true
+      },
+      "request_21_mode": {
+        "passed": true
+      },
+      "request_21_order": {
+        "passed": true
+      },
+      "request_21_response": {
+        "passed": true
+      },
+      "request_21_timing": {
+        "passed": true
+      },
+      "request_21_tokens": {
+        "passed": true
+      },
+      "request_21_uncached": {
+        "passed": true
+      },
+      "request_22_mode": {
+        "passed": true
+      },
+      "request_22_order": {
+        "passed": true
+      },
+      "request_22_response": {
+        "passed": true
+      },
+      "request_22_timing": {
+        "passed": true
+      },
+      "request_22_tokens": {
+        "passed": true
+      },
+      "request_22_uncached": {
+        "passed": true
+      },
+      "request_23_actual_output_count": {
+        "passed": true
+      },
+      "request_23_calibration": {
+        "passed": true
+      },
+      "request_23_captured": {
+        "passed": true
+      },
+      "request_23_draft_prepared": {
+        "passed": true
+      },
+      "request_23_fallback": {
+        "passed": true
+      },
+      "request_23_mode": {
+        "passed": true
+      },
+      "request_23_observation": {
+        "passed": true
+      },
+      "request_23_order": {
+        "passed": true
+      },
+      "request_23_response": {
+        "passed": true
+      },
+      "request_23_target_prepared": {
+        "passed": true
+      },
+      "request_23_timing": {
+        "passed": true
+      },
+      "request_23_tokens": {
+        "passed": true
+      },
+      "request_23_uncached": {
+        "passed": true
+      },
+      "request_24_mode": {
+        "passed": true
+      },
+      "request_24_order": {
+        "passed": true
+      },
+      "request_24_response": {
+        "passed": true
+      },
+      "request_24_timing": {
+        "passed": true
+      },
+      "request_24_tokens": {
+        "passed": true
+      },
+      "request_24_uncached": {
+        "passed": true
+      },
+      "request_25_actual_output_count": {
+        "passed": true
+      },
+      "request_25_calibration": {
+        "passed": true
+      },
+      "request_25_draft_prepared": {
+        "passed": true
+      },
+      "request_25_fallback": {
+        "passed": true
+      },
+      "request_25_mode": {
+        "passed": true
+      },
+      "request_25_observation": {
+        "passed": true
+      },
+      "request_25_order": {
+        "passed": true
+      },
+      "request_25_response": {
+        "passed": true
+      },
+      "request_25_target_prepared": {
+        "passed": true
+      },
+      "request_25_timing": {
+        "passed": true
+      },
+      "request_25_tokens": {
+        "passed": true
+      },
+      "request_25_uncached": {
+        "passed": true
+      },
+      "request_26_mode": {
+        "passed": true
+      },
+      "request_26_order": {
+        "passed": true
+      },
+      "request_26_response": {
+        "passed": true
+      },
+      "request_26_timing": {
+        "passed": true
+      },
+      "request_26_tokens": {
+        "passed": true
+      },
+      "request_26_uncached": {
+        "passed": true
+      },
+      "request_27_actual_output_count": {
+        "passed": true
+      },
+      "request_27_calibration": {
+        "passed": true
+      },
+      "request_27_draft_prepared": {
+        "passed": true
+      },
+      "request_27_fallback": {
+        "passed": true
+      },
+      "request_27_mode": {
+        "passed": true
+      },
+      "request_27_observation": {
+        "passed": true
+      },
+      "request_27_order": {
+        "passed": true
+      },
+      "request_27_response": {
+        "passed": true
+      },
+      "request_27_target_prepared": {
+        "passed": true
+      },
+      "request_27_timing": {
+        "passed": true
+      },
+      "request_27_tokens": {
+        "passed": true
+      },
+      "request_27_uncached": {
+        "passed": true
+      },
+      "request_28_mode": {
+        "passed": true
+      },
+      "request_28_order": {
+        "passed": true
+      },
+      "request_28_response": {
+        "passed": true
+      },
+      "request_28_timing": {
+        "passed": true
+      },
+      "request_28_tokens": {
+        "passed": true
+      },
+      "request_28_uncached": {
+        "passed": true
+      },
+      "request_29_actual_output_count": {
+        "passed": true
+      },
+      "request_29_calibration": {
+        "passed": true
+      },
+      "request_29_captured": {
+        "passed": true
+      },
+      "request_29_draft_prepared": {
+        "passed": true
+      },
+      "request_29_fallback": {
+        "passed": true
+      },
+      "request_29_mode": {
+        "passed": true
+      },
+      "request_29_observation": {
+        "passed": true
+      },
+      "request_29_order": {
+        "passed": true
+      },
+      "request_29_response": {
+        "passed": true
+      },
+      "request_29_target_prepared": {
+        "passed": true
+      },
+      "request_29_timing": {
+        "passed": true
+      },
+      "request_29_tokens": {
+        "passed": true
+      },
+      "request_29_uncached": {
+        "passed": true
+      },
+      "request_2_mode": {
+        "passed": true
+      },
+      "request_2_order": {
+        "passed": true
+      },
+      "request_2_response": {
+        "passed": true
+      },
+      "request_2_timing": {
+        "passed": true
+      },
+      "request_2_tokens": {
+        "passed": true
+      },
+      "request_2_uncached": {
+        "passed": true
+      },
+      "request_30_mode": {
+        "passed": true
+      },
+      "request_30_order": {
+        "passed": true
+      },
+      "request_30_response": {
+        "passed": true
+      },
+      "request_30_timing": {
+        "passed": true
+      },
+      "request_30_tokens": {
+        "passed": true
+      },
+      "request_30_uncached": {
+        "passed": true
+      },
+      "request_31_actual_output_count": {
+        "passed": true
+      },
+      "request_31_calibration": {
+        "passed": true
+      },
+      "request_31_captured": {
+        "passed": true
+      },
+      "request_31_draft_prepared": {
+        "passed": true
+      },
+      "request_31_fallback": {
+        "passed": true
+      },
+      "request_31_mode": {
+        "passed": true
+      },
+      "request_31_observation": {
+        "passed": true
+      },
+      "request_31_order": {
+        "passed": true
+      },
+      "request_31_response": {
+        "passed": true
+      },
+      "request_31_target_prepared": {
+        "passed": true
+      },
+      "request_31_timing": {
+        "passed": true
+      },
+      "request_31_tokens": {
+        "passed": true
+      },
+      "request_31_uncached": {
+        "passed": true
+      },
+      "request_32_actual_output_count": {
+        "passed": true
+      },
+      "request_32_calibration": {
+        "passed": true
+      },
+      "request_32_captured": {
+        "passed": true
+      },
+      "request_32_draft_prepared": {
+        "passed": true
+      },
+      "request_32_fallback": {
+        "passed": true
+      },
+      "request_32_mode": {
+        "passed": true
+      },
+      "request_32_observation": {
+        "passed": true
+      },
+      "request_32_order": {
+        "passed": true
+      },
+      "request_32_response": {
+        "passed": true
+      },
+      "request_32_target_prepared": {
+        "passed": true
+      },
+      "request_32_timing": {
+        "passed": true
+      },
+      "request_32_tokens": {
+        "passed": true
+      },
+      "request_32_uncached": {
+        "passed": true
+      },
+      "request_33_mode": {
+        "passed": true
+      },
+      "request_33_order": {
+        "passed": true
+      },
+      "request_33_response": {
+        "passed": true
+      },
+      "request_33_timing": {
+        "passed": true
+      },
+      "request_33_tokens": {
+        "passed": true
+      },
+      "request_33_uncached": {
+        "passed": true
+      },
+      "request_34_mode": {
+        "passed": true
+      },
+      "request_34_order": {
+        "passed": true
+      },
+      "request_34_response": {
+        "passed": true
+      },
+      "request_34_timing": {
+        "passed": true
+      },
+      "request_34_tokens": {
+        "passed": true
+      },
+      "request_34_uncached": {
+        "passed": true
+      },
+      "request_35_actual_output_count": {
+        "passed": true
+      },
+      "request_35_calibration": {
+        "passed": true
+      },
+      "request_35_captured": {
+        "passed": true
+      },
+      "request_35_draft_prepared": {
+        "passed": true
+      },
+      "request_35_fallback": {
+        "passed": true
+      },
+      "request_35_mode": {
+        "passed": true
+      },
+      "request_35_observation": {
+        "passed": true
+      },
+      "request_35_order": {
+        "passed": true
+      },
+      "request_35_response": {
+        "passed": true
+      },
+      "request_35_target_prepared": {
+        "passed": true
+      },
+      "request_35_timing": {
+        "passed": true
+      },
+      "request_35_tokens": {
+        "passed": true
+      },
+      "request_35_uncached": {
+        "passed": true
+      },
+      "request_3_actual_output_count": {
+        "passed": true
+      },
+      "request_3_calibration": {
+        "passed": true
+      },
+      "request_3_draft_prepared": {
+        "passed": true
+      },
+      "request_3_fallback": {
+        "passed": true
+      },
+      "request_3_mode": {
+        "passed": true
+      },
+      "request_3_observation": {
+        "passed": true
+      },
+      "request_3_order": {
+        "passed": true
+      },
+      "request_3_response": {
+        "passed": true
+      },
+      "request_3_target_prepared": {
+        "passed": true
+      },
+      "request_3_timing": {
+        "passed": true
+      },
+      "request_3_tokens": {
+        "passed": true
+      },
+      "request_3_uncached": {
+        "passed": true
+      },
+      "request_4_mode": {
+        "passed": true
+      },
+      "request_4_order": {
+        "passed": true
+      },
+      "request_4_response": {
+        "passed": true
+      },
+      "request_4_timing": {
+        "passed": true
+      },
+      "request_4_tokens": {
+        "passed": true
+      },
+      "request_4_uncached": {
+        "passed": true
+      },
+      "request_5_actual_output_count": {
+        "passed": true
+      },
+      "request_5_calibration": {
+        "passed": true
+      },
+      "request_5_captured": {
+        "passed": true
+      },
+      "request_5_draft_prepared": {
+        "passed": true
+      },
+      "request_5_fallback": {
+        "passed": true
+      },
+      "request_5_mode": {
+        "passed": true
+      },
+      "request_5_observation": {
+        "passed": true
+      },
+      "request_5_order": {
+        "passed": true
+      },
+      "request_5_response": {
+        "passed": true
+      },
+      "request_5_target_prepared": {
+        "passed": true
+      },
+      "request_5_timing": {
+        "passed": true
+      },
+      "request_5_tokens": {
+        "passed": true
+      },
+      "request_5_uncached": {
+        "passed": true
+      },
+      "request_6_mode": {
+        "passed": true
+      },
+      "request_6_order": {
+        "passed": true
+      },
+      "request_6_response": {
+        "passed": true
+      },
+      "request_6_timing": {
+        "passed": true
+      },
+      "request_6_tokens": {
+        "passed": true
+      },
+      "request_6_uncached": {
+        "passed": true
+      },
+      "request_7_actual_output_count": {
+        "passed": true
+      },
+      "request_7_calibration": {
+        "passed": true
+      },
+      "request_7_captured": {
+        "passed": true
+      },
+      "request_7_draft_prepared": {
+        "passed": true
+      },
+      "request_7_fallback": {
+        "passed": true
+      },
+      "request_7_mode": {
+        "passed": true
+      },
+      "request_7_observation": {
+        "passed": true
+      },
+      "request_7_order": {
+        "passed": true
+      },
+      "request_7_response": {
+        "passed": true
+      },
+      "request_7_target_prepared": {
+        "passed": true
+      },
+      "request_7_timing": {
+        "passed": true
+      },
+      "request_7_tokens": {
+        "passed": true
+      },
+      "request_7_uncached": {
+        "passed": true
+      },
+      "request_8_actual_output_count": {
+        "passed": true
+      },
+      "request_8_calibration": {
+        "passed": true
+      },
+      "request_8_captured": {
+        "passed": true
+      },
+      "request_8_draft_prepared": {
+        "passed": true
+      },
+      "request_8_fallback": {
+        "passed": true
+      },
+      "request_8_mode": {
+        "passed": true
+      },
+      "request_8_observation": {
+        "passed": true
+      },
+      "request_8_order": {
+        "passed": true
+      },
+      "request_8_response": {
+        "passed": true
+      },
+      "request_8_target_prepared": {
+        "passed": true
+      },
+      "request_8_timing": {
+        "passed": true
+      },
+      "request_8_tokens": {
+        "passed": true
+      },
+      "request_8_uncached": {
+        "passed": true
+      },
+      "request_9_mode": {
+        "passed": true
+      },
+      "request_9_order": {
+        "passed": true
+      },
+      "request_9_response": {
+        "passed": true
+      },
+      "request_9_timing": {
+        "passed": true
+      },
+      "request_9_tokens": {
+        "passed": true
+      },
+      "request_9_uncached": {
+        "passed": true
+      },
+      "request_count": {
+        "passed": true
+      },
+      "sampled_0_budget_temperature": {
+        "passed": true
+      },
+      "sampled_0_mode": {
+        "passed": true
+      },
+      "sampled_0_order": {
+        "passed": true
+      },
+      "sampled_0_response_shape": {
+        "passed": true
+      },
+      "sampled_0_time": {
+        "passed": true
+      },
+      "sampled_0_uncached": {
+        "passed": true
+      },
+      "sampled_0_usage": {
+        "passed": true
+      },
+      "sampled_10_budget_temperature": {
+        "passed": true
+      },
+      "sampled_10_mode": {
+        "passed": true
+      },
+      "sampled_10_order": {
+        "passed": true
+      },
+      "sampled_10_response_shape": {
+        "passed": true
+      },
+      "sampled_10_time": {
+        "passed": true
+      },
+      "sampled_10_uncached": {
+        "passed": true
+      },
+      "sampled_10_usage": {
+        "passed": true
+      },
+      "sampled_11_budget_temperature": {
+        "passed": true
+      },
+      "sampled_11_correction": {
+        "passed": true
+      },
+      "sampled_11_mode": {
+        "passed": true
+      },
+      "sampled_11_order": {
+        "passed": true
+      },
+      "sampled_11_raw_count": {
+        "passed": true
+      },
+      "sampled_11_response_shape": {
+        "passed": true
+      },
+      "sampled_11_sampled": {
+        "passed": true
+      },
+      "sampled_11_time": {
+        "passed": true
+      },
+      "sampled_11_uncached": {
+        "passed": true
+      },
+      "sampled_11_usage": {
+        "passed": true
+      },
+      "sampled_12_budget_temperature": {
+        "passed": true
+      },
+      "sampled_12_mode": {
+        "passed": true
+      },
+      "sampled_12_order": {
+        "passed": true
+      },
+      "sampled_12_response_shape": {
+        "passed": true
+      },
+      "sampled_12_time": {
+        "passed": true
+      },
+      "sampled_12_uncached": {
+        "passed": true
+      },
+      "sampled_12_usage": {
+        "passed": true
+      },
+      "sampled_13_budget_temperature": {
+        "passed": true
+      },
+      "sampled_13_correction": {
+        "passed": true
+      },
+      "sampled_13_mode": {
+        "passed": true
+      },
+      "sampled_13_order": {
+        "passed": true
+      },
+      "sampled_13_raw_count": {
+        "passed": true
+      },
+      "sampled_13_response_shape": {
+        "passed": true
+      },
+      "sampled_13_sampled": {
+        "passed": true
+      },
+      "sampled_13_time": {
+        "passed": true
+      },
+      "sampled_13_uncached": {
+        "passed": true
+      },
+      "sampled_13_usage": {
+        "passed": true
+      },
+      "sampled_14_budget_temperature": {
+        "passed": true
+      },
+      "sampled_14_mode": {
+        "passed": true
+      },
+      "sampled_14_order": {
+        "passed": true
+      },
+      "sampled_14_response_shape": {
+        "passed": true
+      },
+      "sampled_14_time": {
+        "passed": true
+      },
+      "sampled_14_uncached": {
+        "passed": true
+      },
+      "sampled_14_usage": {
+        "passed": true
+      },
+      "sampled_15_budget_temperature": {
+        "passed": true
+      },
+      "sampled_15_correction": {
+        "passed": true
+      },
+      "sampled_15_mode": {
+        "passed": true
+      },
+      "sampled_15_order": {
+        "passed": true
+      },
+      "sampled_15_raw_count": {
+        "passed": true
+      },
+      "sampled_15_response_shape": {
+        "passed": true
+      },
+      "sampled_15_sampled": {
+        "passed": true
+      },
+      "sampled_15_time": {
+        "passed": true
+      },
+      "sampled_15_uncached": {
+        "passed": true
+      },
+      "sampled_15_usage": {
+        "passed": true
+      },
+      "sampled_16_budget_temperature": {
+        "passed": true
+      },
+      "sampled_16_mode": {
+        "passed": true
+      },
+      "sampled_16_order": {
+        "passed": true
+      },
+      "sampled_16_response_shape": {
+        "passed": true
+      },
+      "sampled_16_time": {
+        "passed": true
+      },
+      "sampled_16_uncached": {
+        "passed": true
+      },
+      "sampled_16_usage": {
+        "passed": true
+      },
+      "sampled_17_budget_temperature": {
+        "passed": true
+      },
+      "sampled_17_correction": {
+        "passed": true
+      },
+      "sampled_17_mode": {
+        "passed": true
+      },
+      "sampled_17_order": {
+        "passed": true
+      },
+      "sampled_17_raw_count": {
+        "passed": true
+      },
+      "sampled_17_response_shape": {
+        "passed": true
+      },
+      "sampled_17_sampled": {
+        "passed": true
+      },
+      "sampled_17_time": {
+        "passed": true
+      },
+      "sampled_17_uncached": {
+        "passed": true
+      },
+      "sampled_17_usage": {
+        "passed": true
+      },
+      "sampled_18_budget_temperature": {
+        "passed": true
+      },
+      "sampled_18_mode": {
+        "passed": true
+      },
+      "sampled_18_order": {
+        "passed": true
+      },
+      "sampled_18_response_shape": {
+        "passed": true
+      },
+      "sampled_18_time": {
+        "passed": true
+      },
+      "sampled_18_uncached": {
+        "passed": true
+      },
+      "sampled_18_usage": {
+        "passed": true
+      },
+      "sampled_19_budget_temperature": {
+        "passed": true
+      },
+      "sampled_19_correction": {
+        "passed": true
+      },
+      "sampled_19_mode": {
+        "passed": true
+      },
+      "sampled_19_order": {
+        "passed": true
+      },
+      "sampled_19_raw_count": {
+        "passed": true
+      },
+      "sampled_19_response_shape": {
+        "passed": true
+      },
+      "sampled_19_sampled": {
+        "passed": true
+      },
+      "sampled_19_time": {
+        "passed": true
+      },
+      "sampled_19_uncached": {
+        "passed": true
+      },
+      "sampled_19_usage": {
+        "passed": true
+      },
+      "sampled_1_budget_temperature": {
+        "passed": true
+      },
+      "sampled_1_correction": {
+        "passed": true
+      },
+      "sampled_1_mode": {
+        "passed": true
+      },
+      "sampled_1_order": {
+        "passed": true
+      },
+      "sampled_1_raw_count": {
+        "passed": true
+      },
+      "sampled_1_response_shape": {
+        "passed": true
+      },
+      "sampled_1_sampled": {
+        "passed": true
+      },
+      "sampled_1_time": {
+        "passed": true
+      },
+      "sampled_1_uncached": {
+        "passed": true
+      },
+      "sampled_1_usage": {
+        "passed": true
+      },
+      "sampled_20_budget_temperature": {
+        "passed": true
+      },
+      "sampled_20_correction": {
+        "passed": true
+      },
+      "sampled_20_mode": {
+        "passed": true
+      },
+      "sampled_20_order": {
+        "passed": true
+      },
+      "sampled_20_raw_count": {
+        "passed": true
+      },
+      "sampled_20_response_shape": {
+        "passed": true
+      },
+      "sampled_20_sampled": {
+        "passed": true
+      },
+      "sampled_20_time": {
+        "passed": true
+      },
+      "sampled_20_uncached": {
+        "passed": true
+      },
+      "sampled_20_usage": {
+        "passed": true
+      },
+      "sampled_21_budget_temperature": {
+        "passed": true
+      },
+      "sampled_21_mode": {
+        "passed": true
+      },
+      "sampled_21_order": {
+        "passed": true
+      },
+      "sampled_21_response_shape": {
+        "passed": true
+      },
+      "sampled_21_time": {
+        "passed": true
+      },
+      "sampled_21_uncached": {
+        "passed": true
+      },
+      "sampled_21_usage": {
+        "passed": true
+      },
+      "sampled_22_budget_temperature": {
+        "passed": true
+      },
+      "sampled_22_mode": {
+        "passed": true
+      },
+      "sampled_22_order": {
+        "passed": true
+      },
+      "sampled_22_response_shape": {
+        "passed": true
+      },
+      "sampled_22_time": {
+        "passed": true
+      },
+      "sampled_22_uncached": {
+        "passed": true
+      },
+      "sampled_22_usage": {
+        "passed": true
+      },
+      "sampled_23_budget_temperature": {
+        "passed": true
+      },
+      "sampled_23_correction": {
+        "passed": true
+      },
+      "sampled_23_mode": {
+        "passed": true
+      },
+      "sampled_23_order": {
+        "passed": true
+      },
+      "sampled_23_raw_count": {
+        "passed": true
+      },
+      "sampled_23_response_shape": {
+        "passed": true
+      },
+      "sampled_23_sampled": {
+        "passed": true
+      },
+      "sampled_23_time": {
+        "passed": true
+      },
+      "sampled_23_uncached": {
+        "passed": true
+      },
+      "sampled_23_usage": {
+        "passed": true
+      },
+      "sampled_24_budget_temperature": {
+        "passed": true
+      },
+      "sampled_24_mode": {
+        "passed": true
+      },
+      "sampled_24_order": {
+        "passed": true
+      },
+      "sampled_24_response_shape": {
+        "passed": true
+      },
+      "sampled_24_time": {
+        "passed": true
+      },
+      "sampled_24_uncached": {
+        "passed": true
+      },
+      "sampled_24_usage": {
+        "passed": true
+      },
+      "sampled_25_budget_temperature": {
+        "passed": true
+      },
+      "sampled_25_correction": {
+        "passed": true
+      },
+      "sampled_25_mode": {
+        "passed": true
+      },
+      "sampled_25_order": {
+        "passed": true
+      },
+      "sampled_25_raw_count": {
+        "passed": true
+      },
+      "sampled_25_response_shape": {
+        "passed": true
+      },
+      "sampled_25_sampled": {
+        "passed": true
+      },
+      "sampled_25_time": {
+        "passed": true
+      },
+      "sampled_25_uncached": {
+        "passed": true
+      },
+      "sampled_25_usage": {
+        "passed": true
+      },
+      "sampled_26_budget_temperature": {
+        "passed": true
+      },
+      "sampled_26_mode": {
+        "passed": true
+      },
+      "sampled_26_order": {
+        "passed": true
+      },
+      "sampled_26_response_shape": {
+        "passed": true
+      },
+      "sampled_26_time": {
+        "passed": true
+      },
+      "sampled_26_uncached": {
+        "passed": true
+      },
+      "sampled_26_usage": {
+        "passed": true
+      },
+      "sampled_27_budget_temperature": {
+        "passed": true
+      },
+      "sampled_27_correction": {
+        "passed": true
+      },
+      "sampled_27_mode": {
+        "passed": true
+      },
+      "sampled_27_order": {
+        "passed": true
+      },
+      "sampled_27_raw_count": {
+        "passed": true
+      },
+      "sampled_27_response_shape": {
+        "passed": true
+      },
+      "sampled_27_sampled": {
+        "passed": true
+      },
+      "sampled_27_time": {
+        "passed": true
+      },
+      "sampled_27_uncached": {
+        "passed": true
+      },
+      "sampled_27_usage": {
+        "passed": true
+      },
+      "sampled_28_budget_temperature": {
+        "passed": true
+      },
+      "sampled_28_mode": {
+        "passed": true
+      },
+      "sampled_28_order": {
+        "passed": true
+      },
+      "sampled_28_response_shape": {
+        "passed": true
+      },
+      "sampled_28_time": {
+        "passed": true
+      },
+      "sampled_28_uncached": {
+        "passed": true
+      },
+      "sampled_28_usage": {
+        "passed": true
+      },
+      "sampled_29_budget_temperature": {
+        "passed": true
+      },
+      "sampled_29_correction": {
+        "passed": true
+      },
+      "sampled_29_mode": {
+        "passed": true
+      },
+      "sampled_29_order": {
+        "passed": true
+      },
+      "sampled_29_raw_count": {
+        "passed": true
+      },
+      "sampled_29_response_shape": {
+        "passed": true
+      },
+      "sampled_29_sampled": {
+        "passed": true
+      },
+      "sampled_29_time": {
+        "passed": true
+      },
+      "sampled_29_uncached": {
+        "passed": true
+      },
+      "sampled_29_usage": {
+        "passed": true
+      },
+      "sampled_2_budget_temperature": {
+        "passed": true
+      },
+      "sampled_2_mode": {
+        "passed": true
+      },
+      "sampled_2_order": {
+        "passed": true
+      },
+      "sampled_2_response_shape": {
+        "passed": true
+      },
+      "sampled_2_time": {
+        "passed": true
+      },
+      "sampled_2_uncached": {
+        "passed": true
+      },
+      "sampled_2_usage": {
+        "passed": true
+      },
+      "sampled_30_budget_temperature": {
+        "passed": true
+      },
+      "sampled_30_mode": {
+        "passed": true
+      },
+      "sampled_30_order": {
+        "passed": true
+      },
+      "sampled_30_response_shape": {
+        "passed": true
+      },
+      "sampled_30_time": {
+        "passed": true
+      },
+      "sampled_30_uncached": {
+        "passed": true
+      },
+      "sampled_30_usage": {
+        "passed": true
+      },
+      "sampled_31_budget_temperature": {
+        "passed": true
+      },
+      "sampled_31_correction": {
+        "passed": true
+      },
+      "sampled_31_mode": {
+        "passed": true
+      },
+      "sampled_31_order": {
+        "passed": true
+      },
+      "sampled_31_raw_count": {
+        "passed": true
+      },
+      "sampled_31_response_shape": {
+        "passed": true
+      },
+      "sampled_31_sampled": {
+        "passed": true
+      },
+      "sampled_31_time": {
+        "passed": true
+      },
+      "sampled_31_uncached": {
+        "passed": true
+      },
+      "sampled_31_usage": {
+        "passed": true
+      },
+      "sampled_32_budget_temperature": {
+        "passed": true
+      },
+      "sampled_32_correction": {
+        "passed": true
+      },
+      "sampled_32_mode": {
+        "passed": true
+      },
+      "sampled_32_order": {
+        "passed": true
+      },
+      "sampled_32_raw_count": {
+        "passed": true
+      },
+      "sampled_32_response_shape": {
+        "passed": true
+      },
+      "sampled_32_sampled": {
+        "passed": true
+      },
+      "sampled_32_time": {
+        "passed": true
+      },
+      "sampled_32_uncached": {
+        "passed": true
+      },
+      "sampled_32_usage": {
+        "passed": true
+      },
+      "sampled_33_budget_temperature": {
+        "passed": true
+      },
+      "sampled_33_mode": {
+        "passed": true
+      },
+      "sampled_33_order": {
+        "passed": true
+      },
+      "sampled_33_response_shape": {
+        "passed": true
+      },
+      "sampled_33_time": {
+        "passed": true
+      },
+      "sampled_33_uncached": {
+        "passed": true
+      },
+      "sampled_33_usage": {
+        "passed": true
+      },
+      "sampled_34_budget_temperature": {
+        "passed": true
+      },
+      "sampled_34_mode": {
+        "passed": true
+      },
+      "sampled_34_order": {
+        "passed": true
+      },
+      "sampled_34_response_shape": {
+        "passed": true
+      },
+      "sampled_34_time": {
+        "passed": true
+      },
+      "sampled_34_uncached": {
+        "passed": true
+      },
+      "sampled_34_usage": {
+        "passed": true
+      },
+      "sampled_35_budget_temperature": {
+        "passed": true
+      },
+      "sampled_35_correction": {
+        "passed": true
+      },
+      "sampled_35_mode": {
+        "passed": true
+      },
+      "sampled_35_order": {
+        "passed": true
+      },
+      "sampled_35_raw_count": {
+        "passed": true
+      },
+      "sampled_35_response_shape": {
+        "passed": true
+      },
+      "sampled_35_sampled": {
+        "passed": true
+      },
+      "sampled_35_time": {
+        "passed": true
+      },
+      "sampled_35_uncached": {
+        "passed": true
+      },
+      "sampled_35_usage": {
+        "passed": true
+      },
+      "sampled_3_budget_temperature": {
+        "passed": true
+      },
+      "sampled_3_correction": {
+        "passed": true
+      },
+      "sampled_3_mode": {
+        "passed": true
+      },
+      "sampled_3_order": {
+        "passed": true
+      },
+      "sampled_3_raw_count": {
+        "passed": true
+      },
+      "sampled_3_response_shape": {
+        "passed": true
+      },
+      "sampled_3_sampled": {
+        "passed": true
+      },
+      "sampled_3_time": {
+        "passed": true
+      },
+      "sampled_3_uncached": {
+        "passed": true
+      },
+      "sampled_3_usage": {
+        "passed": true
+      },
+      "sampled_4_budget_temperature": {
+        "passed": true
+      },
+      "sampled_4_mode": {
+        "passed": true
+      },
+      "sampled_4_order": {
+        "passed": true
+      },
+      "sampled_4_response_shape": {
+        "passed": true
+      },
+      "sampled_4_time": {
+        "passed": true
+      },
+      "sampled_4_uncached": {
+        "passed": true
+      },
+      "sampled_4_usage": {
+        "passed": true
+      },
+      "sampled_5_budget_temperature": {
+        "passed": true
+      },
+      "sampled_5_correction": {
+        "passed": true
+      },
+      "sampled_5_mode": {
+        "passed": true
+      },
+      "sampled_5_order": {
+        "passed": true
+      },
+      "sampled_5_raw_count": {
+        "passed": true
+      },
+      "sampled_5_response_shape": {
+        "passed": true
+      },
+      "sampled_5_sampled": {
+        "passed": true
+      },
+      "sampled_5_time": {
+        "passed": true
+      },
+      "sampled_5_uncached": {
+        "passed": true
+      },
+      "sampled_5_usage": {
+        "passed": true
+      },
+      "sampled_6_budget_temperature": {
+        "passed": true
+      },
+      "sampled_6_mode": {
+        "passed": true
+      },
+      "sampled_6_order": {
+        "passed": true
+      },
+      "sampled_6_response_shape": {
+        "passed": true
+      },
+      "sampled_6_time": {
+        "passed": true
+      },
+      "sampled_6_uncached": {
+        "passed": true
+      },
+      "sampled_6_usage": {
+        "passed": true
+      },
+      "sampled_7_budget_temperature": {
+        "passed": true
+      },
+      "sampled_7_correction": {
+        "passed": true
+      },
+      "sampled_7_mode": {
+        "passed": true
+      },
+      "sampled_7_order": {
+        "passed": true
+      },
+      "sampled_7_raw_count": {
+        "passed": true
+      },
+      "sampled_7_response_shape": {
+        "passed": true
+      },
+      "sampled_7_sampled": {
+        "passed": true
+      },
+      "sampled_7_time": {
+        "passed": true
+      },
+      "sampled_7_uncached": {
+        "passed": true
+      },
+      "sampled_7_usage": {
+        "passed": true
+      },
+      "sampled_8_budget_temperature": {
+        "passed": true
+      },
+      "sampled_8_correction": {
+        "passed": true
+      },
+      "sampled_8_mode": {
+        "passed": true
+      },
+      "sampled_8_order": {
+        "passed": true
+      },
+      "sampled_8_raw_count": {
+        "passed": true
+      },
+      "sampled_8_response_shape": {
+        "passed": true
+      },
+      "sampled_8_sampled": {
+        "passed": true
+      },
+      "sampled_8_time": {
+        "passed": true
+      },
+      "sampled_8_uncached": {
+        "passed": true
+      },
+      "sampled_8_usage": {
+        "passed": true
+      },
+      "sampled_9_budget_temperature": {
+        "passed": true
+      },
+      "sampled_9_mode": {
+        "passed": true
+      },
+      "sampled_9_order": {
+        "passed": true
+      },
+      "sampled_9_response_shape": {
+        "passed": true
+      },
+      "sampled_9_time": {
+        "passed": true
+      },
+      "sampled_9_uncached": {
+        "passed": true
+      },
+      "sampled_9_usage": {
+        "passed": true
+      },
+      "sampled_cancel": {
+        "passed": true
+      },
+      "sampled_cancellation_raw": {
+        "passed": true
+      },
+      "sampled_count": {
+        "passed": true
+      },
+      "sampled_readiness": {
+        "passed": true
+      },
+      "sampled_route": {
+        "passed": true
+      },
+      "sampled_stream": {
+        "passed": true
+      },
+      "sampled_stream_raw": {
+        "passed": true
+      },
+      "sampled_stream_route": {
+        "passed": true
+      },
+      "sources": {
+        "passed": true
+      },
+      "startup_setup": {
+        "passed": true
+      },
+      "stream": {
+        "passed": true
+      },
+      "suite_checks": {
+        "passed": true
+      },
+      "target_layout": {
+        "passed": true
+      },
+      "workloads": {
+        "passed": true
+      }
+    }
+  },
+  "model_pair": {
+    "context_configured": 512,
+    "draft": "trained DFlash2 draft",
+    "max_output_tokens": 32,
+    "runtime_weights": "GPU FP16 dequantized from Q8_0 storage",
+    "storage": "Q8_0",
+    "target": "Qwen3.5-2B",
+    "workloads": [
+      {
+        "max_output_tokens": 32,
+        "name": "counting",
+        "prompt_tokens": 30,
+        "visible_completion_tokens": 29
+      },
+      {
+        "max_output_tokens": 32,
+        "name": "short_code",
+        "prompt_tokens": 36,
+        "visible_completion_tokens": 17
+      },
+      {
+        "max_output_tokens": 32,
+        "name": "explanation",
+        "prompt_tokens": 27,
+        "visible_completion_tokens": 32
+      }
+    ]
+  },
+  "provenance": {
+    "backend_source_map": {
+      "file_count": 266,
+      "sha256": "62d2dbbf5f6ce632c4cf2efd524b3a3e3a305c5ace4f80e32166be5421a5bf85"
+    },
+    "checkpoint": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Qwen3.5-2B/Qwen3.5-2B-Q8_0.gguf",
+      "sha256_manifest": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1"
+    },
+    "child_report_sha256": "d3de908d83701c5af5b6330efce79ca9100be41a33922fa7b4d1247efd54ddff",
+    "child_valid": true,
+    "http_report_sha256": "d3de908d83701c5af5b6330efce79ca9100be41a33922fa7b4d1247efd54ddff",
+    "job_phase": "restored",
+    "job_restored": true,
+    "job_sha256": "d2009c0db7e0e55d4684ff934dbb35cd0efe65d9e11d230d1757c3396f2220d0",
+    "owner_sha256": "c07cb57cfe700bda2940711ff0d0d5fd2f539a25604a97910be1e23352a33a63",
+    "preflight_receipt_sha256": "3b9455d943e2590986fe3229af852e62f1a34772e1d491c99fbe28137f769cf9",
+    "probability_audit_sha256": "f226cd256ee8e65fd95f12952c6cfe5b9c5dcbbd13e6ee7195aaba1de90be889",
+    "serving_receipt_parent_job_sha256": "d2009c0db7e0e55d4684ff934dbb35cd0efe65d9e11d230d1757c3396f2220d0",
+    "serving_receipt_parent_sha256": "c07cb57cfe700bda2940711ff0d0d5fd2f539a25604a97910be1e23352a33a63",
+    "serving_receipt_sha256": "8ac7dd4c12aee0733a141bf5c0d56d9c5f70cfdbffd87d44d36266ecb5629a71",
+    "serving_source_map": {
+      "file_count": 11,
+      "sha256": "91ecb410036b2d5873a8401404defe368ff3662955f47f6b0e48cba04381982b"
+    },
+    "source_maps_match_staged_manifest": true
+  },
+  "qualification": {
+    "RKLLM_quality_qualified": false,
+    "api_functional_qualified": true,
+    "general_speedup_claim": false,
+    "modelmax_context_qualified": false,
+    "scope": "One completed full V15 cohort with 36 greedy and 38 sampled HTTP requests, all strict gates and fresh serving restoration qualified.",
+    "single_run_full_suite": true
+  },
+  "schema": "speculative_api_state_v15_evidence"
+}

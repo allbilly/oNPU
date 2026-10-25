@@ -1,0 +1,991 @@
+{
+  "schema": "onpu-cpu-npu-native-profile-v1",
+  "updated_utc": "2026-10-24T15:02:54.469273+00:00",
+  "complete": true,
+  "diagnostic_only": true,
+  "promote_to_model_timing_table": false,
+  "API_qualified": false,
+  "quality_qualified": false,
+  "scope": "Pooled Qwen3.5-2B CPU+NPU INT8 diagnostic. Profile counters after trial5 minus after trial2 exclude warmups. Label walltime includes CPU kernels, Rockchip submission/driver/hardware time and lowered copy/sync statements; not pure hardware attribution.",
+  "phases": {
+    "prefill": {
+      "categories_percent": {
+        "CPU": 88.39544570925169,
+        "ROCKCHIP": 9.253095733141075,
+        "COPY": 2.3514585576072315
+      },
+      "native_ms_per_request": 1782.0041323333335,
+      "native_ms_per_invocation": 1782.0041323333335,
+      "accounted_fraction_of_sum_request_timers": 0.3506375802036372,
+      "top_labels": [
+        {
+          "label": "CPU:E_toks_1536_4",
+          "category": "CPU",
+          "delta_ms": 837.678389,
+          "calls": 72,
+          "mean_ms_per_call": 11.634422069444446,
+          "share_percent": 15.669218976560483
+        },
+        {
+          "label": "CPU:rockchip_cpu_gated_delta_scan",
+          "category": "CPU",
+          "delta_ms": 689.347479,
+          "calls": 54,
+          "mean_ms_per_call": 12.765694055555556,
+          "share_percent": 12.894610558457334
+        },
+        {
+          "label": "CPU:r_8_toks_28start_pos2Btoks29_64_4",
+          "category": "CPU",
+          "delta_ms": 651.206165,
+          "calls": 18,
+          "mean_ms_per_call": 36.17812027777778,
+          "share_percent": 12.181157031462082
+        },
+        {
+          "label": "CPU:E_16_32_32_4_4",
+          "category": "CPU",
+          "delta_ms": 517.107803,
+          "calls": 108,
+          "mean_ms_per_call": 4.788035212962963,
+          "share_percent": 9.672775979535386
+        },
+        {
+          "label": "CPU:r_32_16_4_32_4",
+          "category": "CPU",
+          "delta_ms": 478.950735,
+          "calls": 108,
+          "mean_ms_per_call": 4.434729027777778,
+          "share_percent": 8.959027765606582
+        },
+        {
+          "label": "CPU:r_32_8_64_4_4_28start_pos2Btoks29",
+          "category": "CPU",
+          "delta_ms": 455.385849,
+          "calls": 18,
+          "mean_ms_per_call": 25.299213833333333,
+          "share_percent": 8.518234062748283
+        },
+        {
+          "label": "CPU:E_32_16_32_4_4",
+          "category": "CPU",
+          "delta_ms": 275.012581,
+          "calls": 54,
+          "mean_ms_per_call": 5.092825574074074,
+          "share_percent": 5.144256327469941
+        },
+        {
+          "label": "CPU:E_16_32_128_4",
+          "category": "CPU",
+          "delta_ms": 238.373615,
+          "calls": 54,
+          "mean_ms_per_call": 4.414326203703704,
+          "share_percent": 4.458905017387672
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_128_12288_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 191.205915,
+          "calls": 72,
+          "mean_ms_per_call": 2.6556377083333333,
+          "share_percent": 3.576608148295695
+        },
+        {
+          "label": "CPU:rockchip_quantize",
+          "category": "CPU",
+          "delta_ms": 128.604878,
+          "calls": 627,
+          "mean_ms_per_call": 0.20511144816586924,
+          "share_percent": 2.405622517302217
+        },
+        {
+          "label": "CPU:rockchip_dequantize",
+          "category": "CPU",
+          "delta_ms": 112.379121,
+          "calls": 555,
+          "mean_ms_per_call": 0.2024849027027027,
+          "share_percent": 2.1021111186173704
+        },
+        {
+          "label": "COPY:ROCKCHIP->CPU",
+          "category": "COPY",
+          "delta_ms": 107.116924,
+          "calls": 627,
+          "mean_ms_per_call": 0.17084038915470495,
+          "share_percent": 2.0036789301145346
+        }
+      ]
+    },
+    "decode": {
+      "categories_percent": {
+        "ROCKCHIP": 77.60825932585334,
+        "CPU": 21.544494469461515,
+        "COPY": 0.8472462046851515
+      },
+      "native_ms_per_request": 5772.665103666666,
+      "native_ms_per_invocation": 91.62960482010581,
+      "accounted_fraction_of_sum_request_timers": 0.9595613949935659,
+      "top_labels": [
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_12288_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 3879.4097620000002,
+          "calls": 4536,
+          "mean_ms_per_call": 0.855249065696649,
+          "share_percent": 22.40103252329608
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_24576_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 3130.589889,
+          "calls": 1890,
+          "mean_ms_per_call": 1.6563967666666666,
+          "share_percent": 18.077091677069113
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_2048_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 2339.666411,
+          "calls": 12474,
+          "mean_ms_per_call": 0.1875634448452782,
+          "share_percent": 13.51003028343527
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_2048_4096",
+          "category": "ROCKCHIP",
+          "delta_ms": 1666.780427,
+          "calls": 4536,
+          "mean_ms_per_call": 0.36745600242504406,
+          "share_percent": 9.62455756031588
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_6144_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 1559.869983,
+          "calls": 3402,
+          "mean_ms_per_call": 0.45851557407407406,
+          "share_percent": 9.007220264167676
+        },
+        {
+          "label": "CPU:rockchip_cpu_gated_delta_scan",
+          "category": "CPU",
+          "delta_ms": 1131.044406,
+          "calls": 3402,
+          "mean_ms_per_call": 0.3324645520282187,
+          "share_percent": 6.531035409633043
+        },
+        {
+          "label": "CPU:r_8_28start_pos2B129_64_4",
+          "category": "CPU",
+          "delta_ms": 613.7380039999999,
+          "calls": 1134,
+          "mean_ms_per_call": 0.5412151710758377,
+          "share_percent": 3.543932152529037
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_5120_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 434.261628,
+          "calls": 1134,
+          "mean_ms_per_call": 0.3829467619047619,
+          "share_percent": 2.507574463449397
+        },
+        {
+          "label": "CPU:E_16_32_4",
+          "category": "CPU",
+          "delta_ms": 389.50800799999996,
+          "calls": 10206,
+          "mean_ms_per_call": 0.03816460983735057,
+          "share_percent": 2.249151827363028
+        },
+        {
+          "label": "ROCKCHIP:rockchip_int8_1_32_2048",
+          "category": "ROCKCHIP",
+          "delta_ms": 387.75717899999995,
+          "calls": 6804,
+          "mean_ms_per_call": 0.05698959126984126,
+          "share_percent": 2.2390419447319365
+        },
+        {
+          "label": "CPU:r_8_64_4_28start_pos2B129",
+          "category": "CPU",
+          "delta_ms": 348.75045500000004,
+          "calls": 1134,
+          "mean_ms_per_call": 0.30754008377425046,
+          "share_percent": 2.0138038424024844
+        },
+        {
+          "label": "CPU:r_16_32_4",
+          "category": "CPU",
+          "delta_ms": 277.433731,
+          "calls": 10206,
+          "mean_ms_per_call": 0.027183395159709977,
+          "share_percent": 1.6019968016955197
+        }
+      ]
+    }
+  },
+  "measured_TTFT_ms": [
+    11647.529133129865,
+    1799.076323863119,
+    1799.941686913371
+  ],
+  "cold_setup_observation": "Native prefill runs were zero through all three warmups; NativeReplay construction/compilation first occurs in measured trial3. Its11647.53ms TTFT is outside the per-call profile accounting. Steady later TTFTs are approximately1800ms. No timing rows are replaced by this diagnostic.",
+  "summary": {
+    "scope": "Native profile label walltime deltas only; CPU/ROCKCHIP/COPY/other are label-prefix categories, not pure hardware attribution.",
+    "diagnostic_only": true,
+    "promotion_claim": false,
+    "sdk_win_claim": false,
+    "quality_claim": false,
+    "exclusion_notes": [
+      "Warmups excluded: snapshots after trials 2 and 5 delimit measured trials 3 through 5.",
+      "Counter observer reads add overhead; decode timing includes the first observer read after the first-token timestamp.",
+      "Timed request comparisons use first-token time for prefill and 63/decode_tps for decode."
+    ],
+    "phases": {
+      "prefill": {
+        "measured_requests": 3,
+        "native_runs_delta": 3,
+        "sum_ms": 5346.012397,
+        "per_request_ms": 1782.0041323333335,
+        "ms_per_native_invocation": 1782.0041323333335,
+        "timed_request_comparison_ms": 15246.547143906355,
+        "accounted_fraction": 0.3506375802036372,
+        "labels": [
+          {
+            "label": "CPU:E_toks_1536_4",
+            "category": "CPU",
+            "delta_ms": 837.678389,
+            "calls": 72,
+            "mean_ms_per_call": 11.634422069444446,
+            "share_percent": 15.669218976560483
+          },
+          {
+            "label": "CPU:rockchip_cpu_gated_delta_scan",
+            "category": "CPU",
+            "delta_ms": 689.347479,
+            "calls": 54,
+            "mean_ms_per_call": 12.765694055555556,
+            "share_percent": 12.894610558457334
+          },
+          {
+            "label": "CPU:r_8_toks_28start_pos2Btoks29_64_4",
+            "category": "CPU",
+            "delta_ms": 651.206165,
+            "calls": 18,
+            "mean_ms_per_call": 36.17812027777778,
+            "share_percent": 12.181157031462082
+          },
+          {
+            "label": "CPU:E_16_32_32_4_4",
+            "category": "CPU",
+            "delta_ms": 517.107803,
+            "calls": 108,
+            "mean_ms_per_call": 4.788035212962963,
+            "share_percent": 9.672775979535386
+          },
+          {
+            "label": "CPU:r_32_16_4_32_4",
+            "category": "CPU",
+            "delta_ms": 478.950735,
+            "calls": 108,
+            "mean_ms_per_call": 4.434729027777778,
+            "share_percent": 8.959027765606582
+          },
+          {
+            "label": "CPU:r_32_8_64_4_4_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 455.385849,
+            "calls": 18,
+            "mean_ms_per_call": 25.299213833333333,
+            "share_percent": 8.518234062748283
+          },
+          {
+            "label": "CPU:E_32_16_32_4_4",
+            "category": "CPU",
+            "delta_ms": 275.012581,
+            "calls": 54,
+            "mean_ms_per_call": 5.092825574074074,
+            "share_percent": 5.144256327469941
+          },
+          {
+            "label": "CPU:E_16_32_128_4",
+            "category": "CPU",
+            "delta_ms": 238.373615,
+            "calls": 54,
+            "mean_ms_per_call": 4.414326203703704,
+            "share_percent": 4.458905017387672
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_12288_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 191.205915,
+            "calls": 72,
+            "mean_ms_per_call": 2.6556377083333333,
+            "share_percent": 3.576608148295695
+          },
+          {
+            "label": "CPU:rockchip_quantize",
+            "category": "CPU",
+            "delta_ms": 128.604878,
+            "calls": 627,
+            "mean_ms_per_call": 0.20511144816586924,
+            "share_percent": 2.405622517302217
+          },
+          {
+            "label": "CPU:rockchip_dequantize",
+            "category": "CPU",
+            "delta_ms": 112.379121,
+            "calls": 555,
+            "mean_ms_per_call": 0.2024849027027027,
+            "share_percent": 2.1021111186173704
+          },
+          {
+            "label": "COPY:ROCKCHIP->CPU",
+            "category": "COPY",
+            "delta_ms": 107.116924,
+            "calls": 627,
+            "mean_ms_per_call": 0.17084038915470495,
+            "share_percent": 2.0036789301145346
+          },
+          {
+            "label": "CPU:E_131_1536_4",
+            "category": "CPU",
+            "delta_ms": 84.664147,
+            "calls": 54,
+            "mean_ms_per_call": 1.5678545740740741,
+            "share_percent": 1.5836878165024575
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_64_2048_4096",
+            "category": "ROCKCHIP",
+            "delta_ms": 83.392496,
+            "calls": 144,
+            "mean_ms_per_call": 0.5791145555555555,
+            "share_percent": 1.5599009094478908
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_2048_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 79.555675,
+            "calls": 198,
+            "mean_ms_per_call": 0.4017963383838383,
+            "share_percent": 1.4881311357348128
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_6144_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 63.789554,
+            "calls": 54,
+            "mean_ms_per_call": 1.181288037037037,
+            "share_percent": 1.193217472443508
+          },
+          {
+            "label": "CPU:E_128_512_4",
+            "category": "CPU",
+            "delta_ms": 50.037654,
+            "calls": 414,
+            "mean_ms_per_call": 0.12086389855072464,
+            "share_percent": 0.9359808822755336
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_24576_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 49.398915,
+            "calls": 30,
+            "mean_ms_per_call": 1.6466305,
+            "share_percent": 0.9240329301840189
+          },
+          {
+            "label": "CPU:E_toks_1024_4",
+            "category": "CPU",
+            "delta_ms": 43.134584,
+            "calls": 72,
+            "mean_ms_per_call": 0.5990914444444444,
+            "share_percent": 0.8068552931939637
+          },
+          {
+            "label": "CPU:E_28toks2A204829",
+            "category": "CPU",
+            "delta_ms": 27.739748,
+            "calls": 141,
+            "mean_ms_per_call": 0.19673580141843972,
+            "share_percent": 0.5188867129370407
+          },
+          {
+            "label": "CPU:E_toks_512_4",
+            "category": "CPU",
+            "delta_ms": 25.26207,
+            "calls": 75,
+            "mean_ms_per_call": 0.3368276,
+            "share_percent": 0.47254043058665957
+          },
+          {
+            "label": "CPU:rockchip_cpu_rmsnorm",
+            "category": "CPU",
+            "delta_ms": 23.312604,
+            "calls": 144,
+            "mean_ms_per_call": 0.16189308333333333,
+            "share_percent": 0.43607463411574277
+          },
+          {
+            "label": "COPY:CPU->ROCKCHIP",
+            "category": "COPY",
+            "delta_ms": 18.592342,
+            "calls": 627,
+            "mean_ms_per_call": 0.029652858054226475,
+            "share_percent": 0.3477796274926969
+          },
+          {
+            "label": "CPU:r_128_16_32_4",
+            "category": "CPU",
+            "delta_ms": 14.784674,
+            "calls": 54,
+            "mean_ms_per_call": 0.27379025925925926,
+            "share_percent": 0.2765551761214893
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_5120_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 14.520723,
+            "calls": 18,
+            "mean_ms_per_call": 0.8067068333333334,
+            "share_percent": 0.27161783253904415
+          },
+          {
+            "label": "CPU:E_16_32_4",
+            "category": "CPU",
+            "delta_ms": 12.717665,
+            "calls": 108,
+            "mean_ms_per_call": 0.11775615740740741,
+            "share_percent": 0.23789067543383774
+          },
+          {
+            "label": "CPU:E_2_toks_28start_pos2Btoks29_4",
+            "category": "CPU",
+            "delta_ms": 12.537993,
+            "calls": 36,
+            "mean_ms_per_call": 0.34827758333333336,
+            "share_percent": 0.23452981528879158
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_128_32_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 12.175459,
+            "calls": 108,
+            "mean_ms_per_call": 0.11273573148148149,
+            "share_percent": 0.2277484243551783
+          },
+          {
+            "label": "CPU:E_64_1024_4",
+            "category": "CPU",
+            "delta_ms": 11.870962,
+            "calls": 144,
+            "mean_ms_per_call": 0.08243723611111112,
+            "share_percent": 0.22205264631749785
+          },
+          {
+            "label": "CPU:E_8_toks_32_2_4",
+            "category": "CPU",
+            "delta_ms": 6.844741,
+            "calls": 18,
+            "mean_ms_per_call": 0.3802633888888889,
+            "share_percent": 0.12803451417061873
+          },
+          {
+            "label": "CPU:r_8_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 6.007083,
+            "calls": 18,
+            "mean_ms_per_call": 0.3337268333333333,
+            "share_percent": 0.11236567658112745
+          },
+          {
+            "label": "CPU:E_8_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 4.644436,
+            "calls": 18,
+            "mean_ms_per_call": 0.2580242222222222,
+            "share_percent": 0.08687664103821194
+          },
+          {
+            "label": "CPU:r_2_toks_4_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 4.554901,
+            "calls": 36,
+            "mean_ms_per_call": 0.12652502777777777,
+            "share_percent": 0.08520184133048504
+          },
+          {
+            "label": "CPU:E_2_toks_32_2_4_2",
+            "category": "CPU",
+            "delta_ms": 4.042446,
+            "calls": 18,
+            "mean_ms_per_call": 0.22458033333333333,
+            "share_percent": 0.07561609850116477
+          },
+          {
+            "label": "CPU:r_28start_pos2Btoks29_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 2.252802,
+            "calls": 18,
+            "mean_ms_per_call": 0.12515566666666667,
+            "share_percent": 0.04213985738724055
+          },
+          {
+            "label": "CPU:r_toks_toks",
+            "category": "CPU",
+            "delta_ms": 2.250468,
+            "calls": 18,
+            "mean_ms_per_call": 0.125026,
+            "share_percent": 0.04209619867815656
+          },
+          {
+            "label": "CPU:r_2_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 1.489817,
+            "calls": 18,
+            "mean_ms_per_call": 0.08276761111111111,
+            "share_percent": 0.027867817905473515
+          },
+          {
+            "label": "CPU:E_62080_4",
+            "category": "CPU",
+            "delta_ms": 1.470563,
+            "calls": 3,
+            "mean_ms_per_call": 0.4901876666666667,
+            "share_percent": 0.027507661613826964
+          },
+          {
+            "label": "CPU:E_2_toks_64_4",
+            "category": "CPU",
+            "delta_ms": 1.159942,
+            "calls": 18,
+            "mean_ms_per_call": 0.06444122222222222,
+            "share_percent": 0.02169733090501099
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2560_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 0.632908,
+            "calls": 3,
+            "mean_ms_per_call": 0.21096933333333334,
+            "share_percent": 0.011838880140928336
+          },
+          {
+            "label": "CPU:E_6144_3",
+            "category": "CPU",
+            "delta_ms": 0.343578,
+            "calls": 54,
+            "mean_ms_per_call": 0.006362555555555555,
+            "share_percent": 0.006426808890170256
+          },
+          {
+            "label": "CPU:gpt2_argmax",
+            "category": "CPU",
+            "delta_ms": 0.311204,
+            "calls": 3,
+            "mean_ms_per_call": 0.10373466666666666,
+            "share_percent": 0.005821236033321528
+          },
+          {
+            "label": "CPU:E_toks_28start_pos2Btoks29",
+            "category": "CPU",
+            "delta_ms": 0.128915,
+            "calls": 18,
+            "mean_ms_per_call": 0.007161944444444445,
+            "share_percent": 0.002411423513951122
+          },
+          {
+            "label": "CPU:r_512_4",
+            "category": "CPU",
+            "delta_ms": 0.008459,
+            "calls": 3,
+            "mean_ms_per_call": 0.0028196666666666665,
+            "share_percent": 0.00015823008575039784
+          },
+          {
+            "label": "CPU:E",
+            "category": "CPU",
+            "delta_ms": 0.007,
+            "calls": 108,
+            "mean_ms_per_call": 6.481481481481482e-05,
+            "share_percent": 0.0001309387161901862
+          },
+          {
+            "label": "CPU:E_512_4",
+            "category": "CPU",
+            "delta_ms": 0.006415,
+            "calls": 3,
+            "mean_ms_per_call": 0.0021383333333333332,
+            "share_percent": 0.00011999598062286348
+          }
+        ]
+      },
+      "decode": {
+        "measured_requests": 3,
+        "native_runs_delta": 189,
+        "sum_ms": 17317.995311,
+        "per_request_ms": 5772.665103666666,
+        "ms_per_native_invocation": 91.62960482010581,
+        "timed_request_comparison_ms": 18047.82414273359,
+        "accounted_fraction": 0.9595613949935659,
+        "labels": [
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_12288_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 3879.4097620000002,
+            "calls": 4536,
+            "mean_ms_per_call": 0.855249065696649,
+            "share_percent": 22.40103252329608
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_24576_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 3130.589889,
+            "calls": 1890,
+            "mean_ms_per_call": 1.6563967666666666,
+            "share_percent": 18.077091677069113
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2048_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 2339.666411,
+            "calls": 12474,
+            "mean_ms_per_call": 0.1875634448452782,
+            "share_percent": 13.51003028343527
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2048_4096",
+            "category": "ROCKCHIP",
+            "delta_ms": 1666.780427,
+            "calls": 4536,
+            "mean_ms_per_call": 0.36745600242504406,
+            "share_percent": 9.62455756031588
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_6144_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 1559.869983,
+            "calls": 3402,
+            "mean_ms_per_call": 0.45851557407407406,
+            "share_percent": 9.007220264167676
+          },
+          {
+            "label": "CPU:rockchip_cpu_gated_delta_scan",
+            "category": "CPU",
+            "delta_ms": 1131.044406,
+            "calls": 3402,
+            "mean_ms_per_call": 0.3324645520282187,
+            "share_percent": 6.531035409633043
+          },
+          {
+            "label": "CPU:r_8_28start_pos2B129_64_4",
+            "category": "CPU",
+            "delta_ms": 613.7380039999999,
+            "calls": 1134,
+            "mean_ms_per_call": 0.5412151710758377,
+            "share_percent": 3.543932152529037
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_5120_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 434.261628,
+            "calls": 1134,
+            "mean_ms_per_call": 0.3829467619047619,
+            "share_percent": 2.507574463449397
+          },
+          {
+            "label": "CPU:E_16_32_4",
+            "category": "CPU",
+            "delta_ms": 389.50800799999996,
+            "calls": 10206,
+            "mean_ms_per_call": 0.03816460983735057,
+            "share_percent": 2.249151827363028
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_32_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 387.75717899999995,
+            "calls": 6804,
+            "mean_ms_per_call": 0.05698959126984126,
+            "share_percent": 2.2390419447319365
+          },
+          {
+            "label": "CPU:r_8_64_4_28start_pos2B129",
+            "category": "CPU",
+            "delta_ms": 348.75045500000004,
+            "calls": 1134,
+            "mean_ms_per_call": 0.30754008377425046,
+            "share_percent": 2.0138038424024844
+          },
+          {
+            "label": "CPU:r_16_32_4",
+            "category": "CPU",
+            "delta_ms": 277.433731,
+            "calls": 10206,
+            "mean_ms_per_call": 0.027183395159709977,
+            "share_percent": 1.6019968016955197
+          },
+          {
+            "label": "CPU:E_512_4",
+            "category": "CPU",
+            "delta_ms": 157.67221499999997,
+            "calls": 29673,
+            "mean_ms_per_call": 0.005313659387321807,
+            "share_percent": 0.9104530412931232
+          },
+          {
+            "label": "CPU:rockchip_quantize",
+            "category": "CPU",
+            "delta_ms": 142.92615200000003,
+            "calls": 34965,
+            "mean_ms_per_call": 0.004087692034892036,
+            "share_percent": 0.8253042539468559
+          },
+          {
+            "label": "COPY:ROCKCHIP->CPU",
+            "category": "COPY",
+            "delta_ms": 127.182741,
+            "calls": 34965,
+            "mean_ms_per_call": 0.0036374300300300298,
+            "share_percent": 0.7343964397496769
+          },
+          {
+            "label": "CPU:E_2048_3",
+            "category": "CPU",
+            "delta_ms": 124.064264,
+            "calls": 4536,
+            "mean_ms_per_call": 0.027351028218694885,
+            "share_percent": 0.7163892920169413
+          },
+          {
+            "label": "CPU:E_2048_64_4",
+            "category": "CPU",
+            "delta_ms": 122.00748100000001,
+            "calls": 189,
+            "mean_ms_per_call": 0.6455422275132275,
+            "share_percent": 0.7045127268426018
+          },
+          {
+            "label": "CPU:rockchip_dequantize",
+            "category": "CPU",
+            "delta_ms": 100.62895999999999,
+            "calls": 34965,
+            "mean_ms_per_call": 0.0028779911339911336,
+            "share_percent": 0.5810658693046461
+          },
+          {
+            "label": "CPU:E_62080_4",
+            "category": "CPU",
+            "delta_ms": 92.94882899999999,
+            "calls": 189,
+            "mean_ms_per_call": 0.491792746031746,
+            "share_percent": 0.5367181785813339
+          },
+          {
+            "label": "CPU:E_6144_4",
+            "category": "CPU",
+            "delta_ms": 66.166036,
+            "calls": 3402,
+            "mean_ms_per_call": 0.019449158142269257,
+            "share_percent": 0.3820652148922389
+          },
+          {
+            "label": "CPU:r_512_4_64_4",
+            "category": "CPU",
+            "delta_ms": 61.826083999999994,
+            "calls": 189,
+            "mean_ms_per_call": 0.32712213756613756,
+            "share_percent": 0.35700485471739024
+          },
+          {
+            "label": "ROCKCHIP:rockchip_int8_1_2560_2048",
+            "category": "ROCKCHIP",
+            "delta_ms": 41.859432,
+            "calls": 189,
+            "mean_ms_per_call": 0.22147847619047617,
+            "share_percent": 0.24171060938798059
+          },
+          {
+            "label": "CPU:r_512_4",
+            "category": "CPU",
+            "delta_ms": 27.383112999999998,
+            "calls": 9261,
+            "mean_ms_per_call": 0.002956820321779505,
+            "share_percent": 0.15811941571901722
+          },
+          {
+            "label": "CPU:gpt2_argmax",
+            "category": "CPU",
+            "delta_ms": 19.594196000000004,
+            "calls": 189,
+            "mean_ms_per_call": 0.10367299470899473,
+            "share_percent": 0.11314355760077043
+          },
+          {
+            "label": "COPY:CPU->ROCKCHIP",
+            "category": "COPY",
+            "delta_ms": 19.543317000000002,
+            "calls": 34965,
+            "mean_ms_per_call": 0.0005589394251394252,
+            "share_percent": 0.11284976493547454
+          },
+          {
+            "label": "CPU:E_1024_4",
+            "category": "CPU",
+            "delta_ms": 11.845613,
+            "calls": 9072,
+            "mean_ms_per_call": 0.0013057333553791886,
+            "share_percent": 0.06840060172828395
+          },
+          {
+            "label": "CPU:E_6144_3",
+            "category": "CPU",
+            "delta_ms": 10.131144,
+            "calls": 3402,
+            "mean_ms_per_call": 0.0029779964726631396,
+            "share_percent": 0.058500674114196856
+          },
+          {
+            "label": "CPU:E_4_4",
+            "category": "CPU",
+            "delta_ms": 8.543956,
+            "calls": 6804,
+            "mean_ms_per_call": 0.0012557254556143445,
+            "share_percent": 0.04933571032077294
+          },
+          {
+            "label": "CPU:r_2_4_28start_pos2B129",
+            "category": "CPU",
+            "delta_ms": 8.375964,
+            "calls": 2268,
+            "mean_ms_per_call": 0.00369310582010582,
+            "share_percent": 0.048365667328017906
+          },
+          {
+            "label": "CPU:E_2_28start_pos2B129_4",
+            "category": "CPU",
+            "delta_ms": 6.404903,
+            "calls": 1134,
+            "mean_ms_per_call": 0.0056480626102292765,
+            "share_percent": 0.03698409016158903
+          },
+          {
+            "label": "CPU:E_2_32_2_4_2",
+            "category": "CPU",
+            "delta_ms": 3.310349,
+            "calls": 1134,
+            "mean_ms_per_call": 0.002919179012345679,
+            "share_percent": 0.019115081974282216
+          },
+          {
+            "label": "CPU:r_8_64_4",
+            "category": "CPU",
+            "delta_ms": 2.7903439999999997,
+            "calls": 1134,
+            "mean_ms_per_call": 0.002460620811287478,
+            "share_percent": 0.016112396093718978
+          },
+          {
+            "label": "CPU:E_8_32_2_4",
+            "category": "CPU",
+            "delta_ms": 2.52666,
+            "calls": 1134,
+            "mean_ms_per_call": 0.0022280952380952382,
+            "share_percent": 0.014589794919248666
+          },
+          {
+            "label": "CPU:r_2_64_4",
+            "category": "CPU",
+            "delta_ms": 0.851076,
+            "calls": 1134,
+            "mean_ms_per_call": 0.0007505079365079366,
+            "share_percent": 0.004914402531679956
+          },
+          {
+            "label": "CPU:E",
+            "category": "CPU",
+            "delta_ms": 0.602599,
+            "calls": 6804,
+            "mean_ms_per_call": 8.856540270429159e-05,
+            "share_percent": 0.003479611751697627
+          }
+        ]
+      }
+    },
+    "input_report_sha256": "00dab397f6049bff1c7a5b1a61288f95bcd2c842d5a1e8d537d024fd1d50f77a",
+    "helper_sha256": "6ec0c3feed0be123c118bd0b4453242f801e8c7445637350ecdbd3c37c9f5dea",
+    "metadata": {
+      "input_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-npu-native-profile-v1/results/pooled.json"
+    }
+  },
+  "normal_models_restored_fresh": true,
+  "provenance": {
+    "owner_actual_terminal_exec_session": 64863,
+    "owner_exit_code": 0,
+    "verifier_actual_terminal_exec_session": 31154,
+    "verifier_exit_code": 0,
+    "owner_sha256": "1530c2fa0d2933c51b1408ce41514fc0b94f8f63dd6d82538b5fdca123377c4f",
+    "job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-npu-native-profile-v1/job.json",
+    "job_sha256": "717d500bd19eb44741dd1175eec9461644ccc4597ba02362cfca164cb25f92a7",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-npu-native-profile-v1/results/pooled.json",
+    "report_sha256": "00dab397f6049bff1c7a5b1a61288f95bcd2c842d5a1e8d537d024fd1d50f77a",
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-npu-native-profile-v1/serving-verification.json",
+    "receipt_sha256": "45c62a59b509550ebb1a491e3c5f9668de87ab5e68933e4888bbe05720b14235",
+    "validation": {
+      "valid": true,
+      "gates": {
+        "complete": {
+          "passed": true
+        },
+        "checkpoint": {
+          "passed": true
+        },
+        "input_context": {
+          "passed": true
+        },
+        "source_cohort": {
+          "passed": true
+        },
+        "wrapper": {
+          "passed": true
+        },
+        "workload": {
+          "passed": true
+        },
+        "scan_pool_placement": {
+          "passed": true
+        },
+        "INT8_NPU": {
+          "passed": true
+        },
+        "native_replay": {
+          "passed": true
+        },
+        "six_complete_stable_NPU_trials": {
+          "passed": true
+        },
+        "actual_pool_calls_both_phases": {
+          "passed": true
+        },
+        "timing_medians": {
+          "passed": true
+        },
+        "profiling_diagnostic_only": {
+          "passed": true
+        },
+        "six_profile_snapshots": {
+          "passed": true
+        },
+        "measured_profile_delta_prefill": {
+          "passed": true
+        },
+        "measured_profile_delta_decode": {
+          "passed": true
+        }
+      },
+      "scope": "Native replay profiling diagnostic with warmup-excluded measured deltas; no timing promotion, quality or API qualification."
+    }
+  }
+}

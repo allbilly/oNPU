@@ -1,0 +1,101 @@
+{
+  "updated_utc": "2026-10-22T12:56:54.215397+00:00",
+  "model": "ChatGLM3",
+  "size": "6B",
+  "full_model_baseline_complete": true,
+  "full_model_quality_qualified": false,
+  "implemented": [
+    "Packed grouped and ordinary per-head QKV splitting",
+    "Adjacent-pair partial rotary prefix converted in both query/key weights and biases",
+    "SwiGLU gate/up projection splitting",
+    "Compact value storage avoids retaining the full original fused QKV buffer",
+    "Trained SentencePiece control handling, segmented role decoding and user/observation stopping",
+    "File-backed gate/up splitting and completed input-page release bound GPU loading memory"
+  ],
+  "checks": {
+    "decoder_loader_and_tokenizer": {
+      "passed": 13,
+      "skipped": 1,
+      "subtests_passed": 9,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-loader-tokenizer-tests.log"
+    },
+    "broader_tokenizer_regression": {
+      "passed": 33,
+      "skipped": 1,
+      "subtests_passed": 29,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-regression.log"
+    },
+    "official_tokenizer_reference": {
+      "passed": true,
+      "cases": 72,
+      "controls": 3,
+      "failures": [],
+      "reference_variant": "Official pinned SPTokenizer, tokenize(encode_special_tokens=True), no automatic prefix"
+    },
+    "actual_gguf_schema": {
+      "passed": true,
+      "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/ChatGLM3-6B/chatglm3-6b.Q8_0.gguf",
+      "checkpoint_sha256": "ff3a1fdb079623ce66db88c005d7cc4c03aa0640e01cac5418cdaa2e9271973b",
+      "blocks": 28,
+      "parameter_tensors": 339,
+      "qkv_bias": true,
+      "head_dim": 128,
+      "rope_dim": 64,
+      "scope": "Actual GGUF metadata and tensor shapes; values replaced with NULL-device tensors. Not full-model inference or memory-fit validation."
+    },
+    "mypy": {
+      "passed": true,
+      "source_files": 245,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-fileloadfix-mypy.log"
+    },
+    "ruff": {
+      "passed": true,
+      "scope": "whole tinygrad checkout"
+    },
+    "gpu_verification": {
+      "passed": 6,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-gpu-checks.log",
+      "scope": "Small decoder CPU/OpenCL reference, loader, rotary bias and compact value-storage checks"
+    },
+    "actual_model_progress": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-fileloadfix-cl-baseline.json",
+      "complete": true,
+      "load_seconds": 86.10978574189357,
+      "warmups_completed": 3,
+      "measured_completed": 3,
+      "peak_rss_mib": 12611.859375,
+      "scope": "Complete actual 128/64 requests. Full-model reference quality and RKLLM speed qualification remain pending."
+    },
+    "baseline_validation": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-baseline-validation.json",
+    "production_loader_regression": {
+      "passed": 15,
+      "subtests_passed": 2,
+      "workers": 12,
+      "mali_enabled": true,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/chatglm-fileloadfix-tests.log"
+    }
+  },
+  "source_repo": "THUDM/chatglm3-6b",
+  "source_revision": "e9e0406d062cdb887444fe5bd546833920abd4ac",
+  "source_files": {
+    "modeling_chatglm.py": "182eed20fcfb121a207e81af4eb9b3d3aad3e4aa4157c353128584241f71d1eb",
+    "tokenization_chatglm.py": "aa92d89aaa950bb3339ffe515ce6e8da7631fffb11319574f42093457baef660",
+    "tokenizer.model": "e7dc4c393423b76e4373e5157ddc34803a0189ba96b21ddbb40269d31468a6f2"
+  },
+  "pending": [
+    "Full-model 128/64 benchmark and measured memory fit",
+    "Chat-template/API behavior and full-model output-quality qualification",
+    "Matched RKLLM quality and performance qualification"
+  ],
+  "baseline": {
+    "ttft_ms": 300759.87745588645,
+    "prefill_proxy_tps": 0.4255886825155866,
+    "decode_tps": 1.5068216586502508,
+    "peak_rss_mib": 12611.859375,
+    "checkpoint_sha256": "ff3a1fdb079623ce66db88c005d7cc4c03aa0640e01cac5418cdaa2e9271973b",
+    "report_sha256": "a5ac006e5f81b203bcefc650e0c7bf99ce522c29de7b59c7843da0d0db20f202"
+  }
+}

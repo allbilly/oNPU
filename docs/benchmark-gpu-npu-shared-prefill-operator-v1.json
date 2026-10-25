@@ -1,0 +1,190 @@
+{
+  "schema": "gpu-npu-shared-prefill-operator-v1",
+  "updated_utc": "2026-10-25T11:24:43.272484+00:00",
+  "complete": true,
+  "operator_measurement_valid_within_scope": true,
+  "scope": "Four synthetic projection shapes, GPU-resident inputs/outputs, alternating three inputs,3warmups+9rotatedmeasuredcalls per implementation and shape. Imperative experimental code outside serving.",
+  "input_precision": {
+    "gpu_fp32": "FP32 activation, FP16 weight, FP32 output",
+    "npu_copy_fp16": "FP32 activation explicitly rounded toFP16, FP16 weight, FP32 output",
+    "npu_shared_fp16": "Same FP16-rounded activation and FP16 weight as existing copy path; outputs bit-identical in tested cases."
+  },
+  "timing_includes": "Per-call GPU packing, explicit cache/queue synchronization, CPU finite validation, NPU submissions, GPU unpacking and completion.",
+  "timing_excludes": "One-time tensor/data creation, weight packing, GEM imports, helper allocation/kernel compilation, warmups and validation readback.",
+  "cases": [
+    {
+      "case": "m64_n2048_k2048",
+      "geometry": {
+        "rows": 64,
+        "columns": 2048,
+        "depth": 2048
+      },
+      "npu_tile_rows": 32,
+      "npu_tiles_per_call": 2,
+      "median_seconds": {
+        "gpu_fp32": 0.016854014014825225,
+        "npu_copy_fp16": 0.0069576099049299955,
+        "npu_shared_fp16": 0.0023537171073257923
+      },
+      "shared_speedup_vs_NPU_copy": 2.9560094045605076,
+      "shared_speedup_vs_GPU_different_activation_precision": 7.160594602625862,
+      "warmup_calls_per_mode": 3,
+      "measured_calls_per_mode": 9,
+      "all_reference_checks_passed": true,
+      "all_shared_matches_copy_bits": true,
+      "shared_measured_npu_allocations": 0,
+      "guards_rejected_without_NPU_submission": 5,
+      "post_guard_recovery_bit_equal": true,
+      "max_relative_RMS_vs_FP32_input": 0.00020869630679953843,
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-npu-prefill-sharing-operator-v1/results/m64_n2048_k2048.json",
+        "sha256": "c6ecac0a53273a28474e6995b57518bb6b1d2e25bdee3fce5b45bf94741a1ac9"
+      },
+      "minimum_available_bytes": 12965523456,
+      "process_lifetime_peak_rss_bytes": 252841984
+    },
+    {
+      "case": "m64_n6144_k2048",
+      "geometry": {
+        "rows": 64,
+        "columns": 6144,
+        "depth": 2048
+      },
+      "npu_tile_rows": 32,
+      "npu_tiles_per_call": 2,
+      "median_seconds": {
+        "gpu_fp32": 0.02342954697087407,
+        "npu_copy_fp16": 0.008978249039500952,
+        "npu_shared_fp16": 0.0034550351556390524
+      },
+      "shared_speedup_vs_NPU_copy": 2.5985984613925908,
+      "shared_speedup_vs_GPU_different_activation_precision": 6.781275997332212,
+      "warmup_calls_per_mode": 3,
+      "measured_calls_per_mode": 9,
+      "all_reference_checks_passed": true,
+      "all_shared_matches_copy_bits": true,
+      "shared_measured_npu_allocations": 0,
+      "guards_rejected_without_NPU_submission": 5,
+      "post_guard_recovery_bit_equal": true,
+      "max_relative_RMS_vs_FP32_input": 0.00020763810607604682,
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-npu-prefill-sharing-operator-v1/results/m64_n6144_k2048.json",
+        "sha256": "dd7641763b31831b17687d93e70d7a6c06044d0ab1df5cd608c44cbf9143edcd"
+      },
+      "minimum_available_bytes": 12826386432,
+      "process_lifetime_peak_rss_bytes": 428933120
+    },
+    {
+      "case": "m64_n12288_k2048",
+      "geometry": {
+        "rows": 64,
+        "columns": 12288,
+        "depth": 2048
+      },
+      "npu_tile_rows": 32,
+      "npu_tiles_per_call": 2,
+      "median_seconds": {
+        "gpu_fp32": 0.033177493838593364,
+        "npu_copy_fp16": 0.011296384036540985,
+        "npu_shared_fp16": 0.0053910911083221436
+      },
+      "shared_speedup_vs_NPU_copy": 2.0953799165261615,
+      "shared_speedup_vs_GPU_different_activation_precision": 6.1541333974819645,
+      "warmup_calls_per_mode": 3,
+      "measured_calls_per_mode": 9,
+      "all_reference_checks_passed": true,
+      "all_shared_matches_copy_bits": true,
+      "shared_measured_npu_allocations": 0,
+      "guards_rejected_without_NPU_submission": 5,
+      "post_guard_recovery_bit_equal": true,
+      "max_relative_RMS_vs_FP32_input": 0.00020678176952060312,
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-npu-prefill-sharing-operator-v1/results/m64_n12288_k2048.json",
+        "sha256": "242cae712281249ecf1eacc818d3d8735bf166717521a3b882c2b9456953ef6d"
+      },
+      "minimum_available_bytes": 12590743552,
+      "process_lifetime_peak_rss_bytes": 669884416
+    },
+    {
+      "case": "m64_n2048_k4096",
+      "geometry": {
+        "rows": 64,
+        "columns": 2048,
+        "depth": 4096
+      },
+      "npu_tile_rows": 16,
+      "npu_tiles_per_call": 4,
+      "median_seconds": {
+        "gpu_fp32": 0.011770918034017086,
+        "npu_copy_fp16": 0.013114025117829442,
+        "npu_shared_fp16": 0.004272856051102281
+      },
+      "shared_speedup_vs_NPU_copy": 3.069147418258188,
+      "shared_speedup_vs_GPU_different_activation_precision": 2.7548126810826004,
+      "warmup_calls_per_mode": 3,
+      "measured_calls_per_mode": 9,
+      "all_reference_checks_passed": true,
+      "all_shared_matches_copy_bits": true,
+      "shared_measured_npu_allocations": 0,
+      "guards_rejected_without_NPU_submission": 5,
+      "post_guard_recovery_bit_equal": true,
+      "max_relative_RMS_vs_FP32_input": 0.00020710437092930079,
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-npu-prefill-sharing-operator-v1/results/m64_n2048_k4096.json",
+        "sha256": "003c8ac0a2ce2ae23dd28d0391b2dbcefb575220f933a32ba4b6b45f1d54662a"
+      },
+      "minimum_available_bytes": 12922728448,
+      "process_lifetime_peak_rss_bytes": 339451904
+    }
+  ],
+  "reference_outputs_checked": 144,
+  "negative_guards": 20,
+  "model_qualified": false,
+  "API_qualified": false,
+  "model_quality_qualified": false,
+  "end_to_end_speed_qualified": false,
+  "general_RKLLM_win": false,
+  "installed_in_serving": false,
+  "integration_constraint": "The helper is imperative, not recorded by TinyJit. Direct use in a captured model would omit these side effects on replay. A JIT-visible CL program bridge and fullmodel validation are required.",
+  "source_review": "Buffer views are rejected for both GPU activations and packed NPU weights; positive alternation and negative guards are covered. Existing runtime finite checks retained.",
+  "experimental_source": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/gpu-npu-prefill-sharing-operator-v1/shared_projection.py",
+    "sha256": "1c7e091035a5e6b6a9d0df87ab3bcd84ecbd395d0ff1debaca5ed57ccaa9e2b0"
+  },
+  "evidence": {
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-npu-prefill-sharing-operator-v1/job.json",
+      "sha256": "dced352ebc5eb4dc5a5fddd749d234b353e3e5c890a231ad3ffc2faa5da57e39"
+    },
+    "manifest": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/gpu-npu-prefill-sharing-operator-v1/manifest.json",
+      "sha256": "d94e668d6da95b08062f51903828242f64875a24bca0eb595a9ed9e2d4bf1dad"
+    },
+    "frozen_pins": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/gpu-npu-prefill-sharing-operator-v1/frozen-pins.json",
+      "sha256": "4265a74dec17992d633f97cbfa23650f9725bfcf0f75a9561a78bf46890b1f8a"
+    },
+    "independent_audit": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/gpu-npu-prefill-sharing-operator-v1-independent-audit.json",
+      "sha256": "a34cfcf69b663aa44bd72d3c935cd5d975e00edebe56730aa0af354946e0c4f7"
+    },
+    "parent": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-gpu-npu-prefill-sharing-operator-v1.py",
+      "sha256": "91ab1719695528132dd62b430b440802909d14b2126cb34106eb357ff05832bc"
+    },
+    "parent_exec_session": 21348,
+    "parent_terminal_exit_code": 0,
+    "all_four_children_terminal_exit0": true,
+    "source_pin_count": 287,
+    "fresh_serving": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-npu-prefill-sharing-operator-v1/serving-verification.json",
+      "sha256": "993e54cecf49d7ac9b6399c2e9046ae5420a4283e967eac7a1d87f58a402bc45"
+    },
+    "fresh_helper_session": 54737,
+    "fresh_helper_terminal_exit_code": 0,
+    "audit_lifecycle_note": "Audit snapshot preceded root terminal/fresh closure; later actual owner and fresh-helper exits0 establish restoration."
+  },
+  "serving_restored": true,
+  "goal_complete": false,
+  "next": "Implement a JIT-visible experimental bridge for the qualified shapes, then test replay, weight changes, safety guards and fullmodel greedy/quality/performance before enabling serving. Modelmax262144 and broader RKLLM parity remain open."
+}

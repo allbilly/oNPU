@@ -1,0 +1,163 @@
+{
+  "kind": "Isolated live experimental DFlash2 HTTP verification v2",
+  "complete": true,
+  "updated_utc": "2026-10-22T22:18:49.964316+00:00",
+  "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/speculative-http-probe-v2.json",
+  "raw_sha256": "6388fd781ffe234edb633f8cb29918769f1f50f3ad59a505a8f4eef13d4e128a",
+  "restoration_job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/speculative-http-job-v2.json",
+  "restoration_job_sha256": "bd57d562ce329eb699b112274ae4b36f5c3e033d32a3252ba72081dc19c52f34",
+  "scope": {
+    "base_url": "http://127.0.0.1:8092",
+    "profile": "CL",
+    "context": 512,
+    "mode": "dflash2-experimental",
+    "prepared_prefill_dynamic": true,
+    "prepared_draft_proposals_enabled": false,
+    "target": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Qwen3.5-2B/Qwen3.5-2B-Q8_0.gguf",
+    "draft": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/DFlash2-Qwen3.5-2B",
+    "prompt_tokens": 21,
+    "greedy_output_tokens": 8,
+    "primary_port_8091_restarted": false,
+    "primary_service_scope": "Existing primary process retained its running binary; this verification used a fresh isolated server."
+  },
+  "checks": {
+    "load_and_ready": {
+      "passed": true,
+      "reported_mode": "dflash2-experimental"
+    },
+    "nonstream_greedy": {
+      "passed": true,
+      "text": "One, two, three, four,",
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      },
+      "generation_mode": "dflash2-experimental",
+      "total_seconds": 53.18658626289107,
+      "first_token_ms": 37944.48004779406
+    },
+    "sse_greedy": {
+      "passed": true,
+      "text": "One, two, three, four,",
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      },
+      "same_text_and_usage_as_nonstream": true,
+      "generation_mode": "dflash2-experimental",
+      "done_observed": true,
+      "first_content_seconds": 19.56853846483864,
+      "helper_elapsed_seconds": 23.940202643861994,
+      "worker_total_seconds": 23.91840289789252,
+      "timing_scope": "Helper wall time includes HTTP framing; worker metrics are recorded separately."
+    },
+    "sampled_fallback": {
+      "passed": true,
+      "temperature": 0.6,
+      "output_tokens": 2,
+      "generation_mode": "ordinary"
+    },
+    "request_scoped_stop": {
+      "passed": true,
+      "transport": "model and request_id query parameters",
+      "wrong_id_preserved_active_request": true,
+      "request_scope_verified": true,
+      "error": "Generation stopped",
+      "done_observed": true,
+      "ready_before_disconnect": true,
+      "first_content_seconds": 13.949364189058542,
+      "request_elapsed_seconds": 23.44346521492116,
+      "stop_ack_to_observed_ready_seconds": 9.459577773930505,
+      "latency_scope": "Difference between the post-ack scoped-stop event and the subsequent observed ready event. This was not instantaneous cancellation."
+    },
+    "post_cancel_greedy_recovery": {
+      "passed": true,
+      "text": "One, two, three, four,",
+      "same_message_as_nonstream": true,
+      "generation_mode": "dflash2-experimental",
+      "usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 8,
+        "total_tokens": 29
+      }
+    },
+    "owned_server_shutdown": {
+      "passed": true,
+      "exit_code": -15,
+      "left_orphans": []
+    },
+    "original_sessions_restored": {
+      "passed": true,
+      "probe_exit_code": 0,
+      "sessions": [
+        {
+          "model_id": "b4b92c783d8643a1",
+          "state": "ready"
+        },
+        {
+          "model_id": "55a95dc3c1b93b72",
+          "state": "ready"
+        }
+      ]
+    },
+    "primary_post_restore_health": {
+      "passed": true,
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/post-pass5-primary-health.json",
+      "raw_sha256": "e4de26a38550a8ba0c2f54cdbe1c3c19ffa69fc820966c2c5f81121317169220",
+      "selected_model_preserved": true,
+      "exact_original_ids_profiles_options_preserved": true,
+      "requests": [
+        {
+          "profile": "ROCKCHIP",
+          "elapsed_seconds": 0.1552424889523536,
+          "npu_submissions": 246
+        },
+        {
+          "profile": "CL",
+          "elapsed_seconds": 1.1249463730491698,
+          "npu_submissions": 0
+        }
+      ]
+    }
+  },
+  "probe_program": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/probe-speculative-http-v2.py",
+  "probe_program_sha256": "53c0aa75c929cbeaf684f7b1f48830ad294313a40a65cb5cc1fe60509b0d5bca",
+  "measured_source_cohort": {
+    "selected_sha256": {
+      "/home/orangepi/oNPU/onpu/app.py": "190579bd105a725daaedc89ff32524c7682269e845fab8f5525ddbdd842290e5",
+      "/home/orangepi/oNPU/onpu/runtime.py": "2faf00b19480df91149ab8de418509ce3f47deac08464f55d3e78ba8ab752e0f",
+      "/home/orangepi/oNPU/onpu/speculation.py": "d574b8f10cefa50b820583349701bef3d249ca54cb1f65689fb27adf148d25da",
+      "/home/orangepi/oNPU/onpu/worker.py": "e9b20a53aa92de3362087d5e32b26b4ebccc02a830e23a31e7c2dde72467c383",
+      "/home/orangepi/tinygrad/tinygrad/llm/dflash2.py": "ac3180251e4be52916b8892fce8a6a3e0e4a5d9f27abbdc125bdc7e1d8070948",
+      "/home/orangepi/tinygrad/tinygrad/llm/dflash2_config.py": "f46fda13e52e26ff9fe7bfeb40d56c5f0f7536424358b4e4bc16bee3ef745a5d",
+      "/home/orangepi/tinygrad/tinygrad/llm/dflash2_selector.py": "dd90b4f2f7357cc2f80eb24e202f991c90f34bfefa90472c23f2d1151d312071",
+      "/home/orangepi/tinygrad/tinygrad/llm/speculative.py": "0f721e6647d58239ffa49a7ee0d321be93f231b8392ecb15495d0aec294361cc"
+    },
+    "all_sources_canonical_sha256": "ec892c61cbee9ce4ea2e712a84d70aef4c1ebfd33c6230a44e8b5eeb41159f1c",
+    "full_source_hashes_location": "raw_report.source_sha256",
+    "scope": "Pinned tested HTTP-v2 cohort; not an implicit guarantee for subsequent edits."
+  },
+  "source_comparison_at_record": {
+    "matching_files": 265,
+    "total_files": 265,
+    "all_match": true,
+    "scope": "Read-only hash observation when this document was written; later edits are not covered."
+  },
+  "previous_http_proof": {
+    "report": "speculative-api-verification.json",
+    "raw_sha256": "03445389079c9bae0c4ccb5c3c04d18572261417d1f2c433d3f942710510e2a4",
+    "request_scope_verified": false,
+    "scope": "Older corrected proof covers selected-worker Stop only; retained unchanged."
+  },
+  "benchmark_qualification": false,
+  "speed_win_claimed": false,
+  "limits": [
+    "One pinned pair, context512 and one short prompt; no representative model-quality or model-maximum context qualification.",
+    "HTTP compilation/capture/order effects are included; timings are diagnostics, not a formal ordinary-versus-speculative benchmark.",
+    "Prepared draft proposal graphs from the whole-model v4 experiment remain disabled in the app and are not qualified by this HTTP check.",
+    "Sampled requests use ordinary fallback; trained sampled speculation and automatic measured API cost routing remain unimplemented.",
+    "No published RKLLM win or comparable-quality certification follows from this API check."
+  ]
+}

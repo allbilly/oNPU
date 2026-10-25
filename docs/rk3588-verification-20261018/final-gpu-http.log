@@ -1,0 +1,10 @@
+ready {"state": "ready", "message": "Ready for a conversation", "model_id": "55a95dc3c1b93b72", "model_name": "Qwen3 0.6B Instruct", "selected_profile": "CL", "actual_device": "CL", "context": 512, "load_seconds": 91.95233827806078, "base_device": "CL", "placement": null, "backend_path": "/home/orangepi/tinygrad", "rss_bytes": 2605105152, "active_request": null, "last_metrics": {"prompt_tokens": 23, "cached_tokens": 0, "completion_tokens": 21, "ttft_ms": 6957.636377075687, "total_seconds": 20.040852640056983, "decode_tps": 1.5981453244983306, "prefill_tps": 3.3057203270612656, "device": "CL", "allocated_bytes": 1627590512, "id": "2fcf158c9e084572aa0fa40d7dedbfd8", "model": "55a95dc3c1b93b72", "profile": "CL", "context": 512, "created": 1792281727.7225757, "model_path": "/home/orangepi/oNPU/.data/models/72717a59205944dc-Qwen3-0.6B-Q8_0.gguf"}, "options": {"context": 512, "max_tokens": 64, "temperature": 0.6, "profile": "CL", "realize": true, "idle_timeout": 0, "memory_fraction": 0.8, "id": "global", "npu_prefill": "off", "npu_decode": "off"}}
+nonstream {"id": "chatcmpl-99d94bf3834744d191c1e554", "object": "chat.completion", "created": 1792281961, "model": "55a95dc3c1b93b72", "choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello!"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 19, "completion_tokens": 2, "total_tokens": 21}}
+measured {"prompt_tokens": 19, "cached_tokens": 3, "completion_tokens": 2, "ttft_ms": 4680.432135937735, "total_seconds": 5.9853816740214825, "decode_tps": 1.4746539300955057, "prefill_tps": 3.418487766791295, "device": "CL", "allocated_bytes": 1627590512, "id": "77e95e08302d4427a7db59e411d71132", "model": "55a95dc3c1b93b72", "profile": "CL", "context": 512, "created": 1792281961.4552102, "model_path": "/home/orangepi/oNPU/.data/models/72717a59205944dc-Qwen3-0.6B-Q8_0.gguf"}
+one-token limit passed
+context validation passed
+streaming 'Hello!' {'prompt_tokens': 19, 'completion_tokens': 2, 'total_tokens': 21}
+Stop and concurrent admission passed
+client disconnect cancellation passed
+generation after cancellation passed
+PASS CL

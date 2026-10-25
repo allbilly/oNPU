@@ -1,0 +1,2129 @@
+{
+  "updated_utc": "2026-10-22T12:56:54.215397+00:00",
+  "published_variants": "Upstream benchmark gives family and size, not exact checkpoint revision. Candidates are explicit.",
+  "models": [
+    {
+      "model": "Qwen2",
+      "size": "0.5B",
+      "checkpoint_candidate": "Qwen/Qwen2-0.5B-Instruct",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "c540970f9e29518b1d8f06ab8b24cba66ad77b6d",
+      "gated": false,
+      "config_url": "https://huggingface.co/Qwen/Qwen2-0.5B-Instruct/resolve/c540970f9e29518b1d8f06ab8b24cba66ad77b6d/config.json",
+      "config": {
+        "architectures": [
+          "Qwen2ForCausalLM"
+        ],
+        "attention_dropout": 0.0,
+        "bos_token_id": 151643,
+        "eos_token_id": 151645,
+        "hidden_act": "silu",
+        "hidden_size": 896,
+        "initializer_range": 0.02,
+        "intermediate_size": 4864,
+        "max_position_embeddings": 32768,
+        "max_window_layers": 24,
+        "model_type": "qwen2",
+        "num_attention_heads": 14,
+        "num_hidden_layers": 24,
+        "num_key_value_heads": 2,
+        "rms_norm_eps": 1e-06,
+        "rope_theta": 1000000.0,
+        "sliding_window": 32768,
+        "tie_word_embeddings": true,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.40.1",
+        "use_cache": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "access": "public_config",
+      "baseline_result": "benchmark-results.json#Qwen2/0.5B"
+    },
+    {
+      "model": "MiniCPM4",
+      "size": "0.5B",
+      "checkpoint_candidate": "openbmb/MiniCPM4-0.5B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "5253c7fcc5e29e1cf3eacb59a58adf1ba4df8630",
+      "gated": false,
+      "config_url": "https://huggingface.co/openbmb/MiniCPM4-0.5B/resolve/5253c7fcc5e29e1cf3eacb59a58adf1ba4df8630/config.json",
+      "config": {
+        "_name_or_path": "openbmb/MiniCPM4-0.5B",
+        "architectures": [
+          "MiniCPMForCausalLM"
+        ],
+        "auto_map": {
+          "AutoConfig": "configuration_minicpm.MiniCPMConfig",
+          "AutoModel": "modeling_minicpm.MiniCPMModel",
+          "AutoModelForCausalLM": "modeling_minicpm.MiniCPMForCausalLM",
+          "AutoModelForSeq2SeqLM": "modeling_minicpm.MiniCPMForCausalLM",
+          "AutoModelForSequenceClassification": "modeling_minicpm.MiniCPMForSequenceClassification"
+        },
+        "bos_token_id": 1,
+        "eos_token_id": [
+          2,
+          73440
+        ],
+        "hidden_act": "silu",
+        "hidden_size": 1024,
+        "initializer_range": 0.1,
+        "intermediate_size": 4096,
+        "max_position_embeddings": 32768,
+        "num_attention_heads": 16,
+        "num_hidden_layers": 24,
+        "num_key_value_heads": 2,
+        "rms_norm_eps": 1e-05,
+        "rope_scaling": {
+          "rope_type": "longrope",
+          "long_factor": [
+            1.0004360675811768,
+            1.0668443441390991,
+            1.1631425619125366,
+            1.3025742769241333,
+            1.5040205717086792,
+            1.7941505908966064,
+            2.2101221084594727,
+            2.802666664123535,
+            3.6389970779418945,
+            4.804192543029785,
+            6.39855432510376,
+            8.527148246765137,
+            11.277542114257812,
+            14.684998512268066,
+            18.69317054748535,
+            23.13019371032715,
+            27.72362518310547,
+            32.1606559753418,
+            36.168827056884766,
+            39.57627868652344,
+            42.32667541503906,
+            44.45526885986328,
+            46.04962921142578,
+            47.21482849121094,
+            48.05115509033203,
+            48.64370346069336,
+            49.05967712402344,
+            49.34980392456055,
+            49.551246643066406,
+            49.69068145751953,
+            49.78697967529297,
+            49.85338592529297
+          ],
+          "short_factor": [
+            1.0004360675811768,
+            1.0668443441390991,
+            1.1631425619125366,
+            1.3025742769241333,
+            1.5040205717086792,
+            1.7941505908966064,
+            2.2101221084594727,
+            2.802666664123535,
+            3.6389970779418945,
+            4.804192543029785,
+            6.39855432510376,
+            8.527148246765137,
+            11.277542114257812,
+            14.684998512268066,
+            18.69317054748535,
+            23.13019371032715,
+            27.72362518310547,
+            32.1606559753418,
+            36.168827056884766,
+            39.57627868652344,
+            42.32667541503906,
+            44.45526885986328,
+            46.04962921142578,
+            47.21482849121094,
+            48.05115509033203,
+            48.64370346069336,
+            49.05967712402344,
+            49.34980392456055,
+            49.551246643066406,
+            49.69068145751953,
+            49.78697967529297,
+            49.85338592529297
+          ],
+          "original_max_position_embeddings": 32768
+        },
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.46.3",
+        "use_cache": true,
+        "vocab_size": 73448,
+        "scale_emb": 12,
+        "dim_model_base": 256,
+        "scale_depth": 1.4
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "mradermacher/MiniCPM4-0.5B-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "mradermacher/MiniCPM4-0.5B-GGUF",
+        "revision": "232b2c20f1350b2dc667684f88c0737d7a070c2f",
+        "base_model": "openbmb/MiniCPM4-0.5B",
+        "files": [
+          {
+            "rfilename": "MiniCPM4-0.5B.Q8_0.gguf",
+            "blobId": "c42cefcad3c6792e3ab21a344d23065695c92e75",
+            "size": 462829184,
+            "lfs": {
+              "sha256": "d69653113b3559808359cdac50644c54f7aa18bd31204c69310dc8a22725548f",
+              "size": 462829184,
+              "pointerSize": 134
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Embedding/residual/logit scaling, LongRoPE and GGUF Q/K head layout implemented. Baseline recorded; tokenizer matches official tokenizer on 80 cases. SDK quality gate remains pending.",
+      "baseline_result": "benchmark-results.json#MiniCPM4/0.5B"
+    },
+    {
+      "model": "Qwen3",
+      "size": "0.6B",
+      "checkpoint_candidate": "Qwen/Qwen3-0.6B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "gated": false,
+      "config_url": "https://huggingface.co/Qwen/Qwen3-0.6B/resolve/c1899de289a04d12100db370d81485cdf75e47ca/config.json",
+      "config": {
+        "architectures": [
+          "Qwen3ForCausalLM"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "bos_token_id": 151643,
+        "eos_token_id": 151645,
+        "head_dim": 128,
+        "hidden_act": "silu",
+        "hidden_size": 1024,
+        "initializer_range": 0.02,
+        "intermediate_size": 3072,
+        "max_position_embeddings": 40960,
+        "max_window_layers": 28,
+        "model_type": "qwen3",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 28,
+        "num_key_value_heads": 8,
+        "rms_norm_eps": 1e-06,
+        "rope_scaling": null,
+        "rope_theta": 1000000,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.51.0",
+        "use_cache": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "access": "public_config",
+      "baseline_result": "benchmark-results.json#Qwen3/0.6B"
+    },
+    {
+      "model": "TinyLLAMA",
+      "size": "1.1B",
+      "checkpoint_candidate": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "fe8a4ea1ffedaf415f4da2f062534de366a451e6",
+      "gated": false,
+      "config_url": "https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/fe8a4ea1ffedaf415f4da2f062534de366a451e6/config.json",
+      "config": {
+        "architectures": [
+          "LlamaForCausalLM"
+        ],
+        "attention_bias": false,
+        "bos_token_id": 1,
+        "eos_token_id": 2,
+        "hidden_act": "silu",
+        "hidden_size": 2048,
+        "initializer_range": 0.02,
+        "intermediate_size": 5632,
+        "max_position_embeddings": 2048,
+        "model_type": "llama",
+        "num_attention_heads": 32,
+        "num_hidden_layers": 22,
+        "num_key_value_heads": 4,
+        "pretraining_tp": 1,
+        "rms_norm_eps": 1e-05,
+        "rope_scaling": null,
+        "rope_theta": 10000.0,
+        "tie_word_embeddings": false,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.35.0",
+        "use_cache": true,
+        "vocab_size": 32000
+      },
+      "access": "public_config",
+      "baseline_result": "benchmark-results.json#TinyLLAMA/1.1B"
+    },
+    {
+      "model": "Qwen2.5",
+      "size": "1.5B",
+      "checkpoint_candidate": "Qwen/Qwen2.5-1.5B-Instruct",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "gated": false,
+      "config_url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/resolve/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json",
+      "config": {
+        "architectures": [
+          "Qwen2ForCausalLM"
+        ],
+        "attention_dropout": 0.0,
+        "bos_token_id": 151643,
+        "eos_token_id": 151645,
+        "hidden_act": "silu",
+        "hidden_size": 1536,
+        "initializer_range": 0.02,
+        "intermediate_size": 8960,
+        "max_position_embeddings": 32768,
+        "max_window_layers": 21,
+        "model_type": "qwen2",
+        "num_attention_heads": 12,
+        "num_hidden_layers": 28,
+        "num_key_value_heads": 2,
+        "rms_norm_eps": 1e-06,
+        "rope_theta": 1000000.0,
+        "sliding_window": 32768,
+        "tie_word_embeddings": true,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.43.1",
+        "use_cache": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "access": "public_config",
+      "baseline_result": "benchmark-results.json#Qwen2.5/1.5B"
+    },
+    {
+      "model": "RWKV7",
+      "size": "1.5B",
+      "checkpoint_candidate": "RWKV/RWKV7-Goose-World3-1.5B-HF",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "7e046eaf58c0cfec2da891f86220d4037cbacd44",
+      "gated": false,
+      "config_url": "https://huggingface.co/RWKV/RWKV7-Goose-World3-1.5B-HF/resolve/7e046eaf58c0cfec2da891f86220d4037cbacd44/config.json",
+      "config": {
+        "_attn_implementation_autoset": true,
+        "a_low_rank_dim": 96,
+        "architectures": [
+          "RWKV7ForCausalLM"
+        ],
+        "attn": null,
+        "attn_mode": "chunk",
+        "auto_map": {
+          "AutoConfig": "modeling_rwkv7.RWKV7Config",
+          "AutoModel": "modeling_rwkv7.RWKV7Model",
+          "AutoModelForCausalLM": "modeling_rwkv7.RWKV7ForCausalLM"
+        },
+        "bos_token_id": 1,
+        "decay_low_rank_dim": 96,
+        "eos_token_id": 2,
+        "fuse_cross_entropy": true,
+        "fuse_norm": false,
+        "gate_low_rank_dim": 256,
+        "head_dim": 64,
+        "hidden_act": "sqrelu",
+        "hidden_ratio": 4.0,
+        "hidden_size": 2048,
+        "initializer_range": 0.02,
+        "intermediate_size": 8192,
+        "max_position_embeddings": 2048,
+        "model_type": "rwkv7",
+        "norm_bias": true,
+        "norm_eps": 1e-05,
+        "norm_first": true,
+        "num_heads": null,
+        "num_hidden_layers": 24,
+        "tie_word_embeddings": false,
+        "torch_dtype": "float32",
+        "transformers_version": "4.48.1",
+        "use_cache": true,
+        "v_low_rank_dim": 64,
+        "vocab_size": 65536
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "mradermacher/RWKV7-Goose-World3-1.5B-HF-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "mradermacher/RWKV7-Goose-World3-1.5B-HF-GGUF",
+        "revision": "31e13c6a05957eac3798b245268403192d484c0a",
+        "base_model": "RWKV/RWKV7-Goose-World3-1.5B-HF",
+        "files": [
+          {
+            "rfilename": "RWKV7-Goose-World3-1.5B-HF.Q8_0.gguf",
+            "blobId": "7e5b633eb8710951482660cbc3742910efa3f8c5",
+            "size": 1693647168,
+            "lfs": {
+              "sha256": "dfad28509a04d6ea719f441834fa33b1f53ef5471e927a7bcae847894ff07d1c",
+              "size": 1693647168,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "CPU and ordinary OpenCL decoder with FP32 matrix/shift state, shared first-layer values, LayerNorm/GroupNorm and squared-ReLU channel mixing implemented. CPU/Mali cache/reset/generation checks and 95 tokenizer cases pass. Prepared Mali body projections disabled after scheduling failures; generic one-token prompt fallback is explicit. Full checkpoint and 128/64 baseline are recorded; matched RKLLM quality/speed remains unqualified.",
+      "baseline_result": "/home/orangepi/vlm-bench/baseline-20261021/rwkv7-1.5b-cl-baseline.json"
+    },
+    {
+      "model": "InternLM2",
+      "size": "1.8B",
+      "checkpoint_candidate": "internlm/internlm2-chat-1_8b",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "21ccc6447f57c3c6dd2a78e2248bd6afbe0133e1",
+      "gated": false,
+      "config_url": "https://huggingface.co/internlm/internlm2-chat-1_8b/resolve/21ccc6447f57c3c6dd2a78e2248bd6afbe0133e1/config.json",
+      "config": {
+        "architectures": [
+          "InternLM2ForCausalLM"
+        ],
+        "attn_implementation": "eager",
+        "auto_map": {
+          "AutoConfig": "configuration_internlm2.InternLM2Config",
+          "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
+          "AutoModel": "modeling_internlm2.InternLM2ForCausalLM"
+        },
+        "bias": false,
+        "bos_token_id": 1,
+        "eos_token_id": 2,
+        "hidden_act": "silu",
+        "hidden_size": 2048,
+        "initializer_range": 0.02,
+        "intermediate_size": 8192,
+        "max_position_embeddings": 32768,
+        "model_type": "internlm2",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 24,
+        "num_key_value_heads": 8,
+        "pad_token_id": 2,
+        "rms_norm_eps": 1e-05,
+        "rope_scaling": {
+          "type": "dynamic",
+          "factor": 2.0
+        },
+        "rope_theta": 1000000,
+        "tie_word_embeddings": false,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.41.0",
+        "use_cache": true,
+        "vocab_size": 92544,
+        "pretraining_tp": 1
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "mradermacher/internlm2-chat-1_8b-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "mradermacher/internlm2-chat-1_8b-GGUF",
+        "revision": "32bfd162be034fefac94374bcb7df6618c0fd697",
+        "base_model": "internlm/internlm2-chat-1_8b",
+        "files": [
+          {
+            "rfilename": "internlm2-chat-1_8b.Q8_0.gguf",
+            "blobId": "d9cc5554cb2139b07ee4ba49f753386d3642a298",
+            "size": 2009613632,
+            "lfs": {
+              "sha256": "97e3d100a75859d751809e543efa50b2d5db1a9ae27df0469f8ee30a1bf131db",
+              "size": 2009613632,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "The GGUF converter already splits grouped QKV; added its required Llama-style Q/K RoPE inverse permutation. Full checkpoint and 128/64 baseline are recorded; matched RKLLM quality/speed remains unqualified.",
+      "baseline_result": "benchmark-results.json#InternLM2/1.8B"
+    },
+    {
+      "model": "Gemma2",
+      "size": "2B",
+      "checkpoint_candidate": "google/gemma-2-2b-it",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8",
+      "gated": "manual",
+      "config_url": "https://huggingface.co/google/gemma-2-2b-it/resolve/299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8/config.json",
+      "access": "config_http_401",
+      "error_code": "GatedRepo",
+      "gguf_probe_repo": "bartowski/gemma-2-2b-it-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "bartowski/gemma-2-2b-it-GGUF",
+        "revision": "855f67caed130e1befc571b52bd181be2e858883",
+        "base_model": "google/gemma-2-2b-it",
+        "files": [
+          {
+            "rfilename": "gemma-2-2b-it-Q8_0.gguf",
+            "blobId": "c83891a5a8a33fa1b9ed8dd74f7615cf322baa30",
+            "size": 2784495456,
+            "lfs": {
+              "sha256": "2d448a9aab894b8e8e18168cf3f490cb9f65632222f29f93514ac9ecc754debe",
+              "size": 2784495456,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Post-attention/FFN norms, GELU gating, embedding scaling, softcaps and alternating sliding attention implemented; independent CPU/reference checks pass. Full checkpoint and 128/64 baseline are recorded; matched RKLLM quality/speed remains unqualified.",
+      "baseline_result": "/home/orangepi/vlm-bench/baseline-20261021/gemma2-2b-normfix-cl-baseline.json"
+    },
+    {
+      "model": "Gemma3n",
+      "size": "2B",
+      "checkpoint_candidate": "google/gemma-3n-E2B-it",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "5e092ebca197cdcd8d8b195040accf22693501bc",
+      "gated": "manual",
+      "config_url": "https://huggingface.co/google/gemma-3n-E2B-it/resolve/5e092ebca197cdcd8d8b195040accf22693501bc/config.json",
+      "access": "config_http_401",
+      "error_code": "GatedRepo",
+      "gguf_probe_repo": "bartowski/google_gemma-3n-E2B-it-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "bartowski/google_gemma-3n-E2B-it-GGUF",
+        "revision": "5653037844acaa15cd8bb04a062cc33def399738",
+        "base_model": "google/gemma-3n-E2B-it",
+        "files": [
+          {
+            "rfilename": "google_gemma-3n-E2B-it-Q8_0.gguf",
+            "blobId": "4a77502fe135ea3308fb5917f9376df5c29043c2",
+            "size": 4788112480,
+            "lfs": {
+              "sha256": "7cdd95b247bc16eba3c5d2eca52ad3573ea7817a2bd15c03be84bb96dba2ae98",
+              "size": 4788112480,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Integrated language decoder passes independent CPU/GPU fixtures and full 128/64 OpenCL baseline. Three full warmups and three measured runs; deterministic measured output. Official tokenizer, full-model reference quality, matched RKLLM performance and image/audio/API qualification remain pending.",
+      "downloaded_checkpoint": {
+        "manifest": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Gemma3n-2B/download.json",
+        "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Gemma3n-2B/google_gemma-3n-E2B-it-Q8_0.gguf",
+        "sha256": "7cdd95b247bc16eba3c5d2eca52ad3573ea7817a2bd15c03be84bb96dba2ae98",
+        "complete": true
+      },
+      "baseline_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma3n-e2b-cl-baseline.json"
+    },
+    {
+      "model": "TeleChat2",
+      "size": "3B",
+      "checkpoint_candidate": "Tele-AI/TeleChat2-3B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "b364de9538e146f7a99519d5ed6c9855f76bfdf0",
+      "gated": false,
+      "config_url": "https://huggingface.co/Tele-AI/TeleChat2-3B/resolve/b364de9538e146f7a99519d5ed6c9855f76bfdf0/config.json",
+      "config": {
+        "apply_residual_connection_post_layernorm": false,
+        "architectures": [
+          "TeleChat2ForCausalLM"
+        ],
+        "auto_map": {
+          "AutoConfig": "configuration_telechat2.Telechat2Config",
+          "AutoModelForCausalLM": "modeling_telechat2.Telechat2ForCausalLM"
+        },
+        "attention_dropout": 0.0,
+        "attention_softmax_in_fp32": true,
+        "bias_dropout_fusion": true,
+        "bos_token_id": 1,
+        "eos_token_id": 2,
+        "hidden_dropout": 0.0,
+        "hidden_size": 3072,
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "masked_softmax_fusion": true,
+        "model_type": "telechat",
+        "n_head": 24,
+        "num_key_value_heads": 24,
+        "n_inner": null,
+        "n_layer": 24,
+        "offset_alibi": 100,
+        "pad_token_id": 3,
+        "pretraining_tp": 2,
+        "skip_bias_add": true,
+        "skip_bias_add_qkv": false,
+        "slow_but_exact": false,
+        "transformers_version": "4.24.0",
+        "unk_token_id": 0,
+        "use_cache": true,
+        "vocab_size": 131072,
+        "ffn_hidden_size": 6144,
+        "flash_attn": true,
+        "tie_word_embeddings": false,
+        "training_seqlen": 8192,
+        "base_seqlen": 8192,
+        "seq_length": 32768
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "Tele-AI/TeleChat2-3B-GGUF",
+      "gguf_probe_error": "HTTP Error 401: Unauthorized",
+      "implementation_note": "Original HF shards are checksum verified and converted to a 267-tensor FP16 GGUF; tensor-directory shapes and tokenizer metadata validated. Full-model inference, performance and RKLLM quality qualification pending. Short rotary range supported through 8192; extended dynamic NTK remains unsupported.",
+      "hf_source_probe": {
+        "repo": "Tele-AI/TeleChat2-3B",
+        "revision": "b364de9538e146f7a99519d5ed6c9855f76bfdf0",
+        "files": [
+          {
+            "rfilename": "pytorch_model_00001-of-00004.bin",
+            "blobId": "fd5cd4dbaa1ffa555c1e10839459282ba32f7145",
+            "size": 1937936345,
+            "lfs": {
+              "sha256": "7cd8303a1d22518ff6e7866346e71ec20642a7ca3d01ab81e1244e179b447af5",
+              "size": 1937936345,
+              "pointerSize": 135
+            }
+          },
+          {
+            "rfilename": "pytorch_model_00002-of-00004.bin",
+            "blobId": "f44551543aacd6fff2cde62ef37b67a0b6af268b",
+            "size": 1132629703,
+            "lfs": {
+              "sha256": "b50102edb953247e41974911960c3ab11e3c6365852007642158b3a2362e160f",
+              "size": 1132629703,
+              "pointerSize": 135
+            }
+          },
+          {
+            "rfilename": "pytorch_model_00003-of-00004.bin",
+            "blobId": "ff045ec59dd9b04750c656b8d9653c467119432c",
+            "size": 1132629703,
+            "lfs": {
+              "sha256": "08ddbeb8310241f17b4a7848f4d96676c7a0112c6d88eb3c504451bc5ba5b64f",
+              "size": 1132629703,
+              "pointerSize": 135
+            }
+          },
+          {
+            "rfilename": "pytorch_model_00004-of-00004.bin",
+            "blobId": "b1c6d732efa5bc75bc31d2e60e77895ee08bf889",
+            "size": 1937942891,
+            "lfs": {
+              "sha256": "01291906ab45a42c75e4beaef4d5b60e2d26e023648108abdc99dd3ec7337f03",
+              "size": 1937942891,
+              "pointerSize": 135
+            }
+          }
+        ]
+      },
+      "hf_source_directory": "/home/orangepi/vlm-bench/baseline-20261021/telechat2-hf-source",
+      "hf_source_manifest": "/home/orangepi/vlm-bench/baseline-20261021/telechat2-hf-source/source-manifest.json",
+      "converted_checkpoint": {
+        "complete": true,
+        "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/TeleChat2-3B/TeleChat2-3B-f16.gguf",
+        "sha256": "e7e7f746fcc2ee75217a722ce873c533b2c23d8db124af9b86fb945827eb4cbb",
+        "bytes": 6144189088,
+        "source_repo": "Tele-AI/TeleChat2-3B",
+        "source_revision": "b364de9538e146f7a99519d5ed6c9855f76bfdf0",
+        "dtype": "FP16",
+        "architecture": "telechat2",
+        "source_context": 32768,
+        "supported_context": 8192,
+        "tokenizer_metadata_sha256": "9eedb846019ff5aadfe467544fc5121b8b594f1b260eed3937e51099457b8002",
+        "converter_sha256": "8161c873809195871760aaa496425c501919ccf401fbfe94cf368878db0d0775",
+        "torch_version": "2.14.0+cpu",
+        "chunk_rows": 256,
+        "tensor_count": 267
+      },
+      "baseline_result": "/home/orangepi/vlm-bench/baseline-20261021/telechat2-3b-cl-baseline.json"
+    },
+    {
+      "model": "Phi3",
+      "size": "3.8B",
+      "checkpoint_candidate": "microsoft/Phi-3-mini-4k-instruct",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "f39ac1d28e925b323eae81227eaba4464caced4e",
+      "gated": false,
+      "config_url": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/resolve/f39ac1d28e925b323eae81227eaba4464caced4e/config.json",
+      "config": {
+        "_name_or_path": "Phi-3-mini-4k-instruct",
+        "architectures": [
+          "Phi3ForCausalLM"
+        ],
+        "attention_dropout": 0.0,
+        "auto_map": {
+          "AutoConfig": "configuration_phi3.Phi3Config",
+          "AutoModelForCausalLM": "modeling_phi3.Phi3ForCausalLM"
+        },
+        "bos_token_id": 1,
+        "embd_pdrop": 0.0,
+        "eos_token_id": 32000,
+        "hidden_act": "silu",
+        "hidden_size": 3072,
+        "initializer_range": 0.02,
+        "intermediate_size": 8192,
+        "max_position_embeddings": 4096,
+        "model_type": "phi3",
+        "num_attention_heads": 32,
+        "num_hidden_layers": 32,
+        "num_key_value_heads": 32,
+        "original_max_position_embeddings": 4096,
+        "pad_token_id": 32000,
+        "resid_pdrop": 0.0,
+        "rms_norm_eps": 1e-05,
+        "rope_scaling": null,
+        "rope_theta": 10000.0,
+        "sliding_window": 2047,
+        "tie_word_embeddings": false,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.40.2",
+        "use_cache": true,
+        "attention_bias": false,
+        "vocab_size": 32064
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "bartowski/Phi-3-mini-4k-instruct-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "bartowski/Phi-3-mini-4k-instruct-GGUF",
+        "revision": "e1447f6da0be91f91683c5d19f938d4f51122d88",
+        "base_model": null,
+        "files": [
+          {
+            "rfilename": "Phi-3-mini-4k-instruct-Q8_0.gguf",
+            "blobId": "ebec407f23f6b4ae908d75325c43a3c73fed67ed",
+            "size": 4061221376,
+            "lfs": {
+              "sha256": "0ac8ee48aeebf7d1b354691fd1e29e91c32ad88bbad10ad45ac880dcd4372a47",
+              "size": 4061221376,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Fused QKV and fused gate/up GGUF projections now load into the decoder, with bitwise parameter/logit/cache checks. Full checkpoint baseline and larger-model memory checks remain pending.",
+      "baseline_result": "/home/orangepi/vlm-bench/baseline-20261021/phi3-3.8b-cl-baseline.json"
+    },
+    {
+      "model": "MiniCPM3",
+      "size": "4B",
+      "checkpoint_candidate": "openbmb/MiniCPM3-4B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "d6b14ddaefdb11c624dd75c3c779549bc90b08cb",
+      "gated": false,
+      "config_url": "https://huggingface.co/openbmb/MiniCPM3-4B/resolve/d6b14ddaefdb11c624dd75c3c779549bc90b08cb/config.json",
+      "config": {
+        "_name_or_path": "openbmb/MiniCPM3-4B",
+        "architectures": [
+          "MiniCPM3ForCausalLM"
+        ],
+        "auto_map": {
+          "AutoConfig": "configuration_minicpm.MiniCPM3Config",
+          "AutoModel": "modeling_minicpm.MiniCPM3Model",
+          "AutoModelForCausalLM": "modeling_minicpm.MiniCPM3ForCausalLM",
+          "AutoModelForSeq2SeqLM": "modeling_minicpm.MiniCPM3ForCausalLM",
+          "AutoModelForSequenceClassification": "modeling_minicpm.MiniCPM3ForSequenceClassification"
+        },
+        "bos_token_id": 1,
+        "eos_token_id": [
+          2,
+          73440
+        ],
+        "hidden_act": "silu",
+        "initializer_range": 0.1,
+        "hidden_size": 2560,
+        "num_hidden_layers": 62,
+        "intermediate_size": 6400,
+        "max_position_embeddings": 32768,
+        "model_type": "minicpm3",
+        "num_attention_heads": 40,
+        "num_key_value_heads": 40,
+        "qk_nope_head_dim": 64,
+        "qk_rope_head_dim": 32,
+        "q_lora_rank": 768,
+        "kv_lora_rank": 256,
+        "rms_norm_eps": 1e-05,
+        "rope_scaling": {
+          "type": "longrope",
+          "long_factor": [
+            1.0591234137867171,
+            1.1241891283591912,
+            1.2596935748670968,
+            1.5380380402321725,
+            2.093982484148734,
+            3.1446935121267696,
+            4.937952647693647,
+            7.524541999994549,
+            10.475458000005451,
+            13.062047352306353,
+            14.85530648787323,
+            15.906017515851266,
+            16.461961959767827,
+            16.740306425132907,
+            16.87581087164081,
+            16.940876586213285
+          ],
+          "short_factor": [
+            1.0591234137867171,
+            1.1241891283591912,
+            1.2596935748670968,
+            1.5380380402321725,
+            2.093982484148734,
+            3.1446935121267696,
+            4.937952647693647,
+            7.524541999994549,
+            10.475458000005451,
+            13.062047352306353,
+            14.85530648787323,
+            15.906017515851266,
+            16.461961959767827,
+            16.740306425132907,
+            16.87581087164081,
+            16.940876586213285
+          ],
+          "original_max_position_embeddings": 32768
+        },
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.41.0",
+        "use_cache": true,
+        "vocab_size": 73448,
+        "scale_emb": 12,
+        "dim_model_base": 256,
+        "scale_depth": 1.4
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "mradermacher/MiniCPM3-4B-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "mradermacher/MiniCPM3-4B-GGUF",
+        "revision": "cfa7256f59949d62a5c38f7335e7ccbde3f89578",
+        "base_model": "openbmb/MiniCPM3-4B",
+        "gated": false,
+        "files": [
+          {
+            "rfilename": "MiniCPM3-4B.Q8_0.gguf",
+            "blobId": "d7f8b757d4e69a35810641471c4e516115fc051f",
+            "size": 4331350208,
+            "lfs": {
+              "sha256": "a7741eca9cf158d51c7a55da432b0609382b16fe9134aa7e1308f09784f56215",
+              "size": 4331350208,
+              "pointerSize": 135
+            }
+          }
+        ]
+      },
+      "implementation_note": "Fused latent K/V, value-head width, rotary factors and model scales implemented. Independent CPU/OpenCL small-decoder checks pass; actual GGUF tensor-directory schema validates with NULL placeholders. Full-model inference and benchmark pending.",
+      "baseline_result": "/home/orangepi/vlm-bench/baseline-20261021/minicpm3-4b-cl-baseline.json"
+    },
+    {
+      "model": "ChatGLM3",
+      "size": "6B",
+      "checkpoint_candidate": "THUDM/chatglm3-6b",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "e9e0406d062cdb887444fe5bd546833920abd4ac",
+      "gated": false,
+      "config_url": "https://huggingface.co/THUDM/chatglm3-6b/resolve/e9e0406d062cdb887444fe5bd546833920abd4ac/config.json",
+      "config": {
+        "_name_or_path": "THUDM/chatglm3-6b",
+        "model_type": "chatglm",
+        "architectures": [
+          "ChatGLMModel"
+        ],
+        "auto_map": {
+          "AutoConfig": "configuration_chatglm.ChatGLMConfig",
+          "AutoModel": "modeling_chatglm.ChatGLMForConditionalGeneration",
+          "AutoModelForCausalLM": "modeling_chatglm.ChatGLMForConditionalGeneration",
+          "AutoModelForSeq2SeqLM": "modeling_chatglm.ChatGLMForConditionalGeneration",
+          "AutoModelForSequenceClassification": "modeling_chatglm.ChatGLMForSequenceClassification"
+        },
+        "add_bias_linear": false,
+        "add_qkv_bias": true,
+        "apply_query_key_layer_scaling": true,
+        "apply_residual_connection_post_layernorm": false,
+        "attention_dropout": 0.0,
+        "attention_softmax_in_fp32": true,
+        "bias_dropout_fusion": true,
+        "ffn_hidden_size": 13696,
+        "fp32_residual_connection": false,
+        "hidden_dropout": 0.0,
+        "hidden_size": 4096,
+        "kv_channels": 128,
+        "layernorm_epsilon": 1e-05,
+        "multi_query_attention": true,
+        "multi_query_group_num": 2,
+        "num_attention_heads": 32,
+        "num_layers": 28,
+        "original_rope": true,
+        "padded_vocab_size": 65024,
+        "post_layer_norm": true,
+        "rmsnorm": true,
+        "seq_length": 8192,
+        "use_cache": true,
+        "torch_dtype": "float16",
+        "transformers_version": "4.30.2",
+        "tie_word_embeddings": false,
+        "eos_token_id": 2,
+        "pad_token_id": 0
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "mradermacher/chatglm3-6b-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "mradermacher/chatglm3-6b-GGUF",
+        "revision": "b79a62fe07eb5135732d341cd8cce1777e4a7788",
+        "base_model": "zai-org/chatglm3-6b",
+        "files": [
+          {
+            "rfilename": "chatglm3-6b.Q8_0.gguf",
+            "blobId": "d5b0b23d2454b4e0d1035e8a50b6eeb629b73786",
+            "size": 6636363616,
+            "lfs": {
+              "sha256": "ff3a1fdb079623ce66db88c005d7cc4c03aa0640e01cac5418cdaa2e9271973b",
+              "size": 6636363616,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "File-backed gate/up splitting, bounded source pages and sequential final layouts enable complete 128/64 GPU runs on the 16 GB board. CPU/GPU fixtures and 3+3 baseline pass. Full-model reference quality, matched RKLLM speed, and API qualification remain pending.",
+      "downloaded_checkpoint": {
+        "manifest": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/ChatGLM3-6B/download.json",
+        "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/ChatGLM3-6B/chatglm3-6b.Q8_0.gguf",
+        "sha256": "ff3a1fdb079623ce66db88c005d7cc4c03aa0640e01cac5418cdaa2e9271973b",
+        "complete": true
+      },
+      "baseline_report": "/home/orangepi/vlm-bench/baseline-20261021/chatglm3-6b-fileloadfix-cl-baseline.json"
+    },
+    {
+      "model": "Qwen3-VL",
+      "size": "2B",
+      "checkpoint_candidate": "Qwen/Qwen3-VL-2B-Instruct",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "gated": false,
+      "config_url": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/resolve/89644892e4d85e24eaac8bacfd4f463576704203/config.json",
+      "config": {
+        "architectures": [
+          "Qwen3VLForConditionalGeneration"
+        ],
+        "image_token_id": 151655,
+        "model_type": "qwen3_vl",
+        "text_config": {
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "bos_token_id": 151643,
+          "dtype": "bfloat16",
+          "eos_token_id": 151645,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "hidden_size": 2048,
+          "initializer_range": 0.02,
+          "intermediate_size": 6144,
+          "max_position_embeddings": 262144,
+          "model_type": "qwen3_vl_text",
+          "num_attention_heads": 16,
+          "num_hidden_layers": 28,
+          "num_key_value_heads": 8,
+          "rms_norm_eps": 1e-06,
+          "rope_scaling": {
+            "mrope_interleaved": true,
+            "mrope_section": [
+              24,
+              20,
+              20
+            ],
+            "rope_type": "default"
+          },
+          "rope_theta": 5000000,
+          "tie_word_embeddings": true,
+          "use_cache": true,
+          "vocab_size": 151936
+        },
+        "tie_word_embeddings": true,
+        "transformers_version": "4.57.0.dev0",
+        "video_token_id": 151656,
+        "vision_config": {
+          "deepstack_visual_indexes": [
+            5,
+            11,
+            17
+          ],
+          "depth": 24,
+          "hidden_act": "gelu_pytorch_tanh",
+          "hidden_size": 1024,
+          "in_channels": 3,
+          "initializer_range": 0.02,
+          "intermediate_size": 4096,
+          "model_type": "qwen3_vl",
+          "num_heads": 16,
+          "num_position_embeddings": 2304,
+          "out_hidden_size": 2048,
+          "patch_size": 16,
+          "spatial_merge_size": 2,
+          "temporal_patch_size": 2
+        },
+        "vision_end_token_id": 151653,
+        "vision_start_token_id": 151652
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+        "revision": "52d6c8ffea26cc873ac5ad116f8631268d7eb503",
+        "base_model": [
+          "Qwen/Qwen3-VL-2B-Instruct"
+        ],
+        "files": [
+          {
+            "rfilename": "Qwen3VL-2B-Instruct-Q8_0.gguf",
+            "blobId": "486e686d75b8fd054a9e337cbe1ae78dffc073ff",
+            "size": 1834427424,
+            "lfs": {
+              "sha256": "1e8db19207c8ce0733ddd78c2eff8a9e22c27c82f4443df94c25792ed8fe04f2",
+              "size": 1834427424,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Text-only decoder baseline recorded using Q/K RMSNorm and ordinary RoPE (all three multimodal position axes coincide for text). Image encoder, connector and image-input performance are not qualified.",
+      "baseline_result": "benchmark-results.json#Qwen3-VL/2B"
+    },
+    {
+      "model": "DeepSeekOCR",
+      "size": "3B(A570M)",
+      "checkpoint_candidate": "deepseek-ai/DeepSeek-OCR",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "9f30c71f441d010e5429c532364a86705536c53a",
+      "gated": false,
+      "config_url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR/resolve/9f30c71f441d010e5429c532364a86705536c53a/config.json",
+      "config": {
+        "_name_or_path": "deepseek-ai/DeepSeek-OCR",
+        "candidate_resolutions": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "global_view_pos": "head",
+        "architectures": [
+          "DeepseekOCRForCausalLM"
+        ],
+        "auto_map": {
+          "AutoConfig": "modeling_deepseekocr.DeepseekOCRConfig",
+          "AutoModel": "modeling_deepseekocr.DeepseekOCRForCausalLM"
+        },
+        "language_config": {
+          "architectures": [
+            "DeepseekV2ForCausalLM"
+          ],
+          "auto_map": {
+            "AutoConfig": "configuration_deepseekv2.DeepseekV2Config",
+            "AutoModel": "modeling_deepseek.DeepseekV2Model",
+            "AutoModelForCausalLM": "modeling_deepseek.DeepseekV2ForCausalLM"
+          },
+          "bos_token_id": 0,
+          "eos_token_id": 1,
+          "first_k_dense_replace": 1,
+          "hidden_size": 1280,
+          "intermediate_size": 6848,
+          "kv_lora_rank": null,
+          "lm_head": true,
+          "max_position_embeddings": 8192,
+          "moe_intermediate_size": 896,
+          "n_group": 1,
+          "n_routed_experts": 64,
+          "n_shared_experts": 2,
+          "num_attention_heads": 10,
+          "num_experts_per_tok": 6,
+          "num_hidden_layers": 12,
+          "num_key_value_heads": 10,
+          "q_lora_rank": null,
+          "qk_nope_head_dim": 0,
+          "qk_rope_head_dim": 0,
+          "rm_head": false,
+          "topk_group": 1,
+          "topk_method": "greedy",
+          "torch_dtype": "bfloat16",
+          "use_mla": false,
+          "v_head_dim": 0,
+          "vocab_size": 129280
+        },
+        "model_type": "deepseek_vl_v2",
+        "projector_config": {
+          "input_dim": 2048,
+          "model_type": "mlp_projector",
+          "n_embed": 1280,
+          "projector_type": "linear"
+        },
+        "tile_tag": "2D",
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.46.3",
+        "vision_config": {
+          "image_size": 1024,
+          "mlp_ratio": 3.7362,
+          "model_name": "deeplip_b_l",
+          "model_type": "vision",
+          "width": {
+            "clip-l-14-224": {
+              "heads": 16,
+              "image_size": 224,
+              "layers": 24,
+              "patch_size": 14,
+              "width": 1024
+            },
+            "sam_vit_b": {
+              "downsample_channels": [
+                512,
+                1024
+              ],
+              "global_attn_indexes": [
+                2,
+                5,
+                8,
+                11
+              ],
+              "heads": 12,
+              "layers": 12,
+              "width": 768
+            }
+          }
+        },
+        "bos_token_id": 0,
+        "eos_token_id": 1,
+        "first_k_dense_replace": 1,
+        "hidden_size": 1280,
+        "intermediate_size": 6848,
+        "kv_lora_rank": null,
+        "lm_head": true,
+        "max_position_embeddings": 8192,
+        "moe_intermediate_size": 896,
+        "n_group": 1,
+        "n_routed_experts": 64,
+        "n_shared_experts": 2,
+        "num_attention_heads": 10,
+        "num_experts_per_tok": 6,
+        "num_hidden_layers": 12,
+        "num_key_value_heads": 10,
+        "q_lora_rank": null,
+        "qk_nope_head_dim": 0,
+        "qk_rope_head_dim": 0,
+        "rm_head": false,
+        "topk_group": 1,
+        "topk_method": "greedy",
+        "use_mla": false,
+        "v_head_dim": 0,
+        "vocab_size": 129280
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "ggml-org/DeepSeek-OCR-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "ggml-org/DeepSeek-OCR-GGUF",
+        "revision": "7086620c3e417c744eb30dd3090fd053c6bb2e5e",
+        "base_model": null,
+        "files": [
+          {
+            "rfilename": "DeepSeek-OCR-Q8_0.gguf",
+            "blobId": "0b29105b69fbf1ebb6f0789d22a04d71c1b5e0d5",
+            "size": 3126139712,
+            "lfs": {
+              "sha256": "81ede3e256230707dccf7fa052570c3a939d57db99de655f43cbb1a830d14d92",
+              "size": 3126139712,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Text tokenizer matches 1044 official cases. Ordinary MHA full-head rotary correction and dense/MoE/shared-expert decoder pass independent CPU and Mali OpenCL prefill/cached-decode checks on a small model. Full-model baseline and quality qualification pending. Vision encoder/connector not included.",
+      "baseline_result": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-3b-cl-baseline.json"
+    },
+    {
+      "model": "Qwen3.5",
+      "size": "0.8B",
+      "checkpoint_candidate": "Qwen/Qwen3.5-0.8B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "gated": false,
+      "config_url": "https://huggingface.co/Qwen/Qwen3.5-0.8B/resolve/2fc06364715b967f1860aea9cf38778875588b17/config.json",
+      "config": {
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "image_token_id": 248056,
+        "model_type": "qwen3_5",
+        "text_config": {
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "attn_output_gate": true,
+          "dtype": "bfloat16",
+          "eos_token_id": 248044,
+          "full_attention_interval": 4,
+          "head_dim": 256,
+          "hidden_act": "silu",
+          "hidden_size": 1024,
+          "initializer_range": 0.02,
+          "intermediate_size": 3584,
+          "layer_types": [
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention"
+          ],
+          "linear_conv_kernel_dim": 4,
+          "linear_key_head_dim": 128,
+          "linear_num_key_heads": 16,
+          "linear_num_value_heads": 16,
+          "linear_value_head_dim": 128,
+          "max_position_embeddings": 262144,
+          "mlp_only_layers": [],
+          "model_type": "qwen3_5_text",
+          "mtp_num_hidden_layers": 1,
+          "mtp_use_dedicated_embeddings": false,
+          "num_attention_heads": 8,
+          "num_hidden_layers": 24,
+          "num_key_value_heads": 2,
+          "rms_norm_eps": 1e-06,
+          "tie_word_embeddings": true,
+          "use_cache": true,
+          "vocab_size": 248320,
+          "mamba_ssm_dtype": "float32",
+          "rope_parameters": {
+            "mrope_interleaved": true,
+            "mrope_section": [
+              11,
+              11,
+              10
+            ],
+            "rope_type": "default",
+            "rope_theta": 10000000,
+            "partial_rotary_factor": 0.25
+          }
+        },
+        "tie_word_embeddings": true,
+        "transformers_version": "4.57.0.dev0",
+        "video_token_id": 248057,
+        "vision_config": {
+          "deepstack_visual_indexes": [],
+          "depth": 12,
+          "hidden_act": "gelu_pytorch_tanh",
+          "hidden_size": 768,
+          "in_channels": 3,
+          "initializer_range": 0.02,
+          "intermediate_size": 3072,
+          "model_type": "qwen3_5",
+          "num_heads": 12,
+          "num_position_embeddings": 2304,
+          "out_hidden_size": 1024,
+          "patch_size": 16,
+          "spatial_merge_size": 2,
+          "temporal_patch_size": 2
+        },
+        "vision_end_token_id": 248054,
+        "vision_start_token_id": 248053
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "unsloth/Qwen3.5-0.8B-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "unsloth/Qwen3.5-0.8B-GGUF",
+        "revision": "6ab461498e2023f6e3c1baea90a8f0fe38ab64d0",
+        "base_model": [
+          "Qwen/Qwen3.5-0.8B"
+        ],
+        "files": [
+          {
+            "rfilename": "Qwen3.5-0.8B-Q8_0.gguf",
+            "blobId": "d6a76f24990cc8dc8d5211af50adcff0a12a88ba",
+            "size": 811843840,
+            "lfs": {
+              "sha256": "0ad885ffd4bb022fc4f0d33a3308fa108ef8613159d3b3a67e23abca056b7a6c",
+              "size": 811843840,
+              "pointerSize": 134
+            }
+          }
+        ],
+        "gated": false
+      },
+      "baseline_result": "benchmark-results.json#Qwen3.5/0.8B",
+      "implementation_note": "Memory-bounded Mali fused recurrent path measured at context512 with actual 128-token chunks and 3 warmups + 3 measured requests: 2735.69ms TTFT, 46.79 prefill proxy tok/s, 4.54 decode tok/s. All six 64-token sequences match the original baseline. Exact-hash worker policy enabled at context<=512 for realized GPU-only inference; generic app RAM admission remains conservative. RKLLM quality/speed and maximum-context qualification pending.",
+      "optimization_report": "benchmark-recurrent-family.json"
+    },
+    {
+      "model": "Qwen3.5",
+      "size": "2B",
+      "checkpoint_candidate": "Qwen/Qwen3.5-2B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+      "gated": false,
+      "config_url": "https://huggingface.co/Qwen/Qwen3.5-2B/resolve/15852e8c16360a2fea060d615a32b45270f8a8fc/config.json",
+      "config": {
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "image_token_id": 248056,
+        "model_type": "qwen3_5",
+        "text_config": {
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "attn_output_gate": true,
+          "dtype": "bfloat16",
+          "eos_token_id": 248044,
+          "full_attention_interval": 4,
+          "head_dim": 256,
+          "hidden_act": "silu",
+          "hidden_size": 2048,
+          "initializer_range": 0.02,
+          "intermediate_size": 6144,
+          "layer_types": [
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention"
+          ],
+          "linear_conv_kernel_dim": 4,
+          "linear_key_head_dim": 128,
+          "linear_num_key_heads": 16,
+          "linear_num_value_heads": 16,
+          "linear_value_head_dim": 128,
+          "max_position_embeddings": 262144,
+          "mlp_only_layers": [],
+          "model_type": "qwen3_5_text",
+          "mtp_num_hidden_layers": 1,
+          "mtp_use_dedicated_embeddings": false,
+          "num_attention_heads": 8,
+          "num_hidden_layers": 24,
+          "num_key_value_heads": 2,
+          "rms_norm_eps": 1e-06,
+          "tie_word_embeddings": true,
+          "use_cache": true,
+          "vocab_size": 248320,
+          "mamba_ssm_dtype": "float32",
+          "rope_parameters": {
+            "mrope_interleaved": true,
+            "mrope_section": [
+              11,
+              11,
+              10
+            ],
+            "rope_type": "default",
+            "rope_theta": 10000000,
+            "partial_rotary_factor": 0.25
+          }
+        },
+        "tie_word_embeddings": true,
+        "transformers_version": "4.57.0.dev0",
+        "video_token_id": 248057,
+        "vision_config": {
+          "deepstack_visual_indexes": [],
+          "depth": 24,
+          "hidden_act": "gelu_pytorch_tanh",
+          "hidden_size": 1024,
+          "in_channels": 3,
+          "initializer_range": 0.02,
+          "intermediate_size": 4096,
+          "model_type": "qwen3_5",
+          "num_heads": 16,
+          "num_position_embeddings": 2304,
+          "out_hidden_size": 2048,
+          "patch_size": 16,
+          "spatial_merge_size": 2,
+          "temporal_patch_size": 2
+        },
+        "vision_end_token_id": 248054,
+        "vision_start_token_id": 248053
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "unsloth/Qwen3.5-2B-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "unsloth/Qwen3.5-2B-GGUF",
+        "revision": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+        "base_model": [
+          "Qwen/Qwen3.5-2B"
+        ],
+        "files": [
+          {
+            "rfilename": "Qwen3.5-2B-Q8_0.gguf",
+            "blobId": "e9b5735a49b5bab7e33f98d13fba439d85dff6bd",
+            "size": 2012012800,
+            "lfs": {
+              "sha256": "1b04acba824817554f4ce23639bc8495ff70453b8fcb047900c731521021f2c1",
+              "size": 2012012800,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "baseline_result": "/home/orangepi/vlm-bench/baseline-20261021/qwen35-2b-cl-baseline.json",
+      "implementation_note": "Memory-bounded Mali fused recurrent path measured at context512 with actual 128-token chunks and 3 warmups + 3 measured requests: 7096.23ms TTFT, 18.04 prefill proxy tok/s, 2.40 decode tok/s. All six 64-token sequences match the original baseline. Exact-hash worker policy enabled at context<=512 for realized GPU-only inference; generic app RAM admission remains conservative. RKLLM quality/speed and maximum-context qualification pending.",
+      "optimization_report": "benchmark-recurrent-family.json"
+    },
+    {
+      "model": "Qwen3.5",
+      "size": "4B",
+      "checkpoint_candidate": "Qwen/Qwen3.5-4B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "gated": false,
+      "config_url": "https://huggingface.co/Qwen/Qwen3.5-4B/resolve/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/config.json",
+      "config": {
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "image_token_id": 248056,
+        "model_type": "qwen3_5",
+        "text_config": {
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "attn_output_gate": true,
+          "dtype": "bfloat16",
+          "eos_token_id": 248044,
+          "full_attention_interval": 4,
+          "head_dim": 256,
+          "hidden_act": "silu",
+          "hidden_size": 2560,
+          "initializer_range": 0.02,
+          "intermediate_size": 9216,
+          "layer_types": [
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention",
+            "linear_attention",
+            "linear_attention",
+            "linear_attention",
+            "full_attention"
+          ],
+          "linear_conv_kernel_dim": 4,
+          "linear_key_head_dim": 128,
+          "linear_num_key_heads": 16,
+          "linear_num_value_heads": 32,
+          "linear_value_head_dim": 128,
+          "max_position_embeddings": 262144,
+          "mlp_only_layers": [],
+          "model_type": "qwen3_5_text",
+          "mtp_num_hidden_layers": 1,
+          "mtp_use_dedicated_embeddings": false,
+          "num_attention_heads": 16,
+          "num_hidden_layers": 32,
+          "num_key_value_heads": 4,
+          "rms_norm_eps": 1e-06,
+          "tie_word_embeddings": true,
+          "use_cache": true,
+          "vocab_size": 248320,
+          "mamba_ssm_dtype": "float32",
+          "rope_parameters": {
+            "mrope_interleaved": true,
+            "mrope_section": [
+              11,
+              11,
+              10
+            ],
+            "rope_type": "default",
+            "rope_theta": 10000000,
+            "partial_rotary_factor": 0.25
+          }
+        },
+        "tie_word_embeddings": true,
+        "transformers_version": "4.57.0.dev0",
+        "video_token_id": 248057,
+        "vision_config": {
+          "deepstack_visual_indexes": [],
+          "depth": 24,
+          "hidden_act": "gelu_pytorch_tanh",
+          "hidden_size": 1024,
+          "in_channels": 3,
+          "initializer_range": 0.02,
+          "intermediate_size": 4096,
+          "model_type": "qwen3_5",
+          "num_heads": 16,
+          "num_position_embeddings": 2304,
+          "out_hidden_size": 2560,
+          "patch_size": 16,
+          "spatial_merge_size": 2,
+          "temporal_patch_size": 2
+        },
+        "vision_end_token_id": 248054,
+        "vision_start_token_id": 248053
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "unsloth/Qwen3.5-4B-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "unsloth/Qwen3.5-4B-GGUF",
+        "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+        "base_model": [
+          "Qwen/Qwen3.5-4B"
+        ],
+        "files": [
+          {
+            "rfilename": "Qwen3.5-4B-Q8_0.gguf",
+            "blobId": "871df22fc125cd971cc5c8aaee7d16b1e9ef9c68",
+            "size": 4482403488,
+            "lfs": {
+              "sha256": "10cc391b403021dd11c614679d2fd92f611c3681d29e29651b717316965d61e1",
+              "size": 4482403488,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "baseline_result": "benchmark-results.json#Qwen3.5/4B",
+      "implementation_note": "Memory-bounded Mali fused recurrent path measured at context512 with actual 128-token chunks and 3 warmups + 3 measured requests: 23436.57ms TTFT, 5.46 prefill proxy tok/s, 0.60 decode tok/s. All six 64-token sequences match the original baseline. Exact-hash worker policy enabled at context<=512 for realized GPU-only inference; generic app RAM admission remains conservative. RKLLM quality/speed and maximum-context qualification pending.",
+      "optimization_report": "benchmark-recurrent-family.json"
+    },
+    {
+      "model": "Gemma4",
+      "size": "E2B",
+      "checkpoint_candidate": "google/gemma-4-E2B-it",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "gated": false,
+      "config_url": "https://huggingface.co/google/gemma-4-E2B-it/resolve/3e22461f65e89153144f8adb70e3b8c2cc9845a7/config.json",
+      "config": {
+        "architectures": [
+          "Gemma4ForConditionalGeneration"
+        ],
+        "audio_config": {
+          "_name_or_path": "",
+          "architectures": null,
+          "attention_chunk_size": 12,
+          "attention_context_left": 13,
+          "attention_context_right": 0,
+          "attention_invalid_logits_value": -1000000000.0,
+          "attention_logit_cap": 50.0,
+          "chunk_size_feed_forward": 0,
+          "conv_kernel_size": 5,
+          "dtype": "bfloat16",
+          "gradient_clipping": 10000000000.0,
+          "hidden_act": "silu",
+          "hidden_size": 1024,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "initializer_range": 0.02,
+          "is_encoder_decoder": false,
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "model_type": "gemma4_audio",
+          "num_attention_heads": 8,
+          "num_hidden_layers": 12,
+          "output_attentions": false,
+          "output_hidden_states": false,
+          "output_proj_dims": 1536,
+          "problem_type": null,
+          "residual_weight": 0.5,
+          "return_dict": true,
+          "rms_norm_eps": 1e-06,
+          "subsampling_conv_channels": [
+            128,
+            32
+          ],
+          "use_clipped_linears": true
+        },
+        "audio_token_id": 258881,
+        "boa_token_id": 256000,
+        "boi_token_id": 255999,
+        "dtype": "bfloat16",
+        "eoa_token_id": 258883,
+        "eoa_token_index": 258883,
+        "eoi_token_id": 258882,
+        "eos_token_id": [
+          1,
+          106
+        ],
+        "image_token_id": 258880,
+        "initializer_range": 0.02,
+        "model_type": "gemma4",
+        "text_config": {
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "attention_k_eq_v": false,
+          "bos_token_id": 2,
+          "dtype": "bfloat16",
+          "enable_moe_block": false,
+          "eos_token_id": 1,
+          "expert_intermediate_size": null,
+          "final_logit_softcapping": 30.0,
+          "global_head_dim": 512,
+          "head_dim": 256,
+          "hidden_activation": "gelu_pytorch_tanh",
+          "hidden_size": 1536,
+          "hidden_size_per_layer_input": 256,
+          "initializer_range": 0.02,
+          "intermediate_size": 6144,
+          "layer_types": [
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "full_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "full_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "full_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "full_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "full_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "full_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "sliding_attention",
+            "full_attention"
+          ],
+          "max_position_embeddings": 131072,
+          "model_type": "gemma4_text",
+          "num_attention_heads": 8,
+          "num_experts": null,
+          "num_global_key_value_heads": null,
+          "num_hidden_layers": 35,
+          "num_key_value_heads": 1,
+          "num_kv_shared_layers": 20,
+          "pad_token_id": 0,
+          "rms_norm_eps": 1e-06,
+          "rope_parameters": {
+            "full_attention": {
+              "partial_rotary_factor": 0.25,
+              "rope_theta": 1000000.0,
+              "rope_type": "proportional"
+            },
+            "sliding_attention": {
+              "rope_theta": 10000.0,
+              "rope_type": "default"
+            }
+          },
+          "sliding_window": 512,
+          "tie_word_embeddings": true,
+          "top_k_experts": null,
+          "use_bidirectional_attention": null,
+          "use_cache": true,
+          "use_double_wide_mlp": true,
+          "vocab_size": 262144,
+          "vocab_size_per_layer_input": 262144
+        },
+        "tie_word_embeddings": true,
+        "transformers_version": "5.5.0.dev0",
+        "video_token_id": 258884,
+        "vision_config": {
+          "_name_or_path": "",
+          "architectures": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "chunk_size_feed_forward": 0,
+          "default_output_length": 280,
+          "dtype": "bfloat16",
+          "global_head_dim": 64,
+          "head_dim": 64,
+          "hidden_activation": "gelu_pytorch_tanh",
+          "hidden_size": 768,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "initializer_range": 0.02,
+          "intermediate_size": 3072,
+          "is_encoder_decoder": false,
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "max_position_embeddings": 131072,
+          "model_type": "gemma4_vision",
+          "num_attention_heads": 12,
+          "num_hidden_layers": 16,
+          "num_key_value_heads": 12,
+          "output_attentions": false,
+          "output_hidden_states": false,
+          "patch_size": 16,
+          "pooling_kernel_size": 3,
+          "position_embedding_size": 10240,
+          "problem_type": null,
+          "return_dict": true,
+          "rms_norm_eps": 1e-06,
+          "rope_parameters": {
+            "rope_theta": 100.0,
+            "rope_type": "default"
+          },
+          "standardize": false,
+          "use_clipped_linears": true
+        },
+        "vision_soft_tokens_per_image": 280
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "bartowski/google_gemma-4-E2B-it-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "bartowski/google_gemma-4-E2B-it-GGUF",
+        "revision": "81012ba3538e061d5ee003f11f25335b17f82e2d",
+        "base_model": "google/gemma-4-E2B-it",
+        "files": [
+          {
+            "rfilename": "google_gemma-4-E2B-it-Q8_0.gguf",
+            "blobId": "8e3558c3d26b73f0142878c5c2daea417f17411d",
+            "size": 4967497184,
+            "lfs": {
+              "sha256": "bb145c0e8c2ede3b6992b881f7eefe6b33275eeb9998f450b5c72f4eb1d78732",
+              "size": 4967497184,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Generic loader, independent CPU/GPU numeric fixtures and full 128/64 OpenCL baseline pass. Three full warmups and three measured runs; deterministic measured output. Full-model reference quality, matched RKLLM performance and vision/audio/API remain unqualified.",
+      "downloaded_checkpoint": {
+        "manifest": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Gemma4-E2B/download.json",
+        "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Gemma4-E2B/google_gemma-4-E2B-it-Q8_0.gguf",
+        "sha256": "bb145c0e8c2ede3b6992b881f7eefe6b33275eeb9998f450b5c72f4eb1d78732",
+        "complete": true
+      },
+      "baseline_report": "/home/orangepi/vlm-bench/baseline-20261021/gemma4-e2b-cl-baseline.json"
+    },
+    {
+      "model": "LFM2.5-VL",
+      "size": "450M",
+      "checkpoint_candidate": "LiquidAI/LFM2.5-VL-450M",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "fc6221ca597f3315e4f82fc2df606783267b34ba",
+      "gated": false,
+      "config_url": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M/resolve/fc6221ca597f3315e4f82fc2df606783267b34ba/config.json",
+      "config": {
+        "architectures": [
+          "Lfm2VlForConditionalGeneration"
+        ],
+        "do_image_splitting": true,
+        "downsample_factor": 2,
+        "dtype": "bfloat16",
+        "encoder_patch_size": 16,
+        "image_token_id": 396,
+        "max_image_tokens": 256,
+        "max_pixels_tolerance": 2.0,
+        "max_tiles": 10,
+        "min_image_tokens": 64,
+        "min_tiles": 2,
+        "model_type": "lfm2_vl",
+        "projector_bias": true,
+        "projector_hidden_act": "gelu",
+        "projector_hidden_size": 2048,
+        "projector_use_layernorm": false,
+        "text_config": {
+          "_name_or_path": "LiquidAI/LFM2-350M",
+          "architectures": [
+            "Lfm2ForCausalLM"
+          ],
+          "block_auto_adjust_ff_dim": true,
+          "block_dim": 1024,
+          "block_ff_dim": 6656,
+          "block_ffn_dim_multiplier": 1.0,
+          "block_mlp_init_scale": 1.0,
+          "block_multiple_of": 256,
+          "block_norm_eps": 1e-05,
+          "block_out_init_scale": 1.0,
+          "block_use_swiglu": true,
+          "block_use_xavier_init": true,
+          "conv_L_cache": 3,
+          "conv_bias": false,
+          "conv_dim": 1024,
+          "conv_dim_out": 1024,
+          "conv_use_xavier_init": true,
+          "dtype": "bfloat16",
+          "eos_token_id": 7,
+          "hidden_size": 1024,
+          "initializer_range": 0.02,
+          "intermediate_size": 6656,
+          "layer_types": [
+            "conv",
+            "conv",
+            "full_attention",
+            "conv",
+            "conv",
+            "full_attention",
+            "conv",
+            "conv",
+            "full_attention",
+            "conv",
+            "full_attention",
+            "conv",
+            "full_attention",
+            "conv",
+            "full_attention",
+            "conv"
+          ],
+          "max_position_embeddings": 128000,
+          "model_type": "lfm2",
+          "norm_eps": 1e-05,
+          "num_attention_heads": 16,
+          "num_heads": 16,
+          "num_hidden_layers": 16,
+          "num_key_value_heads": 8,
+          "rope_parameters": {
+            "rope_theta": 1000000.0,
+            "rope_type": "default"
+          },
+          "use_cache": true,
+          "use_pos_enc": true,
+          "vocab_size": 65536
+        },
+        "tile_size": 512,
+        "transformers_version": "5.0.0.dev0",
+        "use_image_special_tokens": true,
+        "use_thumbnail": true,
+        "vision_config": {
+          "attention_dropout": 0.0,
+          "dtype": "bfloat16",
+          "hidden_act": "gelu_pytorch_tanh",
+          "hidden_size": 768,
+          "intermediate_size": 3072,
+          "layer_norm_eps": 1e-06,
+          "model_type": "siglip2_vision_model",
+          "num_attention_heads": 12,
+          "num_channels": 3,
+          "num_hidden_layers": 12,
+          "num_patches": 256,
+          "patch_size": 16,
+          "vision_use_head": false
+        }
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "LiquidAI/LFM2.5-VL-450M-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "LiquidAI/LFM2.5-VL-450M-GGUF",
+        "revision": "1abed04b6fe71314d8c446a1371c03d7c332266d",
+        "base_model": [
+          "LiquidAI/LFM2.5-VL-450M"
+        ],
+        "files": [
+          {
+            "rfilename": "LFM2.5-VL-450M-Q8_0.gguf",
+            "blobId": "71ac3814e5216468c247f943e888304c1e2e7ac1",
+            "size": 379219104,
+            "lfs": {
+              "sha256": "263aca93039e22140d55e046831c700c796affa8143d7638581c488a30c712bc",
+              "size": 379219104,
+              "pointerSize": 134
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Short-convolution and attention blocks implemented; CPU and Mali small-decoder checks pass. Full-model text baseline recorded; independent full-model output check pending. Vision encoder not ported.",
+      "baseline_result": "benchmark-results.json#LFM2.5-VL/450M"
+    },
+    {
+      "model": "Spark-X2.5",
+      "size": "1.7B",
+      "checkpoint_candidate": "XHToken/Spark-X2.5-1.7B",
+      "exact_published_variant_known": false,
+      "baseline_complete": true,
+      "revision": "14d6e83c13c7add2b62a7c39b2131f4ed1cddcf8",
+      "gated": false,
+      "config_url": "https://huggingface.co/XHToken/Spark-X2.5-1.7B/resolve/14d6e83c13c7add2b62a7c39b2131f4ed1cddcf8/config.json",
+      "config": {
+        "architectures": [
+          "Spark2_5ForCausalLM"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "auto_map": {
+          "AutoConfig": "configuration_spark.Spark2_5Config",
+          "AutoModel": "modeling_spark.Spark2_5Model",
+          "AutoModelForCausalLM": "modeling_spark.Spark2_5ForCausalLM"
+        },
+        "bos_token_id": 0,
+        "dtype": "bfloat16",
+        "eos_token_id": 1,
+        "gate_attn_act_mode": "sigmoid",
+        "head_dim": 256,
+        "headwise_attn_output_gate": true,
+        "hidden_act": "gelu",
+        "hidden_size": 2048,
+        "initializer_range": 0.0221,
+        "intermediate_size": 6656,
+        "layer_types": [
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention"
+        ],
+        "max_position_embeddings": 1048576,
+        "mlp_bias": false,
+        "model_type": "spark2_5",
+        "num_attention_heads": 8,
+        "num_hidden_layers": 28,
+        "num_key_value_heads": 2,
+        "pad_token_id": 2,
+        "rms_norm_eps": 1e-06,
+        "rope_parameters": {
+          "full_attention": {
+            "partial_rotary_factor": 0.25,
+            "rope_theta": 5000000
+          },
+          "sliding_attention": {
+            "partial_rotary_factor": 1.0,
+            "rope_theta": 10000
+          }
+        },
+        "sliding_window": 512,
+        "tie_word_embeddings": true,
+        "transformers_version": "4.57.1",
+        "use_cache": true,
+        "vocab_size": 131072
+      },
+      "access": "public_config",
+      "gguf_probe_repo": "XHToken/Spark-X2.5-1.7B-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "XHToken/Spark-X2.5-1.7B-GGUF",
+        "revision": "1f7fa33b1245c14730da39e125714ad3a327901b",
+        "base_model": "XHToken/Spark-X2.5-1.7B",
+        "files": [
+          {
+            "rfilename": "Spark-X2.5-1.7B-Q8_0.gguf",
+            "blobId": "698d21c6c8b28383ef42530fc111c94cfe1010ef",
+            "size": 1820112704,
+            "lfs": {
+              "sha256": "cd77c03185a834bb1162a4b7713520be5838058bfc54873645beff470bb24442",
+              "size": 1820112704,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Baseline recorded; independent streaming PyTorch decoder using pinned official config reproduces the first 4 greedy tokens of the full 1.7B model. Small CPU/Mali decoder checks and 92 tokenizer cases pass. Matched RKLLM W8A8 quality qualification remains pending.",
+      "baseline_result": "benchmark-results.json#Spark-X2.5/1.7B"
+    },
+    {
+      "model": "Spark-X2.6",
+      "size": "4B",
+      "checkpoint_candidate": "XHToken/Spark-X2.6-4B",
+      "benchmark_scope": "user_requested_addition",
+      "exact_published_variant_known": false,
+      "published_rkllm_reference_available": false,
+      "baseline_complete": true,
+      "revision": "66e3ae7bee54e0a523d692cb8ef841f35409807b",
+      "gated": false,
+      "config_url": "https://huggingface.co/XHToken/Spark-X2.6-4B/resolve/66e3ae7bee54e0a523d692cb8ef841f35409807b/config.json",
+      "config": {
+        "architectures": [
+          "Spark2_5ForCausalLM"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "auto_map": {
+          "AutoConfig": "configuration_spark.Spark2_5Config",
+          "AutoModel": "modeling_spark.Spark2_5Model",
+          "AutoModelForCausalLM": "modeling_spark.Spark2_5ForCausalLM"
+        },
+        "bos_token_id": 0,
+        "dtype": "bfloat16",
+        "eos_token_id": 1,
+        "gate_attn_act_mode": "sigmoid",
+        "head_dim": 256,
+        "headwise_attn_output_gate": true,
+        "hidden_act": "gelu",
+        "hidden_size": 2560,
+        "initializer_range": 0.01976,
+        "intermediate_size": 10240,
+        "layer_types": [
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "full_attention"
+        ],
+        "max_position_embeddings": 1048576,
+        "mlp_bias": false,
+        "model_type": "spark2_5",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 36,
+        "num_key_value_heads": 4,
+        "pad_token_id": 2,
+        "rms_norm_eps": 1e-06,
+        "rope_parameters": {
+          "full_attention": {
+            "partial_rotary_factor": 0.25,
+            "rope_theta": 5000000
+          },
+          "sliding_attention": {
+            "partial_rotary_factor": 1.0,
+            "rope_theta": 10000
+          }
+        },
+        "sliding_window": 512,
+        "tie_word_embeddings": true,
+        "transformers_version": "4.57.1",
+        "use_cache": true,
+        "vocab_size": 131072
+      },
+      "access": "public_config",
+      "source_url": "https://github.com/XHToken/Spark-X2.6",
+      "release_date": "2026-10-21",
+      "gguf_probe_repo": "XHToken/Spark-X2.6-4B-GGUF",
+      "gguf_probe": {
+        "resolved_repo": "XHToken/Spark-X2.6-4B-GGUF",
+        "revision": "fe31f8d64890302cc3a1d365d700357b4b75ba77",
+        "base_model": "XHToken/Spark-X2.6-4B",
+        "files": [
+          {
+            "rfilename": "Spark-X2.6-4B-Q8_0.gguf",
+            "blobId": "4233df56b637020e5234638c8506e680ec1248f4",
+            "size": 4375021824,
+            "lfs": {
+              "sha256": "145c2aa606820663f26ad530b8fc141ed885e2e9ca29f9be7c3bfe8931d58b81",
+              "size": 4375021824,
+              "pointerSize": 135
+            }
+          }
+        ],
+        "gated": false
+      },
+      "implementation_note": "Full FP16 OpenCL baseline measured with direct-weight GEMM and no persistent packed copy. First 4 greedy tokens match independent PyTorch equations using pinned official config. Prefill is very slow; no published RKLLM X2.6 reference or quality-qualified speed win.",
+      "baseline_result": "benchmark-results.json#Spark-X2.6/4B"
+    }
+  ],
+  "measured_baselines": 21,
+  "required_baselines": 21,
+  "phase": "All original-table baselines complete; performance optimization and quality qualification pending."
+}

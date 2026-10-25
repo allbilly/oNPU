@@ -1,0 +1,350 @@
+{
+  "schema": "speculative-actual16k-core-v1",
+  "updated_utc": "2026-10-25T10:56:05.411828+00:00",
+  "complete": true,
+  "core_greedy_qualified_within_tested_scope": true,
+  "context": 16384,
+  "actual_cold_prompt_tokens": 16256,
+  "selected_prefill_chunk": 64,
+  "scope": "One repeated-background counting prompt at actual target context16384, 16outputs in cold and cached matched ordinary/speculative cases, followed by core cancellation after3 and frozen short-prompt recovery. This is not HTTP/API16K, broad quality, modelmax or benchmark qualification.",
+  "API_context_cap": 8192,
+  "API16K_qualified": false,
+  "sampled16K_qualified": false,
+  "fresh_probability_audit_executed": false,
+  "quality_qualified": false,
+  "modelmax_qualified": false,
+  "general_speedup_claim": false,
+  "benchmark_qualified": false,
+  "ordinary_and_speculative_cold_ids_match": true,
+  "ordinary_and_speculative_cached_ids_match": true,
+  "restored_cached_prefix_tokens": 16271,
+  "prepared64_graph_calls_after_cold": 257,
+  "metrics": {
+    "cold_ordinary": {
+      "prompt_tokens": 16256,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 16256,
+      "output_tokens": 16,
+      "generated_ids": [
+        16,
+        11,
+        17,
+        11,
+        18,
+        11,
+        19,
+        11,
+        20,
+        11,
+        21,
+        11,
+        22,
+        11,
+        23,
+        11
+      ],
+      "TTFT_seconds": 968.6621372420341,
+      "prefill_proxy_uncached_tokens_per_second": 16.781909166269195,
+      "decode_full_cost_tokens_per_second": 2.8691117130064283,
+      "total_seconds": 973.8902362149674,
+      "finish_reason": "length",
+      "lock_released": true
+    },
+    "cold_speculative": {
+      "prompt_tokens": 16256,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 16256,
+      "output_tokens": 16,
+      "generated_ids": [
+        16,
+        11,
+        17,
+        11,
+        18,
+        11,
+        19,
+        11,
+        20,
+        11,
+        21,
+        11,
+        22,
+        11,
+        23,
+        11
+      ],
+      "TTFT_seconds": 1102.2759467791766,
+      "prefill_proxy_uncached_tokens_per_second": 14.747668265373688,
+      "decode_full_cost_tokens_per_second": 1.718152553071126,
+      "total_seconds": 1111.0062542092055,
+      "finish_reason": "length",
+      "lock_released": true,
+      "speculation": {
+        "proposed_tokens": 14,
+        "accepted_tokens": 6,
+        "fallback_calls": 7,
+        "fallback_observation_calls": 1,
+        "fallback_pending_last_token": true,
+        "retain_fallback_prefix": true,
+        "fallback_observation_batch_size": 8,
+        "cached_tokens": 0
+      },
+      "draft_observation": {
+        "graph_calls": {
+          "64": 257,
+          "8": 9
+        },
+        "retain_target_features": false,
+        "retained_projected_history_bytes": 0,
+        "cached_prefix_rows": 16271
+      }
+    },
+    "follow_ordinary": {
+      "prompt_tokens": 16274,
+      "cached_tokens": 16271,
+      "uncached_prompt_tokens": 3,
+      "output_tokens": 16,
+      "generated_ids": [
+        24,
+        11,
+        16,
+        15,
+        11,
+        16,
+        16,
+        11,
+        16,
+        17,
+        11,
+        16,
+        18,
+        11,
+        16,
+        19
+      ],
+      "TTFT_seconds": 2.359749502968043,
+      "prefill_proxy_uncached_tokens_per_second": 1.271321382302089,
+      "decode_full_cost_tokens_per_second": 3.097431192365384,
+      "total_seconds": 7.202472090953961,
+      "finish_reason": "length",
+      "lock_released": true
+    },
+    "follow_speculative": {
+      "prompt_tokens": 16274,
+      "cached_tokens": 16271,
+      "uncached_prompt_tokens": 3,
+      "output_tokens": 16,
+      "generated_ids": [
+        24,
+        11,
+        16,
+        15,
+        11,
+        16,
+        16,
+        11,
+        16,
+        17,
+        11,
+        16,
+        18,
+        11,
+        16,
+        19
+      ],
+      "TTFT_seconds": 2.391757642151788,
+      "prefill_proxy_uncached_tokens_per_second": 1.2543076886757623,
+      "decode_full_cost_tokens_per_second": 2.0283913598402354,
+      "total_seconds": 9.786780267953873,
+      "finish_reason": "length",
+      "lock_released": true,
+      "speculation": {
+        "proposed_tokens": 14,
+        "accepted_tokens": 7,
+        "fallback_calls": 6,
+        "fallback_observation_calls": 1,
+        "fallback_pending_last_token": true,
+        "retain_fallback_prefix": true,
+        "fallback_observation_batch_size": 8,
+        "cached_tokens": 16271
+      },
+      "draft_observation": {
+        "graph_calls": {
+          "64": 257,
+          "8": 13
+        },
+        "retain_target_features": false,
+        "retained_projected_history_bytes": 0,
+        "cached_prefix_rows": 16289
+      }
+    },
+    "cancel_speculative": {
+      "prompt_tokens": 16292,
+      "cached_tokens": 16289,
+      "uncached_prompt_tokens": 3,
+      "output_tokens": 3,
+      "generated_ids": [
+        16,
+        20,
+        11
+      ],
+      "TTFT_seconds": 2.4520828879904,
+      "prefill_proxy_uncached_tokens_per_second": 1.2234496699492259,
+      "decode_full_cost_tokens_per_second": 0.8930669350786228,
+      "total_seconds": 4.691556684905663,
+      "finish_reason": "cancelled",
+      "lock_released": true,
+      "speculation": {
+        "proposed_tokens": 7,
+        "accepted_tokens": 2,
+        "fallback_calls": 0,
+        "fallback_observation_calls": 0,
+        "fallback_pending_last_token": false,
+        "retain_fallback_prefix": true,
+        "fallback_observation_batch_size": 8,
+        "cached_tokens": 16289
+      },
+      "draft_observation": {
+        "graph_calls": {
+          "64": 257,
+          "8": 15
+        },
+        "retain_target_features": false,
+        "retained_projected_history_bytes": 0,
+        "cached_prefix_rows": 0
+      }
+    },
+    "recovery_ordinary": {
+      "prompt_tokens": 30,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 30,
+      "output_tokens": 16,
+      "generated_ids": [
+        16,
+        11,
+        220,
+        17,
+        11,
+        220,
+        18,
+        11,
+        220,
+        19,
+        11,
+        220,
+        20,
+        11,
+        220,
+        21
+      ],
+      "TTFT_seconds": 2.3759024038445204,
+      "prefill_proxy_uncached_tokens_per_second": 12.62678128169578,
+      "decode_full_cost_tokens_per_second": 3.4189714520503354,
+      "total_seconds": 6.763186770025641,
+      "finish_reason": "length",
+      "lock_released": true
+    },
+    "recovery_speculative": {
+      "prompt_tokens": 30,
+      "cached_tokens": 0,
+      "uncached_prompt_tokens": 30,
+      "output_tokens": 16,
+      "generated_ids": [
+        16,
+        11,
+        220,
+        17,
+        11,
+        220,
+        18,
+        11,
+        220,
+        19,
+        11,
+        220,
+        20,
+        11,
+        220,
+        21
+      ],
+      "TTFT_seconds": 2.707160389982164,
+      "prefill_proxy_uncached_tokens_per_second": 11.081722424358334,
+      "decode_full_cost_tokens_per_second": 3.1671988662426616,
+      "total_seconds": 7.443206541007385,
+      "finish_reason": "length",
+      "lock_released": true,
+      "speculation": {
+        "proposed_tokens": 14,
+        "accepted_tokens": 14,
+        "fallback_calls": 0,
+        "fallback_observation_calls": 0,
+        "fallback_pending_last_token": false,
+        "retain_fallback_prefix": true,
+        "fallback_observation_batch_size": 8,
+        "cached_tokens": 0
+      },
+      "draft_observation": {
+        "graph_calls": {
+          "64": 257,
+          "8": 17
+        },
+        "retain_target_features": false,
+        "retained_projected_history_bytes": 0,
+        "cached_prefix_rows": 46
+      }
+    }
+  },
+  "timing_scope": "Single diagnostic request per case, including first-token work, iterator cleanup and synchronization. Short warmup only; no three-full-long-request warmup or repeated benchmark. Cached prefill proxy uses only3 uncached suffix tokens.",
+  "speed_outcome": {
+    "cold_speculative_slower_ratio": 1.1407920655690529,
+    "cached_speculative_slower_ratio": 1.3588084958004498,
+    "promote_as_speed_win": false
+  },
+  "memory": {
+    "child_lifetime_peak_RSS_bytes": 8136454144,
+    "parent_monitor_peak_RSS_bytes": 8105054208,
+    "parent_minimum_available_bytes": 5427363840,
+    "reserve_bytes": 2147483648,
+    "scope": "RSS, driver allocation and global available memory measure different things. These values do not establish modelmax fit."
+  },
+  "evidence": {
+    "raw": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context16k-aligned-core-v1/results/core.json",
+      "sha256": "4bdd9f26667fba1065f862a1ae7727355494aae421b2dbf1cb598d80f0b77062"
+    },
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context16k-aligned-core-v1/job.json",
+      "sha256": "8c388266c56815c1215492d8431d4f5c99f8f209b80b8176164a4edfcc4b205d"
+    },
+    "manifest": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/context16k-aligned-core-v1/manifest.json",
+      "sha256": "9d654aa3498922e5edd9556a5a4b910322359d8cd4cfecd0156f540e18b4af5a"
+    },
+    "pins": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/context16k-aligned-core-v1/frozen-pins.json",
+      "sha256": "3b93dc802c7298dcff96102027cf95c6a728a2ce3cec2cc3352429d8bb4fe85c"
+    },
+    "independent_audit": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/context16k-aligned-core-v1-independent-audit.json",
+      "sha256": "07488b3912dec0c623f834847f451841c85fd624c88bbe2bcfea8d62afd931e9"
+    },
+    "source_pin_count": 320,
+    "parent": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-context16k-aligned-core-v1.py",
+      "sha256": "4d04a45b1c3729184add86db50cad677a552fd281931ae18a865cbdd776f26d7"
+    },
+    "parent_exec_session": 21686,
+    "parent_terminal_exit_code": 0,
+    "child_terminal_exit_code": 0,
+    "fresh_serving": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/context16k-aligned-core-v1/serving-verification.json",
+      "sha256": "3e2b2cd5581819a4679d8ffb03eab40a2b4fa2312246c0a1fdd48eb58df0e9bf"
+    },
+    "fresh_helper_session": 42200,
+    "fresh_helper_terminal_exit_code": 0,
+    "audit_lifecycle_note": "Independent audit occurred during restoration; final restored state and fresh replies are proven by the later terminal owner/helper evidence."
+  },
+  "serving_restored": true,
+  "goal_complete": false,
+  "next": "Reduce cold-prefill cost before larger API qualification, starting with operator-level measurements for optional GPU/NPU sharing. Measured admission, actual API/boundary coverage, modelmax262144, broad quality and RKLLM performance remain open."
+}

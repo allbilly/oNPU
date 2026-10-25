@@ -1,0 +1,76 @@
+{
+  "schema": "fallback-prefix-retention-CPU-candidate-v1",
+  "updated_utc": "2026-10-25T06:08:35.398583+00:00",
+  "status": "CPU_verified_candidate",
+  "option": "retain_fallback_prefix",
+  "default": false,
+  "requires": "reuse_prefix=True",
+  "app_enabled": false,
+  "trained_model_qualified": false,
+  "API_qualified": false,
+  "modelmax_qualified": false,
+  "general_speedup_claim": false,
+  "behavior": "Observe features from already-completed fallback target calls so target/draft processed prefixes remain aligned. Never consume a deferred final token for retention. No extra target forward calls in paired CPU causal tests. Observation adds work; real-model cost/benefit unmeasured.",
+  "backend_source": "/home/orangepi/tinygrad/tinygrad/llm/speculative.py",
+  "backend_source_sha256": "d6f1828ff2fea1c51682bad9e570affd9ef98f8a0fc68420ed9ac2e1e7e87fd0",
+  "source_before": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-retention-v1/speculative.before.py",
+  "source_before_sha256": "a2de2ebcbb23d064b5435e5c7dab468710d38e07e9c00ec571d4ed9a15c4caba",
+  "implementation_diff": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-retention-v1/implementation.diff",
+  "implementation_diff_sha256": "604c86640d3f54953ac022e5d2111f6f9c287ccb6147cf61bf9fbc8f8ce587c6",
+  "test_source": "/home/orangepi/tinygrad/test/models/test_speculative_fallback_prefix_retention.py",
+  "test_source_sha256": "6271efd379f50733614d273a37667ba52becba59510da817c1261141dd5ae05d",
+  "final_targeted_backend_tests": {
+    "xml": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-retention-v1/targeted-v4.xml",
+    "sha256": "3ededf6ac0c3644346483bde2477a5d4d434d332375bcd9f7b991f13aa25c6de",
+    "junit": {
+      "tests": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "pytest_methods_passed": 28,
+    "pytest_subtests_passed": 31,
+    "GPU_only_skips": 2,
+    "exec_session": 81345,
+    "terminal_exit_code": 0
+  },
+  "application_regression": {
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-retention-App-preflight-v1.json",
+    "sha256": "a9cedde845ca4b0260200964863c19cc20b925efa14fc6c563de6769abf86418",
+    "junit": {
+      "tests": 330,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_paths": 302,
+    "before_after_equal": true,
+    "exec_session": 97172,
+    "terminal_exit_code": 0
+  },
+  "mypy": {
+    "command": ".venv/bin/python -m mypy tinygrad/",
+    "source_files": 264,
+    "exec_session": 62586,
+    "terminal_exit_code": 0
+  },
+  "ruff": {
+    "command": ".venv/bin/python -m ruff check .",
+    "terminal_exit_code": 0
+  },
+  "earlier_broad_backend_pass": {
+    "xml": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/fallback-prefix-retention-v1/backend-v2.xml",
+    "sha256": "b50d712fee057c0fedb0a117c0d093b76643f2bd8517eed2480da26a8d021624",
+    "scope": "218 methods and196subtests passed,22skipped before final nondeferred observation-error counter fix. Final targeted suite above verifies that later delta."
+  },
+  "regression_found_and_fixed": "Nondeferred observation error counted an undelivered token; observation now precedes output counter increments. Both fallback branches and interruption/early-anchor/EOS/default contracts are covered.",
+  "source_review": "Independent read-only source review found no remaining correctness/position/cancel/error issue; does not replace trainedmodel qualification.",
+  "normal_serving": {
+    "server_restarted": false,
+    "original_models_restored_and_freshly_checked_before_edit": true,
+    "current_ready_model_ids": [
+      "b4b92c783d8643a1",
+      "55a95dc3c1b93b72"
+    ]
+  }
+}

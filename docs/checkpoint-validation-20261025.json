@@ -1,0 +1,88 @@
+{
+  "schema": "onpu-checkpoint-validation-v1",
+  "created_utc": "2026-10-25T12:51:49.655221+00:00",
+  "backend_commit": "dee37bc30bbeb1e74d80c08fa59423325f926c4b",
+  "scope": "Combined non-overlapping precommit regression cases. Generic NULL cases use CPU:CLANG host. Other unchanged CPU cases and full App suite reuse their actual successful command results.",
+  "backend_regressions": {
+    "passed_methods": 328,
+    "passed_subtests": 136,
+    "existing_expected_failures": 2
+  },
+  "app_regressions": {
+    "passed_methods": 321,
+    "passed_subtests": 30
+  },
+  "mypy": {
+    "source_files": 264,
+    "exit_code": 0
+  },
+  "ruff_backend_and_app": {
+    "exit_code": 0
+  },
+  "memory_test_cleanup": {
+    "file": "test/models/test_gguf_stream.py",
+    "change": "Collect unreachable cyclic tensors before sampling process-global allocation counters and after loading; keep both memory bounds unchanged."
+  },
+  "known_environment_issue": {
+    "default_host": "CPU:LLVM",
+    "test": "test/null/test_linearizer_rewrite.py::TestLinearizerRewrite::test_reduction",
+    "failure": "LLVM IR typed-pointer mismatch: data0 is i8* but an i64* getelementptr is emitted.",
+    "baseline_reproduced": "3a27bb173abb23c3edef993117b2734bb9aee571",
+    "passing_NULL_test_host": "CPU:CLANG",
+    "product_runtime_defaults_changed": false
+  },
+  "format_cleanup": [
+    {
+      "path": "tinygrad/llm/kernels/rockchip_greedy.py",
+      "before_sha256": "0a3ada8dada26d123cec102251df2008595f538356af4e5276358c3665c48870",
+      "after_sha256": "01ac047734624a01c04b6e75850c658cc96abba2a1617d7117e740bd16e60ccc",
+      "AST_unchanged": true
+    },
+    {
+      "path": "tinygrad/llm/kernels/rockchip_softmax.py",
+      "before_sha256": "3e6dd1006494230b5b592a3dd001a0c18102866ec994df478dc1c83237790d86",
+      "after_sha256": "f429d46acf50a329ce7f4573f2a55ee0f4686923c4f1de93bdbe1889660bff57",
+      "AST_unchanged": true
+    },
+    {
+      "path": "tinygrad/llm/kernels/rockchip_vision_prepared.py",
+      "before_sha256": "5862b754d3bd51a08cf07aa1776cf6363a41a1adaa5b572b9c211dc42de4a410",
+      "after_sha256": "683f93b048ab6bb1a98491028852cda8c4a121eacbcc98d924b0d91aa30720e7",
+      "AST_unchanged": true
+    },
+    {
+      "path": "tinygrad/runtime/support/rockchip_int8.py",
+      "before_sha256": "48a90c3b3884c4db8158e525c6030dd49c56636de2d443841212e50fbb1217d7",
+      "after_sha256": "549aa19d26873b1a003bc54edea033b71fe007a56828ddef2665680ef837e4a8",
+      "AST_unchanged": true
+    },
+    {
+      "repository": "oNPU",
+      "path": "tests/test_speculation_sampling.py",
+      "before_sha256": "ee94ac8f951d5727964f13071e3fd161f1bde24448251dca29d625c100156fd5",
+      "after_sha256": "f34907adf1ee4f8f72a44aef6e67f10d5dac89669d97ea949e2999bb5b411688",
+      "AST_unchanged": true
+    }
+  ],
+  "serving": {
+    "both_original_workers_restored": true,
+    "fresh_replies_verified": true
+  },
+  "limitations": [
+    "This is a WIP source checkpoint, not blanket model-quality or RKLLM speed qualification.",
+    "The experimental DFlash2 API cap remains 8,192; actual 16K core evidence is separate.",
+    "Model maximum 262,144 and broad output quality remain unqualified."
+  ],
+  "local_evidence": {
+    "initial": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/checkpoint-precommit-checks-v1/receipt.json",
+    "rechecks": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/checkpoint-precommit-rechecks-v2-components.json",
+    "null_clang": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/checkpoint-null-clang-v3/receipt.json"
+  },
+  "historical_audit_package": {
+    "checksummed_files_verified": 34,
+    "referenced_ignored_logs_included": 14,
+    "patch_syntax_valid": true,
+    "byte_preservation": "Existing timestamped audit data retained with original checksums. Unified-diff context spaces and raw log whitespace are data, not current-source formatting defects.",
+    "whitespace_scope": "Current source and docs checked separately; immutable audit package checked by checksums and patch parsing."
+  }
+}

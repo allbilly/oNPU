@@ -1,0 +1,244 @@
+{
+  "updated_utc": "2026-10-22T06:04:52.875834+00:00",
+  "objective_complete": false,
+  "priority": [
+    "Fill every model baseline",
+    "Optimize and qualify prefill/decode wins per model",
+    "Resume oMLX comparison and speculative decoding"
+  ],
+  "baseline_models_measured": 11,
+  "baseline_models_required": 21,
+  "qualified_rkllm_wins": 0,
+  "pytest": {
+    "passed": 35,
+    "subtests_passed": 22,
+    "workers": 12,
+    "distinct_verified_tests": 39,
+    "model_and_mali_checks": {
+      "passed": 8,
+      "subtests_passed": 3,
+      "workers": 12,
+      "hardware": "Mali OpenCL"
+    },
+    "phi3_loader_check": {
+      "passed": 1,
+      "workers": 12
+    },
+    "download_checks": {
+      "passed": 3,
+      "subtests_passed": 2,
+      "workers": 12
+    },
+    "historical_run": true,
+    "note": "Earlier run; latest_regression records the current 68-test union."
+  },
+  "mypy": {
+    "passed": true,
+    "source_files": 242
+  },
+  "ruff": {
+    "passed": true,
+    "scope": "whole tinygrad checkout"
+  },
+  "tinyllama_tokenizer": {
+    "complete": true,
+    "passed": true,
+    "cases": 80,
+    "failures": [],
+    "seconds": 0.673870902042836,
+    "tokenizer_json_sha256": "bcd04f0eadf90287bd26e1a183ac487d8a141b09b06aecb7725bbdd343640f2e",
+    "checkpoint_sha256": "a4c9bb1dbaa372f6381a035fa5c02ef087aaa1ff1f843a56a22328114f03fc59"
+  },
+  "minicpm4_tokenizer": {
+    "complete": true,
+    "passed": true,
+    "cases": 80,
+    "failures": [],
+    "tokenizer_json_sha256": "adf7208af154a5ca065d2eda4e5419e02aac58c2c00627874748b75ec6769094"
+  },
+  "minicpm4_rope_layout": {
+    "source_model": "openbmb/MiniCPM4-0.5B",
+    "revision": "5253c7fcc5e29e1cf3eacb59a58adf1ba4df8630",
+    "projections": [
+      {
+        "tensor": "model.layers.0.self_attn.q_proj.weight",
+        "direct_nrmse": 1.4033492803573608,
+        "unpermuted_nrmse": 0.005652592983096838,
+        "requires_llama_rope_unpermutation": true
+      },
+      {
+        "tensor": "model.layers.0.self_attn.k_proj.weight",
+        "direct_nrmse": 1.3978509902954102,
+        "unpermuted_nrmse": 0.005528171081095934,
+        "requires_llama_rope_unpermutation": true
+      }
+    ]
+  },
+  "tinyllama_api": {
+    "response": "2 + 2 = 4",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/tinyllama-api-check.json"
+  },
+  "minicpm4_api": {
+    "response": "2 + 2 = ",
+    "finish_reason": "length",
+    "max_tokens": 8,
+    "interpretation": "Valid API completion; token cap reached before an arithmetic answer. Not a semantic quality pass.",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/minicpm4-api-check.json"
+  },
+  "intent": "INTENT: code records timings for one supplied checkpoint; the task expects every published model\u2019s baseline; benchmark.md requires real timings with checkpoint, workload, precision and qualification status.",
+  "twins": "TWINS: searched precompute_freqs_cis calls - found 1 other site: MLATransformerBlock._init_state; updated it to honor LongRoPE factors.",
+  "pending": [
+    "14 local main-table model baselines",
+    "Remaining architecture and memory support",
+    "Matched level0 SDK speed/quality comparisons",
+    "Qualified prefill and decode wins on every listed model",
+    "oMLX feature comparison and speculative decoding"
+  ],
+  "checkpoint_queue_log": "/home/orangepi/vlm-bench/baseline-20261021/download-parallel-queue.log",
+  "original_sessions_restored": true,
+  "restored_contexts": [
+    {
+      "model_id": "55a95dc3c1b93b72",
+      "context": 40960,
+      "device": "CL"
+    },
+    {
+      "model_id": "b4b92c783d8643a1",
+      "context": 8192,
+      "device": "CPU+ROCKCHIP"
+    }
+  ],
+  "gemma2_port": {
+    "cpu_full_decoder_reference": true,
+    "sliding_cache_reference": true,
+    "gguf_norm_and_flags": true,
+    "full_checkpoint_baseline": false,
+    "unsupported_fast_attention_and_silu_ffn_disabled": true,
+    "sources": [
+      "https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/models/gemma2/modeling_gemma2.py",
+      "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/gemma.py"
+    ],
+    "mali_prefill_and_cached_token_reference": true
+  },
+  "internlm2_port": {
+    "gguf_separate_qk_rope_layout_test": true,
+    "full_checkpoint_baseline": false,
+    "source": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/internlm.py"
+  },
+  "restored_api_chat_checks": "/home/orangepi/vlm-bench/baseline-20261021/restored-api-chat-checks-final.json",
+  "current_hardware_work": "Original sessions restored and serving; remaining checkpoints downloading",
+  "multimodal_baseline_complete": true,
+  "multimodal_baseline": "docs/benchmark-mm-results.json",
+  "phi3_port": {
+    "fused_qkv_and_gate_up_decoder_test": true,
+    "full_checkpoint_baseline": false
+  },
+  "checkpoint_transfer_probe": {
+    "single_seconds": 88.64774449705146,
+    "four_connections_seconds": 29.691219214815646,
+    "speed_ratio": 2.985655248970613,
+    "bytes_per_mode": 8388608
+  },
+  "markdown_table_matches_records": true,
+  "additional_models_required": 1,
+  "additional_models_measured": 1,
+  "spark_support": "benchmark-spark-support.json",
+  "rwkv_support": "benchmark-rwkv-support.json",
+  "latest_regression": {
+    "model_and_shared_checks": {
+      "passed": 44,
+      "subtests_passed": 22
+    },
+    "tokenizer_and_tools": {
+      "passed": 37,
+      "subtests_passed": 31
+    },
+    "distinct_tests": 68,
+    "workers": 12,
+    "mypy_source_files": 242,
+    "ruff_passed": true
+  },
+  "api_recovery": {
+    "passed": true,
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/api-after-spark26.json",
+    "scope": "Short requests after restoring 40960-token GPU and 8192-token NPU allocations; not a new maximum-length stress test."
+  },
+  "gated_delta_layout": {
+    "passed": 2,
+    "subtests_passed": 2,
+    "workers": 12,
+    "log": "/home/orangepi/vlm-bench/baseline-20261021/gated-delta-layout-tests.log",
+    "sources": [
+      "https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/models/qwen3_5/modeling_qwen3_5.py",
+      "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/qwen.py"
+    ],
+    "note": "HF groups value heads; GGUF permutes all associated tensors to tiled order. Native repeat is intentional."
+  },
+  "hf_source_download_checks": {
+    "passed": 11,
+    "subtests_passed": 2,
+    "workers": 12,
+    "log": "/home/orangepi/vlm-bench/baseline-20261021/hf-source-download-tests.log"
+  },
+  "deepseek_ocr": {
+    "evidence": "docs/benchmark-deepseek-ocr-support.json",
+    "cpu_decoder_and_tokenizer_passed": true,
+    "gpu_decoder_passed": true,
+    "full_model_baseline_pending": true
+  },
+  "telechat_conversion": {
+    "evidence": "docs/benchmark-telechat-support.json",
+    "targeted_checks_passed": true,
+    "full_conversion_and_model_pending": false,
+    "full_conversion_complete": true,
+    "full_model_inference_pending": true
+  },
+  "streaming_loading": {
+    "evidence": "docs/benchmark-loading-support.json",
+    "cpu_verified": true,
+    "enabled_in_model_loader": true,
+    "gpu_and_full_model_pending": true,
+    "gpu_verified": true,
+    "full_model_memory_pending": false,
+    "verified_model": "Gemma2/2B"
+  },
+  "minicpm3": {
+    "evidence": "docs/benchmark-minicpm3-support.json",
+    "small_cpu_gpu_decoder_passed": true,
+    "full_model_pending": true
+  },
+  "gemma2_names": {
+    "mapping_fixed": true,
+    "actual_gguf_names_used_in_fixture": true,
+    "checks_passed": 4,
+    "log": "/home/orangepi/vlm-bench/baseline-20261021/gemma2-normfix-checks.log"
+  },
+  "chatglm3": {
+    "evidence": "docs/benchmark-chatglm3-support.json",
+    "cpu_and_opencl_small_decoder_passed": true,
+    "tokenizer_reference_cases": 72,
+    "control_checks": 3,
+    "full_model_pending": true
+  },
+  "omlx_comparison": {
+    "evidence": "docs/omlx-feature-comparison.json",
+    "source_audit_complete": true,
+    "speculative_decoding_implemented": false
+  },
+  "gemma4": {
+    "evidence": "docs/benchmark-gemma4-support.json",
+    "cpu_decoder_and_tokenizer_verified": true,
+    "generic_integration_and_gpu_full_model_pending": true
+  },
+  "gemma3n": {
+    "evidence": "docs/benchmark-gemma3n-support.json",
+    "standalone_cpu_verified": true,
+    "integration_gpu_and_full_model_pending": true
+  },
+  "google_integration_preview": {
+    "cpu_passed": 8,
+    "gpu_skipped": 2,
+    "log": "/home/orangepi/vlm-bench/baseline-20261021/google-preview-cpu-tests.log",
+    "scope": "Temporary patched source copy; typecheck/lint still pending until preview result is complete."
+  }
+}

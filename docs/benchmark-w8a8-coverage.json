@@ -1,0 +1,250 @@
+{
+  "scope": "Current CPU+NPU INT8 candidate timing coverage, plus dated pilot/mixed-precision/quality evidence. Measurements do not imply output-quality or whole-model INT8 qualification.",
+  "original_rk3588_rows": [
+    {
+      "model": "Qwen2 0.5B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "MiniCPM4 0.5B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "Qwen3 0.6B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "TinyLLAMA 1.1B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "Qwen2.5 1.5B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "RWKV7 1.5B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "InternLM2 1.8B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "Gemma2 2B",
+      "cpu_npu_w8a8": "invalid"
+    },
+    {
+      "model": "Gemma3n 2B",
+      "cpu_npu_w8a8": "invalid"
+    },
+    {
+      "model": "TeleChat2 3B",
+      "cpu_npu_w8a8": "invalid"
+    },
+    {
+      "model": "Phi3 3.8B",
+      "cpu_npu_w8a8": "invalid"
+    },
+    {
+      "model": "MiniCPM3 4B",
+      "cpu_npu_w8a8": "invalid"
+    },
+    {
+      "model": "ChatGLM3 6B",
+      "cpu_npu_w8a8": "resource-interrupted"
+    },
+    {
+      "model": "Qwen3-VL 2B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "DeepSeekOCR 3B(A570M)",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "Qwen3.5 0.8B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "Qwen3.5 2B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "Qwen3.5 4B",
+      "cpu_npu_w8a8": "invalid"
+    },
+    {
+      "model": "Gemma4 E2B",
+      "cpu_npu_w8a8": "resource-interrupted"
+    },
+    {
+      "model": "LFM2.5-VL 450M",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    },
+    {
+      "model": "Spark-X2.5 1.7B",
+      "cpu_npu_w8a8": "candidate timing measured; quality and complete learned-matrix coverage unqualified"
+    }
+  ],
+  "measurements": [
+    {
+      "model": "Qwen3-0.6B",
+      "checkpoint": "/home/orangepi/oNPU/.data/models/72717a59205944dc-Qwen3-0.6B-Q8_0.gguf",
+      "checkpoint_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+      "precision": "INT8 per-channel weights and per-token activations; INT32 accumulation; FP32 dequantization and host arithmetic (dynamic W8A8 projections)",
+      "placement": "CPU + Rockchip NPU; NPU projections with CPU attention/norm and host arithmetic",
+      "workload": {
+        "input_tokens": 128,
+        "output_tokens": 64,
+        "context": 512,
+        "warmups": 3,
+        "measured_runs": 3,
+        "fresh_history": true,
+        "eos_ignored": true,
+        "sampling": "temperature=0, raw IDs, no template"
+      },
+      "reported_medians": {
+        "ttft_ms": 223.7672209739685,
+        "prefill_proxy_tokens_per_second": 572.0230132137656,
+        "decode_tokens_per_second": 34.25269587921944
+      },
+      "quality_gate": "not qualified against matched level-0 RKLLM; benchmark.md explicitly says matched SDK speed/output-quality comparison unfinished. Raw trials have matches_stock=null.",
+      "held_out_quality_ratio": "No exact 1.02194 result found in the referenced raw report or the three benchmark JSONs inspected; do not infer parity.",
+      "raw_report": "/home/orangepi/vlm-bench/parity/qwen512-cpu-npu-pilot.json",
+      "raw_report_sha256": "4ef888a83fdd1aee1f215f8be392b0e1dd10d82227682e8c4d2b6e9a9dcdd65b"
+    },
+    {
+      "model": "Qwen3-0.6B",
+      "scope": "Separate 256-position held-out quality experiment comparing CPU+NPU INT8 candidates against GPU FP16; not the 128-input/64-output timing pilot.",
+      "precision": "Unscaled CPU+NPU INT8 and CPU+NPU scaled INT8; scaling/configuration provenance is not provided in this artifact.",
+      "held_out_quality": {
+        "positions": 256,
+        "gpu_fp16_perplexity": 11.569817198307677,
+        "cpu_npu_int8_perplexity": 12.086330460602287,
+        "cpu_npu_scaled_perplexity": 11.823684985651152,
+        "unscaled_ratio_vs_gpu": 1.0446431653535686,
+        "scaled_ratio_vs_gpu": 1.0219422470547426,
+        "gate": "Existing 1.02 ratio gate: scaled candidate fails (1.02194224705 > 1.02). This compares with GPU FP16, not RKLLM SDK."
+      },
+      "timing_pilot_link": "No artifact evidence connects this scaled candidate/configuration to the 34.2526958792 tok/s Qwen3 timing pilot; do not attribute its speed to this quality result.",
+      "matched_sdk_quality": "unqualified; SDK comparison pending",
+      "raw_report": "/home/orangepi/vlm-bench/parity/qwen512-cpu-npu-scaled-vs-gpu-quality.json",
+      "raw_report_sha256": "a6d4ee9d90c8094163fad23cb60f98be9a649ab310e42c26ca8e9a91456e1a8e"
+    },
+    {
+      "model": "SmolVLM-256M",
+      "scope": "Additional multimodal measurement, not one of the original 21 text rows; mixed precision, not full W8A8",
+      "checkpoint": "SmolVLM Hugging Face checkpoint (raw config path /home/orangepi/vlm-bench/hf)",
+      "checkpoint_sha256": "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e",
+      "precision": "FP16 vision; INT8 text projections; CPU host, vision and text NPU enabled",
+      "workload": {
+        "image": "512x512",
+        "text_input_tokens": 128,
+        "output_tokens": 64,
+        "context": 512,
+        "warmups": 3,
+        "measured_runs": 3,
+        "native_generation_loop": true
+      },
+      "reported_medians": {
+        "vision_ms": 1230.357135180384,
+        "first_token_ms": 1329.4602741952986,
+        "prefill_proxy_tokens_per_second": 1291.5837103881897,
+        "decode_tokens_per_second": 105.74239463533962,
+        "image_to_answer_ms": 1925.441759172827
+      },
+      "quality_gate": "Matched level-0 RKLLM output quality and clocks pending; local parity metrics are not a matched SDK qualification.",
+      "raw_report": "/home/orangepi/vlm-bench/baseline-20261021/smolvlm128-cpu-npu-baseline.json",
+      "raw_report_sha256": "a242ca63e16d175103bb2e104e0d35e109ca82a3f475e48063474fbf2307a6aa"
+    }
+  ],
+  "source_documents": [
+    "/home/orangepi/oNPU/benchmark.md",
+    "/home/orangepi/oNPU/docs/benchmark-cpu-tuning.json",
+    "/home/orangepi/oNPU/docs/benchmark-mm-results.json",
+    "/home/orangepi/oNPU/docs/benchmark-results.json"
+  ],
+  "interpretation": "The 21 main-table local baselines are FP16 GPU measurements. The current CPU+NPU INT8 sweep has valid candidate timings for 13 of the 21 published-reference models; the remaining eight are incomplete (six invalid before trials and two resource-interrupted). These are timing-coverage counts only: whole-model learned-matrix coverage and matched level-0 RKLLM output quality remain unqualified for every row. The separate Qwen3-0.6B timing pilot and held-out GPU-FP16-relative quality experiment are retained in measurements above; the quality experiment does not qualify the timing pilot or establish RKLLM parity. SmolVLM remains a separate mixed-precision multimodal result. Current sweep evidence: benchmark-w8a8-results.json and the CPU+NPU candidate table in ../benchmark.md.",
+  "latest_sweep": {
+    "updated_utc": "2026-10-23T09:48:47.733560+00:00",
+    "record": "benchmark-w8a8-results.json",
+    "models_with_valid_candidate_timings": 13,
+    "planned_models": 21,
+    "overall_complete": false,
+    "summary_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/w8a8-all-summary.json",
+    "summary_sha256": "d6b43ca91c8dd9580d16231513d18eb27f18a27419ca27692048f33b3e45a463",
+    "active_phase": "restored",
+    "job_states": {
+      "v1": {
+        "complete": false,
+        "all_cases_attempted": true,
+        "restored": true,
+        "planned_cases": 23,
+        "phase": "restored"
+      },
+      "v2": {
+        "complete": false,
+        "all_cases_attempted": true,
+        "restored": true,
+        "planned_cases": 15,
+        "phase": "restored"
+      },
+      "cpu-gdn-v1": {
+        "complete": false,
+        "all_cases_attempted": true,
+        "restored": true,
+        "planned_cases": 2,
+        "phase": "restored"
+      },
+      "cpu-gdn-v2": {
+        "complete": false,
+        "all_cases_attempted": true,
+        "restored": true,
+        "planned_cases": 2,
+        "phase": "restored"
+      }
+    }
+  },
+  "allocation_diagnostic_followup": {
+    "observed_utc": "2026-10-24T10:35:53.159487+00:00",
+    "model": "Qwen3.5-4B",
+    "report": "benchmark-w8a8-allocation-context-v3.json",
+    "sha256": "c45303b4d17568d2226f73db8f6a89df236c01ce376463a4c7bfc781d7196e51",
+    "kernel_IOVA_failure_confirmed_for_controlled_attempt": true,
+    "failed_payload_bytes": 20971520,
+    "failed_weight_shape": [
+      8192,
+      2560
+    ],
+    "minimum_available_GiB": 5.130687713623047,
+    "new_model_timing": false,
+    "scope": "Deferred loading removes the RAM-reserve interruption; errno14 persists and running kernel reports failed IOVA allocation. Other missing models still need separate validation."
+  },
+  "allocation_alignment_followup": {
+    "report": "benchmark-w8a8-allocation-alignment-v4.json",
+    "sha256": "d1b0bc1fdda936ffcc298f05dac1d738b1b3a93ec06667ef8a0ef154bb06b85b",
+    "first20MiB_recovered": true,
+    "later60MiB_failed": true,
+    "model_preparation_succeeded": false,
+    "new_model_timing": false,
+    "production_applied": false
+  },
+  "CPU_scan_pool_followup": {
+    "evidence": "benchmark-cpu-gdn-head-parallel-model-v1.json",
+    "sha256": "d59ad20551213a0a2718bd0eb1b4ceb505c918de4e644094b30edd13801a4d73",
+    "preferred_model": "Qwen3.5/2B",
+    "preferred_variant": "qwen35-2b-cpu-scan-pooled",
+    "timings_valid": true,
+    "quality_qualified": false,
+    "full_model_W8A8_coverage_qualified": false
+  },
+  "CPU_sigmoid_pool_followup": {
+    "evidence": "benchmark-cpu-sigmoid-backend-model-v1.json",
+    "sha256": "43842a358d591dcba3aa4b23da873271df3c737ddeb8f9190ee6b867db5ca647",
+    "preferred_model": "Qwen3.5/2B",
+    "preferred_variant": "qwen35-2b-cpu-sigmoid-candidate",
+    "timings_valid": true,
+    "quality_qualified": false,
+    "full_model_W8A8_coverage_qualified": false
+  }
+}

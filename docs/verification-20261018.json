@@ -1,0 +1,166 @@
+{
+  "complete": true,
+  "benchmark": {
+    "complete": true,
+    "model": "Qwen3-0.6B",
+    "precision": "same effective FP16 checkpoint",
+    "context": 512,
+    "new_tokens": 32,
+    "warmups": 4,
+    "runs_per_process": 3,
+    "summary": [
+      {
+        "prompt_tokens": 128,
+        "tinygrad": {
+          "first_token_ms": 280.3530745441094,
+          "decode_tps": 18.702209912372123
+        },
+        "stock": {
+          "first_token_ms": 326.3105,
+          "decode_tps": 16.6705
+        },
+        "prefill_speedup": 1.1639269536480858,
+        "decode_speedup": 1.121874563592701
+      },
+      {
+        "prompt_tokens": 256,
+        "tinygrad": {
+          "first_token_ms": 631.8296890240163,
+          "decode_tps": 17.049236811816
+        },
+        "stock": {
+          "first_token_ms": 655.6715,
+          "decode_tps": 16.552500000000002
+        },
+        "prefill_speedup": 1.0377345531401225,
+        "decode_speedup": 1.0300097756723154
+      }
+    ],
+    "checkpoint_sha256": "6782193cfc9dc18b3ab1db4479893ef2d554650df7b33b460aeefe349e4ce035",
+    "stock_model_sha256": "a777ccda03c982653c754405394d6daed354d773404e07f4c607a1b1e3e80e0a",
+    "stock_binary_sha256": "59be6da790b181b88b92c46008c21ba3a28014a61f1fbeb5455ca66b8e60e55f",
+    "raw_report": "/tmp/onpu-full-20261018/paired-final-v7/comparison.json",
+    "all_generated_sequences_match": true,
+    "measured_source_matches_checkout": true
+  },
+  "application": {
+    "passed": true,
+    "browser": "final-browser-pass.log",
+    "gpu_http": "final-gpu-http.log",
+    "npu_http": "final-npu-http.log",
+    "concurrent_gpu_npu": true,
+    "dual": "final-dual.json.gz",
+    "real_npu_form": "final-npu-form.log",
+    "greedy_and_sampled_bucket_switching": true,
+    "both_sessions_left_ready": true,
+    "cold_load_seconds": {
+      "CL": 79.82342893606983,
+      "CPU+ROCKCHIP": 147.18471580301411
+    },
+    "url": "http://127.0.0.1:8091"
+  },
+  "validation": {
+    "backend_tests": 18,
+    "backend_log": "/tmp/onpu-full-20261018/ownership-backend-tests.log",
+    "generation_parser_tokenizer_tests": 24,
+    "generation_log": "/tmp/onpu-full-20261018/adaptive-generation-tests.log",
+    "app_unit_tests": 23,
+    "app_unit_log": "/tmp/onpu-full-20261018/adaptive-app-unit.log",
+    "mypy_sources": 219,
+    "ruff": true,
+    "optional_sdk_fixture_limit": "openai client missing; 11 setup errors in broader server fixture attempt, no dependency or test weakened"
+  },
+  "quality": {
+    "passed": true,
+    "cases": {
+      "prefill128": {
+        "count": 151935,
+        "total_count": 151936,
+        "stock_masked_ids": [
+          151645
+        ],
+        "max_abs": 0.017162799835205078,
+        "rmse": 0.0038988410864154643,
+        "cosine": 0.999999760958135,
+        "argmax": 4379,
+        "reference_argmax": 4379,
+        "within_limits": true,
+        "input_rows": 128,
+        "start_pos": 0,
+        "dump_sha256": "7b822f3b214652ca45a2d231035c2700249134ecf7a3f97c5388a6d82ebf8177",
+        "versus_full_k": {
+          "count": 151936,
+          "total_count": 151936,
+          "stock_masked_ids": [],
+          "max_abs": 0.010448455810546875,
+          "rmse": 0.0022505566596659594,
+          "cosine": 0.9999998835283873,
+          "argmax": 4379,
+          "reference_argmax": 4379,
+          "within_limits": true
+        }
+      },
+      "decode129": {
+        "count": 151935,
+        "total_count": 151936,
+        "stock_masked_ids": [
+          151645
+        ],
+        "max_abs": 0.012218236923217773,
+        "rmse": 0.0034996639568390586,
+        "cosine": 0.999999424866381,
+        "argmax": 438,
+        "reference_argmax": 438,
+        "within_limits": true,
+        "input_rows": 1,
+        "start_pos": 128,
+        "dump_sha256": "a9c342fe21b08cdf44056eff1e4b775681e202b49f36615111dd5abb1b53ed38",
+        "versus_full_k": {
+          "count": 151936,
+          "total_count": 151936,
+          "stock_masked_ids": [],
+          "max_abs": 0.010040283203125,
+          "rmse": 0.003296221308499412,
+          "cosine": 0.9999995016259399,
+          "argmax": 438,
+          "reference_argmax": 438,
+          "within_limits": true
+        }
+      },
+      "prefill256": {
+        "count": 151935,
+        "total_count": 151936,
+        "stock_masked_ids": [
+          151645
+        ],
+        "max_abs": 0.016466140747070312,
+        "rmse": 0.004128591069295587,
+        "cosine": 0.999999795758678,
+        "argmax": 47442,
+        "reference_argmax": 47442,
+        "within_limits": true,
+        "input_rows": 256,
+        "start_pos": 0,
+        "dump_sha256": "bc46c1502a1101afd763ce294b1b5a2a4d51f00963ba03aa23107b0ad3b76aad",
+        "versus_full_k": {
+          "count": 151936,
+          "total_count": 151936,
+          "stock_masked_ids": [],
+          "max_abs": 0.0120849609375,
+          "rmse": 0.0027143446507259107,
+          "cosine": 0.9999999140281656,
+          "argmax": 47442,
+          "reference_argmax": 47442,
+          "within_limits": true
+        }
+      }
+    }
+  },
+  "audit": "/home/orangepi/oNPU/docs/rk3588-verification-20261018/completion-audit.json",
+  "evidence_directory": "/home/orangepi/oNPU/docs/rk3588-verification-20261018",
+  "limitations": [
+    "Tested matched FP16; W8A8 parity and all-model/context coverage not established",
+    "CPU/OpenCL still execute surrounding operators; arbitrary pure-NPU inference not claimed",
+    "Cold preparation compiles multiple prompt variants and sampling modes"
+  ]
+}

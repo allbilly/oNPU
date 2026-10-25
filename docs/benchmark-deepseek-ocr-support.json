@@ -1,0 +1,130 @@
+{
+  "updated_utc": "2026-10-22T08:56:55.407343+00:00",
+  "model": "DeepSeekOCR",
+  "size": "3B(A570M)",
+  "scope": "Text-only language decoder; no image encoder or connector.",
+  "full_model_baseline_complete": true,
+  "quality_qualified": false,
+  "implemented": [
+    "DeepSeek-v3 tokenizer with isolated three-digit and CJK stages followed by the published word/newline split",
+    "Ordinary MHA rotary width restored when OCR GGUF incorrectly inherits zero from its unused MLA setting",
+    "Existing dense first block, routed MoE and ungated shared experts checked against independent NumPy equations"
+  ],
+  "checks": {
+    "tokenizer_equivalence": {
+      "passed": true,
+      "cases": 1044,
+      "failures": [],
+      "checkpoint_sha256": "81ede3e256230707dccf7fa052570c3a939d57db99de655f43cbb1a830d14d92",
+      "reference": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-tokenizer-reference.json",
+      "reference_sha256": "1c22d576e3583575842f9fb2969feaaf989d573494cad955b43b73df664a23cd"
+    },
+    "decoder_and_loader_regression": {
+      "passed": 28,
+      "subtests_passed": 28,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-regression.log"
+    },
+    "tokenizer_regression": {
+      "passed": 31,
+      "subtests_passed": 42,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-tokenizer-regression.log"
+    },
+    "gpu_decoder": {
+      "passed": 1,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-gpu.log",
+      "scope": "Small model against independent NumPy, OpenCL prefill and cached decode; not full-model quality qualification."
+    },
+    "mypy": {
+      "passed": true,
+      "source_files": 242,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-mypy.log"
+    },
+    "ruff": {
+      "passed": true,
+      "scope": "whole tinygrad checkout"
+    }
+  },
+  "sources": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-source/tokenizer.json",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR/resolve/9f30c71f441d010e5429c532364a86705536c53a/tokenizer.json",
+      "sha256": "a02f8fd5228c90256bb4f6554c34a579d48f909e5beb232dc4afad870b55a8b4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-source/tokenizer_config.json",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR/resolve/9f30c71f441d010e5429c532364a86705536c53a/tokenizer_config.json",
+      "sha256": "a0cbe8464049da1f891b7a12676de06af4cb54c130995d42f71adc1c30c6e9f3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-source/modeling_deepseekv2.py",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR/resolve/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekv2.py",
+      "sha256": "69184a0493d1fdac21c360f9f9eabc5b5af3188e0265df44cfaeafc44f9095e3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-source/configuration_deepseek_v2.py",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR/resolve/9f30c71f441d010e5429c532364a86705536c53a/configuration_deepseek_v2.py",
+      "sha256": "6ab21f29a4722e26fa28c8e0d4277591689a598df17cf6c712330e8f62b3fc7c"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-source/modeling_deepseekocr.py",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR/resolve/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py",
+      "sha256": "5835e0b9e1942fe36df9123009d1d80a2b78ccbe6a2d535668a6561e3d4068b1"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-source/llama-conversion-deepseek.py",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/deepseek.py",
+      "sha256": "efaa113fa5d137e564f64bd1ae73a6280473e8b7a6e1b7544fb14c105128d23b"
+    }
+  ],
+  "intent": [
+    "INTENT: our tokenizer rejects `deepseek-v3`; the benchmark needs its exact token IDs; the pinned official tokenizer defines three isolated splitting stages.",
+    "INTENT: the loader uses zero rotary dimensions for OCR; its ordinary Llama attention requires full-head rotation; the pinned model selects LlamaAttention when use_mla=False."
+  ],
+  "twin_search": {
+    "patterns": [
+      "preset not in",
+      "rope_dim = kv.get"
+    ],
+    "other_implementation_sites": []
+  },
+  "pending": [
+    "Full 128-input / 64-output baseline",
+    "Full-model and matched RKLLM output-quality checks",
+    "Vision encoder/connector support"
+  ],
+  "baseline": {
+    "context": 512,
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "warmups": 3,
+    "runs": 3,
+    "ttft_ms": 28090.650644153357,
+    "prefill_proxy_tps": 4.5566762273141315,
+    "decode_tps": 3.9383927110747954,
+    "peak_rss_mib": 10203.734375,
+    "device": "CL",
+    "precision": "FP16",
+    "placement": null,
+    "gpu_kernels": {
+      "linear_layers": 52,
+      "bounded_masks": 12,
+      "attention_blocks": 12,
+      "direct_embedding": true,
+      "prefill_chunk": 128,
+      "fused_qkv": 0,
+      "fused_gate_up": 0,
+      "q8_output_head": false,
+      "pack_weights": true,
+      "generic_recurrent_blocks": 0
+    },
+    "checkpoint_sha256": "81ede3e256230707dccf7fa052570c3a939d57db99de655f43cbb1a830d14d92",
+    "input_sha256": "578ab1756080cd9be389d6fafd3fcd15cee7f3520e37cc1e0affeed9fd9cf757",
+    "qualified_win": false,
+    "quality_status": "not qualified against matched level-0 RKLLM",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/deepseek-ocr-3b-cl-baseline.json",
+    "report_sha256": "1b4034668f8d03d6c98067419732c494ea4c75f9126f07fbf4ef923c6e021be4"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "updated_utc": "2026-10-22T08:56:55.397526+00:00",
+  "model": "TeleChat2",
+  "size": "3B",
+  "source_download_complete": true,
+  "source_manifest": "/home/orangepi/vlm-bench/baseline-20261021/telechat2-hf-source/source-manifest.json",
+  "source_repo": "Tele-AI/TeleChat2-3B",
+  "source_revision": "b364de9538e146f7a99519d5ed6c9855f76bfdf0",
+  "source_weight_sha256": {
+    "pytorch_model_00001-of-00004.bin": "7cd8303a1d22518ff6e7866346e71ec20642a7ca3d01ab81e1244e179b447af5",
+    "pytorch_model_00002-of-00004.bin": "b50102edb953247e41974911960c3ab11e3c6365852007642158b3a2362e160f",
+    "pytorch_model_00003-of-00004.bin": "08ddbeb8310241f17b4a7848f4d96676c7a0112c6d88eb3c504451bc5ba5b64f",
+    "pytorch_model_00004-of-00004.bin": "01291906ab45a42c75e4beaef4d5b60e2d26e023648108abdc99dd3ec7337f03"
+  },
+  "conversion_implemented": true,
+  "full_model_converted": true,
+  "full_model_baseline_complete": true,
+  "quality_qualified": false,
+  "implemented": [
+    "Streamed weights-only mmap PyTorch shard conversion to FP16 GGUF",
+    "Per-head interleaved source K/V split",
+    "Attention output and feed-forward down-projection biases",
+    "Native SentencePiece BPE with separate user-symbol atoms and added-token boundaries",
+    "Standard rotary range through 8192 positions"
+  ],
+  "tokenizer_reference": {
+    "passed": true,
+    "cases": 98,
+    "failures": [],
+    "reference_variant": "Official Telechat2Tokenizer with unk_token aligned to the model's trained <_unk> piece at ID 0",
+    "default_wrapper_unknown_id": 131072,
+    "model_vocab_size": 131072
+  },
+  "checks": {
+    "conversion_tokenizer_regression": {
+      "passed": 33,
+      "subtests_passed": 34,
+      "workers": 12,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/telechat-conversion-regression.log"
+    },
+    "mypy": {
+      "source_files": 242,
+      "passed": true,
+      "log": "/home/orangepi/vlm-bench/baseline-20261021/telechat-latest-mypy.log"
+    },
+    "ruff": {
+      "passed": true,
+      "scope": "whole tinygrad checkout"
+    }
+  },
+  "limits": [
+    "Original HF tokenizer wrapper uses an unknown token outside the trained embedding vocabulary; comparison aligns unk_token to the trained <_unk> at ID 0.",
+    "Extended dynamic NTK positions 8193..32768 are not implemented.",
+    "Actual full-model conversion, inference and matched RKLLM output-quality qualification are pending."
+  ],
+  "conversion": {
+    "complete": true,
+    "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/TeleChat2-3B/TeleChat2-3B-f16.gguf",
+    "sha256": "e7e7f746fcc2ee75217a722ce873c533b2c23d8db124af9b86fb945827eb4cbb",
+    "bytes": 6144189088,
+    "source_repo": "Tele-AI/TeleChat2-3B",
+    "source_revision": "b364de9538e146f7a99519d5ed6c9855f76bfdf0",
+    "dtype": "FP16",
+    "architecture": "telechat2",
+    "source_context": 32768,
+    "supported_context": 8192,
+    "tokenizer_metadata_sha256": "9eedb846019ff5aadfe467544fc5121b8b594f1b260eed3937e51099457b8002",
+    "converter_sha256": "8161c873809195871760aaa496425c501919ccf401fbfe94cf368878db0d0775",
+    "torch_version": "2.14.0+cpu",
+    "chunk_rows": 256,
+    "tensor_count": 267
+  },
+  "converted_directory_validation": {
+    "passed": true,
+    "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/TeleChat2-3B/TeleChat2-3B-f16.gguf",
+    "sha256": "e7e7f746fcc2ee75217a722ce873c533b2c23d8db124af9b86fb945827eb4cbb",
+    "tensor_count": 267,
+    "all_shapes_match_source_mapping": true,
+    "all_tensors_fp16": true,
+    "supported_context": 8192,
+    "vocab_size": 131072,
+    "scope": "Converted GGUF metadata and tensor directory validation; full-model inference and quality remain untested."
+  },
+  "baseline": {
+    "context": 512,
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "warmups": 3,
+    "runs": 3,
+    "ttft_ms": 6211.903761141002,
+    "prefill_proxy_tps": 20.605599333446364,
+    "decode_tps": 3.0004875941077653,
+    "peak_rss_mib": 13416.95703125,
+    "device": "CL",
+    "precision": "FP16",
+    "placement": null,
+    "gpu_kernels": {
+      "linear_layers": 169,
+      "bounded_masks": 24,
+      "attention_blocks": 24,
+      "direct_embedding": true,
+      "prefill_chunk": 128,
+      "fused_qkv": 0,
+      "fused_gate_up": 0,
+      "q8_output_head": false,
+      "pack_weights": true,
+      "generic_recurrent_blocks": 0
+    },
+    "checkpoint_sha256": "e7e7f746fcc2ee75217a722ce873c533b2c23d8db124af9b86fb945827eb4cbb",
+    "input_sha256": "b0ce2943b201b258cad543c7412de52dbed1186992f6286b9d8c4910e93472a4",
+    "qualified_win": false,
+    "quality_status": "not qualified against matched level-0 RKLLM",
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/telechat2-3b-cl-baseline.json",
+    "report_sha256": "db3f282ac95b3513da2f3962a41dfac9f2c34c475002737705c360a13251c74f"
+  }
+}
