@@ -32,7 +32,8 @@ const bytes = (n, precision = 1) => n == null ? '—' : n >= 1024 ** 3 ? `${(n /
 const number = (n, suffix = '', precision = 1) => n == null ? '—' : `${n.toFixed(precision)}${suffix}`;
 const badge = (state, label) => `<span class="badge ${escape(state)}">${escape(label || state)}</span>`;
 let status = null, modelList = [], catalog = [], settings = {}, jobs = [], benchmarks = [], metrics = [], view = 'overview';
-let selectedModel = null, sending = false, controller = null, toastTimer, temperatures = [], lastModel = null;
+let selectedModel = null, sending = false, activeGeneration = null, toastTimer, temperatures = [], lastModel = null;
+let pendingImage = null, pendingImageModel = null, imageBusy = false, imageRevision = 0;
 let histories;
 try { histories = JSON.parse(localStorage.getItem('onpu-history') || '{}'); } catch { histories = {}; }
 if (!histories || typeof histories !== 'object' || Array.isArray(histories)) histories = {};
@@ -117,10 +118,10 @@ function renderLibrary() {
   $('model-count').textContent = modelList.length; $('library-count').textContent = modelList.length;
   const query = $('model-search').value.toLowerCase();
   const visible = modelList.filter((m) => `${m.name} ${m.architecture}`.toLowerCase().includes(query));
-  $('model-library').innerHTML = visible.length ? visible.map((m) => `<article class="card model-card"><div class="model-card-top"><div class="model-glyph">${escape(m.architecture.slice(0, 2).toUpperCase())}</div>${badge(m.state, m.present ? m.state : 'File missing')}</div><h3>${escape(m.name)}</h3><div class="model-meta">${badge('', m.architecture)}${badge('', m.quantization)}${badge('', 'GGUF')}</div><dl class="model-properties"><div><dt>FILE SIZE</dt><dd>${bytes(m.size)}</dd></div><div><dt>WEIGHT PARAMETERS</dt><dd>${(m.parameters / 1e9).toFixed(2)}B</dd></div><div><dt>ESTIMATED MEMORY</dt><dd>${bytes(m.estimated_bytes)}</dd></div><div><dt>MODEL CONTEXT LIMIT</dt><dd>${m.context_limit.toLocaleString()}</dd></div></dl><div class="model-card-actions">${m.state === 'installed' || m.state === 'error' ? `<button class="button primary small" data-action="load" data-id="${m.id}" ${!m.present ? 'disabled' : ''}>${icon('play')} Load model</button>` : `<button class="button secondary small" data-action="unload" ${status?.runtime.active_request ? 'disabled' : ''}>Unload</button>`}<button class="text-button" data-action="remove" data-id="${m.id}" ${m.state !== 'installed' ? 'disabled' : ''} aria-label="Remove ${escape(m.name)} from library">Remove reference</button></div></article>`).join('') : `<div class="empty-state"><div class="model-glyph">${icon('models')}</div><h3>${query ? 'No matching models' : 'Your model library starts here'}</h3><p>${query ? 'Try another search.' : 'Import a GGUF already on your board, or download a small model.'}</p>${query ? '' : '<button class="button primary" data-action="import">Import model</button> <button class="button secondary" data-action="discover">Discover models</button>'}</div>`;
+  $('model-library').innerHTML = visible.length ? visible.map((m) => `<article class="card model-card"><div class="model-card-top"><div class="model-glyph">${escape(m.architecture.slice(0, 2).toUpperCase())}</div>${badge(m.state, m.present ? m.state : 'File missing')}</div><h3>${escape(m.name)}</h3><div class="model-meta">${badge('', m.architecture)}${badge('', m.quantization)}${badge('', m.format || 'GGUF')}${m.supports_images ? badge('', 'Vision') : ''}</div><dl class="model-properties"><div><dt>FILE SIZE</dt><dd>${bytes(m.size)}</dd></div><div><dt>WEIGHT PARAMETERS</dt><dd>${(m.parameters / 1e9).toFixed(2)}B</dd></div><div><dt>ESTIMATED MEMORY</dt><dd>${bytes(m.estimated_bytes)}</dd></div><div><dt>MODEL CONTEXT LIMIT</dt><dd>${m.context_limit.toLocaleString()}</dd></div></dl><div class="model-card-actions">${m.state === 'installed' || m.state === 'error' ? `<button class="button primary small" data-action="load" data-id="${m.id}" ${!m.present ? 'disabled' : ''}>${icon('play')} Load model</button>` : `<button class="button primary small" data-action="select-model" data-id="${m.id}" ${sending ? 'disabled' : ''}>Chat · ${escape(m.profile || '')}</button><button class="button secondary small" data-action="unload" data-id="${m.id}" ${(status?.runtime.sessions || []).find((r) => r.model_id === m.id)?.active_request ? 'disabled' : ''}>Unload</button>`}<button class="text-button" data-action="remove" data-id="${m.id}" ${m.state !== 'installed' ? 'disabled' : ''} aria-label="Remove ${escape(m.name)} from library">Remove reference</button></div></article>`).join('') : `<div class="empty-state"><div class="model-glyph">${icon('models')}</div><h3>${query ? 'No matching models' : 'Your model library starts here'}</h3><p>${query ? 'Try another search.' : 'Import a local model, or download a small model.'}</p>${query ? '' : '<button class="button primary" data-action="import">Import model</button> <button class="button secondary" data-action="discover">Discover models</button>'}</div>`;
 }
 function renderCatalog() {
-  $('model-catalog').innerHTML = catalog.map((m) => `<article class="card model-card"><div class="model-card-top"><div class="model-glyph">${escape(m.name.slice(0, 2).toUpperCase())}</div>${badge('', m.parameters)}</div><h3>${escape(m.name)}</h3><div class="model-meta">${badge('', m.quantization)}${badge('', 'GGUF')}</div><p>${escape(m.description)}</p><div class="model-card-actions"><small>Hugging Face</small><button class="button primary small" data-action="download" data-id="${escape(m.id)}">${icon('download')} Download</button></div></article>`).join('');
+  $('model-catalog').innerHTML = catalog.map((m) => `<article class="card model-card"><div class="model-card-top"><div class="model-glyph">${escape(m.name.slice(0, 2).toUpperCase())}</div>${badge('', m.parameters)}</div><h3>${escape(m.name)}</h3><div class="model-meta">${badge('', m.quantization)}${badge('', m.format || 'GGUF')}${m.supports_images ? badge('', 'Vision') : ''}</div><p>${escape(m.description)}</p><div class="model-card-actions"><small>Hugging Face</small><button class="button primary small" data-action="download" data-id="${escape(m.id)}">${icon('download')} Download</button></div></article>`).join('');
 }
 function renderJobs() {
   $('download-jobs').innerHTML = jobs.filter((j) => j.state !== 'complete').map((j) => `<article class="card download-job"><div class="download-job-header"><h3>${escape(j.file)}</h3>${badge(j.state)}</div><p>${j.error ? escape(j.error) : `${bytes(j.received)}${j.total ? ' of ' + bytes(j.total) : ''} · ${escape(j.repo)}`}</p><div class="meter"><i style="width:${j.total ? Math.min(100, j.received / j.total * 100) : 0}%"></i></div><div class="dialog-actions">${['paused', 'error'].includes(j.state) ? `<button class="button secondary small" data-action="resume" data-id="${j.id}">Resume</button>` : `<button class="button secondary small" data-action="pause" data-id="${j.id}">Pause</button>`}</div></article>`).join('');
@@ -155,15 +156,20 @@ document.addEventListener('click', action(async (event) => {
     case 'load': {
       selectedModel = modelList.find((m) => m.id === id);
       $('load-model-title').textContent = selectedModel.name;
-      $('load-profile').value = settings.profile || 'CPU';
+      $('load-profile').value = settings.profile || 'CL';
       $('load-profile').querySelector('[value=CL]').disabled = status?.profiles.CL.available === false;
+      $('load-profile').querySelector('[value=ROCKCHIP]').disabled = status?.profiles.ROCKCHIP.available === false;
+      $('load-npu-prefill').value = 'off'; $('load-npu-decode').value = 'off';
       $('load-context').value = Math.min(settings.context || 1024, selectedModel.context_limit);
-      $('load-context').max = Math.min(32768, selectedModel.context_limit);
+      $('load-context').max = selectedModel.context_limit;
       $('load-realize').checked = settings.realize ?? true;
+      $('load-vision-gpu').checked = status?.profiles.CL.available !== false;
+      updatePlacementControls();
       $('load-estimate').textContent = `Conservative footprint: ${bytes(selectedModel.estimated_bytes)}. Available RAM: ${bytes(status?.hardware.memory.available)}.`;
       $('model-dialog').showModal(); break;
     }
-    case 'unload': await post('/api/models/unload'); await refreshStatus(); await refreshAll(); toast('Model unloaded'); break;
+    case 'select-model': await post(`/api/models/${id}/select`); await refreshStatus(); location.hash = 'chat'; renderChat(); break;
+    case 'unload': await post('/api/models/unload' + (id ? `?model=${encodeURIComponent(id)}` : '')); await refreshStatus(); await refreshAll(); toast('Model unloaded'); break;
     case 'remove': await api(`/api/models/${id}`, { method: 'DELETE' }); await refreshAll(); toast('Reference removed. The model file is preserved.'); break;
     case 'download': await post('/api/downloads', { catalog_id: id }); await refreshAll(); toast('Download started'); break;
     case 'pause': case 'resume': await post(`/api/downloads/${id}/${button.dataset.action}`); await refreshAll(); break;
@@ -171,12 +177,30 @@ document.addEventListener('click', action(async (event) => {
     case 'suggest': $('chat-input').value = button.dataset.prompt; $('chat-input').focus(); break;
     case 'copy-message': await navigator.clipboard.writeText(currentHistory()[Number(id)].content); toast('Reply copied'); break;
     case 'regenerate': if (!sending) { const history = currentHistory(); history.pop(); persistHistory(); await generateReply(); } break;
-    case 'edit-message': if (!sending) { const history = currentHistory(); const index = Number(id); $('chat-input').value = history[index].content; history.splice(index); persistHistory(); renderChat(); $('chat-input').focus(); } break;
+    case 'edit-message': if (!sending) { const history = currentHistory(); const index = Number(id); $('chat-input').value = history[index].content; setPendingImage(history[index].image || null); history.splice(index); persistHistory(); renderChat(); $('chat-input').focus(); } break;
   }
 }, false));
 $('import-form').onsubmit = action(async () => { await post('/api/models/import', { path: $('import-path').value.trim() }); $('import-dialog').close(); await refreshAll(); toast('Model added to your library'); });
+function updatePlacementControls() {
+  const profile = $('load-profile').value;
+  $('load-npu-prefill').closest('label').hidden = profile === 'CPU';
+  $('load-npu-prefill').disabled = profile === 'CPU';
+  $('load-npu-prefill').value = profile === 'ROCKCHIP' ? 'auto' : 'off';
+  $('load-npu-decode').closest('label').hidden = profile !== 'CL';
+  $('load-npu-decode').disabled = profile !== 'CL';
+  $('load-npu-decode').value = 'off';
+  $('load-realize').disabled = profile === 'ROCKCHIP';
+  if (profile === 'ROCKCHIP') $('load-realize').checked = true;
+  const visionGpu = Boolean(selectedModel?.supports_images && profile === 'ROCKCHIP' && status?.features?.vision_gpu);
+  $('load-vision-gpu').closest('label').hidden = !visionGpu;
+  $('load-vision-help').hidden = !visionGpu;
+  $('load-vision-gpu').disabled = status?.profiles.CL.available === false;
+}
+$('load-profile').onchange = updatePlacementControls;
 $('load-form').onsubmit = action(async () => {
-  await post(`/api/models/${selectedModel.id}/load`, { profile: $('load-profile').value, context: Number($('load-context').value), realize: $('load-realize').checked });
+  const options = { profile: $('load-profile').value, context: Number($('load-context').value), realize: $('load-realize').checked, npu_prefill: $('load-npu-prefill').value, npu_decode: $('load-npu-decode').value };
+  if (selectedModel.supports_images && status?.features?.vision_gpu) options.vision_gpu = $('load-vision-gpu').checked;
+  await post(`/api/models/${selectedModel.id}/load`, options);
   $('model-dialog').close(); await refreshStatus(); await refreshAll(); toast('Preparing model. Progress appears in Overview.');
 });
 $('settings-form').onsubmit = action(async () => {
@@ -215,27 +239,32 @@ function renderChat() {
   if (!history.length) {
     $('chat-messages').innerHTML = `<div class="chat-welcome"><div class="model-glyph">o</div><h2>A little board. A lot to explore.</h2><p>${status?.runtime.model_id ? 'Start a conversation with your local model.' : 'Choose and load a model from your library to get started.'}</p><div class="suggestions">${['Explain how a Rockchip NPU works', 'Write a Python script to monitor temperature', 'Help me plan a local AI project', 'What makes a good inference benchmark?'].map((s) => `<button class="suggestion" data-action="suggest" data-prompt="${escape(s)}">${escape(s)} ${icon('arrow')}</button>`).join('')}</div></div>`;
   } else {
-    $('chat-messages').innerHTML = history.map((m, index) => `<article class="message ${escape(m.role)}"><div class="message-avatar">${m.role === 'user' ? 'You' : 'o'}</div><div class="message-body"><div class="message-label">${m.role === 'user' ? 'You' : escape(status?.runtime.model_name || 'Assistant')}</div>${m.reasoning ? `<details class="reasoning"><summary>Thinking</summary><div class="message-content">${formatText(m.reasoning)}</div></details>` : ''}<div class="message-content">${formatText(m.content || '')}${sending && index === history.length - 1 && !m.content ? '<span class="spinner"></span>' : ''}</div>${m.error ? `<div class="message-error">${escape(m.error)}</div>` : ''}<div class="message-actions">${m.role === 'assistant' ? `<button class="text-button" data-action="copy-message" data-id="${index}" aria-label="Copy reply">${icon('copy')}</button>${index === history.length - 1 && !sending ? '<button class="text-button" data-action="regenerate">Regenerate</button>' : ''}` : !sending ? `<button class="text-button" data-action="edit-message" data-id="${index}">Edit & retry</button>` : ''}${m.tokens != null ? `<span>${m.tokens} tokens</span>` : ''}</div></div></article>`).join('');
+    $('chat-messages').innerHTML = history.map((m, index) => `<article class="message ${escape(m.role)}"><div class="message-avatar">${m.role === 'user' ? 'You' : 'o'}</div><div class="message-body"><div class="message-label">${m.role === 'user' ? 'You' : escape(status?.runtime.model_name || 'Assistant')}</div>${m.reasoning ? `<details class="reasoning"><summary>Thinking</summary><div class="message-content">${formatText(m.reasoning)}</div></details>` : ''}<div class="message-content">${m.image && /^data:image\/(png|jpeg);base64,/.test(m.image) ? `<img class="message-image" src="${escape(m.image)}" alt="Uploaded image">` : ''}${formatText(m.content || '')}${sending && index === history.length - 1 && !m.content ? '<span class="spinner"></span>' : ''}</div>${m.error ? `<div class="message-error">${escape(m.error)}</div>` : ''}<div class="message-actions">${m.role === 'assistant' ? `<button class="text-button" data-action="copy-message" data-id="${index}" aria-label="Copy reply">${icon('copy')}</button>${index === history.length - 1 && !sending ? '<button class="text-button" data-action="regenerate">Regenerate</button>' : ''}` : !sending ? `<button class="text-button" data-action="edit-message" data-id="${index}">Edit & retry</button>` : ''}${m.tokens != null ? `<span>${m.tokens} tokens</span>` : ''}</div></div></article>`).join('');
   }
   renderChatStatus();
   $('chat-messages').scrollTop = $('chat-messages').scrollHeight;
 }
 function renderChatStatus() {
   const r = status?.runtime;
+  if (pendingImage && pendingImageModel !== r?.model_id) setPendingImage(null);
+  $('attach-image').hidden = !r?.supports_images;
+  $('attach-image').disabled = sending || imageBusy || currentHistory().some((m) => m.image);
   $('chat-model-label').textContent = r?.model_name ? `${r.model_name} · ${r.actual_device || r.selected_profile}` : 'Load a model to start a conversation.';
   $('chat-context').textContent = r?.context ? `${r.context.toLocaleString()} token capacity` : 'Context unavailable';
-  $('send-message').disabled = sending || r?.state !== 'ready'; $('send-message').hidden = sending; $('stop-generation').hidden = !sending;
+  $('send-message').disabled = sending || imageBusy || r?.state !== 'ready'; $('send-message').hidden = sending; $('stop-generation').hidden = !sending;
   $('chat-input').disabled = sending; $('new-chat').disabled = sending;
   $('chat-state').textContent = sending ? r?.message || 'Generating…' : r?.state !== 'ready' ? r?.message || 'Load a model to begin.' : 'Ready · runs entirely on this board';
 }
 async function generateReply() {
   if (sending || !status?.runtime.model_id) return;
+  const generation = { model: status.runtime.model_id, controller: new AbortController() };
   const history = currentHistory();
   const reply = { role: 'assistant', content: '', reasoning: '' }; history.push(reply);
-  sending = true; controller = new AbortController(); renderChat();
+  sending = true; activeGeneration = generation; renderChat();
   try {
-    const response = await fetch('/v1/chat/completions', { method: 'POST', signal: controller.signal, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: status.runtime.model_id, messages: history.slice(0, -1).map((m) => ({ role: m.role, content: m.content })), temperature: Number($('chat-temperature').value), max_tokens: Number($('chat-max-tokens').value), enable_thinking: $('chat-thinking').checked, stream: true, stream_options: { include_usage: true } }) });
+    const response = await fetch('/v1/chat/completions', { method: 'POST', signal: generation.controller.signal, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: generation.model, messages: history.slice(0, -1).map((m) => ({ role: m.role, content: m.image ? [{ type: 'image_url', image_url: { url: m.image } }, { type: 'text', text: m.content }] : m.content })), temperature: Number($('chat-temperature').value), max_tokens: Number($('chat-max-tokens').value), enable_thinking: $('chat-thinking').checked, stream: true, stream_options: { include_usage: true } }) });
     if (!response.ok) { const error = await response.json(); throw Error(error.error?.message || JSON.stringify(error.detail) || 'Generation failed'); }
+    generation.requestId = response.headers.get('X-Request-ID');
     const reader = response.body.getReader(), decoder = new TextDecoder(); let buffer = '';
     while (true) {
       const { value, done } = await reader.read();
@@ -253,13 +282,20 @@ async function generateReply() {
       if (done) break;
     }
   } catch (e) { reply.error = e.name === 'AbortError' ? 'Stopped. Partial reply preserved.' : e.message; }
-  finally { sending = false; controller = null; persistHistory(); renderChat(); refreshStatus().catch(() => {}); refreshAll().catch(() => {}); $('chat-input').focus(); }
+  finally { sending = false; activeGeneration = null; persistHistory(); renderChat(); refreshStatus().catch(() => {}); refreshAll().catch(() => {}); $('chat-input').focus(); }
 }
-$('chat-form').onsubmit = action(async () => { const text = $('chat-input').value.trim(); if (!text || sending || status?.runtime.state !== 'ready') return; currentHistory().push({ role: 'user', content: text }); $('chat-input').value = ''; $('chat-input').style.height = ''; persistHistory(); await generateReply(); });
+$('chat-form').onsubmit = action(async () => { const text = $('chat-input').value.trim() || (pendingImage ? 'Describe this image.' : ''); if (!text || sending || imageBusy || status?.runtime.state !== 'ready') return; currentHistory().push({ role: 'user', content: text, ...(pendingImage ? { image: pendingImage } : {}) }); setPendingImage(null); $('chat-input').value = ''; $('chat-input').style.height = ''; persistHistory(); await generateReply(); });
 $('chat-input').onkeydown = (event) => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) { event.preventDefault(); $('chat-form').requestSubmit(); } };
 $('chat-input').oninput = () => { $('chat-input').style.height = 'auto'; $('chat-input').style.height = `${Math.min(160, $('chat-input').scrollHeight)}px`; };
-$('stop-generation').onclick = action(async () => { try { await post('/api/chat/stop'); } finally { controller?.abort(); } });
-$('new-chat').onclick = () => { if (!sending) { histories[status?.runtime.model_id || 'none'] = []; persistHistory(); renderChat(); } };
+$('stop-generation').onclick = action(async () => {
+  const generation = activeGeneration;
+  if (!generation) return;
+  try {
+    if (generation.requestId) await post(`/api/chat/stop?model=${encodeURIComponent(generation.model)}&request_id=${encodeURIComponent(generation.requestId)}`);
+  }
+  finally { generation.controller.abort(); }
+});
+$('new-chat').onclick = () => { if (!sending) { histories[status?.runtime.model_id || 'none'] = []; setPendingImage(null); persistHistory(); renderChat(); } };
 $('chat-options-toggle').onclick = () => { $('chat-options').hidden = !$('chat-options').hidden; };
 async function initialize() {
   const data = await api('/api/settings'); settings = { ...data.settings, data_dir: data.data_dir };
@@ -270,3 +306,26 @@ async function initialize() {
 initialize().catch((e) => { if (!$('login-dialog').open) toast(e.message, true); });
 setInterval(() => { refreshStatus().catch(() => {}); }, 2000);
 setInterval(() => { refreshAll().catch(() => {}); }, 6000);
+
+function setPendingImage(image) {
+  imageRevision += 1;
+  pendingImage = image; pendingImageModel = image ? status?.runtime.model_id : null;
+  $('chat-image-preview').hidden = !image;
+  const preview = $('chat-image-preview').querySelector('img');
+  if (image) preview.src = image; else preview.removeAttribute('src');
+}
+$('attach-image').onclick = () => $('chat-image').click();
+$('remove-chat-image').onclick = () => { setPendingImage(null); $('chat-image').value = ''; renderChatStatus(); };
+$('chat-image').onchange = action(async () => {
+  const file = $('chat-image').files[0]; if (!file) return;
+  if (!['image/png', 'image/jpeg'].includes(file.type) || file.size > 8 * 1024 ** 2) throw Error('Choose a PNG or JPEG image smaller than 8 MiB.');
+  const model = status?.runtime.model_id, revision = ++imageRevision; imageBusy = true; renderChatStatus();
+  try {
+    const image = await createImageBitmap(file);
+    if (image.width * image.height > 16 * 1024 ** 2) { image.close(); throw Error('Choose an image of at most 16 megapixels.'); }
+    const canvas = document.createElement('canvas'); canvas.width = canvas.height = 512;
+    const context = canvas.getContext('2d'); context.fillStyle = '#fff'; context.fillRect(0, 0, 512, 512);
+    context.imageSmoothingQuality = 'high'; context.drawImage(image, 0, 0, 512, 512); image.close();
+    if (model === status?.runtime.model_id && revision === imageRevision) setPendingImage(canvas.toDataURL('image/jpeg', 0.95));
+  } finally { imageBusy = false; $('chat-image').value = ''; renderChatStatus(); }
+});

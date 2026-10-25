@@ -28,6 +28,17 @@ def main():
             page.locator(f"#view-{route}").wait_for(state="visible")
             assert page.locator("h1:visible").inner_text().lower() == route
             assert not page.evaluate("document.documentElement.scrollWidth > innerWidth"), route
+        # Switching chats must retain each independently loaded model session.
+        runtime = page.request.get(args.url + "/api/status").json()["runtime"]
+        loaded = {session["model_id"] for session in runtime.get("sessions", [])}
+        for model_id in sorted(loaded):
+            page.locator('nav [data-view="models"]').click()
+            page.locator(f'#model-library [data-action="select-model"][data-id="{model_id}"]').click()
+            page.locator("#view-chat").wait_for(state="visible")
+            current = page.request.get(args.url + "/api/status").json()["runtime"]
+            assert current["model_id"] == model_id
+            assert {s["model_id"] for s in current["sessions"]} == loaded
+        page.locator('nav [data-view="settings"]').click()
         page.locator("#setting-context").fill("512")
         page.locator("#setting-max-tokens").fill("64")
         page.locator("#setting-idle").fill("0")
@@ -68,26 +79,33 @@ def main():
         # Exercise imports and the manager's actual load/unload forms.
         runtime = page.request.get(args.url + "/api/status").json()["runtime"]
         model_id = runtime["model_id"]
+        profile = runtime["selected_profile"]
+        other_ids = {s["model_id"] for s in runtime.get("sessions", [])} - {model_id}
         model = next(item for item in page.request.get(args.url + "/api/models").json()["models"] if item["id"] == model_id)
         page.locator('[data-view="models"]').click()
         page.locator("#view-models").wait_for(state="visible")
-        page.locator('#model-library [data-action="unload"]').click()
+        page.locator(f'#model-library [data-action="unload"][data-id="{model_id}"]').click()
         page.locator(f'#model-library [data-action="load"][data-id="{model_id}"]').wait_for()
-        assert page.request.get(args.url + "/api/status").json()["runtime"]["rss_bytes"] == 0
+        remaining = page.request.get(args.url + "/api/status").json()["runtime"]
+        assert {s["model_id"] for s in remaining.get("sessions", [])} == other_ids
         page.locator("#import-open").click()
         page.locator("#import-path").fill(model["path"])
         page.locator('#import-form button[type="submit"], #import-form button.button.primary').click()
         page.locator("#import-dialog").wait_for(state="hidden")
         page.locator(f'#model-library [data-action="load"][data-id="{model_id}"]').click()
-        page.locator("#load-profile").select_option("CPU")
+        page.locator("#load-profile").select_option(profile)
+        if profile == "ROCKCHIP":
+            page.locator("#load-npu-prefill").select_option("auto")
+            assert page.locator("#load-npu-decode").is_disabled()
         page.locator("#load-context").fill("512")
         page.locator("#load-form button.button.primary").click()
         page.locator("#model-dialog").wait_for(state="hidden")
-        for _ in range(240):
+        for _ in range(600):
             state = page.request.get(args.url + "/api/status").json()["runtime"]
             assert state["state"] != "error", state
             if state["state"] == "ready":
-                assert state["actual_device"] == "CPU"
+                assert ("ROCKCHIP" in state["actual_device"] if profile == "ROCKCHIP" else state["actual_device"] == profile)
+                assert other_ids <= {s["model_id"] for s in state.get("sessions", [])}
                 break
             time.sleep(0.5)
         else:
@@ -109,7 +127,8 @@ def main():
         page.screenshot(path=str(out / "mobile.png"), full_page=True, animations="disabled")
         assert not errors, errors
         browser.close()
-        print("PASS: real browser chat, Stop, model lifecycle, history, saved settings, themes, desktop/mobile navigation; no console errors.", flush=True)
+        print("PASS: real browser chat, Stop, model lifecycle, history, saved settings, themes, "
+              "desktop/mobile navigation; no console errors.", flush=True)
 
 
 if __name__ == "__main__":

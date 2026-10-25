@@ -15,6 +15,8 @@ from urllib.parse import quote
 
 import httpx
 
+from .execution import qualified_mali_profile
+from .speculation import draft_memory, measured_pair_memory
 from .store import Store
 
 CATALOG = [
@@ -84,7 +86,8 @@ def inspect_gguf(path: Path) -> dict:
         metadata = {}
         for _ in range(keys):
             key, kind = string(), unpack("I")
-            keep = key.startswith(("general.", "split.")) or key.endswith(("context_length", "block_count", "embedding_length", "head_count_kv", "head_count", "key_length"))
+            suffixes = ("context_length", "block_count", "embedding_length", "head_count_kv", "head_count", "key_length")
+            keep = key.startswith(("general.", "split.")) or key.endswith(suffixes)
             result = value(kind, keep)
             if keep and result is not None:
                 metadata[key] = result
@@ -118,24 +121,129 @@ def inspect_gguf(path: Path) -> dict:
     return {"name": metadata.get("general.name") or path.stem, "architecture": arch, "size": size, "parameters": count,
             "quantization": QUANTS.get(types.most_common(1)[0][0], "Mixed"), "context_limit": metadata.get(f"{arch}.context_length", 4096),
             "layers": metadata.get(f"{arch}.block_count", 0), "kv_heads": metadata.get(f"{arch}.attention.head_count_kv", 0),
-            "head_dim": metadata.get(f"{arch}.attention.key_length", metadata.get(f"{arch}.embedding_length", 0) // max(1, metadata.get(f"{arch}.attention.head_count", 1)))}
+            "head_dim": metadata.get(f"{arch}.attention.key_length", metadata.get(f"{arch}.embedding_length", 0) //
+                                     max(1, metadata.get(f"{arch}.attention.head_count", 1)))}
+
+
+HF_FILES = ("config.json", "model.safetensors", "tokenizer.json", "generation_config.json")
+
+
+def model_present(model: dict) -> bool:
+    path = Path(model["path"])
+    return all((path / name).is_file() for name in HF_FILES) if model.get("format") == "HF" else path.is_file()
+
+
+def inspect_hf(path: Path) -> dict:
+    """Read a single-file SmolVLM checkpoint's metadata without loading weights."""
+    if not all((path / name).is_file() for name in HF_FILES):
+        raise ValueError("The model directory needs config.json, model.safetensors, tokenizer.json and generation_config.json")
+    if (path / "config.json").stat().st_size > 1024**2:
+        raise ValueError("Model configuration is too large")
+    config = json.loads((path / "config.json").read_text())
+    if not isinstance(config, dict):
+        raise ValueError("Invalid vision model configuration")  # noqa: TRY004 - invalid file data maps to HTTP 400
+    if config.get("model_type") != "idefics3":
+        raise ValueError("Only SmolVLM-v1 Hugging Face directories are supported")
+    text, vision = config.get("text_config"), config.get("vision_config")
+    for section, fields in ((text, ("max_position_embeddings", "num_hidden_layers", "num_key_value_heads", "head_dim")),
+                            (vision, ("image_size", "patch_size")), (config, ("scale_factor",))):
+        if not isinstance(section, dict) or any(type(section.get(field)) is not int or section[field] < 1 for field in fields):
+            raise ValueError("Invalid vision model configuration: dimensions must be positive integers")
+    image_size, patch, scale = vision["image_size"], vision["patch_size"], config["scale_factor"]
+    if image_size % (patch * scale):
+        raise ValueError("Invalid vision model configuration: image size must be divisible by patch size and scale factor")
+    weights = path / "model.safetensors"
+    size = weights.stat().st_size
+    with weights.open("rb") as file:
+        raw = file.read(8)
+        if len(raw) != 8:
+            raise ValueError("Truncated safetensors header")
+        length = struct.unpack("<Q", raw)[0]
+        if not 2 <= length <= 32 * 1024**2 or length + 8 > size:
+            raise ValueError("Invalid safetensors header length")
+        header = json.loads(file.read(length))
+    if not isinstance(header, dict):
+        raise ValueError("Invalid safetensors header")  # noqa: TRY004 - invalid file data maps to HTTP 400
+    parameters, types = 0, set()
+    for key, tensor in header.items():
+        if key == "__metadata__":
+            continue
+        if not isinstance(tensor, dict):
+            raise ValueError("Invalid safetensors tensor metadata")  # noqa: TRY004 - invalid file data maps to HTTP 400
+        shape, dtype = tensor.get("shape"), tensor.get("dtype")
+        if (dtype not in ("F16", "BF16", "F32") or not isinstance(shape, list) or not 1 <= len(shape) <= 4
+                or any(type(n) is not int or n < 1 for n in shape)):
+            raise ValueError("Unsupported vision checkpoint tensor")
+        count = math.prod(shape)
+        offsets = tensor.get("data_offsets")
+        if not isinstance(offsets, list) or len(offsets) != 2 or any(type(n) is not int for n in offsets):
+            raise ValueError("Invalid safetensors tensor offsets")
+        first, end = offsets
+        if first < 0 or end - first != count * (4 if dtype == "F32" else 2) or end > size - length - 8:
+            raise ValueError("Truncated safetensors weight data")
+        parameters += count
+        types.add(dtype)
+    if not parameters:
+        raise ValueError("The checkpoint has no weights")
+    return {"name": "SmolVLM (Idefics3)", "architecture": "idefics3", "format": "HF", "supports_images": True,
+            "size": sum((path / name).stat().st_size for name in HF_FILES), "parameters": parameters,
+            "quantization": "/".join(sorted(types)), "context_limit": text["max_position_embeddings"],
+            "layers": text["num_hidden_layers"], "kv_heads": text["num_key_value_heads"], "head_dim": text["head_dim"],
+            "vision_resolution": image_size, "image_tokens": (image_size // patch // scale)**2}
 
 
 def register(store: Store, path: Path, managed=False) -> dict:
     path = path.expanduser().resolve(strict=True)
-    if not path.is_file() or path.suffix.lower() != ".gguf":
-        raise ValueError("Select a local .gguf model file")
-    model = inspect_gguf(path)
+    if path.is_dir():
+        if managed:
+            raise ValueError("Vision model directories are imported as references")
+        model = inspect_hf(path)
+    elif path.is_file() and path.suffix.lower() == ".gguf":
+        model = inspect_gguf(path)
+    else:
+        raise ValueError("Select a local .gguf file or a supported Hugging Face model directory")
     key = hashlib.sha256(str(path).encode()).hexdigest()[:16]
     previous = store.get("models", key) or {}
     return store.put("models", {**previous, **model, "id": key, "path": str(path), "managed": managed or previous.get("managed", False),
                                  "imported_at": previous.get("imported_at", time.time())})
 
 
-def estimated_memory(model: dict, context: int, realize: bool) -> int:
-    kv = 2 * model.get("layers", 0) * model.get("kv_heads", 0) * model.get("head_dim", 0) * context * 4
-    # Conservative: mapped/packed source, FP16 execution weights, FP32 KV and workspace.
-    return model["size"] + model.get("parameters", 0) * 2 + kv + 512 * 1024**2
+# The complete 4B GPU run peaks at 9830.328125 MiB with all packing disabled.
+# See docs/benchmark-recurrent-family.json. Reserve another 1536 MiB for startup,
+# additional warm graph variants and workspace. This measured total includes both
+# attention KV and FP32 GDN/conv state; it is not extrapolated to other contexts,
+# checkpoints or the smaller profiles that still pack some projection weights.
+_UNPACKED_MALI_MEMORY = {
+    "10cc391b403021dd11c614679d2fd92f611c3681d29e29651b717316965d61e1":
+        (4482403488, 4205751296, 9831 * 1024**2 + 1536 * 1024**2),
+}
+
+
+def estimated_memory(model: dict, context: int, realize: bool, options: dict | None = None, *, refresh: bool = True) -> int:
+    if (pair := measured_pair_memory(model, context, realize, options, refresh=refresh)) is not None:
+        # This whole-worker peak already includes the draft; do not reserve it twice.
+        return pair
+    kv_bytes = 2 if model.get("architecture") in ("qwen3", "llama", "idefics3") else 4
+    kv = 2 * model.get("layers", 0) * model.get("kv_heads", 0) * model.get("head_dim", 0) * context * kv_bytes
+    # Source, execution and prepared weight layouts, FP16 standard-transformer KV,
+    # conservative cache storage for other architectures, and bounded workspace.
+    draft = draft_memory(context, options)
+    conservative = model["size"] + model.get("parameters", 0) * (4 if realize else 2) + kv + 512 * 1024**2 + draft
+    if (options and model.get("architecture") == "qwen35" and model.get("path")
+            and any((model["size"], model.get("parameters")) == record[:2] for record in _UNPACKED_MALI_MEMORY.values())):
+        path = Path(model["path"])
+        try:
+            checksum, layout = qualified_mali_profile(path, context, options.get("profile", ""), options.get("npu_prefill", "off"),
+                                                     options.get("npu_decode", "off"), realize=realize, refresh=refresh)
+            if checksum and layout.get("recurrent_scan") and layout.get("pack_weights") is False:
+                measured = _UNPACKED_MALI_MEMORY.get(checksum)
+                if measured and (model["size"], model.get("parameters")) == measured[:2]:
+                    return measured[2] + draft
+        except OSError:
+            # Missing or concurrently modified files must not get a smaller
+            # budget based on a stored or stale checkpoint checksum.
+            pass
+    return conservative
 
 
 class Downloads:
@@ -169,7 +277,8 @@ class Downloads:
         try:
             async with httpx.AsyncClient(follow_redirects=True, timeout=httpx.Timeout(30, read=60), trust_env=False) as client:
                 # Resolve a mutable branch once; resumes use the immutable snapshot.
-                info = await client.get(f"https://huggingface.co/api/models/{quote(job['repo'], safe='/')}/revision/{quote(job['revision'], safe='')}")
+                revision_url = f"https://huggingface.co/api/models/{quote(job['repo'], safe='/')}/revision/{quote(job['revision'], safe='')}"
+                info = await client.get(revision_url)
                 info.raise_for_status()
                 manifest = info.json()
                 job["revision"] = manifest["sha"]
@@ -205,7 +314,7 @@ class Downloads:
             job.update(state="complete", model_id=model["id"], sha256=digest)
         except asyncio.CancelledError:
             job.update(state="paused", error=None)
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - persist any background download failure for the client
             job.update(state="error", error=str(exc))
         finally:
             self.store.put("downloads", job)

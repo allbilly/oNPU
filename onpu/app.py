@@ -9,7 +9,7 @@ import time
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
-from urllib.parse import urlparse
+from typing import Literal
 
 import httpx
 from fastapi import FastAPI, HTTPException, Request
@@ -19,24 +19,29 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import __version__, hardware
 from .hardware import backend_info
-from .library import CATALOG, Downloads, estimated_memory, register
-from .runtime import EngineError, Runtime
+from .library import CATALOG, Downloads, estimated_memory, model_present, register
+from .runtime import EngineError, RuntimePool
 from .store import Store
 
 
 class LoadOptions(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    profile: str = Field(default="CPU", pattern="^(CPU|CL)$")
-    context: int = Field(default=1024, ge=64, le=32768)
+    profile: str = Field(default="CL", pattern="^(CPU|CL|ROCKCHIP)$")
+    context: int = Field(default=1024, ge=64)
     realize: bool = True
+    npu_prefill: str = Field(default="off", pattern="^(off|auto)$")
+    npu_decode: str = Field(default="off", pattern="^(off|auto)$")
+    vision_gpu: bool = True
+    speculation: str = Field(default="off", pattern="^(off|dflash2-experimental)$")
+    draft_path: str | None = Field(default=None, min_length=1, max_length=4096)
 
 
 class Settings(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    context: int = Field(default=1024, ge=64, le=32768)
-    max_tokens: int = Field(default=128, ge=1, le=32768)
+    context: int = Field(default=1024, ge=64)
+    max_tokens: int = Field(default=128, ge=1)
     temperature: float = Field(default=0.6, ge=0, le=2)
-    profile: str = Field(default="CPU", pattern="^(CPU|CL)$")
+    profile: str = Field(default="CL", pattern="^(CPU|CL|ROCKCHIP)$")
     realize: bool = True
     idle_timeout: int = Field(default=600, ge=0, le=86400)
     memory_fraction: float = Field(default=0.8, ge=0.2, le=0.9)
@@ -51,9 +56,11 @@ class ChatBody(BaseModel):
     model: str = Field(min_length=1, max_length=300)
     messages: list[dict] = Field(min_length=1, max_length=256)
     stream: bool = False
-    max_tokens: int | None = Field(default=None, ge=1, le=32768)
-    max_completion_tokens: int | None = Field(default=None, ge=1, le=32768)
+    max_tokens: int | None = Field(default=None, ge=1)
+    max_completion_tokens: int | None = Field(default=None, ge=1)
     temperature: float = Field(default=0.6, ge=0, le=2)
+    speculation: Literal["auto", "off", "force"] = "auto"
+    cache_prompt: bool = True
     stream_options: dict | None = None
     tools: list[dict] | None = None
     enable_thinking: bool = False
@@ -77,11 +84,11 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
     data = (data or Path(os.environ.get("ONPU_DATA_DIR", ".data"))).expanduser().resolve()
     api_key = api_key if api_key is not None else os.environ.get("ONPU_API_KEY", "")
     store = Store(data)
-    runtime = Runtime(store, backend)
+    runtime = RuntimePool(store, backend)
     downloads = Downloads(store)
     profiles = {"CPU": {"available": None, "name": "CPU", "reason": "Checking device"},
                 "CL": {"available": None, "name": "Mali OpenCL", "reason": "Checking device"},
-                "ROCKCHIP": {"available": False, "name": "Rockchip NPU assist", "reason": "Experimental: selective LLM offload is not yet qualified."}}
+                "ROCKCHIP": {"available": None, "name": "Rockchip NPU + CPU", "reason": "Checking device"}}
     bench_tasks: dict[str, asyncio.Task] = {}
     started = time.monotonic()
     identity = {"path": str(backend), "available": (backend / "tinygrad/llm/model.py").is_file()}
@@ -90,10 +97,10 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
         identity.update(await backend_info(backend))
         if identity["available"]:
             # Serial checks avoid competing with a device during initial discovery.
-            for profile in ("CPU", "CL"):
+            for profile in ("CPU", "CL", "ROCKCHIP"):
                 profiles[profile] = await runtime.probe(profile)
         else:
-            for profile in ("CPU", "CL"):
+            for profile in ("CPU", "CL", "ROCKCHIP"):
                 profiles[profile] = {"available": False, "name": profile, "reason": "tinygrad checkout not found"}
 
     async def housekeeping():
@@ -101,9 +108,10 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
             await asyncio.sleep(5)
             await runtime.check_startup_timeout()
             timeout = store.settings()["idle_timeout"]
-            if timeout and runtime.state == "ready" and not runtime.active and time.monotonic() - runtime.last_used > timeout:
-                with contextlib.suppress(EngineError):
-                    await runtime.unload()
+            for key, session in list(runtime.sessions.items()):
+                if timeout and session.state == "ready" and not session.active and time.monotonic() - session.last_used > timeout:
+                    with contextlib.suppress(EngineError):
+                        await runtime.unload(key)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -145,7 +153,8 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
         response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "same-origin"
-        response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'"
+        response.headers["Content-Security-Policy"] = ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
+                                                     "img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'")
         return response
 
     @app.exception_handler(EngineError)
@@ -184,6 +193,7 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
         metrics = store.list("metrics", 200)
         return {"version": __version__, "uptime": time.monotonic() - started, "runtime": runtime.status(),
                 "hardware": hardware.snapshot(data), "backend": identity, "profiles": profiles,
+                "features": {"vision_gpu": True},
                 "totals": {"requests": len(metrics), "tokens": sum(m["completion_tokens"] for m in metrics)}}
 
     @app.get("/api/logs")
@@ -192,7 +202,7 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
 
     @app.post("/api/profiles/check")
     async def check_profiles():
-        if runtime.active or runtime.state in ("loading", "preparing"):
+        if runtime.active or any(session.state in ("loading", "preparing") for session in runtime.sessions.values()):
             raise EngineError("Wait for inference to finish before checking devices")
         await discover()
         return profiles
@@ -200,9 +210,14 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
     @app.get("/api/models")
     async def models():
         settings = store.settings()
-        return {"models": [{**item, "state": runtime.state if runtime.model and runtime.model["id"] == item["id"] else "installed",
-                            "estimated_bytes": estimated_memory(item, settings["context"], settings["realize"]),
-                            "present": Path(item["path"]).is_file()} for item in store.list("models")], "catalog": CATALOG}
+        items = []
+        for item in store.list("models"):
+            session = runtime.for_model(item["id"])
+            options = {**settings, **(session.options if session else {})}
+            estimate = await asyncio.to_thread(estimated_memory, item, options["context"], options["realize"], options, refresh=False)
+            items.append({**item, "state": session.state if session else "installed", "profile": session.profile if session else None,
+                          "estimated_bytes": estimate, "present": model_present(item)})
+        return {"models": items, "catalog": CATALOG}
 
     @app.post("/api/models/import")
     async def import_model(body: ImportModel):
@@ -216,8 +231,10 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
         model = store.get("models", key)
         if not model:
             raise HTTPException(404, "Model not found")
-        if not Path(model["path"]).is_file():
+        if not model_present(model):
             raise HTTPException(400, "Model file is missing")
+        if not identity["available"]:
+            raise EngineError("tinygrad checkout not found", 400)
         if profiles[body.profile]["available"] is False:
             raise EngineError(profiles[body.profile].get("reason", "Device is unavailable"), 400)
         if body.context > model.get("context_limit", body.context):
@@ -226,13 +243,21 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
         return runtime.status()
 
     @app.post("/api/models/unload")
-    async def unload():
-        await runtime.unload()
+    async def unload(model: str | None = None):
+        await runtime.unload(model)
+        return runtime.status()
+
+    @app.post("/api/models/{key}/select")
+    async def select_model(key: str):
+        session = runtime.for_model(key)
+        if not session:
+            raise EngineError("Load the model before selecting it", 404)
+        runtime.selected = session.model["id"]
         return runtime.status()
 
     @app.delete("/api/models/{key}")
     async def remove(key: str):
-        if runtime.model and runtime.model["id"] == key:
+        if runtime.for_model(key):
             raise EngineError("Unload the model before removing it")
         if not store.get("models", key):
             raise HTTPException(404, "Model not found")
@@ -309,7 +334,7 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
                                                "owned_by": "local", "name": item["name"]} for item in store.list("models")]}
 
     async def start_request(body: ChatBody):
-        if not runtime.model or body.model not in (runtime.model["id"], runtime.model["name"]):
+        if not runtime.for_model(body.model):
             raise EngineError("Load the requested model before sending a chat request", 404)
         for message in body.messages:
             if message.get("role") not in ("system", "user", "assistant", "tool"):
@@ -324,14 +349,14 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
 
     @app.post("/v1/chat/completions")
     async def chat(body: ChatBody, request: Request):
-        key, channel, prep = await start_request(body)
+        key, channel, _prep = await start_request(body)
 
         async def events():
             try:
                 while True:
                     try:
                         event = await asyncio.wait_for(channel.get(), 10)
-                    except asyncio.TimeoutError:
+                    except TimeoutError:
                         yield ": keepalive\n\n"
                         continue
                     if event["event"] == "chunk":
@@ -350,13 +375,14 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
                 await asyncio.shield(runtime.release(key))
 
         if body.stream:
-            return StreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no", "X-Request-ID": key})
+            return StreamingResponse(events(), media_type="text/event-stream",
+                                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no", "X-Request-ID": key})
         output, reasoning, tool_calls, usage, finish, base = [], [], [], {}, "stop", {}
         try:
             while True:
                 try:
                     event = await asyncio.wait_for(channel.get(), 0.5)
-                except asyncio.TimeoutError:
+                except TimeoutError:
                     if await request.is_disconnected():
                         raise EngineError("Client disconnected", 499)
                     continue
@@ -383,8 +409,8 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
             await asyncio.shield(runtime.release(key))
 
     @app.post("/api/chat/stop")
-    async def stop():
-        await runtime.cancel()
+    async def stop(model: str | None = None, request_id: str | None = None):
+        await runtime.cancel(key=request_id, model=model)
         return {"ok": True}
 
     @app.get("/api/metrics")
@@ -396,7 +422,7 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
         try:
             for index in range(body.repeats):
                 # Unique suffix prevents reused prefixes from masquerading as uncached prefill.
-                request = ChatBody(model=runtime.model["id"], messages=[{"role": "user", "content": f"Trial {uuid.uuid4().hex[:8]}: {body.prompt}"}],
+                request = ChatBody(model=job["model_id"], messages=[{"role": "user", "content": f"Trial {uuid.uuid4().hex[:8]}: {body.prompt}"}],
                                    temperature=0, max_tokens=body.max_tokens)
                 key, channel, _ = await start_request(request)
                 while True:
@@ -413,7 +439,7 @@ def create_app(backend: Path | None = None, data: Path | None = None, api_key: s
             job["state"] = "complete"
         except asyncio.CancelledError:
             job["state"] = "cancelled"
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - persist any background benchmark failure for the client
             job.update(state="error", error=str(exc))
         finally:
             if key:

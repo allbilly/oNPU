@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 
 DEFAULTS = {"context": 1024, "max_tokens": 128, "temperature": 0.6,
-            "profile": "CPU", "realize": True, "idle_timeout": 600, "memory_fraction": 0.8}
+            "profile": "CL", "realize": True, "idle_timeout": 600, "memory_fraction": 0.8}
 
 
 class Store:
