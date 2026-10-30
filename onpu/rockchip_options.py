@@ -33,7 +33,7 @@ def qwen3_prefill_profile(checksum: str | None, context: int, profile: str, pref
 
 
 def text_execution_profile(checksum: str | None, context: int, profile: str, prefill: str) -> dict:
-    dense_profiles = {QWEN2_CHECKPOINT: ("qwen2-0.5b-context512", 2, 24576),
+    dense_profiles = {QWEN2_CHECKPOINT: ("qwen2-0.5b-context512", 4, 24576),
                       TINYLLAMA_CHECKPOINT: ("tinyllama-1.1b-context512", 4, 24384),
                       QWEN25_CHECKPOINT: ("qwen2.5-1.5b-context512", 2, 24576)}
     if (checksum in dense_profiles and context == 512 and profile == "ROCKCHIP"
@@ -50,7 +50,8 @@ def text_execution_profile(checksum: str | None, context: int, profile: str, pre
         if checksum in (QWEN2_CHECKPOINT, QWEN25_CHECKPOINT):
             environment.update(ONPU_REPLAY_NATIVE_FROM_LARGE="1", ONPU_CPU_DECODE_POOL="1", ONPU_EXP2_FAST_PATH="1")
         if checksum == QWEN2_CHECKPOINT:
-            environment.update(ONPU_INT8_EXPERT_DEPTHS="1", ONPU_SWIGLU_PACK_STATIC_LAYOUT="1")
+            environment.update(ONPU_INT8_EXPERT_DEPTHS="1", ONPU_SWIGLU_PACK_STATIC_LAYOUT="1",
+                               ONPU_INT8_SDK_PREFILL="1", ONPU_FFN_PACKED_UPLOAD="1", ONPU_CPU_GQA_PREFILL="1")
         return {"prefill": "on", "mapped_cpu": True, "share_projection_weights": False, "prefill_chunk": 128,
                 "tile_columns": tile_columns, "dense_swiglu": True, "prefill_profile": name, "environment": environment}
     if (profile == "ROCKCHIP" and prefill == "auto" and checksum is not None

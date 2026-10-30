@@ -40,9 +40,10 @@ def test_qwen2_profile_pins_the_measured_checkpoint_context_and_dense_execution(
         assert recipe["prefill_profile"] == "qwen2-0.5b-context512"
         assert recipe["prefill_chunk"] == 128 and recipe["tile_columns"] == 24576
         for flag in ("ONPU_CPU_DECODE_POOL", "ONPU_EXP2_FAST_PATH", "ONPU_INT8_EXPERT_DEPTHS",
-                     "ONPU_REPLAY_NATIVE_FROM_LARGE", "ONPU_SHARED_HOST_POOL"):
+                     "ONPU_REPLAY_NATIVE_FROM_LARGE", "ONPU_SHARED_HOST_POOL", "ONPU_INT8_SDK_PREFILL",
+                     "ONPU_FFN_PACKED_UPLOAD", "ONPU_CPU_GQA_PREFILL"):
             assert recipe["environment"][flag] == "1"
-        assert recipe["environment"]["ONPU_SWIGLU_PREFILL_ROWS"] == "2"
+        assert recipe["environment"]["ONPU_SWIGLU_PREFILL_ROWS"] == "4"
     for args in ((QWEN2_CHECKPOINT, 513, "ROCKCHIP", "auto"), (QWEN2_CHECKPOINT, 512, "CL", "auto"),
                  (QWEN2_CHECKPOINT, 512, "ROCKCHIP", "off"), ("other", 512, "ROCKCHIP", "auto")):
         assert text_execution_profile(*args) == {}

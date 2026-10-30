@@ -285,10 +285,18 @@ def main():
                     raise ValueError("This model's fused SwiGLU execution is unavailable in the selected backend")
                 if placement.get("prepared_qkv_blocks") != len(model.blk) or not placement.get("shared_host_pool"):
                     raise ValueError("This model's shared prefill and prepared QKV execution is unavailable")
-                from tinygrad.llm.kernels.rockchip_cpu import ONPU_CPU_DECODE_POOL, ONPU_CPU_PREFILL_LAYOUT, ONPU_EXP2_FAST_PATH
-                from tinygrad.llm.kernels.rockchip_padding import ONPU_ZERO_PAD_VIEWS
-                from tinygrad.llm.kernels.rockchip_shared_pool import ONPU_PREFILL_CPU_TUNING, ONPU_SHARED_HOST_POOL
                 from tinygrad.helpers import getenv
+                from tinygrad.llm.kernels.rockchip_cpu import (
+                    ONPU_CPU_DECODE_POOL,
+                    ONPU_CPU_GQA_PREFILL,
+                    ONPU_CPU_PREFILL_LAYOUT,
+                    ONPU_EXP2_FAST_PATH,
+                )
+                from tinygrad.llm.kernels.rockchip_padding import ONPU_ZERO_PAD_VIEWS
+                from tinygrad.llm.kernels.rockchip_shared_pool import (
+                    ONPU_PREFILL_CPU_TUNING,
+                    ONPU_SHARED_HOST_POOL,
+                )
                 placement["prefill_features"] = {
                     "cpu_prefill_layout": bool(ONPU_CPU_PREFILL_LAYOUT), "zero_pad_views": bool(ONPU_ZERO_PAD_VIEWS),
                     "shared_host_pool": bool(ONPU_SHARED_HOST_POOL), "cpu_tuning": bool(ONPU_PREFILL_CPU_TUNING),
@@ -301,7 +309,10 @@ def main():
                     raise ValueError("This model's CPU prefill features were not initialized")
                 extra_features = {"large_native_from": ("ONPU_REPLAY_NATIVE_FROM_LARGE", bool(getenv("ONPU_REPLAY_NATIVE_FROM_LARGE", 0))),
                                   "decode_pool": ("ONPU_CPU_DECODE_POOL", bool(ONPU_CPU_DECODE_POOL)),
-                                  "exp2_fast_path": ("ONPU_EXP2_FAST_PATH", bool(ONPU_EXP2_FAST_PATH))}
+                                  "exp2_fast_path": ("ONPU_EXP2_FAST_PATH", bool(ONPU_EXP2_FAST_PATH)),
+                                  "gqa_prefill": ("ONPU_CPU_GQA_PREFILL", bool(ONPU_CPU_GQA_PREFILL)),
+                                  "sdk_prefill": ("ONPU_INT8_SDK_PREFILL", bool(getenv("ONPU_INT8_SDK_PREFILL", 0))),
+                                  "packed_upload": ("ONPU_FFN_PACKED_UPLOAD", bool(getenv("ONPU_FFN_PACKED_UPLOAD", 0)))}
                 for name, (key, actual) in extra_features.items():
                     if actual != (cpu_layout["environment"].get(key, "0") == "1"):
                         raise ValueError("This model's CPU execution features were not initialized")
