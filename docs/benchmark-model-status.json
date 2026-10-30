@@ -1,0 +1,864 @@
+{
+  "schema": "benchmark-model-status-v1",
+  "updated_utc": "2026-10-30T06:08:50.292849+00:00",
+  "sources": {
+    "benchmark_markdown": {
+      "path": "/home/orangepi/oNPU/benchmark.md",
+      "sha256": "a659ac78b89be21c7a34a6715f9d1f2ee33c5f806aaf9e8bdc1f3d13ee8a61b6"
+    },
+    "results_index": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-w8a8-results.json",
+      "sha256": "6011af12f8bd1502cc00bb54973d9374f1ba7d769762b59fecbee5a4b9021629"
+    },
+    "current_source_manifest": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-static-metadata-final-proof-v1.json",
+      "record_sha256": "6bd062311172c09f9772701162a3b2d3e64b182307006722e556c031548091c0",
+      "source_count": 295,
+      "source_cohort_sha256": "abaa02824fbed4b3581994fa1e0a0b8810cb3f0c7b779a2065cc32f19ced02ea",
+      "source_cohort_encoding": "sha256(json.dumps(source_sha256, sort_keys=True).encode())"
+    },
+    "previous_source_manifest": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3-prepared-attention-v1/manifest.json",
+      "source_count": 295,
+      "source_cohort_sha256": "0f7097f6c1bd991584b4ce29af5fe0533eac2dc7105dd331e0d64722ec909c76"
+    },
+    "latest_mixed_width_evidence": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-qwen3-mixed-width-v1.json",
+      "sha256": "b87840c889a15d02f12b05006bc8fc51b22180d9cd4a7bf84bd2bd53f5b819a8"
+    },
+    "source_manifest_history": [
+      {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-safe-width-final-cpu-check-v1.json",
+        "source_count": 295,
+        "source_cohort_sha256": "c25136305bc9a56d8e2f3c55a6a95569ce6ea2bad21143c862f81b4fb064f370",
+        "source_cohort_encoding": "sha256(json.dumps(source_sha256, sort_keys=True).encode())",
+        "record_sha256": "3ae08a2fb8c1867bf22b663863783bc5fcc56519c1a3ceb3c889e41cc21ac07d"
+      }
+    ],
+    "original_quality_and_borrow_evidence": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-qwen3-original-quality-and-borrow-v1.json",
+      "sha256": "5f2bd33357d20900f815424e60077dd7a7b076c7b4bb80f2f2cb4fa91e53aa2f"
+    },
+    "qwen25_current_api": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-exact-scale-v1/job.json",
+      "sha256": "99459ea147078d2299238c24f2629cc2036bf1bbc332867dfd5aebc0189bd8cf",
+      "source_count": 297
+    },
+    "qwen2_current_api": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-api-sdk-gqa-v1/job.json",
+      "sha256": "e0e6587aed6f43a1e6092a7c9b12038e21e3585a5650c835bf373506a9a635d3"
+    }
+  },
+  "status": {
+    "main_reference_models": 21,
+    "additional_spark_model_variants": 2,
+    "pending_lfm3_rows": 1,
+    "quality_qualified_models": 0,
+    "qualified_speed_wins": 0,
+    "candidate_timing_is_not_a_win": true,
+    "configuration_scoped_text_quality_screens_passed": 1
+  },
+  "active_studies": [
+    {
+      "model": "Qwen3/0.6B",
+      "study": "qwen3-original-quality-v2",
+      "status": "complete evidence; combined performance candidate next",
+      "arithmetic": "28attentionlayers FP16oracles and120mixedINT32cycles pass",
+      "quality": "FP16NPUattention PPL30.94500 / original30.61051, +1.093%, passed predeclared1024targetmean screen",
+      "copy_optimization": "CPUattention outputborrow328.78to263.79ms,bitwise32teacher,onepair",
+      "qualified_speed_win": false,
+      "default_enabled": false,
+      "owner_phase": "restored",
+      "owner_restored": true,
+      "next_action": "Combine quality-tested NPUattention with outputborrowing and selected existing host optimizations, then repeat/API/context qualification."
+    },
+    {
+      "model": "Qwen3/0.6B",
+      "study": "rkllm-cpu-isa-v1",
+      "status": "capture and comparison complete; diagnostic only",
+      "report": "docs/benchmark-rkllm-cpu-isa-v1.json",
+      "qualified_speed_win": false,
+      "owner_restored": true
+    },
+    {
+      "model": "Qwen3/0.6B",
+      "study": "qwen3-combined-host-batch-v1 + quality-v2",
+      "status": "four valid timing arms; 1024-target bitwise preservation passes; prefill below RKLLM",
+      "report": "/home/orangepi/oNPU/docs/benchmark-qwen3-combined-host-v1.json",
+      "qualified_speed_win": false,
+      "default_enabled": false,
+      "owner_phase": "restored",
+      "owner_restored": true,
+      "next_action": "Prioritize remaining ~50ms prefill gap. Profiled attention: CPU helpers30.90ms, NPU wait15.85ms, sync3.65ms. Evaluate repeated host-kernel thread creation/memory passes; preserve quality and use full request comparisons."
+    },
+    {
+      "model": "Qwen3/0.6B",
+      "study": "qwen3-shared-host-pool-v1",
+      "status": "4workers timing valid; quality worker succeeded and corrected postprocessor independently verifies1024vectors; all5workers exit0; genericownerexit1 records postprocess NameError",
+      "report": "/home/orangepi/oNPU/docs/benchmark-qwen3-shared-host-pool-v1.json",
+      "qualified_speed_win": false,
+      "production_integrated": false,
+      "default_enabled": false,
+      "owner_phase": "restored",
+      "owner_restored": true,
+      "next_action": "Port the verified scoped worker reuse behind opt-in guards without changing default GPU-first placement; preserve callback/lifecycle/affinity contracts. Then close23-31ms prefill gap using existing SDK prefill template catalog and largest remaining request costs; no broad register redump."
+    },
+    {
+      "model": "Qwen3/0.6B",
+      "study": "qwen3-shared-host-pool-integrated-v1",
+      "status": "all5inference workersvalid;207.47-211.12msTTFT;1024bitwise vectors preserved;default-offservingregressionfixedandrecovered",
+      "report": "/home/orangepi/oNPU/docs/benchmark-qwen3-shared-host-pool-integrated-v1.json",
+      "production_integrated": true,
+      "default_enabled": false,
+      "qualified_speed_win": false,
+      "owner_restored": true,
+      "next_action": "Close8-12ms pilotprefillgap. Existing SDKflag doesnotselect pilotshapes and oldM128alternativeslost; do not repeat. Inspect/capture actual pilotgenericCPUcast/residualprogram sources or match a narrow frontendhalfcast fusion with exactCPUoracles. Keep workerreuse offdefault andall24model/API/modelmax/VLM/specscope."
+    },
+    {
+      "model": "Qwen2.5/1.5B",
+      "study": "qwen25-api-exact-scale-v1",
+      "status": "API functional qualification complete; narrow median lead, consistent win unproven.",
+      "report": "docs/benchmark-qwen25-api-exact-scale-v1.json",
+      "qualified_speed_win": false,
+      "default_enabled": true,
+      "owner_phase": "restored",
+      "owner_restored": true
+    },
+    {
+      "model": "Qwen2/0.5B",
+      "study": "qwen2-dense-software-v1",
+      "status": "Current API decode lead; prefill below published reference",
+      "api_prefill_tps": 741.7658758124645,
+      "api_decode_tps": 43.93617263573875,
+      "quality_qualified": false,
+      "qualified_speed_win": false,
+      "default_enabled": true,
+      "scope": "Exact checkpoint/context512 ROCKCHIP recipe only",
+      "next_action": "Find a substantial full-prefill saving (~27ms), preserving the selected decode recipe and qualifying any arithmetic changes."
+    }
+  ],
+  "models": [
+    {
+      "model": "Qwen2/0.5B",
+      "size": "0.5B",
+      "rkllm_reference": {
+        "ttft_ms": 145.9,
+        "prefill_proxy_tokens_per_second": 877.31,
+        "decode_tokens_per_second": 41.58,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid API median lead; variance crosses reference",
+        "ttft_ms": 142.060826998204,
+        "prefill_proxy_tokens_per_second": 901.107596915718,
+        "decode_tokens_per_second": 43.98181639269931,
+        "slug": "qwen2-api-sdk-gqa-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-qwen2-sdk-gqa-api-v1.json",
+        "report_sha256": "ab49cc01e51949b792be6dcb7b66f025a7937a5886bd8f7a37fafe43496b52ab",
+        "source_count": 297,
+        "source_cohort_sha256": "af126b1789b31fc154a1a18f3056e24a26048076271799c5b44670a36a16a853"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "Measured API precedes a conservative cache-line guard; current guard is equivalent for qualified64-aligned shapes and has CPU regression coverage.",
+      "api_status": "18 functional checks passed; ten measured requests; restored with fresh replies",
+      "maximum_context_status": "512 only; model maximum unqualified",
+      "next_action": "Reduce adaptive-clock variance and extend held-out independent quality/model-max context qualification before calling this a consistent RKLLM win.",
+      "preferred_history": [
+        {
+          "status": "valid",
+          "ttft_ms": 242.79855302302167,
+          "prefill_proxy_tokens_per_second": 527.1860083443879,
+          "decode_tokens_per_second": 41.91949790792479,
+          "slug": "qwen2-row-batch-models-v1-qwen2-05b-2-candidate",
+          "report": "/home/orangepi/oNPU/docs/benchmark-qwen2-row-batch-models-v1-qwen2-05b-2-candidate.json",
+          "report_sha256": "80b7f987eda0b00d7770d61812dd47abe6a62bb1ef1e7f57df49afc70a36921e",
+          "source_count": 291,
+          "source_cohort_sha256": "fc623981375bc709fd95c2e3e8ba41cd07119c302b3578d65d6adb150bbfa7fd"
+        },
+        {
+          "status": "valid API candidate; prefill below reference",
+          "ttft_ms": 172.56118699151557,
+          "prefill_proxy_tokens_per_second": 741.7658758124645,
+          "decode_tokens_per_second": 43.93617263573875,
+          "slug": "qwen2-api-dense-v1",
+          "report": "/home/orangepi/oNPU/docs/benchmark-qwen2-dense-software-v1.json",
+          "report_sha256": "185c39e3f3305a9cf6a88da284dfe6816add426cf44541d4e4fd62ef18053d99",
+          "source_count": 297,
+          "source_cohort_sha256": "71bea27805341d3736cb6944435beca30a0093e4a061562fc08f0e12d356db81"
+        }
+      ]
+    },
+    {
+      "model": "MiniCPM4/0.5B",
+      "size": "0.5B",
+      "rkllm_reference": {
+        "ttft_ms": 135.29,
+        "prefill_proxy_tokens_per_second": 946.12,
+        "decode_tokens_per_second": 45.34,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 177.7453850954771,
+        "prefill_proxy_tokens_per_second": 720.1312142717177,
+        "decode_tokens_per_second": 42.72950923150927,
+        "slug": "minicpm4-05b",
+        "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/w8a8-sweep-v1/results/minicpm4-05b.json",
+        "report_sha256": "ff2f6baaea5b3d4237e3b244fc0889c0221f7a9f71c7c18406414a3b8c7211ec",
+        "source_count": 260,
+        "source_cohort_sha256": "e4ebcf8ce9a1c16860e6fbdd87ff3bcfabf28897dd1ccab905f575c599b5f11d"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Profile prefill and decode separately, address the largest measured cost, then verify exact model output and current-source timing."
+    },
+    {
+      "model": "Qwen3/0.6B",
+      "size": "0.6B",
+      "rkllm_reference": {
+        "ttft_ms": 199.09,
+        "prefill_proxy_tokens_per_second": 642.93,
+        "decode_tokens_per_second": 32.91,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 292.914354999084,
+        "prefill_proxy_tokens_per_second": 436.98780143567996,
+        "decode_tokens_per_second": 37.803832121344534,
+        "slug": "qwen3-current-baseline-v1-1-timing",
+        "report": "/home/orangepi/oNPU/docs/benchmark-qwen3-current-baseline-v1-timing.json",
+        "report_sha256": "d47e238c2ee8b8dc2d35e4c16ed3dcbc167ac3a8559e63d394d990fd9772e2d4",
+        "source_count": 292,
+        "source_cohort_sha256": "9a6e8319787aa9d2bb1c8e3033ef7a768f6521dcac49a4bef44e18c7c6b4bd68"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "Integrated source snapshot passes4ABBA+1024bitwise targets; weak metadata fix passes29currentCPU regressions and real8192-contextVLM reload/fresh replies. Exactpostfix timing notrerun; long-request/API/VLMimagequalification pending.",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Close8-12ms pilotprefillgap. Existing SDKflag doesnotselect pilotshapes and oldM128alternativeslost; do not repeat. Inspect/capture actual pilotgenericCPUcast/residualprogram sources or match a narrow frontendhalfcast fusion with exactCPUoracles. Keep workerreuse offdefault andall24model/API/modelmax/VLM/specscope.",
+      "candidate_text_quality_evidence": {
+        "configuration": "INT8projections+FP16NPUattention",
+        "targets": 1024,
+        "PPL": 30.944998197733643,
+        "original_FP16_PPL": 30.61051276753029,
+        "ratio": 1.0109271423430106,
+        "mean_ratio_screen_passed": true,
+        "default_or_preferred_selected": false,
+        "combined_host_preservation_report": "/home/orangepi/oNPU/docs/benchmark-qwen3-combined-host-v1.json",
+        "shared_host_pool_preservation_report": "/home/orangepi/oNPU/docs/benchmark-qwen3-shared-host-pool-v1.json",
+        "integrated_shared_workers_report": "/home/orangepi/oNPU/docs/benchmark-qwen3-shared-host-pool-integrated-v1.json"
+      },
+      "current_candidate": {
+        "configuration": "Integrated opt-in shared CPU prefill workers; INT8 projections, FP16 NPU attention and host flags111",
+        "source_count": 296,
+        "production_integrated": true,
+        "default_enabled": false,
+        "source_matches": false,
+        "source_note": "Exact timing snapshot precedes weak-runtime-metadata fix; generated inference C/dispatcher unchanged and fix verified separately.",
+        "implementation": "tinygrad/llm/kernels/rockchip_shared_pool.py",
+        "current_implementation_sha256": "354743c03ecf596ff4d1d9f9575b6a7adc7cf6abc45808720280ff6216efc147",
+        "ttft_ms_process_medians": [
+          211.12079599697609,
+          207.4691809975775
+        ],
+        "prefill_proxy_tps_process_medians": [
+          606.2879755428421,
+          616.9591039234622
+        ],
+        "decode_tps_process_medians": [
+          38.081049930755974,
+          38.03193595880222
+        ],
+        "quality_preservation_targets": 1024,
+        "quality_preservation_bitwise": true,
+        "report": "/home/orangepi/oNPU/docs/benchmark-qwen3-shared-host-pool-integrated-v1.json",
+        "qualified_speed_win": false
+      }
+    },
+    {
+      "model": "TinyLLAMA/1.1B",
+      "size": "1.1B",
+      "rkllm_reference": {
+        "ttft_ms": 243.93,
+        "prefill_proxy_tokens_per_second": 524.74,
+        "decode_tokens_per_second": 24.43,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 366.0594469984062,
+        "prefill_proxy_tokens_per_second": 349.66998133654863,
+        "decode_tokens_per_second": 25.564746264651948,
+        "slug": "tinyllama-row-batch-models-v2-tinyllama-11b-3-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-tinyllama-row-batch-models-v2-tinyllama-11b-3-candidate.json",
+        "report_sha256": "01a9777e424c8f9a692a7779b4833fe9d0ac32756b0fbd6d38bdd15710dbb6e3",
+        "source_count": 291,
+        "source_cohort_sha256": "fc623981375bc709fd95c2e3e8ba41cd07119c302b3578d65d6adb150bbfa7fd"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Profile prefill and decode separately, address the largest measured cost, then verify exact model output and current-source timing."
+    },
+    {
+      "model": "Qwen2.5/1.5B",
+      "size": "1.5B",
+      "rkllm_reference": {
+        "ttft_ms": 378.31,
+        "prefill_proxy_tokens_per_second": 338.35,
+        "decode_tokens_per_second": 16.69,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "measurement_scope": "API worker metrics, context512,128input/64output",
+        "ttft_ms": 370.74080400634557,
+        "prefill_proxy_tokens_per_second": 345.2546863382461,
+        "decode_tokens_per_second": 16.762579806915966,
+        "slug": "qwen25-api-exact-scale-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-qwen25-api-exact-scale-v1.json",
+        "report_sha256": "34039221d2d097d98908450def1c9b570c1447bad1048dd441a72c751f6fc68b",
+        "source_count": 297,
+        "source_cohort_sha256": "71bea27805341d3736cb6944435beca30a0093e4a061562fc08f0e12d356db81"
+      },
+      "current_source_matches": true,
+      "quality_qualified": false,
+      "current_runtime_requalification": "Passed at context512; both medians above published rates, with crossing trial ranges.",
+      "api_status": "Passed13requests: uncached,cached,streaming,448+64boundary,cancel/recovery; originalGPU/NPUrestored withfreshreplies.",
+      "maximum_context_status": "Not qualified; API boundary test covers512 tokens only.",
+      "next_action": "Resolve narrow decode margin and request variability before claiming a consistent win; TinyLLAMA prefill remains below reference.",
+      "preferred_history": [
+        {
+          "status": "valid",
+          "ttft_ms": 827.6431609992869,
+          "prefill_proxy_tokens_per_second": 154.65602331015972,
+          "decode_tokens_per_second": 15.898882144530704,
+          "slug": "explicit-prefill-pool-models-v1-qwen25-3-candidate",
+          "report": "/home/orangepi/oNPU/docs/benchmark-explicit-prefill-pool-models-v1-qwen25-3-candidate.json",
+          "report_sha256": "91add84f20337ff5c428d340e40004031a379e42307e0c53c48a2f3a0d66e5a2",
+          "source_count": 289,
+          "source_cohort_sha256": "401423096211dd8a671497c4a8f89998e6811175dbf012c1aaeb84d0fe1233f0"
+        }
+      ],
+      "latest_api": {
+        "measured_requests": 5,
+        "both_rates_above_published_requests": 2,
+        "prefill_range": [
+          332.5432080835782,
+          358.36657400650677
+        ],
+        "decode_range": [
+          16.220357321449477,
+          16.95378366654757
+        ],
+        "consistent_speed_win": false,
+        "independent_quality_qualified": false
+      }
+    },
+    {
+      "model": "RWKV7/1.5B",
+      "size": "1.5B",
+      "rkllm_reference": {
+        "ttft_ms": 634.34,
+        "prefill_proxy_tokens_per_second": 201.78,
+        "decode_tokens_per_second": 13.82,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 1963.2570689973363,
+        "prefill_proxy_tokens_per_second": 65.19777874293938,
+        "decode_tokens_per_second": 14.505685593732244,
+        "slug": "rwkv7-pool-spin-v1-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-rwkv7-pool-spin-timing-candidate-v1.json",
+        "report_sha256": "9064c89df15e576d382ac7a21b67a5b17298da4166fb0e8a0c3c86f335c9ddc4",
+        "source_count": 277,
+        "source_cohort_sha256": "c0138a06fd5994fa4c46689f327cde1166b27a1e17f71ef3193dbf4b1d44a3a1"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure recurrent or gated-attention, convolution, packing and activation costs; validate context and API paths for any selected change."
+    },
+    {
+      "model": "InternLM2/1.8B",
+      "size": "1.8B",
+      "rkllm_reference": {
+        "ttft_ms": 380.14,
+        "prefill_proxy_tokens_per_second": 336.72,
+        "decode_tokens_per_second": 15.45,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 533.3193890110124,
+        "prefill_proxy_tokens_per_second": 240.00627510911093,
+        "decode_tokens_per_second": 15.106133557921861,
+        "slug": "narrow-cbuf-continuation-v2-internlm2-3-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-narrow-cbuf-continuation-v2-internlm2-3-candidate.json",
+        "report_sha256": "4b3056fc22dc96a145ea804feff397c8932fcca3c3f52235e147539b6a93225b",
+        "source_count": 289,
+        "source_cohort_sha256": "6e03d793c28c80b7e2f84561fc7ffce3ed3b448a75391b2656c8491ee500584a"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Profile prefill and decode separately, address the largest measured cost, then verify exact model output and current-source timing."
+    },
+    {
+      "model": "Gemma2/2B",
+      "size": "2B",
+      "rkllm_reference": {
+        "ttft_ms": 598.41,
+        "prefill_proxy_tokens_per_second": 213.9,
+        "decode_tokens_per_second": 10.37,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 713.5793139987072,
+        "prefill_proxy_tokens_per_second": 179.37739714275392,
+        "decode_tokens_per_second": 9.930494395356627,
+        "slug": "gemma2-2b-gelu-static-v1-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-gemma2-gelu-static-candidate-v1.json",
+        "report_sha256": "e9cf6ed0ebaf3dbcca1e67fa2cc45e9994191f81c7e63e283693c4e1bc2c5c4e",
+        "source_count": 275,
+        "source_cohort_sha256": "199fcdbaa5633f5d5a76543a5cf5b09aae2971b396ed2c07718f3141589513de"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure attention, activation and host-kernel costs; validate the complete model before promoting a placement change."
+    },
+    {
+      "model": "Gemma3n/2B",
+      "size": "2B",
+      "rkllm_reference": {
+        "ttft_ms": 1124.51,
+        "prefill_proxy_tokens_per_second": 113.83,
+        "decode_tokens_per_second": 9.91,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 1091.4895308669657,
+        "prefill_proxy_tokens_per_second": 117.27093699041724,
+        "decode_tokens_per_second": 8.569618397435386,
+        "slug": "gemma3n-2b-decode-v5",
+        "report": "/home/orangepi/oNPU/docs/benchmark-gemma-decode-gemma3n-2b-v5.json",
+        "report_sha256": "541c001583151770d3550afa9e417b28e58a396b0a4245bf9f8fb8ab8b3f5e40",
+        "source_count": 274,
+        "source_cohort_sha256": "0022d64dd0ae8bf4e394086c712e5e537e469037689ac58333ee0855fe97918f"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure attention, activation and host-kernel costs; validate the complete model before promoting a placement change."
+    },
+    {
+      "model": "TeleChat2/3B",
+      "size": "3B",
+      "rkllm_reference": {
+        "ttft_ms": 618.48,
+        "prefill_proxy_tokens_per_second": 206.96,
+        "decode_tokens_per_second": 10.18,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 696.4196159970015,
+        "prefill_proxy_tokens_per_second": 183.79723525844958,
+        "decode_tokens_per_second": 9.811638500137175,
+        "slug": "telechat2-3b-domains-deferred-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-w8a8-missing-domains-telechat2-3b-v1.json",
+        "report_sha256": "d735778a541a30cb839f23936a6cec5286597bd264994adecb0b2561eac3d922",
+        "source_count": 270,
+        "source_cohort_sha256": "a7f5cf4a5c090a703b8e767753a44d0036a832833eb372d3d54f7d62d5738c77"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Profile prefill and decode separately, address the largest measured cost, then verify exact model output and current-source timing."
+    },
+    {
+      "model": "Phi3/3.8B",
+      "size": "3.8B",
+      "rkllm_reference": {
+        "ttft_ms": 1017.28,
+        "prefill_proxy_tokens_per_second": 125.83,
+        "decode_tokens_per_second": 7.45,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 1137.477946933359,
+        "prefill_proxy_tokens_per_second": 112.5296541749122,
+        "decode_tokens_per_second": 7.2186505858261265,
+        "slug": "phi3-38b-domains-deferred-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-w8a8-missing-domains-phi3-38b-v1.json",
+        "report_sha256": "a1415696173e67fa8016c86c809da839fe02c6070ab3f88f6aaf00adc9c1697a",
+        "source_count": 270,
+        "source_cohort_sha256": "a7f5cf4a5c090a703b8e767753a44d0036a832833eb372d3d54f7d62d5738c77"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Profile prefill and decode separately, address the largest measured cost, then verify exact model output and current-source timing."
+    },
+    {
+      "model": "MiniCPM3/4B",
+      "size": "4B",
+      "rkllm_reference": {
+        "ttft_ms": 1408.49,
+        "prefill_proxy_tokens_per_second": 90.88,
+        "decode_tokens_per_second": 5.94,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 8140.422914992087,
+        "prefill_proxy_tokens_per_second": 15.72399878196309,
+        "decode_tokens_per_second": 4.60899273054669,
+        "slug": "cpu-mla-projections-models-v1-minicpm3-2-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-cpu-mla-projections-models-v1-minicpm3-2-candidate.json",
+        "report_sha256": "b201026769416f9f6fbb83859f0f9126bd75bf06c0e45bd36bcdc987867df407",
+        "source_count": 291,
+        "source_cohort_sha256": "8f2c6fdd5597e68b6c2674c844a99891834455f637557bdf679ffc4a7855b474"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure MLA or routed-expert projection and attention costs; verify full model paths and image pipeline separately where applicable."
+    },
+    {
+      "model": "ChatGLM3/6B",
+      "size": "6B",
+      "rkllm_reference": {
+        "ttft_ms": 1352.94,
+        "prefill_proxy_tokens_per_second": 94.61,
+        "decode_tokens_per_second": 4.98,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 2298.496176954359,
+        "prefill_proxy_tokens_per_second": 55.68858512073205,
+        "decode_tokens_per_second": 4.320200841997661,
+        "slug": "chatglm3-6b-mapped-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-chatglm-mapped-weights-v1.json",
+        "report_sha256": "4b4ed71fee5cc9a813b8dd08c6daa958377c797165f83679455edb0af1b13e2e",
+        "source_count": 270,
+        "source_cohort_sha256": "2658033566ed7ade280b2294d53f5f2bfe90972530fce9b58de01ab02dcf3f86"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Profile prefill and decode separately, address the largest measured cost, then verify exact model output and current-source timing."
+    },
+    {
+      "model": "Qwen3-VL/2B",
+      "size": "2B",
+      "rkllm_reference": {
+        "ttft_ms": 383.62,
+        "prefill_proxy_tokens_per_second": 333.66,
+        "decode_tokens_per_second": 14.98,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 732.1771800052375,
+        "prefill_proxy_tokens_per_second": 174.8210726795451,
+        "decode_tokens_per_second": 14.388798575437335,
+        "slug": "qwen3-vl-2b-shared",
+        "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/w8a8-sweep-v2/results/qwen3-vl-2b-shared.json",
+        "report_sha256": "ac5b9058dff76ac0273149ca90e796abda3acf87c80631908b5deae84f4bc47c",
+        "source_count": 260,
+        "source_cohort_sha256": "d38e4de2238c9370829b1d6f9a62db1428ed86179806c6983e0f2eeaf587127f"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure decoder and image encoder/connector phases separately, then qualify end-to-end requests and maximum context."
+    },
+    {
+      "model": "DeepSeekOCR/3B(A570M)",
+      "size": "3B(A570M)",
+      "rkllm_reference": {
+        "ttft_ms": 701.21,
+        "prefill_proxy_tokens_per_second": 182.54,
+        "decode_tokens_per_second": 31.6,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 1345.7467249972979,
+        "prefill_proxy_tokens_per_second": 95.1144800298563,
+        "decode_tokens_per_second": 23.285260283908965,
+        "slug": "deepseek-cpu-experts-v1-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-deepseek-cpu-experts-candidate-v1.json",
+        "report_sha256": "49e793d8eb9abc0b9f7a2be19f8863bf201e4de4df5a0cd27a73667b956013a8",
+        "source_count": 283,
+        "source_cohort_sha256": "d55cdf21251428b90519a4ecaa8fbfd1ce44ab5c5775bfabbee127f1f1ab83f3"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure MLA or routed-expert projection and attention costs; verify full model paths and image pipeline separately where applicable."
+    },
+    {
+      "model": "Qwen3.5/0.8B",
+      "size": "0.8B",
+      "rkllm_reference": {
+        "ttft_ms": 587.74,
+        "prefill_proxy_tokens_per_second": 217.78,
+        "decode_tokens_per_second": 27.05,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 882.0466708857566,
+        "prefill_proxy_tokens_per_second": 145.11703770897023,
+        "decode_tokens_per_second": 21.021371729143667,
+        "slug": "qwen35-08b-cpu-gdn-models-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-cpu-gdn-qwen35-08b-v1.json",
+        "report_sha256": "20f67dbf18bf7337db0f44e87be60d2b0466e3acd55be328c0dc76ced659732f",
+        "source_count": 270,
+        "source_cohort_sha256": "840853ebaaace30743053693611e7bbc65d648efe5313a1de54131c26b3d1bd6"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure recurrent or gated-attention, convolution, packing and activation costs; validate context and API paths for any selected change."
+    },
+    {
+      "model": "Qwen3.5/2B",
+      "size": "2B",
+      "rkllm_reference": {
+        "ttft_ms": 776.95,
+        "prefill_proxy_tokens_per_second": 164.75,
+        "decode_tokens_per_second": 13.59,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 1122.4199931602925,
+        "prefill_proxy_tokens_per_second": 114.03930861887308,
+        "decode_tokens_per_second": 11.133363817239639,
+        "slug": "qwen35-2b-cpu-gdn-models-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-cpu-gdn-qwen35-2b-v1.json",
+        "report_sha256": "97a2a3a2e7c2dd7b443b5fbb994447d8655a3b35f2715e2a00e66c6f7155f833",
+        "source_count": 270,
+        "source_cohort_sha256": "840853ebaaace30743053693611e7bbc65d648efe5313a1de54131c26b3d1bd6"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure recurrent or gated-attention, convolution, packing and activation costs; validate context and API paths for any selected change."
+    },
+    {
+      "model": "Qwen3.5/4B",
+      "size": "4B",
+      "rkllm_reference": {
+        "ttft_ms": 2068.88,
+        "prefill_proxy_tokens_per_second": 61.87,
+        "decode_tokens_per_second": 6.22,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 2677.791261812672,
+        "prefill_proxy_tokens_per_second": 47.800589174136455,
+        "decode_tokens_per_second": 5.292688697670675,
+        "slug": "qwen35-4b-cpu-gdn-models-v1",
+        "report": "/home/orangepi/oNPU/docs/benchmark-cpu-gdn-qwen35-4b-v1.json",
+        "report_sha256": "24519259fe9d0793e4346195fc1a17be37d58c7e7f968cad2e4d3933990a4e61",
+        "source_count": 270,
+        "source_cohort_sha256": "840853ebaaace30743053693611e7bbc65d648efe5313a1de54131c26b3d1bd6"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure recurrent or gated-attention, convolution, packing and activation costs; validate context and API paths for any selected change."
+    },
+    {
+      "model": "Gemma4/E2B",
+      "size": "E2B",
+      "rkllm_reference": {
+        "ttft_ms": 599.06,
+        "prefill_proxy_tokens_per_second": 213.67,
+        "decode_tokens_per_second": 11.12,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 873.5115800518543,
+        "prefill_proxy_tokens_per_second": 146.53497781037035,
+        "decode_tokens_per_second": 9.575897868505857,
+        "slug": "gemma4-e2b-decode-v5",
+        "report": "/home/orangepi/oNPU/docs/benchmark-gemma-decode-gemma4-e2b-v5.json",
+        "report_sha256": "ea1aac81474d3e58e7685d68cf547e74167b8a888f4f693b6f815c533f9a14cc",
+        "source_count": 274,
+        "source_cohort_sha256": "0022d64dd0ae8bf4e394086c712e5e537e469037689ac58333ee0855fe97918f"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure attention, activation and host-kernel costs; validate the complete model before promoting a placement change."
+    },
+    {
+      "model": "LFM2.5-VL/450M",
+      "size": "450M",
+      "rkllm_reference": {
+        "ttft_ms": 102.74,
+        "prefill_proxy_tokens_per_second": 1245.86,
+        "decode_tokens_per_second": 62.16,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 161.74528701230884,
+        "prefill_proxy_tokens_per_second": 791.3677261598305,
+        "decode_tokens_per_second": 60.3680418729545,
+        "slug": "lfm450-options-models-v1-lfm25-vl-450m-2-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-lfm450-options-models-v1-lfm25-vl-450m-2-candidate.json",
+        "report_sha256": "7568fa09728c7b8bb18e976fe7af17569d65b846c077b68f5f17a2bfb6e9e4da",
+        "source_count": 291,
+        "source_cohort_sha256": "8f2c6fdd5597e68b6c2674c844a99891834455f637557bdf679ffc4a7855b474"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure decoder and image encoder/connector phases separately, then qualify end-to-end requests and maximum context."
+    },
+    {
+      "model": "Spark-X2.5/1.7B",
+      "size": "1.7B",
+      "rkllm_reference": {
+        "ttft_ms": 386.23,
+        "prefill_proxy_tokens_per_second": 331.41,
+        "decode_tokens_per_second": 15.61,
+        "source": "benchmark.md"
+      },
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 574.7921240108553,
+        "prefill_proxy_tokens_per_second": 222.68920302321789,
+        "decode_tokens_per_second": 14.65296938258449,
+        "slug": "raw-erf-gelu-models-v1-spark-x25-17b-3-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-raw-erf-gelu-models-v1-spark-x25-17b-3-candidate.json",
+        "report_sha256": "d43b69ba9baa32199c7ba4454cba8ab94dff3c85e8c6d37813c46d083c732e74",
+        "source_count": 292,
+        "source_cohort_sha256": "9a6e8319787aa9d2bb1c8e3033ef7a768f6521dcac49a4bef44e18c7c6b4bd68"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Measure recurrent or gated-attention, convolution, packing and activation costs; validate context and API paths for any selected change."
+    },
+    {
+      "model": "Spark-X2.6/4B",
+      "size": "4B",
+      "rkllm_reference": null,
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 1506.132662994787,
+        "prefill_proxy_tokens_per_second": 84.9858735189272,
+        "decode_tokens_per_second": 6.144432367896715,
+        "slug": "raw-erf-gelu-models-v1-spark-x26-4b-3-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-raw-erf-gelu-models-v1-spark-x26-4b-3-candidate.json",
+        "report_sha256": "1d5bb8a2e24a4ed0d09d11acb5a6f12a55afc43f0eb93f13295b37d47fc91efc",
+        "source_count": 292,
+        "source_cohort_sha256": "9a6e8319787aa9d2bb1c8e3033ef7a768f6521dcac49a4bef44e18c7c6b4bd68"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "No RKLLM reference is listed. Preserve the candidate as unqualified, obtain a comparable reference, then requalify the full model and quality."
+    },
+    {
+      "model": "Spark-X2.6/1.7B",
+      "size": "1.7B",
+      "rkllm_reference": null,
+      "current_preferred": {
+        "status": "valid",
+        "ttft_ms": 532.9569540044758,
+        "prefill_proxy_tokens_per_second": 240.16949030920242,
+        "decode_tokens_per_second": 14.559305969160985,
+        "slug": "raw-erf-gelu-models-v1-spark-x26-17b-3-candidate",
+        "report": "/home/orangepi/oNPU/docs/benchmark-raw-erf-gelu-models-v1-spark-x26-17b-3-candidate.json",
+        "report_sha256": "d5a3ba342fad62513febb16f0416f751593d1d6e385aa90e475e8aaac244857f",
+        "source_count": 292,
+        "source_cohort_sha256": "9a6e8319787aa9d2bb1c8e3033ef7a768f6521dcac49a4bef44e18c7c6b4bd68"
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "No RKLLM reference is listed. Preserve the candidate as unqualified, obtain a comparable reference, then requalify the full model and quality."
+    },
+    {
+      "model": "LFM3 (checkpoint pending)",
+      "size": "unknown",
+      "rkllm_reference": null,
+      "current_preferred": {
+        "status": "pending",
+        "timing": null,
+        "slug": null,
+        "report": null,
+        "report_sha256": null,
+        "source_count": 0,
+        "source_cohort_sha256": null
+      },
+      "current_source_matches": false,
+      "quality_qualified": false,
+      "current_runtime_requalification": "historical source cohorts retained; static metadata buffer fix requires current-source sweep",
+      "api_status": "not requalified",
+      "maximum_context_status": "not requalified",
+      "next_action": "Identify the requested checkpoint and obtain a comparable RKLLM reference, then establish current-source timing and quality evidence."
+    }
+  ],
+  "update_scope": "Qwen2 SDK/GQA API median updated; other model cohorts retained; quality-qualified win count unchanged."
+}

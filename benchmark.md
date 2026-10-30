@@ -1,6 +1,188 @@
 # Model Performance Benchmark
 
-Updated: 2026-10-25. Platform: Orange Pi 5, RK3588S, 16 GB RAM.
+## Qwen2 0.5B — October 30 SDK/GQA API result
+
+Ten uncached API requests use 128 input / 64 actual output tokens, context 512, CPU4–7 and unchanged adaptive governors, without sudo. Cells are published RKLLM / oNPU; bold marks the better reported median. This is a published-reference comparison with different operating conditions, not a local RKLLM rerun. TTFT ends at the worker's first emitted text; prompt preparation is excluded.
+
+| Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Qwen2 | 0.5B | W8A8 / INT8 projections + FP32 CPU helpers | 128 | 64 | 145.90 / **142.06** | 41.58 / **43.98** | 669.56 / — |
+
+| Phase | RKLLM tok/s | oNPU API median tok/s | Reference wins / measured requests |
+|---|---:|---:|---|
+| Prefill proxy (input / TTFT) | 877.31 | **901.11** | 7/10; range 725.32–968.74. |
+| Decode | 41.58 | **43.98** | 10/10; range 42.21–44.12. |
+
+The median prefill lead is 2.7%, while request variation is much larger. **This is a measured median lead, not a consistent every-request win or independent quality certification.** The previous API median was 741.77 tok/s with the same chat fixture; that is an unpaired historical comparison.
+
+The app selects the exact checkpoint/context recipe: SDK blocked gate/up execution with direct SwiGLU consumption, one packed K-group upload, safe simultaneous input/output borrowing, and grouped-query CPU prefill with token-major queries. Quantization boundaries, scales, rounding and per-query FP32 reduction order are retained. Both new backend processes match all seven 64-token sequences and 32 full-vocabulary teacher vectors bitwise. Decode's original graph stays in use.
+
+All 18 API checks passed, including cached one-token continuation, streaming, 448+64 context budget, cancellation and recovery. Both original GPU/NPU sessions were restored with fresh replies; the original GPU remained resident. Model-maximum context and independent RKLLM quality remain unqualified. A post-measurement guard tightens disjointness to cache-line boundaries; it is equivalent for this graph's 64-aligned buffer ranges, and the exact source-hash distinction is recorded in the receipt.
+
+The same-checkpoint upstream llama.cpp CPU reference remains 291.95 CLI prompt-eval / 43.48 decode tok/s; its separate synthetic pp128/tg64 means are 289.37/39.22. Those are different timing boundaries from API input/TTFT. [Current evidence, every trial and source scope](docs/benchmark-qwen2-sdk-gqa-api-v1.json) · [Implementation details](../tinygrad/extra/rockchip/qwen2_prefill.md) · [Earlier llama runs](docs/benchmark-qwen2-dense-software-v1.json).
+
+## Historical Qwen2 0.5B — October 30 prior API result
+
+Five uncached API requests used 128 input / 64 actual output tokens at context 512, CPU4–7, and unchanged adaptive governors. No sudo or board-setting changes. Cells are published RKLLM / oNPU; bold identifies the better reported metric. These are worker first-emitted-text timings, with prompt preparation excluded, and are separate from raw backend first-token timings.
+
+| Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Qwen2 | 0.5B | W8A8 / INT8 projections + FP32 CPU helpers | 128 | 64 | **145.90** / 172.56 | 41.58 / **43.94** | 669.56 / — |
+
+| Phase | RKLLM tok/s | oNPU tok/s | Five-request result |
+|---|---:|---:|---|
+| Prefill proxy (input / TTFT) | **877.31** | 741.77 | 0/5 beat the reference; range 695.46–803.63. |
+| Decode | 41.58 | **43.94** | 5/5 beat the reference; range 43.75–44.03. |
+
+The app now selects prepared QKV, shared persistent host workers, token-major CPU prefill output, exact normal-range exp2, two-row raw SwiGLU, natural K896, native output synchronization/borrowing, and the two-KV-head decode pool for this exact checkpoint/context. Backend tests retain bitwise equality of all seven 64-token sequences and 32 full-vocabulary teacher vectors to the previous local recipe. This is a local arithmetic regression gate, not independent RKLLM quality qualification.
+
+All 13 API checks passed: warmups and measured requests, a cached one-token follow-up, streaming, 448+64 context budget, cancellation and recovery. Original GPU/NPU sessions, options and selection were restored and both answered fresh requests. The original GPU stayed resident. This covers context 512; model-maximum context remains unqualified. **Decode wins the published-reference comparison; prefill still needs improvement.**
+
+| CPU-only llama.cpp reference | CLI prompt-eval tok/s | CLI decode tok/s | Synthetic pp128 / tg64 tok/s |
+|---|---:|---:|---:|
+| Qwen2 Q8_0, four big cores, ctx512 | 291.95 | 43.48 | 289.37 / 39.22 |
+
+The upstream llama.cpp binary matches checkout `0893ec9`; three CLI requests used the same checkpoint and exact 128 raw backend prompt IDs. CLI prompt evaluation excludes first-answer work. Its separate synthetic pp128/tg64 tests use different timing/context boundaries from the API. CPU kernel inspection informed reuse of the existing exact exp2 shortcut; no approximate llama polynomial was copied into this recipe.
+
+[Current API, raw trials, numerical scope and profiler/llama evidence](docs/benchmark-qwen2-dense-software-v1.json).
+
+## Qwen2.5 1.5B — October 30 current API result
+
+Five measured API requests used the Qwen2.5 Q8_0 checkpoint at context 512, with 128 prompt and 64 generated tokens. Measurements are worker-reported TTFT and prefill proxy, not separate HTTP transport timings. No sudo or clock changes were used. Table cells are RKLLM / oNPU; bold marks the better reported value.
+
+| Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Qwen2.5 | 1.5B | W8A8 / INT8 projections + FP32 CPU attention | 128 | 64 | 378.31 / **370.74** | 16.69 / **16.76** | 1689.21 / — |
+
+| Engine / measurement | Prefill (tok/s) | Decode (tok/s) |
+|---|---:|---:|
+| Published RKLLM | 338.35 | 16.69 |
+| oNPU API worker, five measured requests | **345.25** | **16.76** |
+
+The controller recorded 13 requests: three warmups, five measured requests, cached-prefix, streaming, a 448-token boundary prompt, cancellation, and post-cancel recovery. Two of five measured requests beat both published rates; one missed the prefill rate and two missed the decode rate. Median decode is only about 0.4% above RKLLM, so this is not a consistent or independently quality-qualified speed win. Measured ranges were 357.18–384.91 ms TTFT, 332.54–358.37 prefill-proxy tok/s, and 16.22–16.95 decode tok/s.
+
+The cached follow-up reused 127 of 128 prompt tokens; the boundary request completed 64 tokens at exactly 512 total. Streaming completed, cancellation returned `Generation stopped`, post-cancel recovery succeeded, and the original sessions were restored with two fresh replies. The worker ran on CPU4–7 at ready and final checks. No replay or scale-bit environment overrides were set: the active source defaults included scalar copy, deduplicated guards, and `ONPU_EXP2_SCALE_BITS=1`; the Qwen profile enabled the existing exp2 fast path. Output quality and model-maximum context remain unqualified.
+
+The exact-scale paired worker screen measured 327.24 / 15.99 tok/s control and 343.64 / 16.09 with scale bits, a 5.0% prefill-proxy and 0.6% decode median increase. It is worker IPC evidence, not a separate API treatment. The current API includes scalar copy, deduplicated guards, and exact scale bits, so it does not isolate the cause of its small decode lead. The rejected split-KV head experiment and wide-prefill prototype are absent from production; neither supplied a clear whole-model decode win.
+
+The llama.cpp CPU reference retained below reports 82.00 CLI prompt-evaluation / 12.75 decode tok/s with a different prompt fixture and timing boundary from this chat-fixture API request. Keep it as a separate descriptive reference. [Exact-scale API receipt](docs/benchmark-qwen25-api-exact-scale-v1.json) · [Exact-scale worker pair](docs/benchmark-qwen25-exact-scale-paired-v1.json) · [Split-KV rejection](docs/benchmark-qwen25-split-kv-v1.json) · [Host-overhead evidence](docs/benchmark-qwen25-host-overhead-v1.json).
+
+### Historical: paired worker and CPU diagnostics — October 30
+
+The ordinary-worker control used the same 128-input/64-output request shape as the published comparison. Cells in the first table are RKLLM / oNPU; bold marks the lower TTFT or higher decode rate. Worker memory was not measured in this comparison.
+
+| Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Qwen2.5 | 1.5B | W8A8 / INT8 projections + FP32 CPU attention | 128 | 64 | 378.31 / **376.43897** | **16.69** / 15.75714 | 1689.21 / — |
+
+| Engine / measurement | Prefill (tok/s) | Decode (tok/s) |
+|---|---:|---:|
+| Published RKLLM | 338.35 | 16.69 |
+| Ordinary oNPU worker control, six measured requests | 340.05 | 15.76 |
+| Rejected wide-prefill worker, six measured requests | 310.58 | 15.78 |
+| Current llama.cpp CPU, exact 128-ID CLI requests | 82.00 | 12.75 |
+
+The worker's prefill rate is the 128 input tokens divided by worker TTFT, while llama.cpp reports pure prompt evaluation. The llama CLI's exact 128 prompt IDs match the backend reference fixture; the worker uses the chat fixture. These boundaries and prompts differ. The ordinary worker's small median prefill lead over RKLLM is not a repeatable or qualified win; its decode median is about 5.6% behind. The wide-prefill arm was slower on prefill and is rejected. Its original validator failure remains recorded: only the two wide-arm warmups lacked wide-kernel capture; the separate measured-row audit confirms all six measured rows selected the wide kernel. It does not change the raw failure or qualify a win.
+
+The llama.cpp CPU-only build is fresh at `0893ec9` (HEAD), uses the same Q8_0 GGUF, and runs on four big CPU cores. A separate standard `llama-bench` reported 70.759666 pp128 and 10.101472 tg64 tok/s; these synthetic measurements are not the same workload as the worker or CLI request. The paired lease is restored, and the shared restoration receipt records two fresh replies for the original sessions. Those worker screens did not establish a default speed gain; the wide production prototype and related scheduling experiments were removed, with no selectable wide flag remaining. At the time of this worker comparison, HTTP/API v2 at 323.32 / 15.82 was the latest API cohort. The completed API result above is a separate, unpaired cohort and does not establish a causal change.
+
+[Paired worker comparison and measured-row audit](docs/benchmark-qwen25-wide-paired-v1.json) · [Historical wide-model candidate](docs/benchmark-qwen25-wide-model-v1.json) · [Current llama.cpp CPU receipt](docs/benchmark-llama-cpu-current-v2.json) · [Prior API v2 result](docs/benchmark-qwen25-api-fast-prefill-v2.json) · [Shared worker restoration receipt](docs/benchmark-qwen25-idle-phase-v1.json).
+
+### Historical: Qwen2.5 1.5B matched adaptive sweep and upstream CPU reference
+
+Updated October 30; oNPU measurements completed October 29. No sudo, governor, IRQ or voltage changes.
+
+| Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Qwen2.5 | 1.5B | w8a8 / INT8 projections + FP32 CPU attention | 128 | 64 | 378.31 / **371.51** | 16.69 / **16.80** | 1689.21 / 4688.60* |
+
+| Engine / measurement | Prefill (tok/s) | Decode (tok/s) |
+|---|---:|---:|
+| Published RKLLM W8A8 | 338.35 (input/TTFT proxy) | 16.69 |
+| oNPU candidate, six measured requests | **344.54** (input/TTFT proxy) | **16.80** |
+| oNPU matched control, six measured requests | 344.63 (input/TTFT proxy) | 16.70 |
+| Main upstream llama.cpp CPU, exact prompt, context 512 | 85.89 (internal prompt-eval) | 14.73 (internal eval,63steps) |
+| Main upstream llama.cpp CPU, standard llama-bench | 82.33 (pure pp128) | 12.19 (separate tg64) |
+
+The matched oNPU order was control/candidate/candidate/control, with three full warmups and three measured 128-input/64-output requests per process. All four processes passed exact generated-ID and 32-target full-vocabulary logit regression checks. The candidate adds an exact normal-range exp2 shortcut inspired by llama.cpp's finite-input fast path; it ties control prefill and improves decode by about 0.6%. Both candidate medians are slightly above the published target, while individual trial ranges cross it. This is median parity/slight lead under measured conditions, not a guarantee for every request or independent RKLLM quality qualification.
+
+The main upstream checkout was `b92761a` at `~/rkllama/ggml-org_llama.cpp`. Its CPU-only binaries generated a successful smoke reply, then ran three context 512 CLI requests using the **same 128 prompt IDs**, 64 output tokens and four big CPU cores. The generation text differs between engines; local exact regression is not an independent quality-equivalence test. Standard `llama-bench` uses synthetic pp128/tg64 tests separately, with context derived from each test; its prefill rate excludes the oNPU TTFT boundary and its tg64 does not share the 128-token prompt. Those reference columns are labeled accordingly. Both programs used the same Qwen2.5 Q8_0 GGUF, with no GPU layers in llama.cpp. oNPU used CPU4–7 compute workers plus its existing CPU0 IRQ-wake helper and the NPU; the resident GPU model remained loaded and idle.
+
+*The oNPU memory value is median sampled process lifetime peak RSS in MiB, including preparation/validation. RKLLM's MB accounting differs, so memory figures are not directly comparable. Both original serving sessions were restored and answered fresh requests after the tests.
+
+[Raw trials, source provenance, reference runs and restoration scope](docs/benchmark-qwen25-exp2-abba-v1.json) · [CPU kernel review](docs/llama-cpu-kernel-review.md).
+
+### Historical: Qwen2.5 1.5B API qualification v2 — context 512
+
+This earlier API cohort is retained as historical; the October 30 API result above is the current cohort, and the comparison between them is unpaired.
+
+| Serving path | Input / output / context | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|---:|
+| Published RKLLM reference | 128 / 64 / — | **378.31** | **338.35** | **16.69** |
+| oNPU API, five measured requests | 128 / 64 / 512 | 395.89 | 323.32 | 15.82 |
+
+The no-sudo API worker completed three warmups and five measured requests, each producing 64 tokens. Measured ranges were 377.47–442.78 ms worker-reported TTFT, 289.08–339.10 prefill-proxy tok/s and 15.48–16.29 decode tok/s. The cached-prefix request, streaming request, 448-token prompt near the 512-token context limit, cancellation and post-cancel recovery checks all passed. All eleven selected worker features were active; the worker reported CPU4–7 both when ready and at the last affinity check. Both original serving sessions were restored and returned fresh replies. The API median is below the published prefill and decode rates and slower on TTFT, so this is a functional serving qualification, not a serving speed win. API output quality and model-maximum context remain unqualified.
+
+The first API attempt is preserved separately because the restarted API parent inherited CPU0–3 from its monitoring controller. That run did not record the target worker's affinity mask directly. The corrected run required and recorded CPU4–7 before measurement and on its final affinity check. [Corrected API results, ranges, request checks and receipts](docs/benchmark-qwen25-api-fast-prefill-v2.json) · [Affinity-confounded v1 diagnostic](docs/benchmark-qwen25-api-affinity-diagnostic-v1.json).
+
+### Historical: earlier exp2 scale experiment before exact-scale qualification
+
+| Process | Median TTFT (ms) | Median prefill proxy (tok/s) | Median decode (tok/s) |
+|---|---:|---:|---:|
+| Scale screen, first process | 358.99 | 356.56 | 16.85 |
+| Repeat process | 382.92 | 334.28 | 16.76 |
+| Six-request pooled summary | 362.47 | 353.13* | 16.83 |
+
+The isolated CPU exp2 component was 14.274% faster, with bitwise-equal output across its finite and edge fixtures. This did not establish a whole-model win: the first model process exceeded published prefill, the repeat did not, and the pooled rate is a summary across six requests rather than a matched control/candidate treatment. All six 64-token sequences and all 32 local full-vocabulary teacher rows matched the prior INT8 recipe exactly; this is local regression evidence, not independent FP16/RKLLM quality. Both model owners restored the original sessions, which returned fresh replies. *The pooled prefill proxy is 128 tokens divided by median TTFT; the median of per-request prefill rates is 353.16 tok/s.
+
+At the time of this earlier report, the helper gated normal-range exponent-bit scaling behind `ONPU_EXP2_SCALE_BITS`, default off. The saved model reports record `ONPU_EXP2_FAST_PATH=1` but do not record the scale-bits setting, so they are not a measured `SCALE_BITS=0`/`1` comparison. The subsequent exact-scale worker pair and API follow-up are recorded above. The earlier component/model report remains historical and does not provide an independent output-quality check. [Earlier component and model runs](docs/benchmark-qwen25-exp2-scale-v1.json).
+
+
+### Latest TinyLLAMA result — adaptive settings, no sudo, October 29
+
+| Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| TinyLLAMA | 1.1B | w8a8 / INT8 projections + FP32 CPU attention | 128 | 64 | **243.93** / 257.96 | 24.43 / **25.33** | 1093.66 / 3502.47* |
+
+| Model | RKLLM prefill proxy (tok/s) | oNPU prefill proxy (tok/s) |
+|---|---:|---:|
+| TinyLLAMA 1.1B | **524.74** | 496.20 |
+
+Six measured requests across two separately loaded processes, with three warmups per process, context 512 and unchanged adaptive governors. Process prefill medians: 531.52 and 472.07 tok/s. The recipe uses prepared QKV, shared CPU workers, token-major CPU attention output, eight-query attention tiles, zero-tail storage reuse and native transfer/cache optimizations. All 32 checked full-vocabulary teacher vectors remain bitwise equal to the prior CPU-attention recipe in both processes.
+
+The first process exceeded the published prefill reference, but the repeat did not. The combined prefill median remains below RKLLM; a consistent prefill win is unachieved. Decode exceeds the published reference. Trial ranges overlap the prefill target. Independent RKLLM quality equivalence and API throughput remain pending. *The oNPU memory figure is median process lifetime peak RSS in MiB; RKLLM reports MB with different accounting, so it is not a directly comparable memory measurement. The GPU model stayed resident; both original sessions were restored with fresh replies after the TinyLLaMA development lease. The FP16 NPU-attention experiment failed its numerical gate and is not selected. [Raw trials, provenance and scope](docs/benchmark-tinyllama-adaptive-layout-v1.json).
+
+
+### Latest Qwen3 result — fixed stock settings, October 29
+
+| Qwen3 0.6B, 128 input / 64 output, context 512 | Published RKLLM | oNPU | oNPU gain |
+|---|---:|---:|---:|
+| TTFT (ms, lower is better) | 199.09 | **149.50** | 24.9% lower latency |
+| Prefill proxy (tok/s) | 642.93 | **856.18** | **33.2%** |
+| Decode (tok/s) | 32.91 | **38.58** | **17.2%** |
+
+All 12 measured requests across four separately loaded processes beat both published speed targets. Prefill range: **825.32–862.76 tok/s**; decode range: **37.85–38.76 tok/s**. Each process had three warmups followed by three measured requests. Generated IDs and 32-target full-vocabulary teacher arrays match across all four blocks.
+
+This is a repeatable **published-reference speed win for this workload**, conditional on supported stock CPU/NPU/DDR performance governors, NPU IRQs on CPU6 and CPU6 deep-idle disabled. It uses the existing numerical recipe, not the rejected score-vector kernel. The changes were authorized as temporary; these figures do not describe ordinary adaptive-governor serving. The four blocks have identical settings, so their inherited control/candidate report labels do not denote different treatments.
+
+RKLLM states maximum CPU/NPU clocks; its table does not establish matching DDR/IRQ settings, checkpoint arithmetic or workload contents. Independent RKLLM quality equivalence, model-maximum context and a new API throughput run remain unqualified. Primary timing/numerical validation passed; ancillary CPU-source-export bookkeeping did not, and no new 1,024-target corpus run is claimed. Restoration receipts are recorded in the [complete result record](docs/benchmark-qwen3-stock-tuning-v1.json).
+
+[Official reference](https://github.com/airockchip/rknn-llm/blob/main/benchmark.md), rechecked October 29 · [TinyLLAMA next-step plan](docs/tinyllama-prefill-plan.md).
+
+
+### Latest Qwen3 prefill check — October 29, score-vector experiment
+
+| Model / current backend | RKLLM prefill proxy (tok/s) | oNPU prefill proxy (tok/s) |
+|---|---:|---:|
+| Qwen3 0.6B, existing recipe remeasurement | 642.93 | **667.79** |
+| Qwen3 0.6B, rejected vector-score candidate | 642.93 | **655.35** |
+
+Six measured 128-input/64-output requests per arm, context 512, balanced control/candidate/candidate/control process order. Bold denotes only the higher measured median against the published reference. The candidate loses to the existing recipe, so it is not promoted. Individual trials cross the reference threshold; this is **not a consistent or matched quality-qualified RKLLM win**. The 1,024-target worker failed before loading due to a missing staged helper import; completed timing/short-teacher checks remain separate valid evidence. Prior 642.22 tok/s results below remain their original cohort, not overwritten. [Raw trial summary](docs/benchmark-qwen3-score-vector-v1.json).
+
+TinyLLAMA next: [prefill plan](docs/tinyllama-prefill-plan.md), starting from the newer focused 358.06 tok/s recipe rather than the older 235.05 sweep.
+
+
+Updated: 2026-10-29 (Asia/Shanghai). Platform: Orange Pi 5, RK3588S, 16 GB RAM.
 
 Reference: [Rockchip rknn-llm benchmark.md](https://github.com/airockchip/rknn-llm/blob/main/benchmark.md).
 The reference table uses maximum CPU/NPU frequencies and W8A8 exports made with `optimization_level=0`.
@@ -12,6 +194,39 @@ The main table records GPU-first OpenCL baselines. Dtype cells show reference / 
 FP16 GPU operands currently come from Q8_0 GGUF checkpoints. Experimental CPU+NPU results are listed separately.
 No row is currently qualified as faster in both prefill and decode at comparable output quality.
 The 21 RK3588 baseline rows remain FP16 GPU measurements. New CPU+NPU INT8 measurements are recorded separately in the W8A8 sweep section below.
+
+Qwen3-0.6B now has a separate CPU+NPU fast-profile result: the 64-token backend candidate reports 38.39 decode tok/s versus the published RKLLM 32.91. The API profile's prefill-proxy median is 650.49 versus 642.93 tok/s, but its 627.42–711.39 range crosses the reference and it stops at 59 of 64 requested tokens. This is a promising phase-specific result, not a consistent matched-quality speed win. [Measurements and API evidence](docs/benchmark-qwen3-cpu-token-inputs-v1.json) · [API qualification](docs/benchmark-qwen3-api-fast-prefill-v1.json).
+
+Indexed sweep checked on October 28: [CPU+NPU candidate timings](#onpu-w8a8-sweep-cpunpu-candidates)
+cover all 21 reference models plus Spark-X2.6, with 204 valid timing variants.
+The latest [Qwen2 four-row prefill comparison](#qwen205b-four-row-swiglu-prefill-v1)
+records 24 matched sequences and four bitwise-equal teacher arrays; its
+prefill NPU/native-replay qualification passed. Quality and the all-model speed
+goal remain unqualified. [Full verification](docs/benchmark-qwen2-row-batch-models-verification-v1.json).
+
+Current preferred validated MiniCPM3 result: **15.72 prefill proxy tok/s and 4.61 decode tok/s**.
+The CPU latent-projection candidate preserves all 24 generated sequences and
+all four sets of 32 full-vocabulary teacher vectors exactly. Comparable RKLLM
+quality remains unqualified. [Results and verification](docs/benchmark-cpu-mla-projections-models-verification-v1.json).
+
+DeepSeekOCR grouped CPU experts passed the exact-bit and local numerical gates. The candidate becomes the preferred timing variant. This is text-only decoder inference; RKLLM and held-out quality remain unqualified. [Verification](docs/benchmark-deepseek-cpu-experts-verification-v1.json).
+
+## Qwen3-0.6B prefill follow-up — October 29
+
+The fast recipe is now selected by the oNPU worker for the verified F16 checkpoint with **Rockchip NPU + CPU**, context **512**, and prefill **Auto/On**. It includes prepared NPU attention, shared CPU workers, packing/view/copy optimizations and ready CPU token inputs. Other checkpoint/context profiles retain their existing behavior.
+
+| Measurement | Input tokens | Actual output tokens | Median TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|---:|---:|
+| Published RKLLM W8A8 | 128 | 64 | 199.09 | 642.93 | 32.91 |
+| Matched backend control | 128 | 64 | 204.24 | 626.72 | 38.27 |
+| Backend with ready CPU token inputs | 128 | 64 | 199.31 | 642.22 | **38.39** |
+| oNPU API fast profile | 128 | 59 (64-token budget) | **196.77** | **650.49** | 37.36 |
+
+The API median is 1.18% above the published prefill-proxy target, but its five measured requests range from 627.42 to 711.39 tok/s. **A consistent RKLLM win is not established.** The API measures first emitted text with a different chat prompt; the raw backend measures first generated token. Its naturally stopped 59-token decode rate is not a matched 64-output comparison. Bold marks better reported values, not a matched-engine certification.
+
+The backend candidate preserves all 1,024 held-out full-vocabulary logit vectors bitwise. The app passes uncached generation, a one-token cached-prefix follow-up, streaming, the 448-token prompt + 64-token context boundary, cancellation and recovery. Both original models were restored and answered fresh requests. The one-token JIT input guard was added after the backend batch and is covered by CPU regression and the API test; source cohorts are recorded separately.
+
+[Backend measurements](docs/benchmark-qwen3-cpu-token-inputs-v1.json) · [API qualification and source provenance](docs/benchmark-qwen3-api-fast-prefill-v1.json) · [Earlier transfer optimization](docs/benchmark-qwen3-batch-borrow-v1.json).
 
 ## RK3588
 
@@ -50,7 +265,7 @@ The Qwen3.5 rows use `--gpu-recurrent-scan`, actual 128-token prefill chunks and
 TTFT is 2.74, 7.10 and 23.44 seconds for 0.8B, 2B and 4B, down from 41.22, 101.53 and 480.83 seconds.
 The worker enables this path for the exact checked checkpoint hashes at context 512 or below, with realized weights and GPU-only inference.
 The generic RAM admission estimate can still reject larger models before worker startup; that estimate has not been requalified here.
-RWKV7 also uses one-token generic recurrent execution: its measured TTFT is 160.08 seconds (0.80 prefill proxy tok/s), and decode is 0.80 tok/s. Its full-model output quality is not qualified.
+The RWKV7 FP16 GPU baseline uses one-token generic recurrent execution: its measured TTFT is 160.08 seconds (0.80 prefill proxy tok/s), and decode is 0.80 tok/s. Its full-model output quality is not qualified.
 Qwen3-VL-2B measures its language decoder with text input only; image encoder/connector performance is not included.
 DeepSeekOCR also measures text-only language decoding; its image encoder and connector are excluded.
 
@@ -58,10 +273,16 @@ DeepSeekOCR also measures text-only language decoding; its image encoder and con
 ## oNPU W8A8 sweep: CPU+NPU candidates
 
 These are actual CPU+NPU INT8 projection runs, shown as **published RKLLM / oNPU**.
-The measurement pass has stopped; unsuccessful rows still need fixes and reruns. A dash is pending or failed, never an inferred result.
+Candidate timings now cover all 21 main models plus Spark-X2.6; quality and speed qualification remain open. A dash is pending or failed, never an inferred result.
 Each timing row requires three full warmups and three measured 128-input/64-output requests at context 512,
 stable measured IDs and positive NPU submissions in both phases. **Bold marks only the better reported number.**
 Whole-model INT8 coverage and comparable output quality remain unqualified; no row is a certified RKLLM win.
+
+A subsequent storage-view lifetime correction changes the current runtime. The
+recorded timings below remain tied to their captured source cohorts; numerical
+and performance requalification after that correction is pending. The fix
+passes 144 tests, with 11 skips, plus mypy and Ruff.
+[Regression, source and restoration evidence](docs/benchmark-memory-view-cpu-verification-v1.json).
 
 A controlled Qwen3.5-4B follow-up captured an errno-14 failure for a 20 MiB
 INT8 projection buffer (8,192×2,560) while more than 5 GiB remained available.
@@ -72,43 +293,90 @@ successful timing row or a cause claim for every failed model. Both original
 models were restored and answered fresh requests.
 [Controlled allocation and kernel-log evidence](docs/benchmark-w8a8-allocation-context-v3.json).
 
+An October 26 follow-up now completes Qwen3.5-4B with two memory domains and
+deferred CPU weight realization. Three full warmups and three measured requests
+record **32.20 prefill proxy tok/s** and **4.84 decode tok/s**, below the recorded
+RKLLM reference of 61.87 and 6.22. Both phases execute NPU work in the second
+domain and use native replay; all six generated ID sequences match each other.
+This adds one timing candidate; output quality, full learned-matrix coverage,
+and API support for the opt-in configuration remain unqualified.
+[Measured run](docs/benchmark-npu-domains-qwen35-4b-v3.json) ·
+[Capacity, hardware, cleanup and serving-restoration evidence](docs/benchmark-npu-domains-verification-v1.json).
+
 | Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
 | :---------- | :--------: | :---: | :----: | :--------: | :------: | :------: | :--------: |
-| Qwen2 | 0.5B | w8a8 / INT8† | 128 | 64 | **145.90** / 439.06 | **41.58** / 33.74 | 669.56 / 2177.62* |
+| Qwen2 | 0.5B | w8a8 / INT8† | 128 | 64 | 145.90 / **142.06** | 41.58 / **43.98** | 669.56 / — |
 | MiniCPM4 | 0.5B | w8a8 / INT8† | 128 | 64 | **135.29** / 177.75 | **45.34** / 42.73 | 534.82 / 1977.30* |
-| Qwen3 | 0.6B | w8a8 / INT8† | 128 | 64 | **199.09** / 227.34 | 32.91 / **34.24** | 791.11 / 2447.89* |
-| TinyLLAMA | 1.1B | w8a8 / INT8† | 128 | 64 | **243.93** / 544.56 | **24.43** / 22.35 | 1093.66 / 4517.74* |
-| Qwen2.5 | 1.5B | w8a8 / INT8† | 128 | 64 | **378.31** / 958.38 | **16.69** / 14.27 | 1689.21 / 6470.10* |
-| RWKV7 | 1.5B | w8a8 / INT8† | 128 | 64 | **634.34** / 15275.51 | **13.82** / 9.11 | 1486.19 / 5113.72* |
-| InternLM2 | 1.8B | w8a8 / INT8† | 128 | 64 | **380.14** / 803.98 | **15.45** / 14.09 | 1775.56 / 6222.81* |
-| Gemma2 | 2B | w8a8 / — | 128 | 64 | 598.41 / — | 10.37 / — | 2779.22 / — |
-| Gemma3n | 2B | w8a8 / — | 128 | 64 | 1124.51 / — | 9.91 / — | 2702.59 / — |
-| TeleChat2 | 3B | w8a8 / — | 128 | 64 | 618.48 / — | 10.18 / — | 2788.39 / — |
-| Phi3 | 3.8B | w8a8 / — | 128 | 64 | 1017.28 / — | 7.45 / — | 3758.34 / — |
-| MiniCPM3 | 4B | w8a8 / — | 128 | 64 | 1408.49 / — | 5.94 / — | 4384.02 / — |
-| ChatGLM3 | 6B | w8a8 / — | 128 | 64 | 1352.94 / — | 4.98 / — | 5985.99 / — |
+| Qwen3 | 0.6B | w8a8 / INT8 projections + FP16 attention‡ | 128 | 64 | 199.09 / **149.50** | 32.91 / **38.58** | 791.11 / — |
+| TinyLLAMA | 1.1B | w8a8 / INT8† | 128 | 64 | **243.93** / 257.96 | 24.43 / **25.33** | 1093.66 / 3502.47* |
+| Qwen2.5 | 1.5B | w8a8 / INT8† | 128 | 64 | 378.31 / **371.51** | 16.69 / **16.80** | 1689.21 / 4688.60* |
+| RWKV7 | 1.5B | w8a8 / INT8† | 128 | 64 | **634.34** / 1963.26 | 13.82 / **14.51** | 1486.19 / 3711.14* |
+| InternLM2 | 1.8B | w8a8 / INT8† | 128 | 64 | **380.14** / 533.32 | **15.45** / 15.11 | 1775.56 / 6220.91* |
+| Gemma2 | 2B | w8a8 / INT8† | 128 | 64 | **598.41** / 713.58 | **10.37** / 9.93 | 2779.22 / 6247.94* |
+| Gemma3n | 2B | w8a8 / INT8† | 128 | 64 | 1124.51 / **1091.49** | **9.91** / 8.57 | 2702.59 / 5957.46* |
+| TeleChat2 | 3B | w8a8 / INT8† | 128 | 64 | **618.48** / 696.42 | **10.18** / 9.81 | 2788.39 / 11106.87* |
+| Phi3 | 3.8B | w8a8 / INT8† | 128 | 64 | **1017.28** / 1137.48 | **7.45** / 7.22 | 3758.34 / 8922.37* |
+| MiniCPM3 | 4B | w8a8 / INT8† | 128 | 64 | **1408.49** / 8140.42 | **5.94** / 4.61 | 4384.02 / 9778.67* |
+| ChatGLM3 | 6B | w8a8 / INT8† | 128 | 64 | **1352.94** / 2298.50 | **4.98** / 4.32 | 5985.99 / 12262.25* |
 | Qwen3-VL | 2B | w8a8 / INT8† | 128 | 64 | **383.62** / 732.18 | **14.98** / 14.39 | 1868.98 / 5752.71* |
-| DeepSeekOCR | 3B(A570M) | w8a8 / INT8† | 128 | 64 | **701.21** / 37366.15 | **31.60** / 3.15 | 3066.66 / 6833.05* |
-| Qwen3.5 | 0.8B | w8a8 / INT8† | 128 | 64 | **587.74** / 16676.34 | **27.05** / 8.00 | 1039.66 / 2878.52* |
-| Qwen3.5 | 2B | w8a8 / INT8† | 128 | 64 | **776.95** / 1602.53 | **13.59** / 10.73 | 2121.91 / 6326.94* |
-| Qwen3.5 | 4B | w8a8 / — | 128 | 64 | 2068.88 / — | 6.22 / — | 4575.78 / — |
-| Gemma4 | E2B | w8a8 / — | 128 | 64 | 599.06 / — | 11.12 / — | 2498.70 / — |
-| LFM2.5-VL | 450M | w8a8 / INT8† | 128 | 64 | **102.74** / 274.46 | **62.16** / 54.25 | 436.94 / 1681.74* |
-| Spark-X2.5 | 1.7B | w8a8 / INT8† | 128 | 64 | **386.23** / 2407.40 | **15.61** / 9.10 | 1830.32 / 5817.18* |
+| DeepSeekOCR | 3B(A570M) | w8a8 / INT8† | 128 | 64 | **701.21** / 1345.75 | **31.60** / 23.29 | 3066.66 / 8856.39* |
+| Qwen3.5 | 0.8B | w8a8 / INT8† | 128 | 64 | **587.74** / 882.05 | **27.05** / 21.02 | 1039.66 / 2031.64* |
+| Qwen3.5 | 2B | w8a8 / INT8† | 128 | 64 | **776.95** / 1122.42 | **13.59** / 11.13 | 2121.91 / 4647.27* |
+| Qwen3.5 | 4B | w8a8 / INT8† | 128 | 64 | **2068.88** / 2677.79 | **6.22** / 5.29 | 4575.78 / 9737.73* |
+| Gemma4 | E2B | w8a8 / INT8† | 128 | 64 | **599.06** / 873.51 | **11.12** / 9.58 | 2498.70 / 5589.87* |
+| LFM2.5-VL | 450M | w8a8 / INT8† | 128 | 64 | **102.74** / 161.75 | **62.16** / 60.37 | 436.94 / 1505.80* |
+| Spark-X2.5 | 1.7B | w8a8 / INT8† | 128 | 64 | **386.23** / 574.79 | **15.61** / 14.65 | 1830.32 / 5808.43* |
 
 Additional candidate with no RKLLM reference row:
 
 | Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
 | :---------- | :--------: | :---: | :----: | :--------: | :------: | :------: | :--------: |
-| Spark-X2.6 | 4B | — / — | 128 | 64 | — / — | — / — | — / — |
-Spark-X2.6 candidate status: invalid.
+| Spark-X2.6 | 4B | — / INT8† | 128 | 64 | — / 1506.13 | — / 6.14 | — / 9341.85* |
+Spark-X2.6 now has a measured INT8 candidate; no RKLLM reference row is available.
 
-**Recorded main-table models: 13/21.** Original sweep snapshot: 2026-10-23T09:48:47.724248+00:00.
+The latest gated-attention follow-up improves Qwen3.5-4B from 32.20 to
+**41.74 prefill proxy tok/s**, and from 4.84 to **5.23 decode tok/s**.
+Spark-X2.5 improves from 53.17 to **159.37 prefill proxy tok/s**, and from 9.10
+to **13.10 decode tok/s**. The CPU kernel now handles output/head gates without
+bypassing them. Spark's 512-token window covers its full allocated 512-token
+context, so all 28 attention blocks use the same causal kernel. Smaller windows
+retain their fallback. Both candidates remain below the recorded RKLLM rates.
+All six requests per model have stable outputs within that candidate, but the
+outputs differ from the previous oNPU path; comparable quality remains pending.
+[Timing, profile, failed-attempt and restoration evidence](docs/benchmark-gated-attention-verification-v1.json).
+The latest raw runs sample big cores at 1.8 GHz, NPU at 1 GHz and the memory
+controller at 2.112 GHz. A post-run policy snapshot shows big-core minimum and
+maximum limits pinned to 1.8 GHz. The reference uses maximum clock settings;
+these local settings were not changed.
+
+A later three-domain/deferred-loading sweep adds valid timings for Gemma2,
+TeleChat2, Phi3, MiniCPM3, Gemma3n and Gemma4, plus the additional Spark-X2.6.
+Every successful row has three full warmups and three measured requests with
+stable measured 64-token outputs, native replay and positive NPU work in both
+phases. Three domains were configured; actual use was one or two. These are
+CPU/NPU candidates, which can be slower than the separate GPU baseline.
+That initial ChatGLM3 attempt hit the 2 GiB RAM reserve before timing; the
+private file-backed follow-up below supersedes it and preserves the failure. All attempts finished and both original serving
+sessions were restored and answered fresh requests.
+[Raw runs, validators, memory failure and restoration proof](docs/benchmark-w8a8-missing-domains-verification-v1.json).
+
+The final ChatGLM3-6B gap is now measured using private file-backed packed CPU
+weights: **55.69 prefill proxy tok/s** and **4.32 decode tok/s**, below the
+recorded RKLLM reference of 94.61 and 4.98. All six requests have identical
+64-token outputs. Observed minimum available RAM was about 5.0 GiB; the earlier
+loader stopped at its 2 GiB reserve. File-backed pages remain resident as used,
+and RSS is not exclusive physical memory. This completes timing coverage, not
+whole-model INT8 coverage, comparable quality, API qualification or speed wins.
+[Raw run](docs/benchmark-chatglm-mapped-weights-v1.json) ·
+[Loader tests, source cohorts, memory and restoration evidence](docs/benchmark-chatglm-mapped-verification-v1.json).
+
+**Recorded main-table models: 21/21.** Original sweep snapshot: 2026-10-23T09:48:47.724248+00:00.
+TinyLLAMA and Qwen2.5 now use the October 29 focused process cohorts shown at the top of this page, rather than their older sweep variants. TinyLLAMA still misses the combined prefill target; Qwen2.5 has a small median lead with trial ranges crossing the target. These backend results do not establish independent RKLLM quality equivalence. [TinyLLAMA](docs/benchmark-tinyllama-adaptive-layout-v1.json) · [Qwen2.5](docs/benchmark-qwen25-exp2-abba-v1.json).
 The Qwen3.5-2B preferred row now uses the October 25 CPU sigmoid/pool follow-up.
 Its 128-row CPU scan, parked head workers and pooled prefill sigmoid preserve
 the prior INT8 output sequence across all twelve control/candidate requests.
 [Updated model evidence](docs/benchmark-cpu-sigmoid-backend-model-v1.json).
-† Dynamic per-token activation/per-channel weight INT8 projections, INT32 accumulation and FP32 host arithmetic.
+† Dynamic per-token activation/per-channel weight INT8 projections, INT32 accumulation and FP32 host arithmetic. ‡ Qwen3 uses the October 29 fixed-stock profile: 12 measured requests across four processes, with all requests above the published prefill and decode targets. This profile requires the documented CPU/NPU performance governors, NPU IRQ placement and CPU6 idle setting; output quality versus RKLLM remains unqualified. Its local memory figure is omitted because this profile's table does not report one. [Profile and conditions](docs/benchmark-qwen3-stock-tuning-v1.json). Earlier Qwen3 CPU-token-input results remain in [their original cohort](docs/benchmark-qwen3-cpu-token-inputs-v1.json).
 Qwen3 uses the preferred matched FP16 source where selected. Other checkpoint provenance is in the result record.
 The learned-matrix coverage audit is separate; INT8 placement alone does not establish that every learned projection was quantized.
 * Local memory is lifetime peak process RSS in MiB and is not the reference memory metric; no memory winner is declared.
@@ -117,33 +385,948 @@ Prefill proxies are `128000 / TTFT(ms)` and include first-token work.
 
 | Model | Model Size | Prefill proxy(tok/s), RKLLM / oNPU INT8 |
 | :--- | :---: | ---: |
-| Qwen2 | 0.5B | **877.31** / 291.53 |
+| Qwen2 | 0.5B | 877.31 / **901.11** |
 | MiniCPM4 | 0.5B | **946.12** / 720.13 |
-| Qwen3 | 0.6B | **642.93** / 563.03 |
-| TinyLLAMA | 1.1B | **524.74** / 235.05 |
-| Qwen2.5 | 1.5B | **338.35** / 133.56 |
-| RWKV7 | 1.5B | **201.78** / 8.38 |
-| InternLM2 | 1.8B | **336.72** / 159.21 |
-| Gemma2 | 2B | 213.90 / — |
-| Gemma3n | 2B | 113.83 / — |
-| TeleChat2 | 3B | 206.96 / — |
-| Phi3 | 3.8B | 125.83 / — |
-| MiniCPM3 | 4B | 90.88 / — |
-| ChatGLM3 | 6B | 94.61 / — |
+| Qwen3 | 0.6B | 642.93 / **856.18‡** |
+| TinyLLAMA | 1.1B | **524.74** / 496.20 |
+| Qwen2.5 | 1.5B | 338.35 / **344.54** |
+| RWKV7 | 1.5B | **201.78** / 65.20 |
+| InternLM2 | 1.8B | **336.72** / 240.01 |
+| Gemma2 | 2B | **213.90** / 179.38 |
+| Gemma3n | 2B | 113.83 / **117.27** |
+| TeleChat2 | 3B | **206.96** / 183.80 |
+| Phi3 | 3.8B | **125.83** / 112.53 |
+| MiniCPM3 | 4B | **90.88** / 15.72 |
+| ChatGLM3 | 6B | **94.61** / 55.69 |
 | Qwen3-VL | 2B | **333.66** / 174.82 |
-| DeepSeekOCR | 3B(A570M) | **182.54** / 3.43 |
-| Qwen3.5 | 0.8B | **217.78** / 7.68 |
-| Qwen3.5 | 2B | **164.75** / 79.87 |
-| Qwen3.5 | 4B | 61.87 / — |
-| Gemma4 | E2B | 213.67 / — |
-| LFM2.5-VL | 450M | **1245.86** / 466.37 |
-| Spark-X2.5 | 1.7B | **331.41** / 53.17 |
-| Spark-X2.6 | 4B | — / — |
+| DeepSeekOCR | 3B(A570M) | **182.54** / 95.11 |
+| Qwen3.5 | 0.8B | **217.78** / 145.12 |
+| Qwen3.5 | 2B | **164.75** / 114.04 |
+| Qwen3.5 | 4B | **61.87** / 47.80 |
+| Gemma4 | E2B | **213.67** / 146.53 |
+| LFM2.5-VL | 450M | **1245.86** / 791.37 |
+| Spark-X2.5 | 1.7B | **331.41** / 222.69 |
+| Spark-X2.6 | 4B | — / 84.99 |
 
-Pending/failed rows: Gemma2-2B: invalid; Gemma3n-2B: invalid; TeleChat2-3B: invalid; Phi3-3.8B: invalid; MiniCPM3-4B: invalid; ChatGLM3-6B: resource-interrupted; Qwen3.5-4B: invalid; Gemma4-E2B: resource-interrupted.
+† Qwen3 uses the October 29 existing-recipe prefill remeasurement: six requests per arm in balanced control/candidate/candidate/control order. Trial variability crosses the RKLLM reference. Its 38.39 tok/s decode value in the main table comes from the separate ready-CPU-token-input cohort, not this prefill-only remeasurement.
+‡ Qwen3 uses the newer fixed-stock profile described above. The 667.79 tok/s existing-recipe and 655.35 tok/s rejected candidate measurements remain documented in the score-vector experiment section.
+
+Pending timing rows: none. Candidate timing coverage is complete; comparable quality and qualified RKLLM wins remain open.
 [Per-model runs, variants, ranges, failures and hashes](docs/benchmark-w8a8-results.json).
 Vision/connector performance is excluded for text-only VLM decoder cases.
+
+The October 26 CPU recurrent-scan follow-up updates the preferred Qwen3.5 timing variants to Qwen3.5/0.8B: 145.12 prefill proxy tok/s and 21.02 decode tok/s, Qwen3.5/2B: 114.04 prefill proxy tok/s and 11.13 decode tok/s, Qwen3.5/4B: 47.80 prefill proxy tok/s and 5.29 decode tok/s. Each uses the 128/64/512 protocol with three warmups and three measured requests. These candidates also include mapped CPU loading and current CPU attention placement; earlier-run differences do not isolate recurrent-scan unrolling. Output quality and full-model W8A8 coverage remain pending. [Run reports and restoration verification](docs/benchmark-cpu-gdn-models-v1-verification.json).
+
+A diagnostic-only CPU-attention profile measured Gemma4/E2B at 6.46s TTFT without the hook and 4.11s with 35 CPU attention blocks; the attention pilot decoded at 0.36 tok/s. Gemma3n/2B used 30 CPU attention blocks and measured 9.83s TTFT and 0.33 tok/s decode. Each report contains only 8 generated tokens. Both attention candidates were below the 1.5 tok/s gate and honestly skipped the 64-token full sweep; these are not timing candidates. The native profile and selected generated C show whole-weight Q8 unpacking dominates CPU decode time. [Raw diagnostic profiles and source verification](docs/benchmark-gemma-attention-profile-verification-v1.json).
+
+Gemma CPU attention v3 added full W8A8 timing candidates only for rows that completed 64 outputs and passed the candidate gate. Accepted: Gemma4/E2B TTFT 1.43s, prefill proxy 89.59 tok/s, decode 9.03 tok/s, Gemma3n/2B TTFT 6.93s, prefill proxy 18.47 tok/s, decode 6.20 tok/s. The 8-token stock/control and pilot profiles are diagnostics; the V2 token-changing run is rejected. Output quality and full-model coverage remain unqualified. [Run, pilot, rejection and pruning evidence](docs/benchmark-gemma-pruned-verification-v3.json).
+
+Gemma host-kernel v4 reports are accepted only for candidates that completed 64 output tokens under the full 128/64/512 protocol. Accepted: Gemma4/E2B TTFT 0.87s, prefill proxy 146.95 tok/s, decode 9.05 tok/s, Gemma3n/2B TTFT 1.10s, prefill proxy 116.56 tok/s, decode 8.26 tok/s. The CPU GELU hook emitted one kernel per FFN block during 128-token prefill and none during decode. The CBUF command-buffer measurements are primitive-only and are not model speedups. Model output quality and full learned-matrix coverage remain unqualified; no general RKLLM win is claimed. [Full reports, stock-8 gate profiles, CBUF shapes and CPU evidence](docs/benchmark-gemma-host-kernels-verification-v4.json).
 <!-- onpu-w8a8-sweep:end -->
+
+Gemma decode v5 completed both full 128/64/512 candidates with three warmups and three measured requests: Gemma4/E2B: 146.53 prefill proxy tok/s, 9.58 decode tok/s; Gemma3n/2B: 117.27 prefill proxy tok/s, 8.57 decode tok/s. All twelve 64-token sequences match v4. Each phase uses the vector CPU softcap; the narrow K=4096 NPU decode case also passed signed-integer native replay regression. Historical comparisons do not isolate the two changes or clock drift. Comparable output quality remains unqualified. [Full reports and restoration verification](docs/benchmark-gemma-decode-verification-v5.json).
+
+The SDK-derived INT8 prefill layout was also measured as a complete projection pipeline, including CPU quantization, transfers, NPU execution and FP32 output conversion. All 126 outputs across nine cases matched the independent reference bit for bit. One original shape improved by 6.9%; two were near parity, and six expanded widths were slower in every paired block. The option remains off by default and these operator measurements change no model timing row. [Full pipeline results and restoration evidence](../tinygrad/extra/rockchip/int8_sdk_prefill.md).
+
+The SDK pipeline v2 repeat adds four-row CPU conversion and preserves 140 bitwise outputs across ten projection cases. Its 64/3072/2048 case is 9.7% faster than the current control; expanded widths and a two-call row split still lose overall. Broader dispatch remains disabled, and no model timing row changes. [V2 samples and profiles](../tinygrad/extra/rockchip/int8_sdk_prefill_v2_results.json).
+
+Gemma2 host-v1 completes the full 128/64/512 comparison: current control 42.34/7.27 prefill-proxy/decode tok/s; capped CPU attention, vector GELU and final-logit softcap candidate 138.74/9.24. Both use three full warmups and three measured requests. Candidate sequences are stable across all six requests but first differ from control at output token 14 (29 of 64 positions differ). Comparable quality remains unqualified. CPU/DMC clocks vary and later candidate NPU samples end at 800 MHz versus 1 GHz for control; no fixed-clock win is claimed. Actual counts are 26 CPU attention calls per phase, 26 GELU calls in prefill and one final softcap per phase. Both normal workers were restored and answered fresh requests. [Full reports and evidence](docs/benchmark-gemma2-host-verification-v1.json).
+
+Gemma2 fixed-prefix quality diagnostic: the throughput benchmark first emits EOS at output 8, before the free-sequence divergence at output 14. Under identical teacher-forced prefixes, the control reproduces all 64 benchmark predictions and the candidate reproduces the first divergence. On 128 held-out natural-text targets across 16 prefixes, sampled perplexity is 28.64 for control and 27.67 for candidate (ratio 0.96620), passing the declared local 1.02 regression limit. Distributions still differ: natural-target argmax agreement is 90.6%, mean probability total variation 0.09149 and maximum logit difference 6.0789. This is a local host-kernel regression check against existing INT8, not FP16 or RKLLM quality parity. A separate direct-logit profile attributes 31.9% of native prefill time and 89.7% of native decode time to NPU matmuls. Timing cells remain unchanged. [Raw-backed quality and profile evidence](docs/benchmark-gemma2-host-quality-v1.json).
+
+Gemma2 natural-depth v1 removes zero padding from 2304 to 2560 input channels. Full 128/64/512 runs measure 140.29/9.79 prefill-proxy/decode tok/s versus 136.94/9.30 for the identically configured padded control. All twelve 64-token sequences match the prior host candidate. Packed weights fall from 2,829,582,336 to 2,614,099,968 bytes (205.5 MiB saved). Independent integer/FP32 checks and vocabulary-tail/partial-row native replay passed. Quality qualification against RKLLM and all-options API qualification remain open; clocks vary. [Full reports and restoration evidence](docs/benchmark-gemma2-natural-verification-v1.json).
+
+Depth 2304 is now enabled by default after the natural-depth qualification above. The measured explicit value 1 and new unset default select the same branch; `ONPU_INT8_NATURAL2304=0` retains the padded control. The proof records the default-only source change and post-promotion CPU/static checks. [Implementation notes](../tinygrad/extra/rockchip/int8_natural2304.md).
+
+Gemma2 fused-GELU v1 combines raw INT8 projection scaling, GELU and independent down-projection-group quantization. Full 128/64/512 runs measure 183.86/9.93 prefill-proxy/decode tok/s versus 140.37/9.93 for the current unfused control. All twelve 64-token sequences match the prior candidate; the native graph executes 26 fused pack kernels during prefill and none during decode. The option remains off by default pending API qualification. RKLLM quality and fixed-clock qualification remain open; timing cells are candidates only. [Full reports, exact payload/native checks and restoration](docs/benchmark-gemma2-gelu-verification-v1.json).
+
+Gemma2 static-layout follow-up resolves raw GELU fragment locations before the channel loops. Complete pack timings improve 6.8% at the full Gemma2 shape with identical payload and scale bits. Full requests measure 179.38/9.93 prefill-proxy/decode tok/s versus 169.93/9.86 for this run's control; all twelve output sequences match the previous candidate. The table now records this latest candidate. Earlier 183.86 tok/s measurements are retained above; adaptive clocks and process state vary, so those rates are not adjusted by the new ratio. The static layout defaults to the measured option within the optional fused-GELU path. RKLLM quality, fixed-clock performance and full serving API qualification remain open. Both original sessions were restored and answered fresh requests. [Full reports, compiled-kernel selection and checks](docs/benchmark-gemma2-gelu-static-verification-v1.json).
+
+RWKV7 native CPU scan v1 permits actual 128-token prefill chunks while preserving FP32 recurrent state. Full requests measure 67.20/12.73 prefill-proxy/decode tok/s versus 9.12/10.25 for the current one-token control. Prompt NPU submissions fall from 46,208 to 409; the candidate executes 24 native scan kernels in each captured phase. Each variant is stable across all six runs, but two output positions differ between them (outputs 23 and 57, token 629 becomes 630). The 20-test CPU suite includes independent matrix equations, complete small-model PyTorch references, cache/reset/generation and pooled state checks. Held-out quality, full learned-matrix coverage, model-maximum context and serving API remain unqualified; adaptive clocks vary. Both normal sessions were restored and answered fresh requests. [Raw reports, checks, differences and restoration](docs/benchmark-rwkv7-scan-verification-v1.json).
+
+RWKV7 native-scan quality follow-up **fails the predeclared local 2% regression limit**: sampled perplexity on 128 held-out targets rises from 8.8876 to 9.1603 (ratio 1.03069, +3.07%). Natural-target argmax agreement is 93.75%, mean probability total variation 0.05772 and maximum absolute logit difference 4.58. The faster row remains an experimental timing candidate, not a quality-qualified result. The direct native decode recurrence matches the existing tinygrad FP32 recurrence bit for bit in a separate trained-geometry primitive check; batching and the surrounding model pipeline need further isolation. Profiling attributes only 12.5% of candidate prefill time to NPU calls; the CPU scan takes 416.5 ms and three large CPU kernels take 338.3, 288.0 and 165.0 ms. NPU calls account for 72.5% of native decode time. These component profiles do not change timing cells. Both normal sessions were restored and answered fresh requests. [Raw-vector comparison, failed gate and profiles](docs/benchmark-rwkv7-scan-quality-v1.json).
+
+RWKV7 single-token isolation retains the native scan while disabling prefix batching. All 192 native logit-vector hashes match the batched native run exactly; the 3.07% local regression persists, so batching alone is not its cause. Generated generic recurrence code shows a different FP32 order for normalized-key projection. An ordered-normalization fix now passes the focused bitwise test, but full-model quality and timing are pending. The earlier quality-failing cohort is retained as historical evidence; the corrected follow-up now supplies the measured row. [Isolation, source identities and restored serving](docs/benchmark-rwkv7-single-quality-v1.json).
+
+RWKV7 ordered-normalization and small-depth v2 supersede the earlier experimental row. Preserving the generic fused FP32 normalized-key reduction order restores exact agreement on all 192 fixed-prefix full logit vectors, including 128 held-out targets: sampled perplexity is 8.8876 on both paths, ratio 1.00000. This passes the unchanged local regression gate against existing INT8, rather than qualifying FP16 or RKLLM output quality. Matched corrected-scan timing control/candidate measure 66.89/66.75 prefill proxy tok/s and 12.65/13.10 decode tok/s. All twelve 64-token timing sequences match. Opt-in physical depths 64/128/256 reduce packed weights by 68.125 MiB; the planner default remains off. The candidate still trails RKLLM 201.78/13.82 tok/s. Both original workers were restored and answered fresh requests; the GPU worker stayed loaded. [Full reports, exact local quality and restoration](docs/benchmark-rwkv7-small-depth-verification-v2.json).
+
+RWKV7 decode-worker follow-up keeps CPU workers awake between single-row scan calls and parks them at the end of each inference call. Matched control/candidate measure 13.05/14.51 decode tok/s and 65.77/65.20 prefill proxy tok/s. The captured scan sources confirm parked prefill in both variants, parked control decode and spinning candidate decode. All twelve 64-token timing sequences match. All 192 fixed-prefix logit dumps match each other and the prior local INT8 cohort byte for byte. The current decode rate exceeds the published RKLLM 13.82 tok/s; prefill remains below 201.78. This is a reported speed comparison with adaptive local clocks, rather than matched RKLLM output-quality or both-phase qualification. `ONPU_RWKV_DECODE_SPIN=1` remains opt-in/default-off. The earlier CPU-only proxy used substantially more CPU time for spinning workers; that is not a full-model power measurement. Both original serving sessions were restored and answered fresh requests; the GPU session stayed loaded. [Raw timings, callback sources, exact local quality and restoration](docs/benchmark-rwkv7-pool-spin-verification-v1.json).
+
+A fresh API worker now selects the pinned RWKV7 INT8 recurrent configuration with 128-row prefill, smaller physical depths and spinning decode workers. Eighteen uncached greedy `/v1/chat/completions` requests (three warmups and three measured requests per workload) reproduce the independent backend reference, including usage, finish reason and NPU submission count. Each prompt has 128 tokens; replies stop naturally or reach their 64-token budget. The following API metrics use first visible text, so they remain separate from the canonical backend row.
+
+| API workload | Prompt tokens | Completion tokens | Prefill proxy tok/s | Decode tok/s |
+| :--- | ---: | ---: | ---: | ---: |
+| counting_continuation | 128 | 39 | 65.06 | 14.44 |
+| long_story | 128 | 64 | 65.94 | 14.30 |
+| code | 128 | 64 | 65.23 | 14.03 |
+
+This qualifies the checked local serving configuration at context 512, not maximum context or comparable RKLLM output quality. GPU-first defaults remain in place; both original serving sessions were restored and answered fresh requests. [HTTP responses, references, timings and restoration](docs/benchmark-rwkv7-api-verification-v1.json).
+
+Component profiling identifies CPU work behind the two largest prefill gaps. NPU kernels account for 4.6% of MiniCPM3's recorded native prefill time and 0.3% of DeepSeekOCR's. MiniCPM3 spends 11.93 seconds in the generic per-head query projection, 10.23 seconds in latent QK dots, 4.03 seconds in value projection and 2.02 seconds in weighted-value reduction. Its query projection decodes Q8 weights inside dot products; static weight preparation and MLA attention kernels are direct experiment targets. DeepSeekOCR spends 19.63 seconds in expert gate/up matmuls and 13.17 seconds in expert down matmuls—98.8% of its recorded native prefill time. Those expert matmuls also account for 87.2% of native decode time. These are one-request diagnostic kernel timings after three full warmups, not new throughput rows or quality-qualified wins. The captured CPU sources and bindings support the attribution. Both normal serving models were restored and answered fresh requests. [Profiles, exact sources, output comparisons and restoration](docs/benchmark-mla-moe-profile-verification-v1.json).
+
+MiniCPM3's opt-in CPU MLA table preparation measures 3.94/5.63 prefill proxy tok/s and 2.19/2.89 decode tok/s for matched control/candidate. Preparing 124 contiguous FP16 tables (155 MiB logical size) removes all 124 Q8-reading per-head projection programs in each captured phase; NPU packed weights stay identical. All twelve 64-token sequences match each other and the previous reference. CPU tests preserve decoded weight bits, projection outputs and small-model cached/reset/generation behavior. Full-model logits, held-out perplexity and comparable RKLLM quality remain unqualified. A stale packed-byte validation constant initially stopped the candidate; the unchanged control was independently revalidated against the current profile, and the candidate resumed under the same numerical sources in a separate lease. Original failed validation, corrected audit, raw timings, source evidence and both serving restorations are retained. [Matched results and correction](docs/benchmark-minicpm3-mla-weights-verification-v2.json).
+
+MiniCPM3 CPU MLA attention v1 compares the matched weights-only control with an opt-in QK/PV candidate: 5.63/10.62 prefill proxy tok/s and 2.89/3.86 decode tok/s. Both variants prepare 124 CPU MLA FP16 tables and retain identical packed NPU weights; the candidate adds 62 QK and 62 PV CPU kernels in each phase while keeping generic softmax and the existing small/static fallback. All twelve generated 64-token sequences match across the pair, with CPU checks recorded separately. These are local regression checks, not model-logit, held-out, or RKLLM quality qualification. The candidate improves both measured phases against this control. The optional helper remains off by default. [Reports, CPU receipt and restored-serving evidence](docs/benchmark-minicpm3-mla-attention-verification-v1.json).
+
+A fresh real RKLLM Qwen3-0.6B W8A8 GDB trace now covers the complete bounded 128-input/2-output pass: **2,657 submissions, 3,751 tasks and 367,308 register words**. Prefill contains 896 FP16-family matrix tasks and 896 DPU conversion tasks; decode contains 594 INT8-family matrix tasks and no FP16-family matrix tasks. The capture includes active per-core task ranges and matrix-address buffer bindings. This is register/scheduling evidence, with no debugger throughput or comparable-quality claim; existing model timing cells stay unchanged. Both original serving sessions were restored and answered fresh requests. [Full trace inventory and verification](docs/benchmark-rkllm-full-register-capture-v2.json).
+
+### Grouped NPU MLA projections
+
+The latest completed NPU experiment runs forty distinct head projections in one
+submission across three cores. These are **CPU / grouped NPU milliseconds**;
+lower is better. They include FP16 input conversion, layout, transfers, native
+replay and output assembly, with immutable weights packed before measurement.
+
+| Projection, all 40 heads | 1 row CPU / NPU (ms) | 17 rows CPU / NPU (ms) | 128 rows CPU / NPU (ms) |
+|---|---:|---:|---:|
+| Query latent, K64/N256 | 0.597 / **0.354** | 7.534 / **1.008** | 34.493 / **7.560** |
+| Value, K256/N64 | 0.593 / **0.313** | 7.534 / **0.802** | 36.971 / **7.084** |
+
+The grouped three-core path is 1.69–1.89× faster than CPU at one row and
+4.56–5.22× at 128 rows. It wins all eight paired timing blocks for every tested
+shape, and grouped outputs match separate NPU calls bit for bit. Clocks were
+not fixed. These gains do not establish full-model throughput or RKLLM wins.
+[Raw measurements](docs/benchmark-minicpm3-grouped-npu-operator-v1.json) ·
+[Source, test and restoration verification](docs/benchmark-minicpm3-grouped-npu-operator-verification-v1.json).
+
+The optional model hook now supports independent prefill/decode selection and
+symbolic token counts. Its matched MiniCPM3 128-input/64-output/context-512 run
+completed the control's three warmups and three measurements at 10.73 prefill
+proxy tok/s and 4.03 decode tok/s. The following fixed-token logit diagnostic
+failed with `cycle detected in assign graph`; the candidate was correctly not
+run. A small NPU reproducer also fails for fixed-shape full-logit calls with a
+fresh cache, while generation-matching symbolic token inputs pass. The trained
+comparison still needs that diagnostic change and revalidation, so those control
+timings do not replace the validated model row. The candidate combines INT8 dense projections
+with FP16 MLA projections; comparable FP16/RKLLM output quality remains
+unqualified. The model timing tables retain the completed CPU-MLA result above
+until the grouped candidate completes inference and validation.
+
+The v2 repeat fixes the diagnostic input form and validates the control's six
+requests plus 32 fixed-token full-vocabulary logit vectors: **10.62 prefill proxy
+tok/s and 3.98 decode tok/s**. The candidate prepares all 62 grouped FP16 hooks
+but stops during its first warmup with `Rockchip matmul requires finite FP16
+activations` in captured decode. No candidate timing request completes. A short
+trained diagnostic subsequently found non-finite query output despite finite
+inputs and a finite independent reference. Whole-buffer synchronization,
+separate FP16 allocations and one-core execution did not resolve it; none is
+accepted as a fix. The preferred timing cells remain unchanged.
+
+The subsequent **grouped INT8 MLA v1** run completes three full warmups and
+three measured requests per arm with the same 128-input/64-output/context-512
+workload. Both variants retain CPU MLA attention and prepared FP16 source tables;
+the candidate adds 62 grouped INT8 projection hooks, with 124 grouped programs
+in each captured phase. CPU surrounding arithmetic remains FP32.
+
+| MiniCPM3 variant | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) | Local numerical gate |
+|---|---:|---:|---:|---|
+| Matched CPU-MLA control | 12049.75 | 10.62 | 3.97 | Reference |
+| Grouped INT8 candidate | 6450.59 | 19.84 | 4.81 | **Failed; rejected for promotion** |
+| Published RKLLM reference | 1408.49 | 90.88 | 5.94 | Comparable quality unqualified |
+
+The candidate is 1.87× faster in prefill and 1.21× faster in decode than this
+control, but fails two unchanged local limits over 32 repeated-prompt teacher
+targets: relative RMS logit error is **0.16412 versus a 0.01 limit**, and mean
+probability total variation is **0.06455 versus a 0.02 limit**. The sampled
+perplexity ratio is 0.96179 and passes its 1.02 limit; this does not override
+the failed limits. Argmax agreement is 96.875%. This small diagnostic does not
+qualify held-out, FP16 or RKLLM output quality. Candidate timing cells therefore
+do not replace the preferred row. The INT8 hook remains opt-in. Both normal
+serving models were restored with their options and answered fresh requests.
+[Raw reports, unchanged thresholds and restored-serving evidence](docs/benchmark-minicpm3-mla-int8-verification-v1.json).
+
+### Grouped INT8 residual v2
+
+A matched 128-input/64-output/context-512 run completes three warmups and three
+measured requests per arm. The candidate computes three scaled INT8 products,
+`A0W0 + A1W0 + A0W1`, in one grouped submission per projection. Original source
+tables remain FP16; CPU attention and surrounding FP32 arithmetic remain.
+
+| MiniCPM3 variant | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Matched CPU-MLA control | 12027.73 | 10.64 | 3.98 |
+| Residual INT8 candidate | 7901.40 | 16.20 | 4.41 |
+| Published RKLLM reference | 1408.49 | 90.88 | 5.94 |
+
+The local numerical gate **fails**: relative RMS logit error is
+0.159280 (limit 0.01), mean probability total variation is
+0.063834 (limit 0.02), and sampled perplexity ratio is
+1.028491 (limit 1.02). Argmax agreement is
+93.750%. These 32 repeated-prompt teacher targets are a local
+regression check, not held-out, FP16 or RKLLM quality qualification. The preferred timing row is retained.
+
+Candidate packed NPU weights are 4,236,083,200 bytes: 3,992,289,280 dense INT8
+bytes plus 243,793,920 bytes for grouped residual products. Another 9,523,200
+bytes hold CPU dequantization scales; these are outside the NPU weight count.
+The option remains experimental and opt-in. Before the trained runs, CPU
+checks, NPU changed-input/native-replay tests and complete small-model generation
+passed. All candidate timing requests used the original 10 GiB soft and 11 GiB
+hard memory limits. During the later non-greedy quality diagnostic, repeated
+soft-limit throttling delayed compilation; the soft limit was raised to 10.5 GiB
+while the hard limit and global 2 GiB reserve stayed unchanged. Saved timing
+trials and medians were verified unchanged. Both original serving models were
+restored and answered fresh requests.
+[Raw reports, quality vectors, gates and serving evidence](docs/benchmark-minicpm3-mla-int8-residual-verification-v2.json).
+
+A subsequent bitwise-invariant trace of all 124 query/value projections at the
+last fixed-teacher decode position finds exact agreement with the independent
+scaled INT8 recipe, including independently reconstructed packed weights and
+scales. The largest RMS difference from the original CPU projection on identical
+inputs is 0.2254%. This single-position check does not establish prefill or
+earlier-cache correctness and does not override the failed whole-model gates.
+[Actual projection snapshots and independent analysis](docs/benchmark-minicpm3-projection-trace-verification-v1.json).
+
+### Query-only NPU MLA v1
+
+A matched 128-input/64-output/context-512 run completes three warmups and three
+measured requests per arm. The candidate computes three scaled INT8 products,
+`A0W0 + A1W0 + A0W1`, only for query projections. Value projections keep the
+original CPU dot with FP16 source tables and FP32 arithmetic. CPU attention
+and other surrounding arithmetic remain FP32.
+
+| MiniCPM3 variant | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Matched CPU-MLA control | 11918.53 | 10.74 | 4.03 |
+| Query-only NPU candidate | 10082.89 | 12.69 | 4.27 |
+| Published RKLLM reference | 1408.49 | 90.88 | 5.94 |
+
+The local numerical gate **fails**: relative RMS logit error is
+0.164209 (limit 0.01), mean probability total variation is
+0.063534 (limit 0.02), and sampled perplexity ratio is
+1.021769 (limit 1.02). Argmax agreement is
+93.750%. These 32 repeated-prompt teacher targets are a local
+regression check, not held-out, FP16 or RKLLM quality qualification. The preferred timing row is retained.
+
+Candidate packed NPU weights are 4,114,186,240 bytes: 3,992,289,280 dense INT8
+bytes plus 121,896,960 bytes for query residual products. Another 7,618,560
+bytes hold CPU dequantization scales; these are outside the NPU weight count.
+The option remains experimental and opt-in. Before the trained runs, CPU
+checks, NPU changed-input/native-replay tests and complete small-model generation
+passed. The run used 10 GiB soft/11 GiB hard limits and a 2 GiB board reserve. Both original serving models were restored and answered
+fresh requests.
+[Raw reports, quality vectors, gates and serving evidence](docs/benchmark-minicpm3-mla-query-only-verification-v1.json).
+
+The historical residual raw reports have a stale FP16 suffix in their precision
+description. Their `grouped_mla_precision=int8_residual`, integer ABI and checked
+packed codes establish INT8 execution. New reports correct the suffix; prior
+reports and their hashes are retained.
+
+### CPU MLA causal work v1
+
+A matched 128-input/64-output/context-512 run completes three warmups and three
+measured requests per arm. Both arms use CPU MLA query/value projections,
+prepared FP16 source tables, FP32 attention and generic softmax. The candidate
+skips bounded masked QK outputs and zero-probability PV tails; unsafe inputs
+retain the original full calculation. Single-row decode avoids the new scan.
+
+| MiniCPM3 variant | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Matched CPU-MLA control | 11971.85 | 10.69 | 4.01 |
+| Causal-work candidate | 10960.11 | 11.68 | 4.01 |
+| Published RKLLM reference | 1408.49 | 90.88 | 5.94 |
+
+The local numerical gate **passes**: relative RMS logit error is
+0.000000 (limit 0.01), mean probability total variation is
+0.000000 (limit 0.02), and sampled perplexity ratio is
+1.000000 (limit 1.02). Argmax agreement is
+100.000%. These 32 repeated-prompt teacher targets are a local
+regression check, not held-out, FP16 or RKLLM quality qualification. The preferred timing row is retained.
+
+Both arms retain the same 3,992,289,280 packed NPU bytes for dense INT8
+projections, 124 CPU FP16 projection tables and 62 QK/PV kernels per phase.
+No grouped NPU MLA projection is enabled. Exact bitwise final-logit agreement
+is **required and passed**, in addition to the original numerical limits.
+The control sets `ONPU_MLA_CAUSAL_WORK=0`, the candidate sets it to `1`.
+The run used 10 GiB soft/11 GiB hard limits and a 2 GiB board reserve. Both original serving models were restored and answered fresh
+requests. These local checks do not qualify RKLLM or held-out output quality.
+[Raw reports, quality vectors, gates and serving evidence](docs/benchmark-minicpm3-cpu-mla-causal-verification-v1.json).
+
+### DeepSeekOCR grouped CPU experts v1
+
+Both arms use identical dense INT8 NPU options, deferred CPU weight realization,
+128 input/64 output tokens, context 512, three warmups and three measured requests.
+The earlier published 3.43/3.15 tok/s candidate used realized weights.
+This new matched pair defers weight realization in both arms for the packed-weight
+memory experiment; its original-expert control must not be presented as the
+earlier baseline. Saved source shows raw Q8 blocks decoded inside the deferred
+control expert loops; the candidate prepares packed FP16 weights once. Its gains
+therefore include preparation as well as grouped execution. Only the candidate
+enables grouped CPU expert projections. It groups selected
+rows by expert, reuses packed FP16 weights and computes independent output
+channels with the original sequential FP32 feature accumulation. Routing,
+activations, shared experts and the final top-k weighted sum stay in the model.
+
+| DeepSeekOCR variant | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Original CPU-expert control | 81829.83 | 1.56 | 1.47 |
+| Grouped CPU-expert candidate | 1345.75 | 95.11 | 23.29 |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 |
+
+The local qualification **passes**: exact bitwise agreement of 32 fixed-teacher full-vocabulary
+vectors is **passed**, relative logit RMS is 0.000000 (limit 0.01),
+mean probability total variation is 0.000000 (limit 0.02),
+and sampled perplexity ratio is 1.000000 (limit 1.02).
+Targets repeat the prompt; this is local regression against existing INT8 inference,
+not held-out, FP16 or RKLLM quality qualification. The candidate becomes the preferred timing variant.
+
+The checkpoint has one leading dense block and eleven MoE blocks. The candidate
+executes all 33 grouped expert kernels in each captured phase; the control uses
+the original expert matrices. Dense NPU weights remain 505,446,400 bytes in both
+arms. Original expert tensors/layouts are retained, with a separate CPU packed
+copy; local RSS includes preparation up to each measured request.
+The run used 10 GiB soft/11 GiB hard limits, no swap and a global 2 GiB RAM reserve. Both original serving models were restored with their options and
+answered fresh requests. The image encoder and connector are excluded.
+[Raw reports, bitwise comparison, source hashes and restoration](docs/benchmark-deepseek-cpu-experts-verification-v1.json).
+
+A subsequent diagnostic of the same configuration attributes 81.17% of recorded
+prefill kernel time and 50.42% of decode time to grouped CPU experts. NPU
+execution alone accounts for 4.46% and 39.24%; copies are separate. All four
+profile-run sequences match the candidate. Instrumented component timings do
+not replace the throughput row above. A CPU tile prototype improves the isolated
+gate/up and down kernels by 8.9% and 8.5%, with twelve exact-bit routing/length
+checks. Its subsequent integration passed exact model-logit checks but lost in
+complete-model timing, as recorded below; the runtime option was removed.
+[Current profile and restored serving](docs/benchmark-deepseek-cpu-experts-profile-verification-v1.json)
+· [Prototype samples and generated sources](docs/benchmark-deepseek-cpu-experts-tile-prototype-v2.json).
+
+### DeepSeekOCR eight-row expert tile v1
+
+Both arms use grouped CPU experts with the same N16 packed FP16 tables,
+dense INT8 NPU options, deferred weight realization and 505,446,400 dense NPU
+weight bytes. Only `ONPU_EXPERT_TILE8=0/1` changes. The candidate reuses each
+weight across up to eight prefill rows, computes eight independent outputs at a
+time and separates full row tiles from tails. Each output retains sequential
+FP32 feature accumulation. Capacity-one decode retains the original kernel.
+
+| DeepSeekOCR tile variant | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Four-row control | 1295.03 | 98.84 | 24.71 |
+| Eight-row candidate | 1320.75 | 96.91 | 23.83 |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 |
+
+Each arm uses 128 input/64 output tokens, context 512, three complete warmups
+and three measurements. All twelve generated sequences match the prior grouped
+candidate. Local numerical regression **passes**: bitwise equality of 32
+fixed-teacher full-vocabulary vectors is **passed**,
+relative logit RMS is 0.000000, mean probability total
+variation is 0.000000 and sampled perplexity ratio is
+1.000000. The original 0.01/0.02/1.02 numerical
+limits and the exact-bit requirement remain unchanged. Targets repeat the
+prompt; held-out, FP16 and comparable RKLLM quality remain unqualified.
+
+Preferred-row promotion requires local regression and both measured throughput
+medians to improve over this matched control. The prior preferred timing variant is retained. CPU-only qualification
+passes 49 tests with one hardware skip, mypy on 274 files and Ruff. A separate
+native NPU model test passes changed-prefix and cached-decode equality before
+either trained arm runs. The candidate captures 33 eight-row expert programs in
+prefill and none in decode; both arms execute 33 expert programs in each phase.
+The slower experimental tile option was removed after the comparison; the
+runtime and tests were restored byte for byte to their previously qualified
+four-row versions. Both original serving models were
+restored with their options/settings and answered fresh requests. The image
+encoder and connector are excluded. These measurements do not establish a
+full VLM or certified RKLLM win.
+[Reports, exact logits, source hashes and restoration](docs/benchmark-deepseek-expert-tile-verification-v1.json).
+
+### Selected NPU experts and physical depths
+
+These are operator experiments, not new model rows. The selected-expert INT8
+runtime keeps an immutable atlas resident and validates routing IDs before
+patching task weight addresses in ordinary and native replay. Raw integer
+outputs match independent references, including changed IDs, duplicates and
+signed extremes. It remains unselected by the app/model placement configuration.
+Separate projections trail the prepared CPU kernels. A partial fused gate/up
+trial measures 0.713 ms on NPU versus 0.767 ms on CPU (paired 1.076x), but its
+subsequent prefill harness checked native execution too early. The corrected
+warmup diagnosis and the completed prefill tests below supersede that harness
+failure; no backend admission fix was needed.
+
+`ONPU_INT8_EXPERT_DEPTHS=1` removes zero padding at depths 896 and 1280.
+It remains off by default. The hardware tests cover exact raw integer results
+with grouped 17/128-row execution and routed single-token execution. Padded
+and natural complete decode projections match bit for bit for all six changed
+inputs. Timing includes quantization, copies, routing/command cleaning,
+submission, output scaling and native replay.
+
+| Selected projection | Padded NPU median ms | Natural NPU median ms | Paired speedup |
+|---|---:|---:|---:|
+| E8, N1792, K1280, six routes | 0.685 | 0.628 | 1.134x |
+| E8, N1280, K896, six routes | 0.435 | 0.403 | 1.081x |
+
+Speedups are medians of paired block ratios, not ratios of separate medians.
+The prefill probe uses 128 tokens, six selected experts per token and balanced
+12-row groups across 64 experts, with combined gate/up width 1792 and depth
+1280. Route-map creation is outside timing. The NPU side includes input gather,
+quantization, padded work, copies and dequantization/scatter; the prepared CPU
+kernel includes bucketing and uses a favorable combined-width layout.
+
+| Rows allocated per expert | CPU median ms | NPU median ms | Paired NPU speedup |
+|---|---:|---:|---:|
+| 12 | 51.89 | 10.34 | 5.090x |
+| 128 | 51.72 | 41.82 | 1.225x |
+
+The 128-row case includes allocation/computation overhead for worst-case unique
+top-k occupancy, but routing in this test is still balanced. All six routing/input
+changes pass sampled independent integer/scaling checks and native execution.
+Operator differences from original FP16 weights are about 1.1% relative RMS;
+that is not a trained-model or RKLLM quality qualification. Efficient dynamic
+expert row counts, runtime route-map creation, complete-model quality and
+repeated full-model timing remain open. Both serving models were restored and
+answered fresh requests. The preferred model rows and GPU baseline stay unchanged.
+[Raw samples, raw integer tests, source hashes and restoration](docs/benchmark-expert-depths-prefill-verification-v1.json).
+
+### Dynamic expert row counts
+
+An experimental ABI-4 path accepts per-expert counts, validates all counts before
+command mutation, skips empty experts, and builds three-core task chains from
+qualified row-count templates. Ordinary and native replay update task counts and
+subcore ranges. Exact integer tests cover zero/one/full and changing row counts,
+sparse experts, invalid-count rejection and native-to-ordinary recovery. Twelve
+changed balanced/skewed/mixed projection cases match fixed-NPU outputs bit for bit.
+
+| Routing | Prepared CPU ms | Fixed NPU ms | Dynamic-count NPU ms | Paired speedup vs fixed NPU |
+|---|---:|---:|---:|---:|
+| balanced | 51.87 | 40.72 | 44.23 | 0.925x |
+| skewed | 51.97 | 42.93 | 35.36 | 1.188x |
+| mixed | 55.99 | 39.86 | 42.43 | 0.852x |
+
+These 128-token/top-6/E64 operators still gather, quantize and copy full 128-row
+buffers per expert. Dynamic NPU work alone does not consistently improve the
+complete operator pipeline. Route-map/count construction is outside timing.
+Compact active-route buffers remain necessary before model integration; no
+preferred model row changes. All original serving options/settings were restored
+and both models answered fresh requests.
+[Raw samples, exact checks and restoration](docs/benchmark-bucketed-experts-verification-v1.json).
+
+### Compact expert buffers
+
+The experimental ABI-5 path packs expert input and output rows consecutively,
+using prefix sums of validated counts. This 128-token/top-6 workload stores 768
+routed rows rather than 8,192 fixed expert slots. Native scale guards and buffer
+bounds use the compact row count; weights and task descriptors remain resident.
+Twelve changed balanced/skewed/mixed projection cases match padded-NPU outputs
+bit for bit. Raw hardware tests cover exact integers/task counts, aggregate
+count bounds, recovery, and ordinary/native replay at depths 896 and 1280.
+The fixed-slot ABI remains covered by its hardware suite.
+
+| Routing | Prepared CPU ms | Fixed NPU ms | Dynamic slots NPU ms | Compact NPU ms | Paired compact/fixed speedup |
+|---|---:|---:|---:|---:|---:|
+| balanced | 48.91 | 39.34 | 40.98 | 10.77 | 3.575x |
+| skewed | 50.79 | 49.68 | 39.12 | 6.54 | 7.491x |
+| mixed | 56.40 | 40.35 | 42.46 | 11.03 | 3.660x |
+
+Speedups are medians of paired block ratios, not ratios of separate medians.
+The NPU timings include input gather, format-specific quantization/transfers,
+command updates, matrix execution, expert-scale selection and output scatter.
+Route-map/count construction is excluded. The prepared CPU combined-width
+reference includes bucketing. All cases use E64, width 1792, depth 1280 and
+128 tokens/top-6, with balanced, skewed and mixed maps. There are no steady NPU
+allocations. Model placement, complete-model quality and repeated trained-model
+timing still need qualification; the preferred model rows are unchanged.
+Both serving models were restored and answered fresh requests.
+[Raw samples, exact checks and restoration](docs/benchmark-compact-experts-verification-v1.json).
+
+### Trained compact NPU experts v2
+
+This paired DeepSeekOCR text-decoder run integrates runtime routing maps,
+fused gate/up projections and down projections. Prefill builds stable compact
+expert buckets inside inference; decode selects expert weight addresses at
+runtime. The original expert tensors/state remain, with no duplicate packed
+CPU expert copies on the candidate. Both arms use identical dense INT8 options,
+natural depths 896/1280, deferred weight realization, context 512, 128 input/64
+output tokens, three full warmups and three measured requests.
+
+| Trained DeepSeekOCR path | TTFT ms | Prefill proxy tok/s | Decode tok/s | Peak RSS MiB |
+|---|---:|---:|---:|---:|
+| CPU FP16 expert control | 1303.63 | 98.19 | 25.60 | 8751.12 |
+| Compact NPU INT8 expert candidate | 516.35 | 247.89 | 37.25 | 8073.47 |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 | 3066.66* |
+
+The local numerical gate **fails**: relative logit RMS is
+0.065740 (limit 0.01), mean probability total variation is
+0.017152 (limit 0.02), and sampled perplexity ratio is
+1.000309 (limit 1.02). All vectors must be finite.
+This new expert path changes FP16 expert arithmetic to INT8, so bitwise equality
+and equality to old CPU greedy IDs are diagnostics, not admission gates.
+Measured candidate greedy sequences must be stable. The fixed 32 teacher targets
+repeat the prompt; these are local regression checks, not held-out, FP16-source
+or matched RKLLM quality qualification. The prior preferred model timing variant is retained.
+
+Before either trained arm, a synthetic full model matches an independent CPU
+INT8 expert recipe across changed prefixes, cache decode and resets. Expert
+state keys/IDs are retained. Wide vocabulary tile/tail integer goldens at
+N24576/N6400, K1280 pass six changed inputs each through native replay.
+Candidate captures contain 22 NPU expert programs per phase and 22 runtime route
+maps in prefill, none in decode; CPU expert kernels are replaced. The image
+encoder/connector, application placement and broad API qualification are outside
+this experiment. The feature remains off by default. Both serving models were
+restored and answered fresh requests. Memory metrics differ from the RKLLM
+reference methodology; no memory winner is declared.
+[Full raw results, quality gates and source/restoration evidence](docs/benchmark-npu-experts-verification-v2.json).
+
+### Precision-protected NPU experts v1
+
+This paired DeepSeekOCR text-decoder run tests trace-guided precision protection.
+Transformer blocks 1 and 2 retain CPU FP16 experts; block 3 retains its CPU
+FP16 down projection. Other expert projections use compact/routed INT8 NPU
+execution. Block 0 is the leading dense block. Prefill builds stable compact
+expert buckets inside inference; decode selects expert weight addresses at
+runtime. Original expert tensors/state remain. CPU packed weights are prepared only
+for the preserved CPU parts; NPU-owned projections avoid duplicate CPU packs. Both arms use identical dense INT8 options,
+natural depths 896/1280, deferred weight realization, context 512, 128 input/64
+output tokens, three full warmups and three measured requests.
+
+| Trained DeepSeekOCR path | TTFT ms | Prefill proxy tok/s | Decode tok/s | Peak RSS MiB |
+|---|---:|---:|---:|---:|
+| CPU FP16 expert control | 1274.64 | 100.42 | 25.78 | 8751.28 |
+| Hybrid CPU/NPU expert candidate | 651.78 | 196.38 | 34.31 | 8423.65 |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 | 3066.66* |
+
+The local numerical gate **fails**: relative logit RMS is
+0.055437 (limit 0.01), mean probability total variation is
+0.012442 (limit 0.02), and sampled perplexity ratio is
+1.017578 (limit 1.02). All vectors must be finite.
+This new expert path changes FP16 expert arithmetic to INT8, so bitwise equality
+and equality to old CPU greedy IDs are diagnostics, not admission gates.
+Measured candidate greedy sequences must be stable. The fixed 32 teacher targets
+repeat the prompt; these are local regression checks, not held-out, FP16-source
+or matched RKLLM quality qualification. The prior preferred model timing variant is retained.
+
+Before either trained arm, two synthetic full-model modes match independent CPU
+expert recipes (all INT8, and INT8 gate/up plus FP16 CPU down) across changed prefixes, cache decode and resets. Expert
+state keys/IDs are retained. Wide vocabulary tile/tail integer goldens at
+N24576/N6400, K1280 pass six changed inputs each through native replay.
+Candidate captures contain 17 NPU expert programs per phase and 17 runtime route
+maps in prefill, none in decode. Seven CPU expert kernels remain per phase.
+The hybrid choice was fixed from the earlier layer trace; the finite/RMS/TV/PPL
+gates are unchanged. The image
+encoder/connector, application placement and broad API qualification are outside
+this experiment. The feature remains off by default. Both serving models were
+restored and answered fresh requests. Memory metrics differ from the RKLLM
+reference methodology; no memory winner is declared.
+[Full raw results, quality gates and source/restoration evidence](docs/benchmark-npu-experts-hybrid-verification-v1.json).
+
+### Activation-residual NPU experts v5
+
+This paired DeepSeekOCR text-decoder run adds a second activation product to recover INT8 activation precision. Each routed row shares its packed weight matrix across A0W0 and A1W0. Explicit fused dequantization matches the independent CPU recipe; no test tolerance or quality gate changes. The same trace-guided hybrid mask remains in place.
+Transformer blocks 1 and 2 retain CPU FP16 experts; block 3 retains its CPU
+FP16 down projection. Other expert projections use compact/routed INT8 NPU
+execution. Block 0 is the leading dense block. Prefill builds stable compact
+expert buckets inside inference; decode selects expert weight addresses at
+runtime. Original expert tensors/state remain. CPU packed weights are prepared only
+for the preserved CPU parts; NPU-owned projections avoid duplicate CPU packs. Both arms use identical dense INT8 options,
+natural depths 896/1280, deferred weight realization, context 512, 128 input/64
+output tokens, three full warmups and three measured requests.
+
+| Trained DeepSeekOCR path | TTFT ms | Prefill proxy tok/s | Decode tok/s | Peak RSS MiB |
+|---|---:|---:|---:|---:|
+| CPU FP16 expert control | 1337.79 | 95.68 | 25.26 | 8749.05 |
+| Activation-residual CPU/NPU expert candidate | 771.40 | 165.93 | 33.28 | 8458.89 |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 | 3066.66* |
+
+The local numerical gate **fails**: relative logit RMS is
+0.054358 (limit 0.01), mean probability total variation is
+0.014354 (limit 0.02), and sampled perplexity ratio is
+1.015918 (limit 1.02). All vectors must be finite.
+This new expert path changes FP16 expert arithmetic to INT8, so bitwise equality
+and equality to old CPU greedy IDs are diagnostics, not admission gates.
+Measured candidate greedy sequences must be stable. The fixed 32 teacher targets
+repeat the prompt; these are local regression checks, not held-out, FP16-source
+or matched RKLLM quality qualification. The prior preferred model timing variant is retained.
+
+Before either trained arm, four synthetic full-model modes match independent CPU
+expert recipes (all INT8 and CPU-down hybrid, each with and without activation residuals) across changed prefixes, cache decode and resets. Two operator tests and nine subtests cover routed row pairs, compact chunking, exact integer products, changed routing/counts and native replay. Expert
+state keys/IDs are retained. Wide vocabulary tile/tail integer goldens at
+N24576/N6400, K1280 pass six changed inputs each through native replay.
+Candidate captures contain 17 NPU expert programs per phase and 17 runtime route
+maps in prefill, none in decode. Seven CPU expert kernels remain per phase.
+The hybrid choice was fixed from the earlier layer trace; the finite/RMS/TV/PPL
+gates are unchanged. The image
+encoder/connector, application placement and broad API qualification are outside
+this experiment. The feature remains off by default. Both serving models were
+restored and answered fresh requests. Memory metrics differ from the RKLLM
+reference methodology; no memory winner is declared.
+[Full raw results, quality gates and source/restoration evidence](docs/benchmark-npu-experts-activation-verification-v5.json).
+
+### Weight-residual NPU experts v1
+
+This paired DeepSeekOCR text-decoder run computes A0W0+A1W0+A0W1 for
+all eleven MoE blocks. The activation pair shares one W0 atlas; a separate W1
+atlas stores quantized FP32 weight remainders. This uses two packed INT8 weight
+representations, not the same storage cost as ordinary W8A8. Each projection
+uses two NPU submissions and one ordered fused CPU dequantization. Original
+expert tensors/state remain and CPU packed expert copies are skipped. Both arms
+use identical dense INT8 options, natural depths 896/1280, deferred loading,
+context 512, 128 input/64 output tokens, three warmups and three measured requests.
+
+| Trained DeepSeekOCR path | TTFT ms | Prefill proxy tok/s | Decode tok/s | Peak RSS MiB |
+|---|---:|---:|---:|---:|
+| CPU FP16 expert control | 1272.10 | 100.62 | 25.63 | 8749.66 |
+| Three-product NPU expert candidate | 791.17 | 161.79 | 27.10 | 11254.34 |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 | 3066.66* |
+
+The local numerical gate **fails**: relative logit RMS is
+0.055134 (limit 0.01), mean probability total variation is
+0.016913 (limit 0.02), and sampled perplexity ratio is
+0.996463 (limit 1.02). All vectors must be finite.
+This new expert path changes FP16 expert arithmetic to INT8, so bitwise equality
+and equality to old CPU greedy IDs are diagnostics, not admission gates.
+Measured candidate greedy sequences must be stable. The fixed 32 teacher targets
+repeat the prompt; these are local regression checks, not held-out, FP16-source
+or matched RKLLM quality qualification. The prior preferred model timing variant is retained.
+
+Before either trained arm, six synthetic model modes match independent CPU
+integer recipes, including activation and weight residuals with/without CPU
+down projections. Two operator tests and twelve subtests cover changed IDs/counts,
+compact chunking, signed integer outputs and native replay. Wide vocabulary
+integer checks cover N24576/N6400 at K1280 with six inputs each. Candidate captures
+contain 44 NPU expert programs and 22 fused three-product dequantization kernels
+per phase, with 22 runtime route maps in prefill and none in decode. CPU expert
+kernels are replaced. Numerical gates and original synthetic tolerances remain
+unchanged. The image encoder/connector, application placement and broad API
+qualification are outside this experiment. The feature remains off by default.
+Both original serving models were restored and answered fresh requests. Memory
+metrics differ from the RKLLM reference methodology; no memory winner is declared.
+The candidate initially stalled at its 11 GiB hard limit during warmup. The
+recorded runtime adjustment raised it to 11.75 GiB before any measured request,
+with a 2 GiB global reserve retained. The control retained its initial limit. The original run admission failed only
+because its observer omitted indexed-device expert labels. A separate audit
+recomputed 44 expert programs per phase from the preserved full labels and
+re-ran the original validator with that derived field corrected. Raw reports
+and the original failed admission remain unchanged in the evidence.
+A separate CPU-only diagnostic evaluates blocks 3 and 4 using captured control
+activations. Smoothing calibration uses prefix positions 0..63; evaluation uses
+positions 64..127 and captured decode, not held-out text. Activation correction
+approaches the W8 weight-error floor (roughly 0.5–0.8% projection RMS). Three
+products reduce the tested projection errors to about 0.007–0.025%, but this does
+not carry through to the trained logit gate above. The tested smoothing option
+also worsens later-position errors and is not integrated. The discrepancy now
+requires a trained intermediate trace; operator precision alone does not explain
+it. [Diagnostic inputs, formulas, results and serving restoration](docs/benchmark-expert-quant-error-diagnostics-v2.json).
+
+[Full raw results, quality gates and source/restoration evidence](docs/benchmark-npu-experts-weight-verification-v1.json).
+
+### DeepSeekOCR six-row prefill tile v1
+
+Both arms use grouped CPU experts with the same N16 packed FP16 tables,
+dense INT8 NPU options, natural depths, deferred loading and 427,540,480 dense
+NPU weight bytes. Only `--cpu-expert-prefill-rows 4/6` changes. The candidate
+reuses each weight across six prefill rows, keeps sixteen independent output
+channels and separates full six-row tiles from tails. Each output retains
+sequential FP32 feature accumulation. Capacity-one decode keeps the original
+four-row/sixteen-channel kernel; no extra packed weight copy is created.
+
+| DeepSeekOCR tile variant | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Four-row control | 1202.03 | 106.49 | 25.84 |
+| Six-row candidate | 1133.94 | 112.88 | 25.21 |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 |
+
+Each arm uses 128 input/64 output tokens, context 512, three complete warmups
+and three measurements. All twelve generated sequences match the prior grouped
+candidate. Local numerical regression **passes**: bitwise equality of 32
+fixed-teacher full-vocabulary vectors is **passed**,
+relative logit RMS is 0.000000, mean probability total
+variation is 0.000000 and sampled perplexity ratio is
+1.000000. The original 0.01/0.02/1.02 numerical
+limits and the exact-bit requirement remain unchanged. Targets repeat the
+prompt; held-out, FP16 and comparable RKLLM quality remain unqualified.
+
+Preferred-row promotion requires local regression and both measured throughput
+medians to improve over this matched control. The prior preferred timing variant is retained. CPU-only qualification
+passes 100 tests and 89 subtests, with twenty hardware skips, mypy on 278 files
+and Ruff. Two actual-NPU model tests pass changed-prefix and cached-decode equality before
+either trained arm runs. The candidate captures 33 six-row expert programs in
+prefill and none in decode; both arms execute 33 expert programs in each phase.
+The default remains four rows; six rows are opt-in. Both original serving models were
+restored with their options/settings and answered fresh requests. The image
+encoder and connector are excluded. These measurements do not establish a
+full VLM or certified RKLLM win.
+[Reports, exact logits, source hashes and restoration](docs/benchmark-deepseek-cpu-prefill-r6-verification-v1.json).
+
+### DeepSeekOCR natural-text quality sample v1
+
+This matched run uses 128 input/64 output tokens, context 512, three warmups
+and three measured requests. Both arms have identical dense INT8 NPU options
+and four-row CPU expert settings. The control uses FP16 CPU expert weights;
+the candidate uses single-product INT8 NPU experts across all eleven MoE blocks.
+These are measured candidate speeds, not certified RKLLM quality wins.
+
+| DeepSeekOCR path | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| CPU expert control | 1233.78 | 103.75 | 26.61 |
+| Fast NPU expert candidate | 478.80 | **267.33** | **37.38** |
+| Published RKLLM reference | 701.21 | 182.54 | 31.60 |
+
+Sixteen separate WikiText-2 test prefixes contribute 512 teacher-forced English
+targets. The local point perplexity ratio is 0.996349;
+the empirical 95% sequence-cluster bootstrap upper estimate is
+1.011648, against the predeclared 1.02 limit.
+These local PPL checks **pass**. Natural-vector relative RMS is
+0.062065, mean probability TV is 0.046617, and
+next-token argmax agreement is 94.73%; the distributions
+and predicted token sequences are therefore not identical.
+Every saved vector is independently checked finite, hashed and rescored. Repeating
+the first sequence after the others reproduces all its logit bits in both arms.
+The corpus region was not used for this path's calibration; pretraining overlap
+is unknown, and this English-only sample does not qualify vision/OCR tasks.
+
+The original 32-target numerical gate **still fails**:
+relative logit RMS is 0.065740 (limit 0.01), mean TV
+0.017152 (limit 0.02), and perplexity ratio
+1.000309 (limit 1.02). Those gates were not changed.
+No automatic promotion occurs; the preferred row and 68 accepted timing variants
+remain unchanged. The control is the current mixed-precision decoder, not a full
+FP16 model or a matched RKLLM export. The image encoder/connector is excluded.
+Both original serving models were restored and answered fresh requests.
+[Raw runs, independently rescored logits, uncertainty and restoration](docs/benchmark-deepseek-natural-quality-verification-v1.json).
+
+### DeepSeekOCR decoded Q8_0 GGUF reference v1
+
+This quality-only comparison scores 512 teacher-forced English targets from
+16 separate WikiText-2 test prefixes against logits from the existing Q8_0
+GGUF decoded to half/native-F32 values with CPU F32 expert projections. It is
+not an original HF FP16 checkpoint, an RKLLM export, or a vision/OCR reference.
+
+| Expert path vs decoded GGUF | Point PPL ratio | 95% sequence-bootstrap upper | Local 1.02 PPL gate |
+|---|---:|---:|---|
+| Mixed CPU FP16 experts control | 1.012232 | 1.023470 | fails |
+| Single-product INT8 NPU experts candidate | 1.008536 | 1.018805 | passes |
+
+The candidate passes this narrow PPL comparison; the control's bootstrap upper
+estimate exceeds 1.02. Candidate vectors still differ from the decoded-GGUF
+reference (relative RMS 0.063864, mean TV
+0.046421). The unchanged fixed-32 gate also still fails on
+relative RMS 0.065740 (limit 0.01). This English-only
+sample has unknown pretraining overlap and does not certify HF FP16, RKLLM,
+vision/OCR, or broad output quality. It causes no promotion or timing-row change;
+the preferred timing variant remains `deepseek-cpu-experts-v1-candidate` and the canonical
+inventory remains at 68 valid timing variants.
+[Comparison and provenance](docs/benchmark-deepseek-gguf-reference-verification-v1.json).
+
+### Small-row INT8 buffer-register experiment v2
+
+This isolated test changes both ordered CNA `CBUF_CON0` writes in each task
+to the captured SDK value `0xb1`; every other command-body word, input, weight
+and integer operation is identical. All 66 checks across 11 three-core shapes
+match independent INT32 matrix products exactly, including changed random,
+all-127 and alternating -128/127 inputs. No timed call allocates NPU buffers.
+
+| Path | Groups | Rows | Full output N | K | Paired control/candidate time |
+|---|---:|---:|---:|---:|---:|
+| Grouped | 6 | 1 | 1792 | 1280 | 0.999× |
+| Grouped | 6 | 2 | 1792 | 1280 | 1.008× |
+| Grouped | 64 | 12 | 1792 | 1280 | 1.001× |
+| Grouped | 64 | 24 | 1792 | 1280 | 1.001× |
+| Grouped | 6 | 1 | 1280 | 896 | 0.993× |
+| Grouped | 6 | 2 | 1280 | 896 | 1.002× |
+| Grouped | 64 | 12 | 1280 | 896 | 1.000× |
+| Grouped | 64 | 24 | 1280 | 896 | 1.011× |
+| Dense | 1 | 1 | 3072 | 3072 | 0.994× |
+| Dense | 1 | 1 | 6144 | 3072 | 0.997× |
+| Dense | 1 | 1 | 24576 | 3072 | 1.002× |
+
+The paired medians range from 0.993× to 1.011×, with no material speedup established.
+Ratios above 1 favor the candidate. Each case has three warmups and twelve
+alternating ABBA/BAAB blocks (24 timed calls per arm). Timing includes the
+prepared Python runtime call and blocking submission, excluding uploads,
+output copies and reference calculation. These are primitive results, not
+model timings or RKLLM speed wins; no product guard/default is changed. Both
+original serving models were restored and answered fresh requests. The first
+attempt stopped before matrix submission because its harness expected one
+register write; v2 handles the two ordered writes in the actual recipe.
+[Exact outputs, paired samples and restoration evidence](docs/benchmark-smallrow-cbuf-verification-v2.json).
+
+### Qwen3 prefill worker-pool comparison v1
+
+Four separate processes run in control/candidate/candidate/control order, each
+with 128 input/64 output tokens, context 512, three full warmups and three
+measured requests. The only option change is `--cpu-prefill-pool`.
+
+| Process | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| 1-control | 275.90 | 463.93 | 37.43 |
+| 2-candidate | 280.11 | 456.96 | 37.78 |
+| 3-candidate | 285.08 | 449.00 | 37.90 |
+| 4-control | 299.28 | 427.70 | 36.97 |
+
+The candidate actually dispatches through the persistent pool. All 32 saved
+full-vocabulary teacher vectors are bitwise equal across all four processes,
+and all 24 generated sequences match. This is local numerical regression,
+not HF FP16 or matched RKLLM quality qualification. The no-pool attention
+kernel already creates temporary threads; this option replaces that dispatch
+with persistent workers. The results do not establish a useful prefill gain
+relative to the run-to-run variation, and the older preferred prefill result
+is faster. The existing preferred row is retained; four valid measurement
+variants are added (72 total). Source identities are recorded for each run,
+so differences from the older source cohort are not attributed to this flag.
+Both original serving models were restored and answered fresh API requests.
+[Exact comparisons, samples and restoration](docs/benchmark-qwen3-prefill-pool-verification-v1.json).
+
+### Qwen3 native component profile v1
+
+This diagnostic profiles measured request index 3 after three warmups: one
+128-token prefill and 63 decode transitions. Summed native profile rows are
+280.696 ms for prefill (CPU 174.629 ms / 62.21%, NPU 80.177 ms / 28.56%, copies
+25.889 ms / 9.22%) and 1548.924 ms for decode (CPU 196.768 ms / 12.70%, NPU
+1329.906 ms / 85.86%, copies 22.250 ms / 1.44%). Prefill includes 28 CPU
+attention calls (70.211 ms) and 28 FFN-pack calls (39.565 ms).
+
+These instrumented component sums exclude Python dispatch and KV reset; they are
+not whole-request wall time, throughput, or causal attribution. The profile is
+diagnostic only and does not qualify timing or quality. All six generated
+sequences match the existing Qwen3 reference. The original source hashes, native
+call inventory and generated program sources are retained in the profile report.
+Both original serving models were restored and answered fresh requests.
+[Profile and restoration evidence](docs/benchmark-qwen3-native-profile-verification-v1.json).
+
+### Qwen3 CPU kernel microbenchmarks v1
+
+Separate CPU-only tests retained the current attention register tile (8 query
+rows × 2 channel vectors). Six alternative tiles were slower on the tested
+128-row prefill and partial-row cases. All 63 finite-input comparisons were
+bitwise equal, and all 21 poisoned-future masking checks passed. Compiling the
+identical captured FFN packing source with `-O3` instead of `-O2` passed three
+bitwise input-pattern checks but measured 0.995× paired speedup. Neither change
+is promoted. These are small CPU kernel experiments, not model-speed or quality
+results; the model timing tables and 72 canonical variants remain unchanged.
+[Samples and exact-output checks](docs/benchmark-qwen3-cpu-micro-verification-v1.json).
+
+### Cache-from-DMA output collection v1
+
+The six private, aligned output shapes (12 KiB–3 MiB) compare driver
+FROM_DEVICE with EL0 CIVAC after a fresh blocking NPU submit. Initial CPU
+zeroes are synchronized to the device before its first write. For each of six
+changed inputs, the candidate CIVAC result is copied and checked against the
+exact INT32 golden before the driver FROM_DEVICE cross-check; all 72 arm/input
+checks pass. The CPU reads the previous output before each overwrite.
+
+Median driver/CIVAC ratios by M×N×K are: 1×3072×1024 1.333×, 17×3072×1024 1.106×, 64×3072×1024 1.081×, 128×4096×1024 1.071×, 128×6144×1024 1.078×, 1×24576×1024 1.178×.
+These times cover output synchronization plus CPU copying only. They do not
+establish arbitrary-alias or dirty-mapping behavior, a general cache policy, or
+model-level speed or quality. No canonical timing row or preferred variant is
+changed. Both original serving models were restored and answered fresh requests.
+[Raw probe and restoration evidence](docs/benchmark-cache-from-dma-verification-v1.json).
+
+### Qwen3 native FROM_DEVICE invalidation ABBA v1
+
+Four control/candidate/candidate/control processes vary only `ONPU_REPLAY_NATIVE_FROM=0/1`. Each uses 128 input/64 output tokens, context 512, three warmups and three measurements; the CPU prefill pool stays off.
+
+| Process | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| 1-control | 278.73 | 459.22 | 38.10 |
+| 2-candidate | 286.20 | 447.23 | 38.15 |
+| 3-candidate | 273.34 | 468.28 | 38.02 |
+| 4-control | 289.55 | 442.07 | 38.01 |
+
+Aggregating the six measured requests per role gives:
+
+| Role | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| Control | 284.14 | 450.48 | 38.0650 |
+| Candidate | 277.10 | 461.93 | 38.0656 |
+
+Prefill proxy here is 128000 divided by the aggregate median TTFT. These
+measurements improve prefill versus the matched control, while decode is nearly
+unchanged. They do not establish a fixed-clock or comparable-quality RKLLM win.
+
+The candidate invalidates 84 prefill and 112 decode native output sites, leaving 63 and 7 driver FROM_DEVICE sites; control retains 147 and 119 driver sites. All four reports preserve the 32 teacher vectors bitwise and all 24 generated sequences. This is local regression, not HF FP16 or matched RKLLM quality qualification. Native FROM_DEVICE remains opt-in/default-off. The older preferred prefill result remains faster, so the preferred row is retained; four valid timing variants are added (76 total). Native invalidation and source records are descriptive evidence, not a general speed or correctness claim. Both original serving models were restored and answered fresh requests.
+[Exact comparisons, per-run sources and restoration](docs/benchmark-qwen3-native-from-verification-v1.json).
+
+### Qwen3 FP32 KV staging microbenchmark v1
+
+A separate CPU-only prototype staged visible FP16 keys/values into FP32 once
+per head before the existing query-block loops, retaining the scalar tail and
+dot reduction order. Twelve changed-input/future-NaN comparisons were bitwise
+equal. Paired control/candidate ratios were 1.003× at 128 rows/end 128,
+0.992× at 128 rows/end 256, and 0.816× at 17 rows/end 62. This did not establish
+a speed benefit, so no backend attention change is made. These are isolated
+CPU kernel measurements, not model throughput or quality certification.
+[Raw checks and paired samples](docs/benchmark-qwen3-attention-float-kv-v1.json).
+
+### NPU prefill attention operator revisions v1–v4
+
+These are synthetic complete-attention operator measurements. Each paired
+median ratio is computed within its own revision from the raw ABBA blocks;
+packing, uploads, grouped QK, causal softmax, grouped PV, output invalidation,
+and unpack are included. Revisions used different clock, affinity, IRQ, and
+measurement protocols, so ratios are not causal cross-revision comparisons.
+
+| Revision | Layout / mode | Paired median control/candidate ratio |
+|---|---|---:|
+| v1 | original / single | 0.763× |
+| v1 | original / residual | 0.476× |
+| v2 | original / single | 0.560× |
+| v2 | folded / single | 0.355× |
+| v2 | folded / residual | 0.291× |
+| v2 | original / residual | 0.301× |
+| v3 | original / single | 0.785× |
+| v3 | folded / single | 0.938× |
+| v3 | folded_parallel / single | 1.102× |
+| v3 | folded_parallel / residual | 0.776× |
+| v3 | folded / residual | 0.459× |
+| v3 | original / residual | 0.465× |
+| v4 | blocked / single | 1.040× |
+| v4 | sdk / single | 0.676× |
+| v4 | sdk / residual | 0.479× |
+| v4 | blocked / residual | 0.755× |
+
+Revision 3's fastest ordinary case is folded-parallel single precision at
+1.102×; its folded-parallel residual case is 0.776×. Under revision
+4's common protocol, blocked/single is 1.040× while
+SDK/single is 0.676×; residual blocked/SDK are
+0.755×/0.479×. Three
+captured SDK row-major FP16→FP32 matrix goldens (source task 28640) are finite;
+maximum absolute error is 1.907e-6. This operator result does not add backend
+API support for row-128 attention.
+
+Dynamic RHS remains unsupported by current NativeReplay. These synthetic
+operator results are not model timing, model quality, or an RKLLM win; they do
+not change numerical backend code, defaults, or model timing rows. [Reports, validators,
+and restoration evidence](docs/benchmark-npu-prefill-attention-op-series-verification-v1.json).
+
+### Direct NPU/OpenCL FFN chain v1
+
+This synthetic chain uses the Qwen3 projection shapes: NPU INT8 gate/up
+(128×6144×1024), activation/quantization, and two NPU down projections
+(64×1024×3072). DMA-buffer handles pass the large tensors directly between
+NPU and OpenCL; only normal CPU allocations use host import. Blocking NPU
+completion, explicit visibility synchronization, GPU completion, input uploads
+and output reads are included. Six changed-input cases reproduce every FFN
+payload byte and scale bit, and downstream NPU INT32 outputs match independent
+CPU integer references.
+
+Twenty-four timed calls per arm in twelve alternating ABBA blocks measure a
+paired 1.499× speed ratio: separate median times are 6.916 ms for CPU packing
+and 4.702 ms for the DMA-buffer GPU route. These are whole-chain operator
+measurements, not trained-model throughput, task quality, or an RKLLM win.
+No model timing row or default changes from this probe. Both original serving
+models were restored and answered fresh API requests.
+[Data visibility, exact checks and complete timing samples](docs/benchmark-npu-opencl-ffn-chain-verification-v1.json).
+
+### DPU layout discovery and pipeline v1/v2
+
+The discovery probe relocates only the source and destination addresses from the
+captured 69-word DPU task. Two dtype hypotheses use two patterns each; FP16 reconstructs all
+16,384 source elements in the native N16K32 order; FP32 is unsupported. Source
+and destination buffers are independently guarded at 8 MiB.
+
+Pipeline v1 preserved all 63,488 finite FP16 encodings but timed out in the consumer
+chain before consumer validation or timings. Pipeline v2 uses the corrected PC
+successor tail links: the CPU link decoder rejects the old chain and validates
+1/2/16/32-task chains. The [Rockchip driver](https://github.com/rockchip-linux/kernel/blob/develop-6.1/drivers/rknpu/rknpu_job.c)
+starts the first command, so hardware successor links are required. The completed v2 report passes finite packing checks and
+12 consumer checks; its group-1/group-16 paired median CPU-control/pipeline ratios
+are 0.899× and 0.948×.
+
+Both ratios are below one: DPU packing loses to CPU packing for the measured
+CPU-resident inputs, including finite checks, uploads, matmul, output invalidation
+and CPU copying. Group 16 uses four persistent CPU workers for the control;
+group 1 uses a single CPU. No softmax or complete attention operation is measured.
+A device-resident input could have different costs, but that benefit is untested.
+This recipe is not enabled in a model. No model timing rows or preferred variants
+change. [Discovery, retained v1 failure, corrected v2 and
+restoration proof](docs/benchmark-dpu-layout-series-verification-v1.json).
 
 ## Prefill throughput
 
@@ -194,7 +1377,65 @@ It preserves the same mathematical operations; the small-decoder checks cover bo
 | Model | Model Size | Dtype | Seqlen | New_tokens | TTFT(ms) | Tokens/s | memory(MB) |
 | :---------- | :--------: | :---: | :----: | :--------: | :------: | :------: | :--------: |
 | Spark-X2.6 | 4B | — / FP16 | 128 | 64 | — / 161422.06 | — / 2.07 | — / 13190.66* |
+| Spark-X2.6 | 1.7B | — / INT8† (experimental) | 128 | 64 | — / 540.37 | — / 14.55 | — / 5805.91* |
 <!-- onpu-additional-benchmarks:end -->
+
+### LFM3 candidates (unmeasured)
+
+Liquid AI has released [LFM3](https://huggingface.co/blog/LiquidAI/lfm3).
+The following additions are pending loader support and measurement, checked on 2026-10-28.
+They are separate from the 21 RKLLM reference models and the measured Spark-X2.6 candidate.
+
+| Model | Intended workload | Configured maximum context (tokens) | oNPU status | Prefill / decode (tok/s) |
+| :--- | :--- | ---: | :--- | :---: |
+| [LFM3-1.7B](https://huggingface.co/LiquidAI/LFM3-1.7B) | Text generation | 262144 | Planned; loader compatibility unqualified | — / — |
+| [LFM3-VL-2B](https://huggingface.co/LiquidAI/LFM3-VL-2B) | Image/video to text | 128000 | Planned; text and vision compatibility unqualified | — / — |
+
+The official [text config](https://huggingface.co/LiquidAI/LFM3-1.7B/blob/40ebe0aa6662c9d40389c2f5d565b6a2c6aebacd/config.json)
+has 24 layers: 13 gated short convolutions, five sliding-window attention layers and six global attention layers.
+It specifies a seven-element convolution kernel, a 256-token sliding window, sandwich normalization,
+and different RoPE settings for sliding and global attention. Existing LFM2 support does not establish LFM3 compatibility.
+The [VL config](https://huggingface.co/LiquidAI/LFM3-VL-2B/blob/f83d2b0a2296aaa277f394990a9b8b949ddf9691/config.json)
+also introduces a hybrid vision encoder and projector that need their own correctness checks.
+The context values above describe the checkpoints; full-context operation on this board is untested.
+The initial benchmark target remains 128 input / 64 output tokens on the GPU-first path, with NPU acceleration evaluated separately.
+No RKLLM comparison or oNPU speed claim is available for these additions yet.
+
+### Spark-X2.6-1.7B candidate (measured)
+
+The official [Spark-X2.6-1.7B model card](https://huggingface.co/XHToken/Spark-X2.6-1.7B)
+identifies this as a separate release following the 4B model. Its complete
+[config at f18c032](https://huggingface.co/XHToken/Spark-X2.6-1.7B/blob/f18c032c7675f807c0fdffe281dbe124edba2605/config.json)
+matches [Spark-X2.5-1.7B at 14d6e83](https://huggingface.co/XHToken/Spark-X2.5-1.7B/blob/14d6e83c13c7add2b62a7c39b2131f4ed1cddcf8/config.json):
+`spark2_5`, 28 layers, hidden size 2048, FFN size 6656, eight attention heads,
+two KV heads, head dimension 256, GELU and a 131072-token vocabulary.
+The official Q8_0 checkpoint is now downloaded and hash-verified at publisher
+GGUF revision `cdc3d8893fba4ce0687f1b49ce1e18b29cae96d0`. Its tensor shapes,
+quantization types, token vocabulary, merges and BOS/EOS IDs match the supported
+X2.5-1.7B GGUF. Full-model inference and fixed-prefix logits were measured; comparable quality and serving behavior remain unqualified.
+[Checkpoint receipt](docs/benchmark-spark-x26-17b-checkpoint-v1.json) ·
+[GGUF metadata checks](docs/benchmark-spark-x26-17b-metadata-v1.json).
+
+| Model | Intended workload | Configured maximum context (tokens) | oNPU status | Prefill / decode (tok/s) |
+| :--- | :--- | ---: | :--- | :---: |
+| [Spark-X2.6-1.7B](https://huggingface.co/XHToken/Spark-X2.6-1.7B) | Text generation | 1048576 | Measured; preferred additional variant | — / 236.87 |
+
+This row does not reuse the measured 4B timings or the X2.5-1.7B results.
+The initial target is 128 input / 64 output tokens on the GPU-first path, with
+NPU acceleration measured separately. Full configured context on this board
+and comparable RKLLM quality are untested; no RKLLM reference timing is available.
+
+
+Four ABBA processes use the official X2.6-1.7B checkpoint, 128 inputs, 64 outputs and context 512. All 24 outputs match the fresh control reference, and four teacher arrays match bitwise. This checkpoint has no historical preferred timing or RKLLM reference.
+
+| Role | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 741.393 | 172.65 | 14.392 |
+| candidate | 6 | 539.846 | 237.10 | 14.557 |
+
+The slower-TTFT candidate is raw-erf-gelu-models-v1-spark-x26-17b-2-candidate. Both candidate processes beat both matched controls in TTFT and decode; it is the preferred additional variant.
+
+[Four reports and validation evidence](docs/benchmark-raw-erf-gelu-models-verification-v1.json).
 
 ## GPU tuning measurements
 
@@ -1816,3 +3057,1254 @@ Portable source, validators and the four historical records are now included in
 the backend at `extra/rockchip/shared_prefill/`. The helper matches the measured
 source byte for byte. Packaging and CLI checks used no devices; the portable
 wrapper has not been rerun on hardware.
+
+<!-- onpu-expert-activation-residual-status-v1:start -->
+### NPU expert activation-residual qualification status
+
+The initial failed qualification is superseded by the completed v5 run above.
+The compact fixture now prepares its sliced atlas on CPU before upload. A
+bitwise-verified intermediate trace identified separate-product versus fused
+rounding in residual dequantization; an explicit FMA now matches the independent
+CPU recipe. No tolerances or admission gates changed. Qualification passes
+95 CPU tests and 86 subtests, mypy, Ruff, two hardware operator tests with nine
+subtests, all four synthetic model modes, and the wide vocabulary integer checks.
+
+The trained residual candidate measures 165.93 prefill proxy tok/s and 33.28
+decode tok/s, but fails the local relative-logit RMS gate (0.054358 versus 0.01).
+It remains off by default and the prior preferred model row is retained. Both
+original serving models were restored and answered fresh requests.
+[Current trained result and restoration](docs/benchmark-npu-experts-activation-verification-v5.json).
+[Historical failed checks](docs/benchmark-npu-expert-activation-residual-status-v1.json).
+<!-- onpu-expert-activation-residual-status-v1:end -->
+
+<!-- onpu-expert-firstdiff-v2:start -->
+### Expert-to-attention numerical boundary
+
+Two diagnostic traces preserve all 32 teacher logit vectors bit for bit against
+their respective untraced runs. First-MoE outputs differ by about 0.01–0.02%,
+while the next MoE input differs by about 0.69%. The boundary trace locates
+amplification at the intervening dynamic INT8 quantizers and attention path.
+A 0.0105% attention-input difference flips 131 of 163,840 prefill codes by one;
+the QKV output difference becomes 0.0807%, attention output 0.2751%, attention
+output projection 1.0279%, and the following normalized input 0.6866%.
+
+Independent CPU reconstruction of the layer-2 QKV weights predicts every changed
+integer sum exactly: 491,520 prefill sums and 3,840 decode sums. Decode changes
+only one of 1,280 input codes at that first quantizer. Static weight scales and
+FP32 dequantization also match exactly. This rules out incorrect NPU integer
+products at this boundary; small expert arithmetic differences are amplified
+through later quantization. The original logit gate remains failed.
+
+These captures use shortened diagnostic generation and provide no new throughput
+or comparable-quality claim. Preferred timing rows remain unchanged. Both original
+serving models were restored and answered fresh requests.
+[Early expert boundaries](docs/benchmark-npu-expert-firstdiff-v1-verification.json).
+[Quantizer/attention boundary and independent integer verification](docs/benchmark-npu-boundary-firstdiff-v2-verification.json).
+<!-- onpu-expert-firstdiff-v2:end -->
+
+<!-- onpu-gpu-ffn-integration-status-v1:start -->
+### NPU/OpenCL FFN integration: historical qualification failures
+
+The optional `ONPU_FFN_GPU=1` integration remains disabled by default. The earlier
+standalone **1.50× FFN-chain speedup** is an operator result, not a whole-model win.
+These early attempts did not pass hardware numerical qualification, so no new
+Qwen3 control/candidate timing was accepted at that point. The later v5 comparison
+below resolves the numerical and dispatch failures; preferred rows remain unchanged
+because the integrated candidate is slower in prefill.
+
+| Integration attempt | Observed result |
+|---|---|
+| CPU scale arguments | Stopped at unsupported CPU-to-Rockchip buffer mapping. |
+| All-device arguments | Stopped when an NPU output slice required an unavailable generic renderer. |
+| Direct tile outputs | Reached GPU execution, then failed exact CPU packed-payload comparison; the first reported mismatch is one byte in a scale header (index 56: 35 versus 36). |
+
+The six-buffer implementation uses DMA-buffer imports and writes each NPU input
+tile directly. CPU checks pass: 41 tests, 9 hardware skips, 66 subtests; type checking
+passes for 280 source files and Ruff passes. Native replay, trained-model equality,
+and model speed were unqualified in these early attempts. The later v5 result
+resolves numerical equality and replay for its checked workload; no exact-output
+check was relaxed. Both original serving
+models were restored and answered fresh requests after each attempt.
+[Qualification failures, source hashes and restoration evidence](docs/benchmark-gpu-ffn-integration-status-v1.json).
+<!-- onpu-gpu-ffn-integration-status-v1:end -->
+
+### GPU FFN rounding arithmetic trace v5
+
+The failing synthetic CPU/OpenCL trace exposed quotient/activation rounding
+differences; the corrected v5 division trace has zero bit mismatches across
+gate, up, exp argument, exp2, denominator, quotient and activation for eight
+128×3072 cases. Its activation-derived scale bits also match the compiled CPU
+FFN scale path in all eight cases. CPU checks pass 41 tests, 9 skips and 66
+subtests; mypy passes 280 files and Ruff passes.
+
+This is operator arithmetic evidence only: no NPU is used and no timing is
+qualified. The historical GPU integration-v1 failure remains retained; this
+trace does not supersede it. The v4 hardware qualification did not pass: its
+changed payload/scale/down integer and native replay checks passed on eight
+inputs, but its final captured GPU-call count was 3 instead of the required 1;
+no model timing arms ran.
+The separate CPU probe shows three separately realized outputs capture three
+calls, while grouped realization captures one with identical outputs. The separately validated v5 model comparison below supersedes these integration failures: it passes the hardware and local exact-output gates, but is slower in prefill.
+The feature remains off by default. No model timing, quality or RKLLM win is
+claimed.
+[Traces, leases, CPU checks, historical failure and v4 status](docs/benchmark-gpu-ffn-rounding-status-v2.json).
+
+
+### Qwen3 direct NPU/OpenCL FFN ABBA v5
+
+Residual-corrected GPU division and grouped output realization now pass the
+full eight-input NPU/OpenCL/NPU test: both packed tiles, scale bits, downstream
+integer references, input rebinding, native replay and exactly one GPU dispatch.
+The four-process control/candidate/candidate/control model comparison also
+completes all three warmups and three measured 128-input/64-output requests
+per process at context 512.
+
+| Aggregate role (six measured requests) | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| Control | 284.24 | 450.32 | 37.5766 |
+| Candidate | 309.32 | 413.81 | 37.8200 |
+
+All four processes preserve 32 full-vocabulary teacher vectors bit for bit and
+all 24 generated sequences. Candidate prefill is slower than its matched control;
+decode uses the unchanged CPU/NPU path and is nearly unchanged. The candidate
+records 28 GPU FFN calls in prefill and zero in decode. Native FROM_DEVICE
+invalidation stays disabled in both roles. The earlier standalone 1.50× chain
+result does not predict this integrated full-model result.
+
+`ONPU_FFN_GPU` remains off by default and the older preferred Qwen3 row is retained.
+The arithmetic and dispatch failures above are historical; they are resolved
+for this qualified workload, while performance remains unsuccessful. Four valid
+timing variants are added (80 total). Local numerical equality does not establish
+held-out, HF FP16, or comparable RKLLM quality. Both original serving sessions
+were restored and answered fresh requests.
+[Raw reports, comparisons, source hashes and restoration](docs/benchmark-qwen3-gpu-ffn-verification-v5.json).
+
+A read-only follow-up on the existing GDB capture verifies a DPU conversion
+source at BO offset 0x420000 and destination at 0x840000. That destination
+matches the next FP16 task's CNA register used as RHS by the local renderer.
+This establishes address linkage only: buffer bytes, tensor semantics and
+packing equivalence require a fresh bounded payload capture before any port
+or speed claim.
+[Captured addresses and source hash](docs/benchmark-dpu-conversion-address-inventory-v1.json).
+
+
+### CPU/OpenCL host-attention diagnostics v1–v6
+
+Six FP32 OpenCL prototypes directly import owned, page-aligned CPU Tensor mmaps.
+All 288 numerical cases pass the same relative-RMS limit of 1e-5, including partial
+prompts, longer prefixes and masked future NaNs. The largest observed error is
+below 6e-7. These tests do not establish bitwise equality or comparable model quality.
+
+Query/GQA reuse improves some larger-prefix operator cases: the four-query version
+records paired CPU/GPU ratios of about 1.25 at end 256 and 1.67 at end 512. The
+initial 128-token case does not show a robust benefit, and 17-row partial prompts
+lose. Early GPU samples often differ substantially from later samples; CPU/GPU
+frequencies vary and memory stays at 528 MHz in these isolated tests, whereas
+mixed NPU model runs record 2.112 GHz. These measurements are not substitutes for
+full-model request timing. These CPU-backed adaptations are not enabled in serving.
+
+Independent checks found:
+
+- The old and current CPU attention generators compile to byte-identical ELF for
+  the checked one-row and 128-row Qwen3 shapes on the current toolchain.
+- Native quantizer input writes into owned NPU memory are 7–12% faster than normal
+  CPU packing plus copying across six tested shape/sync combinations, with identical
+  payload and scale bits. This rules out that mechanism as a demonstrated regression
+  in those isolated cases; it is not a model speed claim.
+- Idle-priority CPU wake workers, with or without explicit attention-worker placement,
+  did not establish a useful speed benefit in the simulated prefill sequence and remain unselected.
+
+A controlled maximum-clock comparison needs an administrator-held frequency lease.
+The reviewable helper changes only supported minimum-frequency requests and restores
+them afterward; the agent has not applied it. Model rows and all 80 valid model
+variants remain unchanged. Both original serving sessions were restored and answered
+fresh requests after each completed GPU lease.
+[Raw prototypes, diagnostics, clock conditions and restoration evidence](docs/benchmark-gpu-host-attention-series-verification-v1.json).
+
+### Qwen3 static SwiGLU fragment loads v1
+
+The CPU SwiGLU packer can resolve three-core gate/up fragment addresses before
+entering the channel loops. The complete operator is 1.056x faster at Qwen3's
+128x3072 geometry by the median paired ratio; all 54 cases preserve payload
+and scale bits. The full-model comparison below uses four ABBA processes,
+three warmups and three measured 128-input/64-output requests per process,
+context 512, identical packed weights and native replay, with only
+`ONPU_SWIGLU_PACK_STATIC_LAYOUT` changed.
+
+| Aggregate role (six measured requests) | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| Control | 300.61 | 425.81 | 37.7555 |
+| Candidate | 285.04 | 449.06 | 37.7783 |
+
+All four processes preserve 32 full-vocabulary teacher vectors bit for bit
+and all 24 generated sequences. Captured source inspection confirms 28 pack
+calls in each phase and the intended fragment-load implementation in each
+role. These are adaptive-clock measurements; the operator ratio must not be
+applied to whole-model throughput. The option remains off by default and
+the older preferred Qwen3 row is retained. Comparable RKLLM quality and an
+RKLLM prefill win remain unqualified. CPU verification passed 80 tests and
+74 subtests (nine explicit hardware skips), mypy on 280 files, and Ruff.
+The initial 700 MiB CPU test attempt exhausted its cap during worker startup;
+the successful retry used 2 GiB. Both original serving models were restored
+and answered fresh requests after CPU checks and after the model comparison.
+The original model owner encountered a stdout BrokenPipeError while recording
+restoration; its failed job is preserved and its final exit code is unknown.
+A separate successful recovery check verified both original options, selection,
+settings, no remaining benchmark processes and fresh API replies. Completed
+model measurements were revalidated without rerunning them.
+[Raw measurements, exact local checks and restoration](docs/benchmark-qwen3-swiglu-static-verification-v1.json).
+
+### QKV preparation without head normalization: three-model ABBA v1
+
+The new explicit `--fused-qkv-without-norm` option skips Q/K normalization
+when the checkpoint has none. Qwen2 keeps dense bias addition before fused
+RoPE/cache preparation; MiniCPM4 and TinyLlama consume raw INT8 projection
+tiles directly. Existing geometry, full-head RoPE, context and attention-feature
+guards remain. Four ABBA processes per model use the same checkpoint/input,
+128 inputs, 64 outputs, context 512, three warmups and three measured requests.
+Only this QKV option changes between each matched control/candidate pair.
+
+| Model | Prefill proxy tok/s, control / candidate | Decode tok/s, control / candidate |
+|---|---:|---:|
+| Qwen2/0.5B | 252.30 / 255.74 | 37.244 / 37.618 |
+| MiniCPM4/0.5B | 539.71 / 607.20 | 44.807 / 45.982 |
+| TinyLLAMA/1.1B | 183.06 / 189.40 | 24.216 / 24.338 |
+
+All 24 generated sequences per model match each other and the previous
+preferred sequence. All four sets of 32 full-vocabulary teacher vectors per
+model match bit for bit. Captured native source confirms prepared QKV in
+every candidate attention block during prefill and zero such calls in decode;
+the candidate source has no normalization reduction. The independent audit
+and final comparison recheck report/NPZ hashes and full-vector equality.
+These are adaptive-clock measurements. They do not exceed the older preferred
+prefill rates, so preferred main-table rows stay unchanged and the option
+remains opt-in. Comparable HF/RKLLM quality remains unqualified.
+
+CPU checks passed 77 tests plus 35 subtests, with seven explicit hardware skips;
+mypy checked 280 files and Ruff passed. Two failed test-fixture attempts are
+preserved; the final fixture uses the existing QKV test's precompiled function
+boundary and fixed-capacity NumPy readback. No numerical assertion was relaxed.
+All twelve model processes exited successfully and cleaned up. Both original
+serving sessions were restored with their original settings/selection and
+answered fresh requests. Twelve actual timing variants bring the inventory to 96.
+[Full runs, source hashes, numerical checks and restoration](docs/benchmark-qkv-without-norm-models-verification-v1.json).
+
+### Explicit CPU prefill pooling: wide-FFN ABBA v1
+
+Explicit `--cpu-prefill-pool` now creates the requested parked-worker pool even
+when two KV heads and context 512 do not qualify for decode attention pooling.
+The existing wide-FFN sigmoid path becomes available during prefill. Both arms
+request `--cpu-pool`; only the prefill-pool switch changes. New QKV preparation,
+static SwiGLU packing, GPU FFN and native FROM invalidation remain disabled.
+Four ABBA processes per model use 128 inputs, 64 outputs, context 512,
+three full warmups and three measured requests per process.
+
+| Model | Prefill proxy tok/s, control / candidate | Decode tok/s, control / candidate |
+|---|---:|---:|
+| Qwen2/0.5B | 262.83 / 373.38 | 37.429 / 37.934 |
+| TinyLLAMA/1.1B | 183.97 / 267.10 | 24.353 / 24.418 |
+| Qwen2.5/1.5B | 109.27 / 158.52 | 15.493 / 15.866 |
+
+All 24 generated sequences per model match each other and the previous
+preferred sequence; all four sets of 32 full-vocabulary teacher vectors per
+model match bit for bit. Captured source verifies nonzero parked-worker
+callbacks in 24, 22 and 28 sigmoid kernels respectively, only during prefill.
+Each teacher check records positive pool dispatches. Creating a pool also
+enables its existing decode affinity policy; decode is measured rather than
+attributed solely to the prefill sigmoid change.
+
+The main CPU+NPU rows select the slower-TTFT candidate process per model.
+Both candidates individually improve prefill and decode over the previous
+preferred row. Each selected row is an actual three-warmup/three-measurement
+run; the table above aggregates six measured requests per role. Existing
+adaptive clocks remain unchanged. Comparable HF/RKLLM quality and RKLLM
+prefill wins remain unqualified; the option is still explicit.
+
+CPU verification passed 82 tests and 35 subtests, with seven explicit hardware
+skips; mypy checked 280 files and Ruff passed. A fixture-only formatting edit
+was verified to have identical ASTs under the benchmark interpreter. All
+twelve model processes exited successfully and cleaned up. Both original
+serving models were restored with original options/settings/selection and
+answered fresh requests. The timing inventory now contains 108 valid variants.
+[Full reports, selection policy and restoration](docs/benchmark-explicit-prefill-pool-models-verification-v1.json).
+
+
+A separate CPU-only prototype folds raw INT32 dequantization, SwiGLU and
+independent split-K quantization into one pack function. Eight cases preserve
+payload and scale bits across widths 4,864, 5,632 and 8,960, partial rows and
+fragmented raw projections. This prototype is not integrated or timed.
+[Numerical prototype](docs/benchmark-grouped-swiglu-pack-operator-v1.json).
+
+### Grouped SwiGLU v1: arithmetic mismatch detected
+
+The optional raw SwiGLU packer passed its CPU and full-FFN hardware test,
+but the full-model gate stopped at TinyLlama because generated IDs differed.
+Six model processes completed; remaining cases were not run. These attempts
+do not replace any canonical timing or preferred row; the inventory stays at 108.
+A CPU trace against the serving sigmoid helper identifies a rounding difference:
+`gate / denominator` does not preserve materialized sigmoid followed by
+gate/up multiplication. Direct division changes payload and scale bits in
+all four traced geometries; explicit multiplication matches exactly. The
+original tensor-only test reference allowed sigmoid algebraic fusion and
+did not cover this serving boundary. The option remains off by default.
+Both original serving models were restored and answered fresh requests.
+[Failed runs, arithmetic diagnosis and restoration](docs/benchmark-grouped-swiglu-integration-status-v1.json).
+
+### Grouped SwiGLU v2: materialized-sigmoid arithmetic
+
+The corrected optional `--fused-swiglu-ffn` combines raw INT32 dequantization,
+SwiGLU and independently scaled split-K packing. It preserves the serving
+order: sigmoid reciprocal is rounded before gate and up multiplication.
+The failed division-form v1 and the stricter serving-reference diagnosis
+remain recorded above. Both roles request CPU prefill pooling; only the new
+raw-FFN switch changes. Four ABBA processes per model use 128 inputs, 64
+outputs, context 512, three warmups and three measured requests per process.
+
+| Model | Prefill proxy tok/s, control / candidate | Decode tok/s, control / candidate |
+|---|---:|---:|
+| Qwen2/0.5B | 392.70 / 507.22 | 37.995 / 37.978 |
+| TinyLLAMA/1.1B | 280.40 / 337.78 | 24.054 / 24.112 |
+| Qwen2.5/1.5B | 158.72 / 230.75 | 15.905 / 15.857 |
+
+All 24 generated sequences per model match the previous preferred sequence,
+and all four sets of 32 teacher vectors per model match bit for bit. The
+exclusive full-FFN NPU/native-replay test also passed with the serving sigmoid
+helper as reference. Captured source confirms the new packer in every
+candidate FFN prefill block and no such calls in decode. Controls retain the
+separate pooled sigmoid. Clocks remain adaptive; comparable HF/RKLLM quality
+and all-model RKLLM wins remain unqualified.
+
+Preferred rows change only where both candidate processes individually improve
+both phases over the previous preferred timing; selection uses the slower
+candidate TTFT. Other preferred rows remain unchanged. Each selected row is
+one actual three-warmup/three-measurement process, while the table above
+aggregates six measured requests per role.
+
+CPU verification passed 91 tests and 35 subtests, with 9 explicit hardware skips;
+mypy checked 280 files and Ruff passed. The initial typecheck failure was a
+reused optional local binding; it was renamed before the successful checks.
+The qualification and twelve model processes exited successfully and cleaned
+up. Both original serving models were restored and answered fresh requests.
+The timing inventory now contains 120 valid variants.
+[Full runs, arithmetic checks, selection and restoration](docs/benchmark-grouped-swiglu-models-verification-v2.json).
+
+### Narrow INT8 decode CBUF: numerical qualification v2
+
+A bounded single-core probe verifies M=1,K=4096 at per-core output widths
+320,352,640,704,832 and864. Changing both writes of CNA_CBUF_CON0 from
+0x48 to0xb1 preserves all60 independent INT32 checks across zeros, extrema,
+alternating signs and random inputs. Output buffers are poisoned before every
+arm to reject stale results. These are correctness checks, not timing or
+model wins; production settings remain unchanged. The GPU model stayed
+resident, and both original models answered fresh requests after NPU restoration.
+[Commands, golden outputs, source hashes and restoration](docs/benchmark-narrow-decode-cbuf-verification-v2.json).
+
+### Narrow INT8 decode CBUF: paired primitive measurements v3
+
+A new single-core M=1,K=4096 sweep changes only the two CBUF register
+writes. It passes 180 independent integer checks and rechecks every retained
+timed output (2,880 checks). Three warmups precede 40 alternating ABBA/BAAB
+blocks per shape, 80 calls per arm. Timing covers blocking submission;
+command preparation, uploads and output checks are outside the interval.
+Existing adaptive clocks remain unchanged. N=512 and N=1024 are unchanged
+controls, already using one input/eleven weight banks.
+
+| Per-core N | Baseline ms | One-input-bank ms | Median paired speedup | Faster blocks |
+|---:|---:|---:|---:|---:|
+| 128 | 0.144373 | 0.135624 | 1.064x | 38/40 |
+| 192 | 0.138248 | 0.123373 | 1.120x | 40/40 |
+| 256 | 0.180685 | 0.160123 | 1.120x | 37/40 |
+| 320 | 0.210873 | 0.184914 | 1.140x | 40/40 |
+| 352 | 0.176748 | 0.150790 | 1.173x | 40/40 |
+| 416 | 0.270664 | 0.238434 | 1.126x | 39/40 |
+| 448 | 0.296913 | 0.259726 | 1.145x | 40/40 |
+| 512 | 0.337600 | 0.337308 | 1.001x | 21/40 |
+| 576 | 0.308871 | 0.270663 | 1.141x | 39/40 |
+| 608 | 0.438077 | 0.385870 | 1.136x | 40/40 |
+| 640 | 0.336579 | 0.294434 | 1.143x | 40/40 |
+| 704 | 0.497723 | 0.437640 | 1.140x | 40/40 |
+| 768 | 0.533452 | 0.472494 | 1.130x | 39/40 |
+| 832 | 0.383099 | 0.327684 | 1.168x | 39/40 |
+| 864 | 0.433411 | 0.375370 | 1.168x | 40/40 |
+| 896 | 0.410515 | 0.350141 | 1.171x | 40/40 |
+| 960 | 0.437932 | 0.372745 | 1.175x | 40/40 |
+| 1024 | 0.396078 | 0.396078 | 1.000x | 21/40 |
+
+These are primitive measurements; no full-model timing is replaced and no
+production default changes. The GPU model stayed resident. Both original
+sessions were restored and answered fresh requests.
+[Full samples, register hashes, exact outputs and restoration](docs/benchmark-narrow-decode-cbuf-verification-v3.json).
+
+### Narrow CBUF combined v2: INT8 decode input and weight banks
+
+The decode-only narrow-CBUF option changes captured INT8 decode commands from
+CBUF 0x48 to 0xb1. Both roles use CPU pooling, CPU prefill pooling, and fused
+SwiGLU; only `ONPU_INT8_DECODE_NARROW_CBUF` changes (0 control, 1 candidate).
+QKV-without-norm, static SwiGLU, GPU FFN, and native FROM remain off. Four ABBA
+processes per model use 128 inputs, 64 outputs, context 512, three warmups and
+three measured requests per process.
+
+| Model | Prefill proxy tok/s, control / candidate | Decode tok/s, control / candidate |
+|---|---:|---:|
+| Qwen2/0.5B | 493.03 / 498.15 | 37.771 / 38.687 |
+| TinyLLAMA/1.1B | 342.42 / 339.64 | 24.044 / 25.004 |
+| InternLM2/1.8B | 259.66 / 248.03 | 14.849 / 15.367 |
+
+For each model all 24 generated sequences match. Each of four processes emitted
+32 full-vocabulary FP32 teacher vectors, and the four arrays match bitwise.
+These matched-output checks establish local consistency; HF/RKLLM quality and
+the all-model speed goal remain unqualified. Clocks were adaptive.
+
+The earlier narrow-CBUF primitive tests showed a 6–17% decode improvement;
+that is a primitive-level result, not a full-model claim. Preferred rows change
+only when both candidate processes individually improve TTFT and decode over
+the previous preferred row; selection uses the slower-TTFT candidate. The
+qualified timing inventory contains 132 variants. The v1 TinyLLAMA control
+setup interruption was a monitor status-read timeout with zero measured trials,
+not a numerical failure; its artifact is retained with this report.
+[Combined runs, evidence, interruption, and selection](docs/benchmark-narrow-cbuf-models-combined-verification-v2.json).
+
+### FFN prefill pool v2: pooled raw SwiGLU and GELU packing
+
+All four models use the raw FFN packer in both roles and CPU attention pooling.
+The control passes no raw-FFN pool callback; the candidate enables pooled
+workers for raw FFN packing. Both roles use narrow-CBUF decode and keep GPU FFN
+and native FROM off. Gemma2 retains file-backed CPU weights, deferred weight
+realization, CPU GELU, CPU softcap, and three NPU domains in both roles. Four
+ABBA processes per model use 128 input IDs, 64 outputs, context 512, three
+warmups, and three measured requests per process.
+
+| Model | Prefill proxy tok/s, control / candidate | Decode tok/s, control / candidate | Measured requests, control / candidate |
+|---|---:|---:|---:|
+| Qwen2/0.5B | 481.74 / 503.99 | 38.676 / 38.617 | 6 / 6 |
+| TinyLLAMA/1.1B | 335.23 / 347.20 | 24.954 / 25.038 | 6 / 6 |
+| InternLM2/1.8B | 252.74 / 252.51 | 15.149 / 14.746 | 6 / 6 |
+| Gemma2/2B | 174.11 / 174.21 | 9.654 / 9.678 | 6 / 6 |
+
+Each model has 32 full-vocabulary FP32 teacher vectors in each process; all four
+arrays match bitwise, and all 24 generated sequences match. NPU/native-replay
+qualification passed for SiLU and GELU at 17/128 rows with seven changed inputs.
+The earlier CPU prototype passed eight tests, 800 exact timed output checks,
+and 46 CPU tests with two hardware skips; mypy checked 280 files and Ruff
+passed. Comparable HF/RKLLM quality and all-model speed qualification remain
+open. Clocks were adaptive.
+
+Preferred rows change only when both candidate processes individually improve
+TTFT and decode over the previous preferred row; choose the slower-TTFT
+candidate. The FFN study contributes 16 valid timing reports and brings the
+valid timing inventory to 148. The earlier v1 qualification failure was a
+lazy native-plan test-order issue; it ran no model timings and its job, report,
+log, failed test source, and correction diagnosis are retained in the evidence.
+[Full runs, qualification, source evidence, prior failure and restoration](docs/benchmark-ffn-prefill-pool-models-verification-v2.json).
+
+### CPU MLA latent projections: MiniCPM3 full-model v1
+
+The candidate adds only `--cpu-mla-projections` to the established CPU MLA
+weights/attention baseline. Both arms use 124 prepared CPU weights, 62 CPU MLA
+attention blocks, three NPU domains, deferred realization, no file-backed
+weights, and zero GPU native calls. The candidate prepares 62 CPU MLA
+projection blocks (162,529,280 packed bytes); the control prepares none.
+Both prefill and decode call the serial native projection helper 124 times in
+the candidate; neither arm profiles native calls or invokes native GPU work.
+Four ABBA processes use 128 input IDs, 64 output tokens, context 512, three
+warmups and three measured requests per process.
+
+| Role | Aggregate median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| control | 10944.79 | 11.70 | 3.942 |
+| candidate | 8092.56 | 15.82 | 4.578 |
+
+All 24 warmup/measured 64-token sequences match the previous preferred sequence. Four
+32-row full-vocabulary FP32 teacher arrays match bitwise across all four processes,
+and their float64 NLL values were independently recomputed. This validates the
+fixed-prefix local numerical gate, not comparable model quality or a speed
+goal. Adaptive clocks were observed; process RSS is not exclusive physical
+memory. The unrelated MLA projection primitive's speedup is not a full-model
+claim.
+[Full reports, numerical evidence, CPU checks and restoration](docs/benchmark-cpu-mla-projections-models-verification-v1.json).
+
+### LFM2.5-VL/450M: CPU SwiGLU prefill worker options v1
+
+
+The candidate enables only the existing CPU SwiGLU prefill worker options:
+`--cpu-prefill-pool`, `--share-projection-weights`, and
+`--fused-swiglu-ffn`. Control keeps those three options off. Both roles retain
+CPU INT8 math, one NPU domain, 16 fused FFN blocks, six attention blocks, and
+zero native GPU calls. LFM2.5-VL configuration is hidden size 1024 and FFN
+intermediate size 4608 (not 6656), with ten short-convolution and six
+attention layers. Four ABBA processes use 128 input IDs, 64 generated tokens,
+context 512, three warmups and three measured requests each.
+
+| Candidate process | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| lfm450-options-models-v1-lfm25-vl-450m-2-candidate selected | 161.745 | 791.37 | 60.368 |
+| lfm450-options-models-v1-lfm25-vl-450m-3-candidate | 139.638 | 916.66 | 60.844 |
+
+| Role aggregate | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 333.442 | 383.88 | 59.218 |
+| candidate | 6 | 156.697 | 816.86 | 60.529 |
+
+The table above reports both actual candidate processes. Preferred selection is
+conservative: both candidates must individually beat the previous preferred
+report in TTFT and decode, then the slower-TTFT candidate is selected. The
+role-level summary uses all six measured requests per role. All 24 warmup and
+measured 64-token sequences match; all four 32-row full-vocabulary FP32 teacher
+arrays match bitwise, with float64 NLL recomputed independently. The new timing
+remains below the RKLLM reference in both prefill and decode. Comparable output
+quality and the all-model speed goal remain unqualified. Clocks were adaptive;
+RSS is lifetime process peak, not exclusive physical memory.
+[Full reports, numerical audit, source pins and restoration](docs/benchmark-lfm450-options-models-v1-verification.json).
+
+### LFM2.5-VL/450M: narrow decode CBUF v1
+
+
+Both roles retain `--cpu-prefill-pool`, `--share-projection-weights`, and
+`--fused-swiglu-ffn`; only narrow decode CBUF changes (control 0, candidate
+1). Both roles use CPU INT8, one NPU domain, 16 fused FFN blocks, six attention
+blocks, and no native GPU calls. The 128-input/64-output, context-512 ABBA
+run uses three warmups and three measured requests per process.
+
+| Candidate process | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-2-candidate | 189.150 | 676.71 | 61.546 |
+| lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-3-candidate | 183.639 | 697.02 | 61.170 |
+
+| Role aggregate | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 159.998 | 800.01 | 59.382 |
+| candidate | 6 | 187.335 | 683.27 | 61.290 |
+
+Prepared decode commands have M=1, K=4096 and per-core N=320 or 352. The two
+CBUF values are 0x48/0x48 for control and 0xb1/0xb1 for candidate; no prefill
+commands use the narrow buffer. All 24 warmup and measured 64-token sequences
+match the prior preferred output. Four full-vocabulary FP32 teacher arrays are
+bitwise identical and their float64 NLL was independently recomputed.
+
+The candidates do not both improve TTFT and decode over the current preferred options process. Keep the existing preferred row and report both measured candidates without promotion. The candidate-role aggregate is slower than RKLLM in both phases. Quality and the all-model speed goal
+remain unqualified. Clocks were adaptive; process RSS is not exclusive physical
+memory.
+[Reports, comparison, numerical audit and restoration](docs/benchmark-lfm450-narrow-cbuf-models-v1-verification.json).
+
+### Qwen2/0.5B: natural K896 full-model v1
+
+Both roles keep CPU prefill pooling and raw SwiGLU FFN pooling enabled, with
+24 fused FFN blocks, 24 attention blocks, 49 CPU norms, no prepared QKV, and
+shared projection packing disabled. The only role change is
+`ONPU_INT8_EXPERT_DEPTHS=0/1`. Control uses physical input K=1024; candidate
+uses natural K=896. Both remain CPU INT8 with NPU work enabled, one domain,
+and native GPU calls disabled. Four ABBA runs use 128 inputs, 64 outputs,
+context 512, three warmups and three measured requests per process.
+
+| Candidate process | TTFT ms | Prefill proxy tok/s | Decode tok/s | Role |
+|---|---:|---:|---:|---|
+| qwen2-natural896-models-v1-qwen2-05b-2-candidate | 268.055 | 477.51 | 40.668 | candidate |
+| qwen2-natural896-models-v1-qwen2-05b-3-candidate | 248.047 | 516.03 | 40.510 | candidate |
+
+| Role aggregate | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 248.801 | 514.47 | 37.895 |
+| candidate | 6 | 258.051 | 496.03 | 40.625 |
+
+Each phase records 237 prepared input-width commands. Natural candidates use
+K=896 and controls K=1024, with the actual width fields, register values,
+three-core splits, and invalidation evidence retained. The separate golden
+probe checks 48 shape/arm/input combinations against int32 references with
+zero max error and no poison remaining. All 24 full-model generated sequences
+match the prior preferred output; four full-vocabulary FP32 teacher arrays are
+bitwise equal and float64 NLL was recomputed.
+
+The candidate pair does not satisfy the two-process promotion gate; keep the existing preferred variant and publish these measurements without promotion. Candidate aggregate is slower than RKLLM in both timing phases. Model quality and the all-model speed goal remain unqualified. Clocks were adaptive; process RSS is not exclusive physical memory.
+[Model reports, comparison, golden probe, numerical audit and restoration](docs/benchmark-qwen2-natural896-models-verification-v1.json).
+
+### Qwen2/0.5B: current native phase profile v3
+
+This diagnostic profiles one warmed request after four warmups, with 128 input
+tokens, 64 outputs and context 512. Native counts confirm one prefill and 63
+decode transitions; no warmup counts are included. Both processes reproduce
+all five prior 64-token sequences. Control uses padded K1024, candidate K896.
+
+| Recipe | Phase | CPU call ms | NPU call ms | Copy call ms |
+|---|---|---:|---:|---:|
+| control | prefill | 144.104 | 66.869 | 23.960 |
+| control | decode | 3.947 | 20.181 | 0.342 |
+| candidate | prefill | 144.429 | 64.929 | 24.528 |
+| candidate | decode | 3.954 | 18.461 | 0.355 |
+
+Decode values are per transition. These are instrumented call wall times,
+including driver and cache work, rather than pure hardware busy time. The
+largest prefill labels are CPU raw SwiGLU packing (55.54/59.64 ms), CPU
+attention (38.94/35.68 ms), and the combined gate/up NPU projection
+(30.23/29.04 ms), shown control/candidate. CPU work totals about 144 ms in
+both prefill profiles. A separate materialized sigmoid costs about 1.4 ms
+per decode transition; the current raw FFN path excludes one-token decode.
+
+The initial diagnostic stopped at its native-run assertion after three
+warmups. Its restoration and fresh-request receipts are preserved. The
+corrected protocol retains that assertion and uses four warmups. Both
+original serving sessions were restored and answered fresh requests.
+These profiles do not change the 164 valid timing variants or preferred
+model rankings. Comparable RKLLM quality and the all-model speed goal remain
+unqualified.
+[Profiles, source inventory, independent audit and restoration](docs/benchmark-qwen2-phase-profile-verification-v3.json).
+
+### Experimental raw SwiGLU decode integration v1
+
+An opt-in `--fused-swiglu-decode` path now reuses the raw FFN packing helper
+for one-row CPU FP32 decode, retaining per-K-group quantization and materialized
+sigmoid rounding. The CPU gate passed 41 tests (two hardware skips), mypy on
+281 files and repository Ruff. NPU/native replay and full-model speed checks
+are pending. The option defaults off and does not promote a benchmark row.
+[CPU evidence and source changes](docs/benchmark-raw-swiglu-decode-cpu-verification-v1.json).
+
+### Raw SwiGLU decode placement qualification v2
+
+The decode option and reported block count now require all gate/up and down
+projections to select NPU decode. Mixed placement retains the ordinary path
+and reports zero eligible decode blocks. Updated CPU checks passed 44 tests
+with three hardware skips, mypy on 281 files and repository Ruff. Both serving
+sessions answered fresh requests after restoration. NPU/native replay and
+full-model performance remain pending; no preferred timing row changes.
+[Current CPU qualification](docs/benchmark-raw-swiglu-decode-cpu-verification-v2.json).
+
+### Qwen2/0.5B: raw SwiGLU decode v1
+
+Both roles retain raw FFN prefill pooling, CPU prefill pooling, 24 fused SwiGLU
+blocks, and 24 attention blocks. The candidate enables the serial raw SwiGLU
+decode path for 24 blocks; the control keeps that decode path disabled. The
+only varied model flag is `--fused-swiglu-decode`; expert depths stay enabled
+and narrow CBUF stays off in both roles. Four ABBA runs use 128 input IDs, 64
+outputs, context 512, three warmups and three measured requests per process.
+
+| Candidate process | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| qwen2-raw-decode-models-v1-qwen2-05b-2-candidate | 278.487 | 459.63 | 41.796 |
+| qwen2-raw-decode-models-v1-qwen2-05b-3-candidate | 262.430 | 487.75 | 41.700 |
+
+| Role aggregate | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 253.359 | 505.21 | 40.563 |
+| candidate | 6 | 270.458 | 473.27 | 41.748 |
+
+Both roles use 237 prepared input-width commands per phase with physical K=896.
+Raw FFN helper calls remain at 24 in prefill for both arms; decode helper calls
+are 0 in control and 24 in candidate. All 24 warmup and measured 64-token
+sequences match; four full-vocabulary FP32 teacher arrays are bitwise equal
+and their float64 NLL was independently recomputed. The one-row materialized
+INT8/native-replay hardware qualification passed separately.
+
+The candidate pair does not meet the two-process promotion gate; the previous preferred variant is retained. The candidate aggregate measures 473.27 prefill proxy tok/s and 41.748 decode tok/s, versus RKLLM's published 877.31 and 41.58. This does not establish comparable-quality performance. Full-model quality and the all-model speed goal remain unqualified. Clocks were adaptive; process RSS is not exclusive physical memory.
+[Timing, qualification, numerical audit and restoration](docs/benchmark-qwen2-raw-decode-models-verification-v1.json).
+
+### CPU raw FFN row-batching prototype v1
+
+This CPU-only prototype interleaves two or four rows in the existing raw
+SwiGLU packer. All 174 payload/scale comparisons and 640 timed output checks
+were exact; two dense Tensor references also matched in the probe. Both
+serving models stayed resident and answered fresh requests. No accelerator
+was opened, and no model timing row changes.
+
+| Hidden width | Row batch | Baseline median ms | Candidate median ms | Paired speedup | Faster blocks |
+|---:|---:|---:|---:|---:|---:|
+| 4864 | 2 | 3.103 | 2.954 | 1.114x | 29/40 |
+| 4864 | 4 | 3.077 | 2.530 | 1.219x | 33/40 |
+| 4608 | 2 | 2.955 | 2.602 | 1.143x | 38/40 |
+| 4608 | 4 | 2.972 | 2.496 | 1.198x | 34/40 |
+
+Each arm has 80 timed calls in 40 alternating ABBA/BAAB blocks. Speedups
+are medians of paired block ratios. Clocks were adaptive; output checks and
+poisoning were outside timing. Production integration and full-model gains
+remain unqualified.
+[Operator samples, generated C, source pins and independent audit](docs/benchmark-ffn-row-batch-cpu-verification-v1.json).
+
+### Direct raw FFN row-batching generator v2
+
+The proposed production generator emits row batches directly rather than
+rewriting C text. It passed the same 174 exact payload/scale comparisons,
+two dense-reference assertions and 640 checked timing calls. Single-row code
+remains the original program. Both serving models remained loaded and
+answered fresh requests; no accelerator opened.
+
+| Hidden width | Row batch | Baseline median ms | Candidate median ms | Paired speedup | Faster blocks |
+|---:|---:|---:|---:|---:|---:|
+| 4864 | 2 | 3.484 | 3.196 | 1.095x | 23/40 |
+| 4864 | 4 | 3.085 | 2.521 | 1.229x | 36/40 |
+| 4608 | 2 | 3.332 | 3.060 | 1.034x | 20/40 |
+| 4608 | 4 | 3.337 | 3.150 | 1.118x | 21/40 |
+
+The four-row Qwen-width result is more consistent than the liquid-model
+width result. These are operator measurements under adaptive clocks, with
+checks outside timing. Full-model benefits remain unqualified and the
+168 valid LLM timing variants are unchanged.
+[Direct generator, samples and independent audit](docs/benchmark-ffn-row-batch-cpu-verification-v2.json).
+
+### Experimental raw FFN row-batching integration v1
+
+The direct row-batching generator is now available behind
+`ONPU_SWIGLU_PREFILL_ROWS=2/4`; its default remains 1. CPU integration checks
+passed 51 tests with three hardware skips, mypy on 281 files and repository
+Ruff. Dynamic partial rows, exact payload/scales, inactive data and unchanged
+one-row/GELU selection are covered. NPU and model measurements remain
+pending; the 168 valid timing variants are unchanged.
+[Integrated CPU qualification](docs/benchmark-ffn-row-batch-integration-cpu-verification-v1.json).
+
+### Qwen2/0.5B: four-row SwiGLU prefill v1
+
+Both roles retain raw FFN prefill pooling, CPU prefill pooling, 24 fused SwiGLU
+blocks, and 24 attention blocks. Both roles keep serial raw SwiGLU decode enabled for 24 blocks. The only
+varied setting is `ONPU_SWIGLU_PREFILL_ROWS=1/4`; expert depths stay enabled
+and narrow CBUF stays off in both roles. Four ABBA runs use 128 input IDs, 64
+outputs, context 512, three warmups and three measured requests per process.
+
+| Candidate process | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|
+| qwen2-row-batch-models-v1-qwen2-05b-2-candidate selected | 242.799 | 527.19 | 41.919 |
+| qwen2-row-batch-models-v1-qwen2-05b-3-candidate | 238.218 | 537.32 | 42.097 |
+
+| Role aggregate | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 248.232 | 515.65 | 41.992 |
+| candidate | 6 | 240.508 | 532.21 | 42.002 |
+
+Both roles use 237 prepared input-width commands per phase with physical K=896.
+Raw FFN helper calls remain at 24 in prefill for both arms; decode helper calls
+are 24 in both roles. Candidate prefill source contains four-row batching;
+control prefill and both serial decode sources do not. All 24 warmup and measured 64-token
+sequences match; four full-vocabulary FP32 teacher arrays are bitwise equal
+and their float64 NLL was independently recomputed. The SiLU/GELU full-FFN
+INT8/native-replay qualification passed at 17 and 128 rows with seven changed
+inputs each.
+
+Both candidates individually beat the prior preferred report in TTFT and decode; the slower-TTFT candidate is selected. The candidate aggregate measures 532.21 prefill proxy tok/s and 42.002 decode tok/s, versus RKLLM's published 877.31 and 41.58. This does not establish comparable-quality performance. Full-model quality and the all-model speed goal remain unqualified. Clocks were adaptive; process RSS is not exclusive physical memory.
+[Timing, qualification, numerical audit and restoration](docs/benchmark-qwen2-row-batch-models-verification-v1.json).
+
+### Qwen2/0.5B: combined current-recipe QKV v1
+
+Both roles retain four-row raw SwiGLU prefill, fused decode and natural K896.
+Only the candidate adds `--fused-qkv-without-norm`; actual prefill QKV helper
+calls are 24 versus zero in control, with zero in decode for both. All 24
+generated sequences and four full-vocabulary FP32 teacher arrays match the
+current preferred output bitwise.
+
+| Role | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 240.482 | 532.26 | 42.014 |
+| candidate | 6 | 243.072 | 526.59 | 41.999 |
+
+The candidate pair did not both improve prior preferred TTFT and decode.
+The preferred row remains the four-row SwiGLU recipe. Local clocks were
+adaptive; comparable RKLLM quality and the all-model goal remain unqualified.
+[Raw reports, independent audit and restoration](docs/benchmark-qwen2-combined-qkv-models-verification-v1.json).
+
+### CPU core affinity and attention query tiles v1
+
+Device-tree and runtime checks identify cores 0–3 as Cortex-A55 efficiency
+cores and 4–7 as Cortex-A76 performance cores. Benchmark processes use
+`taskset -c 4-7`; monitors use 0–3. Persistent worker masks are 5, 6 and 7,
+with pooled caller work on 4. Frequencies remain dynamic; affinity does not
+lock either A76 pair to its maximum frequency.
+
+The CPU attention probe tests existing query/PV tile options for Qwen2
+geometry (14 query heads, 2 KV heads, head dimension 64, context 512).
+All 96 output comparisons against the 4x2 baseline and 1600 timed checks
+were bitwise exact. Both serving sessions remained resident and answered
+fresh requests; only CPU/NPY devices opened.
+
+| Total KV tokens | Query x channel tile | Baseline median ms | Candidate median ms | Paired speedup | Faster blocks |
+|---:|---:|---:|---:|---:|---:|
+| 128 | 8x1 | 2.140 | 2.053 | 1.039x | 33/40 |
+| 128 | 8x2 | 2.150 | 1.972 | 1.090x | 37/40 |
+| 128 | 8x4 | 2.130 | 2.464 | 0.861x | 0/40 |
+| 128 | 16x1 | 2.132 | 2.151 | 0.992x | 18/40 |
+| 128 | 16x2 | 2.152 | 2.138 | 1.007x | 23/40 |
+| 512 | 8x1 | 7.718 | 7.278 | 1.069x | 36/40 |
+| 512 | 8x2 | 7.990 | 6.712 | 1.187x | 39/40 |
+| 512 | 8x4 | 7.792 | 8.799 | 0.886x | 2/40 |
+| 512 | 16x1 | 7.728 | 7.463 | 1.030x | 30/40 |
+| 512 | 16x2 | 7.770 | 6.750 | 1.162x | 39/40 |
+
+Each arm has 80 timed calls in 40 alternating ABBA/BAAB blocks. Readback,
+checks and output poisoning are outside timing. The 8x2 candidate is selected
+for full-model qualification; no model timing row changes. There is no
+independent Tensor oracle in this probe, and comparable RKLLM quality is
+unqualified.
+[Core masks, samples, generated C and independent audit](docs/benchmark-attention-query-tiles-cpu-verification-v1.json).
+
+### MiniCPM4/0.5B: CPU pooling and QKV preparation v1
+
+Four ABBA processes used 128 input tokens, 64 output tokens and context 512.
+All 24 generated sequences and four full-vocabulary FP32 teacher arrays
+match the pinned prior output bitwise.
+
+| Role | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 226.033 | 566.29 | 42.207 |
+| candidate | 6 | 220.115 | 581.51 | 48.896 |
+
+Both candidate processes did not improve the prior preferred result in both
+phases. The preferred row stays unchanged. Clocks were adaptive; comparable
+RKLLM quality and all-model performance remain unqualified.
+[Reports, exact-output comparison and restoration](docs/benchmark-minicpm4-pooled-qkv-models-verification-v1.json).
+
+### TinyLLAMA/1.1B: four-row prefill and fused SwiGLU decode v2
+
+Four ABBA processes used 128 input tokens, 64 output tokens and context 512.
+All 24 generated sequences and four full-vocabulary FP32 teacher arrays
+match the pinned prior output bitwise.
+
+| Role | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---:|---:|---:|---:|
+| control | 6 | 368.661 | 347.20 | 24.997 |
+| candidate | 6 | 357.479 | 358.06 | 25.295 |
+
+Both candidate processes improved the prior preferred TTFT and decode.
+The primary row selects the candidate with the slower process median TTFT.
+Clocks were adaptive; comparable RKLLM quality and all-model performance
+remain unqualified.
+[Reports, exact-output comparison and restoration](docs/benchmark-tinyllama-row-batch-models-verification-v2.json).
+
+## Spark phase profiles v1 (diagnostic only)
+
+These are diagnostic per-call native profiles captured at request index 4. CPU, ROCKCHIP, and COPY times are sums of labeled calls; decode values divide the 63 measured transitions. Instrumentation includes driver/cache and supporting work, so these figures are not throughput or end-to-end qualification. The erf/GELU subset includes only CPU labels whose every matched native source contains both approximation constants; mixed source labels are marked ambiguous.
+
+| Model | Prefill CPU ms | erf subset ms (prefill CPU) | NPU calls ms (prefill) | Decode CPU ms/transition | NPU ms/transition |
+|---|---:|---:|---:|---:|---:|
+| Spark-X2.5/1.7B | 658.906 | 313.067 | 290.289 | 8.427 | 58.495 |
+| Spark-X2.6/4B | 1392.051 | 667.206 | 481.026 | 13.424 | 144.730 |
+
+Timing, quality, and goal qualification remain false. Full raw per-phase labels and provenance are in [the verification artifact](docs/benchmark-spark-phase-profiles-verification-v1.json).
+
+### CPU erf-GELU prefill vector qualification
+
+The opt-in `--cpu-erf-gelu` kernel preserves the tensor erf formula and is
+limited to CPU prefill; one-row decode stays generic. In 40 paired blocks
+per geometry, finite output bits match in every timed call.
+
+| Width, 128 rows | Tensor baseline ms | Serial vector ms | Paired speedup | Faster blocks |
+|---|---:|---:|---:|---:|
+| 6,656 | 11.48 | 5.93 | 1.934× | 40/40 |
+| 10,240 | 17.41 | 8.78 | 1.982× | 40/40 |
+
+The operator study checked 960 timed outputs, 22 finite datasets, two
+nonfinite-classification datasets and four dynamic-row datasets. The port
+passed 80 repository tests with three hardware skips, mypy on 282 files and
+Ruff. Full-model speed and comparable RKLLM quality remain pending.
+[Operator evidence](docs/benchmark-cpu-erf-gelu-operator-verification-v1.json) ·
+[Integration checks](docs/benchmark-cpu-erf-gelu-integration-cpu-verification-v1.json).
+
+### Spark: vector erf-GELU model comparison v2
+
+Candidate adds only `--cpu-erf-gelu` to the current pooled recipe. Four ABBA
+processes per model use 128 inputs, 64 outputs and context 512. All 24
+generated sequences and four full-vocabulary FP32 teacher arrays per model
+match exactly. The helper executes only in prefill; decode stays generic.
+
+| Model | Role | Measured requests | TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---|---:|---:|---:|---:|
+| Spark-X2.5/1.7B | control | 6 | 958.569 | 133.53 | 14.358 |
+| Spark-X2.5/1.7B | candidate | 6 | 735.179 | 174.11 | 14.250 |
+| Spark-X2.6/4B | control | 6 | 2010.554 | 63.66 | 6.118 |
+| Spark-X2.6/4B | candidate | 6 | 1699.716 | 75.31 | 6.056 |
+
+Preferred rows select the slower-TTFT candidate only when both candidate
+processes improve the previous preferred TTFT and decode. Improvements over
+the older preferred recipe do not isolate the GELU option: current controls
+also use the current pool placement. Clocks remain adaptive, and comparable
+RKLLM quality and the all-model goal remain unqualified.
+[Reports, comparison and serving restoration](docs/benchmark-spark-erf-gelu-models-verification-v2.json).
+
+### Raw erf-GELU fusion operator qualification v3
+
+This private CPU prototype fuses raw INT32 scaling, erf GELU and independent
+per-K-group quantization. The baseline is the existing multi-stage path with
+the vector erf helper. Both use the corrected storage-view memory planner.
+All 40 payload cases, two dynamic-row cases and 960 timed checks match the
+independent oracle exactly. Timings below are operator timings, not LLM rates.
+
+| Rows | Hidden width | Fused mode | Baseline ms | Fused ms | Median paired speedup | Faster blocks |
+|---:|---:|---|---:|---:|---:|---:|
+| 128 | 6,656 | serial | 16.518 | 9.453 | 1.745× | 40/40 |
+| 128 | 6,656 | pooled | 16.514 | 8.966 | 2.073× | 40/40 |
+| 1 | 6,656 | serial | 0.903 | 0.347 | 2.584× | 40/40 |
+| 128 | 10,240 | serial | 26.004 | 14.212 | 1.840× | 40/40 |
+| 128 | 10,240 | pooled | 26.039 | 13.488 | 1.971× | 40/40 |
+| 1 | 10,240 | serial | 1.138 | 0.393 | 2.892× | 40/40 |
+
+The prototype is not installed in inference. NPU/full-model qualification and
+comparable RKLLM quality remain pending. Both serving models stayed resident
+and answered fresh requests.
+[Payloads, timings, sources and restoration](docs/benchmark-raw-erf-gelu-operator-verification-v3.json).
+
+### Raw erf-GELU full-model comparison v1
+
+The first case passed its opt-in hardware qualification. Twelve model reports then measured three Spark checkpoints in per-model ABBA order. Both arms use the same pooled CPU recipe and standalone CPU erf helper; candidates add fused raw erf-GELU prefill and decode. The official X2.6-1.7B checkpoint has no historical timing prior or RKLLM row.
+
+| Model | Role | Measured requests | Median TTFT ms | Prefill proxy tok/s | Decode tok/s |
+|---|---|---:|---:|---:|---:|
+| Spark-X2.5/1.7B | control | 6 | 730.576 | 175.20 | 14.415 |
+| Spark-X2.5/1.7B | candidate | 6 | 554.414 | 230.87 | 14.659 |
+| Spark-X2.6/4B | control | 6 | 1723.674 | 74.26 | 6.054 |
+| Spark-X2.6/4B | candidate | 6 | 1427.393 | 89.67 | 6.164 |
+| Spark-X2.6/1.7B | control | 6 | 741.393 | 172.65 | 14.392 |
+| Spark-X2.6/1.7B | candidate | 6 | 539.846 | 237.10 | 14.557 |
+
+For the two previously timed checkpoints, promotion requires both candidate processes to improve that checkpoint’s indexed preferred TTFT and decode. The new X2.6-1.7B candidate is considered only if both candidate processes improve both matched controls in both phases. Where a gate passes, the selected candidate is the one with the slower TTFT. A missing promotion does not invalidate the timing comparison. These are local INT8 timings and fixed-prefix regressions; no HF quality or RKLLM speed claim is made.
+
+[Twelve model reports, comparison, qualification, current-source proof and serving restoration](docs/benchmark-raw-erf-gelu-models-verification-v1.json).
+
+
+### Current-source Qwen3 baseline, October 28
+
+Qwen3-0.6B was remeasured after the storage-view lifetime fix using the same
+matched checkpoint, 128 input tokens, 64 outputs, context 512, three warmups
+and three measured requests. The main W8A8 row now uses this current baseline:
+**292.91 ms TTFT**, **436.99 prefill-proxy tok/s**, and
+**37.80 decode tok/s**. The historical 227.34 ms / 34.24 tok/s source
+cohort remains in the run index; this replacement is a requalification, not an
+optimization win. Comparable HF/RKLLM output quality remains unqualified.
+
+The separately instrumented request accounts for CPU attention at 61.12 ms
+and raw FFN packing at 40.74 ms across 28 layers. NPU projections dominate
+decode. Its call timers are disjoint; residual request time is reported rather
+than assigned to an unmeasured cause. This profile is excluded from throughput
+selection. Both processes produced six identical local sequences, identical to
+each other and the recorded historical IDs. Affinity was CPUs 4–7; clocks were
+adaptive and are retained in each trial.
+
+A synthetic dynamic FP16 QK/PV prototype passed twelve changed-input oracle
+checks, including poisoned future cache. Its first NumPy pipeline was slower
+than CPU attention and was not integrated. Operator experiments do not count as
+full-model results. Both original serving models were restored and answered
+fresh requests with the original options and selection.
+[Raw timing, separate profile, probe and restoration evidence](docs/benchmark-qwen3-current-baseline-v1-verification.json).
+
+## October 29: bounded Qwen3 prefill screens
+
+The post-reboot CPU+NPU screen uses the same source cohort, checkpoint, input
+IDs, context 512, three full warmups and three measured 128-input/64-output
+requests per process. CPU affinity is 4–7 and clocks are adaptive. The API and
+its model sessions were absent in both arms. These are two screening processes,
+not a final alternating-process speed qualification.
+
+| Configuration | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Control: existing FFN threads | **285.66** | **448.09** | 36.57 |
+| Candidate: reuse parked workers only for FFN packing | 291.77 | 438.70 | **37.76** |
+
+All twelve generated sequences match the prior IDs. Both runs use native replay
+in both phases, and all 32 full-vocabulary teacher vectors match bit for bit.
+The pooled worker path executes in prefill only; decode keeps its existing
+serial FFN kernel. The candidate does not improve measured prefill, so it is
+rejected as a standalone optimization and has not changed production defaults.
+Bold marks better reported samples, not RKLLM-qualified wins.
+
+A separate NPU prototype streams two 64-row INT8 tiles per core under one
+submission. All 36 independent integer-output checks pass, including partial
+rows and one-core execution. Its paired matmul timings are slower for all six
+tested geometries, including the three main Qwen3 projections; the full-model
+test is therefore skipped. Copying the reference's row count alone is not a
+speed improvement for this command/layout configuration.
+
+The experimental mixed INT8/FP16 attention path also remains off: after reboot,
+standalone FP16 attention passes, while one INT8 vocabulary projection followed
+by FP16 attention still fails score validation. None of these results qualifies
+an all-model or comparable-quality RKLLM win. The preferred comparison rows
+remain unchanged.
+[Raw screen statistics, integer oracles and source-linked evidence](docs/benchmark-qwen3-bounded-prefill-screen-v1.json).
+
+## October 29: attention pipeline qualification
+
+The complete captured DPU producer/FP16 matrix pair passes its initial constant
+oracle, then fails after a valid INT8 projection. The producer still writes
+the exact FP16 weights, while 160 matrix output values are nonfinite. Adding
+the producer alone does not resolve the mixed-operation failure.
+
+An experimental entirely INT8 attention runtime passes 21 changed-input cases
+after INT8 work, independent integer QK/PV oracles, native replay, causal future
+invariance, cached-tail equality and invalid-input rejection. Frozen balancing
+and per-token scales avoid future-dependent quantization. It remains off:
+operator correctness does not establish model quality or request speed.
+
+| Separate paired operator screen | CPU control (ms) | Candidate with frontend/transfers (ms) |
+|---|---:|---:|
+| INT8 NPU attention | **5.48** | 10.56 |
+| Online OpenCL attention, subgroups off | **5.13** | 8.60 |
+| Online OpenCL attention, subgroups on | **6.76** | 9.93 |
+| Dense Tensor OpenCL attention | **5.95** | 7.69 |
+
+Each row is its own comparison; adaptive clocks prevent treating controls from
+different runs as interchangeable. GPU checks include numerical, causal and
+cached-tail comparisons and preserve both API sessions. No row is a full-model
+result or an RKLLM win. Separate direct-call phase profiles attribute roughly
+2 ms to host packing/softmax/unpack and 1.1 ms to NPU execution; the IRQ helper
+has little effect there. Those instrumented direct-call timings use a different
+protocol and are not substituted for the paired operator timings above.
+No production setting or preferred full-model number is promoted.
+[Qualification, profiles and original artifact hashes](docs/benchmark-qwen3-attention-paths-v1.json).
+
+
+### October 29: mixed-precision tile-width boundary
+
+The existing INT8 decode recipe now passes 25 changed-input mixed head/QKV/
+FP16-attention cycles at **24,384 total columns (8,128 per core)**, followed by
+the native cached-attention and invalid-input test. The 8,192-column per-core
+case fails even with one core, despite correct INT32 projection outputs.
+`configure` now rejects that larger tile when INT8 projections and experimental
+NPU prefill attention are selected together. Normal serving defaults stay unchanged.
+
+A narrow GDB capture preserved the four missing command-tail words for the
+first 12 prefill and 6 decode submissions; the normal SDK run finished.
+A separate ten-shape, 30-oracle INT8 qualification passed. The five-setting
+SDK-style decode recipe alone measured 292.70 ms TTFT / 37.65 decode tok/s
+versus 284.49 ms / 37.96 for its old-recipe control, with bitwise-equal teacher
+vectors. It was rejected as a standalone speed improvement and was not used
+in the width-only model comparison below.
+
+| Configuration | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) | Qualification |
+|---|---:|---:|---:|---|
+| Published RKLLM W8A8 | **199.09** | **642.93** | 32.91 | Published reference |
+| oNPU CPU attention, 24,384-column tiles | 305.69 | 418.72 | 37.51 | Local screening control |
+| oNPU FP16 NPU attention, same tiles/INT8 recipe | 283.74 | 451.11 | **37.87** | Rejected by local numerical gate |
+
+Both arms complete three full warmups and three measured 128-input/64-output
+requests at context 512, with native replay and adaptive clocks on CPUs 4–7.
+The candidate executes 28 prepared NPU attention calls per prefill. Decode
+keeps the existing CPU-attention/INT8-projection path; rates vary with adaptive
+clocks. Each arm's six generated sequences are stable, but they first differ at output index 2
+and differ at 19 of 64 positions. Independent recomputation of 32 fixed-prefix
+full-vocabulary teacher vectors gives maximum logit error **2.91887**, relative
+L2 error **12.303%**, and top-1 agreement **93.75%**, failing the predeclared
+0.05 / 0.2% / 96.875% limits. The repeated-prefix NLL decreases by 0.01645;
+that does not establish held-out quality.
+
+The configuration remains experimental and the preferred W8A8 rows are
+unchanged. The next gate is numerical diagnosis and comparison with the original
+FP16 checkpoint on frozen held-out text. Both original serving sessions were
+restored and answered fresh requests. CPU regressions pass (57 passed, one
+hardware skip); the final guard-scope check passes 11 tests with one hardware
+skip, plus mypy and Ruff. Bold marks reported numerical samples only.
+[Raw reports, independent audits, failed gate and serving receipts](docs/benchmark-qwen3-mixed-width-v1.json).
+
+
+### October 29: original-checkpoint quality and output borrowing
+
+A four-prefix live diagnostic now checks all 28 NPU attention layers against
+independent CPU emulation of the declared FP16 query/probability casts. Worst
+relative output error is 0.00338%; exported output and raw PV output agree
+exactly after head reordering. Ordinary and native-replay logits match bit for
+bit and reproduce the prior candidate's first teacher vector. A further 120
+mixed cycles verify exact full INT32 matrices after FP16 attention across all
+six required projection shapes, including changed signed inputs.
+
+The gate uncovered a static-call scheduling bug before NPU submission:
+constant length/count tensors reached a pointer-input kernel as `CONST`.
+The helper now creates CPU integer buffers for constants while retaining its
+existing symbolic path. CPU checks pass: 12 tests and 3 subtests, one hardware
+skip; replay checks pass 19 tests and 27 subtests, two hardware skips; mypy and
+Ruff pass. The original failed attempt and all source records are retained.
+
+The separate original-checkpoint quality protocol was frozen before evaluation:
+16 disjoint WikiText-2 prefixes, 64 following targets each, 1,024 targets total,
+context 512, identical token IDs and the existing matched FP16 checkpoint.
+Every full-vocabulary logit vector is retained and the NLL was independently
+recomputed. Repeating the first sequence reproduces all 64 vectors bitwise.
+
+| Arithmetic/configuration | Sampled perplexity | Change from original FP16 | Predeclared 2% mean-ratio screen |
+|---|---:|---:|---|
+| Original FP16 checkpoint, OpenCL | **30.61051** | Reference | Reference |
+| INT8 projections, FP32 CPU attention | 31.45853 | +2.770% | Fail |
+| INT8 projections, FP16 NPU prefill attention | 30.94500 | +1.093% | Pass on this sample |
+
+The NPU-attention candidate also passes the predeclared comparison with the
+CPU-INT8 control (perplexity ratio 0.98368). Its sequence-bootstrap 95% interval
+against original FP16 is 0.98705–1.03584; uncertainty remains beyond the mean
+screen. The earlier fixed-prompt FP32 logit gate remains failed and unchanged.
+These are separate arithmetic modes, and the new original-checkpoint protocol
+was not chosen after observing its quality results. This is sampled text
+quality evidence, not broad VLM or model-maximum-context qualification.
+
+An independent matched timing pair exercises existing mapped-output borrowing
+with **CPU attention in both arms**, the original INT8 recipe and 24,384-column
+tiles. Both use three full warmups and three measured 128-input/64-output
+requests at context 512, native replay on CPUs 4–7 and adaptive clocks.
+
+| CPU-attention configuration | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Output borrowing off | 328.78 | 389.32 | 37.03 |
+| Output borrowing on | **263.79** | **485.23** | **37.78** |
+
+Borrowing removes 84 prefill copies and 28 decode copies at qualified sites.
+All twelve generated sequences and all 32 full-vocabulary teacher vectors
+match bit for bit. This is one process pair with clock drift, not a final ABBA
+or RKLLM speed qualification. Borrowing remains opt-in; its 1,024-target quality
+run was not repeated. The quality-passing NPU-attention run and this timing
+screen use different attention paths. Their combination is the next measured
+candidate. Preferred comparison rows remain unchanged, and the all-model goal
+is still incomplete. Both original serving models were restored and answered
+fresh requests.
+[Full arithmetic, quality, borrowing, source and serving evidence](docs/benchmark-qwen3-original-quality-and-borrow-v1.json).
+
+### October 29: RKLLM CPU ISA capture
+
+The existing Qwen3-0.6B W8A8 SDK model was sampled on performance cores 4–7,
+with separate prefill/decode windows and bounded GDB entry observations.
+The capture completed with 8,650 user-CPU samples, zero reported lost samples,
+16 hot-range disassemblies and 24 entry records. Debugger/profiler timings are
+excluded from speed tables; preferred comparison rows remain unchanged.
+
+Observed SDK CPU paths include eight-lane FP16 reductions, a five-output FP32
+reduction reusing its input, min/max-based asymmetric scale calculation, and
+INT32-to-float output conversion. These give specific comparison targets for
+our generated CPU code. FP16 accumulation and quantization policy changes
+require quality checks. The SDK's hottest OpenMP locations are polling loops;
+its 58.94% decode libgomp CPU-sample share is not a request-latency saving.
+
+Inspection also corrects the prior claim that packed INT8 FFN preparation is
+serial: the 128×3072 kernel creates three pthreads and joins them on each call.
+A CPU-only check confirms these threads inherit the caller's affinity. The
+unexecuted combined-host stage's single-core prefill restriction was corrected
+to CPUs 4–7; no speed result is claimed for that correction. Both original
+serving models were restored and answered fresh requests.
+[Findings and next actions](docs/rkllm-cpu-isa.md) ·
+[Machine-readable capture and verification evidence](docs/benchmark-rkllm-cpu-isa-v1.json).
+
+### October 29: combined host optimizations and preserved sampled quality
+
+Four unprofiled Qwen3-0.6B processes compare NPU FP16 prefill attention with
+existing mapped output borrowing, native cache invalidation and static FFN
+layout off/on/on/off. Each uses three complete warmups and three measured
+128-input/64-output requests, context 512, CPUs 4–7, adaptive clocks and the
+original INT8 recipe. All 24 generated sequences match; all subsequent arms'
+32 full-vocabulary teacher rows match the first control bitwise.
+
+| Process / reference | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Published RKLLM W8A8 | **199.09** | **642.93** | 32.91 |
+| Control 1 | 261.39 | 489.69 | 37.96 |
+| Candidate 1 | 253.19 | 505.54 | **38.04** |
+| Candidate 2 | 247.64 | 516.88 | 37.68 |
+| Control 2 | 271.64 | 471.22 | 37.92 |
+
+Bold marks the best reported number in this table, not a qualified matched
+RKLLM win. The candidate remains roughly 50 ms short on TTFT. Its lower TTFT
+repeats across both processes, while decode shows little consistent change.
+It borrows 84 prefill and 28 decode outputs; the earlier CPU-attention borrowing
+pair's larger gain does not transfer unchanged to this attention configuration.
+
+The first held-out quality worker stopped before model loading because of an
+unescaped quote in its harness. That failure is retained. A corrected retry
+preserves **all 1,024 full-vocabulary vectors bitwise** against the prior
+NPU-attention candidate, including the repeated first sequence. Sampled
+perplexity remains 30.94500, versus 30.61051 original FP16 (+1.093%). The prior
+bootstrap uncertainty remains unchanged; this does not qualify all models,
+VLM images, the API or maximum context. Production defaults remain unchanged.
+
+Diagnostic clocks inside the quality retry split the prepared attention call
+across all 28 layers. Median CPU packing/softmax/unpacking is 30.90 ms; NPU
+QK/PV submit and wait is 15.85 ms; synchronization is 3.65 ms. Total median is
+50.27 ms across 16 prefixes. These clocks are excluded from the unprofiled
+speed measurements above, and category medians need not sum exactly. CPU
+softmax alone has a median of 18.56 ms, identifying a concrete host-side cost.
+Both benchmark owners have exited; original options, settings and selection
+were restored, and both original serving models answered fresh requests.
+[Raw timing arms, quality preservation, phase clocks and failed attempt](docs/benchmark-qwen3-combined-host-v1.json).
+
+### October 29: shared CPU workers during prefill
+
+A staged prototype replaces per-call thread creation across large RMSnorm,
+quantization, dequantization, QKV preparation and FFN packing. It pins the main
+thread once during prefill, uses the existing workers on CPUs 5–7, and parks
+them/restores affinity afterward. Arithmetic, four work partitions, NPU recipe,
+FP16 attention and the three previously measured host flags remain unchanged.
+This is experimental code; production defaults and the historical preferred
+cohort are unchanged.
+
+Each process uses three full warmups and three measured 128-input/64-output
+requests at context 512 with adaptive clocks. All 24 generated sequences
+match, and the later processes' 32 teacher vectors match the first control
+bitwise. Both candidate medians improve on both control medians.
+
+| Process / reference | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Published RKLLM W8A8 | **199.09** | **642.93** | 32.91 |
+| Control 1 | 253.47 | 504.98 | 37.93 |
+| Shared workers 1 | 230.00 | 556.52 | **38.06** |
+| Shared workers 2 | 221.84 | 576.99 | 37.98 |
+| Control 2 | 267.57 | 478.38 | 38.05 |
+
+Bold denotes the best reported number, not a qualified matched RKLLM win.
+Prefill still needs another 22.75–30.91 ms reduction to meet the published
+target. The quality process preserved all **1,024 full-vocabulary vectors
+bitwise**, including the repeated first sequence: sampled perplexity remains
+30.94500 (+1.093% versus original FP16). The same sampling/uncertainty and
+API/VLM/model-maximum-context limits still apply.
+
+All five workers exited successfully. The final quality report validator
+raised a missing-helper error after inference; a corrected copy revalidated
+all saved arrays and 28 checks without rerunning the model or altering any
+numerical gate. The original failed validator/job remain recorded. Serving
+options, settings and selection were restored, and both original models
+answered fresh requests.
+
+Six standalone CPU operators also have native tinygrad VIZ CLI JSON traces.
+The reader runs with tracing disabled, and raw profile/rewrite hashes are
+verified unchanged. Those graph traces are separate from model timing because
+whole-model PROFILE currently bypasses optimized Rockchip native replay.
+[Model timings and quality](docs/benchmark-qwen3-shared-host-pool-v1.json) ·
+[Operator comparisons and agent-readable VIZ traces](docs/benchmark-shared-host-pool-operators-v1.json).
+
+### October 29: worker reuse integrated into tinygrad
+
+The repository now contains the opt-in shared dispatcher and guarded prefill
+scope. The default remains off. Current-source inference was measured with
+all five worker processes succeeding, without prototype monkeypatches. Each
+process uses three warmups and three measured 128-input/64-output requests at
+context 512, CPUs 4–7 and adaptive clocks, with the existing host flags enabled
+in both arms.
+
+| Process / reference | TTFT (ms) | Prefill proxy (tok/s) | Decode (tok/s) |
+|---|---:|---:|---:|
+| Published RKLLM W8A8 | **199.09** | **642.93** | 32.91 |
+| Integrated control 1 | 252.09 | 507.76 | 37.94 |
+| Integrated shared workers 1 | 211.12 | 606.29 | 38.08 |
+| Integrated shared workers 2 | 207.47 | 616.96 | 38.03 |
+| Integrated control 2 | 265.69 | 481.77 | **38.11** |
+
+Bold marks the best reported number, not a matched RKLLM qualification.
+Prefill remains 8.38–12.03 ms short of the published target. All 24 generated
+sequences, all 32 teacher rows and all 1,024 held-out full-vocabulary vectors
+match bitwise. Sampled perplexity remains 30.94500; prior quality uncertainty,
+other-model and API/VLM/maximum-context limits remain explicit.
+
+The subsequent serving reload exposed parameter discovery recursively entering
+new JIT/runtime metadata. Both metadata attributes now hold weak references;
+the model-state getter dereferences explicitly. Two new regressions cover a
+warmed JIT and cyclic runtime state. The final CPU checks include 108 tests
+and 8 subtests, 6 explicit hardware skips, mypy on 285 files and repository
+Ruff. Generated C for all six operator fixtures and the native dispatcher
+expression remain identical after this metadata-only fix. Exact timing-source
+files are preserved with hashes matching the frozen measurement manifest;
+post-fix throughput has not been rerun.
+
+The original GPU worker stayed loaded. Only the failed NPU session was reloaded
+after the fix, and both original models are ready with their original options,
+settings and selection. Both answered fresh requests. The all-model speed goal
+remains incomplete.
+[Integrated timings, quality, source provenance and serving recovery](docs/benchmark-qwen3-shared-host-pool-integrated-v1.json) ·
+[Shared-worker implementation](/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_shared_pool.py).
+
+### Qwen2.5 1.5B adaptive software screen — October 29
+
+| Model / candidate | Prefill proxy, RKLLM / oNPU (tok/s) | Decode, RKLLM / oNPU (tok/s) | Decision |
+|---|---:|---:|---|
+| Qwen2.5 1.5B, prepared QKV + shared CPU + fused SwiGLU | **338.35** / 284.96 | **16.69** / 12.24 | Rejected; decode regressed. |
+
+Three measured 128-input/64-output requests at context 512, adaptive governors and no sudo. The worker failed during report finalization after writing timing and 32-target teacher arrays. Independent comparison of those saved arrays confirms bitwise equality to the prior preferred recipe; the failed worker status is preserved. This does not qualify independent RKLLM quality equivalence. A separate opt-in decode pool for two KV heads is being tested next. [Measured trials and independent numerical verification](docs/benchmark-qwen25-adaptive-screen-v1.json).
+
+### Qwen2.5 1.5B: opt-in two-KV-head decode pool — October 29
+
+| Model / candidate | Prefill proxy, RKLLM / oNPU (tok/s) | Decode, RKLLM / oNPU (tok/s) |
+|---|---:|---:|
+| Qwen2.5 1.5B, CPU decode pool | **338.35** / 303.94 | 16.69 / **16.73** |
+
+Three unprofiled measured requests after three warmups, 128 input/64 actual output, context 512. All 32 checked full-vocabulary teacher vectors remain bitwise equal to the prior local recipe. No sudo or governor/IRQ changes. Prefill is still below the reference; decode's small lead needs process-level repetition. The worker completed successfully, but the original validator incorrectly required 28 distinct source hashes for 28 same-shaped CPU kernel calls; independent revalidation preserved that ancillary failure and verified primary timing/numerical gates and actual shared source hashes. [Trials, scope and verification](docs/benchmark-qwen25-decode-pool-v1.json).

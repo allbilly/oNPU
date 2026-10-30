@@ -39,12 +39,31 @@ decode by 17.1%, with identical generated IDs. Full logits match bit for bit on
 256 held-out positions and synthetic 32K/40K cache-boundary checks. These are
 improvements over the prior GPU path; they do not establish an RKLLM win.
 
-The **Rockchip NPU + CPU** profile prepares FP16 weights and places supported
-dense decode projections on the NPU. Its prefill control defaults to Auto in
+The **Rockchip NPU + CPU** profile places supported dense decode projections on
+the NPU. It normally uses FP16; checkpoint-qualified profiles use INT8 projections.
+Its prefill control defaults to Auto in
 the load form; Auto selects supported prefill work only when it wins. Other
 operations use the CPU. It is an
 inference profile, not a claim that the complete model runs on the NPU or that
 quantized GGUF weights execute with native quantized arithmetic.
+
+The verified Qwen3-0.6B F16 checkpoint selects its fast prefill recipe with
+**Rockchip NPU + CPU**, **Auto** or **On** prefill, and context **512**.
+The worker caps prefill chunks at 128 and uses INT8 projections with FP16 NPU
+attention. Five uncached 128-token API requests measured 650.49 prefill-proxy
+tok/s at the median; timing variation prevents a consistent RKLLM-win claim.
+Cached follow-up, streaming, context-boundary and cancellation/recovery checks
+pass. This profile requires the updated tinygrad backend and is limited to the
+checked checkpoint/context. [Measurements and qualification](docs/benchmark-qwen3-api-fast-prefill-v1.json).
+
+The checked RWKV7-1.5B Q8_0 checkpoint selects INT8 projections and native CPU
+recurrence with **Rockchip NPU + CPU**, **Auto** prefill and context up to 512.
+Its prefill chunks are capped at 128 tokens. A fresh server passed eighteen
+uncached chat requests across three workloads at context 512, matching the
+independent backend reference including natural stopping and NPU submissions.
+Measured decode was 14.03–14.44 tok/s; prefill was about 65–66 tok/s. This is
+local serving qualification, with broader context and comparable RKLLM quality
+still open. [Exact checkpoint, requests and measurements](docs/benchmark-rwkv7-api-verification-v1.json).
 
 A GPU-only model and a different NPU-assisted model can remain loaded and serve
 requests concurrently. Each model has its own worker, request admission, KV
