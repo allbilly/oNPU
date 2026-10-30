@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 wide INT8 prefill full-model candidate v1",
+  "raw_receipt": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-wide-model-v1/results/candidate.json",
+    "sha256": "cfee99bce8ca9539f1bc54bacf47a2c27820c5db402e020fe2c888283d60aac2",
+    "complete": true,
+    "run_token": "qwen25-wide-model-v1",
+    "runner_sha256": "5e972909af700a20ccd7f8568da700293c4625a5fb51e0e441f81270066a860b"
+  },
+  "workload": {
+    "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/qwen2.5-1.5b-instruct-q8_0.gguf",
+    "checkpoint_sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+    "context": 512,
+    "prompt_tokens": 128,
+    "chunk_size": 128,
+    "precision": "INT8 per-channel weights and per-token activations; INT32 accumulation, FP32 dequantization and host arithmetic",
+    "wide_prefill_enabled": true,
+    "production_flag": "ONPU_INT8_WIDE_PREFILL",
+    "default": "off",
+    "admission": "M=128,N=17920,K=1536 only"
+  },
+  "quality_validation": {
+    "six_trials": 6,
+    "generated_ids_per_trial": [
+      64,
+      64,
+      64,
+      64,
+      64,
+      64
+    ],
+    "teacher_oracle_exact": true,
+    "teacher_oracle_sha256": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed",
+    "local_quality": {
+      "max_abs": 0.0,
+      "relative_l2": 0.0,
+      "mean_NLL_increase": 0.0,
+      "top1_matches": 32
+    },
+    "local_quality_gate_passed": true,
+    "full_vocab_teacher_comparison": "32 logits positions exact"
+  },
+  "performance": {
+    "measured_runs": 3,
+    "median_prefill_tps": 319.5336486249613,
+    "median_decode_tps": 16.656667946501617,
+    "median_first_token_ms": 400.58379000402056
+  },
+  "qualification": {
+    "quality_qualified": false,
+    "model_speed_qualified": false,
+    "goal_complete": false,
+    "interpretation": "Historical candidate passed generated-ID and teacher-logit exactness checks; model-speed qualification is false. Its prepared primitive showed a 7.17% gain, not a full-model win. The paired worker comparison did not show a win; the production prototype was removed.",
+    "current_status": "rejected; production prototype removed and no selectable flag remains"
+  },
+  "final_shared_lease": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-idle-phase-lease-v1/job.json",
+    "status": "restored",
+    "restored": true,
+    "phase": "restored",
+    "sha256": "43953313d1e8232b5cfa2a13e7c49b3811a35437a99752edfee01c86f9d28ca4",
+    "fresh_reply_count": 2
+  },
+  "paired_comparison": {
+    "report": "/home/orangepi/oNPU/docs/benchmark-qwen25-wide-paired-v1.json",
+    "run": "qwen25-worker-wide-paired-v1",
+    "lease": "qwen25-wide-paired-lease-v1",
+    "status": "complete; no qualified win"
+  }
+}

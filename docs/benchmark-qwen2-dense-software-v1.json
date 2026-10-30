@@ -1,0 +1,296 @@
+{
+  "schema": "qwen2-dense-software-v1",
+  "updated_utc": "2026-10-30T03:49:25.503597+00:00",
+  "complete": true,
+  "goal_complete": false,
+  "quality_qualified": false,
+  "model_speed_qualified": false,
+  "comparison_kind": "published reference; not locally matched RKLLM",
+  "checkpoint_sha256": "a07bd33b0e52babc1083e97d9bb6018197d7af25697552cc4d0b751e035158ff",
+  "reference": {
+    "url": "https://github.com/airockchip/rknn-llm/blob/main/benchmark.md",
+    "checked": "2026-10-30",
+    "ttft_ms": 145.9,
+    "prefill_proxy_tps": 877.3132282385195,
+    "decode_tps": 41.58,
+    "conditions": "upstream maximum CPU/NPU frequencies; local unchanged adaptive settings, no sudo"
+  },
+  "api": {
+    "raw": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-api-dense-v1/job.json",
+      "sha256": "32822131e76b00374addd0ce00e7fe1bf2a94eb9302328cacca6e1b44afcc033"
+    },
+    "metrics": {
+      "ttft_ms": 172.56118699151557,
+      "prefill_tps": 741.7658758124645,
+      "decode_tps": 43.93617263573875
+    },
+    "ranges": {
+      "ttft_ms": [
+        159.2774000018835,
+        184.05008100671694
+      ],
+      "prefill_tps": [
+        695.4628832536544,
+        803.6293912286762
+      ],
+      "decode_tps": [
+        43.7514057875212,
+        44.029510492888974
+      ]
+    },
+    "measured_requests": 5,
+    "input_tokens": 128,
+    "actual_output_tokens": 64,
+    "context": 512,
+    "functional_requests": 13,
+    "restored": true,
+    "fresh_original_replies": 2,
+    "gpu_preserved": true,
+    "decode_reference_wins": 5,
+    "prefill_reference_wins": 0,
+    "parent_scope": "Existing API parent retained conservative pre-update memory admission; newly launched worker verifies the new pinned recipe and resolved feature states.",
+    "quality_scope": "Backend matches all 7 saved 64-token sequences and 32 full-vocabulary fixed-teacher vectors bitwise. API uses a different chat prompt. Independent RKLLM quality and model-max context remain unqualified."
+  },
+  "backend_screens": [
+    {
+      "name": "baseline",
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-current-screen-v1/results/baseline.json",
+        "sha256": "2f9a699658c2dd3d8ec53505cbaca20b9fcf89074f3e6b1cd56bb3b7618bed93"
+      },
+      "exact_local_regression": true,
+      "measured_requests": 3,
+      "median": {
+        "first_token_ms": 289.4534039951395,
+        "prefill_tps": 442.2127991355367,
+        "decode_tps": 31.911414561642477
+      },
+      "timing_boundary": "raw backend first token, separate process; adaptive clocks; not a causal paired effect estimate"
+    },
+    {
+      "name": "modern",
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-current-screen-v1/results/modern.json",
+        "sha256": "1699fcf9aa21064953db86274a358276841660805a1833db36050a269b1fea17"
+      },
+      "exact_local_regression": true,
+      "measured_requests": 3,
+      "median": {
+        "first_token_ms": 250.15805200382601,
+        "prefill_tps": 511.6765140066022,
+        "decode_tps": 31.655208701282888
+      },
+      "timing_boundary": "raw backend first token, separate process; adaptive clocks; not a causal paired effect estimate"
+    },
+    {
+      "name": "pooled-QKV",
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-pooled-screen-v1/results/pooled.json",
+        "sha256": "5cfd4b2f99b64cd4e4832af4fb7ffbc937f2fe6e8594c32d2d1184e3a1cd68f6"
+      },
+      "exact_local_regression": true,
+      "measured_requests": 3,
+      "median": {
+        "first_token_ms": 159.72644899738953,
+        "prefill_tps": 801.3700974601392,
+        "decode_tps": 32.819183284896525
+      },
+      "timing_boundary": "raw backend first token, separate process; adaptive clocks; not a causal paired effect estimate"
+    },
+    {
+      "name": "large-output-sync",
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-large-screen-v1/results/large.json",
+        "sha256": "845ca867d31afd6f0cee89c6f48a25e398e4f661febd4ddd6eb24e6c16e671b3"
+      },
+      "exact_local_regression": true,
+      "measured_requests": 3,
+      "median": {
+        "first_token_ms": 151.10937600547913,
+        "prefill_tps": 847.0685498387526,
+        "decode_tps": 32.63814818516642
+      },
+      "timing_boundary": "raw backend first token, separate process; adaptive clocks; not a causal paired effect estimate"
+    },
+    {
+      "name": "decode-pool",
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-decode-pool-screen-v1/results/pool.json",
+        "sha256": "8e695375fb405dc17f80f7191a969ce1ddde79e544d5859c3ba338f8f02de908"
+      },
+      "exact_local_regression": true,
+      "measured_requests": 3,
+      "median": {
+        "first_token_ms": 180.66381200333126,
+        "prefill_tps": 708.4982796534804,
+        "decode_tps": 43.88441460946909
+      },
+      "timing_boundary": "raw backend first token, separate process; adaptive clocks; not a causal paired effect estimate"
+    },
+    {
+      "name": "rows2",
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-rows2-screen-v1/results/rows2.json",
+        "sha256": "f6f2a4ef5043c4847e8e4c41856c96c9e6e5f43950db12155e61b55cadc635c4"
+      },
+      "exact_local_regression": true,
+      "measured_requests": 3,
+      "median": {
+        "first_token_ms": 175.99400600010995,
+        "prefill_tps": 727.2974967108825,
+        "decode_tps": 44.12317002529083
+      },
+      "timing_boundary": "raw backend first token, separate process; adaptive clocks; not a causal paired effect estimate"
+    },
+    {
+      "name": "chunk64-rejected",
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-chunk64-screen-v2/results/chunk64.json",
+        "sha256": "1b256e25c0ef8dbd2b818613d01a84afdf27ef52aa0e7ab46633670de19613f1"
+      },
+      "exact_local_regression": true,
+      "measured_requests": 3,
+      "median": {
+        "first_token_ms": 181.03124300250784,
+        "prefill_tps": 707.060272453782,
+        "decode_tps": 44.242508278248465
+      },
+      "timing_boundary": "raw backend first token, separate process; adaptive clocks; not a causal paired effect estimate"
+    }
+  ],
+  "diagnostics": {
+    "native_and_viz": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-pooled-profile-v3/results/profile.json",
+      "sha256": "c43a9b21fac0314b19ba6318fe8a25baca02b86ed3bde8d2eabce2c4a7ede8c6"
+    },
+    "viz_events": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-pooled-profile-v3/results/viz-events.jsonl",
+      "sha256": "e2f14e0202c25e4b7639942b232e60c527006dc0b44a9934dd0d0d1885918a71"
+    },
+    "viz_scope": "Explicit profile path with no stale rewrite file; one PROFILE executor fallback request, separate native C request profile. Diagnostic timings excluded from speed evidence.",
+    "old_profile_v1": "Failed wrapper access; preserved.",
+    "old_profile_v2": "Completed diagnostic but inherited VIZ/PROFILE contaminated cache probe stdout and disabled cache cleaning; not the selected execution recipe.",
+    "attention_tile_probe": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-attention-tiles-modern-v1/results/cpu.json",
+      "sha256": "a066ab527bffeb279e74c2229004153376af1212b9e3fcd0465ac86565f3a81a"
+    },
+    "attention_tile_decision": "8x2 helped the isolated helper by ~9-13%; not promoted without full-model evidence."
+  },
+  "llama_cpp": {
+    "raw": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-llama-cpu-ref-v1/results/llama.json",
+      "sha256": "651f7a0f83d9bedb4187ef61683a4b6ded91db00d691a74a82356abab27cac07"
+    },
+    "source_commit": "0893ec98f5eafad36a43a72cd1c3723d72b0d03a",
+    "checkpoint_sha256": "a07bd33b0e52babc1083e97d9bb6018197d7af25697552cc4d0b751e035158ff",
+    "cli_prompt_eval_tps": 291.95,
+    "cli_decode_tps": 43.48,
+    "actual_prompt_ids_match_backend": true,
+    "context": 512,
+    "cli_requests": 3,
+    "synthetic_bench": [
+      {
+        "n_prompt": 128,
+        "n_gen": 0,
+        "avg_ts": 289.373363
+      },
+      {
+        "n_prompt": 0,
+        "n_gen": 64,
+        "avg_ts": 39.21893
+      }
+    ],
+    "scope": "CPU4-7, four threads, NGL0; CLI internal prompt-eval, not TTFT; standard pp128 and tg64 are separate synthetic tests. Q8 storage is not equivalent compute arithmetic."
+  },
+  "tests": {
+    "app_recipe_and_admission": "24 passed (app environment, serial; pytest-xdist unavailable there)",
+    "tinygrad_mypy": "286 source files clean",
+    "tinygrad_ruff": "all checks passed",
+    "cpu_selected_math_and_layout": {
+      "passed": 31,
+      "skipped": 1,
+      "environment": {
+        "DEV": "CPU",
+        "ROCKCHIP_TEST": "0",
+        "ONPU_EXP2_FAST_PATH": "1",
+        "ONPU_EXP2_SCALE_BITS": "1",
+        "ONPU_SWIGLU_PREFILL_ROWS": "2"
+      },
+      "files": [
+        "test/runtime/test_rockchip_exp2_fast_path.py",
+        "test/runtime/test_rockchip_swiglu_ffn.py",
+        "test/runtime/test_rockchip_cpu_prefill_layout.py",
+        "test/runtime/test_rockchip_prefill_cpu_tuning.py"
+      ],
+      "pytest_workers": 12
+    },
+    "two_kv_decode_pool": {
+      "passed": 4,
+      "pytest_workers": 12,
+      "geometry": [
+        [
+          12,
+          2,
+          128
+        ],
+        [
+          14,
+          2,
+          64
+        ]
+      ],
+      "scope": "Exact serial/pool output with NaN-poisoned future KV, threshold lengths1/15/16 and128/512, changed inputs and affinity restoration."
+    }
+  },
+  "conclusion": "Current API decode exceeds published RKLLM in all five requests; prefill remains below it. Do not mark model or all-model speed/quality goal complete.",
+  "rejected_followups": {
+    "register_probe": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-grains-cbuf-v1/results/probe.json",
+        "sha256": "1b6ba7563084744a614ab67978cf259cd38632a13e405517fa94de805272045f"
+      },
+      "log": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-grains-cbuf-v1/results/probe.log",
+        "sha256": "5c7e49cd00bce39da23dd193c1535b8908bee3f9cf74a04a7382da39fa4ac635"
+      },
+      "status": "failed integer output gate; no timing promoted",
+      "additional_failure": "Runner was edited after the owner started, producing a pin mismatch as well. Preserve this failed stage; do not relabel or promote it.",
+      "production_registers_changed": false
+    },
+    "health_harness_v1": {
+      "status": "Required positive activation-scale header was uninitialized; driver rejected before NPU submission. Corrected in a new v2 stage.",
+      "log": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-chunk64-screen-v1/results/chunk64.log",
+        "sha256": "3f20bc9f0ef4f0e8807242165052127d06621fdf6e39a8faedcfcb3d71c92524"
+      }
+    },
+    "known_good_health_and_chunk64": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-chunk64-screen-v2/results/chunk64.json",
+        "sha256": "1b256e25c0ef8dbd2b818613d01a84afdf27ef52aa0e7ab46633670de19613f1"
+      },
+      "log": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-chunk64-screen-v2/results/chunk64.log",
+        "sha256": "6f76c7f5063eacb6ebf4f6c7a6bf0398aa36b5759c5ca3f59dc90d896454d651"
+      },
+      "status": "Known-good integer check passed after ordinary owned initialization. Model preserves old exact logits/IDs, but loses prefill; chunk128 retained."
+    },
+    "compiler_O3": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-cpu-o3-v1/results/cpu.json",
+        "sha256": "0ac82abe6160bae373cb00e280c18f5a6b9d7815c3f11139c113f679547837b7"
+      },
+      "status": "Exact CPU helper outputs, performance parity; not ported or enabled. Native clang target already Cortex-A76."
+    }
+  },
+  "followup_lease": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-register-lease-v1/job.json",
+    "sha256": "3509bf7fa73d83afbbb7e272a36fda606142710f21df65c427c474abca10e494",
+    "restored": true,
+    "fresh_original_replies": 2,
+    "host_settings_unchanged": true,
+    "all_cases_passed": false,
+    "scope": "Rejected register/health-harness cases remain failures. Valid known-good chunk64 and CPU O3 measurements did not improve the selected recipe."
+  }
+}

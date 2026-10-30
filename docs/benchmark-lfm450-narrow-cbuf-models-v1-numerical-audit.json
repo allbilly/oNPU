@@ -1,0 +1,159 @@
+{
+  "audit_complete": true,
+  "audit_kind": "lfm450-narrow-cbuf-models-v1-numerical-audit",
+  "checks": {
+    "all_24_trials_are_3_warm_3_measured_64_tokens": true,
+    "all_24_warm_and_measured_sequences_match_prior_preferred": true,
+    "all_four_reports_complete_and_ABBA": true,
+    "all_four_teacher_arrays_float32_32x65536_finite": true,
+    "all_report_source_hashes_before_after_match_manifest_current": true,
+    "candidate_raw_ffn16_prefill_zero_decode_pool_ge88_share_enabled": true,
+    "candidate_share_dispatch_evidence_includes_50": true,
+    "captured_decode_sites_48k_4096_m1_width320_or352_correct_cbuf": true,
+    "four_teacher_arrays_uint32_bitwise_identical": true,
+    "independent_float64_teacher_mean_nll_delta_le_1e_7": true,
+    "job_four_cases_complete_and_valid": true,
+    "same_128_token_input_context_and_workload": true,
+    "source_cohort_291_matches_manifest_and_current": true,
+    "teacher_prefix128_and_teacher_ids_first32_exact_int32": true
+  },
+  "dataset_refs": [
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-1-control.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-1-control.json",
+      "report_sha256": "fbf5c6f159a21b2257c54737453c78f046a9efdab64ab05e8f753c7a38f01915"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-2-candidate.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-2-candidate.json",
+      "report_sha256": "f96ebb4d588025c1a39f43cc9c3db48364ced180c18e7b6cfd69adb78e16fc19"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-3-candidate.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-3-candidate.json",
+      "report_sha256": "932955214b673d70b4707ff30340300b0efce7a1cc7c49710eba38ecb149f115"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-4-control.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-narrow-cbuf-models-v1/results/lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-4-control.json",
+      "report_sha256": "4772b0e3bac07af1b3abbbfd960076e94549d8ae52e80dc3cea916ae9d7b2db6"
+    }
+  ],
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "restoration_snapshot": {
+    "phase": "restoring",
+    "restored": false
+  },
+  "restoration_verified": false,
+  "source_count": 291,
+  "teacher_logits": {
+    "dtype": "float32",
+    "mean_nll_float64_by_case": [
+      2.0807037992437083,
+      2.0807037992437083,
+      2.0807037992437083,
+      2.0807037992437083
+    ],
+    "mean_nll_float64_max_delta": 0.0,
+    "shape": [
+      32,
+      65536
+    ]
+  },
+  "timing_metrics": [
+    {
+      "case": "lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-1-control",
+      "decode_tps_measured": [
+        59.37355331532132,
+        58.063090720713184,
+        58.99788678613244
+      ],
+      "first_token_ms_measured": [
+        146.0260029998608,
+        152.84945801249705,
+        158.96125399740413
+      ],
+      "prefill_tps_measured": [
+        876.5562117051305,
+        837.4252788618633,
+        805.2276688889876
+      ],
+      "prepared_decode_sites": 48,
+      "report_median_decode_tps": 58.99788678613244,
+      "report_median_prefill_tps": 837.4252788618633,
+      "role": "control"
+    },
+    {
+      "case": "lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-2-candidate",
+      "decode_tps_measured": [
+        58.32441191225609,
+        61.5463692325014,
+        61.89996294521469
+      ],
+      "first_token_ms_measured": [
+        192.37503400654532,
+        189.14953400962986,
+        185.52066397387534
+      ],
+      "prefill_tps_measured": [
+        665.3670038891063,
+        676.7132716990111,
+        689.9500964379079
+      ],
+      "prepared_decode_sites": 48,
+      "report_median_decode_tps": 61.5463692325014,
+      "report_median_prefill_tps": 676.7132716990111,
+      "role": "candidate"
+    },
+    {
+      "case": "lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-3-candidate",
+      "decode_tps_measured": [
+        61.40979974487908,
+        60.28979149707878,
+        61.17015541984416
+      ],
+      "first_token_ms_measured": [
+        194.68471300206147,
+        183.6391469987575,
+        160.20228000706993
+      ],
+      "prefill_tps_measured": [
+        657.4732963170285,
+        697.0191383042421,
+        798.9898770126817
+      ],
+      "prepared_decode_sites": 48,
+      "report_median_decode_tps": 61.17015541984416,
+      "report_median_prefill_tps": 697.0191383042421,
+      "role": "candidate"
+    },
+    {
+      "case": "lfm450-narrow-cbuf-models-v1-lfm25-vl-450m-4-control",
+      "decode_tps_measured": [
+        60.64704750753462,
+        60.21060286914462,
+        59.39054760581526
+      ],
+      "first_token_ms_measured": [
+        161.03497799485922,
+        173.44377699191682,
+        197.90233901585452
+      ],
+      "prefill_tps_measured": [
+        794.8583692425269,
+        737.9913088837158,
+        646.7836642888063
+      ],
+      "prepared_decode_sites": 48,
+      "report_median_decode_tps": 60.21060286914462,
+      "report_median_prefill_tps": 737.9913088837158,
+      "role": "control"
+    }
+  ]
+}

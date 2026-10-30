@@ -1,0 +1,470 @@
+{
+  "audit_complete": true,
+  "audit_kind": "qwen2-raw-decode-models-v1-numerical-audit",
+  "captured_input_width_summary": [
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-4-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-4-control"
+    }
+  ],
+  "checks": {
+    "all24_sequences_equal_pinned_canonical_prior": true,
+    "canonical_prior_report_hash_valid": true,
+    "captured_237_k896_commands_per_phase_n_counts_and_cbuf": true,
+    "captured_raw_ffn_source_hashes_valid_prefill_pooled_decode_candidate_serial": true,
+    "cpu_proof_contains_seven_current_test_source_hashes": true,
+    "current_291_source_cohort_matches_cpu_proof_v2": true,
+    "five_cases_complete_valid_and_model_abba": true,
+    "four_teacher_arrays_fp32_32x151936_finite": true,
+    "four_teacher_arrays_uint32_bitwise_identical": true,
+    "frozen_job_pins_match_actual_files": true,
+    "independent_float64_nll_finite_and_report_consistent": true,
+    "independent_float64_nll_max_delta_le_1e_7": true,
+    "model_workload_128_input_64_generated_context512_3warm_3measured": true,
+    "qualification_report_passed_with_rockchip_test_and_hashes": true,
+    "qualification_test_source_asserts_14_full_shape_comparisons_and_native_replay": true,
+    "raw_ffn_calls_prefill24_both_decode_candidate24_control0_and_pool_dispatches": true,
+    "role_flags_and_decode_placement_differ_only_as_requested": true,
+    "source_count_291_matches_current_job_manifest_and_reports": true,
+    "teacher_arrays_match_prior_preferred_optional": true,
+    "teacher_prefix128_and_first32_int32_ids_exact": true
+  },
+  "dataset_refs": [
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-1-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-1-control.json",
+      "report_sha256": "4b323f2c10a851b236a4002e5218f269c639e5545d7724f0567fed7ee416f055"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-2-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-2-candidate.json",
+      "report_sha256": "48230a2d84566fd4e184e9f46465927790a27260cf83981098477e125bbc8bbe"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-3-candidate.json",
+      "report_sha256": "a61f04abd7b218fd82f97e9e54345485fc2e740b364b3d25de1c221c688b389c"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-4-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qwen2-05b-4-control.json",
+      "report_sha256": "5cda0314a0a6c12721e8671973bd871267e33edc67b85ea10eb154d56f78b74c"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/grouped-swiglu-models-v2/results/qwen2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/oNPU/docs/benchmark-grouped-swiglu-models-v2-qwen2-3-candidate.json",
+      "report_sha256": "77923b83fca28ed450f7ed8efaaaa3d494ed16798c5e5f441eb4c8b51e02f3a2",
+      "role": "prior_canonical_preferred_optional"
+    }
+  ],
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "qualification_evidence": {
+    "cpu_proof_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/raw-swiglu-decode-cpu-check-v2.json",
+    "cpu_proof_test_source_count": 7,
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qualification.json",
+    "pytest_log": "bringing up nodes...\nbringing up nodes...\n\n.                                                                        [100%]\n1 passed in 8.26s",
+    "pytest_log_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-raw-decode-models-v1/results/qwen2-raw-decode-models-v1-qualification.pytest.log",
+    "pytest_log_sha256": "d9353e04211b7c265f072601f5c52e39dbd86d6c6a2e8e9f8a2d4e27be6ca8d9",
+    "sha256": "81c6a3810c7340c2365062e0b71e867abb9d28375e1ea39bdc9d4cfc51300d41",
+    "test_path": "/home/orangepi/tinygrad/test/runtime/test_rockchip_swiglu_decode_hw.py",
+    "test_sha256": "95ea0d2cde25b6374572d7d46fa3dc33cc3dc885596ab83285063638e42f5c23"
+  },
+  "quality_qualified": false,
+  "raw_ffn_sources": [
+    {
+      "has_part_call": false,
+      "has_pool_part": true,
+      "has_pthread_create": false,
+      "has_row_loop": true,
+      "phase": "prefill",
+      "sha256": "65a60b3bff94baa63b102964d83650b81289ea49cbb45c6d4c17c8709677f2f2",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-1-control",
+      "source_bytes": 8417
+    },
+    {
+      "has_part_call": false,
+      "has_pool_part": true,
+      "has_pthread_create": false,
+      "has_row_loop": true,
+      "phase": "prefill",
+      "sha256": "e7b5a58f12b9465926127f3134d61a92bc2d05026f706a29e2d0bb84f809c058",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-2-candidate",
+      "source_bytes": 8417
+    },
+    {
+      "has_part_call": true,
+      "has_pool_part": false,
+      "has_pthread_create": false,
+      "has_row_loop": true,
+      "phase": "decode",
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-2-candidate",
+      "source_bytes": 7855
+    },
+    {
+      "has_part_call": false,
+      "has_pool_part": true,
+      "has_pthread_create": false,
+      "has_row_loop": true,
+      "phase": "prefill",
+      "sha256": "bdbf5ff1553cbee821600faca7f3a03f83800703274c811aa611da50e8d2223e",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-3-candidate",
+      "source_bytes": 8417
+    },
+    {
+      "has_part_call": true,
+      "has_pool_part": false,
+      "has_pthread_create": false,
+      "has_row_loop": true,
+      "phase": "decode",
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-3-candidate",
+      "source_bytes": 7855
+    },
+    {
+      "has_part_call": false,
+      "has_pool_part": true,
+      "has_pthread_create": false,
+      "has_row_loop": true,
+      "phase": "prefill",
+      "sha256": "08f26467eafed215590cccf8fdcb10f94bf6e266c9c18afeb5f252523d999a2b",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-4-control",
+      "source_bytes": 8417
+    }
+  ],
+  "restoration_snapshot": {
+    "phase": "restoring",
+    "restored": false
+  },
+  "restoration_verified": false,
+  "source_count": 291,
+  "teacher_logits": {
+    "all_finite": true,
+    "dtype": "float32",
+    "float64_mean_nll_by_case": [
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162
+    ],
+    "float64_mean_nll_max_delta": 0.0,
+    "four_way_uint32_bitwise_identical": true,
+    "optional_prior_preferred_bitwise_match": true,
+    "shape": [
+      32,
+      151936
+    ]
+  },
+  "timing_metrics": [
+    {
+      "decode_tps_measured": [
+        40.21237490463625,
+        40.51059585887119,
+        40.29280969013488
+      ],
+      "first_token_ms_measured": [
+        265.43278398457915,
+        249.03901398647577,
+        231.67838199879043
+      ],
+      "prefill_tps_measured": [
+        482.2313132481646,
+        513.9756938121797,
+        552.4900463119959
+      ],
+      "report_median_decode_tps": 40.29280969013488,
+      "report_median_first_token_ms": 249.03901398647577,
+      "report_median_prefill_tps": 513.9756938121797,
+      "role": "control",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "decode_tps_measured": [
+        41.7955147757035,
+        41.33196986069322,
+        41.98942809763937
+      ],
+      "first_token_ms_measured": [
+        254.35077300062403,
+        278.4870180184953,
+        286.96419100742787
+      ],
+      "prefill_tps_measured": [
+        503.24203260701694,
+        459.62645192853864,
+        446.0486848572922
+      ],
+      "report_median_decode_tps": 41.7955147757035,
+      "report_median_first_token_ms": 278.4870180184953,
+      "report_median_prefill_tps": 459.62645192853864,
+      "role": "candidate",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "decode_tps_measured": [
+        41.498988548831115,
+        41.70023850293087,
+        41.979415169426176
+      ],
+      "first_token_ms_measured": [
+        280.7818200089969,
+        262.42953399196267,
+        247.39607798983343
+      ],
+      "prefill_tps_measured": [
+        455.86997048419516,
+        487.74998016770553,
+        517.3889620241274
+      ],
+      "report_median_decode_tps": 41.70023850293087,
+      "report_median_first_token_ms": 262.42953399196267,
+      "report_median_prefill_tps": 487.74998016770553,
+      "role": "candidate",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "decode_tps_measured": [
+        40.67888027719862,
+        40.682872002918984,
+        40.61547067351389
+      ],
+      "first_token_ms_measured": [
+        257.6792260224465,
+        267.7249599946663,
+        222.33759600203484
+      ],
+      "prefill_tps_measured": [
+        496.74163484506073,
+        478.1026020231736,
+        575.7011063429351
+      ],
+      "report_median_decode_tps": 40.67888027719862,
+      "report_median_first_token_ms": 257.6792260224465,
+      "report_median_prefill_tps": 496.74163484506073,
+      "role": "control",
+      "slug": "qwen2-raw-decode-models-v1-qwen2-05b-4-control"
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "schema": "gpu-ffn-rounding-status-v2",
+  "complete": true,
+  "goal_complete": false,
+  "operator_arithmetic_only": true,
+  "NPU_used": false,
+  "timing_qualified": false,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "default_enabled": false,
+  "historical_integration_v1_retained": {
+    "path": "/home/orangepi/oNPU/docs/benchmark-gpu-ffn-integration-status-v1.json",
+    "sha256": "8bd67568870d582dd97329d2c810512fd38bcc9832b2b685d61a6ef15fd46a7d"
+  },
+  "supersedes_historical_integration_failure": false,
+  "v4_full_hardware_model_status": {
+    "staged_manifest": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3-gpu-ffn-v4/manifest.json",
+      "sha256": "a552f45b4422c985870cb7ecadd19c381640a95b0e647e1a06d868460ebc965b"
+    },
+    "job_present": true,
+    "full_model_qualified": false,
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-gpu-ffn-v4/job.json",
+      "sha256": "f86f4d049bd867dc29a727304643adacdbf8476919fe1729845e60686942b4ed"
+    },
+    "owner_terminal": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-gpu-ffn-v4-owner-terminal.json",
+      "sha256": "e9bea625040717d7273e52b35da305112e0bfc78eeb619d690f3b9bfb6f885c2"
+    },
+    "fresh": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-gpu-ffn-v4-fresh.json",
+      "sha256": "1cd5be49821274f3fd418e7c39ce730e65ca3e173d2a8b81e93de879c2edbc70"
+    },
+    "qualification": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-gpu-ffn-v4/results/qualification.json",
+      "sha256": "a482d7370ad380f44d63f57bce773ca61a433b42115f639ec522a524769a1fa1"
+    },
+    "qualification_log": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-gpu-ffn-v4/results/qualification.pytest.log",
+      "sha256": "cd136efa1fb30009cbe7b96d1364a36a9baabf8c36e1bfd1b65b37ed0acf252d"
+    },
+    "phase": "restored",
+    "complete": false,
+    "restored": true,
+    "model_cases_started": 0,
+    "hardware_qualification_passed": false,
+    "payload_scale_integer_native_checks_reached": true,
+    "failing_gate": "native.gpu_calls expected 1, observed 3"
+  },
+  "v5_model_status": {
+    "stage_present": true,
+    "run_present": true,
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-gpu-ffn-v5/job.json",
+      "sha256": "0bd717c1ff69b185d70454456260957a25567446dd1024c18c96a702e39daf6b"
+    },
+    "phase": "restored",
+    "complete": true,
+    "restored": true,
+    "model_cases_started": 4,
+    "published_verification": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-qwen3-gpu-ffn-verification-v5.json",
+      "sha256": "60575744b485bdf2ca5aa8aec397df92e9dc57d7fd15d8cfe53cef17e5f3717b"
+    }
+  },
+  "trace_revisions": [
+    {
+      "revision": 1,
+      "report": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-v1.json",
+        "sha256": "f12e6d7edc3aa2029f8cd2e98f99a70218067c06bf009fb22f89f119efdf3e09"
+      },
+      "lease": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v1.json",
+        "sha256": "e8fd125d3e13657143826c246da7c48c63283bda19bae9fc3fcfb91670fb6b49"
+      },
+      "fresh": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v1-fresh.json",
+        "sha256": "292ece30f227ae41b2ccc1a919a528a71c4923e907e6f2ca843d6a1f309355e7"
+      },
+      "fields": [
+        "gate",
+        "up",
+        "exp_argument",
+        "exp2",
+        "denominator",
+        "quotient",
+        "activation"
+      ],
+      "aggregate_mismatches": {
+        "gate": 0,
+        "up": 0,
+        "exp_argument": 0,
+        "exp2": 0,
+        "denominator": 0,
+        "quotient": 7141,
+        "activation": 6419
+      },
+      "cpu_scale_bits_match_all_cases": true,
+      "scope": "Synthetic failing-fixture CPU/OpenCL arithmetic trace. No NPU calls or model throughput. Trace activation maximum/127 also compared to actual compiled CPU FFN scales."
+    },
+    {
+      "revision": 2,
+      "report": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-v2.json",
+        "sha256": "7f43196b759dc123353728883419cea5cee9cde1f8fa126bc393a2a0ffe0edf0"
+      },
+      "lease": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v2.json",
+        "sha256": "c1f33faf568ce16aca14da152df509f0d2ad2c20be39c5ce84e6ee21123c7807"
+      },
+      "fresh": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v2-fresh.json",
+        "sha256": "ddef38b83c914729ae56a72d8e754e5a214280fc1329931701ac705554da479f"
+      },
+      "fields": [
+        "gate",
+        "up",
+        "exp_argument",
+        "exp2",
+        "denominator",
+        "quotient",
+        "activation"
+      ],
+      "aggregate_mismatches": {
+        "gate": 0,
+        "up": 0,
+        "exp_argument": 0,
+        "exp2": 0,
+        "denominator": 0,
+        "quotient": 238,
+        "activation": 189
+      },
+      "cpu_scale_bits_match_all_cases": true,
+      "scope": "Synthetic failing-fixture CPU/OpenCL arithmetic trace. No NPU calls or model throughput. Trace activation maximum/127 also compared to actual compiled CPU FFN scales."
+    },
+    {
+      "revision": 3,
+      "report": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-v3.json",
+        "sha256": "82a10a4d1776a8bedc49261d583fbcbb2c18d0e4dd0c11c3e4da6f890931c35a"
+      },
+      "lease": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v3.json",
+        "sha256": "32f7477159798882c6b0ac96bafaa59efd72376819fab5e3cfffaf7eade5b4bd"
+      },
+      "fresh": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v3-fresh.json",
+        "sha256": "6d740415ca24f7a24308a4889a3532d25c8e2426d5234466e7434a85997c6380"
+      },
+      "fields": [
+        "gate",
+        "up",
+        "exp_argument",
+        "exp2",
+        "denominator",
+        "quotient",
+        "activation"
+      ],
+      "aggregate_mismatches": {
+        "gate": 0,
+        "up": 0,
+        "exp_argument": 0,
+        "exp2": 0,
+        "denominator": 0,
+        "quotient": 238,
+        "activation": 189
+      },
+      "cpu_scale_bits_match_all_cases": true,
+      "scope": "Synthetic failing-fixture CPU/OpenCL arithmetic trace. No NPU calls or model throughput. Trace activation maximum/127 also compared to actual compiled CPU FFN scales."
+    },
+    {
+      "revision": 4,
+      "report": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-v4.json",
+        "sha256": "901578d97a0ce3f8fce36d4b09805a71b591158680012ca7f2742fcf80fd87c3"
+      },
+      "lease": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v4.json",
+        "sha256": "ec6528746bc7922a7e41aa31e3f95ccd0f9b51b7bb2f464a5939cb55b0fdd9ce"
+      },
+      "fresh": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v4-fresh.json",
+        "sha256": "3176488fe5853f3815f21b23532b7fe8f45d217f0611077d9499e487f934b4c5"
+      },
+      "fields": [
+        "gate",
+        "up",
+        "exp_argument",
+        "exp2",
+        "denominator",
+        "quotient",
+        "activation"
+      ],
+      "aggregate_mismatches": {
+        "gate": 0,
+        "up": 0,
+        "exp_argument": 0,
+        "exp2": 0,
+        "denominator": 0,
+        "quotient": 238,
+        "activation": 189
+      },
+      "cpu_scale_bits_match_all_cases": true,
+      "scope": "Synthetic failing-fixture CPU/OpenCL arithmetic trace. No NPU calls or model throughput. Trace activation maximum/127 also compared to actual compiled CPU FFN scales."
+    },
+    {
+      "revision": 5,
+      "report": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-v5.json",
+        "sha256": "790372c455e72b09d865db0404d76184e2b12d5e8ed850f56cbf5a0a8070af53"
+      },
+      "lease": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v5.json",
+        "sha256": "d31dbc7e45f5d8332a3e48444168b4f73da2fb83ff8a93c06853ac8111db7449"
+      },
+      "fresh": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-rounding-trace-lease-v5-fresh.json",
+        "sha256": "ec11b129e0a9161f235c1994880937804fc13206f4ed3b1c012ed6405a5e78ee"
+      },
+      "fields": [
+        "gate",
+        "up",
+        "exp_argument",
+        "exp2",
+        "denominator",
+        "quotient",
+        "activation"
+      ],
+      "aggregate_mismatches": {
+        "gate": 0,
+        "up": 0,
+        "exp_argument": 0,
+        "exp2": 0,
+        "denominator": 0,
+        "quotient": 0,
+        "activation": 0
+      },
+      "cpu_scale_bits_match_all_cases": true,
+      "scope": "Synthetic failing-fixture CPU/OpenCL arithmetic trace. No NPU calls or model throughput. Trace activation maximum/127 also compared to actual compiled CPU FFN scales."
+    }
+  ],
+  "mismatch_history": [
+    {
+      "revision": 1,
+      "quotient_mismatches": 7141,
+      "activation_mismatches": 6419
+    },
+    {
+      "revision": 2,
+      "quotient_mismatches": 238,
+      "activation_mismatches": 189
+    },
+    {
+      "revision": 3,
+      "quotient_mismatches": 238,
+      "activation_mismatches": 189
+    },
+    {
+      "revision": 4,
+      "quotient_mismatches": 238,
+      "activation_mismatches": 189
+    },
+    {
+      "revision": 5,
+      "quotient_mismatches": 0,
+      "activation_mismatches": 0
+    }
+  ],
+  "cpu_check": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-ffn-cpu-check-v5.json",
+    "sha256": "3e05d9994ecd430c0b3e96ee8641923529dc26a6f9d8b98b05e74f65d3dfab3d"
+  },
+  "cpu_check_fresh": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-ffn-cpu-check-v5-fresh.json",
+    "sha256": "f28963e558427b789c0f53de37169b4392a3989d1b4585c665e3d784e1e50ac0"
+  },
+  "CPU_logs": [
+    {
+      "kind": "pytest",
+      "exit_code": 0,
+      "log": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-ffn-cpu-pytest-v5.log",
+        "sha256": "6a058096ee152bf90fcbf3df4769229496d999e62fc469160bce5ca4fa6faf54"
+      }
+    },
+    {
+      "kind": "mypy",
+      "exit_code": 0,
+      "log": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-ffn-cpu-mypy-v5.log",
+        "sha256": "ed3214079f8c231bf290f1ddc5caeb8570ad79c8051b96a6227ccec57cca29f6"
+      }
+    },
+    {
+      "kind": "ruff",
+      "exit_code": 0,
+      "log": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-ffn-cpu-ruff-v5.log",
+        "sha256": "bfd027bc3b3a0270ada9cef687e05c84e2c281cf127fcdf9573fee1452b85aad"
+      }
+    }
+  ],
+  "CPU_check_summary": {
+    "pytest": "41 passed, 9 skipped, 66 subtests passed",
+    "mypy": "280 source files",
+    "ruff": "All checks passed"
+  },
+  "operator_trace_finding": "v5 reports zero mismatches for all seven traced fields across eight synthetic 128x3072 cases; actual compiled CPU FFN scale bits match all cases. This is synthetic CPU/OpenCL arithmetic evidence only.",
+  "multi_output_cpu_probe": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/multi-output-realize-v1.json",
+    "sha256": "7703b5c04647be80a49581b41b8ccc416bd6e020875fd82459c20f25b28439b5"
+  },
+  "multi_output_cpu_probe_source": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/probe-multi-output-realize-v1.py",
+    "sha256": "5abd5969e6bb5ba0828d5327014e90decc20585f83b50a9a574f17c7d08df3da"
+  },
+  "limitations": "The v4 hardware qualification did not pass: its changed payload/scale/down integer and native replay assertions passed on eight inputs, but the captured GPU-call-count assertion expected one and observed three. No trained model arms ran. The CPU helper reproduces 3-to-1 captured-call grouping with identical output values. A corrected arithmetic trace and CPU checks do not establish full hardware integration or Qwen3 ABBA model correctness/performance. The historical v1 integration failure is retained; the separately published v5 verification, when linked in v5_model_status, supplies the full hardware/model evidence. No HF/RKLLM quality or speed win is claimed.",
+  "publisher": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/publish-gpu-ffn-rounding-status-v2.py",
+    "sha256": "6ec5d3287969a091fc4ce2c2a8455bd8b43db37a8059615cc38625e0f5e0a5dd"
+  }
+}

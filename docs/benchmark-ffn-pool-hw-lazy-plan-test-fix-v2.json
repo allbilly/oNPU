@@ -1,0 +1,22 @@
+{
+  "complete": true,
+  "hardware_retest_passed": false,
+  "goal_complete": false,
+  "reason": "NativeReplay is lazy: the wrapper constructor leaves native=None; the first wrapped call constructs it and later calls execute it. Inspect source after all seven changed-input executions, while retaining exact FP32 comparison, callback count, parked state and native_runs>=2 assertions.",
+  "failed_test_source": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-hw-test-failed-v1.py",
+    "sha256": "df8fae3a51dadbf530882faf3ecbbc6929252e227df750706d50ea1cebbb4a98"
+  },
+  "corrected_test_source": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/test_ffn_prefill_pool_hw_fixed_v2.py",
+    "sha256": "2c56fd45767f4b42a889275b280bc9f46787a37f414f318b86500ce915c9fa6f"
+  },
+  "twin_search": {
+    "pattern": "captured\\s*=\\s*RockchipCapturedJit\\([^\\n]*\\)(?:\\n[^\\n]*){0,8}\\.native\\.calls",
+    "matched_sites": [
+      "/home/orangepi/tinygrad/test/runtime/test_rockchip_ffn_pool_hw.py"
+    ],
+    "other_sites": 0
+  },
+  "production_code_changed": false
+}

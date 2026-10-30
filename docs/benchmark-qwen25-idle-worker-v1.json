@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 idle-worker mask diagnostic v1",
+  "source_receipts": {
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-idle-v1/results/idle.json",
+    "report_sha256": "900e80389e29330d65e18bdca914c6441553fd7b62f49b941e73e9b3f909bd4c",
+    "lease": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-idle-lease-v1/job.json",
+    "lease_sha256": "4287ffd4998eaa6bc5c1d7c8ed283f498d611ae71e8f313ed6b58d2eec886053",
+    "run_token": "qwen25-worker-idle-v1",
+    "report_kind": "qwen25-worker-idle-v1",
+    "paths": {
+      "request_metrics": "requests[].terminal.metrics",
+      "mask": "requests[].mask",
+      "warmup": "requests[].warmup",
+      "block": "requests[].block",
+      "token_ids": "requests[].token_ids",
+      "thermal_frequency": [
+        "requests[].start_board",
+        "requests[].end_board"
+      ]
+    },
+    "common_token_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+    "common_response_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b"
+  },
+  "workload": {
+    "model": "qwen2.5-1.5b-instruct",
+    "device": "CPU+ROCKCHIP",
+    "context": 512,
+    "prompt_tokens": 128,
+    "completion_tokens": 64,
+    "precision": "int8",
+    "worker_affinity": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "generation": "ordinary, speculation off"
+  },
+  "design": {
+    "requests_total": 30,
+    "warmup_requests": 6,
+    "measured_requests": 24,
+    "measured_control_mask": 14,
+    "measured_candidate_mask": 10,
+    "measured_per_mask": 12,
+    "control_blocks": [
+      0,
+      3,
+      5,
+      6
+    ],
+    "candidate_blocks": [
+      1,
+      2,
+      4,
+      7
+    ],
+    "all_requests_exactly_64_token_ids": true,
+    "all_token_id_sequences_identical": true,
+    "per_request_host_pool_parked_and_mask_restored": true
+  },
+  "measured": {
+    "control_mask14": {
+      "n": 12,
+      "median": {
+        "ttft_ms": 421.103,
+        "prefill_128_over_median_ttft_tok_s": 303.964,
+        "median_per_request_prefill_128_over_ttft_tok_s": 304.0,
+        "decode_tok_s": 15.262,
+        "total_seconds": 4.608
+      },
+      "range": {
+        "ttft_ms": {
+          "min": 350.489,
+          "max": 765.654
+        },
+        "total_seconds": {
+          "min": 4.339,
+          "max": 4.911
+        },
+        "decode_tps": {
+          "min": 14.962,
+          "max": 15.898
+        },
+        "prefill_tps": {
+          "min": 167.177,
+          "max": 365.204
+        }
+      },
+      "prefill_per_request_tok_s_range": {
+        "min": 167.177,
+        "max": 365.204
+      },
+      "thermal_and_npu_frequency": {
+        "snapshots": "start_board and end_board for measured requests",
+        "zone0_c_range": [
+          83.153,
+          85.888
+        ],
+        "all_zone_floor_c_range": [
+          80.384,
+          83.153
+        ],
+        "all_zone_ceiling_c_range": [
+          85.0,
+          87.666
+        ],
+        "npu_devfreq_hz_values": [
+          800000000
+        ]
+      },
+      "blocks": {
+        "0": {
+          "mask": 14,
+          "n": 3,
+          "median": {
+            "ttft_ms": 391.945,
+            "prefill_128_over_median_ttft_tok_s": 326.576,
+            "median_per_request_prefill_128_over_ttft_tok_s": 326.576,
+            "decode_tok_s": 15.796,
+            "total_seconds": 4.38
+          }
+        },
+        "3": {
+          "mask": 14,
+          "n": 3,
+          "median": {
+            "ttft_ms": 425.668,
+            "prefill_128_over_median_ttft_tok_s": 300.704,
+            "median_per_request_prefill_128_over_ttft_tok_s": 300.704,
+            "decode_tok_s": 15.353,
+            "total_seconds": 4.537
+          }
+        },
+        "5": {
+          "mask": 14,
+          "n": 3,
+          "median": {
+            "ttft_ms": 445.65,
+            "prefill_128_over_median_ttft_tok_s": 287.221,
+            "median_per_request_prefill_128_over_ttft_tok_s": 287.221,
+            "decode_tok_s": 15.099,
+            "total_seconds": 4.623
+          }
+        },
+        "6": {
+          "mask": 14,
+          "n": 3,
+          "median": {
+            "ttft_ms": 416.232,
+            "prefill_128_over_median_ttft_tok_s": 307.521,
+            "median_per_request_prefill_128_over_ttft_tok_s": 307.521,
+            "decode_tok_s": 15.055,
+            "total_seconds": 4.615
+          }
+        }
+      }
+    },
+    "candidate_mask10": {
+      "n": 12,
+      "median": {
+        "ttft_ms": 407.648,
+        "prefill_128_over_median_ttft_tok_s": 313.996,
+        "median_per_request_prefill_128_over_ttft_tok_s": 314.009,
+        "decode_tok_s": 15.564,
+        "total_seconds": 4.447
+      },
+      "range": {
+        "ttft_ms": {
+          "min": 383.822,
+          "max": 654.699
+        },
+        "total_seconds": {
+          "min": 4.302,
+          "max": 4.809
+        },
+        "decode_tps": {
+          "min": 15.143,
+          "max": 16.166
+        },
+        "prefill_tps": {
+          "min": 195.51,
+          "max": 333.488
+        }
+      },
+      "prefill_per_request_tok_s_range": {
+        "min": 195.51,
+        "max": 333.488
+      },
+      "thermal_and_npu_frequency": {
+        "snapshots": "start_board and end_board for measured requests",
+        "zone0_c_range": [
+          84.076,
+          85.0
+        ],
+        "all_zone_floor_c_range": [
+          81.307,
+          83.153
+        ],
+        "all_zone_ceiling_c_range": [
+          85.0,
+          86.777
+        ],
+        "npu_devfreq_hz_values": [
+          800000000
+        ]
+      },
+      "blocks": {
+        "1": {
+          "mask": 10,
+          "n": 3,
+          "median": {
+            "ttft_ms": 405.089,
+            "prefill_128_over_median_ttft_tok_s": 315.98,
+            "median_per_request_prefill_128_over_ttft_tok_s": 315.98,
+            "decode_tok_s": 16.122,
+            "total_seconds": 4.306
+          }
+        },
+        "2": {
+          "mask": 10,
+          "n": 3,
+          "median": {
+            "ttft_ms": 393.915,
+            "prefill_128_over_median_ttft_tok_s": 324.944,
+            "median_per_request_prefill_128_over_ttft_tok_s": 324.944,
+            "decode_tok_s": 15.889,
+            "total_seconds": 4.364
+          }
+        },
+        "4": {
+          "mask": 10,
+          "n": 3,
+          "median": {
+            "ttft_ms": 587.407,
+            "prefill_128_over_median_ttft_tok_s": 217.907,
+            "median_per_request_prefill_128_over_ttft_tok_s": 217.907,
+            "decode_tok_s": 15.528,
+            "total_seconds": 4.645
+          }
+        },
+        "7": {
+          "mask": 10,
+          "n": 3,
+          "median": {
+            "ttft_ms": 618.768,
+            "prefill_128_over_median_ttft_tok_s": 206.863,
+            "median_per_request_prefill_128_over_ttft_tok_s": 206.863,
+            "decode_tok_s": 15.15,
+            "total_seconds": 4.777
+          }
+        }
+      }
+    }
+  },
+  "qualification": {
+    "throughput_qualification": false,
+    "timing_scope": "Unprofiled real worker IPC metrics with mask setter inside generation; HTTP API not measured.",
+    "same_arithmetic_local_regression": "All 30 generated token ID sequences are identical across masks; this is a local regression only, not an independent quality evaluation.",
+    "http_api_qualified": false,
+    "independent_quality_qualified": false,
+    "lease_restored": true,
+    "lease_phase": "restored",
+    "fresh_reply_count": 2,
+    "promotion": "none",
+    "interpretation": "Candidate mask has a modest median decode increase, but ranges overlap and measured masks occupy different blocks amid strong nonlinear drift. No reliable gain is established. The stronger decode-parking experiment is staged and pending results."
+  }
+}

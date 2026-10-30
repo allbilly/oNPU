@@ -1,0 +1,84 @@
+{
+  "exact_exp2_inputs": 1114112,
+  "exact_gate": true,
+  "blocks": [
+    {
+      "variant": "current",
+      "median_ms": 0.615991
+    },
+    {
+      "variant": "fast",
+      "median_ms": 0.481972
+    },
+    {
+      "variant": "fast",
+      "median_ms": 0.482118
+    },
+    {
+      "variant": "current",
+      "median_ms": 0.615991
+    }
+  ],
+  "three_way_blocks": [
+    {
+      "variant": "current",
+      "median_ms": 0.616283
+    },
+    {
+      "variant": "fast",
+      "median_ms": 0.481826
+    },
+    {
+      "variant": "llama",
+      "median_ms": 0.274454
+    },
+    {
+      "variant": "llama",
+      "median_ms": 0.274455
+    },
+    {
+      "variant": "fast",
+      "median_ms": 0.481826
+    },
+    {
+      "variant": "current",
+      "median_ms": 0.616575
+    }
+  ],
+  "llama_gate_difference": {
+    "different_bits": 55987,
+    "max_abs": 3.814697265625e-06
+  },
+  "production_inline_blocks": [
+    {
+      "flag": 0,
+      "median_ms": 0.617157
+    },
+    {
+      "flag": 1,
+      "median_ms": 0.431661
+    },
+    {
+      "flag": 1,
+      "median_ms": 0.43166
+    },
+    {
+      "flag": 0,
+      "median_ms": 0.617158
+    }
+  ],
+  "llama_commit": "b92761a515ea31e852e7fbc1fad5f874b46f3718",
+  "cpu_affinity": [
+    4
+  ],
+  "elements": 131072,
+  "compiler": "clang -O2 -shared -fPIC -mcpu=native; existing adaptive governors",
+  "source_sha256": {
+    "fast.c": "998f2562ca5aeeaae530e38ae0c3b3403f6540c8a18b8ab684c3f84010a8715a",
+    "production-1.c": "c3e12294bd4564f29ec5ce92b9760aec4a177d481071cdc9e056690455dadb21",
+    "production-0.c": "df78e303f8833818942b93d446af1c0e7f8e5cb58cf1d7e6971bf992feda91ba",
+    "current.c": "b58163924bceafbfeba344f518f80bf57193bc901374da5548af451886603593",
+    "llama.c": "a6c877835c2e566bb6800be691876bebc07a8ab40f2adffb1bedc169c145872c"
+  },
+  "scope": "CPU activation microbenchmarks; no full-model speed inference. Exact alternative reuses original polynomial and exceptional handling. llama.cpp helper changes arithmetic."
+}

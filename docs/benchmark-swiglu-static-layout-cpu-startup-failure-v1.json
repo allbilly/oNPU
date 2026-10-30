@@ -1,0 +1,18 @@
+{
+  "complete": false,
+  "session": 72957,
+  "exit_code": 1,
+  "result": "oom-kill",
+  "runtime_seconds": 107.06,
+  "scope": "700 MiB CPU test startup allocation failure; no test verdict; model sessions remained ready.",
+  "serving_sessions": [
+    [
+      "b4b92c783d8643a1",
+      "ready"
+    ],
+    [
+      "55a95dc3c1b93b72",
+      "ready"
+    ]
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "audit_complete": true,
+  "audit_kind": "qwen2-natural896-models-v1-numerical-audit",
+  "captured_command_summary": [
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        1024
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        1024
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        1024
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-4-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        1024
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-4-control"
+    }
+  ],
+  "checks": {
+    "all_24_sequences_equal_prior_canonical_and_report_flags": true,
+    "all_four_cases_complete_valid_and_abba": true,
+    "canonical_preferred_report_hash_valid": true,
+    "four_teacher_arrays_fp32_32x151936_finite": true,
+    "four_teacher_arrays_uint32_bitwise_identical": true,
+    "frozen_source_pins_match_files_and_manifest": true,
+    "independent_float64_nll_finite_and_matches_report": true,
+    "independent_float64_nll_max_delta_le_1e_7": true,
+    "prepared_input_width_commands_capture_contract": true,
+    "raw_ffn_pool_teacher_dispatch_and_no_projection_sharing": true,
+    "source_count_291_matches_manifest_current_and_before_after": true,
+    "teacher_arrays_match_prior_preferred_optional": true,
+    "teacher_prefix128_and_first32_ids_exact_int32": true,
+    "workload_128_tokens_64_generated_context512_three_warm_three_measured": true
+  },
+  "dataset_refs": [
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-1-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-1-control.json",
+      "report_sha256": "9b8afcf94b11a966ecc951e1f82a6c3be670cb3e553dfeabf492890b14dc5e1f"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-2-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-2-candidate.json",
+      "report_sha256": "06deac3e0974bb48009b72bd101a26d62e5b5fc2d20ae636123ae3bec3d76d94"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-3-candidate.json",
+      "report_sha256": "43f7b2dd7061f8733b3eb7fac78b6ed02c6f12d580ca874486fc4ec8c8c10f7a"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-4-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-natural896-models-v1/results/qwen2-natural896-models-v1-qwen2-05b-4-control.json",
+      "report_sha256": "0e24555ea37a096de80c1b984fd6d671fa3ee9d3209f4287660ecdb3673a8314"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/grouped-swiglu-models-v2/results/qwen2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/oNPU/docs/benchmark-grouped-swiglu-models-v2-qwen2-3-candidate.json",
+      "report_sha256": "77923b83fca28ed450f7ed8efaaaa3d494ed16798c5e5f441eb4c8b51e02f3a2",
+      "role": "prior_canonical_preferred_optional"
+    }
+  ],
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "restoration_snapshot": {
+    "phase": "restoring",
+    "restored": false
+  },
+  "restoration_verified": false,
+  "source_count": 291,
+  "teacher_logits": {
+    "all_finite": true,
+    "dtype": "float32",
+    "independent_float64_mean_nll_by_case": [
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162
+    ],
+    "independent_float64_mean_nll_max_delta": 0.0,
+    "prior_preferred_bitwise_match": true,
+    "shape": [
+      32,
+      151936
+    ],
+    "uint32_bitwise_identical_across_four": true
+  },
+  "timing_metrics": [
+    {
+      "decode_tps_measured": [
+        37.878673368503875,
+        36.90934236433669,
+        37.91148920534829
+      ],
+      "first_token_ms_measured": [
+        225.35245399922132,
+        250.83893100963905,
+        221.47769801085815
+      ],
+      "prefill_tps_measured": [
+        567.9991396962657,
+        510.2876155818146,
+        577.9362940359109
+      ],
+      "report_median_decode_tps": 37.878673368503875,
+      "report_median_first_token_ms": 225.35245399922132,
+      "report_median_prefill_tps": 567.9991396962657,
+      "role": "control",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "decode_tps_measured": [
+        40.64958973528908,
+        40.66769741276278,
+        40.68795945882562
+      ],
+      "first_token_ms_measured": [
+        224.26513099344447,
+        281.35019598994404,
+        268.0552749952767
+      ],
+      "prefill_tps_measured": [
+        570.7530164541789,
+        454.9490344217672,
+        477.5134531572096
+      ],
+      "report_median_decode_tps": 40.66769741276278,
+      "report_median_first_token_ms": 268.0552749952767,
+      "report_median_prefill_tps": 477.5134531572096,
+      "role": "candidate",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "decode_tps_measured": [
+        40.481675235115695,
+        40.60001784284853,
+        40.509963416902245
+      ],
+      "first_token_ms_measured": [
+        269.73613500013016,
+        244.15574199520051,
+        248.04712299373932
+      ],
+      "prefill_tps_measured": [
+        474.53782934918314,
+        524.25553850999,
+        516.0309801425542
+      ],
+      "report_median_decode_tps": 40.509963416902245,
+      "report_median_first_token_ms": 248.04712299373932,
+      "report_median_prefill_tps": 516.0309801425542,
+      "role": "candidate",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "decode_tps_measured": [
+        37.9963205821627,
+        37.511637762335596,
+        37.969317168241126
+      ],
+      "first_token_ms_measured": [
+        275.404947984498,
+        267.2803890018258,
+        246.76336799166165
+      ],
+      "prefill_tps_measured": [
+        464.77015368367626,
+        478.89783638082633,
+        518.7155656115264
+      ],
+      "report_median_decode_tps": 37.969317168241126,
+      "report_median_first_token_ms": 267.2803890018258,
+      "report_median_prefill_tps": 478.89783638082633,
+      "role": "control",
+      "slug": "qwen2-natural896-models-v1-qwen2-05b-4-control"
+    }
+  ]
+}

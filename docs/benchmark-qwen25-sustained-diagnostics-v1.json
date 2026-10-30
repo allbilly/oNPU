@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 sustained ordinary-request diagnostics",
+  "source_receipts": {
+    "aging": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-aging-v1/results/aging.json",
+      "sha256": "82c565638a4d4267f728d7c0e7525be2472442b676400ae1463d75beac40dd59",
+      "lease": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-aging-lease-v1/job.json",
+      "lease_sha256": "c25cb5a336e60143290c6c0c0278a6feb1de0db02f9d531689a04d45d7fa130d",
+      "request_metrics_path": "requests[].terminal.metrics",
+      "host_snapshot_paths": ["requests[].start_host.board", "requests[].first_host.board"],
+      "run_token": "f62f75f6eded29167595ea9be119c6eb"
+    },
+    "runtime": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-runtime-v1/results/runtime.json",
+      "sha256": "d2b9dd4a20cb7605a12ebb291f0859e75076ba8aebb3c89d47c9ebd47c7ef89f",
+      "lease": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-runtime-lease-v1/job.json",
+      "lease_sha256": "e979728ec9dfa637e31a0f9413d6697d11f04063583f9d7dd32150292277cd51",
+      "lease_report_sha256": "d2b9dd4a20cb7605a12ebb291f0859e75076ba8aebb3c89d47c9ebd47c7ef89f",
+      "request_metrics_path": "requests[].terminal.metrics",
+      "warmup_flag_path": "requests[].warmup",
+      "run_token": "a39af1cbbe97f744cef01d43675c26cf",
+      "response_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b"
+    }
+  },
+  "workload": {
+    "model": "qwen2.5-1.5b-instruct",
+    "device": "CPU+ROCKCHIP",
+    "context": 512,
+    "prompt_tokens": 128,
+    "completion_tokens": 64,
+    "generation_mode": "ordinary",
+    "speculation": "off",
+    "placement_precision": "int8 projections with CPU helpers",
+    "worker_affinity": [4, 5, 6, 7]
+  },
+  "aging": {
+    "request_count": 24,
+    "report_warmup_measured_flags": false,
+    "warmup_measured_split": "Not recorded; report contains request indexes only. Do not label a subset as warmup.",
+    "throughput_qualification": false,
+    "thermal_celsius": {
+      "path_template": "requests[index].{start_host|first_host}.board['/sys/class/thermal/thermal_zoneN/temp']",
+      "request_0_start_by_zone": {"zone0": 70.23, "zone1": 70.23, "zone2": 70.23, "zone3": 70.23, "zone4": 69.307, "zone5": 68.384, "zone6": 69.307},
+      "request_0_first_by_zone": {"zone0": 75.769, "zone1": 79.461, "zone2": 79.461, "zone3": 76.692, "zone4": 73.923, "zone5": 72.076, "zone6": 73.923},
+      "request_23_start_by_zone": {"zone0": 80.384, "zone1": 81.307, "zone2": 81.307, "zone3": 81.307, "zone4": 80.384, "zone5": 79.461, "zone6": 80.384},
+      "request_23_first_by_zone": {"zone0": 84.076, "zone1": 85.888, "zone2": 85.888, "zone3": 84.076, "zone4": 84.076, "zone5": 81.307, "zone6": 82.23},
+      "interpretation": "Zone0 rose 70.230->80.384 C at request start and 75.769->84.076 C at first snapshot. All-zone maximum rose 70.230->81.307 C at start and 79.461->85.888 C at first snapshot; zone0 is not the board maximum throughout."
+    },
+    "frequencies_hz": {
+      "path_template": "requests[index].{start_host|first_host}.board[sysfs frequency path]",
+      "request_0_first": {"cpu_policy0": 1800000, "cpu_policy4": 2256000, "cpu_policy6": 2256000, "ddr": 2112000000, "npu": 1000000000},
+      "request_8_start": {"cpu_policy0": 1200000, "cpu_policy4": 600000, "cpu_policy6": 408000, "ddr": 528000000, "npu": 800000000},
+      "request_8_first": {"cpu_policy0": 1416000, "cpu_policy4": 2016000, "cpu_policy6": 2016000, "ddr": 2112000000, "npu": 800000000},
+      "request_23_first": {"cpu_policy0": 1200000, "cpu_policy4": 1800000, "cpu_policy6": 1800000, "ddr": 2112000000, "npu": 800000000},
+      "interpretation": "Observed CPU and DDR frequencies fluctuate. NPU devfreq falls from 1000 MHz to 800 MHz by request 8 and stays at 800 MHz for the remaining requests; these sysfs readings are reported devfreq values, not independent physical-clock measurements."
+    },
+    "performance_medians": {
+      "metric_paths": {"ttft_ms": "requests[].terminal.metrics.ttft_ms", "total_seconds": "requests[].terminal.metrics.total_seconds", "decode_tok_s": "requests[].terminal.metrics.decode_tps", "prefill_tok_s": "requests[].terminal.metrics.prefill_tps"},
+      "grouping": "Index windows only; no warmup labels exist in this report.",
+      "first_3_indexes_0_2": {"ttft_ms": 374.478, "total_seconds": 4.214, "decode_tok_s": 16.376, "prefill_tok_s": 341.809},
+      "middle_6_indexes_9_14": {"ttft_ms": 396.368, "total_seconds": 4.471, "decode_tok_s": 15.438, "prefill_tok_s": 322.945},
+      "last_3_indexes_21_23": {"ttft_ms": 410.352, "total_seconds": 4.617, "decode_tok_s": 14.995, "prefill_tok_s": 311.928}
+    },
+    "native_and_host_timing": {
+      "graph_path": "requests[0].graphs[]; graphs_after_warmup[]",
+      "native_replay_present": true,
+      "native_profile_examples": ["ROCKCHIP:rockchip_int8_1_17920_1536", "ROCKCHIP:rockchip_int8_1_1536_4096"],
+      "decode_timer_medians_ms_first_3": {"runtime_ns": 58.463, "c_ns": 57.359, "runtime_minus_c": 1.104},
+      "decode_timer_medians_ms_last_3": {"runtime_ns": 64.574, "c_ns": 63.286, "runtime_minus_c": 1.292},
+      "interpretation": "Native ROCKCHIP operators dominate the recorded profile. Runtime-minus-C decode timing grows by about 0.188 ms per token while C timing grows by about 5.927 ms; evidence does not support growing Python overhead as the main slowdown."
+    }
+  },
+  "runtime_variants": {
+    "request_count": 36,
+    "warmup_count": 12,
+    "measured_count": 24,
+    "warmup_measured_rule": "Split strictly on requests[].warmup (true=warmup, false=measured).",
+    "all_requests_ordinary": true,
+    "throughput_qualification": false,
+    "timing_scope": "Unprofiled real worker IPC metrics; staged runtime overrides, not deployed API throughput.",
+    "medians_by_warmup_flag": {
+      "metrics_order": ["ttft_ms", "total_seconds", "decode_tok_s", "prefill_tok_s"],
+      "warmup": {
+        "normal_n3": [340.704, 4.146, 16.556, 375.693],
+        "held_n3": [358.716, 4.115, 16.771, 356.829],
+        "scalar1_n3": [385.881, 4.159, 16.699, 331.708],
+        "scalar4_n3": [366.383, 4.224, 16.333, 349.361]
+      },
+      "measured": {
+        "normal_n6": [399.411, 4.485, 15.499, 320.473],
+        "held_n6": [433.64, 4.492, 15.804, 295.481],
+        "scalar1_n6": [456.871, 4.496, 15.695, 280.851],
+        "scalar4_n6": [607.302, 4.582, 16.113, 211.09]
+      }
+    },
+    "measured_block_medians": {
+      "block0_normal_indexes12_14": {"ttft_ms": 392.238, "total_seconds": 4.381, "decode_tok_s": 15.82, "prefill_tok_s": 326.332},
+      "block1_held_indexes15_17": {"ttft_ms": 397.57, "total_seconds": 4.422, "decode_tok_s": 15.743, "prefill_tok_s": 321.956},
+      "block2_scalar1_indexes18_20": {"ttft_ms": 430.345, "total_seconds": 4.519, "decode_tok_s": 15.708, "prefill_tok_s": 297.436},
+      "block3_scalar4_indexes21_23": {"ttft_ms": 583.586, "total_seconds": 4.577, "decode_tok_s": 16.237, "prefill_tok_s": 219.333},
+      "block4_scalar4_indexes24_26": {"ttft_ms": 631.017, "total_seconds": 4.617, "decode_tok_s": 16.111, "prefill_tok_s": 202.847},
+      "block5_scalar1_indexes27_29": {"ttft_ms": 479.426, "total_seconds": 4.472, "decode_tok_s": 15.682, "prefill_tok_s": 266.986},
+      "block6_held_indexes30_32": {"ttft_ms": 588.875, "total_seconds": 4.582, "decode_tok_s": 15.865, "prefill_tok_s": 217.363},
+      "block7_normal_indexes33_35": {"ttft_ms": 763.078, "total_seconds": 4.896, "decode_tok_s": 15.24, "prefill_tok_s": 167.742}
+    },
+    "caveats": [
+      "The measured mode order is mirrored (normal/held/scalar1/scalar4/scalar4/scalar1/held/normal), but nonlinear drift and graph interactions remain confounding.",
+      "The runtime report contains no thermal telemetry; only the separate aging report directly records thermal and frequency drift.",
+      "Held and scalar variants are diagnostic staged runtime overrides, not deployed API qualifications.",
+      "Held has no durable measured advantage over ordinary; scalar variants do not establish a repeatable whole-request win. Scalar4 measured median TTFT is 607.302 ms and prefill proxy 211.09 tok/s, versus normal 399.411 ms and 320.473 tok/s.",
+      "No quality qualification is recorded; do not promote these variants from this screen."
+    ]
+  },
+  "status": {
+    "diagnostic_only": true,
+    "ordinary_sustained_drift_observed": true,
+    "native_execution_observed": true,
+    "quality_qualified": false,
+    "api_qualified": false,
+    "promotion": "none",
+    "next_experiment": "Parking one idle worker is in progress; no results yet."
+  }
+}

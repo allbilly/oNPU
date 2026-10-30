@@ -1,0 +1,415 @@
+{
+  "schema": "qwen25-api-fast-prefill-v2-diagnostic-v1",
+  "date_local": "2026-10-30",
+  "status": {
+    "complete": true,
+    "restored": true,
+    "functional_complete": true,
+    "serving_speed_win": false,
+    "promotion_approved": false,
+    "quality_comparable": false,
+    "quality_pending": true
+  },
+  "model": {
+    "name": "Qwen2.5 1.5B Instruct Q8_0",
+    "model_id": "30b26da5858517f3",
+    "checkpoint_path": "/home/orangepi/vlm-bench/baseline-20261021/qwen2.5-1.5b-instruct-q8_0.gguf",
+    "checkpoint_sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+    "context": 512,
+    "load_options": {
+      "profile": "ROCKCHIP",
+      "context": 512,
+      "realize": true,
+      "npu_prefill": "auto",
+      "npu_decode": "auto",
+      "vision_gpu": true,
+      "speculation": "off",
+      "draft_path": null
+    }
+  },
+  "affinity": {
+    "worker_pid": 1707175,
+    "ready_cpus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "last_checked_cpus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "ready_and_last_check_match": true,
+    "prior_affinity_failure": {
+      "run": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v1",
+      "correction_receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/onpu-api-affinity-correction-v1.json",
+      "scope": "Prior serving timings used inherited CPU0-3 main-thread restriction; preserve as separate cohort."
+    },
+    "worker_affinity_gate_applied_before_warmup_and_measurement": true
+  },
+  "source_provenance": {
+    "tinygrad_source_count": 297,
+    "onpu_source_count": 12,
+    "tinygrad_changed_paths": [],
+    "tinygrad_source_unchanged": true,
+    "onpu_source_unchanged": true,
+    "api_controller_sha256": "307cfa9cdb4b7e25a25e26bf4a1960ed34edf8e4c2b35256594011a5c25dd5b2",
+    "api_source_counts_unchanged_after": true
+  },
+  "worker_features": {
+    "required": {
+      "shared_host_pool": true,
+      "zero_pad_views": true,
+      "cpu_tuning": true,
+      "cpu_prefill_layout": true,
+      "cpu_token_inputs": true,
+      "borrow_outputs": true,
+      "borrow_batch": true,
+      "native_from": true,
+      "large_native_from": true,
+      "decode_pool": true,
+      "exp2_fast_path": true
+    },
+    "observed": {
+      "zero_pad_views": true,
+      "cpu_tuning": true,
+      "cpu_prefill_layout": true,
+      "cpu_token_inputs": true,
+      "borrow_outputs": true,
+      "borrow_batch": true,
+      "native_from": true,
+      "large_native_from": true,
+      "decode_pool": true,
+      "exp2_fast_path": true,
+      "shared_host_pool": true
+    },
+    "all_11_active": true
+  },
+  "measured_requests": {
+    "count": 5,
+    "prompt_tokens": 128,
+    "completion_tokens": 64,
+    "records": [
+      {
+        "phase": "measured-1",
+        "response_id": "chatcmpl-5ff076ab371d4acf859b25d7",
+        "worker_metric_id": "3660a7ad497546849f241d55a8ce8046",
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "finish_reason": "length",
+        "worker_ttft_ms": 377.46836099540815,
+        "worker_prefill_tps": 339.10126841480394,
+        "worker_decode_tps": 16.28746161900585,
+        "client_wall_seconds": 4.267208232995472,
+        "npu_submissions": 11284,
+        "assistant_text_chars": 333,
+        "assistant_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b",
+        "assistant_text": "A bicycle stays balanced while moving because it has a special design that allows it to maintain its center of gravity and stability. The bicycle has a front wheel that is smaller and lighter than the back wheel, which helps it stay upright as it moves. Additionally, the bicycle has a chain that connects the front wheel to the back"
+      },
+      {
+        "phase": "measured-2",
+        "response_id": "chatcmpl-3edc212941aa499d9ad6d447",
+        "worker_metric_id": "91d9e9e1c6854959aa313579595e75b6",
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "finish_reason": "length",
+        "worker_ttft_ms": 401.61648800130934,
+        "worker_prefill_tps": 318.7120146311889,
+        "worker_decode_tps": 15.969326944210254,
+        "client_wall_seconds": 4.365771380005754,
+        "npu_submissions": 11284,
+        "assistant_text_chars": 333,
+        "assistant_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b",
+        "assistant_text": "A bicycle stays balanced while moving because it has a special design that allows it to maintain its center of gravity and stability. The bicycle has a front wheel that is smaller and lighter than the back wheel, which helps it stay upright as it moves. Additionally, the bicycle has a chain that connects the front wheel to the back"
+      },
+      {
+        "phase": "measured-3",
+        "response_id": "chatcmpl-8fd05bd4c9744e22964910a9",
+        "worker_metric_id": "20140111a9604e248baf6f0c54964e1e",
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "finish_reason": "length",
+        "worker_ttft_ms": 393.4075599972857,
+        "worker_prefill_tps": 325.3623290840754,
+        "worker_decode_tps": 15.75292088294992,
+        "client_wall_seconds": 4.412605695993989,
+        "npu_submissions": 11284,
+        "assistant_text_chars": 333,
+        "assistant_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b",
+        "assistant_text": "A bicycle stays balanced while moving because it has a special design that allows it to maintain its center of gravity and stability. The bicycle has a front wheel that is smaller and lighter than the back wheel, which helps it stay upright as it moves. Additionally, the bicycle has a chain that connects the front wheel to the back"
+      },
+      {
+        "phase": "measured-4",
+        "response_id": "chatcmpl-2a8d809c00cf40288f8424d8",
+        "worker_metric_id": "85e9ae1fdc9a4bd9a7e09bd7e4bd7797",
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "finish_reason": "length",
+        "worker_ttft_ms": 442.77775699447375,
+        "worker_prefill_tps": 289.08407881382703,
+        "worker_decode_tps": 15.823811032887447,
+        "client_wall_seconds": 4.44480892100546,
+        "npu_submissions": 11284,
+        "assistant_text_chars": 333,
+        "assistant_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b",
+        "assistant_text": "A bicycle stays balanced while moving because it has a special design that allows it to maintain its center of gravity and stability. The bicycle has a front wheel that is smaller and lighter than the back wheel, which helps it stay upright as it moves. Additionally, the bicycle has a chain that connects the front wheel to the back"
+      },
+      {
+        "phase": "measured-5",
+        "response_id": "chatcmpl-f5e05cfb07de43a28d665a14",
+        "worker_metric_id": "60a22404c75a471692568f9e1a9dcc26",
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "finish_reason": "length",
+        "worker_ttft_ms": 395.89435899688397,
+        "worker_prefill_tps": 323.31857499643604,
+        "worker_decode_tps": 15.479354519125437,
+        "client_wall_seconds": 4.484926787001314,
+        "npu_submissions": 11284,
+        "assistant_text_chars": 333,
+        "assistant_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b",
+        "assistant_text": "A bicycle stays balanced while moving because it has a special design that allows it to maintain its center of gravity and stability. The bicycle has a front wheel that is smaller and lighter than the back wheel, which helps it stay upright as it moves. Additionally, the bicycle has a chain that connects the front wheel to the back"
+      }
+    ],
+    "metrics": {
+      "worker_ttft_ms": {
+        "median": 395.89435899688397,
+        "min": 377.46836099540815,
+        "max": 442.77775699447375,
+        "values": [
+          377.46836099540815,
+          401.61648800130934,
+          393.4075599972857,
+          442.77775699447375,
+          395.89435899688397
+        ]
+      },
+      "worker_prefill_tps": {
+        "median": 323.31857499643604,
+        "min": 289.08407881382703,
+        "max": 339.10126841480394,
+        "values": [
+          339.10126841480394,
+          318.7120146311889,
+          325.3623290840754,
+          289.08407881382703,
+          323.31857499643604
+        ]
+      },
+      "worker_decode_tps": {
+        "median": 15.823811032887447,
+        "min": 15.479354519125437,
+        "max": 16.28746161900585,
+        "values": [
+          16.28746161900585,
+          15.969326944210254,
+          15.75292088294992,
+          15.823811032887447,
+          15.479354519125437
+        ]
+      },
+      "client_wall_seconds": {
+        "median": 4.412605695993989,
+        "min": 4.267208232995472,
+        "max": 4.484926787001314,
+        "values": [
+          4.267208232995472,
+          4.365771380005754,
+          4.412605695993989,
+          4.44480892100546,
+          4.484926787001314
+        ]
+      }
+    },
+    "npu_submissions_per_request": [
+      11284
+    ],
+    "matched_backend_reference": {
+      "prefill_submits": 259,
+      "decode_submits": 11025,
+      "total_submits": 11284,
+      "source": "The API records total=11284; the split is from both completed ABBA candidate reports."
+    }
+  },
+  "functional_requests": {
+    "functional_complete": true,
+    "warmups": 3,
+    "measured_requests": 5,
+    "five_unstreamed_requests": {
+      "input_tokens": 128,
+      "completion_tokens_each": 64,
+      "finish_reason_each": "length",
+      "all_complete": true
+    },
+    "cached_prefix": {
+      "passed": true,
+      "prompt_tokens": 128,
+      "cached_tokens": 127,
+      "completion_tokens": 1,
+      "npu_submissions": 175
+    },
+    "streaming": {
+      "passed": true,
+      "completion_tokens": 16,
+      "chunk_count": 19,
+      "first_content_seconds": 0.40950300499389414,
+      "done": true,
+      "terminal_error": null
+    },
+    "near_512_boundary": {
+      "passed": true,
+      "context": 512,
+      "prompt_tokens": 448,
+      "completion_tokens": 64,
+      "npu_submissions": 12061
+    },
+    "cancel_and_recovery": {
+      "cancel_requested": true,
+      "cancel_sent": true,
+      "cancel_terminal_error": {
+        "message": "Generation stopped"
+      },
+      "session_ready_after_cancel": true,
+      "recovery_prompt_tokens": 128,
+      "recovery_completion_tokens": 2,
+      "recovery_npu_submissions": 434,
+      "passed": true
+    }
+  },
+  "comparisons": {
+    "published_rkllm": {
+      "ttft_ms": 378.31,
+      "prefill_proxy_tps": 338.35,
+      "decode_tps": 16.69
+    },
+    "completed_abba_candidate_cases": [
+      {
+        "slug": "qwen25-exp2-fast-abba-v1-2-candidate",
+        "prefill_proxy_tps": 341.7983468004161,
+        "decode_tps": 16.834530112722305,
+        "ttft_ms": 374.4898159930017
+      },
+      {
+        "slug": "qwen25-exp2-fast-abba-v1-3-candidate",
+        "prefill_proxy_tps": 345.5929479647918,
+        "decode_tps": 16.774702790909085,
+        "ttft_ms": 370.37792800401803
+      }
+    ],
+    "median_api_vs_published": {
+      "ttft_ms": {
+        "api": 395.89435899688397,
+        "reference": 378.31,
+        "api_faster": false
+      },
+      "prefill_proxy_tps": {
+        "api": 323.31857499643604,
+        "reference": 338.35,
+        "api_faster": false
+      },
+      "decode_tps": {
+        "api": 15.823811032887447,
+        "reference": 16.69,
+        "api_faster": false
+      }
+    },
+    "decision": "No serving speed win: API median TTFT is slower and median prefill/decode rates are below the published reference. API output quality was not compared to the local teacher arrays or an independent FP16/RKLLM oracle."
+  },
+  "restoration": {
+    "restored": true,
+    "selection_restored": true,
+    "settings_restored": true,
+    "original_gpu_preserved": true,
+    "original_npu_unloaded_for_target": true,
+    "fresh_original_replies": [
+      {
+        "model_id": "55a95dc3c1b93b72",
+        "response_id": "chatcmpl-8c24ebc7b06f4ea180843947",
+        "prompt_tokens": 15,
+        "completion_tokens": 2
+      },
+      {
+        "model_id": "b4b92c783d8643a1",
+        "response_id": "chatcmpl-f7881f746651468a9eed4158",
+        "prompt_tokens": 11,
+        "completion_tokens": 2
+      }
+    ]
+  },
+  "next_profile": {
+    "status": "pending",
+    "goal": "bounded worker-native profile to locate the remaining API prefill/decode gap"
+  },
+  "prior_affinity_diagnostic": {
+    "path": "/home/orangepi/oNPU/docs/benchmark-qwen25-api-affinity-diagnostic-v1.json",
+    "sha256": "82082d492cff88894e24da8ad463316580e785d2617809cb8a49e40ea4f38a7b",
+    "scope": "preserved affinity-confounded v1 API cohort; not merged into v2 metrics"
+  },
+  "raw_receipts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v2/job.json",
+      "sha256": "cb6934bff0d67d4428b6424ef5099df80d7c960c1f6a1aea78131c1c7f3ac66d"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v2/qualification.json",
+      "sha256": "8f67f9b9404db2d574443146bc42bdc8993b4535716716b801edc7b7cd3e6cab"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v2/before.json",
+      "sha256": "11ed7cce5cd3b85a4eb2ded68d9c442a5afb081feb3f10c4492bc706e7462055"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v2/after.json",
+      "sha256": "845b5e6af539703a9386107588d2ce076e56b8124353d6693cfb96aa2a4edebb"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-api-qualification-v2/controller.py",
+      "sha256": "307cfa9cdb4b7e25a25e26bf4a1960ed34edf8e4c2b35256594011a5c25dd5b2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-api-qualification-v2/manifest.json",
+      "sha256": "677c6be3664e9982297777f7002eed3047b6583edbc609231ba7e688f25bbae2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-api-qualification-v2/prompt-128.json",
+      "sha256": "2824c9a576c23c0b5016c856374cad16eb15b20d4c5c374d62c58d5fc91218cf"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-api-qualification-v2/prompt-boundary-448.json",
+      "sha256": "2a0d42a8717bc63082fd2d68515fb993a08e04a50ec6c63d2707dcd631fd86dd"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-lease-v1/job.json",
+      "sha256": "4037c7df87f8eaf172066d87bd6105abbc95e0da78257cc5f074e59d6127fb75"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-fast-abba-v1/results/qwen25-exp2-fast-abba-v1-2-candidate.json",
+      "sha256": "c2a6c0b61d98a2ff1c0bb42003895964df46c8cdbb79d213efd88dbf55a186b4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-fast-abba-v1/results/qwen25-exp2-fast-abba-v1-3-candidate.json",
+      "sha256": "6c3990aa47740e66ced329e9dfc832606b97c7ec701b545aba9949dffdd2c656"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/onpu-api-affinity-correction-v1.json",
+      "sha256": "88b900484b5f8b12d60c46be4b12801fabc0677a383cece39087a5180f5fefd3"
+    },
+    {
+      "path": "/home/orangepi/oNPU/docs/benchmark-qwen25-api-affinity-diagnostic-v1.json",
+      "sha256": "82082d492cff88894e24da8ad463316580e785d2617809cb8a49e40ea4f38a7b"
+    }
+  ],
+  "receipt_notes": {
+    "job_json": "Final completed/restored v2 job receipt.",
+    "qualification_json": "Separate captured qualification receipt; retained unchanged.",
+    "ABBA": "Raw candidate reports and lease job are immutable timing cohort references; their local quality teacher is not an API quality check.",
+    "affinity_correction": "Post-v1 correction record; v2 independently records worker CPU4-7 readiness and final check."
+  }
+}

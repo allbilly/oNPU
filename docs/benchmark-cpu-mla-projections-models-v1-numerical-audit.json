@@ -1,0 +1,86 @@
+{
+  "audit_complete": true,
+  "audit_type": "cpu_mla_projections_v1_numerical_audit",
+  "checks": {
+    "abba_roles": true,
+    "all_24_ids_exact": true,
+    "all_logits_bitwise_identical": true,
+    "all_npz_hashes_match_report_metadata": true,
+    "context_input_output_warmups_runs": true,
+    "cpu_mla_projection_roles": true,
+    "four_logits_f32_32x73448_finite": true,
+    "helper_blocks_0_62_62_0": true,
+    "job_four_cases_valid": true,
+    "mean_nll_equal_within_1e_7": true,
+    "mla_weights_124_attention_62": true,
+    "model_config_vocab": true,
+    "nll_finite_all32": true,
+    "npu_domains_and_budget": true,
+    "packed_bytes_0_162529280": true,
+    "prefix_128_ids_match_report": true,
+    "previous_ids_exact_six_each": true,
+    "projection_source_calls_prefill_decode_0_124": true,
+    "quality_speed_goal_false": true,
+    "regular_attention_zero": true,
+    "report_teacher_metadata": true,
+    "source_count": 291,
+    "source_maps_all_291": true,
+    "source_maps_before_after_identical": true,
+    "teacher_first32_exact": true
+  },
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "nll_mean_float64_by_case": [
+    0.3825215178622563,
+    0.3825215178622563,
+    0.3825215178622563,
+    0.3825215178622563
+  ],
+  "nll_mean_spread_float64": 0.0,
+  "notes": "Read-only numerical/report audit. Job phase observed as restoring; no independent fresh restoration receipt was supplied for this local scope.",
+  "quality_qualified": false,
+  "report_and_npz_references": [
+    {
+      "mean_nll_float64": 0.3825215178622563,
+      "nll_rows": 32,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-1-control.teacher-logits.npz",
+      "npz_sha256": "e840eb3929c41971d52500b8e8955a772f576cc27533621de3e9e8d1af40ee26",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-1-control.json",
+      "report_sha256": "0574e7a08d16d029f80a7cff95e94fcb08ed0e4404e9db3feda60462bb887333",
+      "role": "control",
+      "slug": "cpu-mla-projections-models-v1-minicpm3-1-control"
+    },
+    {
+      "mean_nll_float64": 0.3825215178622563,
+      "nll_rows": 32,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-2-candidate.teacher-logits.npz",
+      "npz_sha256": "e840eb3929c41971d52500b8e8955a772f576cc27533621de3e9e8d1af40ee26",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-2-candidate.json",
+      "report_sha256": "b201026769416f9f6fbb83859f0f9126bd75bf06c0e45bd36bcdc987867df407",
+      "role": "candidate",
+      "slug": "cpu-mla-projections-models-v1-minicpm3-2-candidate"
+    },
+    {
+      "mean_nll_float64": 0.3825215178622563,
+      "nll_rows": 32,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-3-candidate.teacher-logits.npz",
+      "npz_sha256": "e840eb3929c41971d52500b8e8955a772f576cc27533621de3e9e8d1af40ee26",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-3-candidate.json",
+      "report_sha256": "151a22ff984333086accce070fc484175ed567acdd61bf46b574d7faaf08c0f4",
+      "role": "candidate",
+      "slug": "cpu-mla-projections-models-v1-minicpm3-3-candidate"
+    },
+    {
+      "mean_nll_float64": 0.3825215178622563,
+      "nll_rows": 32,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-4-control.teacher-logits.npz",
+      "npz_sha256": "e840eb3929c41971d52500b8e8955a772f576cc27533621de3e9e8d1af40ee26",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-mla-projections-models-v1/results/cpu-mla-projections-models-v1-minicpm3-4-control.json",
+      "report_sha256": "cbb3acca32beec2223a20f52d8e920fb08e6ee6e117436aa32cbe3a92e4f9b47",
+      "role": "control",
+      "slug": "cpu-mla-projections-models-v1-minicpm3-4-control"
+    }
+  ],
+  "restoration_verified": false,
+  "source_count": 291
+}

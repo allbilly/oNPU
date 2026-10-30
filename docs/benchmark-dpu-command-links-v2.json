@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "GPU_used": false,
+  "NPU_used": false,
+  "old_chain_rejected": true,
+  "old_failure": "missing successor PC address",
+  "linked_chain_task_counts": [
+    1,
+    2,
+    16,
+    32
+  ],
+  "scope": "Independent successor walk through encoded PC tail address/amount words, task descriptor correspondence, and command allocation bounds."
+}

@@ -1,0 +1,37 @@
+{
+  "complete": true,
+  "GPU_used": false,
+  "NPU_used": false,
+  "kernel_executed": false,
+  "previous_preferred_CPU_source_matches_HEAD": true,
+  "records": [
+    {
+      "rows": 1,
+      "old": {
+        "source_sha256": "1891847fb7c5e0ae17819488b379931fdce21f078369b632d08964da6418f955",
+        "ELF_sha256": "dc16f64debf1391cc95e709297f5fa6e98b050f8af150c212a8dda4c583fe755",
+        "ELF_bytes": 2384
+      },
+      "current": {
+        "source_sha256": "61e8e01426484da9b1921e7f2d402d1fd7f4775ddbb16101f9f8cbec7a6275f0",
+        "ELF_sha256": "dc16f64debf1391cc95e709297f5fa6e98b050f8af150c212a8dda4c583fe755",
+        "ELF_bytes": 2384
+      },
+      "ELF_bitwise_identical": true
+    },
+    {
+      "rows": 128,
+      "old": {
+        "source_sha256": "49f06674e4693a60c46c9adb37d74816cf243d4c903d6af07773ca920ee9b6ed",
+        "ELF_sha256": "3cf95ff02ee05a604a63774814e468ba225c6eb9e968249b850bf1d7ce9c1289",
+        "ELF_bytes": 10240
+      },
+      "current": {
+        "source_sha256": "cef22d30375a274c1e66ecd0cb8c81c0740bdf209adc27470cb92e7b8e403991",
+        "ELF_sha256": "3cf95ff02ee05a604a63774814e468ba225c6eb9e968249b850bf1d7ce9c1289",
+        "ELF_bytes": 10240
+      },
+      "ELF_bitwise_identical": true
+    }
+  ]
+}

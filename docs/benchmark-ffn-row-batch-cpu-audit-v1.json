@@ -1,0 +1,1838 @@
+{
+  "schema": "ffn-row-batch-cpu-probe-v1-independent-audit-v1",
+  "complete": true,
+  "goal_complete": false,
+  "quality_qualified": false,
+  "model_speed_qualified": false,
+  "timing_qualified": false,
+  "llm_qualified": false,
+  "scope": "CPU-only raw FFN packer prototype; not a full-model or LLM performance qualification.",
+  "interpretation": "Saved payload and scale equality plus paired CPU operator timings describe this probe only. They do not establish model throughput, model quality, hardware portability, or a speed goal.",
+  "evidence": {
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-probe-v1/job.json",
+      "sha256": "5c7cf39b14cbce611dd617026f41998115bc031f2d7bb5b7e70f19cef1f52ffe"
+    },
+    "raw_report": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-probe-v1/results/probe.json",
+      "sha256": "908033c182f1faff1dbdc287ff5a43b32b2218c2a545a6d0c439a4ec3e9bf7e7"
+    },
+    "probe_source": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/probe_ffn_row_batch_cpu_v1.py",
+      "sha256": "682a0aa3aa36332635ed87e4d6ead65bf2898471420ccd964ddcbaf0cb96001f"
+    },
+    "prototype_source": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/prototype_ffn_row_batch_v1.py",
+      "sha256": "a2fc17eddf53aa5522ea97c6b4e89dd70c1ff31fe364755b60c1562307af8a76"
+    },
+    "owner_source": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-ffn-row-batch-cpu-probe-v1.py",
+      "sha256": "206fe6d1b11dc8e2fe990155a45335240dbdd4ce575cc150e032add891d9e4c0"
+    },
+    "owner_terminal": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-probe-v1-owner-terminal.json",
+      "sha256": "b8234c4ab62844c220b4b5c6f3626bd31dfe991a4ab979bb42c6827007d5ce73"
+    },
+    "fresh_receipt": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-probe-v1-fresh.json",
+      "sha256": "a351e5621dc582f9ed74500bfd348a64cac5f3d1ad16966448914ff08fefacdb"
+    },
+    "launch_receipt": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-probe-v1-launch.json",
+      "sha256": "88302a274016f87348ed470513ca23df4edb9d16a9ff663b4e1b2b0fa30dddf9"
+    },
+    "cpu_source_proof": {
+      "run_job": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/raw-swiglu-decode-cpu-check-v2.json",
+        "sha256": "044fda50842a0d8e8883665b01b14029269ffd49261c4bca15ef4f418096bd08",
+        "complete": true,
+        "restored": true,
+        "sessions_unchanged": true,
+        "valid_checks": [
+          {
+            "kind": "pytest",
+            "exit_code": 0,
+            "valid": true,
+            "log": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/raw-swiglu-decode-cpu-v2-pytest-v1.log",
+            "log_sha256": "a13c9e8f27ed3b2616ae233257a22d1f2979f159b6ef11eb17d6fffedd6c89d8"
+          },
+          {
+            "kind": "mypy",
+            "exit_code": 0,
+            "valid": true,
+            "log": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/raw-swiglu-decode-cpu-v2-mypy-v1.log",
+            "log_sha256": "96355951b20629c7c11ab2118b5e72f0176f9859f2d4f1a2d7a5db9e43be9f4c"
+          },
+          {
+            "kind": "ruff",
+            "exit_code": 0,
+            "valid": true,
+            "log": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/raw-swiglu-decode-cpu-v2-ruff-v1.log",
+            "log_sha256": "9b728573f10f7e475f10271ee48243c0f5231d62b9fcfe89ccd580e0cf07e144"
+          }
+        ]
+      },
+      "published_verification": {
+        "path": "/home/orangepi/oNPU/docs/benchmark-raw-swiglu-decode-cpu-verification-v2.json",
+        "sha256": "fb506c2b01237e8399fa7027730bb8c262b92b511d75ce1786a8d30ff33dba54",
+        "schema": "raw-swiglu-decode-cpu-verification-v2",
+        "tests_passed": 44,
+        "tests_skipped": 3,
+        "mypy_source_files": 281,
+        "ruff_passed": true,
+        "hardware_qualified": false,
+        "timing_qualified": false,
+        "quality_qualified": false,
+        "model_speed_qualified": false,
+        "goal_complete": false,
+        "source_sha256_count": 291,
+        "source_map_matches_probe_run": true,
+        "all_proof_references_resolve_and_hash_match": true,
+        "reference_count": 10
+      }
+    }
+  },
+  "provenance": {
+    "job_complete": true,
+    "job_restored": true,
+    "job_numeric_pass": true,
+    "owner_pid": 2523464,
+    "owner_start_ticks": "17950391",
+    "owner_exit_code": 0,
+    "child_pid": 2523466,
+    "terminal_job_sha_matches": true,
+    "fresh_job_sha_matches": true,
+    "raw_report_sha_matches_job_case": true,
+    "probe_and_prototype_hashes_match_job": true,
+    "numerical_source_count": 291,
+    "source_sha256": {
+      "tinygrad/__init__.py": "fc24d5d0df1b1a14bbee0bd2641a61ca5f34ec7d83f1b0b755adf6eb83d5c0be",
+      "tinygrad/codegen/__init__.py": "b8fc262121b861659cf777d19544138e5a4d9582c5277dd6f93e914e30423727",
+      "tinygrad/codegen/decomp/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/codegen/decomp/dtype.py": "b3a04ebdd9f5686936964fefa99a46ac27515edb7be4c9f07201269c42371502",
+      "tinygrad/codegen/decomp/op.py": "2d5ff52711a92c45f8814056d799da3c0aade9498822cc5cdee2a83dc3276ae1",
+      "tinygrad/codegen/decomp/transcendental.py": "1d737c265c9f96b8f09d82b85eb660dbb91b558a5af88512075c5a20540d00c5",
+      "tinygrad/codegen/gpudims.py": "15d368b1a45c237c8d3ea0b28af5f3b80fa49dbe73694bd8b315d835c4335ae5",
+      "tinygrad/codegen/late/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/codegen/late/coalesce.py": "36d59f15f202ae20444cd76795e0068b79f4158833e691da3c0ac72848e0d475",
+      "tinygrad/codegen/late/gater.py": "c194d9ffe8d022e62894367d4c0ce0fdf57ff02f34f128efcdac3072334275b9",
+      "tinygrad/codegen/late/linearizer.py": "9c1d7ae56a0381bdb4fd1340fe32eee77ad66617b06a215b8c4c46bf3f97fbe8",
+      "tinygrad/codegen/late/regalloc.py": "e120e26baee8021becfd716e39cb85dc0f5c5992bd30d5a50e48e7a0f528c9e5",
+      "tinygrad/codegen/opt/__init__.py": "6bddcc6a2052b1a39e9a421731275524fa6f0f861abfdefeafae5403747f8778",
+      "tinygrad/codegen/opt/heuristic.py": "029537ca82fadbbc34c9780fee3853466eb5a157a51b7c43dd45a94b3cde2a89",
+      "tinygrad/codegen/opt/postrange.py": "2ee24512630396f82016e709036c8991af7ec7482347060951fe01ebd719d3dd",
+      "tinygrad/codegen/opt/search.py": "670111d23c6360c6bd57f473a0e8877fe9b6615455aa27473f52c6bb99ef81b7",
+      "tinygrad/codegen/simplify.py": "a05ecef8e0f13d104516be51e4289653b00ca3104893000ed09a3b9b639a629f",
+      "tinygrad/device.py": "7a221075b3968b25db62edbc46450616a1e64e20c363466e26aab2a5a2f080f9",
+      "tinygrad/dtype.py": "7800592dcccbdd5a5beaee889342b5f62790d37445938fe601416c8b76057926",
+      "tinygrad/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/engine/jit.py": "7e91838fb3f3593661d771459775ef3e2811ba1038c58f06c9d5c359cac0bec8",
+      "tinygrad/engine/realize.py": "a00765bf85f23399020a9b6ee1e397aed12c3d2a2c4f1362001b67130b41a1db",
+      "tinygrad/engine/worker.py": "b9d47164d0b2fa09f4f396efcfd856b8ebe93a4e446ff683692ea9d605bb017d",
+      "tinygrad/function.py": "dbf481c6049a538680e386d2846e0569bb9924f0293dd3356e92e7a428593a22",
+      "tinygrad/helpers.py": "eda095ab2c35d045e40523cf8f025543c45b012ff217ddeaed6143610330f308",
+      "tinygrad/llm/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/llm/__main__.py": "2b2aeb15c8e098d5268709723bf52e22845634a68075e5904a474ec01f4165f0",
+      "tinygrad/llm/chatglm.py": "789feb35a21226616e674caf42d687fdc4efb7ffff97445f286931880342bac6",
+      "tinygrad/llm/cli.py": "801120b53b59f15221d014a710df2cf8224728e9699f70629ac87b5db28baf49",
+      "tinygrad/llm/dflash2.py": "fd06909403b5268285116846e9082fa9f451618cd8691e04074fccec36eeeb3a",
+      "tinygrad/llm/dflash2_config.py": "f46fda13e52e26ff9fe7bfeb40d56c5f0f7536424358b4e4bc16bee3ef745a5d",
+      "tinygrad/llm/dflash2_selector.py": "54455105954ca47e44d32dec4974d0f222c8c239d61492c43a1a922b54c95342",
+      "tinygrad/llm/gemma3n.py": "37c434bfe88f8c196271f5dc7f7f6a8421c94e55c86a6ecf6eff0e3d76b1acc3",
+      "tinygrad/llm/gemma4.py": "e218b96aaeb628cf355e5428a09d397f863933b28ac50f924c2c0d48acc78c4c",
+      "tinygrad/llm/gguf.py": "ef7957f1a2bd57c48380bdece85f90ddf829055834eb63465468189927b0f2c1",
+      "tinygrad/llm/kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/llm/kernels/amd.py": "05a05aa63391251eea4b8c2dfcc1c56718bdecb712ad9041e56ab84a31edd92c",
+      "tinygrad/llm/kernels/mali.py": "8a52d608e7c22dbaf1605d4aa32b49a8b7af3b88e3678a9c5c3373d95ab961c4",
+      "tinygrad/llm/kernels/mali_attention.py": "aee062ac18b5bb749304decf245a7c52d0a10fcf5d22bddc25e88e172439e778",
+      "tinygrad/llm/kernels/mali_copy.py": "5f9622c02ac6681b4614b777295531ec6de33da9a43253dd4466a3e90d9617e5",
+      "tinygrad/llm/kernels/mali_half_prefill.py": "352996d9b939565f76875960ddb121f648c813d38e5aef313e412c76fe2c8a76",
+      "tinygrad/llm/kernels/mali_linear.py": "31e10be28dea06d51b13383c69a63e24966e7029f7aa4749d3b5e79fe810f96d",
+      "tinygrad/llm/kernels/mali_q8.py": "2d6d4d38b2eb86bb1ca9a546ddaa8ac30ccadc3626332c36acc1328ccfc9459d",
+      "tinygrad/llm/kernels/mali_q8_checkpoint.py": "f96c43dc0489f33db4b2ce084a371af44d0cceb520479d15dc5f63bf65a46387",
+      "tinygrad/llm/kernels/mali_q8_shared.py": "d00c78f07e42ff41424b76b7257916b74055590ddad405f6afcb6c240aca15fc",
+      "tinygrad/llm/kernels/mali_recurrent.py": "35d74bdd1619a786dbf44514a787ce713ad43b9911b4fb7c01812024ca0c281d",
+      "tinygrad/llm/kernels/mali_rows.py": "26dc2d4534ce7cfc6bb6f97e6531b26f1c47de758208ef34f237a95573ca3d58",
+      "tinygrad/llm/kernels/mali_state.py": "c9710fe99c1c78ec06eae0cd8617ef8259a108fe111ace074d6091bbbc6e2c22",
+      "tinygrad/llm/kernels/rockchip.py": "e3920d8cf90c3cb33ffe393cbb0081a66cf1206645f7e6d9f4dd4b4eb7de21eb",
+      "tinygrad/llm/kernels/rockchip_attention.py": "ed1d797b3e2822e779886ffe5f0f8279c9d0669c85a71fa57206a701f65a07fd",
+      "tinygrad/llm/kernels/rockchip_bucketed_int8.py": "58011adc4e4a569f94a045ed6c10118122d66b89430f0193cd555d294f7d593d",
+      "tinygrad/llm/kernels/rockchip_cache.c": "03006a743c7a7f4e72f851950c39f0d473c144d290479fa8935308360c55c549",
+      "tinygrad/llm/kernels/rockchip_cache.py": "ef9a59e36734e62510e304c5de70db93bfc6418a081d6ed840e61d0fe1c359cd",
+      "tinygrad/llm/kernels/rockchip_cpu.py": "dcffed8092dd2247a98dacdf9bef28368fe06a74aab10448b239e3f78f414286",
+      "tinygrad/llm/kernels/rockchip_decode.py": "a560368faa8346ef53ce9905d7844d516a78e77ac90e032175ae7cde9f3a3803",
+      "tinygrad/llm/kernels/rockchip_dot_attention.py": "8d880c2518f699175f664a039133f98281b6781737073841d376a69f9a95b02e",
+      "tinygrad/llm/kernels/rockchip_experts.py": "09ffb2941c59acfd8ae11ab0fb93ff2bdfa8f2799f981aecbf099776f84c6bb6",
+      "tinygrad/llm/kernels/rockchip_gelu.py": "450b2a2d6e9f622fd709b78d811639b76e6272cf502a32abbd779a7f0449942b",
+      "tinygrad/llm/kernels/rockchip_gelu_ffn.py": "5d1331bc133dea39e9a6a1a3538e6e9fcabf67e81205fdcf87fdcc5aee2ab22a",
+      "tinygrad/llm/kernels/rockchip_gpt2.py": "cb9a53386a3e6aa7f13bbb6a20488eaa3685f0ec86f6a054f1f7e38dabea0698",
+      "tinygrad/llm/kernels/rockchip_gpt2_decode.py": "8153cb1d439880dfa85914d92974e848dd8977f41c13519cad23980f94438359",
+      "tinygrad/llm/kernels/rockchip_gpu.py": "7c9c5055953f2b46f864ee76007376389a61f338f01abb4143baa588a8826188",
+      "tinygrad/llm/kernels/rockchip_greedy.py": "01ac047734624a01c04b6e75850c658cc96abba2a1617d7117e740bd16e60ccc",
+      "tinygrad/llm/kernels/rockchip_grouped_int8.py": "2bbf3a5678b3dadc1989fe313b2328c06b8b259de363a035e569d0709438fe1a",
+      "tinygrad/llm/kernels/rockchip_idle.c": "4fb7c8022cefd7929907f4abeedaf8894a96f9261763c32015bbd648eeb09b57",
+      "tinygrad/llm/kernels/rockchip_idle.py": "e0fa42189a9c076df1a2da6a1160a63c1a97814e1411ffe2a5297dced29498dc",
+      "tinygrad/llm/kernels/rockchip_int8.py": "cec73ea4caac47f45fedeb5ad15a9bc5f90ff5d44e7f7a90a8ba6002b347ec48",
+      "tinygrad/llm/kernels/rockchip_mla.py": "07615348877ff5379a1e88a1f297a7c1c2a499ae7884f97f515d1fafe691ee1a",
+      "tinygrad/llm/kernels/rockchip_mla_attention.c": "e598cd75b09ed8a4a1cbaabf96cc2f7838f696a55f3d81ba60e7147ff3d8c390",
+      "tinygrad/llm/kernels/rockchip_mla_attention.py": "db0e011e3e95ffac8c6c8623f0ab4323a577a6ded52acb67dd0b394e90d4d8c5",
+      "tinygrad/llm/kernels/rockchip_mla_cpu.c": "68db31eb6e77c3a919a538e0b68d12187bdfc01767ff712d64c9a33fd8a3ee7b",
+      "tinygrad/llm/kernels/rockchip_mla_cpu.py": "e2b2c2661da04e87f11031ce3f5e618ab58457c9f524199442c5e344e490215c",
+      "tinygrad/llm/kernels/rockchip_mla_projections.py": "5341b3e0ccb3b6b668654fcffc1225f6109e9363628b17e85023ddb4d25358da",
+      "tinygrad/llm/kernels/rockchip_npu_experts.py": "bf338580687e6d4cc8a9fd9ce49a7d03589f97603989c2c0eac2f08f73708d7f",
+      "tinygrad/llm/kernels/rockchip_packed_attention.py": "aace3f08085c69a0deb29ce21244c58e1f95b50b99e31cfa3f9ae6abc04e8822",
+      "tinygrad/llm/kernels/rockchip_pool.c": "6b93a5024aa53552da934e475daaa10d84171cc6be6fd7911c5827a646e031a8",
+      "tinygrad/llm/kernels/rockchip_pool.py": "31fff31283e4660faa5b484e5a456be2c0486823e62ef0688cb600552e487709",
+      "tinygrad/llm/kernels/rockchip_qkv.py": "f1ad14efa29f7b147e5b4a22758ffd5824f4744f03a2160ad411be2d1f7b9d4f",
+      "tinygrad/llm/kernels/rockchip_recurrent.c": "93ef4514c57ccc7c0dd29f1765ef98cd99df98ceccb4ad8dd41191ad8a7c3d8e",
+      "tinygrad/llm/kernels/rockchip_recurrent.py": "d932b2dc3349c435f5b0f35162f0ca3e67e958942083a55b1c1c6ad63d824d0b",
+      "tinygrad/llm/kernels/rockchip_replay.py": "6cb30d010c402f3411bbff41a6968d932e2323bc13d34531ac202c5260e7f66d",
+      "tinygrad/llm/kernels/rockchip_routed_int8.py": "2d6c0966a7e0ea7e600d19570bfc48cdb96fbfe9b1190e14bf3f777cd8033177",
+      "tinygrad/llm/kernels/rockchip_rwkv.c": "ab1ec8474d3d7cec5805c22576d864e1e9d23308cf31ebee3c8509ce1eee6918",
+      "tinygrad/llm/kernels/rockchip_rwkv.py": "5b46a2f060ff8db312ce08c859605a9010c3ede615a7bc3d2a9ba89863579580",
+      "tinygrad/llm/kernels/rockchip_sigmoid.c": "b6ead2a0abe50364a3fb84ec072cdd9e5bab1caff97bc67f4cb60a3a079dec01",
+      "tinygrad/llm/kernels/rockchip_sigmoid.py": "3e8ab4e113436a4d620d01b5de16a3dc7bb8550ffe2389861e87dfbbedbecb92",
+      "tinygrad/llm/kernels/rockchip_softcap.py": "23da42409134a60761a45e34677e2c7134e8df6e4783700eecb07e862f832bb1",
+      "tinygrad/llm/kernels/rockchip_softmax.py": "f429d46acf50a329ce7f4573f2a55ee0f4686923c4f1de93bdbe1889660bff57",
+      "tinygrad/llm/kernels/rockchip_static.c": "04e7539678968204b48ac5e4d466ca38c06fb4f7c1d600ff20b8ffe24129ed50",
+      "tinygrad/llm/kernels/rockchip_static.py": "3ab6823a9fecf1b9a6d6dd0fd1d43bec6c61391d913dab3e0fd075b335d6550e",
+      "tinygrad/llm/kernels/rockchip_vision.py": "94f26b16273eec73d419fd068483721846f20cb9c1f4225fa6a9f214c038e47c",
+      "tinygrad/llm/kernels/rockchip_vision_mlp.py": "b1644c2dd0ca7da816211d18e7f1c9e9d1f0094c8028a62b137b4e080b716a9b",
+      "tinygrad/llm/kernels/rockchip_vision_pipeline.py": "26cee5cdecf29ff41058296870177930911a8e17e9219774be3a959c15d1aa94",
+      "tinygrad/llm/kernels/rockchip_vision_prepared.py": "683f93b048ab6bb1a98491028852cda8c4a121eacbcc98d924b0d91aa30720e7",
+      "tinygrad/llm/kernels/vision_embed.py": "12102e073bfbdd1484728a7a6e279c4cdd7f59dbd7713ef0d39adb6fa221990f",
+      "tinygrad/llm/model.py": "fa3c903801fc757b8da0fae3a6fca5d20d3d38494a2e3a0dc02acb1090036292",
+      "tinygrad/llm/rwkv.py": "f94363ad44d65784db0fd49777b927a627d393b3427de76bd5466fec5e66c02c",
+      "tinygrad/llm/serve.py": "4750c7971d126c91c776886b03f2dbf47815317907d7c05d418388f371e16c00",
+      "tinygrad/llm/speculative.py": "ba6a69a248efa202655d813cf91702b403c4073f85fc51808db51079ffb1a60b",
+      "tinygrad/llm/speculative_adaptive.py": "bdddc414c20e102fb4840d4088097cd73b692288c7e79d1c79df5cb7529105fb",
+      "tinygrad/llm/speculative_budget.py": "79a64b2bc8777d995928a1675d09617f82f4ec20a850796e6c0bb54d30169e0b",
+      "tinygrad/llm/speculative_policy.py": "b6379199d6a3ad09b5d143c0010bc8be19105312a940ad78ea35d806198d7890",
+      "tinygrad/llm/speculative_sampling.py": "fbffa90eca44034b57004b67e4b44f6c0ed06fc6a0d536359220b9a1523e0d67",
+      "tinygrad/llm/speculative_trace.py": "bdd913c8ed34c65c76027109bf2efd1d39c540123f79f4e972d73fd508d7d9da",
+      "tinygrad/llm/vision.py": "d96c9e65478ae86377112ba2831547d093a5e52d00ab93db9faf9f2826fc062a",
+      "tinygrad/mixin/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/mixin/creation.py": "4099d41e065e5638f8bb17f6c016ec6b286bac52e5ca6c9a86b89d73cbebbebb",
+      "tinygrad/mixin/dtype.py": "99027a5281c17bfbd572f12a090bf0d31db36bd239202606c1d3d6237486ec64",
+      "tinygrad/mixin/elementwise.py": "951d9d8a83e5cd3ae5a26571d685f2cef44fa8b41b1e4c3e028f1bf4d31076de",
+      "tinygrad/mixin/gradient.py": "c88b1b5557ab5edb450ed0f7e10bd2adebfcfb572f9977446fa04c2f39cc58d6",
+      "tinygrad/mixin/movement.py": "e6412a4f11b8dadb72cab73b260405c0b39389979e4786f0d981be321f121a50",
+      "tinygrad/mixin/op.py": "c09ecfca6522014dbd7b5ac1faae8c85fdc936484cd95084ac41a3ef135e82c7",
+      "tinygrad/mixin/rand.py": "19623f666365a318b6730123dd0fad27469ced754740415b86563ce0857c0363",
+      "tinygrad/mixin/reduce.py": "6981c71968b41ee79e8e97dfdc89db4b62216fd508707b57dfa0cd42b414e79e",
+      "tinygrad/nn/__init__.py": "992c14aec20683a93469d289d5817d1a023f0e3f39ddd5b93181dc8ef5b0691e",
+      "tinygrad/nn/datasets.py": "bc5ff2d74e07452c4f82afc5d6f7e2656978e189cb64689a1e8a1670825dff67",
+      "tinygrad/nn/onnx.py": "670eaffe1386d496e8337f4be5a472cd7b3786fa610a47ba767d89871346503b",
+      "tinygrad/nn/optim.py": "981bdfa9de9baf3b82f7e80f5c32bab954c56d4f8ef902bf9940770e783dee4b",
+      "tinygrad/nn/state.py": "8b709853bca9edf31b99eb7e76c756968cb9bf521747f7dc50a86110ff974e6b",
+      "tinygrad/nn/torch.py": "377d20ff02d4c70e112830be326c8ad9a188cb490c9d15ca7d4bcffc0820d4ca",
+      "tinygrad/renderer/__init__.py": "119d64c9f98c132f9971c8b7c744bcd53ca8d3ec9e2dd0fca2d76f26ad0e8ff7",
+      "tinygrad/renderer/amd/__init__.py": "daa2583cf98a69bf59aa3f842bacb704598445fb23b9166bebc3adb9a9b7112f",
+      "tinygrad/renderer/amd/dsl.py": "dd45cbdf0d63570742eb54a21ef09266eaed95b8f3708de5363ef1c64d86606f",
+      "tinygrad/renderer/amd/elf.py": "faa631ce5f4d71fae646fa4e44b7ef6012f08b9738ba45691b9d901dcfbe77fc",
+      "tinygrad/renderer/amd/generate.py": "2bbf3599176b8dc500b253a97714977e443b7397063e38a775bcc9bd1c709824",
+      "tinygrad/renderer/amd/sqtt.py": "1bb1807a141e2bf5446af8b092e65520ddb775ff08af272271fb22b02362e49b",
+      "tinygrad/renderer/cstyle.py": "aa6c775081a9fcfbcc675e38e0f3b029c788c5a92f1c0fd46bc0c367d661a492",
+      "tinygrad/renderer/isa/__init__.py": "3fd9ff060c1bb591d79e07b5990e264e5ec2b8efd03fc18fb6fe3a5585022d8b",
+      "tinygrad/renderer/isa/x86.py": "523c94a6eeb89dd5f888967f11380b9f298745ec9b1800e3cd2726668b2c8181",
+      "tinygrad/renderer/llvmir.py": "108235c5ad3fd43aa22b6e094136c35314c4fe7c58f7b508c34d666a3a526b4f",
+      "tinygrad/renderer/nir.py": "a3d8186dcb5b6df0ef3c8aaaee3361b6d9433fe35a6b46d4a4aa0dc1193f05a7",
+      "tinygrad/renderer/ptx.py": "906bd04176ef07274e0fc9d9bf99bc86bb8d8bc9674a3099aee2eceff3d3d3e0",
+      "tinygrad/renderer/tc.py": "f8836d7fa6dee7f0f84f6adf29c192a29ffae62ca40e0372f74b128cde4e6654",
+      "tinygrad/renderer/wgsl.py": "8a5f1823834fef671a28822e21775912393f8b718b0b8e3ff7e319d9a926ef8d",
+      "tinygrad/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/autogen/__init__.py": "89955c8ec8c5cb2d446db169379100b421f51232563eb076b9111e4845a9f5bb",
+      "tinygrad/runtime/autogen/am/__init__.py": "fb2a32843680df3df2ebef7692b0ce5aa4f8ce5da778c6abe456160c0112de74",
+      "tinygrad/runtime/autogen/am/am.py": "075d9d29b885c546897143ade1b18f36d4a4450d1fb1d899d2df8f08aa5853e1",
+      "tinygrad/runtime/autogen/am/fw.py": "c60f58eb1ee6d61cee3817c5af23ef1fdb8c9ac9d4353d07972114cef09c7c02",
+      "tinygrad/runtime/autogen/am/navi_offsets.py": "9080f1a21706918dc9392709804115aa60201c8865ac86ef2b49252a2441c7cf",
+      "tinygrad/runtime/autogen/am/pm4_nv.py": "9bb32046114fd7ddbb976cc25bd5300bad08298b87682539a1a3e860954aad16",
+      "tinygrad/runtime/autogen/am/pm4_soc15.py": "f1ace5672c822d7a728f72b376a4ee5842aa4805944ea5f24dc8289dd341fac8",
+      "tinygrad/runtime/autogen/am/pmc.py": "b65aa28d165f88fd1f17c965e48e5fcbeb7f33bb3da4cba498b819f648ea8b3e",
+      "tinygrad/runtime/autogen/am/regs.py": "81d38816611a1e086e21feca4c2e021174decab385650405e520457aacbfd10f",
+      "tinygrad/runtime/autogen/am/sdma_4_0_0.py": "e2538620e5e73b0a745ce2ba0284c709f158e2893dd478f98bbd86c04c50292b",
+      "tinygrad/runtime/autogen/am/sdma_5_0_0.py": "33e42eb0e8c9be08f698ce8dded66446ad600cf03f64179696556a69617ee5bd",
+      "tinygrad/runtime/autogen/am/sdma_6_0_0.py": "523636d23466359b244b9e5454a8d0a80a5bf8e67882a9238e571ee90d580e88",
+      "tinygrad/runtime/autogen/am/smu_13_0_0.py": "5a2254c980525c8d5c8acc15f56f2ae72520d510aa1c2499b4c2b3586570c125",
+      "tinygrad/runtime/autogen/am/smu_13_0_12.py": "0e558c4f37ef3608d5c0498c96b123bb3362ed0a093ce50acd7a0f2102342919",
+      "tinygrad/runtime/autogen/am/smu_13_0_6.py": "acd6efb5ad0b972a5553c53db400d1f806c1d37d97ee0a583d8e45947060183d",
+      "tinygrad/runtime/autogen/am/smu_14_0_2.py": "f1b5e7d9d10f0a4cfb28dad0b8afe42cd5a276206959bd525bb8e871888991d4",
+      "tinygrad/runtime/autogen/am/soc_11.py": "da4af42a9f6bd4e980cd7a8a2ae3fc34ada4995bb693506f65148ddd7f45ef6c",
+      "tinygrad/runtime/autogen/am/soc_12.py": "8e81635ccab1b30c312778ccd8804e6b5d4df81c0b391a1e9c7f1bb3375e7933",
+      "tinygrad/runtime/autogen/am/soc_9.py": "b5386d6f41ce2ec65e1f9de20bb4439eceedcccfebf0dbd269891367c7cd8d2d",
+      "tinygrad/runtime/autogen/am/vega_offsets.py": "aeedb84cc5ee439c578ab015f0a2c424d95faf3304965041fcb7b116cce2a1eb",
+      "tinygrad/runtime/autogen/amd/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/autogen/amd/cdna/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/autogen/amd/cdna/enum.py": "6273f0c16e079332c354b849f38268527f7bc99bf943a9e5e2831ec3f705eb4a",
+      "tinygrad/runtime/autogen/amd/cdna/ins.py": "d98fad08ef7bd7af6e1ce6459d6bc5f1f7e0f81c6be93561857049675255a3dd",
+      "tinygrad/runtime/autogen/amd/cdna/operands.py": "ae871116dbad3aa9644975ed0f1b6042c9d53d64078f01f6688c7d73ae01f381",
+      "tinygrad/runtime/autogen/amd/cdna/str_pcode.py": "e67649d19bb728278d97065a843518535a87126358710aa85f5a5cd61760fb1a",
+      "tinygrad/runtime/autogen/amd/common.py": "c05fa9bd4e9efb05483d29ddeefb5994ac21560e0d13b4cb18548a57177c7d44",
+      "tinygrad/runtime/autogen/amd/rdna3/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/autogen/amd/rdna3/enum.py": "4c495befe2c1f11f3b2f2820fbd0d3d9b3faf4d4969312ad757c6fa7569cc9dc",
+      "tinygrad/runtime/autogen/amd/rdna3/ins.py": "652a5df671664024650c5f5b6c2eddf7af0354a556e84473a3eb207bacfc4746",
+      "tinygrad/runtime/autogen/amd/rdna3/operands.py": "96fd869a40884dec0247633c49af6e80dffc375afdbf222eb70f6b7d04bcf806",
+      "tinygrad/runtime/autogen/amd/rdna3/str_pcode.py": "b7705c1430b06c5ce1a90ac625a515708ebe11c184068bf89746f3fd5466ae39",
+      "tinygrad/runtime/autogen/amd/rdna4/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/autogen/amd/rdna4/enum.py": "e7f785ef907c6ae1109baf9188a4b63b964e3137bf2f1328196b081396a71388",
+      "tinygrad/runtime/autogen/amd/rdna4/ins.py": "927770e3b602975581ca933998b8e8cd87e8fc9bb2213133835e0059a77c0a0b",
+      "tinygrad/runtime/autogen/amd/rdna4/operands.py": "5cca92ffc1d5f92ab3c31fbf73a8ba47d5d49dc3bdb52f257556b6ce6638d6a8",
+      "tinygrad/runtime/autogen/amd/rdna4/str_pcode.py": "b8a9001477cc9b6cfdf0b5dd8aec0bc2a49b073a6bcec0d0a811cc6fa67d3490",
+      "tinygrad/runtime/autogen/amd_gpu.py": "478e889f08e47ebf4410ea089602dd1cfe62718b92a5fe085d56ef11633ad8b6",
+      "tinygrad/runtime/autogen/amdgpu_drm.py": "c9e226465de3421c70f8986814244ce832b78b3b7643047823053e901f4a68ff",
+      "tinygrad/runtime/autogen/amdgpu_kd.py": "bbb71ab4ab4a69a8acf468222b8562ed6466c72eb3abb6df5186a78f320bd68a",
+      "tinygrad/runtime/autogen/avcodec.py": "b5dd616799a3ed4e69bf0a35b5d05c2c80759a24e6573ad68c849c0dfcc6af05",
+      "tinygrad/runtime/autogen/bnxt.py": "a2c0a2f1b9d85b04701fe1b6279ac3b50064ba5d712c1519443eb27cfe083a8c",
+      "tinygrad/runtime/autogen/comgr.py": "ed3f777f3841706da31d6b186f09e719bdc429d85d08b2c79b5db37e59f257ed",
+      "tinygrad/runtime/autogen/comgr_3.py": "8afed852b5fa28ec802a2de73bcc455ea966973058c63f41371bda444db9a62d",
+      "tinygrad/runtime/autogen/corefoundation.py": "56795809f590e21234877a256681371ee32d8cf5a597417e784988e31622087f",
+      "tinygrad/runtime/autogen/cuda.py": "64bab6b381449254db3cb8d1d60b69e10c9ffa4befa6d8294305c2ae1fa18129",
+      "tinygrad/runtime/autogen/ggml_common.py": "7edaed6afd77bd84459ebaab381c6998bb2e2788eb620a0f4c07b26242a8b891",
+      "tinygrad/runtime/autogen/hip.py": "d69dcb6f55bd4dcac2178065ebe462ad55fbed8acf17a8c3561e918fdf59aa77",
+      "tinygrad/runtime/autogen/hsa.py": "b8457e9fd6ce160d072af0e4ba1e1c34e443dd71cabd767c6511457a72f3d901",
+      "tinygrad/runtime/autogen/io_uring.py": "d8b1658c94ab9727973700f14fe40661eb87272bb9e40a02904563f304ca05ef",
+      "tinygrad/runtime/autogen/iokit.py": "d0033fb9bd4ecf4a796ac01e280d6fb3289614c8008d6e62b312d09894189162",
+      "tinygrad/runtime/autogen/kfd.py": "248a7e74aa98b54f5e9cac56bf7a2495e8f6994386705a3c6c19ab0c7c053197",
+      "tinygrad/runtime/autogen/kgsl.py": "9f050c287acacb79a4e6d15cd32eb12a137c556de9c18d77baaea80b2e8b070d",
+      "tinygrad/runtime/autogen/libc.py": "edc96d14bdacf6992407318faabdf20690ceedbb915084626e59d1514b26f04e",
+      "tinygrad/runtime/autogen/libclang.py": "8f6f44f8065512c002a2e86d3ddd1933aaa89af58b7678077f3ae9d0369f3cfa",
+      "tinygrad/runtime/autogen/libusb.py": "f234ee7c90cc4ac1c7d97724db665f2dba466580bc1205deab1a58de99992a6e",
+      "tinygrad/runtime/autogen/llvm.py": "18ccc5041f5f9227d7b8f43200da1e8cff680d40c6eadb38fc5f883aba1de1bd",
+      "tinygrad/runtime/autogen/llvm_qcom.py": "a0032f4677216211f658b92e11fc7a1060d556133d8b5e9482c7554698f08ea6",
+      "tinygrad/runtime/autogen/mesa.py": "355cc3facb9c31ce6c808a850fa9e3962e9690cf759d776cb05c1da354b61df7",
+      "tinygrad/runtime/autogen/metal.py": "842e5f17ad86aef820af1c14409660cad373c0b7d2559d81dbe978cd028fdb99",
+      "tinygrad/runtime/autogen/mlx5.py": "7b1782a5ec4aed44cf849b3e574d15b85924390b24f9368cc17014ac4ffc1e99",
+      "tinygrad/runtime/autogen/nv.py": "261256ac4322e046ff2db28235ae2ca8f68df081af1ce1509b407e814194aed6",
+      "tinygrad/runtime/autogen/nv_570.py": "411e74f3a283d3f4bed0294fb6a54a34ddf6fe624a3db8ec58df97ab66909abf",
+      "tinygrad/runtime/autogen/nv_580.py": "57157c789576e3107e187bc26242bbaf34b4cfc1a8f67245a8e587e984cd692c",
+      "tinygrad/runtime/autogen/nv_610.py": "9615048a5619c64fbb95ce61b1bea809ca42f1d301366f77a55a813d1047b41c",
+      "tinygrad/runtime/autogen/nv_regs/__init__.py": "cc89dd8a3df44879f7013b61d9d741df9bd77d50a292c6ef81ab5130c66cc8a3",
+      "tinygrad/runtime/autogen/nv_regs/dev_bus.py": "7ba8a3407e27a809be0504d285991c7a1aef1826d9e689b3aa59bb80aae65e6e",
+      "tinygrad/runtime/autogen/nv_regs/dev_falcon_second_pri.py": "391295f032d2c0fbe905d236e52a6e018f9438d2bdd76282d57f0eca5d2bfc0d",
+      "tinygrad/runtime/autogen/nv_regs/dev_falcon_v4.py": "6b3c9aedf59a7a37ba67d9b5b77f77cd5cadaac1b82040b0926e9acf1dedcee9",
+      "tinygrad/runtime/autogen/nv_regs/dev_fb.py": "6cbeb46bc9577e576926fcc982fcc0b8fa31e10206d1615311075eb28b48fe41",
+      "tinygrad/runtime/autogen/nv_regs/dev_fbif_v4.py": "8d2c87027939226d3a910157d41e660427774c3b11a17bd25c0ed1b2a9651c23",
+      "tinygrad/runtime/autogen/nv_regs/dev_fsp_pri.py": "f461181260b8e072b8df132322b03960058ce435d6da71c169153ace417edd1a",
+      "tinygrad/runtime/autogen/nv_regs/dev_gc6_island.py": "16329261e64d0f54104b062155166378319885968a7ff9ae9c2b47979b15f14f",
+      "tinygrad/runtime/autogen/nv_regs/dev_gsp.py": "8425f6b358af1acdf4dbb5549429feb05f95f649d451bccd6dc44eadd4674bc8",
+      "tinygrad/runtime/autogen/nv_regs/dev_mmu.py": "d36ae887aa8026067486e2f3fea295ca1f17c9e7867f2842d4cedea1bbf46355",
+      "tinygrad/runtime/autogen/nv_regs/dev_riscv_pri.py": "bb48da8a9f2f5b92a2aede932076709a4f2ae7266f895c77386b8aa373ab9207",
+      "tinygrad/runtime/autogen/nv_regs/dev_sec_pri.py": "ad4e6690236365ab4edad12c15d49a8a55f787a9ceecdd96d47794e25979808c",
+      "tinygrad/runtime/autogen/nv_regs/dev_therm.py": "af124c35f2ede3c96477d405b588dff2689bbd15fb5e7f1fdb40c7d2e8bdb10a",
+      "tinygrad/runtime/autogen/nv_regs/dev_vm.py": "724a62f3a9b748c63fbe5d04f3ed19cc9ffc2f3e29a8f9f4a9dca37e61887a7b",
+      "tinygrad/runtime/autogen/nv_regs/nv_ref.py": "7486129fa0586428ed6570add35d49db5f9edc4cda83457a5094b58066ba55ef",
+      "tinygrad/runtime/autogen/nvjitlink.py": "272066e86e6d51d0a064e711f22c5baa6fd065a09b640da789d60a3cac2f56d7",
+      "tinygrad/runtime/autogen/nvrtc.py": "26c305997b4f63950e8b0712d9f3cd513dc92b1753595e63235e035b7597592b",
+      "tinygrad/runtime/autogen/opencl.py": "e0da74f9804788dbb88724d5ce1e0f26c027ea4125039d62c08ad98c1f074c9a",
+      "tinygrad/runtime/autogen/pci.py": "baceb6b8c4e45429c8dc3b7eff17259aaed30d30d6ea50935ce28d69534d8bac",
+      "tinygrad/runtime/autogen/qcom_dsp.py": "4838000bcc679270d8beee74bb06d6dcd7d1a52faea0dd3d8c84f7acc160a87f",
+      "tinygrad/runtime/autogen/rockchip.py": "4fcfc349ee15a4d80728dad0a86fd781502315bdf454e4af1ff811e7f79cec2c",
+      "tinygrad/runtime/autogen/rocprof.py": "b7561632d83083620e34fc14472f5c4f1e30878eb8c856df1bf74a764a317c73",
+      "tinygrad/runtime/autogen/sqtt.py": "9f47e053dacbfe732d653db926a3957dd65c33b879b02d809b38baa8eaad98c3",
+      "tinygrad/runtime/autogen/vfio.py": "c501177743326af85725911c225ebe7dbc50f56e8882913ae22ad2d50fa33c27",
+      "tinygrad/runtime/autogen/webgpu.py": "d54d4b783bc925ad3e6b017f96aa5a27159fc2d95742bcf75e0addcb9f8ac4d6",
+      "tinygrad/runtime/ops_amd.py": "719be92c917e2c3a08ad802732dd7d116668649dfd08aef10ddea5dcc84b6436",
+      "tinygrad/runtime/ops_cl.py": "0aa8f63d58c069c6994e37750c8d41b8926f8ec27e8e54745e99bf68bef9fc8a",
+      "tinygrad/runtime/ops_cpu.py": "308017e40f4dfdf57624b535fb8eb1f6288fe8fbbd65a2d5fbbbbde9d9683232",
+      "tinygrad/runtime/ops_cuda.py": "d564db6c6927dfdfcc925f8c2cfd9938f800df2d4219dd96294f402cb92d789a",
+      "tinygrad/runtime/ops_disk.py": "d0133e07537a0e5b358bd40c0992e0abe0eb5c42c858795e9eda4140a3e1708e",
+      "tinygrad/runtime/ops_dsp.py": "67783322e6352f5f52d10e501f6b717e27fcfa716466072e03e46f7875f1676e",
+      "tinygrad/runtime/ops_hip.py": "5a023a90196ae106a0543f59045bb902425f9b3dca4ca6c67a1741b14afcabb3",
+      "tinygrad/runtime/ops_metal.py": "105ab56af475dd0a86b1e06191fbbdd4613697c257093ba61c5401feeef89e04",
+      "tinygrad/runtime/ops_npy.py": "53de851f9d707e6fceb871914b812c138cd5b1ebb669be02b55115c68266710c",
+      "tinygrad/runtime/ops_null.py": "5e1e53e866d17ab1ccf6116ac11b0283e1b329ee6b215b2e5cf4927dbed38cb1",
+      "tinygrad/runtime/ops_nv.py": "e711ef90bab87f8cd444ca2a10fbb0c9e8a602c22d8fa7c165b746b088314f30",
+      "tinygrad/runtime/ops_python.py": "62decc9aa674b47a578e06bec68d46695920524da27b10fb63da75d420df8d7b",
+      "tinygrad/runtime/ops_qcom.py": "618d7f7c97af087f97d3c5b5d1f720fd9d217a9d2c0485589d7d604b8098663b",
+      "tinygrad/runtime/ops_rdma.py": "e6e0d69734269c6501a5b8439651a0364d90285c4671fa6301c9c54f16737769",
+      "tinygrad/runtime/ops_rockchip.py": "0a62e7b0b6ffcc697110e86462c9bf097518e814d10d93177637f357cfe12008",
+      "tinygrad/runtime/ops_webgpu.py": "52c7689d7fd2acb9ad1f37ec9ce3dd88a16fa51d6de93b74eb8f637ce3802e15",
+      "tinygrad/runtime/support/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/support/am/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/support/am/amdev.py": "dae42e13b5dbf01cff0fd29767eec3df2f7d86f0d4d78d89b0aa731a7c88c09c",
+      "tinygrad/runtime/support/am/ip.py": "972086c5373e7cd83a2b39d598551840c4a7b3e59cd2f19745581fee287bdede",
+      "tinygrad/runtime/support/amd.py": "3c888308b57f5f9b4922ffb008829610f6333a547c9fd9168f9f770fc6315c10",
+      "tinygrad/runtime/support/autogen.py": "3571a0c1e955e2c7173e3066a79040efb0f333e3302013f28e6d478ccdaf763c",
+      "tinygrad/runtime/support/c.py": "a3113a746068d0d0cd8fdbe18dbe54c20692a2cc85691618cf72dcef1cd801ae",
+      "tinygrad/runtime/support/compiler_amd.py": "230b53fbae926583d6a4a1fa4ea085773924e042496ed786aa8fbc2f8aa6ebec",
+      "tinygrad/runtime/support/compiler_cpu.py": "7980be156006d76fbc0e893154e7fb2900597d0c4d5171b4497a44d888d4fe48",
+      "tinygrad/runtime/support/compiler_cuda.py": "44e2eb882f867db26cb0a0c27716cc5c1000e4a7ea2401d3346d226573078bda",
+      "tinygrad/runtime/support/compiler_llvm.py": "4f4128c0cf88860e5445345139e81d360c7c4189912a67159d6822d2649735e5",
+      "tinygrad/runtime/support/compiler_mesa.py": "2301ed834ceea0798128e765fceff5231ec88851ca73b10a34e423952ae7eee0",
+      "tinygrad/runtime/support/compiler_qcom.py": "9c99f6e4c9e594e44c46846558e66f85d8ca700b73d371e0da54a997f72cfe34",
+      "tinygrad/runtime/support/compileserver.py": "f977fbab9038e6b895174f07c540fb26247137c63c989e373745433cd52157ec",
+      "tinygrad/runtime/support/elf.py": "155aaeb2cfdd748814150feafcb10c1ef34eb01cbd702bdbe5e0c9b03be3f388",
+      "tinygrad/runtime/support/hcq2.py": "08ccbd5ba6d0494af350eb4d8851a15d9ed1e5153cc30e7225439e4380d3bd69",
+      "tinygrad/runtime/support/memory.py": "5cd20a3b98a69caa855a7e660a0a53a64bd969fee282b853a5f68097977a5bcb",
+      "tinygrad/runtime/support/nv/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/support/nv/ip.py": "5ad88909badc5d30ab2527569d791b58ac28d56a8d9019f1e7c43eb764b4fe8a",
+      "tinygrad/runtime/support/nv/nvdev.py": "5329dffaa57b690eb516f0d33a219c552d92dcad3f2af8a5563bc8df2b51073b",
+      "tinygrad/runtime/support/objc.py": "c00586d4e58f14adeb899275ab215dbcb75b9c7a3e8d6210c001fd2941f4628b",
+      "tinygrad/runtime/support/rdma/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/runtime/support/rdma/bnxtdev.py": "c682c931db0c51c861ce7016a00d7aad5dc0e88bc8bef930bade4117910660f3",
+      "tinygrad/runtime/support/rockchip_bucketed.py": "815e6dc26dd0ce3c92c77c27ced45404cb15005e981384126d937d699025d8e2",
+      "tinygrad/runtime/support/rockchip_gpu.py": "1677113312cced1a7aa0e963f0ac4cbfd4f3aca1dd7aa3620be6410d3447877a",
+      "tinygrad/runtime/support/rockchip_int8.py": "36806ae1e7b6cdb40f894f4142074c17e304a25a5a7d514273d7ec5fc2f8c2b6",
+      "tinygrad/runtime/support/system.py": "681f819e98ede6ac6451c0e499fd038eb00cc2e0a25f872e58321a39f38d9869",
+      "tinygrad/runtime/support/usb.py": "d57b34b46593c83edc2674d5e5d71ba9ca495e7009f08e116e06a35352d9b6bc",
+      "tinygrad/schedule/__init__.py": "a72195d925810318695055cc87eb1489811a51cc49d7ad9215bf68e2e92d735d",
+      "tinygrad/schedule/allreduce.py": "d736bb1070049ad4c14e9354a66be534bb6ebdc53e75f80328f2ad4f846a8ea1",
+      "tinygrad/schedule/indexing.py": "44feb97662961d7f350667b61ed33b6575c50d50848f6299adea55c7e3cbd1ab",
+      "tinygrad/schedule/memory.py": "24122dbab59fe1856939520e74fdb3828040ed7652fe897a3fac2d14f45785c6",
+      "tinygrad/schedule/multi.py": "5c88ce3832852af4a583d35bcb5ad6834eaf3d0366bf61e6b242ed6818cb72d0",
+      "tinygrad/schedule/prepare.py": "237d5580d8a0279cf49c875907fdb266e206b21d15d5570c90cdf4b2f2dd0a23",
+      "tinygrad/schedule/rangeify.py": "6af2c0e74f67d8380bbe88e6a186f0caad8641680e9f69bb17208a31cc459918",
+      "tinygrad/tensor.py": "5680ec3b2a716e435ae8f8ca42f39697ed46de7a3d50018a7becb9a368bcc56d",
+      "tinygrad/uop/__init__.py": "22495f25f31b744f0362575fe42f2608a349d4642cba4a2d0a71150f234c7db3",
+      "tinygrad/uop/divandmod.py": "40c04f04dc9057eb17c9680304fb797ce78add201e394736f6558d4e145f075c",
+      "tinygrad/uop/movement.py": "7508947bf142145b2e2ec2234d21ac424cd801ef0acb18bd79a2292c886f7a09",
+      "tinygrad/uop/ops.py": "017e94e1ecfc1ada2cb68f9e71d274dec1d744ee9ffff40ebe324387b7b00bc9",
+      "tinygrad/uop/render.py": "03d3fcad5396a0879cd8f8fcddf04c7abed04b76c7a50f5075554260a1ded89a",
+      "tinygrad/uop/spec.py": "13a8e64ad12f24a4c3806b1bce8e3d04be4478e37d84d82b45ae860e776fd4c6",
+      "tinygrad/uop/symbolic.py": "e552dae03bd8057dd5c7708493bf11e5acbcbd17d03b818d5b9c1770727021c2",
+      "tinygrad/uop/upat.py": "f89095353c93afb851b080aff975f861c070f87cc82aab90df481eade4e8c6bd",
+      "tinygrad/uop/validate.py": "9f0f248f17fb9d31e19e6537cc593d5e3e6a4ee41efc657338efc32dac7eef43",
+      "tinygrad/uop/weak.py": "856defae2c4afe2425cf5c58e2c3b2ef17ee63831c878dcdc298816721a3c97d",
+      "tinygrad/viz/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tinygrad/viz/cli.py": "997ee8b2c57f6f17a3773937432f7931591bdd081c98abfb29174ff5d0c91db9",
+      "tinygrad/viz/serve.py": "77c9b2341762caedaa8e6204bec29b95605119400373c5029480127115fa6d87",
+      "extra/rockchip/benchmark_inference.py": "4a050daea92d0546b33cfd69328cdd1796e24da20e885b2d2bb2929aee7d98e1"
+    },
+    "all_current_numerical_sources_match": true,
+    "current_source_mismatch_count": 0,
+    "all_frozen_source_paths_match": true,
+    "frozen_source_count": 303,
+    "frozen_source_map_sha256": "2d449b7eb5869dfb261595d73f2a68a592e0a2cf19186b66808f6e2a4053502e",
+    "CPU_proof_sha_matches_job": true,
+    "CPU_test_source_hashes_match": true
+  },
+  "serving_state": {
+    "before_equals_after_for_sessions_options_selection_and_settings": true,
+    "fresh_receipt_sessions_equal_after_state": true,
+    "fresh_responses": 2,
+    "every_fresh_response_has_choice_and_positive_completion_usage": true,
+    "opened_devices": [
+      "CPU",
+      "NPY"
+    ],
+    "accelerators_opened": false
+  },
+  "numerical_qualification": {
+    "payload_and_scale_records": 174,
+    "unique_geometry_active_seed_groups": 58,
+    "geometry_count": 8,
+    "batch_set_per_group": [
+      1,
+      2,
+      4
+    ],
+    "all_payload_hashes_match_within_group": true,
+    "all_scale_bit_hashes_match_within_group": true,
+    "all_records_exact": true,
+    "all_records_poisoned": true,
+    "groups": [
+      {
+        "rows": 1,
+        "hidden": 4864,
+        "input_tile": 1,
+        "active": 1,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "cadef6c3cfc59ba632d9cf8632de23b69c7fbf933bd1522d254cfe6c8deaba2d",
+        "scale_bits_sha256": "d713a221fd99539acacc149685de707f5370c8268e6ca8f4cb34dc4e0608e021",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 1,
+        "hidden": 4864,
+        "input_tile": 1,
+        "active": 1,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "62ce3025fc392a602708987bf777368d9922d98754eb828c5683c930ac7590ab",
+        "scale_bits_sha256": "1bc807ea795837d390955f3e49e03bb304b87ef8c6e94bf720f403d725a3b389",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "input_tile": 17,
+        "active": 1,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "3f069513864e4d157aa9cdb4d347b261e5f6078f0d1a115f55f788a58728ce10",
+        "scale_bits_sha256": "3cc8e5bed11e12eff764c03dc4334ef6059803fadd105ad1d010f42b6b540079",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "input_tile": 17,
+        "active": 1,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "7020b7acd1a4b5ccb9d0b2283ca181bc27cd26866d844159434fce0dc2f49941",
+        "scale_bits_sha256": "de5588515f15939d8cb8c940d1a98cd077d7ca1330ae9579379db3557c2f5846",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "input_tile": 17,
+        "active": 16,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "9f8e06cf68cbebb9632325951c1b4b4cd58ab58524f7c99b68916d079e8a9641",
+        "scale_bits_sha256": "d0d666d4e9e85a00fb15d36f6776a53c632193d436468f77c8a0dc1fd10c513c",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "input_tile": 17,
+        "active": 16,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "f8e2c3a02ac4ef41701cfb334c24c6b729eee76f9bc277aa7fa29e4e53022800",
+        "scale_bits_sha256": "6181f421e2d703386f7b286be4311652f3c6299732be0b0e4548874e8a3a49ea",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "input_tile": 17,
+        "active": 17,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "a9f3761268586c50620b7c899e54d81b689a9ef3e9a283d03c8dd1ee0db16566",
+        "scale_bits_sha256": "75051201f2e89e904d620a2f483c1f83427bcad5d0b887058a19689721da4bc3",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "input_tile": 17,
+        "active": 17,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "718d5c99f1dfa8bfc4dfacbfe6579ec66ce4a6e1d5180dc76fc53f1254395ee5",
+        "scale_bits_sha256": "547d258cd4c45ee795a621a6a615914c62ec3fec82e25fe6324ca3c772a3c7fd",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "input_tile": 33,
+        "active": 1,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "9c16b27e6f4fb3bee35aadc7a2167369e6d40541d864f1ae41412649d939ad67",
+        "scale_bits_sha256": "e9e0a94b856088574a391d407d00eea14879b51dc8f81db6ebc50c07c315d595",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "input_tile": 33,
+        "active": 1,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "caa030db946dd27731f8ead8b54b1c0389a29c30f795eb4a12425992a5de6ca2",
+        "scale_bits_sha256": "e5f1d8a6d367f3113dc86dbca7345bd13c0a4b802dffc9e32f293bae6e816df0",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "input_tile": 33,
+        "active": 17,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "183bfbe4acbb6b3b9b64051daa6fc10f40b2c7120476b8b8164c677eee05f584",
+        "scale_bits_sha256": "182951b974f80d86b6f7616d0774063a957f3707ba5887b842e17fcfcebde6f0",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "input_tile": 33,
+        "active": 17,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "5061a1b56555bd13a2835dd2f673c7a2c447b3789878fd26432e84c9b8666046",
+        "scale_bits_sha256": "4d9b635bfca181bb43fafd6210a03fb4abf573936ab07242e9068ffaf03f3e87",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "input_tile": 33,
+        "active": 33,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "17364ab72ecf278097a4089e7e81967419be12275c1f699baa777cb30e0dfa32",
+        "scale_bits_sha256": "2019978d4dc80763779b73dbbc5b40b0d45abefdc28720060729541546e95fe4",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "input_tile": 33,
+        "active": 33,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "85e2215a98d852503c8f402bc085c99fab25d18f4558eac0caaff0f1b536b32d",
+        "scale_bits_sha256": "89d4e2a5e00e54968fbf9a7a3e280ebf976bc4291a04a176ec3b5bb8709318bd",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 1,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "d1520658e3813fb52ecaf7132b994006afc4f818c7bf6945313d4a32edb6f596",
+        "scale_bits_sha256": "88926c558d0f926d0b38b9a62fe99f073481977d0c29487e512d8bccd5aa9604",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 1,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "dc946eeb4083b598f947f46cd48fa96b8540f41338c8636dd34f862979ce5b25",
+        "scale_bits_sha256": "b042c5f5134a8c0daefc01218e97b40b72128b661f119733d9128e67cdcf9544",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 17,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "888465c18a45ab3fd562c1dd61c9becbe27c6ac3e3a2ee920e893a5dd1e74ec7",
+        "scale_bits_sha256": "0e799797ceae38cfdd2e60dc3de26b4ca9552cf173dfb755a6b0ceb967025ea7",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 17,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "5c628fa3f892a944a4d7885edf67e7aa5682a59d1c5054adbbb6275aaecd92ee",
+        "scale_bits_sha256": "98c90a4df0e960fe98d102dedbd90b8878872c37bb876a2af7d3eed4a2a11344",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 63,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "6ec5c125987326bd12d1a8be92024eb6adcd74813a92f093419eab5d357f2313",
+        "scale_bits_sha256": "a685e9a17ea326a04692fd6a9338997cce42ad38156fc7907132a4e02d6ceeb9",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 63,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "38c75453dc3bdfff3399aca678afc1787d771e0b9115b7a063a38c894413ed3f",
+        "scale_bits_sha256": "f205db831ee9856cb57b2fa2e6d35b9dd4df435908f6e0030bd42955dbb2a1e2",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 65,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "7934d9769c069cebd8c81bca51c795a70b8e3e14035812b1faadbed67c4c1cd3",
+        "scale_bits_sha256": "c5e0b5e453d8dc77c0205e64a7dbd90aeb7d491e928a1beff2de641bb4937531",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 65,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "af1f3028667636b8473cd3c776e6afbd181d2a893aaca353f89dee8e874098a2",
+        "scale_bits_sha256": "b61a485975717f0bf672f4f5efdf0985169fc39d8e332e27d3816f743196ec5a",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 125,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "89574109da7a8836ef3eaa0a94bce6c528e3bb1256900f3708e1814cc70af015",
+        "scale_bits_sha256": "07239d83e6ec2b0374899b522e84822d8f1c838541c3bdac30448735332a7140",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 125,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "675cc4dc9b1ff8905e79ee9a3de014452c262fdc6da1455eb548d89f305abea0",
+        "scale_bits_sha256": "02fdd9f4927f945b80b3c4c401f347ab16d96d973bdc3ed40cae0102e32c938f",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 126,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "17727bd6dd1e039bbb7d2274cdea3f01bd9052d851454d20499be5b688e5128d",
+        "scale_bits_sha256": "9a4300b2366262acb7cbd32cdf648a88a9fd2cbbe0fc94dad209db306c9ecc5b",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "input_tile": 64,
+        "active": 126,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "9e952321c9b57ebcc3bf85758cda3d51865536ae40c2674763d1a707477ac742",
+        "scale_bits_sha256": "95fe3569ce2e32c418ef8ce782a3461cbd677c0b825486aceaddeffcaa667215",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 1,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "a1b048179737a82ae18fdc6396888fc521f8c770ca3b6faab66920e8d5a1c3e2",
+        "scale_bits_sha256": "dc8197c90ad2bdd9e792f4164a21c4142399f657b9aa56bc35598a3a2b8ca31a",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 1,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "9ba0056391f81618d9a028a32f5c6f6b44327d40ffff87ac0798db2317cb8cab",
+        "scale_bits_sha256": "0ed92ca618ec4839bb311f36115427127e88c9127163f6c90456c15681514127",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 17,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "960c6a1d4e77f43360ed2bfc5ad0e57af9171098d9100ec1ce15d83a866d34b6",
+        "scale_bits_sha256": "866d8964ef9859974791332ff80dd619bf3852b96e56e76d161ad3f482978705",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 17,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "3e5f524c5979fc7170f0a4e6d916dfd75e131cdd3f98551004a9dda47d15d70b",
+        "scale_bits_sha256": "4ab1e8a7a179d509bc0b7ad91c5b22fa4ffa61b42de40a9638c9c7a93b77d62d",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 65,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "d3aa49536655fa7c30202a9f3df65dd02943727f987b2a8f03e573bdb5bda3c1",
+        "scale_bits_sha256": "35767654f2d04e8ca5317c7d92fc40c9de7f495b311a61d797fce35653d76b13",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 65,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "248a4d356ad48ee50bbd184297f82cb63238edd294fd49e2dd5758d6e98c5fdd",
+        "scale_bits_sha256": "d6a1177ac0bc723aeaeee81ced186d118c53c746d6b581c812c60d82d07d922f",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 127,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "fde5cf4b8be3fa6f91425c45ce0aa6af5f44d3fd770022d3e527773cb408e1dd",
+        "scale_bits_sha256": "5f8d6bdb1678836fde984635f3e1e35a4269bd1d79d34ff0d3ff67153bd3f3fc",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 127,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "33fbbc9038432bb6668f6538003ff5cbda97ffdfd92d7a0f9040e9613fc525b3",
+        "scale_bits_sha256": "c6ebe91041f39b5c273c982aed86dd1bff65cf6cd73c6483d5d0e8e948023f0d",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 128,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "60f20ce12ddb9e60b3df6cad2806b643ee9b8a9fb502097964a7e7f3db7c17a9",
+        "scale_bits_sha256": "d8017b40838e4e707219bc2a4b6d11078904e748fbf97c9a461e450d91b9850f",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "input_tile": 128,
+        "active": 128,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "19472498ecc669a739e8e5f47f7c02bd23711cf411348f890036f1cb586e7314",
+        "scale_bits_sha256": "384b46d5da8d124fa7a5e09ad81a4d04229be43139b8fa36442e4fa8cf2b1e6b",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 1,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "298b2f8f733785e4f31cb0f0663411d3c3b3738c790157e61550cbb4000728df",
+        "scale_bits_sha256": "dc8197c90ad2bdd9e792f4164a21c4142399f657b9aa56bc35598a3a2b8ca31a",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 1,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "f045343b35b9de2febe2f40d3dae9e9a5e471f29f47ddf3ee12572c3044f9ebf",
+        "scale_bits_sha256": "0ed92ca618ec4839bb311f36115427127e88c9127163f6c90456c15681514127",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 17,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "e1d46224c3b870267d4dd186ff3b1a380e8b2487e5d53d09f1e0f945128bd138",
+        "scale_bits_sha256": "0aaa7f4890223d5ff5db0e2242df20ee4c8cdc7a2b78de4beef248a6421591ef",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 17,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "f522a267ee7ad8da7d79b9c63b6d33fddf08f30361e7f1f1e5355c6d34602086",
+        "scale_bits_sha256": "08085424bb24bccd26d5ae7a33657ff2781f58469f2e09bd5d81748ff68f703b",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 65,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "be441d957e9ae1369de865a8e214031881605546930766d851a1aefef0eb43fa",
+        "scale_bits_sha256": "82692892a8306ce0612374dca7123a3aab1aa037476e70eaf949e8110eb5521d",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 65,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "93ec122fe3bbc81fa05811a4597099b18df11545a250a755fb7589458a171294",
+        "scale_bits_sha256": "667447c26e6dfabc0cfb0f76a1991567db4458bbff2365167d46c9b060a58d1e",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 127,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "c399687e3cd7da0ca505132c56a0e058c9c491b4bf6111b399695e5d5c6adac5",
+        "scale_bits_sha256": "77bb2840fd353273e8aabfd45dc5194a5f1848cb0a294bc704aaa171c2800de9",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 127,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "87b2f16d72c1125770430517f615b96f50f2964bb5a9f23250b73905aeeaa5c0",
+        "scale_bits_sha256": "111ce7ec843de8f64f97a345f6929d42ad308794b4552685997ce385e5e41c61",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 128,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "a8d638dc57bc824fe6cc0bb8c8e02a2e90b05b5c25fe4f594b3451d052bd9028",
+        "scale_bits_sha256": "95cdedd742374f0bd8823072073410b381a5cc480d4fa3ee89d1e3d2f8c34482",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "input_tile": 128,
+        "active": 128,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "6946e78ac0f3057ab3bc46db1fc1289a40ca559fcb7e210abfc958207172a7de",
+        "scale_bits_sha256": "8980014721b1173129a0ada2d2abe47d36748facb334ec9c86fff1bfdbd5c9af",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "input_tile": 64,
+        "active": 17,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "c203a77d6aa1a40bdc697564c77e7052ef3dbd217e1ba3ae78fc7aa6e6d06ee0",
+        "scale_bits_sha256": "4e9d7cceb9dbf60ae307afad48ed5d9a5509970ac66a83dd0047559c01225325",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "input_tile": 64,
+        "active": 17,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "2036fac424075cf5380325b1e6e336d5fe740b9834aee547a29dfab788162c31",
+        "scale_bits_sha256": "6822f32ee853b2cc290c0acf6546540fdd2c09041775d44b6983b30eccf87070",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "input_tile": 64,
+        "active": 65,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "ba308b3b06e157fabe284b8b42a1ea61866cbfe5f362c6ffab351cff00e06fed",
+        "scale_bits_sha256": "e2750536289c49131bcf24c970485c310b3a797c5840bd0dde76f50b77a057d4",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "input_tile": 64,
+        "active": 65,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "d38e0a56c71789751d3e4d64ce729f7ccf79f329001b437b01c38fda554fbcb1",
+        "scale_bits_sha256": "1627c254ad886e36f968002275113f307879042d3b45218962cafb845aa81b83",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "input_tile": 64,
+        "active": 128,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "5f05a5698efd0103839dad882c9742d9296c28ae2d6c883bd867314e164e2e36",
+        "scale_bits_sha256": "6b4b679761517a44dc25e40a03c9b5773422c0836eb4e3095490e2f52feb2974",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "input_tile": 64,
+        "active": 128,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "47dae94492857e6d81d5689b7f6712e8a30f05a4cf02de2f12ac12c1f75ee1f0",
+        "scale_bits_sha256": "9cb12eb9f9509726b4e2c135f4f06c7b990cac1b2fff0ddea0a484f11e75fac3",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "input_tile": 64,
+        "active": 17,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "0917c25d7d987651ef8ac063c58d57f3489846d9584c90f369882a169cd5b899",
+        "scale_bits_sha256": "4b4a2d2c3798b64de5c87317c90cbb6465366c63f65c5936b42129dde286591d",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "input_tile": 64,
+        "active": 17,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "7f5ea3d6117aa496b09ce3293b6682a9d9e501eb9e9dfcd0099436e6e1ff4117",
+        "scale_bits_sha256": "c446b1c3e3c900104ab593cc9e9ee7681d2f3e74604f1c93974450f69678afb5",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "input_tile": 64,
+        "active": 65,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "b6f2ca5989ffa513199eadc2c09c00ce235494e3134f489a302e2d53f30841ee",
+        "scale_bits_sha256": "443cf9c19a87130c302f8c1ec03c940b2be1af91bc7e2656754fe48dcb217f0b",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "input_tile": 64,
+        "active": 65,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "051e5aee5ae7686dfedde1ba34e0bc9633b3109cf5d3d6eb5307e4786b52dcc7",
+        "scale_bits_sha256": "e9026994de5832f024a557660cabb36a85b82d1938130605e8b6318999d37e93",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "input_tile": 64,
+        "active": 128,
+        "seed": 0,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "32f1e5479b575be0f8450d506ea293bb74dc2faa09dba149e4b53076129b0e05",
+        "scale_bits_sha256": "9e8900cef7290cb833d6d48e3a50b58bcc8a55266869de4e7d49f6cf901ba179",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "input_tile": 64,
+        "active": 128,
+        "seed": 1,
+        "batches": [
+          1,
+          2,
+          4
+        ],
+        "payload_sha256": "fd9ca30b38c429a1c0dce8551d442c7d990cde21ccfa71b23ce7f18bdcb1724c",
+        "scale_bits_sha256": "159555fc585863ae49dbc149964f670f65df0ed1976aff70f1bc9e92bd317c40",
+        "all_exact": true,
+        "all_poisoned_before_compute": true
+      }
+    ],
+    "independent_dense_tensor_references": {
+      "recorded_references": [
+        {
+          "rows": 128,
+          "hidden": 4864,
+          "exact": true,
+          "sha256": "d43bc35af9847307a87eac0e4ecfaddd095806d95f7a9ac8e7b1f15fcbfab84f"
+        },
+        {
+          "rows": 128,
+          "hidden": 4608,
+          "exact": true,
+          "sha256": "c8ef5dc8a2335977dfd2258534e388ab4393b4873457d387209ed519f357a1b1"
+        }
+      ],
+      "reference_count": 2,
+      "probe_source_assertion_present": true,
+      "source_uses_dense_raw_tile_reconstruction_and_tensor_sigmoid": true,
+      "output_arrays_saved_in_report": false,
+      "reference_values_independently_recomputed_by_this_audit": false,
+      "shared_reference_helpers": [
+        "production quantize helper",
+        "payload_layout helper"
+      ],
+      "limitation": "The dense reference separately reconstructs raw tile values and uses materialized Tensor sigmoid, but reuses production quantize/payload-layout helpers. This audit confirms saved source assertions and hashes only; no output arrays were stored for independent value recomputation."
+    }
+  },
+  "program_source_audit": {
+    "generated_source_count": 22,
+    "all_generated_source_hashes_match": true,
+    "actual_captured_kernel_descriptors": 24,
+    "captured_descriptor_map_matches_reported_programs": true,
+    "row1_reuses_original_program_for_batches_1_2_4": true,
+    "batched_programs_contain_batch_values_when_rows_allow": true,
+    "programs": [
+      {
+        "rows": 1,
+        "hidden": 4864,
+        "batch": 1,
+        "source_sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+        "single_row_original_program": true,
+        "batch_values_present": false
+      },
+      {
+        "rows": 1,
+        "hidden": 4864,
+        "batch": 2,
+        "source_sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+        "single_row_original_program": true,
+        "batch_values_present": false
+      },
+      {
+        "rows": 1,
+        "hidden": 4864,
+        "batch": 4,
+        "source_sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+        "single_row_original_program": true,
+        "batch_values_present": false
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "batch": 1,
+        "source_sha256": "67610216eaa289d96bd7437c96459f02c6e9ba4a076a13fc441982e9eb97997a",
+        "single_row_original_program": false,
+        "batch_values_present": false
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "batch": 2,
+        "source_sha256": "319e77fb834ec5eb2e2e221564653c2cbb405e406478e769419067a56137e027",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 17,
+        "hidden": 4608,
+        "batch": 4,
+        "source_sha256": "7852c89a1cc177e2058f32b38e37c5d0fd8e2142a9dd8c02988f08378db267dc",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "batch": 1,
+        "source_sha256": "5a331ac19627f545a08e57d03d90375d3d0d26de468e492f7461a236b44879b1",
+        "single_row_original_program": false,
+        "batch_values_present": false
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "batch": 2,
+        "source_sha256": "1cca0aaa36b5117cf9457c909fb07566a9fd6770e0d0726b9f47f7fc4e2a2ae6",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 33,
+        "hidden": 4928,
+        "batch": 4,
+        "source_sha256": "17aa5a901aee8041f042982dc0110858452c982212a32a546b4cd6febef4d52a",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "batch": 1,
+        "source_sha256": "4e09c1296339eafe485a4901eec0e433ce0463f99c76969f14971b9010f3d116",
+        "single_row_original_program": false,
+        "batch_values_present": false
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "batch": 2,
+        "source_sha256": "6ef3b095184dd84b8e1189ad482bfea39704330360a744755ef90882c5b5bf30",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 126,
+        "hidden": 4864,
+        "batch": 4,
+        "source_sha256": "ab2c6f2dc82c132ee004661e9c2f556cbdd98a6b95a59e78107d5beb178c3943",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "batch": 1,
+        "source_sha256": "a210bb3cd1b81271854660993cb122f6b8e230fc1355cf0b37a3e4bc28b4661b",
+        "single_row_original_program": false,
+        "batch_values_present": false
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "batch": 2,
+        "source_sha256": "4f76770a41b253f207a57bf4924b6f21e6b522bb273bfac57b034035daa6c4e2",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4864,
+        "batch": 4,
+        "source_sha256": "45a437c1d52a9769e09c8b4ba65abca96b80fa58d15fa6cf548c690e21b08f38",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "batch": 1,
+        "source_sha256": "3a2d9ab9ed4edd343b51dff2c5e752d4cfa45fe6f532558d26add63cb6d6c02b",
+        "single_row_original_program": false,
+        "batch_values_present": false
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "batch": 2,
+        "source_sha256": "6fd18a7467d0cf6ebe6e1ba8db772c529f3ae1433f9ce5edf23f206f230d2f00",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 4608,
+        "batch": 4,
+        "source_sha256": "41c73938f752db0d3b1ea14c9df3ca1c181dadfa3c38fdbc40b1a0b15ab13c77",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "batch": 1,
+        "source_sha256": "b53918428ef22249d54021b0477878be6d79f16ada3e9e0b9aaa942f2255b278",
+        "single_row_original_program": false,
+        "batch_values_present": false
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "batch": 2,
+        "source_sha256": "b952ad59e8619fe7236173d495092f46a9be6d19d8bdb073f1fe249c47effa20",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 5632,
+        "batch": 4,
+        "source_sha256": "1da565ab257bb4fd4758bd089b82c1df9c6e23b26456a762c3d5a8abc397d146",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "batch": 1,
+        "source_sha256": "6500f45266b811992514957bed21c3db79f96bd48efbd306c15e16ca74b8d69f",
+        "single_row_original_program": false,
+        "batch_values_present": false
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "batch": 2,
+        "source_sha256": "9a5aa12a812572553d963af6fb4ac634bf3d424468e6771255be8ff39b5ee087",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      },
+      {
+        "rows": 128,
+        "hidden": 8960,
+        "batch": 4,
+        "source_sha256": "58b2cd9618e92d35ae95487a24cc155282ab222af8eb43c3dd62e56578a75dc0",
+        "single_row_original_program": false,
+        "batch_values_present": true
+      }
+    ]
+  },
+  "timing_method": {
+    "timed_exact_checks": 640,
+    "expected_timed_exact_checks": 640,
+    "per_batch_warmup_calls_before_timing": 4,
+    "timing_starts_after_poison_and_before_run": true,
+    "output_readback_excluded_from_timed_interval": true,
+    "outputs_poisoned_before_reuse": true,
+    "pool_affinity_restoration_and_worker_parked_assertions_present": true,
+    "expected_pool_dispatch_count_asserted": true,
+    "paired_order": "ABBA on even blocks; BAAB on odd blocks, 40 blocks per candidate batch and hidden width.",
+    "summaries_recomputed_from_saved_samples": true
+  },
+  "timing_results": [
+    {
+      "rows": 128,
+      "hidden": 4864,
+      "blocks_by_candidate_batch": {
+        "2": 40,
+        "4": 40
+      },
+      "comparisons": {
+        "2": {
+          "baseline_calls": 80,
+          "candidate_calls": 80,
+          "baseline_median_ms": 3.1025609999999997,
+          "candidate_median_ms": 2.954105,
+          "paired_block_median_speedup": 1.1136817317133718,
+          "candidate_faster_blocks": 29,
+          "paired_blocks": 40,
+          "timed_samples_all_exact": true,
+          "all_sample_output_sha256_equal": "fcd7bda09d964d1b1d67469ce51bf5abce1125917e711d4d59a15f932eee3268",
+          "paired_speedup_ratios": [
+            0.8483146018545363,
+            1.4137478011398004,
+            0.8283672723880898,
+            1.420242267893237,
+            1.4481092123513564,
+            0.8248446997366774,
+            0.8099428399157025,
+            0.9705942738254045,
+            1.3954383112302917,
+            1.0035495346650714,
+            1.410901685606745,
+            0.8340295466617865,
+            1.428041272487175,
+            1.008182796130092,
+            1.1187146737738676,
+            1.137061408195038,
+            1.1076000866681643,
+            1.1282107825745211,
+            1.111187394995484,
+            1.1109934924046538,
+            1.1452627764826624,
+            1.0690044346476089,
+            0.626501604405099,
+            1.112582721785751,
+            1.1084337919444462,
+            1.105860047442587,
+            1.353519221882854,
+            0.5634744359860144,
+            1.580094514861667,
+            0.8247030751804557,
+            1.3458240460685391,
+            1.1262579311134533,
+            0.6066843295717809,
+            1.1147807416409925,
+            1.1315003642725037,
+            1.1225818737311215,
+            1.1264849614995096,
+            0.8255816302699068,
+            1.1845024396745936,
+            1.5392803659470202
+          ]
+        },
+        "4": {
+          "baseline_calls": 80,
+          "candidate_calls": 80,
+          "baseline_median_ms": 3.0773325,
+          "candidate_median_ms": 2.5304645,
+          "paired_block_median_speedup": 1.218884807964569,
+          "candidate_faster_blocks": 33,
+          "paired_blocks": 40,
+          "timed_samples_all_exact": true,
+          "all_sample_output_sha256_equal": "fcd7bda09d964d1b1d67469ce51bf5abce1125917e711d4d59a15f932eee3268",
+          "paired_speedup_ratios": [
+            1.2166430705999547,
+            1.224888344587051,
+            1.218879533998692,
+            1.9949106119865567,
+            1.4112918177402576,
+            0.6235066065353273,
+            1.3142001080222003,
+            1.2263745176931724,
+            0.8579923840111051,
+            1.219320270589095,
+            1.2187194579023435,
+            1.223556712464478,
+            1.2302937854078593,
+            1.2245513808583341,
+            0.8567465127803771,
+            0.9271547502819444,
+            1.4765165304851977,
+            1.3980945390323842,
+            1.213166393060454,
+            1.2295119401276506,
+            1.6882293044183918,
+            1.2001145225446903,
+            1.2215881054203148,
+            1.2420251150838069,
+            1.2012690731496165,
+            1.2088536213933916,
+            1.2254329914057334,
+            1.1746649587350848,
+            0.8669213572782991,
+            1.218890081930446,
+            1.2265601805474362,
+            1.2183361635938124,
+            1.2202688688810157,
+            1.204585554515214,
+            0.8806341784315351,
+            1.2041545554430912,
+            1.2130662524520255,
+            1.2195515310295006,
+            0.8803837461805026,
+            1.21505856598018
+          ]
+        }
+      }
+    },
+    {
+      "rows": 128,
+      "hidden": 4608,
+      "blocks_by_candidate_batch": {
+        "2": 40,
+        "4": 40
+      },
+      "comparisons": {
+        "2": {
+          "baseline_calls": 80,
+          "candidate_calls": 80,
+          "baseline_median_ms": 2.9548335000000003,
+          "candidate_median_ms": 2.602068,
+          "paired_block_median_speedup": 1.1425128267139901,
+          "candidate_faster_blocks": 38,
+          "paired_blocks": 40,
+          "timed_samples_all_exact": true,
+          "all_sample_output_sha256_equal": "fdd1a954440bbc5936c5240952db8819bc2cae06db66cd7eab036d9da8d3d99e",
+          "paired_speedup_ratios": [
+            1.142542230444562,
+            1.134022568351641,
+            0.9481620955751667,
+            1.1372308325542466,
+            1.1080799900781197,
+            1.122770020381764,
+            1.1391420207747154,
+            1.125317542738079,
+            1.0737920986718388,
+            1.4008140069743946,
+            1.3178638707569261,
+            0.7892049242588394,
+            1.1353747488685404,
+            1.156059781167419,
+            1.1449962646571608,
+            1.9703956871455144,
+            1.0973337316695955,
+            1.781167032225757,
+            1.2202658437507305,
+            1.1424834229834184,
+            1.1235198606977044,
+            1.1553478833401543,
+            1.0788631090351055,
+            1.1428165773080856,
+            1.120948701252386,
+            1.1432699456999302,
+            1.135771372971299,
+            1.1455982969900322,
+            1.1449740135382074,
+            1.149715432483441,
+            1.1523740817132377,
+            1.8340051830131656,
+            1.1480400266519961,
+            1.1443087551728548,
+            1.129782047542055,
+            1.1260191104302937,
+            1.1443133246090846,
+            1.1465734235688367,
+            1.1370585974555205,
+            1.1306772028807897
+          ]
+        },
+        "4": {
+          "baseline_calls": 80,
+          "candidate_calls": 80,
+          "baseline_median_ms": 2.9723335,
+          "candidate_median_ms": 2.4961945,
+          "paired_block_median_speedup": 1.1977477287744205,
+          "candidate_faster_blocks": 34,
+          "paired_blocks": 40,
+          "timed_samples_all_exact": true,
+          "all_sample_output_sha256_equal": "fdd1a954440bbc5936c5240952db8819bc2cae06db66cd7eab036d9da8d3d99e",
+          "paired_speedup_ratios": [
+            1.2039731790404558,
+            1.2027976542200565,
+            1.6319674192834144,
+            0.7818725502681176,
+            1.2886285651646325,
+            1.1893155486262177,
+            1.2000468409280873,
+            1.1957291933179148,
+            1.1697183470488066,
+            1.1874522442356283,
+            1.184037300598849,
+            1.1852521608994713,
+            0.8373269117952716,
+            1.1598469652290573,
+            1.2027661831217504,
+            1.2079708339322757,
+            1.36990013947679,
+            2.0638963522847544,
+            1.190627553401264,
+            1.2086501747206557,
+            1.3843538149329897,
+            1.0636903302587049,
+            1.1873067130895891,
+            1.2007617500762975,
+            0.7609779554018807,
+            1.871897036705028,
+            1.303006604499306,
+            1.2089284096187458,
+            1.6307205431718592,
+            1.0232019215839612,
+            0.7567261287732896,
+            1.1997662642309264,
+            1.6113096879069897,
+            1.1124298120668545,
+            1.187296871146312,
+            0.9146981675423872,
+            1.3333333761568122,
+            1.189250251708653,
+            1.4142443130996398,
+            0.9495718032687025
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,577 @@
+{
+  "schema": "qwen2-sdk-gqa-api-v1",
+  "updated_utc": "2026-10-30T06:08:50.292849+00:00",
+  "complete": true,
+  "goal_complete": false,
+  "comparison_kind": "published-reference median comparison, not a local RKLLM rerun",
+  "checkpoint_sha256": "a07bd33b0e52babc1083e97d9bb6018197d7af25697552cc4d0b751e035158ff",
+  "context": 512,
+  "input_tokens": 128,
+  "actual_output_tokens": 64,
+  "reference": {
+    "url": "https://github.com/airockchip/rknn-llm/blob/main/benchmark.md",
+    "checked": "2026-10-30",
+    "ttft_ms": 145.9,
+    "prefill_tps": 877.3132282385195,
+    "decode_tps": 41.58,
+    "conditions": "Published maximum CPU/NPU frequencies; oNPU uses unchanged adaptive governors, no sudo."
+  },
+  "api": {
+    "raw": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-api-sdk-gqa-v1/job.json",
+      "sha256": "e0e6587aed6f43a1e6092a7c9b12038e21e3585a5650c835bf373506a9a635d3"
+    },
+    "measured_requests": 10,
+    "functional_requests": 18,
+    "median": {
+      "ttft_ms": 142.060826998204,
+      "prefill_tps": 901.107596915718,
+      "decode_tps": 43.98181639269931
+    },
+    "range": {
+      "ttft_ms": [
+        132.13092199293897,
+        176.4734349999344
+      ],
+      "prefill_tps": [
+        725.3216326867984,
+        968.7361449490247
+      ],
+      "decode_tps": [
+        42.20640858410652,
+        44.11578829541778
+      ]
+    },
+    "prefill_reference_wins": 7,
+    "decode_reference_wins": 10,
+    "trials": [
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 139.00211900181603,
+        "total_seconds": 1.5672626589948777,
+        "decode_tps": 44.11578829541778,
+        "prefill_tps": 920.8492713577101,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "22926ed624f84ffb9e32c591c60229ed",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339742.727049,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 143.88146900455467,
+        "total_seconds": 1.6367864060011925,
+        "decode_tps": 42.20640858410652,
+        "prefill_tps": 889.621164459671,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "41fc5f7385ef48838ed53b8bc7af49f0",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339744.469598,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 140.68022099672817,
+        "total_seconds": 1.5727918740012683,
+        "decode_tps": 43.996986893526724,
+        "prefill_tps": 909.8649340547804,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "db837925b7294b8d9c3da64af11dec8f",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339746.1662383,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 176.4734349999344,
+        "total_seconds": 1.6074820200010436,
+        "decode_tps": 44.03143538893106,
+        "prefill_tps": 725.3216326867984,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "d020646329ce47178f3e731351b65c46",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339747.8805141,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 136.45261300553102,
+        "total_seconds": 1.566663500998402,
+        "decode_tps": 44.05554820299622,
+        "prefill_tps": 938.0545903859796,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "fd48e554334c42968665c3d40f82a9d0",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339749.5812442,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 159.15738300827798,
+        "total_seconds": 1.5997403770015808,
+        "decode_tps": 43.738272007875516,
+        "prefill_tps": 804.2353900311527,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "1089ed85e2f64316943a0645edb353a0",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339751.3234181,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 143.44143299967982,
+        "total_seconds": 1.572725417005131,
+        "decode_tps": 44.08399664507971,
+        "prefill_tps": 892.3502597766554,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "5b1e6dbf0b9746fc94c201865f8c7132",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339753.046955,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 139.37915599672124,
+        "total_seconds": 1.5821140369953355,
+        "decode_tps": 43.67334390976317,
+        "prefill_tps": 918.3582658730627,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "c416316437e34e28b7a93fb08740fc83",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339754.7623165,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 150.91457900416572,
+        "total_seconds": 1.5851553700049408,
+        "decode_tps": 43.93206632007613,
+        "prefill_tps": 848.1619260685662,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "d8b1d293d72445f7adeaf7f1bb3be6ea",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339756.5143044,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      },
+      {
+        "prompt_tokens": 128,
+        "cached_tokens": 0,
+        "completion_tokens": 64,
+        "ttft_ms": 132.13092199293897,
+        "total_seconds": 1.565224894991843,
+        "decode_tps": 43.96664589187189,
+        "prefill_tps": 968.7361449490247,
+        "device": "CPU+ROCKCHIP",
+        "allocated_bytes": 794649472,
+        "generation_mode": "ordinary",
+        "speculation_routing": {
+          "requested": "off",
+          "selected": "ordinary",
+          "reason": "request_off",
+          "prompt_tokens": 128,
+          "reply_budget": 64,
+          "cached_tokens": 0,
+          "estimated_setup_seconds": null,
+          "estimated_ordinary_decode_seconds": null
+        },
+        "npu_submissions": 8152,
+        "id": "382369a9b89b426cb9ee05b374ade069",
+        "model": "d5b80d147701371a",
+        "profile": "ROCKCHIP",
+        "context": 512,
+        "created": 1793339758.1922274,
+        "model_path": "/home/orangepi/vlm-bench/baseline-20261021/Qwen2-0.5B-Instruct-Q8_0.gguf"
+      }
+    ],
+    "restored": true,
+    "fresh_original_replies": 2,
+    "original_gpu_preserved": true,
+    "worker_features": {
+      "zero_pad_views": true,
+      "cpu_tuning": true,
+      "cpu_prefill_layout": true,
+      "cpu_token_inputs": true,
+      "borrow_outputs": true,
+      "borrow_batch": true,
+      "native_from": true,
+      "large_native_from": true,
+      "decode_pool": true,
+      "exp2_fast_path": true,
+      "sdk_prefill": true,
+      "packed_upload": true,
+      "gqa_prefill": true,
+      "shared_host_pool": true
+    },
+    "boundary_scope": "448 prompt+64 actual output; context512 only; model maximum unqualified",
+    "arithmetic_scope": "Same quantization, rounding and FP32 CPU arithmetic as prior local recipe. Two backend cohorts retain all saved generated IDs and32 full-vocabulary teacher vectors exactly. Independent RKLLM quality remains unqualified."
+  },
+  "backend": [
+    {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-gqa-model-v1/results/gqa.json",
+        "sha256": "30f78ec98fe911df1bf56a3fb5a06a7be7e9fe1d0c4ad57de6b40cfbc016bdb6"
+      },
+      "exact_64_token_requests": 7,
+      "exact_teacher_vectors": 32,
+      "measured_prefill_tps": [
+        833.5639907496899,
+        888.4246253805935,
+        909.7588193943957
+      ],
+      "median_prefill_tps": 888.4246253805935,
+      "native_details": {
+        "prefill": {
+          "gqa_calls": 24,
+          "packed_payload_borrows": 24,
+          "input_borrow_count": 55,
+          "sdk_calls": 24,
+          "runs": 4,
+          "reason": null,
+          "profiled": false,
+          "cpu_calls": 666,
+          "cpu_sources": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-gqa-model-v1/results/candidate-cpu-prefill",
+          "profile": [],
+          "driver_from_sites": 0,
+          "borrowed_output_copies": 97,
+          "borrowed_input_copies": 55
+        },
+        "decode": {
+          "gqa_calls": 0,
+          "packed_payload_borrows": 0,
+          "input_borrow_count": 55,
+          "sdk_calls": 0,
+          "runs": 438,
+          "reason": null,
+          "profiled": false,
+          "cpu_calls": 572,
+          "cpu_sources": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-gqa-model-v1/results/candidate-cpu-decode",
+          "profile": [],
+          "driver_from_sites": 0,
+          "borrowed_output_copies": 96,
+          "borrowed_input_copies": 55
+        }
+      }
+    },
+    {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-gqa-model-v2/results/gqa.json",
+        "sha256": "a822a444159d953101e1c6e24b58ed31c731d32f9d33fbd4b483fb94970872a6"
+      },
+      "exact_64_token_requests": 7,
+      "exact_teacher_vectors": 32,
+      "measured_prefill_tps": [
+        890.1277117374518,
+        772.1408306686392,
+        848.0678272214724
+      ],
+      "median_prefill_tps": 848.0678272214724,
+      "native_details": {
+        "prefill": {
+          "gqa_calls": 24,
+          "packed_payload_borrows": 24,
+          "input_borrow_count": 55,
+          "sdk_calls": 24,
+          "runs": 4,
+          "reason": null,
+          "profiled": false,
+          "cpu_calls": 666,
+          "cpu_sources": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-gqa-model-v2/results/candidate-cpu-prefill",
+          "profile": [],
+          "driver_from_sites": 0,
+          "borrowed_output_copies": 97,
+          "borrowed_input_copies": 55
+        },
+        "decode": {
+          "gqa_calls": 0,
+          "packed_payload_borrows": 0,
+          "input_borrow_count": 55,
+          "sdk_calls": 0,
+          "runs": 438,
+          "reason": null,
+          "profiled": false,
+          "cpu_calls": 572,
+          "cpu_sources": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-gqa-model-v2/results/candidate-cpu-decode",
+          "profile": [],
+          "driver_from_sites": 0,
+          "borrowed_output_copies": 96,
+          "borrowed_input_copies": 55
+        }
+      }
+    }
+  ],
+  "implementation": {
+    "sdk_gate": "Native blocked A16/C4 layout for128x9728x896, including both per-core widths; direct CPU SwiGLU consumption, no transpose.",
+    "packed_upload": "One upload for all K groups on a shared NPU device; bounded aligned scale-header offsets; original independent scales retained.",
+    "borrowing": "Full-write proof and disjoint cache-line checks retain both large output borrowing and packed-input borrowing; original metadata/lifetime/version guards retained.",
+    "cpu_gqa": "Reuse existing decode GQA reductions across shared KV heads, distribute prefill rows across four workers, and produce token-major QKV query storage.",
+    "flags": {
+      "ONPU_INT8_SDK_PREFILL": 1,
+      "ONPU_FFN_PACKED_UPLOAD": 1,
+      "ONPU_CPU_GQA_PREFILL": 1,
+      "ONPU_SWIGLU_PREFILL_ROWS": 4
+    }
+  },
+  "evidence": {
+    "sdk_main_capture": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-prefill-capture-v1/results/capture.json",
+      "sha256": "ea29c2d5586792670f3017da41eaf59a0e1180c99046be83259787452d39ec0d"
+    },
+    "sdk_tail_capture": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-prefill-tail-capture-v1/results/capture.json",
+      "sha256": "d6ffee21a07d04b49ac79d32b8a7db9db2ca1aba39cef9472ef2cfd62d080604"
+    },
+    "ordered_register_audit": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-command-audit-v1.json",
+      "sha256": "c0b415ed35aacbfba6084df21a63f50c2d981803500bb3e7150d79014290d286"
+    },
+    "raw_integer_and_timing": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-raw-gate-v1/results/probe.json",
+      "sha256": "c403331c6a483dbc1b4befbdc19186085eb13735bba85e89a6a8c2fbabeba2c7"
+    },
+    "both_alias_hardware": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-packed-qualification-v5/results/qualification.json",
+      "sha256": "c9cf372a662ccdba1ec43d4d3a7b3505df421e1c54149e0708b82a39dc28c2cf"
+    },
+    "native_profile": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-packed-profile-v1/results/profile.json",
+      "sha256": "1dc51920b911d7c1037ac92888a7cf2ea1728c08a480ad95f474a36d6486c6f0"
+    },
+    "grouped_query_cpu": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-gqa-prefill-cpu-v1/results/cpu.json",
+      "sha256": "2dd8c1d01746bccc739f77875752ac0c35ffd2c6384bcf7d36f79cd66010b545"
+    },
+    "original_api": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-api-dense-v1/job.json",
+      "sha256": "32822131e76b00374addd0ce00e7fe1bf2a94eb9302328cacca6e1b44afcc033"
+    }
+  },
+  "rejected": {
+    "NPU_attention": {
+      "oracle_pass": true,
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-prefill-attention-primitive-v2/results/primitive.json",
+        "sha256": "2166aba88eb234982a55e233e22389b4f8bb8923902df7798282b6e04b1682d2"
+      },
+      "profile": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-attention-sync-profile-v1/results/primitive.json",
+        "sha256": "3aaa4750885f32aa55c410d9af77d54012c07c29660e7d70412aca323050b40e"
+      },
+      "decision": "Slower; prototype removed."
+    },
+    "fetch_grain_only": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-fetch-grain-v1/results/probe.json",
+        "sha256": "5fb3294bb6034e21eaf63940f9edc17a0367f79c06f762a297bc9c1a1018b522"
+      },
+      "decision": "Failed independent integer oracle; not ported."
+    },
+    "SDK_down": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-down-raw-v1/results/probe.json",
+        "sha256": "6d77d3ced7c0714c67c531fbf88e776f6a95617208687bcbef1b271e173d8667"
+      },
+      "decision": "Exact outputs, slower in all20 paired blocks; not ported."
+    },
+    "approximate_exp": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-prefill-exp-cpu-v1/results/cpu.json",
+        "sha256": "b1b3d4d24c57f5d152d6ad41239d6ebdabc811a35f0416d7b6ce416854eb1b7f"
+      },
+      "decision": "Arithmetic changed for too little component gain; not ported."
+    },
+    "main_CPU_wake": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-main-wake-paired-v1/results/paired.json",
+        "sha256": "63d3dce29fb49907b2ace8b7c24b6286edad7745e0b3f518dbc0f505782d7b65"
+      },
+      "decision": "Prevents sleep but only ~2% paired prefill gain; not ported."
+    },
+    "temporary_padding": {
+      "raw": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-sdk-stack-cpu-v3/results/cpu.json",
+        "sha256": "399d80d4fff57ce51924090060e60de3280cbe94875ec5ff9f3e5d0971ff5498"
+      },
+      "decision": "No substantial gain; not ported."
+    }
+  },
+  "post_measurement_guard": {
+    "path": "tinygrad/llm/kernels/rockchip_replay.py",
+    "measured_sha256": "1777479eb9d1b76933ba71d4ca10cb97bb187f7be50382ec68871b551c9ce49a",
+    "current_sha256": "3c8c2dccbd15ffc09b7875b5cc22ac93e1d0318615853ca15943ab76936b8a8c",
+    "change": "Tighten redirected-write/input overlap from byte ranges to64-byte cache-line ranges.",
+    "api_executed_this_guard_revision": false,
+    "qualified_shape_equivalence": "All source/output extents are multiples64 and mapped bases/planner offsets are64-aligned, so the new guard makes the same alias decisions for the measured INT8 graph. Sub-cache-line adjacency now retains the copy.",
+    "reconstruction_verified": true,
+    "subsequent_verification": "Replay overlap/disjoint CPU tests; no new timing or full-logit claim attached to the changed source hash."
+  },
+  "tests": {
+    "CPU_suite": "34 passed,5 explicit hardware skips,33 subtests; includes dynamic GQA/QKV, SDK packing, header offsets and replay borrowing.",
+    "app": "24 recipe/admission +15 worker tests passed; PYTHONPATH points at backend.",
+    "hardware": "Changed-input FFN/native replay passes with both input/output aliases present; all raw integer outputs exact.",
+    "mypy": "286 source files clean",
+    "ruff": "clean",
+    "post_cacheline_guard": "21 replay tests passed,2 explicit hardware skips,35 subtests; includes sub-cache-line adjacency and disjoint ranges."
+  },
+  "quality_qualified": false,
+  "consistent_prefill_win": false,
+  "conclusion": "API median901.11 exceeds published877.31, with7/10 prefill requests winning. Decode median43.98 exceeds41.58 in10/10. Variance remains material; no repeatable every-request or independent RKLLM-quality claim.",
+  "post_measurement_app_formatting": {
+    "path": "onpu/worker.py",
+    "measured_sha256": "e0bfad6be72ad00f39da2b70059657101dc3ba77401d58cd1222fb359a1fb5d6",
+    "current_sha256": "1a22d2879e1cb560679e257521f91f93a577be12e726d5d6fe4c61b19a561296",
+    "scope": "Import ordering/formatting only; profile values and worker logic unchanged. All39 app recipe/admission/worker tests and touched-file Ruff pass afterward."
+  }
+}

@@ -1,0 +1,550 @@
+{
+  "complete": true,
+  "recorded_utc": "2026-10-28T18:50:53.696280+00:00",
+  "ffn_pool_screen": [
+    {
+      "role": "control",
+      "ttft_ms": 285.65651000008074,
+      "prefill_proxy_tps": 448.09061064270446,
+      "decode_tps": 36.57413423863104,
+      "ttft_samples_ms": [
+        279.13989700005004,
+        285.65651000008074,
+        299.31039500002043
+      ],
+      "teacher_bitwise_equal_control": null,
+      "teacher_dispatches": 0,
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-legacy-ffn-pool-v2/results/1-control.json",
+      "report_sha256": "b55c155c4b240e265d966b2f4a639401017c6d62f2ea8aff72687367c40c3557"
+    },
+    {
+      "role": "candidate",
+      "ttft_ms": 291.77409699991586,
+      "prefill_proxy_tps": 438.69555699468725,
+      "decode_tps": 37.75841490567596,
+      "ttft_samples_ms": [
+        319.56164700000045,
+        291.77409699991586,
+        284.8421569999573
+      ],
+      "teacher_bitwise_equal_control": true,
+      "teacher_dispatches": 112,
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-legacy-ffn-pool-v2/results/2-candidate.json",
+      "report_sha256": "037869729e57070e39378af0d648d76c7e9903ceb7671a25789dfc50119128b8"
+    }
+  ],
+  "ffn_pool_disposition": "Rejected as a standalone optimization: candidate medianTTFT is higher; singlepair is not final speed qualification.",
+  "row64_disposition": "Rejected at primitive gate: all integer checks pass but paired matmul timings lose; fullmodel intentionally skipped.",
+  "row64_qualification": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/prefill-row64-qualification-v1.json",
+  "row64_predicted_saving_ms": -22.56828,
+  "production_source_changed": false,
+  "quality_qualified": false,
+  "model_speed_qualified": false,
+  "all_model_goal_complete": false,
+  "primary_artifacts": {
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-legacy-ffn-pool-v2/job.json": "37c39a768ccd10b560db1284b46a062305c936b0fc3ad8ec924c9258c194a4cb",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/prefill-row64-qualification-v1.json": "bfb9e6a6a7b3f9286a97ebae525d1a622e1c1c84fb78daa92f7836007124e3ee",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/prefill-row64-cpu-check-v1.json": "898080a0dd26cb313e409adf2d10682b975f9433baab402bd08a1b9965bce007",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-postreboot-npu-check-v1.json": "8e6addb1623ec36fffa9b1b3afa0064d5446ecaafa1cf3491ffdd78e7376b343"
+  },
+  "row64_results": [
+    {
+      "m": 65,
+      "n": 32,
+      "k": 512,
+      "checks": [
+        {
+          "pattern": 0,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 0,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        }
+      ],
+      "submissions_per_matmul": 1,
+      "tasks": [
+        1,
+        2
+      ],
+      "sample_ms": [
+        [
+          0.086916,
+          0.088082,
+          0.09304,
+          0.087498,
+          0.087207,
+          0.086915,
+          0.086624,
+          0.087499,
+          0.087499,
+          0.087498,
+          0.087207,
+          0.086915
+        ],
+        [
+          0.091582,
+          0.090998,
+          0.090123,
+          0.090998,
+          0.092457,
+          0.091874,
+          0.095373,
+          0.091582,
+          0.090707,
+          0.090123,
+          0.090999,
+          0.089832
+        ]
+      ],
+      "median_ms": [
+        0.0873525,
+        0.0909985
+      ],
+      "median_paired_speedup": 0.9599334143101366
+    },
+    {
+      "m": 127,
+      "n": 96,
+      "k": 512,
+      "checks": [
+        {
+          "pattern": 0,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 0,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        }
+      ],
+      "submissions_per_matmul": 1,
+      "tasks": [
+        3,
+        6
+      ],
+      "sample_ms": [
+        [
+          0.158664,
+          0.156915,
+          0.158081,
+          0.165956,
+          0.159831,
+          0.156331,
+          0.15954,
+          0.156622,
+          0.158664,
+          0.159248,
+          0.155748,
+          0.156331
+        ],
+        [
+          0.167122,
+          0.167123,
+          0.170039,
+          0.171206,
+          0.174998,
+          0.167706,
+          0.172664,
+          0.166539,
+          0.171498,
+          0.167706,
+          0.167706,
+          0.172956
+        ]
+      ],
+      "median_ms": [
+        0.1583725,
+        0.16887249999999998
+      ],
+      "median_paired_speedup": 0.9309239631423497
+    },
+    {
+      "m": 128,
+      "n": 4096,
+      "k": 1024,
+      "checks": [
+        {
+          "pattern": 0,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 0,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        }
+      ],
+      "submissions_per_matmul": 1,
+      "tasks": [
+        3,
+        6
+      ],
+      "sample_ms": [
+        [
+          0.819863,
+          0.830072,
+          0.820155,
+          0.823655,
+          0.818696,
+          0.816072,
+          0.813155,
+          0.824821,
+          0.816946,
+          0.824821,
+          0.828029,
+          0.843197
+        ],
+        [
+          1.081193,
+          1.082652,
+          1.086442,
+          1.083818,
+          1.077693,
+          1.08236,
+          1.08586,
+          1.080026,
+          1.07886,
+          1.085276,
+          1.104818,
+          1.108026
+        ]
+      ],
+      "median_ms": [
+        0.821905,
+        1.083235
+      ],
+      "median_paired_speedup": 0.7589846868709976
+    },
+    {
+      "m": 128,
+      "n": 6144,
+      "k": 1024,
+      "checks": [
+        {
+          "pattern": 0,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 0,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        }
+      ],
+      "submissions_per_matmul": 1,
+      "tasks": [
+        3,
+        6
+      ],
+      "sample_ms": [
+        [
+          1.748517,
+          1.728392,
+          1.64906,
+          1.751142,
+          1.647894,
+          1.646143,
+          1.609103,
+          1.791975,
+          1.596852,
+          1.940431,
+          1.721684,
+          1.71585
+        ],
+        [
+          2.053887,
+          1.976888,
+          1.898431,
+          2.158886,
+          2.185136,
+          2.103178,
+          2.145178,
+          2.078679,
+          2.191261,
+          2.20526,
+          2.176969,
+          2.076345
+        ]
+      ],
+      "median_ms": [
+        1.7187670000000002,
+        2.124178
+      ],
+      "median_paired_speedup": 0.8187561159624298
+    },
+    {
+      "m": 128,
+      "n": 1024,
+      "k": 2048,
+      "checks": [
+        {
+          "pattern": 0,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 0,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        }
+      ],
+      "submissions_per_matmul": 1,
+      "tasks": [
+        3,
+        6
+      ],
+      "sample_ms": [
+        [
+          0.44566,
+          0.432244,
+          0.447119,
+          0.431952,
+          0.433119,
+          0.438077,
+          0.440994,
+          0.445369,
+          0.459368,
+          0.45966,
+          0.441577,
+          0.43516
+        ],
+        [
+          0.573701,
+          0.586825,
+          0.577492,
+          0.5632,
+          0.604908,
+          0.565534,
+          0.571075,
+          0.574283,
+          0.583617,
+          0.600534,
+          0.59995,
+          0.615991
+        ]
+      ],
+      "median_ms": [
+        0.4412855,
+        0.5805545000000001
+      ],
+      "median_paired_speedup": 0.7695887683664779
+    },
+    {
+      "m": 128,
+      "n": 2656,
+      "k": 896,
+      "checks": [
+        {
+          "pattern": 0,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 0,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 1,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": false,
+          "integer_exact": true,
+          "one_submit": true
+        },
+        {
+          "pattern": 2,
+          "candidate": true,
+          "integer_exact": true,
+          "one_submit": true
+        }
+      ],
+      "submissions_per_matmul": 1,
+      "tasks": [
+        3,
+        6
+      ],
+      "sample_ms": [
+        [
+          0.558242,
+          0.561742,
+          0.557659,
+          0.590616,
+          0.590034,
+          0.592367,
+          0.581575,
+          0.568159,
+          0.551825,
+          0.601116,
+          0.596158,
+          0.557367
+        ],
+        [
+          0.70524,
+          0.703782,
+          0.685407,
+          0.739073,
+          0.733823,
+          0.73149,
+          0.714573,
+          0.709615,
+          0.723031,
+          0.728573,
+          0.707282,
+          0.725365
+        ]
+      ],
+      "median_ms": [
+        0.574867,
+        0.7188019999999999
+      ],
+      "median_paired_speedup": 0.8023565160574141
+    }
+  ]
+}

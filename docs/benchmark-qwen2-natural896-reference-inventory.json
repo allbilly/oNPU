@@ -1,0 +1,1508 @@
+{
+  "schema": "onpu-current-benchmark-gap-inventory-v1",
+  "source_evidence": {
+    "benchmark_markdown": "/home/orangepi/oNPU/benchmark.md",
+    "benchmark_markdown_sha256": "75ad0172e9b3b1059ec11a82caa319e3504daff56367f1241ab6fdd2a15fa93e",
+    "published_w8a8_results": "/home/orangepi/oNPU/docs/benchmark-w8a8-results.json",
+    "published_w8a8_results_sha256": "0efa80099c1cfc31b0b8d1b91cd8b8a85398fcbede6d79a2c9b09ecbcb48b1b7",
+    "merged_summary": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/w8a8-all-summary.json",
+    "merged_summary_sha256": "d6b43ca91c8dd9580d16231513d18eb27f18a27419ca27692048f33b3e45a463",
+    "published_summary_hash_matches_merged_file": true,
+    "published_valid_main_count": 13,
+    "reconciled_valid_main_count": 13,
+    "planned_main_count": 21
+  },
+  "interpretation": {
+    "gpu_coverage": "All 21 original RK3588 rows have measured local GPU FP16 timings; Spark-X2.6 has a separate measured local GPU FP16 baseline.",
+    "w8a8_coverage": "13/21 preferred original-main CPU+NPU INT8 projection timing candidates are valid. Eight preferred rows have no valid timing metrics. Spark-X2.6 CPU+NPU candidate is invalid and has no published metrics.",
+    "quality": "Whole-model output quality and full learned-matrix W8A8 coverage remain unqualified. The only listed held-out quality evidence is a separate 256-position/context-512 Qwen3.5-0.8B PPL comparison against local FP16; the CPU-scan timing case still fails the prior expected-ID gate.",
+    "storage_precision": "The GPU baseline uses FP16 runtime operands from Q8_0 stored checkpoints; Q8_0 storage is not W8A8.",
+    "memory": "RKLLM memory and local lifetime peak RSS are different measurements; no memory winner is evidenced."
+  },
+  "rkllm_wins_evidenced": {
+    "prefill_proxy_models": [],
+    "decode_models": [
+      "Qwen3"
+    ],
+    "counts": {
+      "prefill_proxy": 0,
+      "decode": 1
+    },
+    "rule": "Compare valid preferred CPU+NPU W8A8 timing rows only against displayed RKLLM references; omit invalid scan experiments and models without reference rows."
+  },
+  "models": [
+    {
+      "model": "Qwen2",
+      "size": "0.5B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Qwen2",
+        "size": "0.5B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 145.9,
+          "local_gpu": 1280.52
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 41.58,
+          "local_gpu": 10.21
+        },
+        "memory_mb": {
+          "rkllm_reference": 669.56,
+          "local_gpu": 2753.29,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "qwen2-05b",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "qwen2-05b",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 439.0556369908154,
+          "prefill_proxy_tokens_per_second": 291.53480610631044,
+          "decode_tokens_per_second": 33.738991168394925,
+          "peak_rss_mib": 2177.62109375
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 145.9,
+            "local_cpu_npu": 439.06
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 41.58,
+            "local_cpu_npu": 33.74
+          },
+          "memory_mb": {
+            "rkllm_reference": 669.56,
+            "local_process_peak_rss": 2177.62,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 877.31,
+          "local_cpu_npu": 291.53
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "MiniCPM4",
+      "size": "0.5B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "MiniCPM4",
+        "size": "0.5B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 135.29,
+          "local_gpu": 1262.78
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 45.34,
+          "local_gpu": 8.34
+        },
+        "memory_mb": {
+          "rkllm_reference": 534.82,
+          "local_gpu": 2554.7,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "minicpm4-05b",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "minicpm4-05b",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 177.7453850954771,
+          "prefill_proxy_tokens_per_second": 720.1312142717177,
+          "decode_tokens_per_second": 42.72950923150927,
+          "peak_rss_mib": 1977.296875
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 135.29,
+            "local_cpu_npu": 177.75
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 45.34,
+            "local_cpu_npu": 42.73
+          },
+          "memory_mb": {
+            "rkllm_reference": 534.82,
+            "local_process_peak_rss": 1977.3,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 946.12,
+          "local_cpu_npu": 720.13
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Qwen3",
+      "size": "0.6B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Qwen3",
+        "size": "0.6B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 199.09,
+          "local_gpu": 1406.79
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 32.91,
+          "local_gpu": 7.96
+        },
+        "memory_mb": {
+          "rkllm_reference": 791.11,
+          "local_gpu": 3568.17,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "qwen3-matched-f16-shared",
+          "sweep": "v2",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "qwen3-matched-f16-shared",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 227.34240698628128,
+          "prefill_proxy_tokens_per_second": 563.0273810188172,
+          "decode_tokens_per_second": 34.239217041407365,
+          "peak_rss_mib": 2447.89453125
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 199.09,
+            "local_cpu_npu": 227.34
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 32.91,
+            "local_cpu_npu": 34.24
+          },
+          "memory_mb": {
+            "rkllm_reference": 791.11,
+            "local_process_peak_rss": 2447.89,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 642.93,
+          "local_cpu_npu": 563.03
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": true,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "TinyLLAMA",
+      "size": "1.1B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "TinyLLAMA",
+        "size": "1.1B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 243.93,
+          "local_gpu": 2736.21
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 24.43,
+          "local_gpu": 5.87
+        },
+        "memory_mb": {
+          "rkllm_reference": 1093.66,
+          "local_gpu": 5798.29,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "tinyllama-11b",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "tinyllama-11b",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 544.5584990084171,
+          "prefill_proxy_tokens_per_second": 235.05280008130316,
+          "decode_tokens_per_second": 22.35239708911806,
+          "peak_rss_mib": 4517.7421875
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 243.93,
+            "local_cpu_npu": 544.56
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 24.43,
+            "local_cpu_npu": 22.35
+          },
+          "memory_mb": {
+            "rkllm_reference": 1093.66,
+            "local_process_peak_rss": 4517.74,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 524.74,
+          "local_cpu_npu": 235.05
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Qwen2.5",
+      "size": "1.5B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Qwen2.5",
+        "size": "1.5B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 378.31,
+          "local_gpu": 4027.07
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 16.69,
+          "local_gpu": 4.71
+        },
+        "memory_mb": {
+          "rkllm_reference": 1689.21,
+          "local_gpu": 8713.62,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "qwen25-15b",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "qwen25-15b",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 958.3826861344278,
+          "prefill_proxy_tokens_per_second": 133.55833932714228,
+          "decode_tokens_per_second": 14.268353556389691,
+          "peak_rss_mib": 6470.09765625
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 378.31,
+            "local_cpu_npu": 958.38
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 16.69,
+            "local_cpu_npu": 14.27
+          },
+          "memory_mb": {
+            "rkllm_reference": 1689.21,
+            "local_process_peak_rss": 6470.1,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 338.35,
+          "local_cpu_npu": 133.56
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "RWKV7",
+      "size": "1.5B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "RWKV7",
+        "size": "1.5B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 634.34,
+          "local_gpu": 160077.04
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 13.82,
+          "local_gpu": 0.8
+        },
+        "memory_mb": {
+          "rkllm_reference": 1486.19,
+          "local_gpu": 6501.57,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "rwkv7-15b",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "rwkv7-15b",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 15275.508388876915,
+          "prefill_proxy_tokens_per_second": 8.379426513438013,
+          "decode_tokens_per_second": 9.106013840559768,
+          "peak_rss_mib": 5113.72265625
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 634.34,
+            "local_cpu_npu": 15275.51
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 13.82,
+            "local_cpu_npu": 9.11
+          },
+          "memory_mb": {
+            "rkllm_reference": 1486.19,
+            "local_process_peak_rss": 5113.72,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 201.78,
+          "local_cpu_npu": 8.38
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "InternLM2",
+      "size": "1.8B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "InternLM2",
+        "size": "1.8B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 380.14,
+          "local_gpu": 4176.5
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 15.45,
+          "local_gpu": 4.04
+        },
+        "memory_mb": {
+          "rkllm_reference": 1775.56,
+          "local_gpu": 9340.63,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "internlm2-18b-shared",
+          "sweep": "v2",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "internlm2-18b-shared",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 803.9842711295933,
+          "prefill_proxy_tokens_per_second": 159.20709471114495,
+          "decode_tokens_per_second": 14.089633540180028,
+          "peak_rss_mib": 6222.80859375
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 380.14,
+            "local_cpu_npu": 803.98
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 15.45,
+            "local_cpu_npu": 14.09
+          },
+          "memory_mb": {
+            "rkllm_reference": 1775.56,
+            "local_process_peak_rss": 6222.81,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 336.72,
+          "local_cpu_npu": 159.21
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Gemma2",
+      "size": "2B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Gemma2",
+        "size": "2B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 598.41,
+          "local_gpu": 5833.0
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 10.37,
+          "local_gpu": 3.19
+        },
+        "memory_mb": {
+          "rkllm_reference": 2779.22,
+          "local_gpu": 10090.47,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "invalid",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "gemma2-2b-shared",
+          "sweep": "v2",
+          "status": "invalid"
+        },
+        "published_preferred_variant": {
+          "slug": "gemma2-2b-shared",
+          "status": "invalid"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "invalid",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Gemma3n",
+      "size": "2B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Gemma3n",
+        "size": "2B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 1124.51,
+          "local_gpu": 71678.78
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 9.91,
+          "local_gpu": 2.22
+        },
+        "memory_mb": {
+          "rkllm_reference": 2702.59,
+          "local_gpu": 12978.16,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "invalid",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "gemma3n-2b-shared",
+          "sweep": "v2",
+          "status": "invalid"
+        },
+        "published_preferred_variant": {
+          "slug": "gemma3n-2b-shared",
+          "status": "invalid"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "invalid",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "TeleChat2",
+      "size": "3B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "TeleChat2",
+        "size": "3B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 618.48,
+          "local_gpu": 6211.9
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 10.18,
+          "local_gpu": 3.0
+        },
+        "memory_mb": {
+          "rkllm_reference": 2788.39,
+          "local_gpu": 13416.96,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "invalid",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "telechat2-3b-shared",
+          "sweep": "v2",
+          "status": "invalid"
+        },
+        "published_preferred_variant": {
+          "slug": "telechat2-3b-shared",
+          "status": "invalid"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "invalid",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Phi3",
+      "size": "3.8B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Phi3",
+        "size": "3.8B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 1017.28,
+          "local_gpu": 161489.96
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 7.45,
+          "local_gpu": 2.15
+        },
+        "memory_mb": {
+          "rkllm_reference": 3758.34,
+          "local_gpu": 12159.94,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "invalid",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "phi3-38b-shared",
+          "sweep": "v2",
+          "status": "invalid"
+        },
+        "published_preferred_variant": {
+          "slug": "phi3-38b-shared",
+          "status": "invalid"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "invalid",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "MiniCPM3",
+      "size": "4B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "MiniCPM3",
+        "size": "4B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 1408.49,
+          "local_gpu": 388796.27
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 5.94,
+          "local_gpu": 0.19
+        },
+        "memory_mb": {
+          "rkllm_reference": 4384.02,
+          "local_gpu": 12899.05,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "invalid",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "minicpm3-4b-shared",
+          "sweep": "v2",
+          "status": "invalid"
+        },
+        "published_preferred_variant": {
+          "slug": "minicpm3-4b-shared",
+          "status": "invalid"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "invalid",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "ChatGLM3",
+      "size": "6B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "ChatGLM3",
+        "size": "6B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 1352.94,
+          "local_gpu": 300759.88
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 4.98,
+          "local_gpu": 1.51
+        },
+        "memory_mb": {
+          "rkllm_reference": 5985.99,
+          "local_gpu": 12611.86,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "resource-interrupted",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "chatglm3-6b-shared",
+          "sweep": "v2",
+          "status": "resource-interrupted"
+        },
+        "published_preferred_variant": {
+          "slug": "chatglm3-6b-shared",
+          "status": "resource-interrupted"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "resource-interrupted",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Qwen3-VL",
+      "size": "2B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Qwen3-VL",
+        "size": "2B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 383.62,
+          "local_gpu": 3945.27
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 14.98,
+          "local_gpu": 3.77
+        },
+        "memory_mb": {
+          "rkllm_reference": 1868.98,
+          "local_gpu": 7008.97,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "qwen3-vl-2b-shared",
+          "sweep": "v2",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "qwen3-vl-2b-shared",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 732.1771800052375,
+          "prefill_proxy_tokens_per_second": 174.8210726795451,
+          "decode_tokens_per_second": 14.388798575437335,
+          "peak_rss_mib": 5752.7109375
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 383.62,
+            "local_cpu_npu": 732.18
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 14.98,
+            "local_cpu_npu": 14.39
+          },
+          "memory_mb": {
+            "rkllm_reference": 1868.98,
+            "local_process_peak_rss": 5752.71,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 333.66,
+          "local_cpu_npu": 174.82
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "DeepSeekOCR",
+      "size": "3B(A570M)",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "DeepSeekOCR",
+        "size": "3B(A570M)",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 701.21,
+          "local_gpu": 28090.65
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 31.6,
+          "local_gpu": 3.94
+        },
+        "memory_mb": {
+          "rkllm_reference": 3066.66,
+          "local_gpu": 10203.73,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "deepseekocr-3ba570m",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "deepseekocr-3ba570m",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 37366.15121993236,
+          "prefill_proxy_tokens_per_second": 3.4255601880591997,
+          "decode_tokens_per_second": 3.150083630626567,
+          "peak_rss_mib": 6833.0546875
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 701.21,
+            "local_cpu_npu": 37366.15
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 31.6,
+            "local_cpu_npu": 3.15
+          },
+          "memory_mb": {
+            "rkllm_reference": 3066.66,
+            "local_process_peak_rss": 6833.05,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 182.54,
+          "local_cpu_npu": 3.43
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Qwen3.5",
+      "size": "0.8B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Qwen3.5",
+        "size": "0.8B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 587.74,
+          "local_gpu": 2735.69
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 27.05,
+          "local_gpu": 4.54
+        },
+        "memory_mb": {
+          "rkllm_reference": 1039.66,
+          "local_gpu": 2466.36,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "qwen35-08b",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "qwen35-08b",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 16676.34166404605,
+          "prefill_proxy_tokens_per_second": 7.675544347713033,
+          "decode_tokens_per_second": 8.00393512765717,
+          "peak_rss_mib": 2878.515625
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 587.74,
+            "local_cpu_npu": 16676.34
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 27.05,
+            "local_cpu_npu": 8.0
+          },
+          "memory_mb": {
+            "rkllm_reference": 1039.66,
+            "local_process_peak_rss": 2878.52,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 217.78,
+          "local_cpu_npu": 7.68
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "limited held-out PPL evidence; not full-output or RKLLM quality qualification",
+        "scope": {
+          "positions": 256,
+          "context": 512,
+          "metric": "conditional perplexity",
+          "reference": "local FP16 from same Q8_0 checkpoint"
+        },
+        "ppl": {
+          "local_fp16": 10.58231,
+          "serial_int8_control": 10.55392,
+          "cpu_scan_int8": 10.67492,
+          "serial_control_ratio_vs_local_fp16": 0.99732,
+          "cpu_scan_ratio_vs_local_fp16": 1.00875,
+          "gate": 1.02,
+          "both_ratios_pass_gate": true
+        },
+        "identity_gate": "CPU scan timing case fails prior INT8 token identity at output position 13; no reinterpretation as a valid main-table candidate.",
+        "separate_cpu_scan_timing_reported_in_markdown": {
+          "case_valid": false,
+          "status": "invalid",
+          "ttft_ms": 1551.13,
+          "decode_tokens_per_second": 17.32,
+          "prefill_proxy_tokens_per_second": 82.52,
+          "ttft_measured_range_ms": [
+            1545.99,
+            6424.62
+          ],
+          "counted_in_13_of_21": false
+        }
+      }
+    },
+    {
+      "model": "Qwen3.5",
+      "size": "2B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Qwen3.5",
+        "size": "2B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 776.95,
+          "local_gpu": 7096.23
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 13.59,
+          "local_gpu": 2.4
+        },
+        "memory_mb": {
+          "rkllm_reference": 2121.91,
+          "local_gpu": 5208.04,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "qwen35-2b-shared",
+          "sweep": "v2",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "qwen35-2b-shared",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 21774.720476940274,
+          "prefill_proxy_tokens_per_second": 5.878376263684016,
+          "decode_tokens_per_second": 6.090492810818952,
+          "peak_rss_mib": 6253.61328125
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 776.95,
+            "local_cpu_npu": 21774.72
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 13.59,
+            "local_cpu_npu": 6.09
+          },
+          "memory_mb": {
+            "rkllm_reference": 2121.91,
+            "local_process_peak_rss": 6253.61,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 164.75,
+          "local_cpu_npu": 5.88
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Qwen3.5",
+      "size": "4B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Qwen3.5",
+        "size": "4B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 2068.88,
+          "local_gpu": 23436.57
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 6.22,
+          "local_gpu": 0.6
+        },
+        "memory_mb": {
+          "rkllm_reference": 4575.78,
+          "local_gpu": 9830.33,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "invalid",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "qwen35-4b-shared",
+          "sweep": "v2",
+          "status": "invalid"
+        },
+        "published_preferred_variant": {
+          "slug": "qwen35-4b-shared",
+          "status": "invalid"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "invalid",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Gemma4",
+      "size": "E2B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Gemma4",
+        "size": "E2B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 599.06,
+          "local_gpu": 63315.4
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 11.12,
+          "local_gpu": 2.88
+        },
+        "memory_mb": {
+          "rkllm_reference": 2498.7,
+          "local_gpu": 12862.52,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "resource-interrupted",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "gemma4-e2b-shared",
+          "sweep": "v2",
+          "status": "resource-interrupted"
+        },
+        "published_preferred_variant": {
+          "slug": "gemma4-e2b-shared",
+          "status": "resource-interrupted"
+        },
+        "metrics": null,
+        "published_row": null,
+        "prefill_proxy": null,
+        "quality_qualified": false,
+        "missing_reason": "resource-interrupted",
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "no valid preferred CPU+NPU W8A8 timing"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "LFM2.5-VL",
+      "size": "450M",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "LFM2.5-VL",
+        "size": "450M",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 102.74,
+          "local_gpu": 14427.52
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 62.16,
+          "local_gpu": 7.18
+        },
+        "memory_mb": {
+          "rkllm_reference": 436.94,
+          "local_gpu": 1743.02,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "lfm25-vl-450m",
+          "sweep": "v1",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "lfm25-vl-450m",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 274.4598670396954,
+          "prefill_proxy_tokens_per_second": 466.3705531180165,
+          "decode_tokens_per_second": 54.25446576918873,
+          "peak_rss_mib": 1681.7421875
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 102.74,
+            "local_cpu_npu": 274.46
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 62.16,
+            "local_cpu_npu": 54.25
+          },
+          "memory_mb": {
+            "rkllm_reference": 436.94,
+            "local_process_peak_rss": 1681.74,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 1245.86,
+          "local_cpu_npu": 466.37
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Spark-X2.5",
+      "size": "1.7B",
+      "coverage_scope": "original RK3588 main table",
+      "gpu_baseline": {
+        "model": "Spark-X2.5",
+        "size": "1.7B",
+        "status": "measured",
+        "dtype": "w8a8 / FP16",
+        "seqlen": 128,
+        "new_tokens": 64,
+        "ttft_ms": {
+          "rkllm_reference": 386.23,
+          "local_gpu": 4075.64
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": 15.61,
+          "local_gpu": 3.91
+        },
+        "memory_mb": {
+          "rkllm_reference": 1830.32,
+          "local_gpu": 7123.13,
+          "comparison": "not an equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "valid",
+        "measured": true,
+        "preferred_variant": {
+          "slug": "spark-x25-17b-shared",
+          "sweep": "v2",
+          "status": "valid"
+        },
+        "published_preferred_variant": {
+          "slug": "spark-x25-17b-shared",
+          "status": "valid"
+        },
+        "metrics": {
+          "ttft_ms": 2407.398207113147,
+          "prefill_proxy_tokens_per_second": 53.16943396476662,
+          "decode_tokens_per_second": 9.096714908606256,
+          "peak_rss_mib": 5817.1796875
+        },
+        "published_row": {
+          "dtype": "w8a8 / INT8\u2020",
+          "ttft_ms": {
+            "rkllm_reference": 386.23,
+            "local_cpu_npu": 2407.4
+          },
+          "decode_tokens_per_second": {
+            "rkllm_reference": 15.61,
+            "local_cpu_npu": 9.1
+          },
+          "memory_mb": {
+            "rkllm_reference": 1830.32,
+            "local_process_peak_rss": 5817.18,
+            "comparison": "not equivalent; no memory winner"
+          }
+        },
+        "prefill_proxy": {
+          "rkllm_reference": 331.41,
+          "local_cpu_npu": 53.17
+        },
+        "quality_qualified": false,
+        "missing_reason": null,
+        "rkllm_comparison": {
+          "prefill_win": false,
+          "decode_win": false,
+          "evidence": "valid preferred CPU+NPU W8A8 timing against published RKLLM values"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in the supplied W8A8 records"
+      }
+    },
+    {
+      "model": "Spark-X2.6",
+      "size": "4B",
+      "coverage_scope": "additional model; no RKLLM reference row",
+      "gpu_baseline": {
+        "status": "measured",
+        "dtype": "\u2014 / FP16",
+        "ttft_ms": {
+          "rkllm_reference": null,
+          "local_gpu": 161422.06
+        },
+        "decode_tokens_per_second": {
+          "rkllm_reference": null,
+          "local_gpu": 2.07
+        },
+        "memory_mb": {
+          "rkllm_reference": null,
+          "local_gpu": 13190.66,
+          "comparison": "not equivalent RSS metric"
+        }
+      },
+      "cpu_npu_w8a8": {
+        "status": "invalid",
+        "measured": false,
+        "preferred_variant": {
+          "slug": "spark-x26-4b-shared",
+          "sweep": "v2",
+          "status": "invalid"
+        },
+        "variants": [
+          {
+            "slug": "spark-x26-4b",
+            "sweep": "v1",
+            "status": "invalid"
+          },
+          {
+            "slug": "spark-x26-4b-shared",
+            "sweep": "v2",
+            "status": "invalid"
+          }
+        ],
+        "metrics": null,
+        "missing_reason": "invalid",
+        "quality_qualified": false,
+        "rkllm_comparison": {
+          "prefill_win": null,
+          "decode_win": null,
+          "evidence": "not comparable; published RKLLM reference row unavailable"
+        }
+      },
+      "quality_scope": {
+        "status": "not assessed in supplied artifacts"
+      }
+    }
+  ]
+}

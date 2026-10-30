@@ -1,0 +1,117 @@
+{
+  "complete": true,
+  "hardware_run": false,
+  "numeric_pass": false,
+  "probe_sha256": "6b4c235f93f5b85ae8b28daee2351996619fee27b45d5ac6b6b30cc5da011c0d",
+  "shapes": [
+    {
+      "m": 128,
+      "full_n": 9728,
+      "per_core_n": 3264,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 9728,
+      "per_core_n": 3264,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 9728,
+      "per_core_n": 3200,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 24576,
+      "per_core_n": 8192,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 24576,
+      "per_core_n": 8192,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 24576,
+      "per_core_n": 8192,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 896,
+      "per_core_n": 320,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 896,
+      "per_core_n": 320,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 896,
+      "per_core_n": 256,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 1152,
+      "per_core_n": 384,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 1152,
+      "per_core_n": 384,
+      "natural_matches_production": true
+    },
+    {
+      "m": 128,
+      "full_n": 1152,
+      "per_core_n": 384,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 9728,
+      "per_core_n": 3264,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 9728,
+      "per_core_n": 3264,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 9728,
+      "per_core_n": 3200,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 896,
+      "per_core_n": 320,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 896,
+      "per_core_n": 320,
+      "natural_matches_production": true
+    },
+    {
+      "m": 1,
+      "full_n": 896,
+      "per_core_n": 256,
+      "natural_matches_production": true
+    }
+  ],
+  "scope": "Only raw command structure construction and exact equality with production naturalK896 recipe; no device opened."
+}

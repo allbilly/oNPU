@@ -1,0 +1,277 @@
+{
+  "schema": "expert-quant-error-v2",
+  "complete": true,
+  "diagnostic_only": true,
+  "model_quality_qualified": false,
+  "quality_gate_changed": false,
+  "scope": "Independent GGUF Q8_0 decode to FP16 weights, Float32 BLAS expert reference, mathematical quantization simulation only; no NPU implementation/timing or trained-model qualification.",
+  "calibration": "SmoothQuant alpha0.5, per-expert activation maxima on prefix positions0..63. Missing experts use pooled calibration maxima. Evaluate prefix positions64..127 and captured decode separately. These are disjoint positions of one prompt, not held-out text.",
+  "trace": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-expert-route-trace-v1/results/control.expert-trace.npz",
+    "sha256": "2aaaef98e10e362430409adbe9a9326404e0e76caffee5ebe51d1d417b5a21bb"
+  },
+  "trace_report": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-expert-route-trace-v1/results/control.json",
+    "sha256": "2aec995c99684f623a33e2a01c00515d6c8578d01075f4fde1850d8593a969e4"
+  },
+  "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/DeepSeekOCR-3B(A570M)/DeepSeek-OCR-Q8_0.gguf",
+  "checkpoint_signature_before": [
+    45825,
+    3187399,
+    3126139712,
+    1792638562779686500
+  ],
+  "checkpoint_signature_after": [
+    45825,
+    3187399,
+    3126139712,
+    1792638562779686500
+  ],
+  "runner": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/probe-expert-quant-error-v2.py",
+    "sha256": "0134f4262f26da30c9e3ab689e4f8ac15442a9f17e5d2e2f6c9e309352df6b9e"
+  },
+  "results": [
+    {
+      "transformer_block": 3,
+      "projection": "gate",
+      "elapsed_seconds": 3.625545308997971,
+      "results": {
+        "prefill_positions_64_127": {
+          "routes": 384,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.010206672239287682,
+            "A8A1_W8": 0.005270269668594807,
+            "A16_W8": 0.005270137711519136,
+            "A8_W16": 0.00874375045617064,
+            "A8A1_W16": 3.4488595743171854e-05,
+            "smooth_A8_W8": 0.013355221107927757,
+            "smooth_A8A1_W8": 0.006885413747571181,
+            "smooth_A16_W8": 0.006885275409560668,
+            "three_products_A8A1_W8W1": 8.075471599309221e-05
+          }
+        },
+        "decode": {
+          "routes": 6,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.013462773101513106,
+            "A8A1_W8": 0.005941993497439891,
+            "A16_W8": 0.005941478614877972,
+            "A8_W16": 0.012201589942844336,
+            "A8A1_W16": 4.775541262109132e-05,
+            "smooth_A8_W8": 0.01024809665533562,
+            "smooth_A8A1_W8": 0.0067669581164722424,
+            "smooth_A16_W8": 0.0067667986228007815,
+            "three_products_A8A1_W8W1": 0.00011418051242006273
+          }
+        }
+      }
+    },
+    {
+      "transformer_block": 3,
+      "projection": "up",
+      "elapsed_seconds": 3.34157333499752,
+      "results": {
+        "prefill_positions_64_127": {
+          "routes": 384,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.012844892453092293,
+            "A8A1_W8": 0.006649590103184543,
+            "A16_W8": 0.006649422408364278,
+            "A8_W16": 0.010992837654280656,
+            "A8A1_W16": 4.3412712349499114e-05,
+            "smooth_A8_W8": 0.016251800368080663,
+            "smooth_A8A1_W8": 0.008461779491407518,
+            "smooth_A16_W8": 0.008461479833752984,
+            "three_products_A8A1_W8W1": 0.00010186204615306245
+          }
+        },
+        "decode": {
+          "routes": 6,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.01637918442074229,
+            "A8A1_W8": 0.007075856497673949,
+            "A16_W8": 0.007075653451713097,
+            "A8_W16": 0.014992634040486928,
+            "A8A1_W16": 5.874278806026595e-05,
+            "smooth_A8_W8": 0.011367461104797461,
+            "smooth_A8A1_W8": 0.007921177183127466,
+            "smooth_A16_W8": 0.007921003556121256,
+            "three_products_A8A1_W8W1": 0.00013635085284268128
+          }
+        }
+      }
+    },
+    {
+      "transformer_block": 3,
+      "projection": "down",
+      "elapsed_seconds": 3.4425495479954407,
+      "results": {
+        "prefill_positions_64_127": {
+          "routes": 384,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.025970885309323503,
+            "A8A1_W8": 0.007846267027380258,
+            "A16_W8": 0.007845472036696765,
+            "A8_W16": 0.024742620695351505,
+            "A8A1_W16": 9.841902703407215e-05,
+            "smooth_A8_W8": 0.0443283766873195,
+            "smooth_A8A1_W8": 0.01681437521317339,
+            "smooth_A16_W8": 0.016813207648433352,
+            "three_products_A8A1_W8W1": 0.00021997785334622956
+          }
+        },
+        "decode": {
+          "routes": 6,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.02644331970173605,
+            "A8A1_W8": 0.00807911027555113,
+            "A16_W8": 0.00807543022337488,
+            "A8_W16": 0.025114174880942475,
+            "A8A1_W16": 0.00010318005849608638,
+            "smooth_A8_W8": 0.024378120958158542,
+            "smooth_A8A1_W8": 0.01287327410383394,
+            "smooth_A16_W8": 0.01287103817366361,
+            "three_products_A8A1_W8W1": 0.00022990642097078326
+          }
+        }
+      }
+    },
+    {
+      "transformer_block": 4,
+      "projection": "gate",
+      "elapsed_seconds": 4.201583792004385,
+      "results": {
+        "prefill_positions_64_127": {
+          "routes": 384,
+          "fallback_calibration_routes": 8,
+          "relative_output_RMS": {
+            "A8_W8": 0.009294209048810032,
+            "A8A1_W8": 0.005101724197820074,
+            "A16_W8": 0.005101550980398023,
+            "A8_W16": 0.007756733055454099,
+            "A8A1_W16": 3.015444555665887e-05,
+            "smooth_A8_W8": 0.01783402341094044,
+            "smooth_A8A1_W8": 0.0068789117305986455,
+            "smooth_A16_W8": 0.006879145442198177,
+            "three_products_A8A1_W8W1": 7.223080707794112e-05
+          }
+        },
+        "decode": {
+          "routes": 6,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.011631840698493117,
+            "A8A1_W8": 0.005175976803749089,
+            "A16_W8": 0.005175620806053262,
+            "A8_W16": 0.010416003532203068,
+            "A8A1_W16": 3.8133127821791904e-05,
+            "smooth_A8_W8": 0.02303481046150571,
+            "smooth_A8A1_W8": 0.00849936045498755,
+            "smooth_A16_W8": 0.008501461866586991,
+            "three_products_A8A1_W8W1": 9.310296125734234e-05
+          }
+        }
+      }
+    },
+    {
+      "transformer_block": 4,
+      "projection": "up",
+      "elapsed_seconds": 3.4582489150052425,
+      "results": {
+        "prefill_positions_64_127": {
+          "routes": 384,
+          "fallback_calibration_routes": 8,
+          "relative_output_RMS": {
+            "A8_W8": 0.011532155645384632,
+            "A8A1_W8": 0.006329067324940896,
+            "A16_W8": 0.006328998144410606,
+            "A8_W16": 0.009631411931206452,
+            "A8A1_W16": 3.7606663641996234e-05,
+            "smooth_A8_W8": 0.022452729766413552,
+            "smooth_A8A1_W8": 0.008385696115510724,
+            "smooth_A16_W8": 0.00838584295558071,
+            "three_products_A8A1_W8W1": 8.950614471469695e-05
+          }
+        },
+        "decode": {
+          "routes": 6,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.01314013027583613,
+            "A8A1_W8": 0.005805863727669442,
+            "A16_W8": 0.005805016408164109,
+            "A8_W16": 0.011817336528450061,
+            "A8A1_W16": 4.383617236314649e-05,
+            "smooth_A8_W8": 0.02866771157339625,
+            "smooth_A8A1_W8": 0.009548420790281831,
+            "smooth_A16_W8": 0.009549471565211349,
+            "three_products_A8A1_W8W1": 0.00010875074016449477
+          }
+        }
+      }
+    },
+    {
+      "transformer_block": 4,
+      "projection": "down",
+      "elapsed_seconds": 3.9518653539998922,
+      "results": {
+        "prefill_positions_64_127": {
+          "routes": 384,
+          "fallback_calibration_routes": 8,
+          "relative_output_RMS": {
+            "A8_W8": 0.02875506757286488,
+            "A8A1_W8": 0.007937729915189672,
+            "A16_W8": 0.007937400114825436,
+            "A8_W16": 0.027600970112909146,
+            "A8A1_W16": 0.0001106912745539184,
+            "smooth_A8_W8": 0.03434673389342325,
+            "smooth_A8A1_W8": 0.015390941741988079,
+            "smooth_A16_W8": 0.015389736876579118,
+            "three_products_A8A1_W8W1": 0.0002468943544912578
+          }
+        },
+        "decode": {
+          "routes": 6,
+          "fallback_calibration_routes": 0,
+          "relative_output_RMS": {
+            "A8_W8": 0.023668344356968424,
+            "A8A1_W8": 0.008178906677233803,
+            "A16_W8": 0.008177412946406129,
+            "A8_W16": 0.022298967499649866,
+            "A8A1_W16": 8.766435674475721e-05,
+            "smooth_A8_W8": 0.4843114801599252,
+            "smooth_A8A1_W8": 0.09835585889511377,
+            "smooth_A16_W8": 0.09818251018009336,
+            "three_products_A8A1_W8W1": 0.0001987287993911997
+          }
+        }
+      }
+    }
+  ],
+  "CPU_owner": {
+    "session": 36626,
+    "exit_code": 0
+  },
+  "fresh_serving": {
+    "session": 30211,
+    "exit_code": 0,
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/expert-quant-error-cpu-v2-fresh.json",
+    "sha256": "748922c3688a1e9915e7198b192d930b5a4c2f62575ee8c733165822bca7e628"
+  },
+  "job": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/expert-quant-error-cpu-v2.json",
+    "sha256": "37b8c07d88f3e391a562356588d2bd830ce406825d48dfb6c5a8b24df8503afc"
+  },
+  "raw": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/expert-quant-error-v2-results.json",
+    "sha256": "000b29a6e94d6fdf5904c50c1c292ee594ed17f4f741b5e9474e0a532fe1b0e4"
+  },
+  "NPU_serving_kept_loaded": true
+}

@@ -1,0 +1,35 @@
+{
+  "complete": true,
+  "goal_complete": false,
+  "reason": "Eight-row CPU tile passed exact logits but lost both full-model timing medians; experimental runtime branch and temporary tests removed.",
+  "experiment": {
+    "path": "/home/orangepi/oNPU/docs/benchmark-deepseek-expert-tile-verification-v1.json",
+    "sha256": "c9f6fc564c30eefc0412771255c4bbd2e61a49b5f4d8e4e5489316978fda9d11"
+  },
+  "restored_files": {
+    "tinygrad/llm/kernels/rockchip_experts.py": "97a70a3ebf16336894de933956f687a9426544da675e06d60cad90c2d3fb85e2",
+    "test/models/test_cpu_expert_weights.py": "431f09b681285201e5e0bc7903bd6377d7a0d6c60d8439d0af019a1200d22051",
+    "test/models/test_cpu_expert_model.py": "aae41e5bad53e27bb61109ba4dbb09244cddd1cce78b88b74cbfe7fd248bf03d",
+    "test/models/test_rockchip_cpu_experts.py": "c63e707c28923b18758d36985ab9d8631ea49d7e5cf96baab24a3862fe3f0f97"
+  },
+  "numerical_source_count": 283,
+  "all_numerical_sources_match_previous_qualified_cohort": true,
+  "previous_qualified_CPU_receipt": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-expert-integration-cpu-check-v4.json",
+    "sha256": "0c65357fa83ded8640c199922c60964312a0614ce6e2798034d6527f9734c2e1"
+  },
+  "previous_hardware_receipt": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-expert-model-hw-v1/job.json",
+    "sha256": "0468562bbc181dda308fd335bd7a127af90b540c24e31c9c7491e83cee59bd82"
+  },
+  "previous_trained_receipt": {
+    "path": "/home/orangepi/oNPU/docs/benchmark-deepseek-cpu-experts-verification-v1.json",
+    "sha256": "6c81704413422edda3d3eaba5a39d69967378a21853b972f34e59f4ca19f4a3b"
+  },
+  "prototype_evidence_retained": {
+    "path": "/home/orangepi/tinygrad/extra/rockchip/cpu_expert_tile_results.json",
+    "sha256": "57274bb328250fa3dfb2411240f8b8f90f82028a8b4acc26f05aecb8cc682241"
+  },
+  "production_tile_option_retained": false,
+  "preferred_variant": "deepseek-cpu-experts-v1-candidate"
+}

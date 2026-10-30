@@ -1,0 +1,137 @@
+{
+  "complete": true,
+  "updated_utc": "2026-10-28T21:24:28.067477+00:00",
+  "fp16_pair": {
+    "complete": true,
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-fp16-producer-pair-v1/results/producer-pair.json",
+    "report_sha256": "9671a13b8d2b9ee15ced55050d1d52f0acf18c672eba5e275e6854ee2b8f2b32",
+    "source_pins_verified": 306,
+    "baseline_pair_allclose": true,
+    "after_valid_int8_producer_exact": true,
+    "after_valid_int8_matrix_nonfinite_values": 160,
+    "cpu_matrix_oracle_finite": true,
+    "constant_mixed_cycles_passed": false,
+    "disposition": "Captured producer alone does not repair the INT8-to-FP16 transition; reject integration and close this investigation.",
+    "original_owner_report_validation": "Rejected differing metadata field names; original job/report retained unchanged. This independent verification authenticates data, not a performance or correctness pass.",
+    "quality_qualified": false,
+    "model_speed_qualified": false
+  },
+  "int8_attention": {
+    "changed_input_cases": 21,
+    "checks": {
+      "native_replay_runs": 18,
+      "causal_future_invariant": true,
+      "cached_tail_bitwise_equal": true,
+      "invalid_query_before_submit": true
+    },
+    "operator_timings": {
+      "control_cpu_ms": 5.4761085000000005,
+      "candidate_int8_npu_ms": 10.555557,
+      "samples_ms": [
+        [
+          3.143246,
+          5.549461,
+          5.683043,
+          3.292869,
+          3.173287,
+          5.570754,
+          5.402756,
+          5.579212,
+          5.282299,
+          5.599336,
+          5.600503,
+          3.225204
+        ],
+        [
+          10.513558,
+          10.044564,
+          12.298824,
+          10.036397,
+          10.597556,
+          10.750679,
+          11.937162,
+          10.223645,
+          11.973037,
+          9.617279,
+          11.92812,
+          9.690193
+        ]
+      ],
+      "relative_l2_vs_float_attention": 0.0070979055017232895,
+      "max_abs_vs_float_attention": 0.0027513206005096436,
+      "scope": "Operator only; quantized candidate withallonesbalance, notmodelquality or request-speed qualification."
+    },
+    "all_checks_passed": true,
+    "scope": "Quantized operator, not full model. Frozen balance and per-token scales preserve causal invariance."
+  },
+  "phase_profiles": [
+    {
+      "wake_helper": false,
+      "median_phase_ms": {
+        "pack": 0.727406,
+        "input_sync": 0.131831,
+        "qk_submit": 0.559117,
+        "score_sync": 0.073791,
+        "normalize": 0.870029,
+        "probability_sync": 0.064457,
+        "pv_submit": 0.571658,
+        "result_sync": 0.078458,
+        "unpack": 0.398702
+      },
+      "direct_outer_ms": 3.627698
+    },
+    {
+      "wake_helper": true,
+      "median_phase_ms": {
+        "pack": 0.735865,
+        "input_sync": 0.133582,
+        "qk_submit": 0.546284,
+        "score_sync": 0.078749,
+        "normalize": 0.880529,
+        "probability_sync": 0.067374,
+        "pv_submit": 0.538409,
+        "result_sync": 0.073207,
+        "unpack": 0.427869
+      },
+      "direct_outer_ms": 3.567615
+    }
+  ],
+  "phase_profile_scope": "Separate direct-call instrumented requests on different seeded inputs; do not compare their wall time to paired frontend throughput as a claimed speedup.",
+  "gpu_probes": [
+    {
+      "implementation": "online, subgroups off",
+      "cpu_ms": 5.134426,
+      "gpu_bridge_ms": 8.595147,
+      "resident_gpu_ms": null,
+      "numerical_and_causal_checks_passed": true
+    },
+    {
+      "implementation": "online, subgroups on",
+      "cpu_ms": 6.75957,
+      "gpu_bridge_ms": 9.926732,
+      "resident_gpu_ms": 5.646731,
+      "numerical_and_causal_checks_passed": true
+    },
+    {
+      "implementation": "dense Tensor SDPA",
+      "cpu_ms": 5.954434,
+      "gpu_bridge_ms": 7.69216,
+      "resident_gpu_ms": 7.009815,
+      "numerical_and_causal_checks_passed": true
+    }
+  ],
+  "primary_artifacts": {
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/producer-pair-independent-verification-v1.json": "82410bb8a568f6a1d3bf0a762c6f846b318a2c25daac0ba3d6ad82c535dcef7f",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/int8-causal-attention-qualified-v1/results/hardware.json": "24b6cbb4ed0162f12bd956f1f2cd9e1a689a47f8aeeac4ace7a26bca3bf62142",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/int8-causal-attention-profile-v1/results/coldirq.json": "f7bd49a3ed725bc5f4d98aad2de671051bd339a7be65aa3d86abcb6625064049",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/int8-causal-attention-profile-v1/results/wakeirq.json": "f2f1de4e349bb0db9f052440fc198048c167803e72786d92eba69b5c8fe29fb3",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-attention-bridge-operator-v1.json": "ca4d0f27417de7c7e6d5e472b3e0059eb5ff1c693c63acf2cb8fea47723b25c2",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-attention-bridge-operator-v2.json": "6c2ed36cc0c8746e9dd3c12a743c5c8a7821b01d1379de44218e8f9c6d466134",
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/gpu-attention-bridge-operator-v4.json": "22078cee94443b4ee5433ee2e5b41b4e8018e57185198836a2b89591b2ca00f6"
+  },
+  "production_promoted": false,
+  "quality_qualified": false,
+  "model_speed_qualified": false,
+  "all_model_goal_complete": false,
+  "disposition": "No tested transfer-inclusive attention path beats its paired CPU control. Retain CPU attention and leave experiments off; keep the complete objective active."
+}

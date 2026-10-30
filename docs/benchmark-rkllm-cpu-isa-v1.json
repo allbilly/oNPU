@@ -1,0 +1,316 @@
+{
+  "kind": "rkllm-cpu-isa-v1-evidence",
+  "updated_utc": "2026-10-29T01:49:44.441737+00:00",
+  "complete": true,
+  "diagnostic_only": true,
+  "quality_qualified": false,
+  "model_speed_qualified": false,
+  "timing_qualified": false,
+  "all_model_goal_complete": false,
+  "scope": {
+    "model": "Qwen3-0.6B existing RKLLM W8A8 artifact",
+    "profile_input_tokens": 128,
+    "profile_output_tokens": 32,
+    "profile_runs": 3,
+    "targeted_output_tokens": 2,
+    "targeted_runs": 1,
+    "cpus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "userspace_only": true,
+    "debugger_timings_excluded": true
+  },
+  "library": {
+    "path": "/home/orangepi/qwen3-bench/runtime-1.3.1/librkllmrt.so",
+    "sha256": "f25e9b099db08aaacd0a3ac62b4697d3951d6ae61ae41ea09f6702cfa89eb32c"
+  },
+  "model_sha256": "23d9c681e3f38dccb6084563eda68d605182d06252cb9d1b75b7bb02c1bb1e80",
+  "numerical_source_count": 295,
+  "source_snapshot_unchanged": true,
+  "source_manifest": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/rkllm-cpu-isa-v1/frozen-pins.json",
+  "sampling": {
+    "complete": true,
+    "child_pid": 578198,
+    "exit_code": 0,
+    "elapsed_seconds": 7.008090740000625,
+    "sample_type": 423,
+    "sampling_frequency": 997,
+    "clock": "CLOCK_MONOTONIC",
+    "userspace_only": true,
+    "inherit_threads_and_children": true,
+    "per_CPU_event_rings": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "event": "PERF_COUNT_SW_CPU_CLOCK",
+    "sample_max_stack": 64,
+    "samples": 8650,
+    "mappings": 91,
+    "lost_samples": 0,
+    "raw_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/cpu-samples.perf.bin",
+    "events_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/cpu-samples.events.jsonl",
+    "failure": null
+  },
+  "phase_counts": {
+    "prefill": {
+      "sample_count": 1848,
+      "thread_samples": {
+        "578209": 432,
+        "578211": 385,
+        "578212": 410,
+        "578213": 621
+      },
+      "CPU_samples": {
+        "4": 432,
+        "5": 385,
+        "6": 410,
+        "7": 621
+      },
+      "module_samples": {
+        "/home/orangepi/qwen3-bench/runtime-1.3.1/librkllmrt.so": 1067,
+        "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": 599,
+        "/usr/lib/aarch64-linux-gnu/libm.so.6": 21,
+        "/usr/lib/aarch64-linux-gnu/libc.so.6": 157,
+        "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.30": 4
+      }
+    },
+    "decode": {
+      "sample_count": 5602,
+      "thread_samples": {
+        "578209": 1093,
+        "578213": 2801,
+        "578211": 922,
+        "578212": 786
+      },
+      "CPU_samples": {
+        "4": 1093,
+        "7": 2801,
+        "5": 922,
+        "6": 786
+      },
+      "module_samples": {
+        "/home/orangepi/qwen3-bench/runtime-1.3.1/librkllmrt.so": 1865,
+        "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": 3302,
+        "/usr/lib/aarch64-linux-gnu/libc.so.6": 396,
+        "/usr/lib/aarch64-linux-gnu/libm.so.6": 10,
+        "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.30": 29
+      }
+    }
+  },
+  "targeted_entry_records": 24,
+  "observed_hot_ranges": [
+    {
+      "begin_vma": 3292308,
+      "samples": 239,
+      "user_CPU_sample_share_percent": 12.932900432900434,
+      "disassembly": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-00-elf-323c94.asm",
+      "disassembly_sha256": "6a3c89ff2046cb6d9abcdea49f1713dcbb62a86b1d3d9fdd1627b50d288f1d41",
+      "phase": "prefill"
+    },
+    {
+      "begin_vma": 3297936,
+      "samples": 107,
+      "user_CPU_sample_share_percent": 5.79004329004329,
+      "disassembly": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-01-elf-325290.asm",
+      "disassembly_sha256": "4de774a611f9c848f8e659f276ff6b3751e267b0c6fa03af65c95275ef9b10d0",
+      "phase": "prefill"
+    },
+    {
+      "begin_vma": 3032992,
+      "samples": 418,
+      "user_CPU_sample_share_percent": 7.461620849696537,
+      "disassembly": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-00-elf-2e47a0.asm",
+      "disassembly_sha256": "058ff8f51b27c092395074efeee2e5ea8ddde0bcd4ecd1b79e1f5f78ee3f285a",
+      "phase": "decode"
+    },
+    {
+      "begin_vma": 3240832,
+      "samples": 399,
+      "user_CPU_sample_share_percent": 7.122456265619421,
+      "disassembly": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-01-elf-317380.asm",
+      "disassembly_sha256": "0ec9612793ea881d7b8a89a354a091c054b5334e3a1b7e0708556e05430857ec",
+      "phase": "decode"
+    }
+  ],
+  "minmax_call": {
+    "prefill_counts": [
+      65536
+    ],
+    "decode_counts": [
+      1024
+    ],
+    "return_ELF_VMA": "0x325384",
+    "caller_scale_constant": 0.003921568859368563,
+    "caller_scale_formula": "(maximum-minimum)*float32(1/255)",
+    "caller_zero_point_formula": "round_ties_away(-128-minimum/scale)",
+    "scope": "Observed routine and caller, not every SDK layer or graph operation."
+  },
+  "threading_correction": {
+    "large_FFN_serial": false,
+    "large_FFN_thread_lifecycle": "3 pthread_create attempts plus caller partition and pthread_join each call",
+    "threshold_rows_times_depth": 32768,
+    "pilot_shape": [
+      128,
+      3072
+    ],
+    "separate_attention_pool": true,
+    "single_core_parent_affinity_inherited_by_children": true,
+    "CPU_only_proof": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-offline-v1/ours/pthread-affinity.json",
+    "unexecuted_host_stage_corrected_to": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "speed_gain_measured_from_affinity_correction": false
+  },
+  "interpretation_limits": [
+    "CPU sample share is not wall latency or NPU utilization.",
+    "Most hot libgomp samples are polling; not all CPU time is useful arithmetic.",
+    "FP16 accumulation and asymmetric scaling change numerical behavior.",
+    "Our dumped CPU programs are offline generated representative kernels, not a sampled model trace.",
+    "Internal graph-operation names remain unassigned for the stripped SDK routines."
+  ],
+  "restored": true,
+  "fresh_models": [
+    "55a95dc3c1b93b72",
+    "b4b92c783d8643a1"
+  ],
+  "artifacts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/capture.json",
+      "sha256": "84d6e1d62713047fff2326e9b3653cf309fbcab17023ac279d5f7e527118c901"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/cpu-samples.perf.bin",
+      "sha256": "c3d6323263fb238b41d4ac3a9de12f76617503ea6fa5d6c053d7d16e5bdb895d"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/cpu-samples.events.jsonl",
+      "sha256": "ba3c8bd8ace2d8f51c0af04e0f136a17a7bf2849d0f1a08cd86361b2b55a0e78"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/profile/phase-markers.jsonl",
+      "sha256": "cf9cfaa68942504ee2bc27f8ca7bb96f6086ccd14891411aab7dd5f03e7a0f23"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/targeted/phase-markers.jsonl",
+      "sha256": "47b50a46836213a4142c9450521423beabc48efda5e9c3293dcd69d58be34c18"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-minmax-caller-325354.asm",
+      "sha256": "b34f2d2e1b8aa44471fe09a15cc43288bbad5f4ad9ef681fdd54a6c4170c014f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-offline-v1/ours/report.json",
+      "sha256": "06cc092736a930b5b43ea66a7582f1e21cbcfcfc6356fdc4c9b2770d7588f1d2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-offline-v1/ours/comparison-input.json",
+      "sha256": "fb117a394ddeb7b59631094549355f13a1bb224c2744348f508b4ad2c51ac019"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-offline-v1/ours/pthread-affinity.json",
+      "sha256": "dbfa5161dfb5ac097434c29ad694e726a6decb08dcb9b121e393d255028e9553"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/rkllm-cpu-isa-offline-v1/libgomp-hot/report.json",
+      "sha256": "2f95ca4ffafca40d9839a6971314f6f377b9e60ad130b5034e6afcb98f640895"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/job.json",
+      "sha256": "2148cc7689cacdd18c0b7883dedca7d6e68b93791f45d4749b6f82925f6f49dc"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1-fresh.json",
+      "sha256": "1fac81724b767922f12eb51f6ba65d2d2e668112187c3e6f55fd84955b405823"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1-owner-terminal.json",
+      "sha256": "03ba85995279efbee33757cab55f60a89c6719b9506979db8a048a3bedb24cdd"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-00-elf-2e47a0.asm",
+      "sha256": "058ff8f51b27c092395074efeee2e5ea8ddde0bcd4ecd1b79e1f5f78ee3f285a"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-01-elf-317380.asm",
+      "sha256": "0ec9612793ea881d7b8a89a354a091c054b5334e3a1b7e0708556e05430857ec"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-02-elf-323c94.asm",
+      "sha256": "6a3c89ff2046cb6d9abcdea49f1713dcbb62a86b1d3d9fdd1627b50d288f1d41"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-03-elf-330a50.asm",
+      "sha256": "ca02aea90958a3885ace6a42cf84127460ead836ce6efe5e2cdaa534c45f2c27"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-04-elf-333ba0.asm",
+      "sha256": "52c7c5357368f010a4f7671ab4de55e502a511dd0aac2835af5b3816f9225d80"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-05-elf-327994.asm",
+      "sha256": "df4f9eb7be579cfc3bdf91515ef9e23550d789291e7d9f45c963056f37c67535"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-06-elf-2b9f04.asm",
+      "sha256": "907b61603001e34a81446f140a759ebde77c5778792cac6d98d36b052c4b0010"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/decode-07-elf-32f604.asm",
+      "sha256": "48b5962cfd91e6a3fa3d1bb03315fc172291ebcb942d484cd9b6b0d8d5767743"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-00-elf-323c94.asm",
+      "sha256": "6a3c89ff2046cb6d9abcdea49f1713dcbb62a86b1d3d9fdd1627b50d288f1d41"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-01-elf-325290.asm",
+      "sha256": "4de774a611f9c848f8e659f276ff6b3751e267b0c6fa03af65c95275ef9b10d0"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-02-elf-2d4ac0.asm",
+      "sha256": "e88004dd775f7174ac953fd8ea229ba3bcb028108465e7198de04b5d1b35eab3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-03-elf-2c50d0.asm",
+      "sha256": "ffb1045b9f66a1154892e8230e26191c28b09bd5d85380339584529a60747bac"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-04-elf-2b9f04.asm",
+      "sha256": "907b61603001e34a81446f140a759ebde77c5778792cac6d98d36b052c4b0010"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-05-elf-2c8b70.asm",
+      "sha256": "ce0a6076ebd033d9998c19ecfaefe262cddff8de27e29a6fe37553ce7ef421f4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-06-elf-2bfff4.asm",
+      "sha256": "40b26a83c4a049b058f607a07bac12f2c2a909ead714b47eebdd1d050b69bae5"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1/results/sdk-asm/prefill-07-elf-325640.asm",
+      "sha256": "35fae106504eef994b192e310e3724cb6e06ded5e8482f0c8b993adbc44ae46c"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1-independent-validation.json",
+      "sha256": "0b761bbf532224246089e9efdfebda20be61342e9c29d84e375e1fed02688059"
+    }
+  ],
+  "independent_verification": {
+    "actual_capture_validator_checks": 17,
+    "negative_controls_rejected": [
+      "lost_samples",
+      "source_drift",
+      "incomplete",
+      "missing_decode_samples"
+    ],
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-cpu-isa-v1-independent-validation.json"
+  }
+}

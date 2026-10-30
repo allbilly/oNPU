@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 exact exp2 scale bits paired worker comparison v1",
+  "raw_receipts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-scale-paired-v1/results/paired.json",
+      "sha256": "a3b5c41bfc0dd3c6fc546358ff8a09d675fa39b7144d6a47463b6ba59382a4e8",
+      "kind": "qwen25-worker-scale-paired-v1",
+      "run_token": "qwen25-worker-scale-paired-v1",
+      "complete": true,
+      "throughput_qualification": false
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-scale-paired-lease-v1/job.json",
+      "sha256": "a33c24b30f45bbd495cab0f03f28e1a397ad20a8d1dcb376723b3b09cfa554ee",
+      "phase": "restored",
+      "restored": true,
+      "fresh_reply_count": 2
+    }
+  ],
+  "source_provenance": {
+    "tinygrad_source_count": 297,
+    "onpu_source_count": 12,
+    "tinygrad_source_maps_unchanged": true,
+    "onpu_source_maps_unchanged": true,
+    "tinygrad_source_map_sha256": "2e4d0dd8156e3a3956055d0bfc902d8afbef4447925bf4f88911edbed2819cc5",
+    "onpu_source_map_sha256": "9fb4cb74141f0005ead2c8afd42fe7751d98fe576b209da8ba18f77d51c285bc"
+  },
+  "workload": {
+    "requests": 18,
+    "warmups_per_arm": 3,
+    "measured_per_arm": 6,
+    "same_64_token_ids_all_requests": true,
+    "worker_affinity": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "npu_submissions_per_request": 11284,
+    "timing_scope": "Unprofiled real worker IPC, two exact-arithmetic CPU captures with shared weights; HTTP not measured."
+  },
+  "variants": {
+    "0": {
+      "name": "control",
+      "ONPU_EXP2_SCALE_BITS": 0
+    },
+    "1": {
+      "name": "scale-bits candidate",
+      "ONPU_EXP2_SCALE_BITS": 1
+    },
+    "summaries": {
+      "0": {
+        "measured_count": 6,
+        "warmups": 3,
+        "selection": [
+          "scale-multiplies"
+        ],
+        "metrics": {
+          "prefill_tps": {
+            "median": 327.24399327208926,
+            "min": 311.73060837223716,
+            "max": 346.61926135077954,
+            "values": [
+              328.93185929989954,
+              325.5561272442789,
+              341.9549837775527,
+              346.61926135077954,
+              311.73060837223716,
+              316.7218300719108
+            ]
+          },
+          "decode_tps": {
+            "median": 15.993375298120476,
+            "min": 15.834598273097724,
+            "max": 16.897329279005284,
+            "values": [
+              16.897329279005284,
+              16.638236269733547,
+              16.060583707332444,
+              15.926166888908506,
+              15.84442797804902,
+              15.834598273097724
+            ]
+          },
+          "ttft_ms": {
+            "median": 391.15585899708094,
+            "min": 369.2812670051353,
+            "max": 410.6109459971776,
+            "values": [
+              389.138346989057,
+              393.17337100510485,
+              374.3182760081254,
+              369.2812670051353,
+              410.6109459971776,
+              404.1401250142371
+            ]
+          }
+        },
+        "native_graph_scale_kernel_call_minmax": {
+          "min": 0,
+          "max": 0
+        },
+        "npu_submissions": [
+          11284
+        ]
+      },
+      "1": {
+        "measured_count": 6,
+        "warmups": 3,
+        "selection": [
+          "scale-bits"
+        ],
+        "metrics": {
+          "prefill_tps": {
+            "median": 343.6440989795185,
+            "min": 321.7511556029155,
+            "max": 354.76057061550847,
+            "values": [
+              339.90152399471975,
+              347.38667396431725,
+              337.1697099941326,
+              354.76057061550847,
+              354.2838948476879,
+              321.7511556029155
+            ]
+          },
+          "decode_tps": {
+            "median": 16.09346229865081,
+            "min": 15.967511084667873,
+            "max": 16.28834090171225,
+            "values": [
+              16.28834090171225,
+              16.14299423290718,
+              16.112173854664665,
+              16.074750742636954,
+              16.029490949550294,
+              15.967511084667873
+            ]
+          },
+          "ttft_ms": {
+            "median": 372.5225730013335,
+            "min": 360.80672600655816,
+            "max": 397.8229689964792,
+            "values": [
+              376.5796590014361,
+              368.46548700123094,
+              379.6307800075738,
+              360.80672600655816,
+              361.2921780004399,
+              397.8229689964792
+            ]
+          }
+        },
+        "native_graph_scale_kernel_call_minmax": {
+          "min": 56,
+          "max": 56
+        },
+        "npu_submissions": [
+          11284
+        ]
+      }
+    },
+    "measured_blocks": [
+      {
+        "variant": 0,
+        "block": 0,
+        "selection": "scale-multiplies",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 328.93185929989954,
+        "decode_tps": 16.897329279005284,
+        "ttft_ms": 389.138346989057,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "variant": 0,
+        "block": 0,
+        "selection": "scale-multiplies",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 325.5561272442789,
+        "decode_tps": 16.638236269733547,
+        "ttft_ms": 393.17337100510485,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "variant": 0,
+        "block": 0,
+        "selection": "scale-multiplies",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 341.9549837775527,
+        "decode_tps": 16.060583707332444,
+        "ttft_ms": 374.3182760081254,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "variant": 0,
+        "block": 3,
+        "selection": "scale-multiplies",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 346.61926135077954,
+        "decode_tps": 15.926166888908506,
+        "ttft_ms": 369.2812670051353,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "variant": 0,
+        "block": 3,
+        "selection": "scale-multiplies",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 311.73060837223716,
+        "decode_tps": 15.84442797804902,
+        "ttft_ms": 410.6109459971776,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "variant": 0,
+        "block": 3,
+        "selection": "scale-multiplies",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 316.7218300719108,
+        "decode_tps": 15.834598273097724,
+        "ttft_ms": 404.1401250142371,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "variant": 1,
+        "block": 1,
+        "selection": "scale-bits",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 339.90152399471975,
+        "decode_tps": 16.28834090171225,
+        "ttft_ms": 376.5796590014361,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          56,
+          56
+        ]
+      },
+      {
+        "variant": 1,
+        "block": 1,
+        "selection": "scale-bits",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 347.38667396431725,
+        "decode_tps": 16.14299423290718,
+        "ttft_ms": 368.46548700123094,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          56,
+          56
+        ]
+      },
+      {
+        "variant": 1,
+        "block": 1,
+        "selection": "scale-bits",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 337.1697099941326,
+        "decode_tps": 16.112173854664665,
+        "ttft_ms": 379.6307800075738,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          56,
+          56
+        ]
+      },
+      {
+        "variant": 1,
+        "block": 2,
+        "selection": "scale-bits",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 354.76057061550847,
+        "decode_tps": 16.074750742636954,
+        "ttft_ms": 360.80672600655816,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          56,
+          56
+        ]
+      },
+      {
+        "variant": 1,
+        "block": 2,
+        "selection": "scale-bits",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 354.2838948476879,
+        "decode_tps": 16.029490949550294,
+        "ttft_ms": 361.2921780004399,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          56,
+          56
+        ]
+      },
+      {
+        "variant": 1,
+        "block": 2,
+        "selection": "scale-bits",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 321.7511556029155,
+        "decode_tps": 15.967511084667873,
+        "ttft_ms": 397.8229689964792,
+        "npu_submissions": 11284,
+        "native_graph_scale_kernel_calls": [
+          56,
+          56
+        ]
+      }
+    ]
+  },
+  "derived_median_change_percent": {
+    "prefill_tps": 5.011583419284715,
+    "decode_tps": 0.6258028631523249
+  },
+  "kernel_selection": {
+    "control_native_graph_marker_calls": 0,
+    "candidate_native_graph_marker_calls_min": 56,
+    "candidate_native_graph_marker_calls_max": 56,
+    "note": "All six measured candidate rows contain scale-kernel markers on each captured native CPU graph; control rows have none."
+  },
+  "activation_scope": {
+    "code_default_ONPU_EXP2_SCALE_BITS": 1,
+    "requires_ONPU_EXP2_FAST_PATH": 1,
+    "fast_path_contextual_default": 0,
+    "qwen_profile_fast_path_enabled": true,
+    "other_profiles_with_fast_path_disabled_unchanged": true,
+    "note": "Scaling is gated by the existing fast-path context. The Qwen profile already enables it; with fast path disabled, scale-bits selection has no effect."
+  },
+  "qualification": {
+    "throughput_qualification": false,
+    "independent_quality_qualified": false,
+    "api_qualified": false,
+    "interpretation": "The worker paired median improved about 5.0% in prefill-proxy and 0.6% in decode. These are unprofiled worker IPC measurements; they are not HTTP/API qualification or independent quality evidence."
+  },
+  "restoration": {
+    "phase": "restored",
+    "restored": true,
+    "fresh_original_reply_count": 2
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "complete": true,
+  "path": "/home/orangepi/tinygrad/test/models/test_explicit_prefill_pool.py",
+  "source_before_sha256": "0b463fb1c6f6182c50782ae3349375719b0eb7bf64aa544ce03c1cad21114b21",
+  "source_after_sha256": "430c7e26c7ed90ec6441a2de1690442e3da2aec7a12d975af796519e264a992b",
+  "AST_before_sha256": "567110ea7c9a0ee022e37137d49591d5534fb5cf5fbbae31cfb92c8eacdb216c",
+  "AST_after_sha256": "567110ea7c9a0ee022e37137d49591d5534fb5cf5fbbae31cfb92c8eacdb216c",
+  "AST_identical": true,
+  "scope": "Formatting-only changes; exact pre-change source reconstructed and verified against recorded SHA256; both ASTs compared under benchmark Python3.12. Original Python3.10 AST proof preserved.",
+  "python_version": "3.12.12 (main, Jan 13 2026, 17:36:14) [Clang 21.1.4 ]",
+  "original_style_proof": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/explicit-prefill-pool-test-style-v1.json",
+    "sha256": "f414d3d2de1b22cf3ee347f6e3938a83e47358f4fb75dc63c3a2349b83a54431"
+  }
+}

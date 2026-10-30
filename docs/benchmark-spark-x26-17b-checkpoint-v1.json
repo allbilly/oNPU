@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "checkpoint": "/home/orangepi/vlm-bench/baseline-20261021/checkpoints/Spark-X2.6-1.7B/Spark-X2.6-1.7B-Q8_0.gguf",
+  "source_url": "https://huggingface.co/XHToken/Spark-X2.6-1.7B-GGUF/resolve/cdc3d8893fba4ce0687f1b49ce1e18b29cae96d0/Spark-X2.6-1.7B-Q8_0.gguf",
+  "publisher": "XHToken",
+  "revision": "cdc3d8893fba4ce0687f1b49ce1e18b29cae96d0",
+  "bytes": 1820113440,
+  "sha256": "8d96279c95ae2be111576f3f599880598be0922efee15069b4d7e4dd96ef6ed4",
+  "elapsed_seconds": 205.87835491102305,
+  "verified_utc": "2026-10-28T08:50:47.042318+00:00",
+  "model_runtime_qualified": false,
+  "benchmark_measured": false
+}

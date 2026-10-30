@@ -1,0 +1,1033 @@
+{
+  "schema": "rkllm-full-register-capture-v2",
+  "complete": true,
+  "scope": "Complete bounded128-token prefill/2-output real Qwen3 RKLLM W8A8 pass, max3072submits perphase. Read-only GDB registers/buffer-bindings; no speed or quality claim.",
+  "timing_qualified": false,
+  "quality_qualified": false,
+  "official_benchmark_model_matched": false,
+  "goal_complete": false,
+  "captured_submissions": 2657,
+  "captured_tasks": 3751,
+  "captured_register_words": 367308,
+  "phase_submissions": {
+    "prefill": 2066,
+    "decode": 591
+  },
+  "model_sha256": "23d9c681e3f38dccb6084563eda68d605182d06252cb9d1b75b7bb02c1bb1e80",
+  "SDK_model_info": [
+    "I rkllm: rkllm-toolkit version: 1.3.0, max_context_limit: 16384, npu_core_num: 3, target_platform: RK3588, model_dtype: W8A8"
+  ],
+  "raw": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-w8a8-register-capture-v2/results/capture.json",
+    "sha256": "cc24a1cc27f5c568a9368ff84366b63afa9cb29e2880d1ac435e606262d47f68"
+  },
+  "inventory": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-w8a8-register-capture-v2/task-family-inventory.json",
+    "sha256": "28b458c21faf941e365dc47c92daba1d671f0013baf46424ac0e7acddeefcc25"
+  },
+  "task_inventory": {
+    "schema": "rkllm-w8a8-task-family-inventory-v1",
+    "capture": {
+      "schema": "rkllm-w8a8-register-capture-v2",
+      "validated": true,
+      "submissions": 2657,
+      "phase_submissions": {
+        "prefill": 2066,
+        "decode": 591
+      },
+      "tasks": 3751,
+      "register_words": 367308,
+      "phase_counts_reported": {
+        "prefill": 2066,
+        "decode": 591
+      }
+    },
+    "classifier": {
+      "families": [
+        "INT8-family",
+        "FP16-family",
+        "DPU-only-conversion",
+        "other"
+      ],
+      "rule": "CNA conv (0x201,0x100c) masked by 0x3f0 and DPU dtype (0x1001,0x4010), with conversion fallback on (0x1001,0x4084) bit 0x10000.",
+      "enum_semantics_caveat": "Pattern names do not establish vendor enum semantics."
+    },
+    "task_counts": [
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "tasks": 1335
+      },
+      {
+        "phase": "prefill",
+        "family": "FP16-family",
+        "tasks": 896
+      },
+      {
+        "phase": "prefill",
+        "family": "DPU-only-conversion",
+        "tasks": 896
+      },
+      {
+        "phase": "prefill",
+        "family": "other",
+        "tasks": 15
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "tasks": 594
+      },
+      {
+        "phase": "decode",
+        "family": "other",
+        "tasks": 15
+      }
+    ],
+    "CNA_shapes": [
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 320,
+        "tasks": 56,
+        "examples": [
+          {
+            "file": "w8a8-decode-111.json",
+            "submit": 2177,
+            "task_index": 2026
+          },
+          {
+            "file": "w8a8-decode-114.json",
+            "submit": 2180,
+            "task_index": 2077
+          },
+          {
+            "file": "w8a8-decode-132.json",
+            "submit": 2198,
+            "task_index": 2413
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 352,
+        "tasks": 112,
+        "examples": [
+          {
+            "file": "w8a8-decode-109.json",
+            "submit": 2175,
+            "task_index": 2009
+          },
+          {
+            "file": "w8a8-decode-110.json",
+            "submit": 2176,
+            "task_index": 1992
+          },
+          {
+            "file": "w8a8-decode-112.json",
+            "submit": 2178,
+            "task_index": 2043
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 672,
+        "tasks": 56,
+        "examples": [
+          {
+            "file": "w8a8-decode-1.json",
+            "submit": 2067,
+            "task_index": 23
+          },
+          {
+            "file": "w8a8-decode-107.json",
+            "submit": 2173,
+            "task_index": 1975
+          },
+          {
+            "file": "w8a8-decode-108.json",
+            "submit": 2174,
+            "task_index": 1958
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 704,
+        "tasks": 28,
+        "examples": [
+          {
+            "file": "w8a8-decode-106.json",
+            "submit": 2172,
+            "task_index": 1941
+          },
+          {
+            "file": "w8a8-decode-127.json",
+            "submit": 2193,
+            "task_index": 2328
+          },
+          {
+            "file": "w8a8-decode-150.json",
+            "submit": 2216,
+            "task_index": 2715
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 1024,
+        "tasks": 168,
+        "examples": [
+          {
+            "file": "w8a8-decode-100.json",
+            "submit": 2166,
+            "task_index": 1832
+          },
+          {
+            "file": "w8a8-decode-101.json",
+            "submit": 2167,
+            "task_index": 1815
+          },
+          {
+            "file": "w8a8-decode-102.json",
+            "submit": 2168,
+            "task_index": 1849
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 8128,
+        "tasks": 6,
+        "examples": [
+          {
+            "file": "w8a8-decode-589.json",
+            "submit": 2655,
+            "task_index": 11116
+          },
+          {
+            "file": "w8a8-decode-589.json",
+            "submit": 2655,
+            "task_index": 11117
+          },
+          {
+            "file": "w8a8-decode-590.json",
+            "submit": 2656,
+            "task_index": 10878
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 2048,
+        "N": 320,
+        "tasks": 28,
+        "examples": [
+          {
+            "file": "w8a8-decode-117.json",
+            "submit": 2183,
+            "task_index": 2132
+          },
+          {
+            "file": "w8a8-decode-12.json",
+            "submit": 2078,
+            "task_index": 197
+          },
+          {
+            "file": "w8a8-decode-137.json",
+            "submit": 2203,
+            "task_index": 2519
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 2048,
+        "N": 352,
+        "tasks": 56,
+        "examples": [
+          {
+            "file": "w8a8-decode-10.json",
+            "submit": 2076,
+            "task_index": 178
+          },
+          {
+            "file": "w8a8-decode-11.json",
+            "submit": 2077,
+            "task_index": 159
+          },
+          {
+            "file": "w8a8-decode-115.json",
+            "submit": 2181,
+            "task_index": 2113
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 3072,
+        "N": 320,
+        "tasks": 28,
+        "examples": [
+          {
+            "file": "w8a8-decode-105.json",
+            "submit": 2171,
+            "task_index": 1916
+          },
+          {
+            "file": "w8a8-decode-125.json",
+            "submit": 2191,
+            "task_index": 2303
+          },
+          {
+            "file": "w8a8-decode-147.json",
+            "submit": 2213,
+            "task_index": 2690
+          }
+        ]
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 3072,
+        "N": 352,
+        "tasks": 56,
+        "examples": [
+          {
+            "file": "w8a8-decode-103.json",
+            "submit": 2169,
+            "task_index": 1891
+          },
+          {
+            "file": "w8a8-decode-104.json",
+            "submit": 2170,
+            "task_index": 1866
+          },
+          {
+            "file": "w8a8-decode-124.json",
+            "submit": 2190,
+            "task_index": 2278
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "FP16-family",
+        "height": 128,
+        "width": 1,
+        "K": 64,
+        "N": 128,
+        "tasks": 224,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1017.json",
+            "submit": 1017,
+            "task_index": 55765
+          },
+          {
+            "file": "w8a8-prefill-1018.json",
+            "submit": 1018,
+            "task_index": 28636
+          },
+          {
+            "file": "w8a8-prefill-1019.json",
+            "submit": 1019,
+            "task_index": 82894
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "FP16-family",
+        "height": 128,
+        "width": 1,
+        "K": 128,
+        "N": 64,
+        "tasks": 224,
+        "examples": [
+          {
+            "file": "w8a8-prefill-10.json",
+            "submit": 10,
+            "task_index": 12636
+          },
+          {
+            "file": "w8a8-prefill-1009.json",
+            "submit": 1009,
+            "task_index": 39765
+          },
+          {
+            "file": "w8a8-prefill-1010.json",
+            "submit": 1010,
+            "task_index": 66894
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "FP16-family",
+        "height": 128,
+        "width": 1,
+        "K": 128,
+        "N": 128,
+        "tasks": 448,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1037.json",
+            "submit": 1037,
+            "task_index": 39769
+          },
+          {
+            "file": "w8a8-prefill-1038.json",
+            "submit": 1038,
+            "task_index": 12640
+          },
+          {
+            "file": "w8a8-prefill-1039.json",
+            "submit": 1039,
+            "task_index": 66898
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 1024,
+        "tasks": 6,
+        "examples": [
+          {
+            "file": "w8a8-prefill-2055.json",
+            "submit": 2055,
+            "task_index": 10682
+          },
+          {
+            "file": "w8a8-prefill-2056.json",
+            "submit": 2056,
+            "task_index": 10699
+          },
+          {
+            "file": "w8a8-prefill-2057.json",
+            "submit": 2057,
+            "task_index": 10665
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 1024,
+        "N": 8128,
+        "tasks": 6,
+        "examples": [
+          {
+            "file": "w8a8-prefill-2064.json",
+            "submit": 2064,
+            "task_index": 11116
+          },
+          {
+            "file": "w8a8-prefill-2064.json",
+            "submit": 2064,
+            "task_index": 11117
+          },
+          {
+            "file": "w8a8-prefill-2065.json",
+            "submit": 2065,
+            "task_index": 10997
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 3072,
+        "N": 320,
+        "tasks": 1,
+        "examples": [
+          {
+            "file": "w8a8-prefill-2063.json",
+            "submit": 2063,
+            "task_index": 10817
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 1,
+        "K": 3072,
+        "N": 352,
+        "tasks": 2,
+        "examples": [
+          {
+            "file": "w8a8-prefill-2061.json",
+            "submit": 2061,
+            "task_index": 10792
+          },
+          {
+            "file": "w8a8-prefill-2062.json",
+            "submit": 2062,
+            "task_index": 10767
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 22,
+        "K": 3072,
+        "N": 320,
+        "tasks": 54,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1064.json",
+            "submit": 1064,
+            "task_index": 385
+          },
+          {
+            "file": "w8a8-prefill-109.json",
+            "submit": 109,
+            "task_index": 1159
+          },
+          {
+            "file": "w8a8-prefill-1101.json",
+            "submit": 1101,
+            "task_index": 772
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 22,
+        "K": 3072,
+        "N": 352,
+        "tasks": 108,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1062.json",
+            "submit": 1062,
+            "task_index": 335
+          },
+          {
+            "file": "w8a8-prefill-1063.json",
+            "submit": 1063,
+            "task_index": 360
+          },
+          {
+            "file": "w8a8-prefill-1099.json",
+            "submit": 1099,
+            "task_index": 722
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 42,
+        "K": 3072,
+        "N": 320,
+        "tasks": 54,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1064.json",
+            "submit": 1064,
+            "task_index": 386
+          },
+          {
+            "file": "w8a8-prefill-109.json",
+            "submit": 109,
+            "task_index": 1160
+          },
+          {
+            "file": "w8a8-prefill-1101.json",
+            "submit": 1101,
+            "task_index": 773
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 42,
+        "K": 3072,
+        "N": 352,
+        "tasks": 108,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1062.json",
+            "submit": 1062,
+            "task_index": 336
+          },
+          {
+            "file": "w8a8-prefill-1063.json",
+            "submit": 1063,
+            "task_index": 361
+          },
+          {
+            "file": "w8a8-prefill-1099.json",
+            "submit": 1099,
+            "task_index": 723
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 64,
+        "K": 1024,
+        "N": 320,
+        "tasks": 112,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1005.json",
+            "submit": 1005,
+            "task_index": 10550
+          },
+          {
+            "file": "w8a8-prefill-1008.json",
+            "submit": 1008,
+            "task_index": 10601
+          },
+          {
+            "file": "w8a8-prefill-1032.json",
+            "submit": 1032,
+            "task_index": 101
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 64,
+        "K": 1024,
+        "N": 352,
+        "tasks": 224,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1003.json",
+            "submit": 1003,
+            "task_index": 10533
+          },
+          {
+            "file": "w8a8-prefill-1004.json",
+            "submit": 1004,
+            "task_index": 10516
+          },
+          {
+            "file": "w8a8-prefill-1006.json",
+            "submit": 1006,
+            "task_index": 10567
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 64,
+        "K": 1024,
+        "N": 672,
+        "tasks": 112,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1.json",
+            "submit": 1,
+            "task_index": 50
+          },
+          {
+            "file": "w8a8-prefill-1000.json",
+            "submit": 1000,
+            "task_index": 10482
+          },
+          {
+            "file": "w8a8-prefill-1001.json",
+            "submit": 1001,
+            "task_index": 10499
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 64,
+        "K": 1024,
+        "N": 704,
+        "tasks": 56,
+        "examples": [
+          {
+            "file": "w8a8-prefill-1002.json",
+            "submit": 1002,
+            "task_index": 10465
+          },
+          {
+            "file": "w8a8-prefill-1030.json",
+            "submit": 1030,
+            "task_index": 16
+          },
+          {
+            "file": "w8a8-prefill-1066.json",
+            "submit": 1066,
+            "task_index": 403
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 64,
+        "K": 1024,
+        "N": 1024,
+        "tasks": 324,
+        "examples": [
+          {
+            "file": "w8a8-prefill-103.json",
+            "submit": 103,
+            "task_index": 1000
+          },
+          {
+            "file": "w8a8-prefill-104.json",
+            "submit": 104,
+            "task_index": 1034
+          },
+          {
+            "file": "w8a8-prefill-105.json",
+            "submit": 105,
+            "task_index": 1017
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 64,
+        "K": 2048,
+        "N": 320,
+        "tasks": 56,
+        "examples": [
+          {
+            "file": "w8a8-prefill-102.json",
+            "submit": 102,
+            "task_index": 983
+          },
+          {
+            "file": "w8a8-prefill-1027.json",
+            "submit": 1027,
+            "task_index": 10658
+          },
+          {
+            "file": "w8a8-prefill-1055.json",
+            "submit": 1055,
+            "task_index": 209
+          }
+        ]
+      },
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "height": 1,
+        "width": 64,
+        "K": 2048,
+        "N": 352,
+        "tasks": 112,
+        "examples": [
+          {
+            "file": "w8a8-prefill-100.json",
+            "submit": 100,
+            "task_index": 964
+          },
+          {
+            "file": "w8a8-prefill-101.json",
+            "submit": 101,
+            "task_index": 945
+          },
+          {
+            "file": "w8a8-prefill-1025.json",
+            "submit": 1025,
+            "task_index": 10639
+          }
+        ]
+      }
+    ],
+    "buffer_binding_presence": [
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "tasks": 1335,
+        "bindings": {
+          "features": {
+            "present_tasks": 1335,
+            "fraction": 1.0
+          },
+          "weights": {
+            "present_tasks": 1335,
+            "fraction": 1.0
+          },
+          "output": {
+            "present_tasks": 1335,
+            "fraction": 1.0
+          }
+        }
+      },
+      {
+        "phase": "prefill",
+        "family": "FP16-family",
+        "tasks": 896,
+        "bindings": {
+          "features": {
+            "present_tasks": 896,
+            "fraction": 1.0
+          },
+          "weights": {
+            "present_tasks": 896,
+            "fraction": 1.0
+          },
+          "output": {
+            "present_tasks": 896,
+            "fraction": 1.0
+          }
+        }
+      },
+      {
+        "phase": "prefill",
+        "family": "DPU-only-conversion",
+        "tasks": 896,
+        "bindings": {
+          "features": {
+            "present_tasks": 0,
+            "fraction": 0.0
+          },
+          "weights": {
+            "present_tasks": 0,
+            "fraction": 0.0
+          },
+          "output": {
+            "present_tasks": 896,
+            "fraction": 1.0
+          }
+        }
+      },
+      {
+        "phase": "prefill",
+        "family": "other",
+        "tasks": 15,
+        "bindings": {
+          "features": {
+            "present_tasks": 15,
+            "fraction": 1.0
+          },
+          "weights": {
+            "present_tasks": 15,
+            "fraction": 1.0
+          },
+          "output": {
+            "present_tasks": 15,
+            "fraction": 1.0
+          }
+        }
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "tasks": 594,
+        "bindings": {
+          "features": {
+            "present_tasks": 594,
+            "fraction": 1.0
+          },
+          "weights": {
+            "present_tasks": 594,
+            "fraction": 1.0
+          },
+          "output": {
+            "present_tasks": 594,
+            "fraction": 1.0
+          }
+        }
+      },
+      {
+        "phase": "decode",
+        "family": "other",
+        "tasks": 15,
+        "bindings": {
+          "features": {
+            "present_tasks": 15,
+            "fraction": 1.0
+          },
+          "weights": {
+            "present_tasks": 15,
+            "fraction": 1.0
+          },
+          "output": {
+            "present_tasks": 15,
+            "fraction": 1.0
+          }
+        }
+      }
+    ],
+    "register_value_histograms": [
+      {
+        "phase": "prefill",
+        "family": "INT8-family",
+        "tasks": 1335,
+        "values": {
+          "CBUF_CON0_0x1040": {
+            "162": 828,
+            "132": 330,
+            "147": 162,
+            "177": 15
+          },
+          "FEATURE_GRAINS_0x1010_bits4_13": {
+            "32": 1335
+          }
+        }
+      },
+      {
+        "phase": "prefill",
+        "family": "FP16-family",
+        "tasks": 896,
+        "values": {
+          "CBUF_CON0_0x1040": {
+            "177": 896
+          },
+          "FEATURE_GRAINS_0x1010_bits4_13": {
+            "2064": 896
+          }
+        }
+      },
+      {
+        "phase": "prefill",
+        "family": "DPU-only-conversion",
+        "tasks": 896,
+        "values": {}
+      },
+      {
+        "phase": "prefill",
+        "family": "other",
+        "tasks": 15,
+        "values": {
+          "CBUF_CON0_0x1040": {
+            "177": 15
+          }
+        }
+      },
+      {
+        "phase": "decode",
+        "family": "INT8-family",
+        "tasks": 594,
+        "values": {
+          "CBUF_CON0_0x1040": {
+            "177": 594
+          },
+          "FEATURE_GRAINS_0x1010_bits4_13": {
+            "32": 594
+          }
+        }
+      },
+      {
+        "phase": "decode",
+        "family": "other",
+        "tasks": 15,
+        "values": {
+          "CBUF_CON0_0x1040": {
+            "177": 15
+          }
+        }
+      }
+    ],
+    "register_address_names": {
+      "0x1040": "CBUF_CON0",
+      "0x1010": "CONV_CON2; FEATURE_GRAINS is bits 4..13",
+      "0x4038": "DATA_CUBE_NOTCH_ADDR (not BS_CFG)",
+      "0x4070": "EW_CFG (not BN_CFG), from /home/orangepi/npu/ops_reg/registers.xml"
+    },
+    "scope_caveat": "Inventory of this captured trace only; no software recipe comparison, extrapolation beyond the trace, or model-speed claim."
+  },
+  "validator": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/rkllm-w8a8-register-capture-v2/validate_report.py",
+    "sha256": "b5b8c6f9dbfce3c3113c6ccf52392b738549ddbf0175753fa7be728dd878c42d",
+    "verdict": {
+      "valid": true,
+      "errors": []
+    }
+  },
+  "CPU_validator_fixture": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-full-register-validator-fixture-v2.json",
+    "sha256": "3dca31445b0acc883ecac9f484f3660c2958da4a0e864d67ebbaf596b297c59f"
+  },
+  "owner": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-rkllm-w8a8-register-capture-v2.py",
+    "sha256": "2d50a7d3c84f9a4fe0aa35c652b1fb714215b8953e06f96fdac4a39887bbcd99",
+    "session": 75999,
+    "exit_code": 0
+  },
+  "job": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-w8a8-register-capture-v2/job.json",
+    "sha256": "2997c63307b17872dd5306767af20a3f3b0b4cf2aeb2f8311a9c6cf8e75e7444"
+  },
+  "fresh": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/rkllm-w8a8-register-capture-v2-fresh.json",
+    "sha256": "75616d51943d923f754b5f99075143a814e7c259eae00c78a8bf15b8730237db",
+    "session": 91564,
+    "exit_code": 0
+  },
+  "serving_restored_and_fresh": true,
+  "GPU_kept_loaded": true,
+  "observations": [
+    "128-row FP16-family prefill tasks occur at M/K/N 128/128/64,128/64/128,128/128/128. Operator roles still require binding analysis.",
+    "FP16-family tasks use data_size0 0x10080,featuregrain129,CBUF0xb1; current FP16 packed layout differs, so these fields are not a drop-in change.",
+    "No FP16-family matrix tasks appear in this decode pass. This observation alone does not identify which CPU routines perform attention.",
+    "K3072 decode bank fields differ, but earlier tests at other widths were near parity; copying bank allocation does not guarantee speed.",
+    "Capture is a real existing Qwen3 RKLLM artifact, not the official benchmark export, and debugger timings are not throughput results."
+  ]
+}

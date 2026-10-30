@@ -1,0 +1,144 @@
+{
+  "kind": "qwen3-cpu-token-inputs-v1",
+  "source_cohort": "Completed CPU-token-input batch, before the one-token cached-prefix guard.",
+  "input_tokens": 128,
+  "output_tokens": 64,
+  "context": 512,
+  "precision": "INT8 projections, FP16 NPU prefill attention, FP32 CPU helpers",
+  "runs": [
+    {
+      "role": "control",
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-cpu-token-inputs-v1/results/1-control.json",
+      "sha256": "614fb295fac00caa596b230c8213e14d9c0c6c533966a423da1a61914af3210a",
+      "cpu_token_inputs": false,
+      "teacher_exact": true,
+      "trials": [
+        {
+          "ttft_ms": 194.63679200271145,
+          "prefill_tps": 657.6351710431852,
+          "decode_tps": 38.42576196584771,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 220.53181999945082,
+          "prefill_tps": 580.4151074448973,
+          "decode_tps": 38.250950469067504,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 200.1451440009987,
+          "prefill_tps": 639.5358760208607,
+          "decode_tps": 38.23909341432351,
+          "output_tokens": 64
+        }
+      ]
+    },
+    {
+      "role": "candidate",
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-cpu-token-inputs-v1/results/2-candidate.json",
+      "sha256": "c3642e81c0f233162d5aae7e79f7a7ba20a5a6ed6561ee2479abbfd47e1107d2",
+      "cpu_token_inputs": true,
+      "teacher_exact": true,
+      "trials": [
+        {
+          "ttft_ms": 198.91490699956194,
+          "prefill_tps": 643.4912391974821,
+          "decode_tps": 38.453815817927904,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 203.5934779996751,
+          "prefill_tps": 628.7038330383268,
+          "decode_tps": 38.41749931879683,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 199.69977399887284,
+          "prefill_tps": 640.9621675421749,
+          "decode_tps": 38.40074574403097,
+          "output_tokens": 64
+        }
+      ]
+    },
+    {
+      "role": "candidate",
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-cpu-token-inputs-v1/results/3-candidate.json",
+      "sha256": "4a2e17d7fbbd7f6a4f12747e981c38a5574d5224f7adaf0c1d92a48961ceefa7",
+      "cpu_token_inputs": true,
+      "teacher_exact": true,
+      "trials": [
+        {
+          "ttft_ms": 179.46592799853534,
+          "prefill_tps": 713.2273040765969,
+          "decode_tps": 38.15671051131513,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 193.11635100166313,
+          "prefill_tps": 662.8128552351202,
+          "decode_tps": 38.369919970600954,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 227.00703499867814,
+          "prefill_tps": 563.8591773190877,
+          "decode_tps": 38.38051478133413,
+          "output_tokens": 64
+        }
+      ]
+    },
+    {
+      "role": "control",
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-cpu-token-inputs-v1/results/4-control.json",
+      "sha256": "5133e409af2cc6313459caaa662434c0922ffb14effe5ee0d8d648cb51ad9e06",
+      "cpu_token_inputs": false,
+      "teacher_exact": true,
+      "trials": [
+        {
+          "ttft_ms": 208.3304309999221,
+          "prefill_tps": 614.4085594487532,
+          "decode_tps": 38.29146884294471,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 219.73822699510492,
+          "prefill_tps": 582.511298786676,
+          "decode_tps": 37.945740962099954,
+          "output_tokens": 64
+        },
+        {
+          "ttft_ms": 199.08706400019582,
+          "prefill_tps": 642.9347915838173,
+          "decode_tps": 38.3345193951616,
+          "output_tokens": 64
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "control": {
+      "ttft_ms_median": 204.2377875004604,
+      "prefill_proxy_tps": 626.7204593553064,
+      "decode_tps_median": 38.27120965600611
+    },
+    "candidate": {
+      "ttft_ms_median": 199.3073404992174,
+      "prefill_proxy_tps": 642.2242135156212,
+      "decode_tps_median": 38.39063026268255
+    }
+  },
+  "all_five_workers_exit0": true,
+  "quality": {
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-cpu-token-inputs-v1/results/5-quality-candidate.json",
+    "targets": 1024,
+    "prior_full_logits_bitwise_equal": true,
+    "perplexity": 30.944998197733643
+  },
+  "published_reference": {
+    "ttft_ms": 199.09,
+    "prefill_proxy_tps": 642.93,
+    "decode_tps": 32.91
+  },
+  "consistent_reference_speed_win": false,
+  "fresh_receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-cpu-token-inputs-v1-fresh.json"
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "ffn-pool-published-rkllm-reference-v2",
+  "models": {
+    "Qwen2/0.5B": {
+      "TTFT_ms": 145.9,
+      "decode_tps": 41.58
+    },
+    "TinyLLAMA/1.1B": {
+      "TTFT_ms": 243.93,
+      "decode_tps": 24.43
+    },
+    "InternLM2/1.8B": {
+      "TTFT_ms": 380.14,
+      "decode_tps": 15.45
+    },
+    "Gemma2/2B": {
+      "TTFT_ms": 598.41,
+      "decode_tps": 10.37
+    }
+  },
+  "source_url": "https://github.com/airockchip/rknn-llm/blob/main/benchmark.md",
+  "observed_local_table": "/home/orangepi/oNPU/benchmark.md",
+  "observed_local_table_sha256": "fe4a33cfd827a929a61c20f6090a4a39e8c3e74bc86c13bb2b83b93bc48b88ff",
+  "observed_rows": [
+    "| Qwen2 | 0.5B | w8a8 / INT8\u2020 | 128 | 64 | **145.90** / 254.93 | **41.58** / 37.99 | 669.56 / 2182.22* |",
+    "| TinyLLAMA | 1.1B | w8a8 / INT8\u2020 | 128 | 64 | **243.93** / 380.08 | 24.43 / **24.85** | 1093.66 / 4526.38* |",
+    "| InternLM2 | 1.8B | w8a8 / INT8\u2020 | 128 | 64 | **380.14** / 533.32 | **15.45** / 15.11 | 1775.56 / 6220.91* |",
+    "| Gemma2 | 2B | w8a8 / INT8\u2020 | 128 | 64 | **598.41** / 713.58 | **10.37** / 9.93 | 2779.22 / 6247.94* |"
+  ],
+  "scope": "Published timing reference values retained before further local benchmark updates; no RKLLM output-quality qualification."
+}

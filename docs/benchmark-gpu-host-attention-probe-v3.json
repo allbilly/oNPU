@@ -1,0 +1,3664 @@
+{
+  "schema": "gpu-attention-probe-v3",
+  "complete": true,
+  "quality_qualified": false,
+  "model_speed_qualified": false,
+  "NPU_used": false,
+  "source_sha256": {
+    "tinygrad/__init__.py": "fc24d5d0df1b1a14bbee0bd2641a61ca5f34ec7d83f1b0b755adf6eb83d5c0be",
+    "tinygrad/codegen/__init__.py": "b8fc262121b861659cf777d19544138e5a4d9582c5277dd6f93e914e30423727",
+    "tinygrad/codegen/decomp/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/codegen/decomp/dtype.py": "b3a04ebdd9f5686936964fefa99a46ac27515edb7be4c9f07201269c42371502",
+    "tinygrad/codegen/decomp/op.py": "2d5ff52711a92c45f8814056d799da3c0aade9498822cc5cdee2a83dc3276ae1",
+    "tinygrad/codegen/decomp/transcendental.py": "1d737c265c9f96b8f09d82b85eb660dbb91b558a5af88512075c5a20540d00c5",
+    "tinygrad/codegen/gpudims.py": "15d368b1a45c237c8d3ea0b28af5f3b80fa49dbe73694bd8b315d835c4335ae5",
+    "tinygrad/codegen/late/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/codegen/late/coalesce.py": "36d59f15f202ae20444cd76795e0068b79f4158833e691da3c0ac72848e0d475",
+    "tinygrad/codegen/late/gater.py": "c194d9ffe8d022e62894367d4c0ce0fdf57ff02f34f128efcdac3072334275b9",
+    "tinygrad/codegen/late/linearizer.py": "9c1d7ae56a0381bdb4fd1340fe32eee77ad66617b06a215b8c4c46bf3f97fbe8",
+    "tinygrad/codegen/late/regalloc.py": "e120e26baee8021becfd716e39cb85dc0f5c5992bd30d5a50e48e7a0f528c9e5",
+    "tinygrad/codegen/opt/__init__.py": "6bddcc6a2052b1a39e9a421731275524fa6f0f861abfdefeafae5403747f8778",
+    "tinygrad/codegen/opt/heuristic.py": "029537ca82fadbbc34c9780fee3853466eb5a157a51b7c43dd45a94b3cde2a89",
+    "tinygrad/codegen/opt/postrange.py": "2ee24512630396f82016e709036c8991af7ec7482347060951fe01ebd719d3dd",
+    "tinygrad/codegen/opt/search.py": "670111d23c6360c6bd57f473a0e8877fe9b6615455aa27473f52c6bb99ef81b7",
+    "tinygrad/codegen/simplify.py": "a05ecef8e0f13d104516be51e4289653b00ca3104893000ed09a3b9b639a629f",
+    "tinygrad/device.py": "7a221075b3968b25db62edbc46450616a1e64e20c363466e26aab2a5a2f080f9",
+    "tinygrad/dtype.py": "7800592dcccbdd5a5beaee889342b5f62790d37445938fe601416c8b76057926",
+    "tinygrad/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/engine/jit.py": "7e91838fb3f3593661d771459775ef3e2811ba1038c58f06c9d5c359cac0bec8",
+    "tinygrad/engine/realize.py": "a00765bf85f23399020a9b6ee1e397aed12c3d2a2c4f1362001b67130b41a1db",
+    "tinygrad/engine/worker.py": "b9d47164d0b2fa09f4f396efcfd856b8ebe93a4e446ff683692ea9d605bb017d",
+    "tinygrad/function.py": "dbf481c6049a538680e386d2846e0569bb9924f0293dd3356e92e7a428593a22",
+    "tinygrad/helpers.py": "eda095ab2c35d045e40523cf8f025543c45b012ff217ddeaed6143610330f308",
+    "tinygrad/llm/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/llm/__main__.py": "2b2aeb15c8e098d5268709723bf52e22845634a68075e5904a474ec01f4165f0",
+    "tinygrad/llm/chatglm.py": "789feb35a21226616e674caf42d687fdc4efb7ffff97445f286931880342bac6",
+    "tinygrad/llm/cli.py": "801120b53b59f15221d014a710df2cf8224728e9699f70629ac87b5db28baf49",
+    "tinygrad/llm/dflash2.py": "fd06909403b5268285116846e9082fa9f451618cd8691e04074fccec36eeeb3a",
+    "tinygrad/llm/dflash2_config.py": "f46fda13e52e26ff9fe7bfeb40d56c5f0f7536424358b4e4bc16bee3ef745a5d",
+    "tinygrad/llm/dflash2_selector.py": "54455105954ca47e44d32dec4974d0f222c8c239d61492c43a1a922b54c95342",
+    "tinygrad/llm/gemma3n.py": "37c434bfe88f8c196271f5dc7f7f6a8421c94e55c86a6ecf6eff0e3d76b1acc3",
+    "tinygrad/llm/gemma4.py": "e218b96aaeb628cf355e5428a09d397f863933b28ac50f924c2c0d48acc78c4c",
+    "tinygrad/llm/gguf.py": "ef7957f1a2bd57c48380bdece85f90ddf829055834eb63465468189927b0f2c1",
+    "tinygrad/llm/kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/llm/kernels/amd.py": "05a05aa63391251eea4b8c2dfcc1c56718bdecb712ad9041e56ab84a31edd92c",
+    "tinygrad/llm/kernels/mali.py": "8a52d608e7c22dbaf1605d4aa32b49a8b7af3b88e3678a9c5c3373d95ab961c4",
+    "tinygrad/llm/kernels/mali_attention.py": "aee062ac18b5bb749304decf245a7c52d0a10fcf5d22bddc25e88e172439e778",
+    "tinygrad/llm/kernels/mali_copy.py": "5f9622c02ac6681b4614b777295531ec6de33da9a43253dd4466a3e90d9617e5",
+    "tinygrad/llm/kernels/mali_half_prefill.py": "352996d9b939565f76875960ddb121f648c813d38e5aef313e412c76fe2c8a76",
+    "tinygrad/llm/kernels/mali_linear.py": "31e10be28dea06d51b13383c69a63e24966e7029f7aa4749d3b5e79fe810f96d",
+    "tinygrad/llm/kernels/mali_q8.py": "2d6d4d38b2eb86bb1ca9a546ddaa8ac30ccadc3626332c36acc1328ccfc9459d",
+    "tinygrad/llm/kernels/mali_q8_checkpoint.py": "f96c43dc0489f33db4b2ce084a371af44d0cceb520479d15dc5f63bf65a46387",
+    "tinygrad/llm/kernels/mali_q8_shared.py": "d00c78f07e42ff41424b76b7257916b74055590ddad405f6afcb6c240aca15fc",
+    "tinygrad/llm/kernels/mali_recurrent.py": "35d74bdd1619a786dbf44514a787ce713ad43b9911b4fb7c01812024ca0c281d",
+    "tinygrad/llm/kernels/mali_rows.py": "26dc2d4534ce7cfc6bb6f97e6531b26f1c47de758208ef34f237a95573ca3d58",
+    "tinygrad/llm/kernels/mali_state.py": "c9710fe99c1c78ec06eae0cd8617ef8259a108fe111ace074d6091bbbc6e2c22",
+    "tinygrad/llm/kernels/rockchip.py": "4b422de14ceaf8b188f9da14c38b3a2f6a354710fd7909c0bba8af90f6ec8568",
+    "tinygrad/llm/kernels/rockchip_attention.py": "ed1d797b3e2822e779886ffe5f0f8279c9d0669c85a71fa57206a701f65a07fd",
+    "tinygrad/llm/kernels/rockchip_bucketed_int8.py": "58011adc4e4a569f94a045ed6c10118122d66b89430f0193cd555d294f7d593d",
+    "tinygrad/llm/kernels/rockchip_cache.c": "03006a743c7a7f4e72f851950c39f0d473c144d290479fa8935308360c55c549",
+    "tinygrad/llm/kernels/rockchip_cache.py": "ef9a59e36734e62510e304c5de70db93bfc6418a081d6ed840e61d0fe1c359cd",
+    "tinygrad/llm/kernels/rockchip_cpu.py": "dcffed8092dd2247a98dacdf9bef28368fe06a74aab10448b239e3f78f414286",
+    "tinygrad/llm/kernels/rockchip_decode.py": "a560368faa8346ef53ce9905d7844d516a78e77ac90e032175ae7cde9f3a3803",
+    "tinygrad/llm/kernels/rockchip_dot_attention.py": "8d880c2518f699175f664a039133f98281b6781737073841d376a69f9a95b02e",
+    "tinygrad/llm/kernels/rockchip_experts.py": "09ffb2941c59acfd8ae11ab0fb93ff2bdfa8f2799f981aecbf099776f84c6bb6",
+    "tinygrad/llm/kernels/rockchip_gelu.py": "450b2a2d6e9f622fd709b78d811639b76e6272cf502a32abbd779a7f0449942b",
+    "tinygrad/llm/kernels/rockchip_gelu_ffn.py": "db8d8a177e9ec713563e061d789e1d29da31f9d43f1eec986976baf0833bb1d9",
+    "tinygrad/llm/kernels/rockchip_gpt2.py": "cb9a53386a3e6aa7f13bbb6a20488eaa3685f0ec86f6a054f1f7e38dabea0698",
+    "tinygrad/llm/kernels/rockchip_gpt2_decode.py": "8153cb1d439880dfa85914d92974e848dd8977f41c13519cad23980f94438359",
+    "tinygrad/llm/kernels/rockchip_gpu.py": "7c9c5055953f2b46f864ee76007376389a61f338f01abb4143baa588a8826188",
+    "tinygrad/llm/kernels/rockchip_greedy.py": "01ac047734624a01c04b6e75850c658cc96abba2a1617d7117e740bd16e60ccc",
+    "tinygrad/llm/kernels/rockchip_grouped_int8.py": "2bbf3a5678b3dadc1989fe313b2328c06b8b259de363a035e569d0709438fe1a",
+    "tinygrad/llm/kernels/rockchip_idle.c": "4fb7c8022cefd7929907f4abeedaf8894a96f9261763c32015bbd648eeb09b57",
+    "tinygrad/llm/kernels/rockchip_idle.py": "e0fa42189a9c076df1a2da6a1160a63c1a97814e1411ffe2a5297dced29498dc",
+    "tinygrad/llm/kernels/rockchip_int8.py": "b73489344c12167753b788d4111210423ed9cb845d4c42a6c7d19c3d92273227",
+    "tinygrad/llm/kernels/rockchip_mla.py": "07615348877ff5379a1e88a1f297a7c1c2a499ae7884f97f515d1fafe691ee1a",
+    "tinygrad/llm/kernels/rockchip_mla_attention.c": "e598cd75b09ed8a4a1cbaabf96cc2f7838f696a55f3d81ba60e7147ff3d8c390",
+    "tinygrad/llm/kernels/rockchip_mla_attention.py": "db0e011e3e95ffac8c6c8623f0ab4323a577a6ded52acb67dd0b394e90d4d8c5",
+    "tinygrad/llm/kernels/rockchip_mla_projections.py": "5341b3e0ccb3b6b668654fcffc1225f6109e9363628b17e85023ddb4d25358da",
+    "tinygrad/llm/kernels/rockchip_npu_experts.py": "bf338580687e6d4cc8a9fd9ce49a7d03589f97603989c2c0eac2f08f73708d7f",
+    "tinygrad/llm/kernels/rockchip_packed_attention.py": "aace3f08085c69a0deb29ce21244c58e1f95b50b99e31cfa3f9ae6abc04e8822",
+    "tinygrad/llm/kernels/rockchip_pool.c": "6b93a5024aa53552da934e475daaa10d84171cc6be6fd7911c5827a646e031a8",
+    "tinygrad/llm/kernels/rockchip_pool.py": "31fff31283e4660faa5b484e5a456be2c0486823e62ef0688cb600552e487709",
+    "tinygrad/llm/kernels/rockchip_qkv.py": "dd284ef8f885495ae38f7c670b127cdf2ae2ba414a0543777cd102f37cf0085d",
+    "tinygrad/llm/kernels/rockchip_recurrent.c": "93ef4514c57ccc7c0dd29f1765ef98cd99df98ceccb4ad8dd41191ad8a7c3d8e",
+    "tinygrad/llm/kernels/rockchip_recurrent.py": "d932b2dc3349c435f5b0f35162f0ca3e67e958942083a55b1c1c6ad63d824d0b",
+    "tinygrad/llm/kernels/rockchip_replay.py": "6cb30d010c402f3411bbff41a6968d932e2323bc13d34531ac202c5260e7f66d",
+    "tinygrad/llm/kernels/rockchip_routed_int8.py": "2d6c0966a7e0ea7e600d19570bfc48cdb96fbfe9b1190e14bf3f777cd8033177",
+    "tinygrad/llm/kernels/rockchip_rwkv.c": "ab1ec8474d3d7cec5805c22576d864e1e9d23308cf31ebee3c8509ce1eee6918",
+    "tinygrad/llm/kernels/rockchip_rwkv.py": "5b46a2f060ff8db312ce08c859605a9010c3ede615a7bc3d2a9ba89863579580",
+    "tinygrad/llm/kernels/rockchip_sigmoid.c": "b6ead2a0abe50364a3fb84ec072cdd9e5bab1caff97bc67f4cb60a3a079dec01",
+    "tinygrad/llm/kernels/rockchip_sigmoid.py": "3e8ab4e113436a4d620d01b5de16a3dc7bb8550ffe2389861e87dfbbedbecb92",
+    "tinygrad/llm/kernels/rockchip_softcap.py": "23da42409134a60761a45e34677e2c7134e8df6e4783700eecb07e862f832bb1",
+    "tinygrad/llm/kernels/rockchip_softmax.py": "f429d46acf50a329ce7f4573f2a55ee0f4686923c4f1de93bdbe1889660bff57",
+    "tinygrad/llm/kernels/rockchip_static.c": "04e7539678968204b48ac5e4d466ca38c06fb4f7c1d600ff20b8ffe24129ed50",
+    "tinygrad/llm/kernels/rockchip_static.py": "3ab6823a9fecf1b9a6d6dd0fd1d43bec6c61391d913dab3e0fd075b335d6550e",
+    "tinygrad/llm/kernels/rockchip_vision.py": "94f26b16273eec73d419fd068483721846f20cb9c1f4225fa6a9f214c038e47c",
+    "tinygrad/llm/kernels/rockchip_vision_mlp.py": "b1644c2dd0ca7da816211d18e7f1c9e9d1f0094c8028a62b137b4e080b716a9b",
+    "tinygrad/llm/kernels/rockchip_vision_pipeline.py": "26cee5cdecf29ff41058296870177930911a8e17e9219774be3a959c15d1aa94",
+    "tinygrad/llm/kernels/rockchip_vision_prepared.py": "683f93b048ab6bb1a98491028852cda8c4a121eacbcc98d924b0d91aa30720e7",
+    "tinygrad/llm/kernels/vision_embed.py": "12102e073bfbdd1484728a7a6e279c4cdd7f59dbd7713ef0d39adb6fa221990f",
+    "tinygrad/llm/model.py": "c8737c938c3dbc215346312fdafdb8eec5627b91b1935de5d28c84a3c2f94cb6",
+    "tinygrad/llm/rwkv.py": "f94363ad44d65784db0fd49777b927a627d393b3427de76bd5466fec5e66c02c",
+    "tinygrad/llm/serve.py": "4750c7971d126c91c776886b03f2dbf47815317907d7c05d418388f371e16c00",
+    "tinygrad/llm/speculative.py": "ba6a69a248efa202655d813cf91702b403c4073f85fc51808db51079ffb1a60b",
+    "tinygrad/llm/speculative_adaptive.py": "bdddc414c20e102fb4840d4088097cd73b692288c7e79d1c79df5cb7529105fb",
+    "tinygrad/llm/speculative_budget.py": "79a64b2bc8777d995928a1675d09617f82f4ec20a850796e6c0bb54d30169e0b",
+    "tinygrad/llm/speculative_policy.py": "b6379199d6a3ad09b5d143c0010bc8be19105312a940ad78ea35d806198d7890",
+    "tinygrad/llm/speculative_sampling.py": "fbffa90eca44034b57004b67e4b44f6c0ed06fc6a0d536359220b9a1523e0d67",
+    "tinygrad/llm/speculative_trace.py": "bdd913c8ed34c65c76027109bf2efd1d39c540123f79f4e972d73fd508d7d9da",
+    "tinygrad/llm/vision.py": "d96c9e65478ae86377112ba2831547d093a5e52d00ab93db9faf9f2826fc062a",
+    "tinygrad/mixin/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/mixin/creation.py": "4099d41e065e5638f8bb17f6c016ec6b286bac52e5ca6c9a86b89d73cbebbebb",
+    "tinygrad/mixin/dtype.py": "99027a5281c17bfbd572f12a090bf0d31db36bd239202606c1d3d6237486ec64",
+    "tinygrad/mixin/elementwise.py": "951d9d8a83e5cd3ae5a26571d685f2cef44fa8b41b1e4c3e028f1bf4d31076de",
+    "tinygrad/mixin/gradient.py": "c88b1b5557ab5edb450ed0f7e10bd2adebfcfb572f9977446fa04c2f39cc58d6",
+    "tinygrad/mixin/movement.py": "e6412a4f11b8dadb72cab73b260405c0b39389979e4786f0d981be321f121a50",
+    "tinygrad/mixin/op.py": "c09ecfca6522014dbd7b5ac1faae8c85fdc936484cd95084ac41a3ef135e82c7",
+    "tinygrad/mixin/rand.py": "19623f666365a318b6730123dd0fad27469ced754740415b86563ce0857c0363",
+    "tinygrad/mixin/reduce.py": "6981c71968b41ee79e8e97dfdc89db4b62216fd508707b57dfa0cd42b414e79e",
+    "tinygrad/nn/__init__.py": "992c14aec20683a93469d289d5817d1a023f0e3f39ddd5b93181dc8ef5b0691e",
+    "tinygrad/nn/datasets.py": "bc5ff2d74e07452c4f82afc5d6f7e2656978e189cb64689a1e8a1670825dff67",
+    "tinygrad/nn/onnx.py": "670eaffe1386d496e8337f4be5a472cd7b3786fa610a47ba767d89871346503b",
+    "tinygrad/nn/optim.py": "981bdfa9de9baf3b82f7e80f5c32bab954c56d4f8ef902bf9940770e783dee4b",
+    "tinygrad/nn/state.py": "8b709853bca9edf31b99eb7e76c756968cb9bf521747f7dc50a86110ff974e6b",
+    "tinygrad/nn/torch.py": "377d20ff02d4c70e112830be326c8ad9a188cb490c9d15ca7d4bcffc0820d4ca",
+    "tinygrad/renderer/__init__.py": "119d64c9f98c132f9971c8b7c744bcd53ca8d3ec9e2dd0fca2d76f26ad0e8ff7",
+    "tinygrad/renderer/amd/__init__.py": "daa2583cf98a69bf59aa3f842bacb704598445fb23b9166bebc3adb9a9b7112f",
+    "tinygrad/renderer/amd/dsl.py": "dd45cbdf0d63570742eb54a21ef09266eaed95b8f3708de5363ef1c64d86606f",
+    "tinygrad/renderer/amd/elf.py": "faa631ce5f4d71fae646fa4e44b7ef6012f08b9738ba45691b9d901dcfbe77fc",
+    "tinygrad/renderer/amd/generate.py": "2bbf3599176b8dc500b253a97714977e443b7397063e38a775bcc9bd1c709824",
+    "tinygrad/renderer/amd/sqtt.py": "1bb1807a141e2bf5446af8b092e65520ddb775ff08af272271fb22b02362e49b",
+    "tinygrad/renderer/cstyle.py": "aa6c775081a9fcfbcc675e38e0f3b029c788c5a92f1c0fd46bc0c367d661a492",
+    "tinygrad/renderer/isa/__init__.py": "3fd9ff060c1bb591d79e07b5990e264e5ec2b8efd03fc18fb6fe3a5585022d8b",
+    "tinygrad/renderer/isa/x86.py": "523c94a6eeb89dd5f888967f11380b9f298745ec9b1800e3cd2726668b2c8181",
+    "tinygrad/renderer/llvmir.py": "108235c5ad3fd43aa22b6e094136c35314c4fe7c58f7b508c34d666a3a526b4f",
+    "tinygrad/renderer/nir.py": "a3d8186dcb5b6df0ef3c8aaaee3361b6d9433fe35a6b46d4a4aa0dc1193f05a7",
+    "tinygrad/renderer/ptx.py": "906bd04176ef07274e0fc9d9bf99bc86bb8d8bc9674a3099aee2eceff3d3d3e0",
+    "tinygrad/renderer/tc.py": "f8836d7fa6dee7f0f84f6adf29c192a29ffae62ca40e0372f74b128cde4e6654",
+    "tinygrad/renderer/wgsl.py": "8a5f1823834fef671a28822e21775912393f8b718b0b8e3ff7e319d9a926ef8d",
+    "tinygrad/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/__init__.py": "89955c8ec8c5cb2d446db169379100b421f51232563eb076b9111e4845a9f5bb",
+    "tinygrad/runtime/autogen/am/__init__.py": "fb2a32843680df3df2ebef7692b0ce5aa4f8ce5da778c6abe456160c0112de74",
+    "tinygrad/runtime/autogen/am/am.py": "075d9d29b885c546897143ade1b18f36d4a4450d1fb1d899d2df8f08aa5853e1",
+    "tinygrad/runtime/autogen/am/fw.py": "c60f58eb1ee6d61cee3817c5af23ef1fdb8c9ac9d4353d07972114cef09c7c02",
+    "tinygrad/runtime/autogen/am/navi_offsets.py": "9080f1a21706918dc9392709804115aa60201c8865ac86ef2b49252a2441c7cf",
+    "tinygrad/runtime/autogen/am/pm4_nv.py": "9bb32046114fd7ddbb976cc25bd5300bad08298b87682539a1a3e860954aad16",
+    "tinygrad/runtime/autogen/am/pm4_soc15.py": "f1ace5672c822d7a728f72b376a4ee5842aa4805944ea5f24dc8289dd341fac8",
+    "tinygrad/runtime/autogen/am/pmc.py": "b65aa28d165f88fd1f17c965e48e5fcbeb7f33bb3da4cba498b819f648ea8b3e",
+    "tinygrad/runtime/autogen/am/regs.py": "81d38816611a1e086e21feca4c2e021174decab385650405e520457aacbfd10f",
+    "tinygrad/runtime/autogen/am/sdma_4_0_0.py": "e2538620e5e73b0a745ce2ba0284c709f158e2893dd478f98bbd86c04c50292b",
+    "tinygrad/runtime/autogen/am/sdma_5_0_0.py": "33e42eb0e8c9be08f698ce8dded66446ad600cf03f64179696556a69617ee5bd",
+    "tinygrad/runtime/autogen/am/sdma_6_0_0.py": "523636d23466359b244b9e5454a8d0a80a5bf8e67882a9238e571ee90d580e88",
+    "tinygrad/runtime/autogen/am/smu_13_0_0.py": "5a2254c980525c8d5c8acc15f56f2ae72520d510aa1c2499b4c2b3586570c125",
+    "tinygrad/runtime/autogen/am/smu_13_0_12.py": "0e558c4f37ef3608d5c0498c96b123bb3362ed0a093ce50acd7a0f2102342919",
+    "tinygrad/runtime/autogen/am/smu_13_0_6.py": "acd6efb5ad0b972a5553c53db400d1f806c1d37d97ee0a583d8e45947060183d",
+    "tinygrad/runtime/autogen/am/smu_14_0_2.py": "f1b5e7d9d10f0a4cfb28dad0b8afe42cd5a276206959bd525bb8e871888991d4",
+    "tinygrad/runtime/autogen/am/soc_11.py": "da4af42a9f6bd4e980cd7a8a2ae3fc34ada4995bb693506f65148ddd7f45ef6c",
+    "tinygrad/runtime/autogen/am/soc_12.py": "8e81635ccab1b30c312778ccd8804e6b5d4df81c0b391a1e9c7f1bb3375e7933",
+    "tinygrad/runtime/autogen/am/soc_9.py": "b5386d6f41ce2ec65e1f9de20bb4439eceedcccfebf0dbd269891367c7cd8d2d",
+    "tinygrad/runtime/autogen/am/vega_offsets.py": "aeedb84cc5ee439c578ab015f0a2c424d95faf3304965041fcb7b116cce2a1eb",
+    "tinygrad/runtime/autogen/amd/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/cdna/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/cdna/enum.py": "6273f0c16e079332c354b849f38268527f7bc99bf943a9e5e2831ec3f705eb4a",
+    "tinygrad/runtime/autogen/amd/cdna/ins.py": "d98fad08ef7bd7af6e1ce6459d6bc5f1f7e0f81c6be93561857049675255a3dd",
+    "tinygrad/runtime/autogen/amd/cdna/operands.py": "ae871116dbad3aa9644975ed0f1b6042c9d53d64078f01f6688c7d73ae01f381",
+    "tinygrad/runtime/autogen/amd/cdna/str_pcode.py": "e67649d19bb728278d97065a843518535a87126358710aa85f5a5cd61760fb1a",
+    "tinygrad/runtime/autogen/amd/common.py": "c05fa9bd4e9efb05483d29ddeefb5994ac21560e0d13b4cb18548a57177c7d44",
+    "tinygrad/runtime/autogen/amd/rdna3/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/rdna3/enum.py": "4c495befe2c1f11f3b2f2820fbd0d3d9b3faf4d4969312ad757c6fa7569cc9dc",
+    "tinygrad/runtime/autogen/amd/rdna3/ins.py": "652a5df671664024650c5f5b6c2eddf7af0354a556e84473a3eb207bacfc4746",
+    "tinygrad/runtime/autogen/amd/rdna3/operands.py": "96fd869a40884dec0247633c49af6e80dffc375afdbf222eb70f6b7d04bcf806",
+    "tinygrad/runtime/autogen/amd/rdna3/str_pcode.py": "b7705c1430b06c5ce1a90ac625a515708ebe11c184068bf89746f3fd5466ae39",
+    "tinygrad/runtime/autogen/amd/rdna4/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/rdna4/enum.py": "e7f785ef907c6ae1109baf9188a4b63b964e3137bf2f1328196b081396a71388",
+    "tinygrad/runtime/autogen/amd/rdna4/ins.py": "927770e3b602975581ca933998b8e8cd87e8fc9bb2213133835e0059a77c0a0b",
+    "tinygrad/runtime/autogen/amd/rdna4/operands.py": "5cca92ffc1d5f92ab3c31fbf73a8ba47d5d49dc3bdb52f257556b6ce6638d6a8",
+    "tinygrad/runtime/autogen/amd/rdna4/str_pcode.py": "b8a9001477cc9b6cfdf0b5dd8aec0bc2a49b073a6bcec0d0a811cc6fa67d3490",
+    "tinygrad/runtime/autogen/amd_gpu.py": "478e889f08e47ebf4410ea089602dd1cfe62718b92a5fe085d56ef11633ad8b6",
+    "tinygrad/runtime/autogen/amdgpu_drm.py": "c9e226465de3421c70f8986814244ce832b78b3b7643047823053e901f4a68ff",
+    "tinygrad/runtime/autogen/amdgpu_kd.py": "bbb71ab4ab4a69a8acf468222b8562ed6466c72eb3abb6df5186a78f320bd68a",
+    "tinygrad/runtime/autogen/avcodec.py": "b5dd616799a3ed4e69bf0a35b5d05c2c80759a24e6573ad68c849c0dfcc6af05",
+    "tinygrad/runtime/autogen/bnxt.py": "a2c0a2f1b9d85b04701fe1b6279ac3b50064ba5d712c1519443eb27cfe083a8c",
+    "tinygrad/runtime/autogen/comgr.py": "ed3f777f3841706da31d6b186f09e719bdc429d85d08b2c79b5db37e59f257ed",
+    "tinygrad/runtime/autogen/comgr_3.py": "8afed852b5fa28ec802a2de73bcc455ea966973058c63f41371bda444db9a62d",
+    "tinygrad/runtime/autogen/corefoundation.py": "56795809f590e21234877a256681371ee32d8cf5a597417e784988e31622087f",
+    "tinygrad/runtime/autogen/cuda.py": "64bab6b381449254db3cb8d1d60b69e10c9ffa4befa6d8294305c2ae1fa18129",
+    "tinygrad/runtime/autogen/ggml_common.py": "7edaed6afd77bd84459ebaab381c6998bb2e2788eb620a0f4c07b26242a8b891",
+    "tinygrad/runtime/autogen/hip.py": "d69dcb6f55bd4dcac2178065ebe462ad55fbed8acf17a8c3561e918fdf59aa77",
+    "tinygrad/runtime/autogen/hsa.py": "b8457e9fd6ce160d072af0e4ba1e1c34e443dd71cabd767c6511457a72f3d901",
+    "tinygrad/runtime/autogen/io_uring.py": "d8b1658c94ab9727973700f14fe40661eb87272bb9e40a02904563f304ca05ef",
+    "tinygrad/runtime/autogen/iokit.py": "d0033fb9bd4ecf4a796ac01e280d6fb3289614c8008d6e62b312d09894189162",
+    "tinygrad/runtime/autogen/kfd.py": "248a7e74aa98b54f5e9cac56bf7a2495e8f6994386705a3c6c19ab0c7c053197",
+    "tinygrad/runtime/autogen/kgsl.py": "9f050c287acacb79a4e6d15cd32eb12a137c556de9c18d77baaea80b2e8b070d",
+    "tinygrad/runtime/autogen/libc.py": "edc96d14bdacf6992407318faabdf20690ceedbb915084626e59d1514b26f04e",
+    "tinygrad/runtime/autogen/libclang.py": "8f6f44f8065512c002a2e86d3ddd1933aaa89af58b7678077f3ae9d0369f3cfa",
+    "tinygrad/runtime/autogen/libusb.py": "f234ee7c90cc4ac1c7d97724db665f2dba466580bc1205deab1a58de99992a6e",
+    "tinygrad/runtime/autogen/llvm.py": "18ccc5041f5f9227d7b8f43200da1e8cff680d40c6eadb38fc5f883aba1de1bd",
+    "tinygrad/runtime/autogen/llvm_qcom.py": "a0032f4677216211f658b92e11fc7a1060d556133d8b5e9482c7554698f08ea6",
+    "tinygrad/runtime/autogen/mesa.py": "355cc3facb9c31ce6c808a850fa9e3962e9690cf759d776cb05c1da354b61df7",
+    "tinygrad/runtime/autogen/metal.py": "842e5f17ad86aef820af1c14409660cad373c0b7d2559d81dbe978cd028fdb99",
+    "tinygrad/runtime/autogen/mlx5.py": "7b1782a5ec4aed44cf849b3e574d15b85924390b24f9368cc17014ac4ffc1e99",
+    "tinygrad/runtime/autogen/nv.py": "261256ac4322e046ff2db28235ae2ca8f68df081af1ce1509b407e814194aed6",
+    "tinygrad/runtime/autogen/nv_570.py": "411e74f3a283d3f4bed0294fb6a54a34ddf6fe624a3db8ec58df97ab66909abf",
+    "tinygrad/runtime/autogen/nv_580.py": "57157c789576e3107e187bc26242bbaf34b4cfc1a8f67245a8e587e984cd692c",
+    "tinygrad/runtime/autogen/nv_610.py": "9615048a5619c64fbb95ce61b1bea809ca42f1d301366f77a55a813d1047b41c",
+    "tinygrad/runtime/autogen/nv_regs/__init__.py": "cc89dd8a3df44879f7013b61d9d741df9bd77d50a292c6ef81ab5130c66cc8a3",
+    "tinygrad/runtime/autogen/nv_regs/dev_bus.py": "7ba8a3407e27a809be0504d285991c7a1aef1826d9e689b3aa59bb80aae65e6e",
+    "tinygrad/runtime/autogen/nv_regs/dev_falcon_second_pri.py": "391295f032d2c0fbe905d236e52a6e018f9438d2bdd76282d57f0eca5d2bfc0d",
+    "tinygrad/runtime/autogen/nv_regs/dev_falcon_v4.py": "6b3c9aedf59a7a37ba67d9b5b77f77cd5cadaac1b82040b0926e9acf1dedcee9",
+    "tinygrad/runtime/autogen/nv_regs/dev_fb.py": "6cbeb46bc9577e576926fcc982fcc0b8fa31e10206d1615311075eb28b48fe41",
+    "tinygrad/runtime/autogen/nv_regs/dev_fbif_v4.py": "8d2c87027939226d3a910157d41e660427774c3b11a17bd25c0ed1b2a9651c23",
+    "tinygrad/runtime/autogen/nv_regs/dev_fsp_pri.py": "f461181260b8e072b8df132322b03960058ce435d6da71c169153ace417edd1a",
+    "tinygrad/runtime/autogen/nv_regs/dev_gc6_island.py": "16329261e64d0f54104b062155166378319885968a7ff9ae9c2b47979b15f14f",
+    "tinygrad/runtime/autogen/nv_regs/dev_gsp.py": "8425f6b358af1acdf4dbb5549429feb05f95f649d451bccd6dc44eadd4674bc8",
+    "tinygrad/runtime/autogen/nv_regs/dev_mmu.py": "d36ae887aa8026067486e2f3fea295ca1f17c9e7867f2842d4cedea1bbf46355",
+    "tinygrad/runtime/autogen/nv_regs/dev_riscv_pri.py": "bb48da8a9f2f5b92a2aede932076709a4f2ae7266f895c77386b8aa373ab9207",
+    "tinygrad/runtime/autogen/nv_regs/dev_sec_pri.py": "ad4e6690236365ab4edad12c15d49a8a55f787a9ceecdd96d47794e25979808c",
+    "tinygrad/runtime/autogen/nv_regs/dev_therm.py": "af124c35f2ede3c96477d405b588dff2689bbd15fb5e7f1fdb40c7d2e8bdb10a",
+    "tinygrad/runtime/autogen/nv_regs/dev_vm.py": "724a62f3a9b748c63fbe5d04f3ed19cc9ffc2f3e29a8f9f4a9dca37e61887a7b",
+    "tinygrad/runtime/autogen/nv_regs/nv_ref.py": "7486129fa0586428ed6570add35d49db5f9edc4cda83457a5094b58066ba55ef",
+    "tinygrad/runtime/autogen/nvjitlink.py": "272066e86e6d51d0a064e711f22c5baa6fd065a09b640da789d60a3cac2f56d7",
+    "tinygrad/runtime/autogen/nvrtc.py": "26c305997b4f63950e8b0712d9f3cd513dc92b1753595e63235e035b7597592b",
+    "tinygrad/runtime/autogen/opencl.py": "e0da74f9804788dbb88724d5ce1e0f26c027ea4125039d62c08ad98c1f074c9a",
+    "tinygrad/runtime/autogen/pci.py": "baceb6b8c4e45429c8dc3b7eff17259aaed30d30d6ea50935ce28d69534d8bac",
+    "tinygrad/runtime/autogen/qcom_dsp.py": "4838000bcc679270d8beee74bb06d6dcd7d1a52faea0dd3d8c84f7acc160a87f",
+    "tinygrad/runtime/autogen/rockchip.py": "4fcfc349ee15a4d80728dad0a86fd781502315bdf454e4af1ff811e7f79cec2c",
+    "tinygrad/runtime/autogen/rocprof.py": "b7561632d83083620e34fc14472f5c4f1e30878eb8c856df1bf74a764a317c73",
+    "tinygrad/runtime/autogen/sqtt.py": "9f47e053dacbfe732d653db926a3957dd65c33b879b02d809b38baa8eaad98c3",
+    "tinygrad/runtime/autogen/vfio.py": "c501177743326af85725911c225ebe7dbc50f56e8882913ae22ad2d50fa33c27",
+    "tinygrad/runtime/autogen/webgpu.py": "d54d4b783bc925ad3e6b017f96aa5a27159fc2d95742bcf75e0addcb9f8ac4d6",
+    "tinygrad/runtime/ops_amd.py": "719be92c917e2c3a08ad802732dd7d116668649dfd08aef10ddea5dcc84b6436",
+    "tinygrad/runtime/ops_cl.py": "0aa8f63d58c069c6994e37750c8d41b8926f8ec27e8e54745e99bf68bef9fc8a",
+    "tinygrad/runtime/ops_cpu.py": "308017e40f4dfdf57624b535fb8eb1f6288fe8fbbd65a2d5fbbbbde9d9683232",
+    "tinygrad/runtime/ops_cuda.py": "d564db6c6927dfdfcc925f8c2cfd9938f800df2d4219dd96294f402cb92d789a",
+    "tinygrad/runtime/ops_disk.py": "d0133e07537a0e5b358bd40c0992e0abe0eb5c42c858795e9eda4140a3e1708e",
+    "tinygrad/runtime/ops_dsp.py": "67783322e6352f5f52d10e501f6b717e27fcfa716466072e03e46f7875f1676e",
+    "tinygrad/runtime/ops_hip.py": "5a023a90196ae106a0543f59045bb902425f9b3dca4ca6c67a1741b14afcabb3",
+    "tinygrad/runtime/ops_metal.py": "105ab56af475dd0a86b1e06191fbbdd4613697c257093ba61c5401feeef89e04",
+    "tinygrad/runtime/ops_npy.py": "53de851f9d707e6fceb871914b812c138cd5b1ebb669be02b55115c68266710c",
+    "tinygrad/runtime/ops_null.py": "5e1e53e866d17ab1ccf6116ac11b0283e1b329ee6b215b2e5cf4927dbed38cb1",
+    "tinygrad/runtime/ops_nv.py": "e711ef90bab87f8cd444ca2a10fbb0c9e8a602c22d8fa7c165b746b088314f30",
+    "tinygrad/runtime/ops_python.py": "62decc9aa674b47a578e06bec68d46695920524da27b10fb63da75d420df8d7b",
+    "tinygrad/runtime/ops_qcom.py": "618d7f7c97af087f97d3c5b5d1f720fd9d217a9d2c0485589d7d604b8098663b",
+    "tinygrad/runtime/ops_rdma.py": "e6e0d69734269c6501a5b8439651a0364d90285c4671fa6301c9c54f16737769",
+    "tinygrad/runtime/ops_rockchip.py": "0a62e7b0b6ffcc697110e86462c9bf097518e814d10d93177637f357cfe12008",
+    "tinygrad/runtime/ops_webgpu.py": "52c7689d7fd2acb9ad1f37ec9ce3dd88a16fa51d6de93b74eb8f637ce3802e15",
+    "tinygrad/runtime/support/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/am/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/am/amdev.py": "dae42e13b5dbf01cff0fd29767eec3df2f7d86f0d4d78d89b0aa731a7c88c09c",
+    "tinygrad/runtime/support/am/ip.py": "972086c5373e7cd83a2b39d598551840c4a7b3e59cd2f19745581fee287bdede",
+    "tinygrad/runtime/support/amd.py": "3c888308b57f5f9b4922ffb008829610f6333a547c9fd9168f9f770fc6315c10",
+    "tinygrad/runtime/support/autogen.py": "3571a0c1e955e2c7173e3066a79040efb0f333e3302013f28e6d478ccdaf763c",
+    "tinygrad/runtime/support/c.py": "a3113a746068d0d0cd8fdbe18dbe54c20692a2cc85691618cf72dcef1cd801ae",
+    "tinygrad/runtime/support/compiler_amd.py": "230b53fbae926583d6a4a1fa4ea085773924e042496ed786aa8fbc2f8aa6ebec",
+    "tinygrad/runtime/support/compiler_cpu.py": "7980be156006d76fbc0e893154e7fb2900597d0c4d5171b4497a44d888d4fe48",
+    "tinygrad/runtime/support/compiler_cuda.py": "44e2eb882f867db26cb0a0c27716cc5c1000e4a7ea2401d3346d226573078bda",
+    "tinygrad/runtime/support/compiler_llvm.py": "4f4128c0cf88860e5445345139e81d360c7c4189912a67159d6822d2649735e5",
+    "tinygrad/runtime/support/compiler_mesa.py": "2301ed834ceea0798128e765fceff5231ec88851ca73b10a34e423952ae7eee0",
+    "tinygrad/runtime/support/compiler_qcom.py": "9c99f6e4c9e594e44c46846558e66f85d8ca700b73d371e0da54a997f72cfe34",
+    "tinygrad/runtime/support/compileserver.py": "f977fbab9038e6b895174f07c540fb26247137c63c989e373745433cd52157ec",
+    "tinygrad/runtime/support/elf.py": "155aaeb2cfdd748814150feafcb10c1ef34eb01cbd702bdbe5e0c9b03be3f388",
+    "tinygrad/runtime/support/hcq2.py": "08ccbd5ba6d0494af350eb4d8851a15d9ed1e5153cc30e7225439e4380d3bd69",
+    "tinygrad/runtime/support/memory.py": "5cd20a3b98a69caa855a7e660a0a53a64bd969fee282b853a5f68097977a5bcb",
+    "tinygrad/runtime/support/nv/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/nv/ip.py": "5ad88909badc5d30ab2527569d791b58ac28d56a8d9019f1e7c43eb764b4fe8a",
+    "tinygrad/runtime/support/nv/nvdev.py": "5329dffaa57b690eb516f0d33a219c552d92dcad3f2af8a5563bc8df2b51073b",
+    "tinygrad/runtime/support/objc.py": "c00586d4e58f14adeb899275ab215dbcb75b9c7a3e8d6210c001fd2941f4628b",
+    "tinygrad/runtime/support/rdma/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/rdma/bnxtdev.py": "c682c931db0c51c861ce7016a00d7aad5dc0e88bc8bef930bade4117910660f3",
+    "tinygrad/runtime/support/rockchip_bucketed.py": "815e6dc26dd0ce3c92c77c27ced45404cb15005e981384126d937d699025d8e2",
+    "tinygrad/runtime/support/rockchip_gpu.py": "1677113312cced1a7aa0e963f0ac4cbfd4f3aca1dd7aa3620be6410d3447877a",
+    "tinygrad/runtime/support/rockchip_int8.py": "1ef670e62d3ccd9fb84be33d6561536c0ce30dead20100f34e7ae54073cf30a6",
+    "tinygrad/runtime/support/system.py": "681f819e98ede6ac6451c0e499fd038eb00cc2e0a25f872e58321a39f38d9869",
+    "tinygrad/runtime/support/usb.py": "d57b34b46593c83edc2674d5e5d71ba9ca495e7009f08e116e06a35352d9b6bc",
+    "tinygrad/schedule/__init__.py": "a72195d925810318695055cc87eb1489811a51cc49d7ad9215bf68e2e92d735d",
+    "tinygrad/schedule/allreduce.py": "d736bb1070049ad4c14e9354a66be534bb6ebdc53e75f80328f2ad4f846a8ea1",
+    "tinygrad/schedule/indexing.py": "44feb97662961d7f350667b61ed33b6575c50d50848f6299adea55c7e3cbd1ab",
+    "tinygrad/schedule/memory.py": "24122dbab59fe1856939520e74fdb3828040ed7652fe897a3fac2d14f45785c6",
+    "tinygrad/schedule/multi.py": "5c88ce3832852af4a583d35bcb5ad6834eaf3d0366bf61e6b242ed6818cb72d0",
+    "tinygrad/schedule/prepare.py": "237d5580d8a0279cf49c875907fdb266e206b21d15d5570c90cdf4b2f2dd0a23",
+    "tinygrad/schedule/rangeify.py": "6af2c0e74f67d8380bbe88e6a186f0caad8641680e9f69bb17208a31cc459918",
+    "tinygrad/tensor.py": "5680ec3b2a716e435ae8f8ca42f39697ed46de7a3d50018a7becb9a368bcc56d",
+    "tinygrad/uop/__init__.py": "22495f25f31b744f0362575fe42f2608a349d4642cba4a2d0a71150f234c7db3",
+    "tinygrad/uop/divandmod.py": "40c04f04dc9057eb17c9680304fb797ce78add201e394736f6558d4e145f075c",
+    "tinygrad/uop/movement.py": "7508947bf142145b2e2ec2234d21ac424cd801ef0acb18bd79a2292c886f7a09",
+    "tinygrad/uop/ops.py": "017e94e1ecfc1ada2cb68f9e71d274dec1d744ee9ffff40ebe324387b7b00bc9",
+    "tinygrad/uop/render.py": "03d3fcad5396a0879cd8f8fcddf04c7abed04b76c7a50f5075554260a1ded89a",
+    "tinygrad/uop/spec.py": "13a8e64ad12f24a4c3806b1bce8e3d04be4478e37d84d82b45ae860e776fd4c6",
+    "tinygrad/uop/symbolic.py": "e552dae03bd8057dd5c7708493bf11e5acbcbd17d03b818d5b9c1770727021c2",
+    "tinygrad/uop/upat.py": "f89095353c93afb851b080aff975f861c070f87cc82aab90df481eade4e8c6bd",
+    "tinygrad/uop/validate.py": "9f0f248f17fb9d31e19e6537cc593d5e3e6a4ee41efc657338efc32dac7eef43",
+    "tinygrad/uop/weak.py": "856defae2c4afe2425cf5c58e2c3b2ef17ee63831c878dcdc298816721a3c97d",
+    "tinygrad/viz/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/viz/cli.py": "997ee8b2c57f6f17a3773937432f7931591bdd081c98abfb29174ff5d0c91db9",
+    "tinygrad/viz/serve.py": "77c9b2341762caedaa8e6204bec29b95605119400373c5029480127115fa6d87",
+    "extra/rockchip/benchmark_inference.py": "00fea015bdf3bae08ff9823d2f62b709b55b70debc181409d5c2c6474e61251b"
+  },
+  "runner_sha256": "b399b155867869e38a79032b970b79e0e326d5bf98c524d68a02f21840076c2b",
+  "cpu_source_sha256": "cef22d30375a274c1e66ecd0cb8c81c0740bdf209adc27470cb92e7b8e403991",
+  "CL_template_sha256": "47781a5b09a5be9b31ddc31cf658de467219a2d684224434eb2f9fe09c90e66c",
+  "clocks_before": {
+    "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+    "/sys/class/devfreq/fb000000.gpu/cur_freq": "300000000",
+    "/sys/class/devfreq/dmc/cur_freq": "2112000000",
+    "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "2256000",
+    "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+  },
+  "GQA_heads_per_group": 2,
+  "cases": [
+    {
+      "local_size": 32,
+      "active_rows": 128,
+      "end": 128,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 7.081565427407886e-08,
+          "max_abs": 8.940696716308594e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 6.85226900251155e-08,
+          "max_abs": 5.960464477539063e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 6.811225392779092e-08,
+          "max_abs": 5.960464477539063e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 3.7138360039992396e-08,
+          "max_abs": 5.960464477539063e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 6.794532353000054e-08,
+          "max_abs": 8.940696716308594e-08,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            7290383,
+            3964561,
+            2317546
+          ],
+          "candidate": [
+            6730391,
+            5941154,
+            6054902
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            2469502,
+            4685257,
+            2617958,
+            2402128,
+            2489626,
+            2432461,
+            2425752,
+            2501584,
+            2498376,
+            2495459,
+            2496334,
+            2391044,
+            2225964,
+            2070216,
+            2131465,
+            2420211,
+            2421378,
+            2459293,
+            2450252,
+            2450543,
+            2454627,
+            2502751,
+            2517918,
+            2354587
+          ],
+          "candidate": [
+            6023111,
+            5525827,
+            5690325,
+            6556852,
+            6218233,
+            6012903,
+            5865030,
+            6359981,
+            6323523,
+            4150933,
+            2858287,
+            2965911,
+            2815121,
+            2506834,
+            2782747,
+            3066826,
+            2838163,
+            2571000,
+            2618541,
+            2843704,
+            2750080,
+            2692040,
+            2806954,
+            2932077
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2469502,
+                4685257
+              ],
+              "candidate": [
+                6023111,
+                5525827
+              ]
+            },
+            "paired_median_ratio": 0.6195166170257387
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2617958,
+                2402128
+              ],
+              "candidate": [
+                5690325,
+                6556852
+              ]
+            },
+            "paired_median_ratio": 0.40989739921289614
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2489626,
+                2432461
+              ],
+              "candidate": [
+                6218233,
+                6012903
+              ]
+            },
+            "paired_median_ratio": 0.40242271854388667
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2425752,
+                2501584
+              ],
+              "candidate": [
+                5865030,
+                6359981
+              ]
+            },
+            "paired_median_ratio": 0.40305370686374026
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2498376,
+                2495459
+              ],
+              "candidate": [
+                6323523,
+                4150933
+              ]
+            },
+            "paired_median_ratio": 0.4767631846465344
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2496334,
+                2391044
+              ],
+              "candidate": [
+                2858287,
+                2965911
+              ]
+            },
+            "paired_median_ratio": 0.8391503860273981
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2225964,
+                2070216
+              ],
+              "candidate": [
+                2815121,
+                2506834
+              ]
+            },
+            "paired_median_ratio": 0.8072559801802157
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2131465,
+                2420211
+              ],
+              "candidate": [
+                2782747,
+                3066826
+              ]
+            },
+            "paired_median_ratio": 0.7781210696917535
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2421378,
+                2459293
+              ],
+              "candidate": [
+                2838163,
+                2571000
+              ]
+            },
+            "paired_median_ratio": 0.9022968987993152
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2450252,
+                2450543
+              ],
+              "candidate": [
+                2618541,
+                2843704
+              ]
+            },
+            "paired_median_ratio": 0.897212592990611
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2454627,
+                2502751
+              ],
+              "candidate": [
+                2750080,
+                2692040
+              ]
+            },
+            "paired_median_ratio": 0.910927726694744
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2517918,
+                2354587
+              ],
+              "candidate": [
+                2806954,
+                2932077
+              ]
+            },
+            "paired_median_ratio": 0.8490117931058396
+          }
+        ],
+        "median_ms": {
+          "control": 2.452585,
+          "candidate": 2.948994
+        },
+        "paired_speedup": 0.7926885249359846,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.036166,
+        "finish_ms": 2.556709,
+        "device_kernel_ms": 1.650484,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "1000000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "1200000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    },
+    {
+      "local_size": 32,
+      "active_rows": 128,
+      "end": 256,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 1.1861904018007063e-07,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 1.2140432812220837e-07,
+          "max_abs": 2.60770320892334e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 1.1843445056387062e-07,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 7.597032023452093e-08,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 1.1811404676670318e-07,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            19305980,
+            4489553,
+            13135288
+          ],
+          "candidate": [
+            15133464,
+            15265587,
+            16020116
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            13261286,
+            17087307,
+            4493052,
+            4384554,
+            5071709,
+            16125407,
+            4220057,
+            4372012,
+            5018919,
+            18943736,
+            4395346,
+            5377080,
+            3718398,
+            13185746,
+            4568884,
+            5961279,
+            3606400,
+            17836003,
+            3889021,
+            10216626,
+            7103427,
+            6754307,
+            6678768,
+            6635893
+          ],
+          "candidate": [
+            15127630,
+            14253811,
+            6289106,
+            6096902,
+            5621492,
+            5396038,
+            6000070,
+            5982862,
+            5867947,
+            5383205,
+            6108568,
+            6385647,
+            5751866,
+            5389329,
+            6692475,
+            6242441,
+            5732324,
+            5711325,
+            5877572,
+            6302231,
+            6003861,
+            5489953,
+            6198983,
+            6252649
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                13261286,
+                17087307
+              ],
+              "candidate": [
+                15127630,
+                14253811
+              ]
+            },
+            "paired_median_ratio": 1.0329171057335138
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                4493052,
+                4384554
+              ],
+              "candidate": [
+                6289106,
+                6096902
+              ]
+            },
+            "paired_median_ratio": 0.7167447332506164
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                5071709,
+                16125407
+              ],
+              "candidate": [
+                5621492,
+                5396038
+              ]
+            },
+            "paired_median_ratio": 1.923944477573467
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                4220057,
+                4372012
+              ],
+              "candidate": [
+                6000070,
+                5982862
+              ]
+            },
+            "paired_median_ratio": 0.7170255994108954
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                5018919,
+                18943736
+              ],
+              "candidate": [
+                5867947,
+                5383205
+              ]
+            },
+            "paired_median_ratio": 2.1297956866994596
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                4395346,
+                5377080
+              ],
+              "candidate": [
+                6108568,
+                6385647
+              ]
+            },
+            "paired_median_ratio": 0.7821560618254128
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                3718398,
+                13185746
+              ],
+              "candidate": [
+                5751866,
+                5389329
+              ]
+            },
+            "paired_median_ratio": 1.5172648894485734
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                4568884,
+                5961279
+              ],
+              "candidate": [
+                6692475,
+                6242441
+              ]
+            },
+            "paired_median_ratio": 0.81408823992363
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                3606400,
+                17836003
+              ],
+              "candidate": [
+                5732324,
+                5711325
+              ]
+            },
+            "paired_median_ratio": 1.873738263031311
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                3889021,
+                10216626
+              ],
+              "candidate": [
+                5877572,
+                6302231
+              ]
+            },
+            "paired_median_ratio": 1.1581178283425437
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                7103427,
+                6754307
+              ],
+              "candidate": [
+                6003861,
+                5489953
+              ]
+            },
+            "paired_median_ratio": 1.2056688928496668
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                6678768,
+                6635893
+              ],
+              "candidate": [
+                6198983,
+                6252649
+              ]
+            },
+            "paired_median_ratio": 1.0693105128709233
+          }
+        ],
+        "median_ms": {
+          "control": 5.6691795,
+          "candidate": 6.0019655
+        },
+        "paired_speedup": 1.1137141706067335,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.041708,
+        "finish_ms": 5.264207,
+        "device_kernel_ms": 4.346201,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "1000000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    },
+    {
+      "local_size": 32,
+      "active_rows": 128,
+      "end": 512,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 1.4861470097079162e-07,
+          "max_abs": 2.60770320892334e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 1.4581974502754953e-07,
+          "max_abs": 1.862645149230957e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 1.4987164270562983e-07,
+          "max_abs": 1.862645149230957e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 1.0078736351022429e-07,
+          "max_abs": 2.60770320892334e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 1.4451969750262643e-07,
+          "max_abs": 1.862645149230957e-08,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            15925909,
+            20000719,
+            20588710
+          ],
+          "candidate": [
+            12077722,
+            12053514,
+            11963099
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            22688675,
+            21492861,
+            22943004,
+            8012246,
+            12462424,
+            22264307,
+            23770741,
+            8529363,
+            20358880,
+            20318922,
+            30597090,
+            8057453,
+            12512882,
+            21067035,
+            22971296,
+            8036454,
+            12827292,
+            21414696,
+            22935130,
+            8005246,
+            12179220,
+            22049352,
+            10155377,
+            10339708
+          ],
+          "candidate": [
+            11901850,
+            11534939,
+            11970682,
+            11814934,
+            11968057,
+            11432566,
+            11918474,
+            11873850,
+            11766519,
+            11967765,
+            11939474,
+            11928974,
+            11956974,
+            11544855,
+            11883183,
+            11983223,
+            12251260,
+            11753394,
+            11935391,
+            12054097,
+            12045638,
+            11694769,
+            11884058,
+            11893391
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                22688675,
+                21492861
+              ],
+              "candidate": [
+                11901850,
+                11534939
+              ]
+            },
+            "paired_median_ratio": 1.8851360568207531
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                22943004,
+                8012246
+              ],
+              "candidate": [
+                11970682,
+                11814934
+              ]
+            },
+            "paired_median_ratio": 1.3014272995914842
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                12462424,
+                22264307
+              ],
+              "candidate": [
+                11968057,
+                11432566
+              ]
+            },
+            "paired_median_ratio": 1.4840088231838955
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                23770741,
+                8529363
+              ],
+              "candidate": [
+                11918474,
+                11873850
+              ]
+            },
+            "paired_median_ratio": 1.3575850765986544
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                20358880,
+                20318922
+              ],
+              "candidate": [
+                11766519,
+                11967765
+              ]
+            },
+            "paired_median_ratio": 1.7138836798278811
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                30597090,
+                8057453
+              ],
+              "candidate": [
+                11939474,
+                11928974
+              ]
+            },
+            "paired_median_ratio": 1.6194828838473285
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                12512882,
+                21067035
+              ],
+              "candidate": [
+                11956974,
+                11544855
+              ]
+            },
+            "paired_median_ratio": 1.4288214334297131
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                22971296,
+                8036454
+              ],
+              "candidate": [
+                11883183,
+                11983223
+              ]
+            },
+            "paired_median_ratio": 1.299221592057053
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                12827292,
+                21414696
+              ],
+              "candidate": [
+                12251260,
+                11753394
+              ]
+            },
+            "paired_median_ratio": 1.4264728831334124
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                22935130,
+                8005246
+              ],
+              "candidate": [
+                11935391,
+                12054097
+              ]
+            },
+            "paired_median_ratio": 1.2897472426256034
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                12179220,
+                22049352
+              ],
+              "candidate": [
+                12045638,
+                11694769
+              ]
+            },
+            "paired_median_ratio": 1.441785391463592
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                10155377,
+                10339708
+              ],
+              "candidate": [
+                11884058,
+                11893391
+              ]
+            },
+            "paired_median_ratio": 0.8619547454396811
+          }
+        ],
+        "median_ms": {
+          "control": 20.338901,
+          "candidate": 11.910162
+        },
+        "paired_speedup": 1.4276471582815629,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.121915,
+        "finish_ms": 11.772352,
+        "device_kernel_ms": 10.143308,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "1000000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "600000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    },
+    {
+      "local_size": 32,
+      "active_rows": 17,
+      "end": 62,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 9.489171009176782e-08,
+          "max_abs": 3.725290298461914e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 9.175219075450294e-08,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 9.388176751376223e-08,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 4.2858733446731606e-08,
+          "max_abs": 4.470348358154297e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 9.372805653910122e-08,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            354953,
+            257537,
+            240621
+          ],
+          "candidate": [
+            2104341,
+            1693389,
+            1717306
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            274746,
+            430493,
+            373327,
+            269787,
+            369828,
+            503992,
+            527617,
+            391119,
+            515950,
+            545992,
+            567574,
+            490576,
+            510992,
+            505450,
+            548616,
+            503408,
+            530825,
+            507200,
+            552116,
+            492618,
+            391994,
+            534909,
+            586241,
+            533450
+          ],
+          "candidate": [
+            1670348,
+            1725764,
+            1911844,
+            1851470,
+            1902803,
+            1618433,
+            2009259,
+            2012176,
+            1882678,
+            1825220,
+            1814137,
+            1806846,
+            1802471,
+            1960843,
+            1959385,
+            1855845,
+            1969593,
+            1780888,
+            1824054,
+            1808888,
+            1783513,
+            1791972,
+            2025884,
+            2080133
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                274746,
+                430493
+              ],
+              "candidate": [
+                1670348,
+                1725764
+              ]
+            },
+            "paired_median_ratio": 0.20766070141385207
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                373327,
+                269787
+              ],
+              "candidate": [
+                1911844,
+                1851470
+              ]
+            },
+            "paired_median_ratio": 0.170890337612009
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                369828,
+                503992
+              ],
+              "candidate": [
+                1902803,
+                1618433
+              ]
+            },
+            "paired_median_ratio": 0.24815718117161134
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                527617,
+                391119
+              ],
+              "candidate": [
+                2009259,
+                2012176
+              ]
+            },
+            "paired_median_ratio": 0.22845974136098185
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                515950,
+                545992
+              ],
+              "candidate": [
+                1882678,
+                1825220
+              ]
+            },
+            "paired_median_ratio": 0.28640000345209066
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                567574,
+                490576
+              ],
+              "candidate": [
+                1814137,
+                1806846
+              ]
+            },
+            "paired_median_ratio": 0.2922272764053297
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                510992,
+                505450
+              ],
+              "candidate": [
+                1802471,
+                1960843
+              ]
+            },
+            "paired_median_ratio": 0.27009226442438766
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                548616,
+                503408
+              ],
+              "candidate": [
+                1959385,
+                1855845
+              ]
+            },
+            "paired_median_ratio": 0.27574327104787916
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                530825,
+                507200
+              ],
+              "candidate": [
+                1969593,
+                1780888
+              ]
+            },
+            "paired_median_ratio": 0.27677116615175495
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                552116,
+                492618
+              ],
+              "candidate": [
+                1824054,
+                1808888
+              ]
+            },
+            "paired_median_ratio": 0.2875724412886305
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                391994,
+                534909
+              ],
+              "candidate": [
+                1783513,
+                1791972
+              ]
+            },
+            "paired_median_ratio": 0.25923839702865487
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                586241,
+                533450
+              ],
+              "candidate": [
+                2025884,
+                2080133
+              ]
+            },
+            "paired_median_ratio": 0.272695169065301
+          }
+        ],
+        "median_ms": {
+          "control": 0.506325,
+          "candidate": 1.838345
+        },
+        "paired_speedup": 0.27139371674484436,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.047249,
+        "finish_ms": 1.794304,
+        "device_kernel_ms": 0.826074,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "300000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "1200000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    },
+    {
+      "local_size": 64,
+      "active_rows": 128,
+      "end": 128,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 7.106995263711756e-08,
+          "max_abs": 8.940696716308594e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 6.972787513533336e-08,
+          "max_abs": 5.960464477539063e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 7.0015024237496e-08,
+          "max_abs": 5.960464477539063e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 3.674046954073794e-08,
+          "max_abs": 5.960464477539063e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 7.008968457809966e-08,
+          "max_abs": 1.1920928955078125e-07,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            2745414,
+            4799589,
+            2471252
+          ],
+          "candidate": [
+            6679058,
+            6308065,
+            6594477
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            2674249,
+            4708299,
+            2478252,
+            2456960,
+            2545043,
+            4711799,
+            2472419,
+            2429836,
+            2531626,
+            4686716,
+            2443544,
+            2385503,
+            2534542,
+            4710341,
+            2454627,
+            2381712,
+            2524335,
+            4703341,
+            2474460,
+            2387836,
+            2510918,
+            4710924,
+            2466877,
+            2314921
+          ],
+          "candidate": [
+            6318565,
+            5959821,
+            6212108,
+            6274815,
+            6416563,
+            6003862,
+            6185859,
+            6436688,
+            6424729,
+            5970904,
+            6036236,
+            6507561,
+            6241274,
+            6050819,
+            6058111,
+            6663309,
+            6343356,
+            6132193,
+            6105943,
+            6531186,
+            6420938,
+            6061610,
+            6263732,
+            6425021
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2674249,
+                4708299
+              ],
+              "candidate": [
+                6318565,
+                5959821
+              ]
+            },
+            "paired_median_ratio": 0.601263716582945
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2478252,
+                2456960
+              ],
+              "candidate": [
+                6212108,
+                6274815
+              ]
+            },
+            "paired_median_ratio": 0.3952304342711171
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2545043,
+                4711799
+              ],
+              "candidate": [
+                6416563,
+                6003862
+              ]
+            },
+            "paired_median_ratio": 0.5842668024644889
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2472419,
+                2429836
+              ],
+              "candidate": [
+                6185859,
+                6436688
+              ]
+            },
+            "paired_median_ratio": 0.38837288544063253
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2531626,
+                4686716
+              ],
+              "candidate": [
+                6424729,
+                5970904
+              ]
+            },
+            "paired_median_ratio": 0.5823294381174402
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2443544,
+                2385503
+              ],
+              "candidate": [
+                6036236,
+                6507561
+              ]
+            },
+            "paired_median_ratio": 0.3849749003431736
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2534542,
+                4710341
+              ],
+              "candidate": [
+                6241274,
+                6050819
+              ]
+            },
+            "paired_median_ratio": 0.5893937671965221
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2454627,
+                2381712
+              ],
+              "candidate": [
+                6058111,
+                6663309
+              ]
+            },
+            "paired_median_ratio": 0.38017288950447353
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2524335,
+                4703341
+              ],
+              "candidate": [
+                6343356,
+                6132193
+              ]
+            },
+            "paired_median_ratio": 0.5793473297247279
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2474460,
+                2387836
+              ],
+              "candidate": [
+                6105943,
+                6531186
+              ]
+            },
+            "paired_median_ratio": 0.38476270994780537
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                2510918,
+                4710924
+              ],
+              "candidate": [
+                6420938,
+                6061610
+              ]
+            },
+            "paired_median_ratio": 0.5785551155100706
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                2466877,
+                2314921
+              ],
+              "candidate": [
+                6263732,
+                6425021
+              ]
+            },
+            "paired_median_ratio": 0.3768532652499422
+          }
+        ],
+        "median_ms": {
+          "control": 2.494585,
+          "candidate": 6.252503
+        },
+        "paired_speedup": 0.4868927748905938,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.040249,
+        "finish_ms": 5.988695,
+        "device_kernel_ms": 5.0307,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "300000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "1200000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    },
+    {
+      "local_size": 64,
+      "active_rows": 128,
+      "end": 256,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 1.1815827391546678e-07,
+          "max_abs": 2.2351741790771484e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 1.2033327924558476e-07,
+          "max_abs": 2.60770320892334e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 1.2002019118703829e-07,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 7.478932646162832e-08,
+          "max_abs": 3.3527612686157227e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 1.2179680030200476e-07,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            15225921,
+            18732573,
+            6666809
+          ],
+          "candidate": [
+            16394902,
+            15871077,
+            15170214
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            13287827,
+            18264747,
+            17640590,
+            4108642,
+            12939291,
+            5708700,
+            6742350,
+            6647851,
+            3586859,
+            18158290,
+            3996935,
+            4922378,
+            4137517,
+            18867321,
+            4435304,
+            5316122,
+            4066934,
+            15651164,
+            4252723,
+            4311055,
+            5003461,
+            15574165,
+            4455137,
+            5237374
+          ],
+          "candidate": [
+            15830536,
+            14984425,
+            15763453,
+            15751496,
+            6530311,
+            5606618,
+            5943488,
+            6378647,
+            5858031,
+            5738449,
+            6258482,
+            6476062,
+            6091068,
+            5670200,
+            6471979,
+            6475479,
+            5935029,
+            5674867,
+            6443688,
+            6005028,
+            6047319,
+            5538660,
+            5957778,
+            6442521
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                13287827,
+                18264747
+              ],
+              "candidate": [
+                15830536,
+                14984425
+              ]
+            },
+            "paired_median_ratio": 1.0239368467803676
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                17640590,
+                4108642
+              ],
+              "candidate": [
+                15763453,
+                15751496
+              ]
+            },
+            "paired_median_ratio": 0.690124296250646
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                12939291,
+                5708700
+              ],
+              "candidate": [
+                6530311,
+                5606618
+              ]
+            },
+            "paired_median_ratio": 1.5364670090761838
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                6742350,
+                6647851
+              ],
+              "candidate": [
+                5943488,
+                6378647
+              ]
+            },
+            "paired_median_ratio": 1.0866786478154962
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                3586859,
+                18158290
+              ],
+              "candidate": [
+                5858031,
+                5738449
+              ]
+            },
+            "paired_median_ratio": 1.8751508216286321
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                3996935,
+                4922378
+              ],
+              "candidate": [
+                6258482,
+                6476062
+              ]
+            },
+            "paired_median_ratio": 0.7004030140380371
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                4137517,
+                18867321
+              ],
+              "candidate": [
+                6091068,
+                5670200
+              ]
+            },
+            "paired_median_ratio": 1.955982807295948
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                4435304,
+                5316122
+              ],
+              "candidate": [
+                6471979,
+                6475479
+              ]
+            },
+            "paired_median_ratio": 0.7531537078552408
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                4066934,
+                15651164
+              ],
+              "candidate": [
+                5935029,
+                5674867
+              ]
+            },
+            "paired_median_ratio": 1.6983871345617567
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                4252723,
+                4311055
+              ],
+              "candidate": [
+                6443688,
+                6005028
+              ]
+            },
+            "paired_median_ratio": 0.6879246020232127
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                5003461,
+                15574165
+              ],
+              "candidate": [
+                6047319,
+                5538660
+              ]
+            },
+            "paired_median_ratio": 1.776080036050471
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                4455137,
+                5237374
+              ],
+              "candidate": [
+                5957778,
+                6442521
+              ]
+            },
+            "paired_median_ratio": 0.7816352654077131
+          }
+        ],
+        "median_ms": {
+          "control": 5.276748,
+          "candidate": 6.174775
+        },
+        "paired_speedup": 1.055307747297932,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.027416,
+        "finish_ms": 5.636076,
+        "device_kernel_ms": 4.816694,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "1000000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "2208000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    },
+    {
+      "local_size": 64,
+      "active_rows": 128,
+      "end": 512,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 1.4947227541565566e-07,
+          "max_abs": 2.60770320892334e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 1.490907084504808e-07,
+          "max_abs": 2.60770320892334e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 1.4705130215846358e-07,
+          "max_abs": 2.2351741790771484e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 1.0353428226093198e-07,
+          "max_abs": 2.60770320892334e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 1.4892905079372378e-07,
+          "max_abs": 2.2351741790771484e-08,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            18318412,
+            17739463,
+            8134452
+          ],
+          "candidate": [
+            22443096,
+            21657650,
+            21419654
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            26216910,
+            23300290,
+            20680583,
+            8474239,
+            21214616,
+            22081436,
+            26344075,
+            8253158,
+            12453090,
+            23260041,
+            21585901,
+            8573986,
+            17987667,
+            23356289,
+            22887880,
+            8239450,
+            12493048,
+            22381264,
+            21727358,
+            8292533,
+            13873193,
+            22852589,
+            23547037,
+            8245575
+          ],
+          "candidate": [
+            12682628,
+            12028722,
+            12539714,
+            12800752,
+            12645587,
+            11821059,
+            12677379,
+            12535340,
+            12351300,
+            11811726,
+            12504715,
+            12526006,
+            12707420,
+            11788976,
+            12628088,
+            12742127,
+            12548464,
+            11907683,
+            12649087,
+            12552548,
+            12817960,
+            11895141,
+            12388050,
+            12678254
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                26216910,
+                23300290
+              ],
+              "candidate": [
+                12682628,
+                12028722
+              ]
+            },
+            "paired_median_ratio": 2.0038241536783703
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                20680583,
+                8474239
+              ],
+              "candidate": [
+                12539714,
+                12800752
+              ]
+            },
+            "paired_median_ratio": 1.1505243036967039
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                21214616,
+                22081436
+              ],
+              "candidate": [
+                12645587,
+                11821059
+              ]
+            },
+            "paired_median_ratio": 1.7695949007477363
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                26344075,
+                8253158
+              ],
+              "candidate": [
+                12677379,
+                12535340
+              ]
+            },
+            "paired_median_ratio": 1.3722134847891654
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                12453090,
+                23260041
+              ],
+              "candidate": [
+                12351300,
+                11811726
+              ]
+            },
+            "paired_median_ratio": 1.4780073902995428
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                21585901,
+                8573986
+              ],
+              "candidate": [
+                12504715,
+                12526006
+              ]
+            },
+            "paired_median_ratio": 1.2049148324572831
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                17987667,
+                23356289
+              ],
+              "candidate": [
+                12707420,
+                11788976
+              ]
+            },
+            "paired_median_ratio": 1.6877566806153852
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                22887880,
+                8239450
+              ],
+              "candidate": [
+                12628088,
+                12742127
+              ]
+            },
+            "paired_median_ratio": 1.226924170725396
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                12493048,
+                22381264
+              ],
+              "candidate": [
+                12548464,
+                11907683
+              ]
+            },
+            "paired_median_ratio": 1.4259937184708613
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                21727358,
+                8292533
+              ],
+              "candidate": [
+                12649087,
+                12552548
+              ]
+            },
+            "paired_median_ratio": 1.1911882304461596
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                13873193,
+                22852589
+              ],
+              "candidate": [
+                12817960,
+                11895141
+              ]
+            },
+            "paired_median_ratio": 1.48608553819288
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                23547037,
+                8245575
+              ],
+              "candidate": [
+                12388050,
+                12678254
+              ]
+            },
+            "paired_median_ratio": 1.2683406376943327
+          }
+        ],
+        "median_ms": {
+          "control": 21.4002585,
+          "candidate": 12.544089
+        },
+        "paired_speedup": 1.3991036016300133,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.065041,
+        "finish_ms": 12.190887,
+        "device_kernel_ms": 11.154774,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "1000000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "408000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    },
+    {
+      "local_size": 64,
+      "active_rows": 17,
+      "end": 62,
+      "goldens": [
+        {
+          "pattern": 0,
+          "finite": true,
+          "relative_rms": 9.341466451247635e-08,
+          "max_abs": 3.725290298461914e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 1,
+          "finite": true,
+          "relative_rms": 9.023025196817942e-08,
+          "max_abs": 3.725290298461914e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 2,
+          "finite": true,
+          "relative_rms": 9.669233798834193e-08,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 3,
+          "finite": true,
+          "relative_rms": 3.7356339065986056e-08,
+          "max_abs": 2.9802322387695312e-08,
+          "bitwise_equal": false,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 4,
+          "finite": true,
+          "relative_rms": 0.0,
+          "max_abs": 0.0,
+          "bitwise_equal": true,
+          "future_NaN": false,
+          "inactive_output_unchanged": true
+        },
+        {
+          "pattern": 5,
+          "finite": true,
+          "relative_rms": 9.556141984428929e-08,
+          "max_abs": 3.725290298461914e-08,
+          "bitwise_equal": false,
+          "future_NaN": true,
+          "inactive_output_unchanged": true
+        }
+      ],
+      "timing": {
+        "warmup_ns": {
+          "control": [
+            1152648,
+            1083233,
+            434285
+          ],
+          "candidate": [
+            2088300,
+            1705347,
+            1576141
+          ]
+        },
+        "samples_ns": {
+          "control": [
+            430785,
+            432243,
+            426410,
+            332786,
+            763280,
+            741696,
+            719238,
+            597907,
+            722155,
+            458493,
+            443035,
+            394035,
+            435743,
+            824237,
+            722738,
+            602574,
+            719822,
+            669073,
+            426118,
+            324329,
+            431076,
+            429326,
+            504283,
+            601407
+          ],
+          "candidate": [
+            1528892,
+            1517226,
+            1577891,
+            1584016,
+            1606183,
+            1507309,
+            1634182,
+            1618140,
+            1640890,
+            1655473,
+            1650807,
+            1588683,
+            1586641,
+            1466768,
+            1616390,
+            1663931,
+            1567392,
+            1562141,
+            1558642,
+            1701264,
+            1614349,
+            1583724,
+            1572933,
+            1584891
+          ]
+        },
+        "blocks": [
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                430785,
+                432243
+              ],
+              "candidate": [
+                1528892,
+                1517226
+              ]
+            },
+            "paired_median_ratio": 0.28332060675259463
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                426410,
+                332786
+              ],
+              "candidate": [
+                1577891,
+                1584016
+              ]
+            },
+            "paired_median_ratio": 0.2401069987194437
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                763280,
+                741696
+              ],
+              "candidate": [
+                1606183,
+                1507309
+              ]
+            },
+            "paired_median_ratio": 0.48337236774656883
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                719238,
+                597907
+              ],
+              "candidate": [
+                1634182,
+                1618140
+              ]
+            },
+            "paired_median_ratio": 0.404986037667857
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                722155,
+                458493
+              ],
+              "candidate": [
+                1640890,
+                1655473
+              ]
+            },
+            "paired_median_ratio": 0.3581668645109777
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                443035,
+                394035
+              ],
+              "candidate": [
+                1650807,
+                1588683
+              ]
+            },
+            "paired_median_ratio": 0.258395611654921
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                435743,
+                824237
+              ],
+              "candidate": [
+                1586641,
+                1466768
+              ]
+            },
+            "paired_median_ratio": 0.4126469791632893
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                722738,
+                602574
+              ],
+              "candidate": [
+                1616390,
+                1663931
+              ]
+            },
+            "paired_median_ratio": 0.40401899692133786
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                719822,
+                669073
+              ],
+              "candidate": [
+                1567392,
+                1562141
+              ]
+            },
+            "paired_median_ratio": 0.4438026376459363
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                426118,
+                324329
+              ],
+              "candidate": [
+                1558642,
+                1701264
+              ]
+            },
+            "paired_median_ratio": 0.23020510407355305
+          },
+          {
+            "order": [
+              "control",
+              "candidate",
+              "candidate",
+              "control"
+            ],
+            "samples_ns": {
+              "control": [
+                431076,
+                429326
+              ],
+              "candidate": [
+                1614349,
+                1583724
+              ]
+            },
+            "paired_median_ratio": 0.26903763610148984
+          },
+          {
+            "order": [
+              "candidate",
+              "control",
+              "control",
+              "candidate"
+            ],
+            "samples_ns": {
+              "control": [
+                504283,
+                601407
+              ],
+              "candidate": [
+                1572933,
+                1584891
+              ]
+            },
+            "paired_median_ratio": 0.35014300987008773
+          }
+        ],
+        "median_ms": {
+          "control": 0.481388,
+          "candidate": 1.585766
+        },
+        "paired_speedup": 0.3541549371905327,
+        "scope": "Full CPU kernel or GPU argument setup, dispatch, command completion and HOST memory visibility. No CL transfer commands; no NPU or model timing."
+      },
+      "unmeasured_GPU_phase_profile": {
+        "enqueue_ms": 0.019833,
+        "finish_ms": 1.605891,
+        "device_kernel_ms": 0.828454,
+        "clocks": {
+          "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+          "/sys/class/devfreq/fb000000.gpu/cur_freq": "1000000000",
+          "/sys/class/devfreq/dmc/cur_freq": "528000000",
+          "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "600000",
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+        }
+      }
+    }
+  ],
+  "CL_sources": {
+    "32": "#pragma OPENCL EXTENSION cl_khr_fp16 : enable\n\n#pragma OPENCL FP_CONTRACT OFF\n#define DEPTH 3072\n#define LS 256\nfloat4 poly_exp2(float4 x) {\n\n int4 nan=isnan(x);\nfloat4 safe=select(x,\n(float4)0,\nisinf(x)|nan);\n\n int4 q=convert_int4_rtz(safe+select((float4).5f,\n(float4)-.5f,\nsafe<0)),\nq1=q>>1;\n\n float4 s=safe-convert_float4(q);\n\n float4 y=fma((float4)0.00015359208919107914f,\ns,\n(float4)0.0013392627006396651f);\n\n y=fma(y,\ns,\n(float4)0.009618384763598442f);\ny=fma(y,\ns,\n(float4)0.055503472685813904f);\n\n y=fma(y,\ns,\n(float4)0.24022644758224487f);\ny=fma(y,\ns,\n(float4)0.6931471824645996f);\ny=fma(y,\ns,\n(float4)1.0f);\n\n y=y*as_float4((q1+127)<<23);\ny=y*as_float4((q-q1+127)<<23);\n\n y=select(y,\n(float4)INFINITY,\nx>=128);\ny=select(y,\n(float4)0,\nx<-150);\nreturn select(y,\n(float4)NAN,\nnan);\n\n\n}\nfloat4 approximate_div(float4 n,\nfloat4 d) {\n\n if(any((n==0)|isinf(n)|isnan(n)|isinf(d)|isnan(d)|(d>0x1p100f)))return n/d;\n\n float4 r=1.0f/d;\nr=fma(r,\nfma(-d,\nr,\n(float4)1.0f),\nr);\n\n float4 q=n*r;\nreturn fma(fma(-q,\nd,\nn),\nr,\nq);\n\n\n}\n// The device divide can leave the initial estimate two ULPs away. Resolve\n// residuals against each adjacent-float midpoint before quantizing the FFN.\nfloat4 corrected_div(float4 numerator, float4 denominator) {\n float4 magnitude=fabs(numerator),q=approximate_div(magnitude,denominator);\n for(int iteration=0;iteration<3;iteration++) {\n  uint4 bits=as_uint4(q),exponent=bits&(uint4)0x7f800000u;\n  int4 safe=(exponent>(uint4)(24u<<23))&(exponent<(uint4)(253u<<23))&isfinite(denominator);\n  float4 half_ulp=as_float4(exponent-(uint4)(24u<<23));\n  float4 upper=half_ulp*denominator;\n  float4 lower=select(upper,upper*.5f,(bits&(uint4)0x7fffffu)==0);\n  float4 residual=fma(-q,denominator,magnitude);\n  int4 odd=(bits&(uint4)1u)!=0;\n  int4 increase=safe&((residual>upper)|((residual==upper)&odd));\n  int4 decrease=safe&((residual< -lower)|((residual== -lower)&odd));\n  int4 upper_tie=safe&(residual==upper),lower_tie=safe&(residual== -lower);\n  if(any(upper_tie|lower_tie)) {\n   // A rounded FMA residual can equal a midpoint while its exact value lies\n   // on either side. Compare integer significands only in this rare case.\n   uint4 nb=as_uint4(magnitude),db=as_uint4(denominator);\n   uint4 nm=(nb&(uint4)0x7fffffu)|(uint4)0x800000u;\n   uint4 dm=(db&(uint4)0x7fffffu)|(uint4)0x800000u;\n   uint4 qm=(bits&(uint4)0x7fffffu)|(uint4)0x800000u;\n   uint4 shift=convert_uint4(convert_int4(nb>>23)-convert_int4(bits>>23)-convert_int4(db>>23)+151);\n   ulong4 lhs=convert_ulong4(nm)<<convert_ulong4(shift&63u);\n   ulong4 bound=convert_ulong4(qm*2u+1u)*convert_ulong4(dm);\n   int4 above=convert_int4((lhs>bound)|((lhs==bound)&convert_long4(odd)));\n   increase=select(increase,above,upper_tie);\n   int4 boundary=(qm==(uint4)0x800000u);\n   ulong4 lower_lhs=select(lhs,lhs<<1,convert_long4(boundary));\n   uint4 lower_m=select(qm*2u-1u,qm*4u-1u,boundary);\n   bound=convert_ulong4(lower_m)*convert_ulong4(dm);\n   int4 below=convert_int4((lower_lhs<bound)|((lower_lhs==bound)&convert_long4(odd)));\n   decrease=select(decrease,below,lower_tie);\n  }\n  bits+=convert_uint4(increase&1);bits-=convert_uint4(decrease&1);\n  q=as_float4(bits);\n  if(!any(increase|decrease))break;\n }\n return as_float4(as_uint4(q)|(as_uint4(numerator)&(uint4)0x80000000u));\n}\nfloat exact_scale(float maximum) {\n\n if(maximum<0x1p-20f)return 1e-8f;\n\n uint bits=as_uint(maximum),\nm=(bits&0x7fffff)|0x800000,\nshift=m>=16646144?6:7;\n\n uint numerator=m<<shift,\nq=numerator/127,\nr=numerator-q*127;\nq+=(r>=64);\n\n float result=as_float((((bits>>23)-shift)<<23)|(q-0x800000));\nreturn max(result,\n1e-8f);\n\n\n}\nfloat exact_recip(float scale) {\n\n uint bits=as_uint(scale),\nm=(bits&0x7fffff)|0x800000,\nexponent=bits>>23;\n\n if(m==0x800000)return as_float((254-exponent)<<23);\n\n ulong numerator=((ulong)1)<<47;\n\n uint q=convert_uint_rtz((1.0f/(float)m)*0x1p47f);\nulong product=(ulong)q*m;\n\n while(product>numerator){\nq--;\nproduct-=m;\n\n}\n while(numerator-product>=m){\nq++;\nproduct+=m;\n\n}\n uint r=(uint)(numerator-product);\n\n q+=(r*2>m)||((r*2==m)&&(q&1));\nreturn as_float(((253-exponent)<<23)|(q-0x800000));\n\n\n}\n\n#define ROWS 128\n#define DIM 128\n#define CONTEXT 512\n#define ATTN_LOCAL 32\n__kernel void attention(__global float *out,__global const float *query,__global const half *cache,int total,int active) {\n int item=get_group_id(0),kv=item/ROWS,row=item%ROWS,lid=get_local_id(0);\n if(row>=active)return;\n int used=total-active+row+1;\n __local float q[2*DIM],p[2*CONTEXT],scratch[2*ATTN_LOCAL],maximum[2],denominator[2];\n for(int i=lid;i<2*DIM;i+=ATTN_LOCAL)q[i]=query[((kv*2+i/DIM)*ROWS+row)*DIM+i%DIM];\n barrier(CLK_LOCAL_MEM_FENCE);\n float max0=-INFINITY,max1=-INFINITY;\n for(int t=lid;t<used;t+=ATTN_LOCAL) {\n  float4 a0=(float4)0,a1=(float4)0;\n  for(int c=0;c<DIM;c+=4) {\n   float4 k=vload_half4(0,cache+(kv*CONTEXT+t)*DIM+c);\n   a0=fma(vload4(0,q+c),k,a0);a1=fma(vload4(0,q+DIM+c),k,a1);\n  }\n  float s0=(((a0.s0+a0.s1)+a0.s2)+a0.s3)*0x1.6a09e667f3bccp-4f;\n  float s1=(((a1.s0+a1.s1)+a1.s2)+a1.s3)*0x1.6a09e667f3bccp-4f;\n  p[t]=s0;p[CONTEXT+t]=s1;max0=fmax(max0,s0);max1=fmax(max1,s1);\n }\n scratch[lid]=max0;scratch[ATTN_LOCAL+lid]=max1;barrier(CLK_LOCAL_MEM_FENCE);\n for(int step=ATTN_LOCAL/2;step>0;step/=2) {\n  if(lid<step){scratch[lid]=fmax(scratch[lid],scratch[lid+step]);scratch[ATTN_LOCAL+lid]=fmax(scratch[ATTN_LOCAL+lid],scratch[ATTN_LOCAL+lid+step]);}\n  barrier(CLK_LOCAL_MEM_FENCE);\n }\n if(lid<2)maximum[lid]=scratch[lid*ATTN_LOCAL];\n barrier(CLK_LOCAL_MEM_FENCE);\n for(int h=0;h<2;h++)for(int t=lid*4;t<used;t+=ATTN_LOCAL*4) {\n  if(t+3<used)vstore4(poly_exp2((vload4(0,p+h*CONTEXT+t)-(float4)maximum[h])*(float4)1.4426950216293335f),0,p+h*CONTEXT+t);\n  else for(int j=t;j<used;j++)p[h*CONTEXT+j]=exp(p[h*CONTEXT+j]-maximum[h]);\n }\n barrier(CLK_LOCAL_MEM_FENCE);\n if(lid<2){float sum=0;for(int t=0;t<used;t++)sum+=p[lid*CONTEXT+t];denominator[lid]=sum;}\n barrier(CLK_LOCAL_MEM_FENCE);\n for(int h=0;h<2;h++)for(int t=lid*4;t<used;t+=ATTN_LOCAL*4) {\n  if(t+3<used)vstore4(vload4(0,p+h*CONTEXT+t)/(float4)denominator[h],0,p+h*CONTEXT+t);\n  else for(int j=t;j<used;j++)p[h*CONTEXT+j]/=denominator[h];\n }\n barrier(CLK_LOCAL_MEM_FENCE);\n for(int c=lid*4;c<DIM;c+=ATTN_LOCAL*4) {\n  float4 a0=(float4)0,a1=(float4)0;\n  for(int t=0;t<used;t++) {\n   float4 v=vload_half4(0,cache+(8*CONTEXT+kv*CONTEXT+t)*DIM+c);\n   a0=fma(v,(float4)p[t],a0);a1=fma(v,(float4)p[CONTEXT+t],a1);\n  }\n  vstore4(a0,0,out+((kv*2)*ROWS+row)*DIM+c);vstore4(a1,0,out+((kv*2+1)*ROWS+row)*DIM+c);\n }\n}\n",
+    "64": "#pragma OPENCL EXTENSION cl_khr_fp16 : enable\n\n#pragma OPENCL FP_CONTRACT OFF\n#define DEPTH 3072\n#define LS 256\nfloat4 poly_exp2(float4 x) {\n\n int4 nan=isnan(x);\nfloat4 safe=select(x,\n(float4)0,\nisinf(x)|nan);\n\n int4 q=convert_int4_rtz(safe+select((float4).5f,\n(float4)-.5f,\nsafe<0)),\nq1=q>>1;\n\n float4 s=safe-convert_float4(q);\n\n float4 y=fma((float4)0.00015359208919107914f,\ns,\n(float4)0.0013392627006396651f);\n\n y=fma(y,\ns,\n(float4)0.009618384763598442f);\ny=fma(y,\ns,\n(float4)0.055503472685813904f);\n\n y=fma(y,\ns,\n(float4)0.24022644758224487f);\ny=fma(y,\ns,\n(float4)0.6931471824645996f);\ny=fma(y,\ns,\n(float4)1.0f);\n\n y=y*as_float4((q1+127)<<23);\ny=y*as_float4((q-q1+127)<<23);\n\n y=select(y,\n(float4)INFINITY,\nx>=128);\ny=select(y,\n(float4)0,\nx<-150);\nreturn select(y,\n(float4)NAN,\nnan);\n\n\n}\nfloat4 approximate_div(float4 n,\nfloat4 d) {\n\n if(any((n==0)|isinf(n)|isnan(n)|isinf(d)|isnan(d)|(d>0x1p100f)))return n/d;\n\n float4 r=1.0f/d;\nr=fma(r,\nfma(-d,\nr,\n(float4)1.0f),\nr);\n\n float4 q=n*r;\nreturn fma(fma(-q,\nd,\nn),\nr,\nq);\n\n\n}\n// The device divide can leave the initial estimate two ULPs away. Resolve\n// residuals against each adjacent-float midpoint before quantizing the FFN.\nfloat4 corrected_div(float4 numerator, float4 denominator) {\n float4 magnitude=fabs(numerator),q=approximate_div(magnitude,denominator);\n for(int iteration=0;iteration<3;iteration++) {\n  uint4 bits=as_uint4(q),exponent=bits&(uint4)0x7f800000u;\n  int4 safe=(exponent>(uint4)(24u<<23))&(exponent<(uint4)(253u<<23))&isfinite(denominator);\n  float4 half_ulp=as_float4(exponent-(uint4)(24u<<23));\n  float4 upper=half_ulp*denominator;\n  float4 lower=select(upper,upper*.5f,(bits&(uint4)0x7fffffu)==0);\n  float4 residual=fma(-q,denominator,magnitude);\n  int4 odd=(bits&(uint4)1u)!=0;\n  int4 increase=safe&((residual>upper)|((residual==upper)&odd));\n  int4 decrease=safe&((residual< -lower)|((residual== -lower)&odd));\n  int4 upper_tie=safe&(residual==upper),lower_tie=safe&(residual== -lower);\n  if(any(upper_tie|lower_tie)) {\n   // A rounded FMA residual can equal a midpoint while its exact value lies\n   // on either side. Compare integer significands only in this rare case.\n   uint4 nb=as_uint4(magnitude),db=as_uint4(denominator);\n   uint4 nm=(nb&(uint4)0x7fffffu)|(uint4)0x800000u;\n   uint4 dm=(db&(uint4)0x7fffffu)|(uint4)0x800000u;\n   uint4 qm=(bits&(uint4)0x7fffffu)|(uint4)0x800000u;\n   uint4 shift=convert_uint4(convert_int4(nb>>23)-convert_int4(bits>>23)-convert_int4(db>>23)+151);\n   ulong4 lhs=convert_ulong4(nm)<<convert_ulong4(shift&63u);\n   ulong4 bound=convert_ulong4(qm*2u+1u)*convert_ulong4(dm);\n   int4 above=convert_int4((lhs>bound)|((lhs==bound)&convert_long4(odd)));\n   increase=select(increase,above,upper_tie);\n   int4 boundary=(qm==(uint4)0x800000u);\n   ulong4 lower_lhs=select(lhs,lhs<<1,convert_long4(boundary));\n   uint4 lower_m=select(qm*2u-1u,qm*4u-1u,boundary);\n   bound=convert_ulong4(lower_m)*convert_ulong4(dm);\n   int4 below=convert_int4((lower_lhs<bound)|((lower_lhs==bound)&convert_long4(odd)));\n   decrease=select(decrease,below,lower_tie);\n  }\n  bits+=convert_uint4(increase&1);bits-=convert_uint4(decrease&1);\n  q=as_float4(bits);\n  if(!any(increase|decrease))break;\n }\n return as_float4(as_uint4(q)|(as_uint4(numerator)&(uint4)0x80000000u));\n}\nfloat exact_scale(float maximum) {\n\n if(maximum<0x1p-20f)return 1e-8f;\n\n uint bits=as_uint(maximum),\nm=(bits&0x7fffff)|0x800000,\nshift=m>=16646144?6:7;\n\n uint numerator=m<<shift,\nq=numerator/127,\nr=numerator-q*127;\nq+=(r>=64);\n\n float result=as_float((((bits>>23)-shift)<<23)|(q-0x800000));\nreturn max(result,\n1e-8f);\n\n\n}\nfloat exact_recip(float scale) {\n\n uint bits=as_uint(scale),\nm=(bits&0x7fffff)|0x800000,\nexponent=bits>>23;\n\n if(m==0x800000)return as_float((254-exponent)<<23);\n\n ulong numerator=((ulong)1)<<47;\n\n uint q=convert_uint_rtz((1.0f/(float)m)*0x1p47f);\nulong product=(ulong)q*m;\n\n while(product>numerator){\nq--;\nproduct-=m;\n\n}\n while(numerator-product>=m){\nq++;\nproduct+=m;\n\n}\n uint r=(uint)(numerator-product);\n\n q+=(r*2>m)||((r*2==m)&&(q&1));\nreturn as_float(((253-exponent)<<23)|(q-0x800000));\n\n\n}\n\n#define ROWS 128\n#define DIM 128\n#define CONTEXT 512\n#define ATTN_LOCAL 64\n__kernel void attention(__global float *out,__global const float *query,__global const half *cache,int total,int active) {\n int item=get_group_id(0),kv=item/ROWS,row=item%ROWS,lid=get_local_id(0);\n if(row>=active)return;\n int used=total-active+row+1;\n __local float q[2*DIM],p[2*CONTEXT],scratch[2*ATTN_LOCAL],maximum[2],denominator[2];\n for(int i=lid;i<2*DIM;i+=ATTN_LOCAL)q[i]=query[((kv*2+i/DIM)*ROWS+row)*DIM+i%DIM];\n barrier(CLK_LOCAL_MEM_FENCE);\n float max0=-INFINITY,max1=-INFINITY;\n for(int t=lid;t<used;t+=ATTN_LOCAL) {\n  float4 a0=(float4)0,a1=(float4)0;\n  for(int c=0;c<DIM;c+=4) {\n   float4 k=vload_half4(0,cache+(kv*CONTEXT+t)*DIM+c);\n   a0=fma(vload4(0,q+c),k,a0);a1=fma(vload4(0,q+DIM+c),k,a1);\n  }\n  float s0=(((a0.s0+a0.s1)+a0.s2)+a0.s3)*0x1.6a09e667f3bccp-4f;\n  float s1=(((a1.s0+a1.s1)+a1.s2)+a1.s3)*0x1.6a09e667f3bccp-4f;\n  p[t]=s0;p[CONTEXT+t]=s1;max0=fmax(max0,s0);max1=fmax(max1,s1);\n }\n scratch[lid]=max0;scratch[ATTN_LOCAL+lid]=max1;barrier(CLK_LOCAL_MEM_FENCE);\n for(int step=ATTN_LOCAL/2;step>0;step/=2) {\n  if(lid<step){scratch[lid]=fmax(scratch[lid],scratch[lid+step]);scratch[ATTN_LOCAL+lid]=fmax(scratch[ATTN_LOCAL+lid],scratch[ATTN_LOCAL+lid+step]);}\n  barrier(CLK_LOCAL_MEM_FENCE);\n }\n if(lid<2)maximum[lid]=scratch[lid*ATTN_LOCAL];\n barrier(CLK_LOCAL_MEM_FENCE);\n for(int h=0;h<2;h++)for(int t=lid*4;t<used;t+=ATTN_LOCAL*4) {\n  if(t+3<used)vstore4(poly_exp2((vload4(0,p+h*CONTEXT+t)-(float4)maximum[h])*(float4)1.4426950216293335f),0,p+h*CONTEXT+t);\n  else for(int j=t;j<used;j++)p[h*CONTEXT+j]=exp(p[h*CONTEXT+j]-maximum[h]);\n }\n barrier(CLK_LOCAL_MEM_FENCE);\n if(lid<2){float sum=0;for(int t=0;t<used;t++)sum+=p[lid*CONTEXT+t];denominator[lid]=sum;}\n barrier(CLK_LOCAL_MEM_FENCE);\n for(int h=0;h<2;h++)for(int t=lid*4;t<used;t+=ATTN_LOCAL*4) {\n  if(t+3<used)vstore4(vload4(0,p+h*CONTEXT+t)/(float4)denominator[h],0,p+h*CONTEXT+t);\n  else for(int j=t;j<used;j++)p[h*CONTEXT+j]/=denominator[h];\n }\n barrier(CLK_LOCAL_MEM_FENCE);\n for(int c=lid*4;c<DIM;c+=ATTN_LOCAL*4) {\n  float4 a0=(float4)0,a1=(float4)0;\n  for(int t=0;t<used;t++) {\n   float4 v=vload_half4(0,cache+(8*CONTEXT+kv*CONTEXT+t)*DIM+c);\n   a0=fma(v,(float4)p[t],a0);a1=fma(v,(float4)p[CONTEXT+t],a1);\n  }\n  vstore4(a0,0,out+((kv*2)*ROWS+row)*DIM+c);vstore4(a1,0,out+((kv*2+1)*ROWS+row)*DIM+c);\n }\n}\n"
+  },
+  "scope": "Complete CPU-vs-OpenCL FP32 attention including kernel dispatch and completion/visibility; direct HOST import of exact owned, page-aligned CPU Tensor mmap bases. QueryF32, cacheF16, outputF32, context512, head16/KV8/dim128/maxrows128. Causal masking/futureNaN/partial rows. Existing CPU expf tail versus GPU exp tail may differ; operator numerical RMS limit1e-5, no bitwise or trained-quality claim.",
+  "common_CPU0_IRQ_helper": true,
+  "GPU": {
+    "name": "Mali-LODX r0p0",
+    "driver": "2.1",
+    "CPU_tensor_imports": [
+      {
+        "nbytes": 1048576,
+        "alignment": 0,
+        "storage": "CPU HostAllocator mmap"
+      },
+      {
+        "nbytes": 1048576,
+        "alignment": 0,
+        "storage": "CPU HostAllocator mmap"
+      },
+      {
+        "nbytes": 2097152,
+        "alignment": 0,
+        "storage": "CPU HostAllocator mmap"
+      }
+    ]
+  },
+  "cleanup_complete": true,
+  "cleanup_errors": [],
+  "source_sha256_after": {
+    "tinygrad/__init__.py": "fc24d5d0df1b1a14bbee0bd2641a61ca5f34ec7d83f1b0b755adf6eb83d5c0be",
+    "tinygrad/codegen/__init__.py": "b8fc262121b861659cf777d19544138e5a4d9582c5277dd6f93e914e30423727",
+    "tinygrad/codegen/decomp/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/codegen/decomp/dtype.py": "b3a04ebdd9f5686936964fefa99a46ac27515edb7be4c9f07201269c42371502",
+    "tinygrad/codegen/decomp/op.py": "2d5ff52711a92c45f8814056d799da3c0aade9498822cc5cdee2a83dc3276ae1",
+    "tinygrad/codegen/decomp/transcendental.py": "1d737c265c9f96b8f09d82b85eb660dbb91b558a5af88512075c5a20540d00c5",
+    "tinygrad/codegen/gpudims.py": "15d368b1a45c237c8d3ea0b28af5f3b80fa49dbe73694bd8b315d835c4335ae5",
+    "tinygrad/codegen/late/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/codegen/late/coalesce.py": "36d59f15f202ae20444cd76795e0068b79f4158833e691da3c0ac72848e0d475",
+    "tinygrad/codegen/late/gater.py": "c194d9ffe8d022e62894367d4c0ce0fdf57ff02f34f128efcdac3072334275b9",
+    "tinygrad/codegen/late/linearizer.py": "9c1d7ae56a0381bdb4fd1340fe32eee77ad66617b06a215b8c4c46bf3f97fbe8",
+    "tinygrad/codegen/late/regalloc.py": "e120e26baee8021becfd716e39cb85dc0f5c5992bd30d5a50e48e7a0f528c9e5",
+    "tinygrad/codegen/opt/__init__.py": "6bddcc6a2052b1a39e9a421731275524fa6f0f861abfdefeafae5403747f8778",
+    "tinygrad/codegen/opt/heuristic.py": "029537ca82fadbbc34c9780fee3853466eb5a157a51b7c43dd45a94b3cde2a89",
+    "tinygrad/codegen/opt/postrange.py": "2ee24512630396f82016e709036c8991af7ec7482347060951fe01ebd719d3dd",
+    "tinygrad/codegen/opt/search.py": "670111d23c6360c6bd57f473a0e8877fe9b6615455aa27473f52c6bb99ef81b7",
+    "tinygrad/codegen/simplify.py": "a05ecef8e0f13d104516be51e4289653b00ca3104893000ed09a3b9b639a629f",
+    "tinygrad/device.py": "7a221075b3968b25db62edbc46450616a1e64e20c363466e26aab2a5a2f080f9",
+    "tinygrad/dtype.py": "7800592dcccbdd5a5beaee889342b5f62790d37445938fe601416c8b76057926",
+    "tinygrad/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/engine/jit.py": "7e91838fb3f3593661d771459775ef3e2811ba1038c58f06c9d5c359cac0bec8",
+    "tinygrad/engine/realize.py": "a00765bf85f23399020a9b6ee1e397aed12c3d2a2c4f1362001b67130b41a1db",
+    "tinygrad/engine/worker.py": "b9d47164d0b2fa09f4f396efcfd856b8ebe93a4e446ff683692ea9d605bb017d",
+    "tinygrad/function.py": "dbf481c6049a538680e386d2846e0569bb9924f0293dd3356e92e7a428593a22",
+    "tinygrad/helpers.py": "eda095ab2c35d045e40523cf8f025543c45b012ff217ddeaed6143610330f308",
+    "tinygrad/llm/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/llm/__main__.py": "2b2aeb15c8e098d5268709723bf52e22845634a68075e5904a474ec01f4165f0",
+    "tinygrad/llm/chatglm.py": "789feb35a21226616e674caf42d687fdc4efb7ffff97445f286931880342bac6",
+    "tinygrad/llm/cli.py": "801120b53b59f15221d014a710df2cf8224728e9699f70629ac87b5db28baf49",
+    "tinygrad/llm/dflash2.py": "fd06909403b5268285116846e9082fa9f451618cd8691e04074fccec36eeeb3a",
+    "tinygrad/llm/dflash2_config.py": "f46fda13e52e26ff9fe7bfeb40d56c5f0f7536424358b4e4bc16bee3ef745a5d",
+    "tinygrad/llm/dflash2_selector.py": "54455105954ca47e44d32dec4974d0f222c8c239d61492c43a1a922b54c95342",
+    "tinygrad/llm/gemma3n.py": "37c434bfe88f8c196271f5dc7f7f6a8421c94e55c86a6ecf6eff0e3d76b1acc3",
+    "tinygrad/llm/gemma4.py": "e218b96aaeb628cf355e5428a09d397f863933b28ac50f924c2c0d48acc78c4c",
+    "tinygrad/llm/gguf.py": "ef7957f1a2bd57c48380bdece85f90ddf829055834eb63465468189927b0f2c1",
+    "tinygrad/llm/kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/llm/kernels/amd.py": "05a05aa63391251eea4b8c2dfcc1c56718bdecb712ad9041e56ab84a31edd92c",
+    "tinygrad/llm/kernels/mali.py": "8a52d608e7c22dbaf1605d4aa32b49a8b7af3b88e3678a9c5c3373d95ab961c4",
+    "tinygrad/llm/kernels/mali_attention.py": "aee062ac18b5bb749304decf245a7c52d0a10fcf5d22bddc25e88e172439e778",
+    "tinygrad/llm/kernels/mali_copy.py": "5f9622c02ac6681b4614b777295531ec6de33da9a43253dd4466a3e90d9617e5",
+    "tinygrad/llm/kernels/mali_half_prefill.py": "352996d9b939565f76875960ddb121f648c813d38e5aef313e412c76fe2c8a76",
+    "tinygrad/llm/kernels/mali_linear.py": "31e10be28dea06d51b13383c69a63e24966e7029f7aa4749d3b5e79fe810f96d",
+    "tinygrad/llm/kernels/mali_q8.py": "2d6d4d38b2eb86bb1ca9a546ddaa8ac30ccadc3626332c36acc1328ccfc9459d",
+    "tinygrad/llm/kernels/mali_q8_checkpoint.py": "f96c43dc0489f33db4b2ce084a371af44d0cceb520479d15dc5f63bf65a46387",
+    "tinygrad/llm/kernels/mali_q8_shared.py": "d00c78f07e42ff41424b76b7257916b74055590ddad405f6afcb6c240aca15fc",
+    "tinygrad/llm/kernels/mali_recurrent.py": "35d74bdd1619a786dbf44514a787ce713ad43b9911b4fb7c01812024ca0c281d",
+    "tinygrad/llm/kernels/mali_rows.py": "26dc2d4534ce7cfc6bb6f97e6531b26f1c47de758208ef34f237a95573ca3d58",
+    "tinygrad/llm/kernels/mali_state.py": "c9710fe99c1c78ec06eae0cd8617ef8259a108fe111ace074d6091bbbc6e2c22",
+    "tinygrad/llm/kernels/rockchip.py": "4b422de14ceaf8b188f9da14c38b3a2f6a354710fd7909c0bba8af90f6ec8568",
+    "tinygrad/llm/kernels/rockchip_attention.py": "ed1d797b3e2822e779886ffe5f0f8279c9d0669c85a71fa57206a701f65a07fd",
+    "tinygrad/llm/kernels/rockchip_bucketed_int8.py": "58011adc4e4a569f94a045ed6c10118122d66b89430f0193cd555d294f7d593d",
+    "tinygrad/llm/kernels/rockchip_cache.c": "03006a743c7a7f4e72f851950c39f0d473c144d290479fa8935308360c55c549",
+    "tinygrad/llm/kernels/rockchip_cache.py": "ef9a59e36734e62510e304c5de70db93bfc6418a081d6ed840e61d0fe1c359cd",
+    "tinygrad/llm/kernels/rockchip_cpu.py": "dcffed8092dd2247a98dacdf9bef28368fe06a74aab10448b239e3f78f414286",
+    "tinygrad/llm/kernels/rockchip_decode.py": "a560368faa8346ef53ce9905d7844d516a78e77ac90e032175ae7cde9f3a3803",
+    "tinygrad/llm/kernels/rockchip_dot_attention.py": "8d880c2518f699175f664a039133f98281b6781737073841d376a69f9a95b02e",
+    "tinygrad/llm/kernels/rockchip_experts.py": "09ffb2941c59acfd8ae11ab0fb93ff2bdfa8f2799f981aecbf099776f84c6bb6",
+    "tinygrad/llm/kernels/rockchip_gelu.py": "450b2a2d6e9f622fd709b78d811639b76e6272cf502a32abbd779a7f0449942b",
+    "tinygrad/llm/kernels/rockchip_gelu_ffn.py": "db8d8a177e9ec713563e061d789e1d29da31f9d43f1eec986976baf0833bb1d9",
+    "tinygrad/llm/kernels/rockchip_gpt2.py": "cb9a53386a3e6aa7f13bbb6a20488eaa3685f0ec86f6a054f1f7e38dabea0698",
+    "tinygrad/llm/kernels/rockchip_gpt2_decode.py": "8153cb1d439880dfa85914d92974e848dd8977f41c13519cad23980f94438359",
+    "tinygrad/llm/kernels/rockchip_gpu.py": "7c9c5055953f2b46f864ee76007376389a61f338f01abb4143baa588a8826188",
+    "tinygrad/llm/kernels/rockchip_greedy.py": "01ac047734624a01c04b6e75850c658cc96abba2a1617d7117e740bd16e60ccc",
+    "tinygrad/llm/kernels/rockchip_grouped_int8.py": "2bbf3a5678b3dadc1989fe313b2328c06b8b259de363a035e569d0709438fe1a",
+    "tinygrad/llm/kernels/rockchip_idle.c": "4fb7c8022cefd7929907f4abeedaf8894a96f9261763c32015bbd648eeb09b57",
+    "tinygrad/llm/kernels/rockchip_idle.py": "e0fa42189a9c076df1a2da6a1160a63c1a97814e1411ffe2a5297dced29498dc",
+    "tinygrad/llm/kernels/rockchip_int8.py": "b73489344c12167753b788d4111210423ed9cb845d4c42a6c7d19c3d92273227",
+    "tinygrad/llm/kernels/rockchip_mla.py": "07615348877ff5379a1e88a1f297a7c1c2a499ae7884f97f515d1fafe691ee1a",
+    "tinygrad/llm/kernels/rockchip_mla_attention.c": "e598cd75b09ed8a4a1cbaabf96cc2f7838f696a55f3d81ba60e7147ff3d8c390",
+    "tinygrad/llm/kernels/rockchip_mla_attention.py": "db0e011e3e95ffac8c6c8623f0ab4323a577a6ded52acb67dd0b394e90d4d8c5",
+    "tinygrad/llm/kernels/rockchip_mla_projections.py": "5341b3e0ccb3b6b668654fcffc1225f6109e9363628b17e85023ddb4d25358da",
+    "tinygrad/llm/kernels/rockchip_npu_experts.py": "bf338580687e6d4cc8a9fd9ce49a7d03589f97603989c2c0eac2f08f73708d7f",
+    "tinygrad/llm/kernels/rockchip_packed_attention.py": "aace3f08085c69a0deb29ce21244c58e1f95b50b99e31cfa3f9ae6abc04e8822",
+    "tinygrad/llm/kernels/rockchip_pool.c": "6b93a5024aa53552da934e475daaa10d84171cc6be6fd7911c5827a646e031a8",
+    "tinygrad/llm/kernels/rockchip_pool.py": "31fff31283e4660faa5b484e5a456be2c0486823e62ef0688cb600552e487709",
+    "tinygrad/llm/kernels/rockchip_qkv.py": "dd284ef8f885495ae38f7c670b127cdf2ae2ba414a0543777cd102f37cf0085d",
+    "tinygrad/llm/kernels/rockchip_recurrent.c": "93ef4514c57ccc7c0dd29f1765ef98cd99df98ceccb4ad8dd41191ad8a7c3d8e",
+    "tinygrad/llm/kernels/rockchip_recurrent.py": "d932b2dc3349c435f5b0f35162f0ca3e67e958942083a55b1c1c6ad63d824d0b",
+    "tinygrad/llm/kernels/rockchip_replay.py": "6cb30d010c402f3411bbff41a6968d932e2323bc13d34531ac202c5260e7f66d",
+    "tinygrad/llm/kernels/rockchip_routed_int8.py": "2d6c0966a7e0ea7e600d19570bfc48cdb96fbfe9b1190e14bf3f777cd8033177",
+    "tinygrad/llm/kernels/rockchip_rwkv.c": "ab1ec8474d3d7cec5805c22576d864e1e9d23308cf31ebee3c8509ce1eee6918",
+    "tinygrad/llm/kernels/rockchip_rwkv.py": "5b46a2f060ff8db312ce08c859605a9010c3ede615a7bc3d2a9ba89863579580",
+    "tinygrad/llm/kernels/rockchip_sigmoid.c": "b6ead2a0abe50364a3fb84ec072cdd9e5bab1caff97bc67f4cb60a3a079dec01",
+    "tinygrad/llm/kernels/rockchip_sigmoid.py": "3e8ab4e113436a4d620d01b5de16a3dc7bb8550ffe2389861e87dfbbedbecb92",
+    "tinygrad/llm/kernels/rockchip_softcap.py": "23da42409134a60761a45e34677e2c7134e8df6e4783700eecb07e862f832bb1",
+    "tinygrad/llm/kernels/rockchip_softmax.py": "f429d46acf50a329ce7f4573f2a55ee0f4686923c4f1de93bdbe1889660bff57",
+    "tinygrad/llm/kernels/rockchip_static.c": "04e7539678968204b48ac5e4d466ca38c06fb4f7c1d600ff20b8ffe24129ed50",
+    "tinygrad/llm/kernels/rockchip_static.py": "3ab6823a9fecf1b9a6d6dd0fd1d43bec6c61391d913dab3e0fd075b335d6550e",
+    "tinygrad/llm/kernels/rockchip_vision.py": "94f26b16273eec73d419fd068483721846f20cb9c1f4225fa6a9f214c038e47c",
+    "tinygrad/llm/kernels/rockchip_vision_mlp.py": "b1644c2dd0ca7da816211d18e7f1c9e9d1f0094c8028a62b137b4e080b716a9b",
+    "tinygrad/llm/kernels/rockchip_vision_pipeline.py": "26cee5cdecf29ff41058296870177930911a8e17e9219774be3a959c15d1aa94",
+    "tinygrad/llm/kernels/rockchip_vision_prepared.py": "683f93b048ab6bb1a98491028852cda8c4a121eacbcc98d924b0d91aa30720e7",
+    "tinygrad/llm/kernels/vision_embed.py": "12102e073bfbdd1484728a7a6e279c4cdd7f59dbd7713ef0d39adb6fa221990f",
+    "tinygrad/llm/model.py": "c8737c938c3dbc215346312fdafdb8eec5627b91b1935de5d28c84a3c2f94cb6",
+    "tinygrad/llm/rwkv.py": "f94363ad44d65784db0fd49777b927a627d393b3427de76bd5466fec5e66c02c",
+    "tinygrad/llm/serve.py": "4750c7971d126c91c776886b03f2dbf47815317907d7c05d418388f371e16c00",
+    "tinygrad/llm/speculative.py": "ba6a69a248efa202655d813cf91702b403c4073f85fc51808db51079ffb1a60b",
+    "tinygrad/llm/speculative_adaptive.py": "bdddc414c20e102fb4840d4088097cd73b692288c7e79d1c79df5cb7529105fb",
+    "tinygrad/llm/speculative_budget.py": "79a64b2bc8777d995928a1675d09617f82f4ec20a850796e6c0bb54d30169e0b",
+    "tinygrad/llm/speculative_policy.py": "b6379199d6a3ad09b5d143c0010bc8be19105312a940ad78ea35d806198d7890",
+    "tinygrad/llm/speculative_sampling.py": "fbffa90eca44034b57004b67e4b44f6c0ed06fc6a0d536359220b9a1523e0d67",
+    "tinygrad/llm/speculative_trace.py": "bdd913c8ed34c65c76027109bf2efd1d39c540123f79f4e972d73fd508d7d9da",
+    "tinygrad/llm/vision.py": "d96c9e65478ae86377112ba2831547d093a5e52d00ab93db9faf9f2826fc062a",
+    "tinygrad/mixin/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/mixin/creation.py": "4099d41e065e5638f8bb17f6c016ec6b286bac52e5ca6c9a86b89d73cbebbebb",
+    "tinygrad/mixin/dtype.py": "99027a5281c17bfbd572f12a090bf0d31db36bd239202606c1d3d6237486ec64",
+    "tinygrad/mixin/elementwise.py": "951d9d8a83e5cd3ae5a26571d685f2cef44fa8b41b1e4c3e028f1bf4d31076de",
+    "tinygrad/mixin/gradient.py": "c88b1b5557ab5edb450ed0f7e10bd2adebfcfb572f9977446fa04c2f39cc58d6",
+    "tinygrad/mixin/movement.py": "e6412a4f11b8dadb72cab73b260405c0b39389979e4786f0d981be321f121a50",
+    "tinygrad/mixin/op.py": "c09ecfca6522014dbd7b5ac1faae8c85fdc936484cd95084ac41a3ef135e82c7",
+    "tinygrad/mixin/rand.py": "19623f666365a318b6730123dd0fad27469ced754740415b86563ce0857c0363",
+    "tinygrad/mixin/reduce.py": "6981c71968b41ee79e8e97dfdc89db4b62216fd508707b57dfa0cd42b414e79e",
+    "tinygrad/nn/__init__.py": "992c14aec20683a93469d289d5817d1a023f0e3f39ddd5b93181dc8ef5b0691e",
+    "tinygrad/nn/datasets.py": "bc5ff2d74e07452c4f82afc5d6f7e2656978e189cb64689a1e8a1670825dff67",
+    "tinygrad/nn/onnx.py": "670eaffe1386d496e8337f4be5a472cd7b3786fa610a47ba767d89871346503b",
+    "tinygrad/nn/optim.py": "981bdfa9de9baf3b82f7e80f5c32bab954c56d4f8ef902bf9940770e783dee4b",
+    "tinygrad/nn/state.py": "8b709853bca9edf31b99eb7e76c756968cb9bf521747f7dc50a86110ff974e6b",
+    "tinygrad/nn/torch.py": "377d20ff02d4c70e112830be326c8ad9a188cb490c9d15ca7d4bcffc0820d4ca",
+    "tinygrad/renderer/__init__.py": "119d64c9f98c132f9971c8b7c744bcd53ca8d3ec9e2dd0fca2d76f26ad0e8ff7",
+    "tinygrad/renderer/amd/__init__.py": "daa2583cf98a69bf59aa3f842bacb704598445fb23b9166bebc3adb9a9b7112f",
+    "tinygrad/renderer/amd/dsl.py": "dd45cbdf0d63570742eb54a21ef09266eaed95b8f3708de5363ef1c64d86606f",
+    "tinygrad/renderer/amd/elf.py": "faa631ce5f4d71fae646fa4e44b7ef6012f08b9738ba45691b9d901dcfbe77fc",
+    "tinygrad/renderer/amd/generate.py": "2bbf3599176b8dc500b253a97714977e443b7397063e38a775bcc9bd1c709824",
+    "tinygrad/renderer/amd/sqtt.py": "1bb1807a141e2bf5446af8b092e65520ddb775ff08af272271fb22b02362e49b",
+    "tinygrad/renderer/cstyle.py": "aa6c775081a9fcfbcc675e38e0f3b029c788c5a92f1c0fd46bc0c367d661a492",
+    "tinygrad/renderer/isa/__init__.py": "3fd9ff060c1bb591d79e07b5990e264e5ec2b8efd03fc18fb6fe3a5585022d8b",
+    "tinygrad/renderer/isa/x86.py": "523c94a6eeb89dd5f888967f11380b9f298745ec9b1800e3cd2726668b2c8181",
+    "tinygrad/renderer/llvmir.py": "108235c5ad3fd43aa22b6e094136c35314c4fe7c58f7b508c34d666a3a526b4f",
+    "tinygrad/renderer/nir.py": "a3d8186dcb5b6df0ef3c8aaaee3361b6d9433fe35a6b46d4a4aa0dc1193f05a7",
+    "tinygrad/renderer/ptx.py": "906bd04176ef07274e0fc9d9bf99bc86bb8d8bc9674a3099aee2eceff3d3d3e0",
+    "tinygrad/renderer/tc.py": "f8836d7fa6dee7f0f84f6adf29c192a29ffae62ca40e0372f74b128cde4e6654",
+    "tinygrad/renderer/wgsl.py": "8a5f1823834fef671a28822e21775912393f8b718b0b8e3ff7e319d9a926ef8d",
+    "tinygrad/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/__init__.py": "89955c8ec8c5cb2d446db169379100b421f51232563eb076b9111e4845a9f5bb",
+    "tinygrad/runtime/autogen/am/__init__.py": "fb2a32843680df3df2ebef7692b0ce5aa4f8ce5da778c6abe456160c0112de74",
+    "tinygrad/runtime/autogen/am/am.py": "075d9d29b885c546897143ade1b18f36d4a4450d1fb1d899d2df8f08aa5853e1",
+    "tinygrad/runtime/autogen/am/fw.py": "c60f58eb1ee6d61cee3817c5af23ef1fdb8c9ac9d4353d07972114cef09c7c02",
+    "tinygrad/runtime/autogen/am/navi_offsets.py": "9080f1a21706918dc9392709804115aa60201c8865ac86ef2b49252a2441c7cf",
+    "tinygrad/runtime/autogen/am/pm4_nv.py": "9bb32046114fd7ddbb976cc25bd5300bad08298b87682539a1a3e860954aad16",
+    "tinygrad/runtime/autogen/am/pm4_soc15.py": "f1ace5672c822d7a728f72b376a4ee5842aa4805944ea5f24dc8289dd341fac8",
+    "tinygrad/runtime/autogen/am/pmc.py": "b65aa28d165f88fd1f17c965e48e5fcbeb7f33bb3da4cba498b819f648ea8b3e",
+    "tinygrad/runtime/autogen/am/regs.py": "81d38816611a1e086e21feca4c2e021174decab385650405e520457aacbfd10f",
+    "tinygrad/runtime/autogen/am/sdma_4_0_0.py": "e2538620e5e73b0a745ce2ba0284c709f158e2893dd478f98bbd86c04c50292b",
+    "tinygrad/runtime/autogen/am/sdma_5_0_0.py": "33e42eb0e8c9be08f698ce8dded66446ad600cf03f64179696556a69617ee5bd",
+    "tinygrad/runtime/autogen/am/sdma_6_0_0.py": "523636d23466359b244b9e5454a8d0a80a5bf8e67882a9238e571ee90d580e88",
+    "tinygrad/runtime/autogen/am/smu_13_0_0.py": "5a2254c980525c8d5c8acc15f56f2ae72520d510aa1c2499b4c2b3586570c125",
+    "tinygrad/runtime/autogen/am/smu_13_0_12.py": "0e558c4f37ef3608d5c0498c96b123bb3362ed0a093ce50acd7a0f2102342919",
+    "tinygrad/runtime/autogen/am/smu_13_0_6.py": "acd6efb5ad0b972a5553c53db400d1f806c1d37d97ee0a583d8e45947060183d",
+    "tinygrad/runtime/autogen/am/smu_14_0_2.py": "f1b5e7d9d10f0a4cfb28dad0b8afe42cd5a276206959bd525bb8e871888991d4",
+    "tinygrad/runtime/autogen/am/soc_11.py": "da4af42a9f6bd4e980cd7a8a2ae3fc34ada4995bb693506f65148ddd7f45ef6c",
+    "tinygrad/runtime/autogen/am/soc_12.py": "8e81635ccab1b30c312778ccd8804e6b5d4df81c0b391a1e9c7f1bb3375e7933",
+    "tinygrad/runtime/autogen/am/soc_9.py": "b5386d6f41ce2ec65e1f9de20bb4439eceedcccfebf0dbd269891367c7cd8d2d",
+    "tinygrad/runtime/autogen/am/vega_offsets.py": "aeedb84cc5ee439c578ab015f0a2c424d95faf3304965041fcb7b116cce2a1eb",
+    "tinygrad/runtime/autogen/amd/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/cdna/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/cdna/enum.py": "6273f0c16e079332c354b849f38268527f7bc99bf943a9e5e2831ec3f705eb4a",
+    "tinygrad/runtime/autogen/amd/cdna/ins.py": "d98fad08ef7bd7af6e1ce6459d6bc5f1f7e0f81c6be93561857049675255a3dd",
+    "tinygrad/runtime/autogen/amd/cdna/operands.py": "ae871116dbad3aa9644975ed0f1b6042c9d53d64078f01f6688c7d73ae01f381",
+    "tinygrad/runtime/autogen/amd/cdna/str_pcode.py": "e67649d19bb728278d97065a843518535a87126358710aa85f5a5cd61760fb1a",
+    "tinygrad/runtime/autogen/amd/common.py": "c05fa9bd4e9efb05483d29ddeefb5994ac21560e0d13b4cb18548a57177c7d44",
+    "tinygrad/runtime/autogen/amd/rdna3/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/rdna3/enum.py": "4c495befe2c1f11f3b2f2820fbd0d3d9b3faf4d4969312ad757c6fa7569cc9dc",
+    "tinygrad/runtime/autogen/amd/rdna3/ins.py": "652a5df671664024650c5f5b6c2eddf7af0354a556e84473a3eb207bacfc4746",
+    "tinygrad/runtime/autogen/amd/rdna3/operands.py": "96fd869a40884dec0247633c49af6e80dffc375afdbf222eb70f6b7d04bcf806",
+    "tinygrad/runtime/autogen/amd/rdna3/str_pcode.py": "b7705c1430b06c5ce1a90ac625a515708ebe11c184068bf89746f3fd5466ae39",
+    "tinygrad/runtime/autogen/amd/rdna4/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/autogen/amd/rdna4/enum.py": "e7f785ef907c6ae1109baf9188a4b63b964e3137bf2f1328196b081396a71388",
+    "tinygrad/runtime/autogen/amd/rdna4/ins.py": "927770e3b602975581ca933998b8e8cd87e8fc9bb2213133835e0059a77c0a0b",
+    "tinygrad/runtime/autogen/amd/rdna4/operands.py": "5cca92ffc1d5f92ab3c31fbf73a8ba47d5d49dc3bdb52f257556b6ce6638d6a8",
+    "tinygrad/runtime/autogen/amd/rdna4/str_pcode.py": "b8a9001477cc9b6cfdf0b5dd8aec0bc2a49b073a6bcec0d0a811cc6fa67d3490",
+    "tinygrad/runtime/autogen/amd_gpu.py": "478e889f08e47ebf4410ea089602dd1cfe62718b92a5fe085d56ef11633ad8b6",
+    "tinygrad/runtime/autogen/amdgpu_drm.py": "c9e226465de3421c70f8986814244ce832b78b3b7643047823053e901f4a68ff",
+    "tinygrad/runtime/autogen/amdgpu_kd.py": "bbb71ab4ab4a69a8acf468222b8562ed6466c72eb3abb6df5186a78f320bd68a",
+    "tinygrad/runtime/autogen/avcodec.py": "b5dd616799a3ed4e69bf0a35b5d05c2c80759a24e6573ad68c849c0dfcc6af05",
+    "tinygrad/runtime/autogen/bnxt.py": "a2c0a2f1b9d85b04701fe1b6279ac3b50064ba5d712c1519443eb27cfe083a8c",
+    "tinygrad/runtime/autogen/comgr.py": "ed3f777f3841706da31d6b186f09e719bdc429d85d08b2c79b5db37e59f257ed",
+    "tinygrad/runtime/autogen/comgr_3.py": "8afed852b5fa28ec802a2de73bcc455ea966973058c63f41371bda444db9a62d",
+    "tinygrad/runtime/autogen/corefoundation.py": "56795809f590e21234877a256681371ee32d8cf5a597417e784988e31622087f",
+    "tinygrad/runtime/autogen/cuda.py": "64bab6b381449254db3cb8d1d60b69e10c9ffa4befa6d8294305c2ae1fa18129",
+    "tinygrad/runtime/autogen/ggml_common.py": "7edaed6afd77bd84459ebaab381c6998bb2e2788eb620a0f4c07b26242a8b891",
+    "tinygrad/runtime/autogen/hip.py": "d69dcb6f55bd4dcac2178065ebe462ad55fbed8acf17a8c3561e918fdf59aa77",
+    "tinygrad/runtime/autogen/hsa.py": "b8457e9fd6ce160d072af0e4ba1e1c34e443dd71cabd767c6511457a72f3d901",
+    "tinygrad/runtime/autogen/io_uring.py": "d8b1658c94ab9727973700f14fe40661eb87272bb9e40a02904563f304ca05ef",
+    "tinygrad/runtime/autogen/iokit.py": "d0033fb9bd4ecf4a796ac01e280d6fb3289614c8008d6e62b312d09894189162",
+    "tinygrad/runtime/autogen/kfd.py": "248a7e74aa98b54f5e9cac56bf7a2495e8f6994386705a3c6c19ab0c7c053197",
+    "tinygrad/runtime/autogen/kgsl.py": "9f050c287acacb79a4e6d15cd32eb12a137c556de9c18d77baaea80b2e8b070d",
+    "tinygrad/runtime/autogen/libc.py": "edc96d14bdacf6992407318faabdf20690ceedbb915084626e59d1514b26f04e",
+    "tinygrad/runtime/autogen/libclang.py": "8f6f44f8065512c002a2e86d3ddd1933aaa89af58b7678077f3ae9d0369f3cfa",
+    "tinygrad/runtime/autogen/libusb.py": "f234ee7c90cc4ac1c7d97724db665f2dba466580bc1205deab1a58de99992a6e",
+    "tinygrad/runtime/autogen/llvm.py": "18ccc5041f5f9227d7b8f43200da1e8cff680d40c6eadb38fc5f883aba1de1bd",
+    "tinygrad/runtime/autogen/llvm_qcom.py": "a0032f4677216211f658b92e11fc7a1060d556133d8b5e9482c7554698f08ea6",
+    "tinygrad/runtime/autogen/mesa.py": "355cc3facb9c31ce6c808a850fa9e3962e9690cf759d776cb05c1da354b61df7",
+    "tinygrad/runtime/autogen/metal.py": "842e5f17ad86aef820af1c14409660cad373c0b7d2559d81dbe978cd028fdb99",
+    "tinygrad/runtime/autogen/mlx5.py": "7b1782a5ec4aed44cf849b3e574d15b85924390b24f9368cc17014ac4ffc1e99",
+    "tinygrad/runtime/autogen/nv.py": "261256ac4322e046ff2db28235ae2ca8f68df081af1ce1509b407e814194aed6",
+    "tinygrad/runtime/autogen/nv_570.py": "411e74f3a283d3f4bed0294fb6a54a34ddf6fe624a3db8ec58df97ab66909abf",
+    "tinygrad/runtime/autogen/nv_580.py": "57157c789576e3107e187bc26242bbaf34b4cfc1a8f67245a8e587e984cd692c",
+    "tinygrad/runtime/autogen/nv_610.py": "9615048a5619c64fbb95ce61b1bea809ca42f1d301366f77a55a813d1047b41c",
+    "tinygrad/runtime/autogen/nv_regs/__init__.py": "cc89dd8a3df44879f7013b61d9d741df9bd77d50a292c6ef81ab5130c66cc8a3",
+    "tinygrad/runtime/autogen/nv_regs/dev_bus.py": "7ba8a3407e27a809be0504d285991c7a1aef1826d9e689b3aa59bb80aae65e6e",
+    "tinygrad/runtime/autogen/nv_regs/dev_falcon_second_pri.py": "391295f032d2c0fbe905d236e52a6e018f9438d2bdd76282d57f0eca5d2bfc0d",
+    "tinygrad/runtime/autogen/nv_regs/dev_falcon_v4.py": "6b3c9aedf59a7a37ba67d9b5b77f77cd5cadaac1b82040b0926e9acf1dedcee9",
+    "tinygrad/runtime/autogen/nv_regs/dev_fb.py": "6cbeb46bc9577e576926fcc982fcc0b8fa31e10206d1615311075eb28b48fe41",
+    "tinygrad/runtime/autogen/nv_regs/dev_fbif_v4.py": "8d2c87027939226d3a910157d41e660427774c3b11a17bd25c0ed1b2a9651c23",
+    "tinygrad/runtime/autogen/nv_regs/dev_fsp_pri.py": "f461181260b8e072b8df132322b03960058ce435d6da71c169153ace417edd1a",
+    "tinygrad/runtime/autogen/nv_regs/dev_gc6_island.py": "16329261e64d0f54104b062155166378319885968a7ff9ae9c2b47979b15f14f",
+    "tinygrad/runtime/autogen/nv_regs/dev_gsp.py": "8425f6b358af1acdf4dbb5549429feb05f95f649d451bccd6dc44eadd4674bc8",
+    "tinygrad/runtime/autogen/nv_regs/dev_mmu.py": "d36ae887aa8026067486e2f3fea295ca1f17c9e7867f2842d4cedea1bbf46355",
+    "tinygrad/runtime/autogen/nv_regs/dev_riscv_pri.py": "bb48da8a9f2f5b92a2aede932076709a4f2ae7266f895c77386b8aa373ab9207",
+    "tinygrad/runtime/autogen/nv_regs/dev_sec_pri.py": "ad4e6690236365ab4edad12c15d49a8a55f787a9ceecdd96d47794e25979808c",
+    "tinygrad/runtime/autogen/nv_regs/dev_therm.py": "af124c35f2ede3c96477d405b588dff2689bbd15fb5e7f1fdb40c7d2e8bdb10a",
+    "tinygrad/runtime/autogen/nv_regs/dev_vm.py": "724a62f3a9b748c63fbe5d04f3ed19cc9ffc2f3e29a8f9f4a9dca37e61887a7b",
+    "tinygrad/runtime/autogen/nv_regs/nv_ref.py": "7486129fa0586428ed6570add35d49db5f9edc4cda83457a5094b58066ba55ef",
+    "tinygrad/runtime/autogen/nvjitlink.py": "272066e86e6d51d0a064e711f22c5baa6fd065a09b640da789d60a3cac2f56d7",
+    "tinygrad/runtime/autogen/nvrtc.py": "26c305997b4f63950e8b0712d9f3cd513dc92b1753595e63235e035b7597592b",
+    "tinygrad/runtime/autogen/opencl.py": "e0da74f9804788dbb88724d5ce1e0f26c027ea4125039d62c08ad98c1f074c9a",
+    "tinygrad/runtime/autogen/pci.py": "baceb6b8c4e45429c8dc3b7eff17259aaed30d30d6ea50935ce28d69534d8bac",
+    "tinygrad/runtime/autogen/qcom_dsp.py": "4838000bcc679270d8beee74bb06d6dcd7d1a52faea0dd3d8c84f7acc160a87f",
+    "tinygrad/runtime/autogen/rockchip.py": "4fcfc349ee15a4d80728dad0a86fd781502315bdf454e4af1ff811e7f79cec2c",
+    "tinygrad/runtime/autogen/rocprof.py": "b7561632d83083620e34fc14472f5c4f1e30878eb8c856df1bf74a764a317c73",
+    "tinygrad/runtime/autogen/sqtt.py": "9f47e053dacbfe732d653db926a3957dd65c33b879b02d809b38baa8eaad98c3",
+    "tinygrad/runtime/autogen/vfio.py": "c501177743326af85725911c225ebe7dbc50f56e8882913ae22ad2d50fa33c27",
+    "tinygrad/runtime/autogen/webgpu.py": "d54d4b783bc925ad3e6b017f96aa5a27159fc2d95742bcf75e0addcb9f8ac4d6",
+    "tinygrad/runtime/ops_amd.py": "719be92c917e2c3a08ad802732dd7d116668649dfd08aef10ddea5dcc84b6436",
+    "tinygrad/runtime/ops_cl.py": "0aa8f63d58c069c6994e37750c8d41b8926f8ec27e8e54745e99bf68bef9fc8a",
+    "tinygrad/runtime/ops_cpu.py": "308017e40f4dfdf57624b535fb8eb1f6288fe8fbbd65a2d5fbbbbde9d9683232",
+    "tinygrad/runtime/ops_cuda.py": "d564db6c6927dfdfcc925f8c2cfd9938f800df2d4219dd96294f402cb92d789a",
+    "tinygrad/runtime/ops_disk.py": "d0133e07537a0e5b358bd40c0992e0abe0eb5c42c858795e9eda4140a3e1708e",
+    "tinygrad/runtime/ops_dsp.py": "67783322e6352f5f52d10e501f6b717e27fcfa716466072e03e46f7875f1676e",
+    "tinygrad/runtime/ops_hip.py": "5a023a90196ae106a0543f59045bb902425f9b3dca4ca6c67a1741b14afcabb3",
+    "tinygrad/runtime/ops_metal.py": "105ab56af475dd0a86b1e06191fbbdd4613697c257093ba61c5401feeef89e04",
+    "tinygrad/runtime/ops_npy.py": "53de851f9d707e6fceb871914b812c138cd5b1ebb669be02b55115c68266710c",
+    "tinygrad/runtime/ops_null.py": "5e1e53e866d17ab1ccf6116ac11b0283e1b329ee6b215b2e5cf4927dbed38cb1",
+    "tinygrad/runtime/ops_nv.py": "e711ef90bab87f8cd444ca2a10fbb0c9e8a602c22d8fa7c165b746b088314f30",
+    "tinygrad/runtime/ops_python.py": "62decc9aa674b47a578e06bec68d46695920524da27b10fb63da75d420df8d7b",
+    "tinygrad/runtime/ops_qcom.py": "618d7f7c97af087f97d3c5b5d1f720fd9d217a9d2c0485589d7d604b8098663b",
+    "tinygrad/runtime/ops_rdma.py": "e6e0d69734269c6501a5b8439651a0364d90285c4671fa6301c9c54f16737769",
+    "tinygrad/runtime/ops_rockchip.py": "0a62e7b0b6ffcc697110e86462c9bf097518e814d10d93177637f357cfe12008",
+    "tinygrad/runtime/ops_webgpu.py": "52c7689d7fd2acb9ad1f37ec9ce3dd88a16fa51d6de93b74eb8f637ce3802e15",
+    "tinygrad/runtime/support/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/am/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/am/amdev.py": "dae42e13b5dbf01cff0fd29767eec3df2f7d86f0d4d78d89b0aa731a7c88c09c",
+    "tinygrad/runtime/support/am/ip.py": "972086c5373e7cd83a2b39d598551840c4a7b3e59cd2f19745581fee287bdede",
+    "tinygrad/runtime/support/amd.py": "3c888308b57f5f9b4922ffb008829610f6333a547c9fd9168f9f770fc6315c10",
+    "tinygrad/runtime/support/autogen.py": "3571a0c1e955e2c7173e3066a79040efb0f333e3302013f28e6d478ccdaf763c",
+    "tinygrad/runtime/support/c.py": "a3113a746068d0d0cd8fdbe18dbe54c20692a2cc85691618cf72dcef1cd801ae",
+    "tinygrad/runtime/support/compiler_amd.py": "230b53fbae926583d6a4a1fa4ea085773924e042496ed786aa8fbc2f8aa6ebec",
+    "tinygrad/runtime/support/compiler_cpu.py": "7980be156006d76fbc0e893154e7fb2900597d0c4d5171b4497a44d888d4fe48",
+    "tinygrad/runtime/support/compiler_cuda.py": "44e2eb882f867db26cb0a0c27716cc5c1000e4a7ea2401d3346d226573078bda",
+    "tinygrad/runtime/support/compiler_llvm.py": "4f4128c0cf88860e5445345139e81d360c7c4189912a67159d6822d2649735e5",
+    "tinygrad/runtime/support/compiler_mesa.py": "2301ed834ceea0798128e765fceff5231ec88851ca73b10a34e423952ae7eee0",
+    "tinygrad/runtime/support/compiler_qcom.py": "9c99f6e4c9e594e44c46846558e66f85d8ca700b73d371e0da54a997f72cfe34",
+    "tinygrad/runtime/support/compileserver.py": "f977fbab9038e6b895174f07c540fb26247137c63c989e373745433cd52157ec",
+    "tinygrad/runtime/support/elf.py": "155aaeb2cfdd748814150feafcb10c1ef34eb01cbd702bdbe5e0c9b03be3f388",
+    "tinygrad/runtime/support/hcq2.py": "08ccbd5ba6d0494af350eb4d8851a15d9ed1e5153cc30e7225439e4380d3bd69",
+    "tinygrad/runtime/support/memory.py": "5cd20a3b98a69caa855a7e660a0a53a64bd969fee282b853a5f68097977a5bcb",
+    "tinygrad/runtime/support/nv/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/nv/ip.py": "5ad88909badc5d30ab2527569d791b58ac28d56a8d9019f1e7c43eb764b4fe8a",
+    "tinygrad/runtime/support/nv/nvdev.py": "5329dffaa57b690eb516f0d33a219c552d92dcad3f2af8a5563bc8df2b51073b",
+    "tinygrad/runtime/support/objc.py": "c00586d4e58f14adeb899275ab215dbcb75b9c7a3e8d6210c001fd2941f4628b",
+    "tinygrad/runtime/support/rdma/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/runtime/support/rdma/bnxtdev.py": "c682c931db0c51c861ce7016a00d7aad5dc0e88bc8bef930bade4117910660f3",
+    "tinygrad/runtime/support/rockchip_bucketed.py": "815e6dc26dd0ce3c92c77c27ced45404cb15005e981384126d937d699025d8e2",
+    "tinygrad/runtime/support/rockchip_gpu.py": "1677113312cced1a7aa0e963f0ac4cbfd4f3aca1dd7aa3620be6410d3447877a",
+    "tinygrad/runtime/support/rockchip_int8.py": "1ef670e62d3ccd9fb84be33d6561536c0ce30dead20100f34e7ae54073cf30a6",
+    "tinygrad/runtime/support/system.py": "681f819e98ede6ac6451c0e499fd038eb00cc2e0a25f872e58321a39f38d9869",
+    "tinygrad/runtime/support/usb.py": "d57b34b46593c83edc2674d5e5d71ba9ca495e7009f08e116e06a35352d9b6bc",
+    "tinygrad/schedule/__init__.py": "a72195d925810318695055cc87eb1489811a51cc49d7ad9215bf68e2e92d735d",
+    "tinygrad/schedule/allreduce.py": "d736bb1070049ad4c14e9354a66be534bb6ebdc53e75f80328f2ad4f846a8ea1",
+    "tinygrad/schedule/indexing.py": "44feb97662961d7f350667b61ed33b6575c50d50848f6299adea55c7e3cbd1ab",
+    "tinygrad/schedule/memory.py": "24122dbab59fe1856939520e74fdb3828040ed7652fe897a3fac2d14f45785c6",
+    "tinygrad/schedule/multi.py": "5c88ce3832852af4a583d35bcb5ad6834eaf3d0366bf61e6b242ed6818cb72d0",
+    "tinygrad/schedule/prepare.py": "237d5580d8a0279cf49c875907fdb266e206b21d15d5570c90cdf4b2f2dd0a23",
+    "tinygrad/schedule/rangeify.py": "6af2c0e74f67d8380bbe88e6a186f0caad8641680e9f69bb17208a31cc459918",
+    "tinygrad/tensor.py": "5680ec3b2a716e435ae8f8ca42f39697ed46de7a3d50018a7becb9a368bcc56d",
+    "tinygrad/uop/__init__.py": "22495f25f31b744f0362575fe42f2608a349d4642cba4a2d0a71150f234c7db3",
+    "tinygrad/uop/divandmod.py": "40c04f04dc9057eb17c9680304fb797ce78add201e394736f6558d4e145f075c",
+    "tinygrad/uop/movement.py": "7508947bf142145b2e2ec2234d21ac424cd801ef0acb18bd79a2292c886f7a09",
+    "tinygrad/uop/ops.py": "017e94e1ecfc1ada2cb68f9e71d274dec1d744ee9ffff40ebe324387b7b00bc9",
+    "tinygrad/uop/render.py": "03d3fcad5396a0879cd8f8fcddf04c7abed04b76c7a50f5075554260a1ded89a",
+    "tinygrad/uop/spec.py": "13a8e64ad12f24a4c3806b1bce8e3d04be4478e37d84d82b45ae860e776fd4c6",
+    "tinygrad/uop/symbolic.py": "e552dae03bd8057dd5c7708493bf11e5acbcbd17d03b818d5b9c1770727021c2",
+    "tinygrad/uop/upat.py": "f89095353c93afb851b080aff975f861c070f87cc82aab90df481eade4e8c6bd",
+    "tinygrad/uop/validate.py": "9f0f248f17fb9d31e19e6537cc593d5e3e6a4ee41efc657338efc32dac7eef43",
+    "tinygrad/uop/weak.py": "856defae2c4afe2425cf5c58e2c3b2ef17ee63831c878dcdc298816721a3c97d",
+    "tinygrad/viz/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tinygrad/viz/cli.py": "997ee8b2c57f6f17a3773937432f7931591bdd081c98abfb29174ff5d0c91db9",
+    "tinygrad/viz/serve.py": "77c9b2341762caedaa8e6204bec29b95605119400373c5029480127115fa6d87",
+    "extra/rockchip/benchmark_inference.py": "00fea015bdf3bae08ff9823d2f62b709b55b70debc181409d5c2c6474e61251b"
+  },
+  "clocks_after": {
+    "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+    "/sys/class/devfreq/fb000000.gpu/cur_freq": "1000000000",
+    "/sys/class/devfreq/dmc/cur_freq": "528000000",
+    "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "408000",
+    "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+  }
+}

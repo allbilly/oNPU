@@ -1,0 +1,666 @@
+{
+  "schema": "qwen25-worker-profile-summary-v1",
+  "date_local": "2026-10-30",
+  "scope": {
+    "diagnostic_only": true,
+    "throughput_qualification": false,
+    "context": 512,
+    "prompt_tokens": 128,
+    "requested_completion_tokens": 64,
+    "worker_requests": 4,
+    "profile_requests_are_instrumented": true,
+    "profile_precedes_later_cpu_exp2_scaling_change": true,
+    "source_count_at_profile": 297,
+    "onpu_source_count_at_profile": 12,
+    "within_profile_source_snapshot_unchanged": true,
+    "profiled_rockchip_cpu_source_sha256": "ab21044b4d2ae31f8757a6693dff48b69c0a3fb8a5ad85e626ae8a0e3b868f25",
+    "current_rockchip_cpu_source_sha256_at_summary": "c2fb3247f06e76a529cd2aaeb217ec05e01e921f3ecff58071bb0a9bd3fa3614",
+    "diagnostic_owner_job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/job.json",
+      "status": "live/mutable pending restore; deliberately not hashed"
+    },
+    "worker_affinity": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "native_graphs": {
+    "greedy_prefill_128": {
+      "graph_name": "greedy_prefill_jit/jit/variant:(('CPU', dtypes.i32, (1, 128)),)",
+      "native_present": true,
+      "reason": null,
+      "profiled": true,
+      "driver_from_sync_sites": 0,
+      "native_invalidation_sites": 259,
+      "interpretation": "The replay contains 259 native cache-invalidation sites replacing driver FROM syncs; it records 0 driver FROM sync sites."
+    },
+    "greedy_decode": {
+      "graph_name": "greedy_rollout_jit/jit/jit",
+      "native_present": true,
+      "reason": null,
+      "profiled": true,
+      "driver_from_sync_sites": 0,
+      "native_invalidation_sites": 175,
+      "interpretation": "The replay contains 175 native cache-invalidation sites replacing driver FROM syncs; it records 0 driver FROM sync sites."
+    }
+  },
+  "instrumented_request_metrics": [
+    {
+      "request_id": "profile-0",
+      "prompt_tokens": 128,
+      "completion_tokens": 64,
+      "worker_ttft_ms": 381.4051439985633,
+      "worker_total_ms": 4226.212487992598,
+      "worker_decode_tail_ms": 3844.8073439940345,
+      "prefill_native_profile_ms": 373.60628900000006,
+      "outside_native_prefill_ttft_ms": 7.798854998563229,
+      "decode_native_profile_ms": 3625.883868,
+      "outside_native_decode_tail_ms": 218.92347599403456,
+      "prefill_graph": "greedy_prefill_jit/jit/variant:(('CPU', dtypes.i32, (1, 128)),)",
+      "decode_graph": "greedy_rollout_jit/jit/jit",
+      "prefill_driver_from_sites": 0,
+      "prefill_native_invalidation_sites": 259,
+      "decode_driver_from_sites": 0,
+      "decode_native_invalidation_sites": 175
+    },
+    {
+      "request_id": "profile-1",
+      "prompt_tokens": 128,
+      "completion_tokens": 64,
+      "worker_ttft_ms": 386.36106699414086,
+      "worker_total_ms": 4296.294486994157,
+      "worker_decode_tail_ms": 3909.9334200000158,
+      "prefill_native_profile_ms": 375.17544400000014,
+      "outside_native_prefill_ttft_ms": 11.185622994140715,
+      "decode_native_profile_ms": 3685.8708219999994,
+      "outside_native_decode_tail_ms": 224.06259800001635,
+      "prefill_graph": "greedy_prefill_jit/jit/variant:(('CPU', dtypes.i32, (1, 128)),)",
+      "decode_graph": "greedy_rollout_jit/jit/jit",
+      "prefill_driver_from_sites": 0,
+      "prefill_native_invalidation_sites": 259,
+      "decode_driver_from_sites": 0,
+      "decode_native_invalidation_sites": 175
+    },
+    {
+      "request_id": "profile-2",
+      "prompt_tokens": 128,
+      "completion_tokens": 64,
+      "worker_ttft_ms": 373.1005369918421,
+      "worker_total_ms": 4317.052254991722,
+      "worker_decode_tail_ms": 3943.95171799988,
+      "prefill_native_profile_ms": 365.1990720000001,
+      "outside_native_prefill_ttft_ms": 7.901464991841976,
+      "decode_native_profile_ms": 3716.2501420000003,
+      "outside_native_decode_tail_ms": 227.70157599987988,
+      "prefill_graph": "greedy_prefill_jit/jit/variant:(('CPU', dtypes.i32, (1, 128)),)",
+      "decode_graph": "greedy_rollout_jit/jit/jit",
+      "prefill_driver_from_sites": 0,
+      "prefill_native_invalidation_sites": 259,
+      "decode_driver_from_sites": 0,
+      "decode_native_invalidation_sites": 175
+    },
+    {
+      "request_id": "profile-3",
+      "prompt_tokens": 128,
+      "completion_tokens": 64,
+      "worker_ttft_ms": 382.7381760056596,
+      "worker_total_ms": 4325.430486002006,
+      "worker_decode_tail_ms": 3942.692309996346,
+      "prefill_native_profile_ms": 374.777313,
+      "outside_native_prefill_ttft_ms": 7.960863005659633,
+      "decode_native_profile_ms": 3714.5818139999997,
+      "outside_native_decode_tail_ms": 228.11049599634634,
+      "prefill_graph": "greedy_prefill_jit/jit/variant:(('CPU', dtypes.i32, (1, 128)),)",
+      "decode_graph": "greedy_rollout_jit/jit/jit",
+      "prefill_driver_from_sites": 0,
+      "prefill_native_invalidation_sites": 259,
+      "decode_driver_from_sites": 0,
+      "decode_native_invalidation_sites": 175
+    }
+  ],
+  "outside_native_time": {
+    "prefill_ttft_ms": {
+      "min": 7.798854998563229,
+      "max": 11.185622994140715,
+      "calculation": "worker TTFT ms minus sum of all native prefill graph profile ms"
+    },
+    "decode_tail_ms": {
+      "min": 218.92347599403456,
+      "max": 228.11049599634634,
+      "calculation": "(worker total ms minus worker TTFT ms) minus sum of all native decode graph profile ms"
+    }
+  },
+  "prefill_top_profile_costs": [
+    {
+      "label": "ROCKCHIP:rockchip_int8_128_12288_1536",
+      "calls_per_profile": [
+        28
+      ],
+      "profile_ms": {
+        "median": 81.21954349999999,
+        "min": 80.187925,
+        "max": 85.887051,
+        "values": [
+          85.887051,
+          81.791204,
+          80.187925,
+          80.647883
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.21879053579336244,
+        "min": 0.21518880733316958,
+        "max": 0.22988652367144705
+      }
+    },
+    {
+      "label": "ROCKCHIP:rockchip_int8_64_1536_4096",
+      "calls_per_profile": [
+        112
+      ],
+      "profile_ms": {
+        "median": 66.113216,
+        "min": 65.889947,
+        "max": 67.658015,
+        "values": [
+          65.889947,
+          66.139318,
+          66.087114,
+          67.658015
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.17844528134224133,
+        "min": 0.17628903772284196,
+        "max": 0.18096188919121892
+      }
+    },
+    {
+      "label": "CPU:rockchip_int8_swiglu_pack",
+      "calls_per_profile": [
+        28
+      ],
+      "profile_ms": {
+        "median": 51.172258,
+        "min": 50.536138,
+        "max": 51.959461,
+        "values": [
+          51.478505,
+          50.536138,
+          50.866011,
+          51.959461
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.138214501774635,
+        "min": 0.1347000151747671,
+        "max": 0.13928296893372166
+      }
+    },
+    {
+      "label": "COPY:ROCKCHIP->CPU",
+      "calls_per_profile": [
+        259
+      ],
+      "profile_ms": {
+        "median": 28.7598785,
+        "min": 28.333473,
+        "max": 29.209035,
+        "values": [
+          28.333473,
+          28.782044,
+          28.737713,
+          29.209035
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.07732663355263877,
+        "min": 0.07583778387627729,
+        "max": 0.07869054223664618
+      }
+    },
+    {
+      "label": "CPU:rockchip_cpu_attention",
+      "calls_per_profile": [
+        28
+      ],
+      "profile_ms": {
+        "median": 27.3635315,
+        "min": 26.059942,
+        "max": 28.761338,
+        "values": [
+          26.059942,
+          28.33113,
+          26.395933,
+          28.761338
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.07389627724391856,
+        "min": 0.06975241789893959,
+        "max": 0.07674247346983887
+      }
+    },
+    {
+      "label": "ROCKCHIP:rockchip_int8_128_5632_1536",
+      "calls_per_profile": [
+        28
+      ],
+      "profile_ms": {
+        "median": 23.3868335,
+        "min": 23.131335,
+        "max": 24.479697,
+        "values": [
+          24.479697,
+          23.131335,
+          23.229627,
+          23.54404
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.06321476684311343,
+        "min": 0.06165471480057738,
+        "max": 0.06552271126249697
+      }
+    }
+  ],
+  "decode_top_profile_costs": [
+    {
+      "label": "ROCKCHIP:rockchip_int8_1_17920_1536",
+      "calls_per_profile": [
+        1764
+      ],
+      "profile_ms": {
+        "median": 1569.629662,
+        "min": 1559.923678,
+        "max": 1571.73027,
+        "values": [
+          1559.923678,
+          1570.218243,
+          1571.73027,
+          1569.041081
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.4244722892669071,
+        "min": 0.4224004637847506,
+        "max": 0.4302188748423534
+      },
+      "per_63_decode_steps_ms": {
+        "median": 24.91475653968254,
+        "min": 24.760693301587303,
+        "max": 24.948099523809525,
+        "values": [
+          24.760693301587303,
+          24.924099095238095,
+          24.948099523809525,
+          24.905413984126984
+        ]
+      }
+    },
+    {
+      "label": "ROCKCHIP:rockchip_int8_1_1536_4096",
+      "calls_per_profile": [
+        3528
+      ],
+      "profile_ms": {
+        "median": 790.052259,
+        "min": 768.611081,
+        "max": 801.219836,
+        "values": [
+          768.611081,
+          782.678716,
+          801.219836,
+          797.425802
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.21351006012400237,
+        "min": 0.21197895712637865,
+        "max": 0.21559900582171304
+      },
+      "per_63_decode_steps_ms": {
+        "median": 12.540512047619048,
+        "min": 12.20017588888889,
+        "max": 12.717775174603174,
+        "values": [
+          12.20017588888889,
+          12.423471682539683,
+          12.717775174603174,
+          12.657552412698413
+        ]
+      }
+    },
+    {
+      "label": "ROCKCHIP:rockchip_int8_1_24576_1536",
+      "calls_per_profile": [
+        378
+      ],
+      "profile_ms": {
+        "median": 462.9138305,
+        "min": 459.95124,
+        "max": 463.507227,
+        "values": [
+          459.95124,
+          462.498068,
+          463.329593,
+          463.507227
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.12512955130020126,
+        "min": 0.12467664320105391,
+        "max": 0.1268521708759813
+      },
+      "per_63_decode_steps_ms": {
+        "median": 7.34783857936508,
+        "min": 7.300813333333333,
+        "max": 7.357257571428572,
+        "values": [
+          7.300813333333333,
+          7.341239174603174,
+          7.354437984126984,
+          7.357257571428572
+        ]
+      }
+    },
+    {
+      "label": "ROCKCHIP:rockchip_int8_1_2048_1536",
+      "calls_per_profile": [
+        1764
+      ],
+      "profile_ms": {
+        "median": 216.2249715,
+        "min": 208.261905,
+        "max": 218.245913,
+        "values": [
+          208.261905,
+          215.893659,
+          216.556284,
+          218.245913
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.05842305331647896,
+        "min": 0.05743755525045956,
+        "max": 0.05875383123275045
+      },
+      "per_63_decode_steps_ms": {
+        "median": 3.4321424047619047,
+        "min": 3.305744523809524,
+        "max": 3.4642208412698414,
+        "values": [
+          3.305744523809524,
+          3.4268834761904765,
+          3.4374013333333333,
+          3.4642208412698414
+        ]
+      }
+    },
+    {
+      "label": "ROCKCHIP:rockchip_int8_1_1536_1536",
+      "calls_per_profile": [
+        1764
+      ],
+      "profile_ms": {
+        "median": 173.354478,
+        "min": 165.716536,
+        "max": 175.138148,
+        "values": [
+          165.716536,
+          173.250219,
+          173.458737,
+          175.138148
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.04683981009352646,
+        "min": 0.045703762732866436,
+        "max": 0.047148819643685475
+      },
+      "per_63_decode_steps_ms": {
+        "median": 2.7516583809523807,
+        "min": 2.6304212063492063,
+        "max": 2.779970603174603,
+        "values": [
+          2.6304212063492063,
+          2.750003476190476,
+          2.753313285714286,
+          2.779970603174603
+        ]
+      }
+    },
+    {
+      "label": "CPU:rockchip_int8_swiglu_pack",
+      "calls_per_profile": [
+        1764
+      ],
+      "profile_ms": {
+        "median": 112.99888899999999,
+        "min": 108.663146,
+        "max": 114.089546,
+        "values": [
+          108.663146,
+          112.128124,
+          114.089546,
+          113.869654
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.030537918987570724,
+        "min": 0.029968733129871993,
+        "max": 0.03070017938528746
+      },
+      "per_63_decode_steps_ms": {
+        "median": 1.7936331587301586,
+        "min": 1.7248118412698412,
+        "max": 1.8109451746031746,
+        "values": [
+          1.7248118412698412,
+          1.779811492063492,
+          1.8109451746031746,
+          1.8074548253968254
+        ]
+      }
+    },
+    {
+      "label": "ROCKCHIP:rockchip_int8_1_1536_768",
+      "calls_per_profile": [
+        1764
+      ],
+      "profile_ms": {
+        "median": 108.708798,
+        "min": 101.762388,
+        "max": 110.814183,
+        "values": [
+          101.762388,
+          108.059704,
+          109.357892,
+          110.814183
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.02937211256842253,
+        "min": 0.02806553979792273,
+        "max": 0.02983220953226796
+      },
+      "per_63_decode_steps_ms": {
+        "median": 1.7255364761904763,
+        "min": 1.615276,
+        "max": 1.7589552857142856,
+        "values": [
+          1.615276,
+          1.7152333968253968,
+          1.7358395555555557,
+          1.7589552857142856
+        ]
+      }
+    },
+    {
+      "label": "CPU:rockchip_cpu_attention",
+      "calls_per_profile": [
+        1764
+      ],
+      "profile_ms": {
+        "median": 77.749769,
+        "min": 73.393022,
+        "max": 78.494825,
+        "values": [
+          73.393022,
+          77.146162,
+          78.494825,
+          78.353376
+        ]
+      },
+      "fraction_of_native_profile": {
+        "median": 0.021011849217229504,
+        "min": 0.020241415520150907,
+        "max": 0.021122050992443662
+      },
+      "per_63_decode_steps_ms": {
+        "median": 1.2341233174603174,
+        "min": 1.1649686031746032,
+        "max": 1.2459496031746033,
+        "values": [
+          1.1649686031746032,
+          1.224542253968254,
+          1.2459496031746033,
+          1.243704380952381
+        ]
+      }
+    }
+  ],
+  "hot_cpu_kernel_disassembly": {
+    "function": "rockchip_int8_swiglu_pack",
+    "graph": "greedy prefill 128-row variant",
+    "source_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/results/worker-profile/e7c8f77ae58bc1dbac9384746c239818c1a6c776ad856b0982a72994027f784f.c",
+    "source_sha256": "e7c8f77ae58bc1dbac9384746c239818c1a6c776ad856b0982a72994027f784f",
+    "elf_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/results/worker-profile/e7c8f77ae58bc1dbac9384746c239818c1a6c776ad856b0982a72994027f784f.o",
+    "elf_sha256": "f3edb677d3a695d0cc09ff51ce281062bf1f7917b3312b2714fd8cfc648a8353",
+    "disassembly_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/results/worker-profile/rockchip_int8_swiglu_pack-prefill-128.asm",
+    "disassembly_sha256": "51dc5e948d0674de66774881cf3fa5343f68f3b23f43c18fcddd3a1fbf59a823",
+    "disassembly_bytes": 137437,
+    "command": "aarch64-linux-gnu-objdump -d -C <captured ELF>",
+    "scope": "Read-only disassembly of the actual exported CPU ELF; no cross-implementation or numerical claim."
+  },
+  "cbuf_screen": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-k1536-cbuf-v1/results/cbuf.json",
+    "sha256": "21f4b931a3de4af1b5d1764ebc3f9ae8bd0de1442498e12dd6b5e2d98b3bbbf4",
+    "complete": true,
+    "scope": "Primitive-only CBUF allocation screen; no model-speed/quality qualification; production default unchanged.",
+    "cases": [
+      {
+        "m": 1,
+        "n": 17920,
+        "k": 1536,
+        "control_cbuf_register_values": [
+          147,
+          147,
+          147,
+          147,
+          147,
+          147
+        ],
+        "candidate_cbuf_register_values": [
+          177,
+          177,
+          177,
+          177,
+          177,
+          177
+        ],
+        "register_change": "CNA CBUF_CON0 (register 0x1040): 0x93 -> 0xb1",
+        "other_registers_identical": true,
+        "changed_command_words": 6,
+        "int32_oracle_records": 8,
+        "all_int32_outputs_exact": true,
+        "paired_blocks": 40,
+        "paired_speedup_median": 0.9986777779561593,
+        "candidate_winning_blocks": 19,
+        "unpaired_median_ratio": 1.0007643891565876,
+        "decision": "rejected/no consistent speed benefit"
+      },
+      {
+        "m": 1,
+        "n": 24576,
+        "k": 1536,
+        "control_cbuf_register_values": [
+          147,
+          147,
+          147,
+          147,
+          147,
+          147
+        ],
+        "candidate_cbuf_register_values": [
+          177,
+          177,
+          177,
+          177,
+          177,
+          177
+        ],
+        "register_change": "CNA CBUF_CON0 (register 0x1040): 0x93 -> 0xb1",
+        "other_registers_identical": true,
+        "changed_command_words": 6,
+        "int32_oracle_records": 8,
+        "all_int32_outputs_exact": true,
+        "paired_blocks": 40,
+        "paired_speedup_median": 1.0003061891324032,
+        "candidate_winning_blocks": 20,
+        "unpaired_median_ratio": 1.0091726304263506,
+        "decision": "rejected/no consistent speed benefit"
+      }
+    ],
+    "total_int32_oracles": 16,
+    "paired_blocks_per_shape": 40,
+    "decision": "rejected; paired ratios straddle parity"
+  },
+  "failed_v1_export_attempt": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v1/results/worker-profile.json",
+    "sha256": "4ce0f94d776e86649a9c5a02318a04561bbb85b9cd49e9c844e9eef8ab09992b",
+    "log_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v1/results/worker-profile.log",
+    "log_sha256": "2ee20bf44faaec4a44a9284610d5d9e7df08fadaa1d4dc36b57ed98091f912b8",
+    "complete": false,
+    "error": "'Buffer' object has no attribute 'dtype'",
+    "requests_recorded": 0,
+    "scope": "Separate failed source-export attempt; it failed before requests and is not combined with the completed v2 diagnostic."
+  },
+  "raw_receipts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/results/worker-profile.json",
+      "sha256": "220440df6375d203c9ecb5ad8c3ec0afb4ad541e67696bff465c06f616a1a715"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-k1536-cbuf-v1/results/cbuf.json",
+      "sha256": "21f4b931a3de4af1b5d1764ebc3f9ae8bd0de1442498e12dd6b5e2d98b3bbbf4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/results/worker-profile/e7c8f77ae58bc1dbac9384746c239818c1a6c776ad856b0982a72994027f784f.c",
+      "sha256": "e7c8f77ae58bc1dbac9384746c239818c1a6c776ad856b0982a72994027f784f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/results/worker-profile/e7c8f77ae58bc1dbac9384746c239818c1a6c776ad856b0982a72994027f784f.o",
+      "sha256": "f3edb677d3a695d0cc09ff51ce281062bf1f7917b3312b2714fd8cfc648a8353"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v2/results/worker-profile/rockchip_int8_swiglu_pack-prefill-128.asm",
+      "sha256": "51dc5e948d0674de66774881cf3fa5343f68f3b23f43c18fcddd3a1fbf59a823"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v1/results/worker-profile.json",
+      "sha256": "4ce0f94d776e86649a9c5a02318a04561bbb85b9cd49e9c844e9eef8ab09992b"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-v1/results/worker-profile.log",
+      "sha256": "2ee20bf44faaec4a44a9284610d5d9e7df08fadaa1d4dc36b57ed98091f912b8"
+    }
+  ],
+  "limits": [
+    "Instrumented profile is diagnostic and is not a throughput cohort.",
+    "This profile predates the later exact CPU exponent-scaling source change; do not treat its source hash as current.",
+    "The CBUF screen changes only one register on primitive M1 cases and does not establish a model win."
+  ]
+}

@@ -1,0 +1,2543 @@
+{
+  "affinity": {
+    "caller_during_pool_work": 4,
+    "caller_pin_evidence": "parallel_parked source and cpu-core-affinity-audit-v1.json",
+    "outer_mask": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "worker_masks": [
+      [
+        5
+      ],
+      [
+        6
+      ],
+      [
+        7
+      ]
+    ]
+  },
+  "audit_complete": true,
+  "audit_kind": "attention-query-tiles-cpu-probe-v1-independent-audit",
+  "captured_programs": {
+    "distinct_source_sha256_count": 48,
+    "entries": [
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "78bb8f7f9e20e65ffd0cd365bbc1c6b44382d622ff455b8af36b7fefef7bb01e",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "6fc9d32587660d1f96ad8ca78e3532d8c79beb748f0b8e8c19d46927b876a030",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "ea3809b1ed22f2f22f066b9d2b69c91ded07f316603b328e2d67d9eaa43ab13a",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "b1aa5718ad62fa05c70d7342461ee06931f599ad4ab67778ccd5017fc1e2d3ed",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "2d5009272a24e2dc05643e1638d3c44b9e3a4149e6cd5835ab2e1993d6bc0d3b",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "f2bbdd9ec16ca0079afe6aef7e5d54f39ade7aa437cf21130662c81260ddc1f3",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "78bb8f7f9e20e65ffd0cd365bbc1c6b44382d622ff455b8af36b7fefef7bb01e",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "6fc9d32587660d1f96ad8ca78e3532d8c79beb748f0b8e8c19d46927b876a030",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "ea3809b1ed22f2f22f066b9d2b69c91ded07f316603b328e2d67d9eaa43ab13a",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "b1aa5718ad62fa05c70d7342461ee06931f599ad4ab67778ccd5017fc1e2d3ed",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "2d5009272a24e2dc05643e1638d3c44b9e3a4149e6cd5835ab2e1993d6bc0d3b",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "f2bbdd9ec16ca0079afe6aef7e5d54f39ade7aa437cf21130662c81260ddc1f3",
+        "total_length": 17
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "4adc3457c04d391689fe3f12f58b68eb83f7cc362fc0b07df761ad63addeeded",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "2f9ee1801122751bce319e50f7064b5834e384912ac1887aa7297801e8f476f2",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "6509323cb35e266005290b80af14d793f63bcc1bf9a6aaae75395b22b82fa9a6",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "7b14d7dd2cd4db56e858bcbb1090444414c2df291c056e68641ce2b109e4cfff",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "86172615b65d4a7af17a36dfff7563ec6879dcdb9b760addd8247d11208372b0",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "0f173ac4d549f7082d93db8d6efebb452ace912894e594c6792ecca3399e8d7d",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "4adc3457c04d391689fe3f12f58b68eb83f7cc362fc0b07df761ad63addeeded",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "2f9ee1801122751bce319e50f7064b5834e384912ac1887aa7297801e8f476f2",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "6509323cb35e266005290b80af14d793f63bcc1bf9a6aaae75395b22b82fa9a6",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "7b14d7dd2cd4db56e858bcbb1090444414c2df291c056e68641ce2b109e4cfff",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "86172615b65d4a7af17a36dfff7563ec6879dcdb9b760addd8247d11208372b0",
+        "total_length": 512
+      },
+      {
+        "active_rows": 17,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 17,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "0f173ac4d549f7082d93db8d6efebb452ace912894e594c6792ecca3399e8d7d",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "8a99d0bbaaf61563dba9e4deb1190bd1fe25d932625ce70c53000fe7b96e1bbd",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "9c9d930253e8bc9a0fad2e1507d6f72d3905ee9120f9cb747e6d800ba0b52273",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "9b589ac94660628644fdfb9480312dd020e8e1a68f0862fb91597c690e16d958",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "78c1bd7a540f7242e35f9692fcabbbf121f28407c153add6d873d2f78311e875",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "88af0bf904a9aaacc2e7e0ea550078f0fc750db87c8fa3983d810b29262b2f6b",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "8fd7282320b8102e406cf6f083826e57b407602a4050cc49351fccde34d72b22",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "8a99d0bbaaf61563dba9e4deb1190bd1fe25d932625ce70c53000fe7b96e1bbd",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "9c9d930253e8bc9a0fad2e1507d6f72d3905ee9120f9cb747e6d800ba0b52273",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "9b589ac94660628644fdfb9480312dd020e8e1a68f0862fb91597c690e16d958",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "78c1bd7a540f7242e35f9692fcabbbf121f28407c153add6d873d2f78311e875",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "88af0bf904a9aaacc2e7e0ea550078f0fc750db87c8fa3983d810b29262b2f6b",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "8fd7282320b8102e406cf6f083826e57b407602a4050cc49351fccde34d72b22",
+        "total_length": 33
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "4cbf3b3ddb9c5e2cdecf03fa357dd8a4c9c1adc927d25a200704a64b7291540d",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "2450829743328a85492929478833efd3bbac699f494f3c86bb23692287f4c05b",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "824d345b1f5fd48566bfe1219082a1889abc9a2aba56cc85ee554d7f668e88fd",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "c7531385cf4fd083468f3c89a5ae9cdd20723bd3eb17a53a4b8ba3ceddded9e3",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "584cf29efa2275a67c8b276fbbfcdee226512b2a58719275e0abd23f8db543ab",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "19484137549c894053840ea5feb4df0674da3ca5bc04acda3485d1823a6a0e8f",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "4cbf3b3ddb9c5e2cdecf03fa357dd8a4c9c1adc927d25a200704a64b7291540d",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "2450829743328a85492929478833efd3bbac699f494f3c86bb23692287f4c05b",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "824d345b1f5fd48566bfe1219082a1889abc9a2aba56cc85ee554d7f668e88fd",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "c7531385cf4fd083468f3c89a5ae9cdd20723bd3eb17a53a4b8ba3ceddded9e3",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "584cf29efa2275a67c8b276fbbfcdee226512b2a58719275e0abd23f8db543ab",
+        "total_length": 512
+      },
+      {
+        "active_rows": 33,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 33,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "19484137549c894053840ea5feb4df0674da3ca5bc04acda3485d1823a6a0e8f",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "d486714109266d924523e23cd5b9c9ebb77477f4728452c7c1b07598f9a1946d",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "7541e8427e99a5cdcaf624c076acb90c3191accd9530d02de3eb189887456cf4",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "08746bf53c7050641b45fa437698f1a9c2020cf965f4e792fa843db8fad11398",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "bb155521d166cf374d6a8a3c2b19d8ea8f55f699b82fc8c20c6dccad85dac4b0",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "4a88f41ab7e4d50c5ce9ccf1fd6511410b11835373289b3e9d8e6f1fa031e70e",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "373d77a3e5fcec4a426b3b3f90efa5a642978b07015387564b369b2853c3a739",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "d486714109266d924523e23cd5b9c9ebb77477f4728452c7c1b07598f9a1946d",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "7541e8427e99a5cdcaf624c076acb90c3191accd9530d02de3eb189887456cf4",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "08746bf53c7050641b45fa437698f1a9c2020cf965f4e792fa843db8fad11398",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "bb155521d166cf374d6a8a3c2b19d8ea8f55f699b82fc8c20c6dccad85dac4b0",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "4a88f41ab7e4d50c5ce9ccf1fd6511410b11835373289b3e9d8e6f1fa031e70e",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "373d77a3e5fcec4a426b3b3f90efa5a642978b07015387564b369b2853c3a739",
+        "total_length": 65
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "c4e87fff22e3347e0c3155368e41ef10e571ff1763dfbadeec56233ebf58127f",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "b734e4163ceb933a48c86edaa08c15aae58435b8efa4b283d14fa9fc73424ff1",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "dcf71f87e58e8545a7dd240f4a853a1278ef18cdf3ec081f2446398d2881fd37",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "9373dc15d0e03cc730eecfea961f151ece7dd82f81d1743cceb08518b64e2afe",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "538127e0b0b3ef830aeeeb80c3bfdc382275c7fa92c3420d7981cfd4c8800c0e",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "eedd9737a0d82dce964449e333b5e67996b577f6face104a1c6cb6254b608313",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "c4e87fff22e3347e0c3155368e41ef10e571ff1763dfbadeec56233ebf58127f",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "b734e4163ceb933a48c86edaa08c15aae58435b8efa4b283d14fa9fc73424ff1",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "dcf71f87e58e8545a7dd240f4a853a1278ef18cdf3ec081f2446398d2881fd37",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "9373dc15d0e03cc730eecfea961f151ece7dd82f81d1743cceb08518b64e2afe",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "538127e0b0b3ef830aeeeb80c3bfdc382275c7fa92c3420d7981cfd4c8800c0e",
+        "total_length": 512
+      },
+      {
+        "active_rows": 65,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 65,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "eedd9737a0d82dce964449e333b5e67996b577f6face104a1c6cb6254b608313",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "8d13ca96990431b457c09c1983b031707c9e197d6f563e8ebdcb9108a198ee0a",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "911307c62cd70434603bf7dcdfa98fac9cfd327becc46f859648155bb88c0b5b",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "2950d7f2d8490ab08bc3faccc00f9989c98f50b9ecb2a8eec49547dec631b001",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "21fed1f9329ee88370b83d64234152bbbe57a470947d8b07520c0494ff03f7f4",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "642385f2970ece132c0784007af9d3ee5b9f0f96921bf7b3ce29198ca9880728",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "eed8e3a18cbb3d259420b42349e0972387b9a7502a0f9c096ac50d837bc5976a",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "8d13ca96990431b457c09c1983b031707c9e197d6f563e8ebdcb9108a198ee0a",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "911307c62cd70434603bf7dcdfa98fac9cfd327becc46f859648155bb88c0b5b",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "2950d7f2d8490ab08bc3faccc00f9989c98f50b9ecb2a8eec49547dec631b001",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "21fed1f9329ee88370b83d64234152bbbe57a470947d8b07520c0494ff03f7f4",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "642385f2970ece132c0784007af9d3ee5b9f0f96921bf7b3ce29198ca9880728",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "eed8e3a18cbb3d259420b42349e0972387b9a7502a0f9c096ac50d837bc5976a",
+        "total_length": 128
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "a7f227607ab6d32663886e6218e63ccf437eb7c912f187495ffabaa28fa095b2",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "f7ba92552012677d5ab5015f2c7ac639edcb6c8ef3fa876c429d65a9dc21963b",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "3e4db957a8528b67b5d9d84414317607d5c1c603a3129ba55a4ea205a9f49275",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "298a5be253c8c1547975022849cab01ab3290103e108271e00adca3970191057",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "da23a2e36cda221af2eaa1df5cb335d4c6ff27663c48b446d779fbcb9159a7ad",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "a5919f81800ed1ef9c03a57b2409744d642db9ae35e6f8d773d1e2aa46534ca4",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 4,
+        "source_sha256": "a7f227607ab6d32663886e6218e63ccf437eb7c912f187495ffabaa28fa095b2",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "f7ba92552012677d5ab5015f2c7ac639edcb6c8ef3fa876c429d65a9dc21963b",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "3e4db957a8528b67b5d9d84414317607d5c1c603a3129ba55a4ea205a9f49275",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 4,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 8,
+        "source_sha256": "298a5be253c8c1547975022849cab01ab3290103e108271e00adca3970191057",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 1,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "da23a2e36cda221af2eaa1df5cb335d4c6ff27663c48b446d779fbcb9159a7ad",
+        "total_length": 512
+      },
+      {
+        "active_rows": 128,
+        "channel_tile": 2,
+        "context": 512,
+        "dim": 64,
+        "fast_softmax": true,
+        "heads": 14,
+        "kv_heads": 2,
+        "max_rows": 128,
+        "program_bindings": {
+          "ins": [
+            1,
+            2
+          ],
+          "linear_inputs": 3,
+          "outs": [
+            0
+          ]
+        },
+        "query_rows": 16,
+        "source_sha256": "a5919f81800ed1ef9c03a57b2409744d642db9ae35e6f8d773d1e2aa46534ca4",
+        "total_length": 512
+      }
+    ],
+    "program_info_bindings": [
+      0,
+      1,
+      2
+    ],
+    "records": 96,
+    "variants": [
+      [
+        4,
+        2
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        8,
+        2
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        16,
+        1
+      ],
+      [
+        16,
+        2
+      ]
+    ]
+  },
+  "checks": {
+    "1600_timed_exact_checks_and_40_abba_baab_blocks": true,
+    "96_exact_baseline_bitmatch_checks_cover_16_datasets_times_6_variants": true,
+    "captured_c_sha_programinfo_dot_block_and_pv_channel_tile_evidence": true,
+    "current_291_source_hashes_match_probe_cpu_proof_before_after": true,
+    "eight_cpu_proof_test_sources_match_and_51_pass_3_skip": true,
+    "fresh_responses_have_usage_and_sessions_ready_idle": true,
+    "no_accelerator_quality_llm_or_goal_claim": true,
+    "owner_terminal_and_fresh_receipts_match_job_and_launch": true,
+    "probe_prototype_helper_cpu_proof_hashes_match_frozen_map": true,
+    "probe_uses_public_cpu_prefill_attention_f32_queries_fp16_cache_pool4": true,
+    "raw_report_complete_numericpass_and_accelerators_closed": true,
+    "recomputed_timing_medians_paired_ratios_and_wincounts_match_report": true,
+    "serving_settings_and_stable_session_identity_unchanged": true,
+    "six_expected_variants_qwen_geometry_and_96_group_shape": true
+  },
+  "dataset_refs": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-query-tiles-cpu-probe-v1/results/probe.json",
+      "role": "raw_probe_report",
+      "sha256": "78e11b467bd66d80da498c1c7aa218bc64fac68a08295822a2d9f286a4f4e504"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-query-tiles-cpu-probe-v1/job.json",
+      "role": "probe_job",
+      "sha256": "8e90754bef63efe4b3d4cdb8dbbd1dd6aeb657a9476c409efdae5d775f13598b"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-query-tiles-cpu-probe-v1/before.json",
+      "role": "before_snapshot",
+      "sha256": "9047b8675b518576ef7fd45596735fb3cb77d4ff1ff8420e6987da1cecef7787"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-query-tiles-cpu-probe-v1/after.json",
+      "role": "after_snapshot",
+      "sha256": "66c4c0c0f069867630291aeb83ec2d6765593ac8d88ad5ce4b9198f8a9a25463"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-query-tiles-cpu-probe-v1-owner-terminal.json",
+      "role": "owner_terminal",
+      "sha256": "44b5a7e7262481b6254f59c580c00a5c21a718be8a372fcdf943f19e8527cadd"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-query-tiles-cpu-probe-v1-fresh.json",
+      "role": "fresh_receipt",
+      "sha256": "175e512f94b5bbc68de68876066865ed08cb896253fe523b26d6bc1044d9525c"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-query-tiles-cpu-probe-v1-launch.json",
+      "role": "launch_receipt",
+      "sha256": "ddcb1506b5c4905dfc9f95cf561dcd49ac362721cb15bf442074ed4e9c7afebd"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/probe_attention_query_tiles_v1.py",
+      "role": "probe_source",
+      "sha256": "510f6c60d03bd6bbca44cfda1f7dde445171d834b2bcb2dbe21ab0ba70b08d3c"
+    },
+    {
+      "path": "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_cpu.py",
+      "role": "rockchip_cpu_prototype",
+      "sha256": "dcffed8092dd2247a98dacdf9bef28368fe06a74aab10448b239e3f78f414286"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-npu-head-lease-v3.py",
+      "role": "lease_helper",
+      "sha256": "701738f15f57aebbd61812c7c790c545df549606d971810e04de89aabf55aa5d"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-check-v1.json",
+      "role": "cpu_proof",
+      "sha256": "f39ecf4dd2bcb0255f6447a592a2ce658d0c09ee90ff5a2761aaed1249b39c86"
+    }
+  ],
+  "fresh_choices": {
+    "responses": [
+      {
+        "model_id": "b4b92c783d8643a1",
+        "total_tokens": 13
+      },
+      {
+        "model_id": "55a95dc3c1b93b72",
+        "total_tokens": 17
+      }
+    ],
+    "selected_model_id": "55a95dc3c1b93b72",
+    "sessions": {
+      "55a95dc3c1b93b72": {
+        "active_request": null,
+        "selected_profile": "CL",
+        "state": "ready"
+      },
+      "b4b92c783d8643a1": {
+        "active_request": null,
+        "selected_profile": "ROCKCHIP",
+        "state": "ready"
+      }
+    }
+  },
+  "goal_complete": false,
+  "llm_qualified": false,
+  "provenance": {
+    "child_pid": 2638863,
+    "cpu_proof_sha256": "f39ecf4dd2bcb0255f6447a592a2ce658d0c09ee90ff5a2761aaed1249b39c86",
+    "helper_sha256": "701738f15f57aebbd61812c7c790c545df549606d971810e04de89aabf55aa5d",
+    "job_run_token": "6008e17e11f90011e95e942780404aee4bc28a98e382a84f",
+    "owner_pid": 2638862,
+    "owner_start_ticks": "18390464",
+    "probe_report_sha256": "78e11b467bd66d80da498c1c7aa218bc64fac68a08295822a2d9f286a4f4e504",
+    "probe_sha256": "510f6c60d03bd6bbca44cfda1f7dde445171d834b2bcb2dbe21ab0ba70b08d3c",
+    "prototype_sha256": "dcffed8092dd2247a98dacdf9bef28368fe06a74aab10448b239e3f78f414286"
+  },
+  "qualification": {
+    "baseline_bitmatch_only": true,
+    "dataset_group_count": 16,
+    "exact_output_checks": 96,
+    "independent_tensor_reference_run": false,
+    "scope": "CPU operator comparison only; Qwen2 geometry (14 query heads, 2 KV heads, dim 64, context 512).",
+    "variant_count": 6
+  },
+  "quality_qualified": false,
+  "restoration_snapshot": {
+    "fresh_verified": true,
+    "job_phase": "fresh_verified",
+    "job_restored": true,
+    "owner_terminal": true
+  },
+  "restoration_verified": true,
+  "source_count": 291,
+  "timing_counts": {
+    "active_rows_128_total_lengths": [
+      128,
+      512
+    ],
+    "exact_timed_checks": 1600,
+    "paired_blocks": 400,
+    "timed_samples": 1600
+  },
+  "timing_metrics": [
+    {
+      "active_rows": 128,
+      "blocks": 200,
+      "candidates": [
+        {
+          "baseline_median_ms_recomputed": 2.1399299999999997,
+          "candidate_median_ms_recomputed": 2.0527230000000003,
+          "faster_blocks_recomputed": 33,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 1.0387412867379333,
+          "samples_per_arm": 80,
+          "variant": [
+            8,
+            1
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 2.1504295,
+          "candidate_median_ms_recomputed": 1.9717864999999999,
+          "faster_blocks_recomputed": 37,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 1.089705726467356,
+          "samples_per_arm": 80,
+          "variant": [
+            8,
+            2
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 2.1301595,
+          "candidate_median_ms_recomputed": 2.4642584999999997,
+          "faster_blocks_recomputed": 0,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 0.8612195816945099,
+          "samples_per_arm": 80,
+          "variant": [
+            8,
+            4
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 2.1324925,
+          "candidate_median_ms_recomputed": 2.1505755,
+          "faster_blocks_recomputed": 18,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 0.9918532838843985,
+          "samples_per_arm": 80,
+          "variant": [
+            16,
+            1
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 2.151742,
+          "candidate_median_ms_recomputed": 2.1383254999999997,
+          "faster_blocks_recomputed": 23,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 1.0066045724596697,
+          "samples_per_arm": 80,
+          "variant": [
+            16,
+            2
+          ]
+        }
+      ],
+      "total_length": 128
+    },
+    {
+      "active_rows": 128,
+      "blocks": 200,
+      "candidates": [
+        {
+          "baseline_median_ms_recomputed": 7.7176884999999995,
+          "candidate_median_ms_recomputed": 7.278007,
+          "faster_blocks_recomputed": 36,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 1.0688737334771932,
+          "samples_per_arm": 80,
+          "variant": [
+            8,
+            1
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 7.989663999999999,
+          "candidate_median_ms_recomputed": 6.7118895,
+          "faster_blocks_recomputed": 39,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 1.1865674662388066,
+          "samples_per_arm": 80,
+          "variant": [
+            8,
+            2
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 7.7919165,
+          "candidate_median_ms_recomputed": 8.7991735,
+          "faster_blocks_recomputed": 2,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 0.8857028207191797,
+          "samples_per_arm": 80,
+          "variant": [
+            8,
+            4
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 7.7280425,
+          "candidate_median_ms_recomputed": 7.4630665,
+          "faster_blocks_recomputed": 30,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 1.0298846368555195,
+          "samples_per_arm": 80,
+          "variant": [
+            16,
+            1
+          ]
+        },
+        {
+          "baseline_median_ms_recomputed": 7.769896,
+          "candidate_median_ms_recomputed": 6.750389,
+          "faster_blocks_recomputed": 39,
+          "paired_blocks": 40,
+          "paired_median_speedup_recomputed": 1.1617746251407428,
+          "samples_per_arm": 80,
+          "variant": [
+            16,
+            2
+          ]
+        }
+      ],
+      "total_length": 512
+    }
+  ]
+}

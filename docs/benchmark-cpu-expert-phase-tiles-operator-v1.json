@@ -1,0 +1,749 @@
+{
+  "schema": "cpu-expert-phase-tiles-perf-v1",
+  "complete": true,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "scope": "Prepared kernels, four workers, parking callback forprefill andactivecallback fordecode. Includesgrouping/scatter/zerofill; excludespacking, selectorcreationandTensor/JITdispatch.12alternatingorderblocks,3callspervariantperblock. No model/RKLLM claim.",
+  "records": [
+    {
+      "phase": "decode",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "balanced",
+      "rows": 1,
+      "median_ms": {
+        "baseline": 0.583471,
+        "n32": 0.6024290000000001,
+        "n64": 0.757302
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "n32": 0.9610710707519935,
+        "n64": 0.761238701640677
+      },
+      "blocks": [
+        {
+          "baseline": 2.025306,
+          "n32": 1.966973,
+          "n64": 2.609798
+        },
+        {
+          "n64": 0.774657,
+          "n32": 0.5947,
+          "baseline": 0.578367
+        },
+        {
+          "baseline": 0.564076,
+          "n32": 0.598492,
+          "n64": 0.768531
+        },
+        {
+          "n64": 0.781656,
+          "n32": 0.64195,
+          "baseline": 0.588575
+        },
+        {
+          "baseline": 0.625908,
+          "n32": 0.627949,
+          "n64": 0.741698
+        },
+        {
+          "n64": 0.74374,
+          "n32": 0.604033,
+          "baseline": 0.566992
+        },
+        {
+          "baseline": 0.576326,
+          "n32": 0.589451,
+          "n64": 0.746948
+        },
+        {
+          "n64": 0.749573,
+          "n32": 0.59295,
+          "baseline": 0.58945
+        },
+        {
+          "baseline": 0.569326,
+          "n32": 0.598783,
+          "n64": 0.74899
+        },
+        {
+          "n64": 0.737324,
+          "n32": 0.634075,
+          "baseline": 0.603741
+        },
+        {
+          "baseline": 0.603159,
+          "n32": 0.621825,
+          "n64": 0.79478
+        },
+        {
+          "n64": 0.765031,
+          "n32": 0.600825,
+          "baseline": 0.563784
+        }
+      ]
+    },
+    {
+      "phase": "decode",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "trace",
+      "rows": 1,
+      "median_ms": {
+        "baseline": 0.548326,
+        "n32": 0.5658255,
+        "n64": 0.689928
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "n32": 0.9749486387389366,
+        "n64": 0.8012359033292673
+      },
+      "blocks": [
+        {
+          "baseline": 0.548326,
+          "n32": 0.570784,
+          "n64": 0.683949
+        },
+        {
+          "n64": 0.685116,
+          "n32": 0.573117,
+          "baseline": 0.551242
+        },
+        {
+          "baseline": 0.548326,
+          "n32": 0.555034,
+          "n64": 0.69649
+        },
+        {
+          "n64": 0.721282,
+          "n32": 0.615408,
+          "baseline": 0.589742
+        },
+        {
+          "baseline": 0.566992,
+          "n32": 0.622408,
+          "n64": 0.714866
+        },
+        {
+          "n64": 0.676074,
+          "n32": 0.555617,
+          "baseline": 0.544826
+        },
+        {
+          "baseline": 0.549785,
+          "n32": 0.556784,
+          "n64": 0.686574
+        },
+        {
+          "n64": 0.671991,
+          "n32": 0.560867,
+          "baseline": 0.543659
+        },
+        {
+          "baseline": 0.538992,
+          "n32": 0.546868,
+          "n64": 0.693282
+        },
+        {
+          "n64": 0.685116,
+          "n32": 0.553576,
+          "baseline": 0.548326
+        },
+        {
+          "baseline": 0.545993,
+          "n32": 0.591201,
+          "n64": 0.725657
+        },
+        {
+          "n64": 0.709032,
+          "n32": 0.60695,
+          "baseline": 0.605783
+        }
+      ]
+    },
+    {
+      "phase": "prefill",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "balanced",
+      "rows": 128,
+      "median_ms": {
+        "baseline": 24.4341875,
+        "r6": 20.445117
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "r6": 1.1952659649170512
+      },
+      "blocks": [
+        {
+          "baseline": 24.343043,
+          "r6": 20.365931
+        },
+        {
+          "r6": 20.387514,
+          "baseline": 24.375418
+        },
+        {
+          "baseline": 24.389418,
+          "r6": 20.394514
+        },
+        {
+          "r6": 20.604511,
+          "baseline": 24.418292
+        },
+        {
+          "baseline": 24.410709,
+          "r6": 20.453138
+        },
+        {
+          "r6": 20.444096,
+          "baseline": 24.435792
+        },
+        {
+          "baseline": 24.432583,
+          "r6": 20.462763
+        },
+        {
+          "r6": 20.403555,
+          "baseline": 24.453292
+        },
+        {
+          "baseline": 24.451542,
+          "r6": 20.430097
+        },
+        {
+          "r6": 20.500679,
+          "baseline": 24.468458
+        },
+        {
+          "baseline": 24.465833,
+          "r6": 20.446138
+        },
+        {
+          "r6": 20.521971,
+          "baseline": 24.482166
+        }
+      ]
+    },
+    {
+      "phase": "prefill",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "trace",
+      "rows": 128,
+      "median_ms": {
+        "baseline": 25.754399,
+        "r6": 22.2658215
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "r6": 1.1564814105394312
+      },
+      "blocks": [
+        {
+          "baseline": 25.696067,
+          "r6": 22.181239
+        },
+        {
+          "r6": 22.223239,
+          "baseline": 25.701025
+        },
+        {
+          "baseline": 25.709775,
+          "r6": 22.224405
+        },
+        {
+          "r6": 22.269905,
+          "baseline": 25.722608
+        },
+        {
+          "baseline": 25.739525,
+          "r6": 22.284488
+        },
+        {
+          "r6": 22.292363,
+          "baseline": 25.751191
+        },
+        {
+          "baseline": 25.757607,
+          "r6": 22.276321
+        },
+        {
+          "r6": 22.319196,
+          "baseline": 25.762274
+        },
+        {
+          "baseline": 25.780065,
+          "r6": 22.219739
+        },
+        {
+          "r6": 22.255614,
+          "baseline": 25.759358
+        },
+        {
+          "baseline": 25.796982,
+          "r6": 22.261738
+        },
+        {
+          "r6": 22.286238,
+          "baseline": 25.773357
+        }
+      ]
+    },
+    {
+      "phase": "decode",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "balanced",
+      "rows": 1,
+      "median_ms": {
+        "baseline": 0.5665545000000001,
+        "n32": 0.5697635000000001,
+        "n64": 0.6657200000000001
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "n32": 0.9938902247247393,
+        "n64": 0.8442338478933451
+      },
+      "blocks": [
+        {
+          "baseline": 1.777101,
+          "n32": 1.809184,
+          "n64": 2.335343
+        },
+        {
+          "n64": 2.496049,
+          "n32": 1.921182,
+          "baseline": 0.606075
+        },
+        {
+          "baseline": 0.612491,
+          "n32": 0.568451,
+          "n64": 0.669658
+        },
+        {
+          "n64": 0.653616,
+          "n32": 0.565825,
+          "baseline": 0.564076
+        },
+        {
+          "baseline": 0.557951,
+          "n32": 0.569034,
+          "n64": 0.657408
+        },
+        {
+          "n64": 0.660325,
+          "n32": 0.557659,
+          "baseline": 0.567284
+        },
+        {
+          "baseline": 0.555909,
+          "n32": 0.5632,
+          "n64": 0.664116
+        },
+        {
+          "n64": 0.663824,
+          "n32": 0.578951,
+          "baseline": 0.576909
+        },
+        {
+          "baseline": 0.597617,
+          "n32": 0.590325,
+          "n64": 0.711657
+        },
+        {
+          "n64": 0.749282,
+          "n32": 0.566992,
+          "baseline": 0.565825
+        },
+        {
+          "baseline": 0.558243,
+          "n32": 0.572534,
+          "n64": 0.667324
+        },
+        {
+          "n64": 0.660616,
+          "n32": 0.570493,
+          "baseline": 0.565534
+        }
+      ]
+    },
+    {
+      "phase": "decode",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "trace",
+      "rows": 1,
+      "median_ms": {
+        "baseline": 0.574575,
+        "n32": 0.572971,
+        "n64": 0.6638245
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "n32": 0.9929121972836638,
+        "n64": 0.861360872271077
+      },
+      "blocks": [
+        {
+          "baseline": 0.574575,
+          "n32": 0.571367,
+          "n64": 0.6542
+        },
+        {
+          "n64": 0.698532,
+          "n32": 0.6052,
+          "baseline": 0.596158
+        },
+        {
+          "baseline": 0.604033,
+          "n32": 0.610159,
+          "n64": 0.767656
+        },
+        {
+          "n64": 0.674907,
+          "n32": 0.562617,
+          "baseline": 0.583326
+        },
+        {
+          "baseline": 0.561743,
+          "n32": 0.577493,
+          "n64": 0.655366
+        },
+        {
+          "n64": 0.6507,
+          "n32": 0.573408,
+          "baseline": 0.564951
+        },
+        {
+          "baseline": 0.574575,
+          "n32": 0.559409,
+          "n64": 0.662075
+        },
+        {
+          "n64": 0.655658,
+          "n32": 0.564368,
+          "baseline": 0.562034
+        },
+        {
+          "baseline": 0.561451,
+          "n32": 0.594117,
+          "n64": 0.694449
+        },
+        {
+          "n64": 0.707573,
+          "n32": 0.574575,
+          "baseline": 0.618617
+        },
+        {
+          "baseline": 0.578951,
+          "n32": 0.560867,
+          "n64": 0.665574
+        },
+        {
+          "n64": 0.655074,
+          "n32": 0.572534,
+          "baseline": 0.562326
+        }
+      ]
+    },
+    {
+      "phase": "prefill",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "balanced",
+      "rows": 128,
+      "median_ms": {
+        "baseline": 24.747287999999998,
+        "r6": 21.954326000000002
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "r6": 1.1270588381746798
+      },
+      "blocks": [
+        {
+          "baseline": 24.655706,
+          "r6": 21.875868
+        },
+        {
+          "r6": 21.893077,
+          "baseline": 24.696539
+        },
+        {
+          "baseline": 24.711414,
+          "r6": 21.933909
+        },
+        {
+          "r6": 21.951993,
+          "baseline": 24.740871
+        },
+        {
+          "baseline": 24.733288,
+          "r6": 21.956659
+        },
+        {
+          "r6": 21.939743,
+          "baseline": 24.739122
+        },
+        {
+          "baseline": 24.753705,
+          "r6": 21.949076
+        },
+        {
+          "r6": 21.977075,
+          "baseline": 24.75983
+        },
+        {
+          "baseline": 24.77033,
+          "r6": 21.999242
+        },
+        {
+          "r6": 21.995159,
+          "baseline": 24.772954
+        },
+        {
+          "baseline": 24.803578,
+          "r6": 21.999826
+        },
+        {
+          "r6": 22.014701,
+          "baseline": 24.819329
+        }
+      ]
+    },
+    {
+      "phase": "prefill",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "trace",
+      "rows": 128,
+      "median_ms": {
+        "baseline": 26.333349,
+        "r6": 23.1507265
+      },
+      "paired_speedup": {
+        "baseline": 1.0,
+        "r6": 1.137034269487075
+      },
+      "blocks": [
+        {
+          "baseline": 26.309141,
+          "r6": 23.114852
+        },
+        {
+          "r6": 23.221892,
+          "baseline": 26.313517
+        },
+        {
+          "baseline": 26.312934,
+          "r6": 23.142852
+        },
+        {
+          "r6": 23.216934,
+          "baseline": 26.332766
+        },
+        {
+          "baseline": 26.343558,
+          "r6": 23.174351
+        },
+        {
+          "r6": 23.153935,
+          "baseline": 26.3281
+        },
+        {
+          "baseline": 26.331017,
+          "r6": 23.147518
+        },
+        {
+          "r6": 23.236767,
+          "baseline": 26.348516
+        },
+        {
+          "baseline": 26.333932,
+          "r6": 23.121852
+        },
+        {
+          "r6": 23.232683,
+          "baseline": 26.342975
+        },
+        {
+          "baseline": 26.346475,
+          "r6": 23.100268
+        },
+        {
+          "r6": 23.134976,
+          "baseline": 26.356682
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "phase": "decode",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "balanced",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "decode",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "trace",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "decode",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "same",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "prefill",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "balanced",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "prefill",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "trace",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "prefill",
+      "N": 896,
+      "K": 1280,
+      "broadcast": true,
+      "routing": "same",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "decode",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "balanced",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "decode",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "trace",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "decode",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "same",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "prefill",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "balanced",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "prefill",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "trace",
+      "outputs_bitwise_equal": true
+    },
+    {
+      "phase": "prefill",
+      "N": 1280,
+      "K": 896,
+      "broadcast": false,
+      "routing": "same",
+      "outputs_bitwise_equal": true
+    }
+  ],
+  "sources": {
+    "dffd53f5823bd8b49045b6d4526e4454b10a1602fa5be882f2dd984602978885": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/dffd53f5823bd8b49045b6d4526e4454b10a1602fa5be882f2dd984602978885.c",
+    "013ca619d87e0bbba6fda1583254aa98954100334e0f0f896a80d0886e82b134": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/013ca619d87e0bbba6fda1583254aa98954100334e0f0f896a80d0886e82b134.c",
+    "1bd52cc43c6017288e8140224756f0e71636ebae274f5a8cefe87a49e350babc": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/1bd52cc43c6017288e8140224756f0e71636ebae274f5a8cefe87a49e350babc.c",
+    "ee59c730a331d6810e12f64f7997f25c044cc124c21cdc43248b7a7b19e7f636": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/ee59c730a331d6810e12f64f7997f25c044cc124c21cdc43248b7a7b19e7f636.c",
+    "17211aa5dc3528ae811d53d2cc3492ab00d0afab1c0dc8d29a10b3dcd9f6b130": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/17211aa5dc3528ae811d53d2cc3492ab00d0afab1c0dc8d29a10b3dcd9f6b130.c",
+    "1231ecbc998651ddf3887425e21147bf6e7a952e625c13cfe444b778b14e9250": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/1231ecbc998651ddf3887425e21147bf6e7a952e625c13cfe444b778b14e9250.c",
+    "f10e24a0943ab69eea16a73277c423839032534002b98b2003e3c41e59b3e69b": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/f10e24a0943ab69eea16a73277c423839032534002b98b2003e3c41e59b3e69b.c",
+    "638fe03ced5f4cb6d47b2cc690dd3c0b0ffadd29257e71358d184212426194dc": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/638fe03ced5f4cb6d47b2cc690dd3c0b0ffadd29257e71358d184212426194dc.c",
+    "6f33563391190f62448e0018ca0f996ed7dce710f17e52423696031caed0ad4c": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/6f33563391190f62448e0018ca0f996ed7dce710f17e52423696031caed0ad4c.c",
+    "46b6d721f38eefda1b7b70f39a0065c0f8ff7c0f8d663415eba123b614325ac2": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/cpu-expert-phase-tiles-perf-v1/46b6d721f38eefda1b7b70f39a0065c0f8ff7c0f8d663415eba123b614325ac2.c"
+  },
+  "clocks_before": {
+    "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+    "/sys/class/devfreq/fb000000.gpu/cur_freq": "300000000",
+    "/sys/class/devfreq/dmc/cur_freq": "528000000",
+    "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "408000",
+    "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+  },
+  "clocks_after": {
+    "/sys/class/devfreq/fdab0000.npu/cur_freq": "1000000000",
+    "/sys/class/devfreq/fb000000.gpu/cur_freq": "300000000",
+    "/sys/class/devfreq/dmc/cur_freq": "528000000",
+    "/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq": "408000",
+    "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "2256000",
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1800000"
+  },
+  "runner_sha256": "47ab915135164f8a887b251e48360631496aa2e5a19835c483f79a02ab40b2db",
+  "current_prefill_sources_match_measured": true,
+  "rejected_decode_variants_removed": true,
+  "CPU_owner": {
+    "session": 63569,
+    "exit_code": 0
+  },
+  "fresh_serving": {
+    "session": 22771,
+    "exit_code": 0,
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-expert-phase-tiles-perf-v2-fresh.json",
+    "sha256": "f7009d7f532762a1a208d5a14bf2d4eaeb0b8134c3be58aa1bf8667f5c1d03df"
+  },
+  "job": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-expert-phase-tiles-perf-v2.json",
+    "sha256": "1ac607664641fc9e898cf84f21b79ef7b164d303d7f714270f73327ea15b4c52"
+  },
+  "raw": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-expert-phase-tiles-perf-v1-results.json",
+    "sha256": "ccfbeaf92b59e0af20c1de27d1e4f44b4741d2486c5f79ebef44c18380b8127c"
+  },
+  "initial_setup_failure": {
+    "owner": 58744,
+    "exit_code": 1,
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/cpu-expert-phase-tiles-perf-v1.json",
+      "sha256": "158140b4a93ddf7b4faf97ada40906c664ed3d8e0eebee70d5ebc6de90485dc8"
+    },
+    "reason": "Missing PYTHONPATH; stopped before measurements; corrected launcher run is separate."
+  }
+}

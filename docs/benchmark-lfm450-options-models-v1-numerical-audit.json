@@ -1,0 +1,67 @@
+{
+  "audit_complete": true,
+  "audit_kind": "lfm450-options-models-v1-numerical-audit",
+  "checks": {
+    "abba_control_candidate_candidate_control": true,
+    "all_four_teacher_logits_uint32_bitwise_identical": true,
+    "all_source_hashes_before_after_identical": true,
+    "candidate_pool_share_projection_raw_ffn16_and_teacher_pool": true,
+    "control_pool_disabled_raw_ffn0_and_teacher_pool0": true,
+    "four_reports_and_npz_hashes_valid": true,
+    "full_sequence_ids_identical": true,
+    "independent_float64_nll_delta_le_1e_7": true,
+    "placement_93_layers_6_attention_6_prepared_qkv_33_norms_16_ffn": true,
+    "teacher_prefix128_and_first32_exact": true,
+    "teacher_shape_dtype_finite": true,
+    "workload_128_input_64_generated_context_512": true
+  },
+  "dataset_refs": [
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-1-control.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-1-control.json",
+      "report_sha256": "f0766d362c3243b682caa2df1ffa834b6a0a24ca8a30ed27f499a511b556aafc"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-2-candidate.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-2-candidate.json",
+      "report_sha256": "7568fa09728c7b8bb18e976fe7af17569d65b846c077b68f5f17a2bfb6e9e4da"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-3-candidate.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-3-candidate.json",
+      "report_sha256": "54f3f92b624413f64ddd078f3e1e898b7cbccafab87ec791086b8a6d917f0095"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-4-control.teacher-logits.npz",
+      "npz_sha256": "c490b6ca461d605623df39eabb29310c8ba90804fad9247c33d951074ab31485",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/lfm450-options-models-v1/results/lfm450-options-models-v1-lfm25-vl-450m-4-control.json",
+      "report_sha256": "164fcfe8652e2a87409ce80b43678dd9d87ffd2b7a14a982700cb114ebc9cf42"
+    }
+  ],
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "restoration_verified": false,
+  "source_count": 291,
+  "teacher_logits": {
+    "all_finite": true,
+    "dtype": "float32",
+    "float64_mean_nll_by_case": [
+      2.0807037992437083,
+      2.0807037992437083,
+      2.0807037992437083,
+      2.0807037992437083
+    ],
+    "float64_mean_nll_max_delta": 0.0,
+    "prefix128_exact": true,
+    "shape": [
+      32,
+      65536
+    ],
+    "teacher_first32_exact": true,
+    "uint32_bitwise_identical": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "model": "LFM2.5-VL/450M",
+  "TTFT_ms": 102.74,
+  "decode_tps": 62.16,
+  "observed_row": "| LFM2.5-VL | 450M | w8a8 / INT8\u2020 | 128 | 64 | **102.74** / 274.46 | **62.16** / 54.25 | 436.94 / 1681.74* |",
+  "observed_local_table": "/home/orangepi/oNPU/benchmark.md",
+  "observed_local_table_sha256": "f64aefae36f41443942d82f28a93a32324e65f471a683508a3c37f923d524c3a",
+  "original_url": "https://github.com/airockchip/rknn-llm/blob/main/benchmark.md",
+  "scope": "Published timing context only; output quality unqualified."
+}

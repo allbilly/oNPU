@@ -1,0 +1,1401 @@
+{
+  "audit_complete": true,
+  "checks": {
+    "all_16_f32_arrays_shape_and_all_finite": true,
+    "all_16_independently_recomputed_32_row_NLL_and_mean_within_1e-7": true,
+    "all_16_prefix_and_teacher_ids_exact": true,
+    "all_16_reports_sha256_match_job_and_all_npz_sha256_match_report": true,
+    "all_16_reports_valid_for_requested_numerical_scope": true,
+    "all_16_source_maps_289_unchanged_before_after_and_across_reports": true,
+    "all_4_model_cohorts_abba_and_24_sequences_each_exact": true,
+    "candidate_control_pool_roles_and_callback_hashes_verified": true,
+    "four_arrays_per_model_uint32_bitwise_identical": true,
+    "teacher_pool_calls_equal_blocks_times_8_candidate_or_4_control": true
+  },
+  "cohort_configuration": {
+    "all_previous_ids_exact_six_true": true,
+    "context": 512,
+    "generated_tokens": 64,
+    "input_tokens": 128,
+    "models_in_order": [
+      "Qwen2",
+      "TinyLlama",
+      "InternLM2",
+      "Gemma2"
+    ],
+    "per_model_order": "control,candidate,candidate,control (ABBA)",
+    "per_process_measured_requests": 3,
+    "per_process_trials": 6,
+    "per_process_warmup_requests": 3,
+    "rows_per_fixed_teacher_array": 32
+  },
+  "cohorts": [
+    {
+      "abba_roles_verified": true,
+      "all_24_generated_sequence_length": 64,
+      "all_24_sequences_exact": true,
+      "all_four_logit_arrays_uint32_bitwise_identical": true,
+      "blocks": 24,
+      "case_order": [
+        "qwen2-1-control.json",
+        "qwen2-2-candidate.json",
+        "qwen2-3-candidate.json",
+        "qwen2-4-control.json"
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "model": "Qwen2",
+      "reports": [
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "1655b0044df801c93cf1d2d85cb683e267c14e8cbaed2f85d5e1321735a41ae6"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 96,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-1-control.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-1-control.json",
+          "report_sha256": "76d43ce0d76e91e09f4ced1a0d199ff6be0ee143f5afa49fcbfea64815634514",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 96,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "1b311ea35d2b2f05018ec3146abfca703af9ec2e886809ec6e75474039f37870"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 192,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-2-candidate.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-2-candidate.json",
+          "report_sha256": "ea9d7d5ca2561bb6cd01eb78f745f02d30c8be5ebdf309e7c221e900b8a1422c",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 192,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "6e6928e317e53ff6d4d5697c854f6e5250e8e3696e6a0e6809fd28e6c084f60b"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 192,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-3-candidate.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-3-candidate.json",
+          "report_sha256": "78a968154afbf41eea1b78ff255c60e3be67eda40d0aff441ba0ec2c5377a10a",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 192,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "1655b0044df801c93cf1d2d85cb683e267c14e8cbaed2f85d5e1321735a41ae6"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 96,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-4-control.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-4-control.json",
+          "report_sha256": "ccaf424d105db7f25670604d89d7419f777429fbdd747a06d915fd0d3c7e7504",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 96,
+          "trial_count": 6,
+          "warmups": 3
+        }
+      ]
+    },
+    {
+      "abba_roles_verified": true,
+      "all_24_generated_sequence_length": 64,
+      "all_24_sequences_exact": true,
+      "all_four_logit_arrays_uint32_bitwise_identical": true,
+      "blocks": 22,
+      "case_order": [
+        "tinyllama-1-control.json",
+        "tinyllama-2-candidate.json",
+        "tinyllama-3-candidate.json",
+        "tinyllama-4-control.json"
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "model": "TinyLlama",
+      "reports": [
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 22,
+          "callback_source_hashes": [
+            "5ea6480296b0dcb3dc27c8a95a6afaabbf6e2b705a61563dcf76be9dd5844a29"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 88,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-1-control.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-1-control.json",
+          "report_sha256": "e9028c87b9caf6be60f261796a1efc5a979c5ec926863d24f01b79c44e4dce86",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 88,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 22,
+          "callback_source_hashes": [
+            "e679bf2e4482eaa3b2fca1d196b32c417bdb4c9d4fa5e69f08f783d135cb44b5"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 176,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-2-candidate.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-2-candidate.json",
+          "report_sha256": "0c04a5be294681244f4715be73ac1969d22cf5398c660d66c7a869225534f658",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 176,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 22,
+          "callback_source_hashes": [
+            "373325941777c95474d7a14c32cadb88c4ce0c55b6640c80ae3c95f16113563f"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 176,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-3-candidate.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-3-candidate.json",
+          "report_sha256": "615f9783424d78bcea09e071bd5900094ef4fdfcb1fe30589eb393702d32f4ee",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 176,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 22,
+          "callback_source_hashes": [
+            "5ea6480296b0dcb3dc27c8a95a6afaabbf6e2b705a61563dcf76be9dd5844a29"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 88,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-4-control.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-4-control.json",
+          "report_sha256": "d67bd488e02e96b82de6992005a9c4fd3b9d781c59aa291edcc9af7c6d0ebf54",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 88,
+          "trial_count": 6,
+          "warmups": 3
+        }
+      ]
+    },
+    {
+      "abba_roles_verified": true,
+      "all_24_generated_sequence_length": 64,
+      "all_24_sequences_exact": true,
+      "all_four_logit_arrays_uint32_bitwise_identical": true,
+      "blocks": 24,
+      "case_order": [
+        "internlm2-1-control.json",
+        "internlm2-2-candidate.json",
+        "internlm2-3-candidate.json",
+        "internlm2-4-control.json"
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "model": "InternLM2",
+      "reports": [
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "7eba5e4f402598ab8784bee186f9e3bb6f415c7eca998514ea18454b12fc2164"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 96,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-1-control.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-1-control.json",
+          "report_sha256": "e1623bc7ab850bc30a36baea1e41fe2858bb65a67e950c4c1153bd396882270a",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 96,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "60b769c6190e1a10bc0ec51db26434e4247d49effff5feb716d107d4e39e6152"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 192,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-2-candidate.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-2-candidate.json",
+          "report_sha256": "0d24b276617f6278f36f0973cf8f40e4b0777024e209519dd7011ce1c2edf2f5",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 192,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "cd6502a2dde11c4ff807b5bac2e2ef4c6b5851ec788a891355d637e0d6bab949"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 192,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-3-candidate.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-3-candidate.json",
+          "report_sha256": "6ca5bdd5b02e9f9082fec82d1cfb84b18eeb7e44c8d4611dd1d32743a87f0e05",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 192,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "callback_calls": 24,
+          "callback_source_hashes": [
+            "7eba5e4f402598ab8784bee186f9e3bb6f415c7eca998514ea18454b12fc2164"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 96,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-4-control.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-4-control.json",
+          "report_sha256": "6f7e9f5cbb770aa28244fd93dbc8017667091ffb2ec9f249e467539270dabdbe",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 96,
+          "trial_count": 6,
+          "warmups": 3
+        }
+      ]
+    },
+    {
+      "abba_roles_verified": true,
+      "all_24_generated_sequence_length": 64,
+      "all_24_sequences_exact": true,
+      "all_four_logit_arrays_uint32_bitwise_identical": true,
+      "blocks": 26,
+      "case_order": [
+        "gemma2-1-control.json",
+        "gemma2-2-candidate.json",
+        "gemma2-3-candidate.json",
+        "gemma2-4-control.json"
+      ],
+      "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+      "model": "Gemma2",
+      "reports": [
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 26,
+          "callback_source_hashes": [
+            "876a5e3cfc218a8137b27930fffdd36e6079941596d9821b79ffdf7e421bd9dc"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 104,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            256000
+          ],
+          "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-1-control.teacher-logits.npz",
+          "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-1-control.json",
+          "report_sha256": "d486f6d9b4b2edc7c71610ee533dba5f44c37efc0c6b29086eb41513fb5aada5",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 104,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 26,
+          "callback_source_hashes": [
+            "10b0a8895f4cb6f760e0bae74262d27de30f6f4d145d993f11335b26633a80b1"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 208,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            256000
+          ],
+          "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-2-candidate.teacher-logits.npz",
+          "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-2-candidate.json",
+          "report_sha256": "0b7e192842e2942516610a2d923a8ff15543f413e4d3e151fa126f8a0ac6135f",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 208,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 26,
+          "callback_source_hashes": [
+            "2e95f84c7cec83f6ebda52e810a360e99f6f3cb6be932d93139d378335742db7"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 208,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            256000
+          ],
+          "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-3-candidate.teacher-logits.npz",
+          "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": true,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-3-candidate.json",
+          "report_sha256": "e80253024b16be8ae767fac5865b322cf0659124924fdfb373b1b8746d33b550",
+          "role": "candidate",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 208,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "callback_calls": 26,
+          "callback_source_hashes": [
+            "876a5e3cfc218a8137b27930fffdd36e6079941596d9821b79ffdf7e421bd9dc"
+          ],
+          "context": 512,
+          "expected_teacher_pool_dispatches": 104,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            256000
+          ],
+          "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-4-control.teacher-logits.npz",
+          "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "raw_ffn_pool_enabled": false,
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-4-control.json",
+          "report_sha256": "8b445ac43fd51bb8f9245feee7de8fdffe7ea28930a92ff9dd6d14c16d0e078b",
+          "role": "control",
+          "source_map_count": 289,
+          "source_maps_unchanged": true,
+          "target_ids_exact": true,
+          "teacher_pool_dispatches": 104,
+          "trial_count": 6,
+          "warmups": 3
+        }
+      ]
+    }
+  ],
+  "continuation_state": "The job records complete/restored after independent checks; restoration_verified remains false because no independent fresh terminal receipt was used here.",
+  "goal_complete": false,
+  "job_complete_observed": true,
+  "job_json": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/job.json",
+  "job_phase_observed": "restored",
+  "job_restored_field_observed": true,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "report_and_npz_references": [
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "1655b0044df801c93cf1d2d85cb683e267c14e8cbaed2f85d5e1321735a41ae6"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 96,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-1-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-1-control.json",
+      "report_sha256": "76d43ce0d76e91e09f4ced1a0d199ff6be0ee143f5afa49fcbfea64815634514",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 96,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "1b311ea35d2b2f05018ec3146abfca703af9ec2e886809ec6e75474039f37870"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 192,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-2-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-2-candidate.json",
+      "report_sha256": "ea9d7d5ca2561bb6cd01eb78f745f02d30c8be5ebdf309e7c221e900b8a1422c",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 192,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "6e6928e317e53ff6d4d5697c854f6e5250e8e3696e6a0e6809fd28e6c084f60b"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 192,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-3-candidate.json",
+      "report_sha256": "78a968154afbf41eea1b78ff255c60e3be67eda40d0aff441ba0ec2c5377a10a",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 192,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "1655b0044df801c93cf1d2d85cb683e267c14e8cbaed2f85d5e1321735a41ae6"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 96,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-4-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/qwen2-4-control.json",
+      "report_sha256": "ccaf424d105db7f25670604d89d7419f777429fbdd747a06d915fd0d3c7e7504",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 96,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 22,
+      "callback_source_hashes": [
+        "5ea6480296b0dcb3dc27c8a95a6afaabbf6e2b705a61563dcf76be9dd5844a29"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 88,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-1-control.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-1-control.json",
+      "report_sha256": "e9028c87b9caf6be60f261796a1efc5a979c5ec926863d24f01b79c44e4dce86",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 88,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 22,
+      "callback_source_hashes": [
+        "e679bf2e4482eaa3b2fca1d196b32c417bdb4c9d4fa5e69f08f783d135cb44b5"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 176,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-2-candidate.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-2-candidate.json",
+      "report_sha256": "0c04a5be294681244f4715be73ac1969d22cf5398c660d66c7a869225534f658",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 176,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 22,
+      "callback_source_hashes": [
+        "373325941777c95474d7a14c32cadb88c4ce0c55b6640c80ae3c95f16113563f"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 176,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-3-candidate.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-3-candidate.json",
+      "report_sha256": "615f9783424d78bcea09e071bd5900094ef4fdfcb1fe30589eb393702d32f4ee",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 176,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 22,
+      "callback_source_hashes": [
+        "5ea6480296b0dcb3dc27c8a95a6afaabbf6e2b705a61563dcf76be9dd5844a29"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 88,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-4-control.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/tinyllama-4-control.json",
+      "report_sha256": "d67bd488e02e96b82de6992005a9c4fd3b9d781c59aa291edcc9af7c6d0ebf54",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 88,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "7eba5e4f402598ab8784bee186f9e3bb6f415c7eca998514ea18454b12fc2164"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 96,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-1-control.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-1-control.json",
+      "report_sha256": "e1623bc7ab850bc30a36baea1e41fe2858bb65a67e950c4c1153bd396882270a",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 96,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "60b769c6190e1a10bc0ec51db26434e4247d49effff5feb716d107d4e39e6152"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 192,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-2-candidate.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-2-candidate.json",
+      "report_sha256": "0d24b276617f6278f36f0973cf8f40e4b0777024e209519dd7011ce1c2edf2f5",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 192,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "cd6502a2dde11c4ff807b5bac2e2ef4c6b5851ec788a891355d637e0d6bab949"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 192,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-3-candidate.json",
+      "report_sha256": "6ca5bdd5b02e9f9082fec82d1cfb84b18eeb7e44c8d4611dd1d32743a87f0e05",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 192,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "callback_calls": 24,
+      "callback_source_hashes": [
+        "7eba5e4f402598ab8784bee186f9e3bb6f415c7eca998514ea18454b12fc2164"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 96,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-4-control.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/internlm2-4-control.json",
+      "report_sha256": "6f7e9f5cbb770aa28244fd93dbc8017667091ffb2ec9f249e467539270dabdbe",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 96,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 26,
+      "callback_source_hashes": [
+        "876a5e3cfc218a8137b27930fffdd36e6079941596d9821b79ffdf7e421bd9dc"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 104,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        256000
+      ],
+      "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-1-control.teacher-logits.npz",
+      "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-1-control.json",
+      "report_sha256": "d486f6d9b4b2edc7c71610ee533dba5f44c37efc0c6b29086eb41513fb5aada5",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 104,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 26,
+      "callback_source_hashes": [
+        "10b0a8895f4cb6f760e0bae74262d27de30f6f4d145d993f11335b26633a80b1"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 208,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        256000
+      ],
+      "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-2-candidate.teacher-logits.npz",
+      "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-2-candidate.json",
+      "report_sha256": "0b7e192842e2942516610a2d923a8ff15543f413e4d3e151fa126f8a0ac6135f",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 208,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 26,
+      "callback_source_hashes": [
+        "2e95f84c7cec83f6ebda52e810a360e99f6f3cb6be932d93139d378335742db7"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 208,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        256000
+      ],
+      "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": true,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-3-candidate.json",
+      "report_sha256": "e80253024b16be8ae767fac5865b322cf0659124924fdfb373b1b8746d33b550",
+      "role": "candidate",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 208,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "callback_calls": 26,
+      "callback_source_hashes": [
+        "876a5e3cfc218a8137b27930fffdd36e6079941596d9821b79ffdf7e421bd9dc"
+      ],
+      "context": 512,
+      "expected_teacher_pool_dispatches": 104,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        256000
+      ],
+      "logits_uint32_sha256": "ff0e8f531870092d4425c04a849a5a264de467f67472f4aeb0b5568d9be58dad",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-4-control.teacher-logits.npz",
+      "npz_sha256": "4ec20fba3844a253acf7d254765f50441c9cc33888cf169489a44d76167e3077",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "raw_ffn_pool_enabled": false,
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-prefill-pool-models-v2/results/gemma2-4-control.json",
+      "report_sha256": "8b445ac43fd51bb8f9245feee7de8fdffe7ea28930a92ff9dd6d14c16d0e078b",
+      "role": "control",
+      "source_map_count": 289,
+      "source_maps_unchanged": true,
+      "target_ids_exact": true,
+      "teacher_pool_dispatches": 104,
+      "trial_count": 6,
+      "warmups": 3
+    }
+  ],
+  "restoration_independently_verified": false,
+  "restoration_verified": false,
+  "schema": "ffn-prefill-pool-models-v2-numerical-audit-v1",
+  "scope": "Read-only NumPy CPU audit of the 16 completed model timing reports and fixed-teacher logits; no model imports or device execution.",
+  "source_provenance": {
+    "numerical_source_count": 289,
+    "source_maps_identical_across_all_16_reports": true,
+    "source_maps_unchanged_before_after_each_report": true
+  }
+}

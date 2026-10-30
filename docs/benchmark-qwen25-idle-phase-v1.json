@@ -1,0 +1,503 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 idle-worker phase parking diagnostic v1",
+  "source_receipt": {
+    "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-idle-phase-v1/results/idle.json",
+    "report_sha256": "2461688129d9e9c12ecd783c9027538264faabaa4346afb17d71a5d58a2cf5d3",
+    "kind": "qwen25-worker-idle-phase-v1",
+    "run_token": "qwen25-worker-idle-phase-v1",
+    "complete": true,
+    "errors": [],
+    "paths": {
+      "metrics": "requests[].terminal.metrics",
+      "mask": "requests[].mask",
+      "warmup": "requests[].warmup",
+      "block": "requests[].block",
+      "token_ids": "requests[].token_ids",
+      "board_snapshots": [
+        "requests[].start_board",
+        "requests[].end_board"
+      ]
+    },
+    "common_output_token_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+    "common_response_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b"
+  },
+  "workload": {
+    "model": "qwen2.5-1.5b-instruct",
+    "device": "CPU+ROCKCHIP",
+    "checkpoint_sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+    "context": 512,
+    "prompt_tokens": 128,
+    "completion_tokens": 64,
+    "precision": "int8",
+    "worker_affinity": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "generation": "ordinary, speculation off"
+  },
+  "design": {
+    "requests_total": 27,
+    "warmups_per_mask": 3,
+    "measured_per_mask": 6,
+    "mask_order_by_block": {
+      "14": [
+        0,
+        5
+      ],
+      "2": [
+        1,
+        4
+      ],
+      "0": [
+        2,
+        3
+      ]
+    },
+    "mask_interpretation": {
+      "14": "all workers spin during decode (control)",
+      "2": "CPU5-only idle spin during decode",
+      "0": "all workers parked during decode"
+    },
+    "unchanged_compute_groups_per_mask": 4,
+    "worker_mask_setter_inside_generation": true,
+    "all_requests_exactly_64_output_ids": true,
+    "all_output_id_sequences_identical": true,
+    "all_requests_mask_restored": true,
+    "all_requests_host_pool_parked": true,
+    "ondemand_screening_settings": {
+      "busy_threshold_percent": 95,
+      "poll_interval_ms": 10
+    }
+  },
+  "measured_by_mask": {
+    "14": {
+      "n": 6,
+      "median": {
+        "ttft_ms": 413.718,
+        "total_seconds": 4.615,
+        "decode_tok_s": 15.137,
+        "prefill_proxy_tok_s": 309.569,
+        "128_over_median_ttft_tok_s": 309.389,
+        "median_per_request_128_over_ttft_tok_s": 309.569
+      },
+      "range": {
+        "ttft_ms": [
+          378.079,
+          791.484
+        ],
+        "total_seconds": [
+          4.473,
+          4.95
+        ],
+        "decode_tok_s": [
+          14.943,
+          15.387
+        ],
+        "prefill_proxy_tok_s": [
+          161.722,
+          338.554
+        ],
+        "per_request_128_over_ttft_tok_s": [
+          161.722,
+          338.554
+        ]
+      },
+      "blocks": {
+        "0": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 755.664,
+            "total_seconds": 4.902,
+            "decode_tok_s": 15.195,
+            "prefill_proxy_tok_s": 169.387,
+            "128_over_median_ttft_tok_s": 169.387,
+            "median_per_request_128_over_ttft_tok_s": 169.387
+          },
+          "range": {
+            "ttft_ms": [
+              378.079,
+              791.484
+            ],
+            "total_seconds": [
+              4.473,
+              4.95
+            ],
+            "decode_tok_s": [
+              15.149,
+              15.387
+            ],
+            "prefill_proxy_tok_s": [
+              161.722,
+              338.554
+            ],
+            "per_request_128_over_ttft_tok_s": [
+              161.722,
+              338.554
+            ]
+          }
+        },
+        "5": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 403.748,
+            "total_seconds": 4.591,
+            "decode_tok_s": 15.048,
+            "prefill_proxy_tok_s": 317.03,
+            "128_over_median_ttft_tok_s": 317.03,
+            "median_per_request_128_over_ttft_tok_s": 317.03
+          },
+          "range": {
+            "ttft_ms": [
+              392.759,
+              423.689
+            ],
+            "total_seconds": [
+              4.558,
+              4.64
+            ],
+            "decode_tok_s": [
+              14.943,
+              15.126
+            ],
+            "prefill_proxy_tok_s": [
+              302.109,
+              325.899
+            ],
+            "per_request_128_over_ttft_tok_s": [
+              302.109,
+              325.899
+            ]
+          }
+        }
+      },
+      "thermal_frequency_snapshots": {
+        "zone0_c_range": [
+          77.615,
+          85.888
+        ],
+        "all_zone_floor_c_range": [
+          77.615,
+          83.153
+        ],
+        "all_zone_ceiling_c_range": [
+          77.615,
+          86.777
+        ],
+        "reported_frequency_mhz_ranges": {
+          "cpu_policy0_mhz": [
+            408.0,
+            1608.0
+          ],
+          "cpu_policy4_mhz": [
+            408.0,
+            2208.0
+          ],
+          "cpu_policy6_mhz": [
+            408.0,
+            1608.0
+          ],
+          "npu_devfreq_mhz": [
+            800.0,
+            1000.0
+          ]
+        }
+      }
+    },
+    "2": {
+      "n": 6,
+      "median": {
+        "ttft_ms": 565.962,
+        "total_seconds": 4.782,
+        "decode_tok_s": 14.96,
+        "prefill_proxy_tok_s": 248.941,
+        "128_over_median_ttft_tok_s": 226.164,
+        "median_per_request_128_over_ttft_tok_s": 248.941
+      },
+      "range": {
+        "ttft_ms": [
+          380.726,
+          882.29
+        ],
+        "total_seconds": [
+          4.47,
+          5.17
+        ],
+        "decode_tok_s": [
+          14.529,
+          15.407
+        ],
+        "prefill_proxy_tok_s": [
+          145.077,
+          336.2
+        ],
+        "per_request_128_over_ttft_tok_s": [
+          145.077,
+          336.2
+        ]
+      },
+      "blocks": {
+        "1": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 743.256,
+            "total_seconds": 5.074,
+            "decode_tok_s": 14.694,
+            "prefill_proxy_tok_s": 172.215,
+            "128_over_median_ttft_tok_s": 172.215,
+            "median_per_request_128_over_ttft_tok_s": 172.215
+          },
+          "range": {
+            "ttft_ms": [
+              737.158,
+              882.29
+            ],
+            "total_seconds": [
+              5.029,
+              5.17
+            ],
+            "decode_tok_s": [
+              14.529,
+              14.699
+            ],
+            "prefill_proxy_tok_s": [
+              145.077,
+              173.64
+            ],
+            "per_request_128_over_ttft_tok_s": [
+              145.077,
+              173.64
+            ]
+          }
+        },
+        "4": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 383.588,
+            "total_seconds": 4.503,
+            "decode_tok_s": 15.296,
+            "prefill_proxy_tok_s": 333.692,
+            "128_over_median_ttft_tok_s": 333.692,
+            "median_per_request_128_over_ttft_tok_s": 333.692
+          },
+          "range": {
+            "ttft_ms": [
+              380.726,
+              394.766
+            ],
+            "total_seconds": [
+              4.47,
+              4.534
+            ],
+            "decode_tok_s": [
+              15.221,
+              15.407
+            ],
+            "prefill_proxy_tok_s": [
+              324.243,
+              336.2
+            ],
+            "per_request_128_over_ttft_tok_s": [
+              324.243,
+              336.2
+            ]
+          }
+        }
+      },
+      "thermal_frequency_snapshots": {
+        "zone0_c_range": [
+          75.769,
+          85.0
+        ],
+        "all_zone_floor_c_range": [
+          74.846,
+          83.153
+        ],
+        "all_zone_ceiling_c_range": [
+          75.769,
+          85.888
+        ],
+        "reported_frequency_mhz_ranges": {
+          "cpu_policy0_mhz": [
+            408.0,
+            1800.0
+          ],
+          "cpu_policy4_mhz": [
+            408.0,
+            2256.0
+          ],
+          "cpu_policy6_mhz": [
+            408.0,
+            1416.0
+          ],
+          "npu_devfreq_mhz": [
+            800.0,
+            1000.0
+          ]
+        }
+      },
+      "decode_vs_mask14_percent": -1.169
+    },
+    "0": {
+      "n": 6,
+      "median": {
+        "ttft_ms": 396.248,
+        "total_seconds": 5.569,
+        "decode_tok_s": 12.144,
+        "prefill_proxy_tok_s": 323.03,
+        "128_over_median_ttft_tok_s": 323.03,
+        "median_per_request_128_over_ttft_tok_s": 323.03
+      },
+      "range": {
+        "ttft_ms": [
+          375.012,
+          407.263
+        ],
+        "total_seconds": [
+          5.558,
+          5.619
+        ],
+        "decode_tok_s": [
+          12.089,
+          12.207
+        ],
+        "prefill_proxy_tok_s": [
+          314.293,
+          341.323
+        ],
+        "per_request_128_over_ttft_tok_s": [
+          314.293,
+          341.323
+        ]
+      },
+      "blocks": {
+        "2": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 396.332,
+            "total_seconds": 5.56,
+            "decode_tok_s": 12.151,
+            "prefill_proxy_tok_s": 322.962,
+            "128_over_median_ttft_tok_s": 322.962,
+            "median_per_request_128_over_ttft_tok_s": 322.962
+          },
+          "range": {
+            "ttft_ms": [
+              375.012,
+              407.263
+            ],
+            "total_seconds": [
+              5.558,
+              5.619
+            ],
+            "decode_tok_s": [
+              12.089,
+              12.207
+            ],
+            "prefill_proxy_tok_s": [
+              314.293,
+              341.323
+            ],
+            "per_request_128_over_ttft_tok_s": [
+              314.293,
+              341.323
+            ]
+          }
+        },
+        "3": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 396.164,
+            "total_seconds": 5.577,
+            "decode_tok_s": 12.137,
+            "prefill_proxy_tok_s": 323.098,
+            "128_over_median_ttft_tok_s": 323.098,
+            "median_per_request_128_over_ttft_tok_s": 323.098
+          },
+          "range": {
+            "ttft_ms": [
+              385.381,
+              404.056
+            ],
+            "total_seconds": [
+              5.56,
+              5.607
+            ],
+            "decode_tok_s": [
+              12.109,
+              12.201
+            ],
+            "prefill_proxy_tok_s": [
+              316.788,
+              332.139
+            ],
+            "per_request_128_over_ttft_tok_s": [
+              316.788,
+              332.139
+            ]
+          }
+        }
+      },
+      "thermal_frequency_snapshots": {
+        "zone0_c_range": [
+          73.923,
+          85.0
+        ],
+        "all_zone_floor_c_range": [
+          73.923,
+          82.23
+        ],
+        "all_zone_ceiling_c_range": [
+          74.846,
+          85.888
+        ],
+        "reported_frequency_mhz_ranges": {
+          "cpu_policy0_mhz": [
+            408.0,
+            1800.0
+          ],
+          "cpu_policy4_mhz": [
+            408.0,
+            1608.0
+          ],
+          "cpu_policy6_mhz": [
+            408.0,
+            600.0
+          ],
+          "npu_devfreq_mhz": [
+            800.0,
+            1000.0
+          ]
+        }
+      },
+      "decode_vs_mask14_percent": -19.773
+    }
+  },
+  "interpretation": {
+    "decision": "reject as a performance gain; promote none",
+    "observed_decode_median_tok_s": {
+      "control_mask14": 15.137,
+      "mask2": 14.96,
+      "mask0": 12.144
+    },
+    "comparison": "Mask0 decode is materially slower than mask14 (about 19.8% by measured medians); mask2 is also slightly slower (about 1.2%) and has worse aggregate TTFT/prefill medians. Blocks show strong drift and mixed behavior, so neither candidate has a reliable gain.",
+    "causality_caveat": "Lower observed temperatures do not prove a performance gain or thermal causality. Sysfs CPU/NPU frequency snapshots are reported values, not independent physical-clock measurements.",
+    "qualification": {
+      "throughput_qualification": false,
+      "timing_scope": "Unprofiled real worker IPC metrics with mask setter inside generation; HTTP API not measured.",
+      "http_api_qualified": false,
+      "independent_output_quality_qualified": false,
+      "same_arithmetic_local_regression": "Output token ID sequences match exactly for all 27 requests; this is not an independent quality evaluation."
+    },
+    "shared_lease": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-idle-phase-lease-v1/job.json",
+      "status": "restored",
+      "restored": true,
+      "phase": "restored",
+      "sha256": "43953313d1e8232b5cfa2a13e7c49b3811a35437a99752edfee01c86f9d28ca4",
+      "fresh_reply_count": 2
+    }
+  }
+}

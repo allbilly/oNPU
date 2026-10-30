@@ -1,0 +1,107 @@
+{
+  "schema": "grouped-MLA-NPU-operator-verification-v1",
+  "complete": true,
+  "scope": "Synthetic operator evidence only, no trained-model, quality or RKLLM speed claim.",
+  "report": "/home/orangepi/oNPU/docs/benchmark-minicpm3-grouped-npu-operator-v1.json",
+  "report_sha256": "c812f7509ba31f7492c72e250a42026a491e4d05b5a1244f1cd38ff6e4796dd1",
+  "owner_session": 77894,
+  "owner_exit": 0,
+  "job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-npu-grouped-v1/job.json",
+  "job_sha256": "5fca174e64d60c9944e4a8aeaa6971e9ffddc7bcfee53e756efc28f940d0e126",
+  "fresh": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-npu-grouped-v1-fresh.json",
+  "fresh_sha256": "4c50b2425353f0a0b7e1a98f606499742ecffc6bf08fe764b221c12b4cfe1643",
+  "sources_and_pins_rehashed": true,
+  "CPU_tests": {
+    "passed": 32,
+    "skipped": 5,
+    "subtests_passed": 50,
+    "log": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-grouped-cpu-pytest-v1.log"
+  },
+  "mypy": {
+    "passed": true,
+    "source_files": 271,
+    "log": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-grouped-cpu-mypy-v2.log"
+  },
+  "ruff": {
+    "passed": true,
+    "unit": "onpu-mla-grouped-ruff-v3"
+  },
+  "hardware_tests": {
+    "passed": 4,
+    "subtests_passed": 29,
+    "log": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-npu-grouped-v1/results/projection.pytest.log",
+    "sha256": "5a89fd30685488bedd098a9d1e0d7537d05cd8d988ea7da7b506295c17b95b99"
+  },
+  "summary": [
+    {
+      "projection": "query_latent",
+      "rows": 1,
+      "median_ms": {
+        "CPU": 0.5968875,
+        "NPU_per_head": 0.9833405,
+        "NPU_grouped1": 0.4643265,
+        "NPU_grouped3": 0.3539325
+      },
+      "CPU_over_NPU_grouped3": 1.6864444491534405
+    },
+    {
+      "projection": "query_latent",
+      "rows": 17,
+      "median_ms": {
+        "CPU": 7.5337915,
+        "NPU_per_head": 2.1609285,
+        "NPU_grouped1": 1.1649005,
+        "NPU_grouped3": 1.0076945
+      },
+      "CPU_over_NPU_grouped3": 7.4762653760638775
+    },
+    {
+      "projection": "query_latent",
+      "rows": 128,
+      "median_ms": {
+        "CPU": 34.4926075,
+        "NPU_per_head": 22.3693585,
+        "NPU_grouped1": 8.249824,
+        "NPU_grouped3": 7.560188
+      },
+      "CPU_over_NPU_grouped3": 4.562400763049808
+    },
+    {
+      "projection": "value_projection",
+      "rows": 1,
+      "median_ms": {
+        "CPU": 0.592804,
+        "NPU_per_head": 0.8884045,
+        "NPU_grouped1": 0.380911,
+        "NPU_grouped3": 0.313392
+      },
+      "CPU_over_NPU_grouped3": 1.891573492622658
+    },
+    {
+      "projection": "value_projection",
+      "rows": 17,
+      "median_ms": {
+        "CPU": 7.533646,
+        "NPU_per_head": 1.7339345,
+        "NPU_grouped1": 0.888988,
+        "NPU_grouped3": 0.8020725
+      },
+      "CPU_over_NPU_grouped3": 9.392724473161715
+    },
+    {
+      "projection": "value_projection",
+      "rows": 128,
+      "median_ms": {
+        "CPU": 36.971011,
+        "NPU_per_head": 10.2627335,
+        "NPU_grouped1": 7.507834,
+        "NPU_grouped3": 7.0844855
+      },
+      "CPU_over_NPU_grouped3": 5.2185879976746365
+    }
+  ],
+  "model_integrated": false,
+  "quality_qualified": false,
+  "RKLLM_win": false,
+  "serving_restored_and_fresh": true
+}

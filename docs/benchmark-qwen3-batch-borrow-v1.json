@@ -1,0 +1,225 @@
+{
+  "kind": "qwen3-batch-borrow-v1",
+  "scope": "Qwen3-0.6B, context 512, 128 input / 64 output; CPU+NPU INT8 projections and FP16 attention, existing adaptive clock policies. Three warmups and three measured requests per process.",
+  "runs": [
+    {
+      "role": "control",
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-batch-borrow-v1/results/1-control.json",
+      "sha256": "e381e959385040571068b33000552d4aedee98a0c59bca1e73f0dcc533e79263",
+      "median_ttft_ms": 213.52135999768507,
+      "prefill_proxy_tps": 599.4716406891926,
+      "decode_tps": 38.240026361972696,
+      "measured_ttft_ms": [
+        211.09793500363594,
+        222.94265199889196,
+        213.52135999768507
+      ],
+      "measured_decode_tps": [
+        38.250386961422905,
+        38.240026361972696,
+        38.08293091232498
+      ],
+      "teacher_bitwise_equal_control": null,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 84,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": false,
+          "output_copies": 84,
+          "invalidate_sites": 84,
+          "driver_from_sites": 63
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 28,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": false,
+          "output_copies": 28,
+          "invalidate_sites": 112,
+          "driver_from_sites": 7
+        }
+      }
+    },
+    {
+      "role": "candidate",
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-batch-borrow-v1/results/2-candidate.json",
+      "sha256": "dcf0fca694c8bcdfad877e659663bab289e413fceec0d11b28b80c52ef21d932",
+      "median_ttft_ms": 203.35341299505671,
+      "prefill_proxy_tps": 629.4460373926034,
+      "decode_tps": 38.39247185774735,
+      "measured_ttft_ms": [
+        203.35341299505671,
+        199.8604590044124,
+        216.84544200252276
+      ],
+      "measured_decode_tps": [
+        38.39247185774735,
+        38.40167948029859,
+        38.38566963072303
+      ],
+      "teacher_bitwise_equal_control": true,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 85,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": true,
+          "output_copies": 85,
+          "invalidate_sites": 147,
+          "driver_from_sites": 0
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 29,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": true,
+          "output_copies": 29,
+          "invalidate_sites": 119,
+          "driver_from_sites": 0
+        }
+      }
+    },
+    {
+      "role": "candidate",
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-batch-borrow-v1/results/3-candidate.json",
+      "sha256": "b428d1ac4448551715c79627e8a78bd0b517d529fd00bb1243b42029687a550b",
+      "median_ttft_ms": 186.53263799933484,
+      "prefill_proxy_tps": 686.2069896875444,
+      "decode_tps": 38.38052011240947,
+      "measured_ttft_ms": [
+        186.53263799933484,
+        197.63069799955701,
+        181.1721679987386
+      ],
+      "measured_decode_tps": [
+        38.39911266299739,
+        38.298967062242454,
+        38.38052011240947
+      ],
+      "teacher_bitwise_equal_control": true,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 85,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": true,
+          "output_copies": 85,
+          "invalidate_sites": 147,
+          "driver_from_sites": 0
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 29,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": true,
+          "output_copies": 29,
+          "invalidate_sites": 119,
+          "driver_from_sites": 0
+        }
+      }
+    },
+    {
+      "role": "control",
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-batch-borrow-v1/results/4-control.json",
+      "sha256": "064f8c2066cabf16887bfe73145e5ba898d7c1f2557911ed7f47268d050b09b6",
+      "median_ttft_ms": 202.1520549969864,
+      "prefill_proxy_tps": 633.1867365974002,
+      "decode_tps": 38.26200023819743,
+      "measured_ttft_ms": [
+        192.20664499880513,
+        226.00598599819932,
+        202.1520549969864
+      ],
+      "measured_decode_tps": [
+        38.284426896164355,
+        38.26200023819743,
+        38.2267215361834
+      ],
+      "teacher_bitwise_equal_control": true,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 84,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": false,
+          "output_copies": 84,
+          "invalidate_sites": 84,
+          "driver_from_sites": 63
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 28,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "borrow_batch": false,
+          "output_copies": 28,
+          "invalidate_sites": 112,
+          "driver_from_sites": 7
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "control": {
+      "median_ttft_ms": 212.3096475006605,
+      "prefill_proxy_tps": 602.8929985369684,
+      "decode_tps": 38.2452066616978
+    },
+    "candidate": {
+      "median_ttft_ms": 198.7455785019847,
+      "prefill_proxy_tps": 644.039484877002,
+      "decode_tps": 38.38907074423519
+    }
+  },
+  "all_five_workers_valid_exit0": true,
+  "reference": {
+    "ttft_ms": 199.09,
+    "prefill_proxy_tps": 642.93,
+    "decode_tps": 32.91
+  },
+  "repeatable_win_in_both_process_medians": false,
+  "aggregate_prefill_above_reference": true,
+  "margin_too_small_for_confident_speed_claim": true,
+  "quality": {
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-batch-borrow-v1/results/5-quality-candidate.json",
+    "sha256": "a21144f9533a55b40b88164155beb50eb310a23a3c4303bc6115885436bb764c",
+    "scored_targets": 1024,
+    "prior_logits_bitwise_equal": true,
+    "perplexity": 30.944998197733643,
+    "broad_quality_qualified": false
+  },
+  "fresh_serving": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-batch-borrow-v1-fresh.json",
+  "default_enabled": false
+}

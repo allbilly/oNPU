@@ -1,0 +1,251 @@
+{
+  "kind": "shared-host-pool-operators-v1",
+  "updated_utc": "2026-10-29T03:04:39.282476+00:00",
+  "complete": true,
+  "diagnostic_only": true,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "source_count": 295,
+  "source_unchanged": true,
+  "intent": "INTENT: the kernels create pthreads per call; the performance task expects less host overhead with identical outputs; the pool API provides reusable four-part dispatch.",
+  "prototype": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared_host_pool_v1.py",
+    "sha256": "14c8f14a26b0f237c674e9bad65cc813c71ccc866a741d0830de1f42eba030e2",
+    "production_files_edited": false,
+    "families": [
+      "RMSnorm",
+      "activation quantization",
+      "output dequantization",
+      "QKV preparation",
+      "SwiGLU FFN packing"
+    ],
+    "dispatch_only": true
+  },
+  "thread_count": {
+    "source_derived_attempts_per_prefill": 756,
+    "syscalls_measured": false,
+    "evidence": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-thread-count-v1.json"
+  },
+  "numerical": {
+    "cases": 15,
+    "all_outputs_bitwise": true,
+    "changed_inputs_and_nonfinite_cases": true,
+    "small_serial_path_unchanged": true,
+    "stopped_pool_fallback_bitwise": true,
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-pool-cpu-check-v3.json"
+  },
+  "active_scope": {
+    "inside_and_outside_bitwise": true,
+    "parks_after_scope": true,
+    "affinity_restored": true,
+    "exception_cleanup": true,
+    "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-pool-active-scope-cpu-v1.json"
+  },
+  "experiments": {
+    "1": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-pool-operator-v1/report.json",
+      "sha256": "dcf61398fd791714fe4ec167cf0ba63c9b73545fea427677a2f01a419e6766d4",
+      "selection": "not selected: mixed/regressing operator timings",
+      "blocks": [
+        {
+          "role": "control",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.088957,
+            "quantize-r128-k1024": 0.103249,
+            "quantize-r128-k2048": 0.23653899999999997,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.675491,
+            "ffn-pack-r128-d3072-t64-static1": 0.957529,
+            "dequantize-r128-n1024-t64x2": 0.09595699999999999
+          }
+        },
+        {
+          "role": "candidate",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.08166599999999999,
+            "quantize-r128-k1024": 0.057165999999999995,
+            "quantize-r128-k2048": 0.575159,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.5763250000000001,
+            "ffn-pack-r128-d3072-t64-static1": 0.8595299999999999,
+            "dequantize-r128-n1024-t64x2": 0.06474899999999999
+          }
+        },
+        {
+          "role": "candidate",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.11608199999999999,
+            "quantize-r128-k1024": 0.28495499999999996,
+            "quantize-r128-k2048": 0.362245,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.6571159999999999,
+            "ffn-pack-r128-d3072-t64-static1": 0.841447,
+            "dequantize-r128-n1024-t64x2": 0.091582
+          }
+        },
+        {
+          "role": "control",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.18287299999999998,
+            "quantize-r128-k1024": 0.10354000000000001,
+            "quantize-r128-k2048": 0.15078899999999998,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.6507000000000001,
+            "ffn-pack-r128-d3072-t64-static1": 0.9038619999999999,
+            "dequantize-r128-n1024-t64x2": 0.142332
+          }
+        }
+      ]
+    },
+    "2": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-pool-operator-v2/report.json",
+      "sha256": "5972bfa010f17f657bd959e0bde985db538b7f0b96d60174add8e6b1f9244b2e",
+      "selection": "not selected: mixed/regressing operator timings",
+      "blocks": [
+        {
+          "role": "control",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.130665,
+            "quantize-r128-k1024": 0.150498,
+            "quantize-r128-k2048": 0.611325,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.627659,
+            "ffn-pack-r128-d3072-t64-static1": 0.810239,
+            "dequantize-r128-n1024-t64x2": 0.15137299999999998
+          }
+        },
+        {
+          "role": "candidate",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.077874,
+            "quantize-r128-k1024": 0.42670199999999997,
+            "quantize-r128-k2048": 0.702908,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.5063259999999999,
+            "ffn-pack-r128-d3072-t64-static1": 0.786907,
+            "dequantize-r128-n1024-t64x2": 0.088957
+          }
+        },
+        {
+          "role": "candidate",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.07816500000000001,
+            "quantize-r128-k1024": 0.435744,
+            "quantize-r128-k2048": 0.183748,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.65595,
+            "ffn-pack-r128-d3072-t64-static1": 0.835905,
+            "dequantize-r128-n1024-t64x2": 0.061541
+          }
+        },
+        {
+          "role": "control",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.16974799999999998,
+            "quantize-r128-k1024": 0.244996,
+            "quantize-r128-k2048": 0.150498,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.567576,
+            "ffn-pack-r128-d3072-t64-static1": 0.827739,
+            "dequantize-r128-n1024-t64x2": 0.12454
+          }
+        }
+      ]
+    },
+    "3": {
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-pool-operator-v3/report.json",
+      "sha256": "72dff67da3e296faf9f8c815de8539a82905aca0a772a6bfe52400037e0a2889",
+      "selection": "selected for model test",
+      "blocks": [
+        {
+          "role": "control",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.08283199999999999,
+            "quantize-r128-k1024": 0.107041,
+            "quantize-r128-k2048": 0.40832799999999997,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.601117,
+            "ffn-pack-r128-d3072-t64-static1": 0.8160729999999999,
+            "dequantize-r128-n1024-t64x2": 0.16012299999999996
+          }
+        },
+        {
+          "role": "candidate",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.06912399999999999,
+            "quantize-r128-k1024": 0.050457999999999996,
+            "quantize-r128-k2048": 0.095665,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.461411,
+            "ffn-pack-r128-d3072-t64-static1": 0.74024,
+            "dequantize-r128-n1024-t64x2": 0.032665999999999994
+          }
+        },
+        {
+          "role": "candidate",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.030332999999999995,
+            "quantize-r128-k1024": 0.050748999999999996,
+            "quantize-r128-k2048": 0.09595699999999999,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.37741199999999997,
+            "ffn-pack-r128-d3072-t64-static1": 0.742865,
+            "dequantize-r128-n1024-t64x2": 0.029165999999999997
+          }
+        },
+        {
+          "role": "control",
+          "medians_ms": {
+            "rmsnorm-r128-w1024-f16gamma": 0.097123,
+            "quantize-r128-k1024": 0.345037,
+            "quantize-r128-k2048": 0.15195599999999998,
+            "int8-qkv-r128-h16-kv8-d128-cap128-ctx512": 0.663241,
+            "ffn-pack-r128-d3072-t64-static1": 0.89803,
+            "dequantize-r128-n1024-t64x2": 0.09974899999999999
+          }
+        }
+      ]
+    }
+  },
+  "tinygrad_VIZ": {
+    "writer": "VIZ=1 PROFILE=1",
+    "reader": "VIZ=0 PROFILE=0 TRACK_MATCH_STATS=0 python -m tinygrad.viz.cli --json",
+    "traces": [
+      {
+        "case": "dequantize-r128-n1024-t64x2",
+        "timeline": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/dequantize-r128-n1024-t64x2/timeline.jsonl",
+        "sha256": "ef50aad1b65c98783e9d1287adeda58035c99121b9c94faea4255a10fe7349f4",
+        "events": 50,
+        "metadata": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/dequantize-r128-n1024-t64x2/trace.json"
+      },
+      {
+        "case": "ffn-pack-r128-d3072-t64-static1",
+        "timeline": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/ffn-pack-r128-d3072-t64-static1/timeline.jsonl",
+        "sha256": "d275bd8754dab2189b5774f6a7530beda5073cdc78dd4e79a05bed5613173b65",
+        "events": 49,
+        "metadata": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/ffn-pack-r128-d3072-t64-static1/trace.json"
+      },
+      {
+        "case": "int8-qkv-r128-h16-kv8-d128-cap128-ctx512",
+        "timeline": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/int8-qkv-r128-h16-kv8-d128-cap128-ctx512/timeline.jsonl",
+        "sha256": "7871bd32fa879be14710e845c7b11ea9d865761c140471c3a297ec5edcc84162",
+        "events": 52,
+        "metadata": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/int8-qkv-r128-h16-kv8-d128-cap128-ctx512/trace.json"
+      },
+      {
+        "case": "quantize-r128-k1024",
+        "timeline": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/quantize-r128-k1024/timeline.jsonl",
+        "sha256": "1b55c6fbdbaeac92588aabe05661af981ff7642b1c52415c5e53f8d4c6004d80",
+        "events": 50,
+        "metadata": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/quantize-r128-k1024/trace.json"
+      },
+      {
+        "case": "quantize-r128-k2048",
+        "timeline": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/quantize-r128-k2048/timeline.jsonl",
+        "sha256": "1f0f468217a23f1b4a5356319ba7e8b7ec65d49cf73bed2ece675ba45ba1accd",
+        "events": 50,
+        "metadata": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/quantize-r128-k2048/trace.json"
+      },
+      {
+        "case": "rmsnorm-r128-w1024-f16gamma",
+        "timeline": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/rmsnorm-r128-w1024-f16gamma/timeline.jsonl",
+        "sha256": "9a02ba5f4a03049dca75b63694c32bddf3b28160695a853d3a5718cb8c476a3d",
+        "events": 51,
+        "metadata": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/rmsnorm-r128-w1024-f16gamma/trace.json"
+      }
+    ],
+    "v1_defect": "Reader inherited PROFILE=1, emitted non-JSON exit logs and could overwrite its source PKLs. V2 explicitly disables reader tracing and verifies before/after raw hashes.",
+    "v1_audit": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared-host-pool-v1/profiles-v2/v1-audit.json",
+    "limit": "Standalone CPU operators only. PROFILE on the whole Rockchip model bypasses native replay; these are graph diagnostics, not model-throughput evidence."
+  },
+  "next_action": "Review/freeze/run one full-model shared-active-pool ABBA and 1024target preservation batch. Do not promote from operator medians or add isolated savings to promise model speed."
+}

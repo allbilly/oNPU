@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 1.5B API host-overhead default qualification v1",
+  "raw_receipt": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-host-overhead-v1/job.json",
+    "sha256": "3aa1c2ae7bc768039da7b745f4818ade3e13dc3c992eb5a82313ee0814f53e61",
+    "kind": "qwen25-api-host-overhead-v1",
+    "complete": true,
+    "restored": true,
+    "phase": "restored",
+    "request_records": 13
+  },
+  "workload": {
+    "checkpoint_path": "/home/orangepi/vlm-bench/baseline-20261021/qwen2.5-1.5b-instruct-q8_0.gguf",
+    "checkpoint_sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+    "context": 512,
+    "load_options": {
+      "profile": "ROCKCHIP",
+      "context": 512,
+      "realize": true,
+      "npu_prefill": "auto",
+      "npu_decode": "auto",
+      "vision_gpu": true,
+      "speculation": "off",
+      "draft_path": null
+    },
+    "timing_scope": "Worker-reported prefill/TTFT proxy and decode; API functional requests are recorded, but these are not HTTP transport timing or independent quality measurements."
+  },
+  "source_and_defaults": {
+    "tinygrad_source_count": 297,
+    "onpu_source_count": 12,
+    "tinygrad_source_map_sha256": "2e4d0dd8156e3a3956055d0bfc902d8afbef4447925bf4f88911edbed2819cc5",
+    "onpu_source_map_sha256": "9fb4cb74141f0005ead2c8afd42fe7751d98fe576b209da8ba18f77d51c285bc",
+    "changed_from_measured_batch": [
+      "tinygrad/llm/kernels/rockchip_replay.py"
+    ],
+    "paired_replay_source_sha256": "0c170df36b45fd5667260b1cc0195883979db278510b41c4aba277ee8ecc3f49",
+    "api_replay_source_sha256": "41a6ee22d4173ead9bed66fd4a38fe1040283d489ee5bce7c2a68e5679ca00ba",
+    "source_delta_scope": "only two default argument changes in replay.py",
+    "defaults": {
+      "ONPU_REPLAY_SCALAR_COPY": 1,
+      "ONPU_REPLAY_DEDUP_GUARDS": 1
+    },
+    "environment_overrides": {},
+    "feature_flags": {
+      "shared_host_pool": true,
+      "zero_pad_views": true,
+      "cpu_tuning": true,
+      "cpu_prefill_layout": true,
+      "cpu_token_inputs": true,
+      "borrow_outputs": true,
+      "borrow_batch": true,
+      "native_from": true,
+      "large_native_from": true,
+      "decode_pool": true,
+      "exp2_fast_path": true
+    }
+  },
+  "execution": {
+    "worker_pid": 2045593,
+    "cpu_affinity_ready": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "cpu_affinity_last_checked": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "worker_affinity_checks_match": true,
+    "request_record_phases": [
+      "warmup-1",
+      "warmup-2",
+      "warmup-3",
+      "measured-1",
+      "measured-2",
+      "measured-3",
+      "measured-4",
+      "measured-5",
+      "cached-followup",
+      "streamed-request",
+      "near-512-boundary",
+      "cancelled-request",
+      "post-cancel-recovery"
+    ],
+    "functional_checks": {
+      "complete_and_restored": true,
+      "request_record_count": 13,
+      "warmup_count": 3,
+      "measured_count": 5,
+      "measured_each_128_prompt_64_output": true,
+      "worker_cpu_affinity_ready": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "worker_cpu_affinity_last_checked": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "replay_flag_overrides": {},
+      "replay_flag_absent_keys": [
+        "ONPU_REPLAY_DEDUP_GUARDS",
+        "ONPU_REPLAY_SCALAR_COPY"
+      ],
+      "replay_flag_interpretation": "absent resolves to enabled source default; process environment checked for only these keys",
+      "cached_followup_cached_tokens": 127,
+      "stream_completed": true,
+      "near_context_boundary": {
+        "prompt_tokens": 448,
+        "output_tokens": 64,
+        "total": 512
+      },
+      "cancellation_and_recovery": {
+        "cancel_sent": true,
+        "terminal_error": {
+          "message": "Generation stopped"
+        },
+        "recovery_ready": true
+      },
+      "original_sessions_restored_with_fresh_replies": 2
+    },
+    "records": [
+      {
+        "phase": "warmup-1",
+        "worker_request_id": "35db399006d3431dac4c83116bb43fad",
+        "response_id": "chatcmpl-4d96997ab94b4fd1bb4fbc06",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 376.48134399205446,
+          "prefill_tps": 339.9902864846907,
+          "decode_tps": 16.67806381569121,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "warmup-2",
+        "worker_request_id": "1ce5de7bfff64ddc8194933ec69fb8c2",
+        "response_id": "chatcmpl-1ead26b0c06a48f3b9f6c533",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 383.192252003937,
+          "prefill_tps": 334.035981496528,
+          "decode_tps": 17.041256886424478,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "warmup-3",
+        "worker_request_id": "86d1c80d2ccd4582b20867c5f513cdb9",
+        "response_id": "chatcmpl-8a1986fdb16b4630b9e79545",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 412.5810580007965,
+          "prefill_tps": 310.24206642020124,
+          "decode_tps": 16.51160934953661,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "measured-1",
+        "worker_request_id": "9e6571236e06414fa6333ab705b6009c",
+        "response_id": "chatcmpl-92a96da14a37480dad4da002",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 358.6459630023455,
+          "prefill_tps": 356.8979249856017,
+          "decode_tps": 16.290482947127416,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "measured-2",
+        "worker_request_id": "4dd70789235f4ab08855d466d6f9e795",
+        "response_id": "chatcmpl-9a4a16e45e4f40a0b7c69379",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 388.5639290092513,
+          "prefill_tps": 329.41812258891497,
+          "decode_tps": 16.042837219283438,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "measured-3",
+        "worker_request_id": "92c4a31addd944639d11a1c92e6dd11c",
+        "response_id": "chatcmpl-e89ffe54e950478891e108e1",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 382.04543400206603,
+          "prefill_tps": 335.0386854755809,
+          "decode_tps": 16.532671567982003,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "measured-4",
+        "worker_request_id": "a78be0ec160349e28b90affd05cc784f",
+        "response_id": "chatcmpl-23da1a061c364fb4a3a7da9a",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 385.47942899458576,
+          "prefill_tps": 332.0540355002908,
+          "decode_tps": 16.592046352357517,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "measured-5",
+        "worker_request_id": "dc0ad3e883e54ae4b0ef1af8e6ef1a26",
+        "response_id": "chatcmpl-ba9d92a028454a7d992028d4",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 388.95259000128135,
+          "prefill_tps": 329.0889514312742,
+          "decode_tps": 16.594560050192598,
+          "npu_submissions": 11284
+        }
+      },
+      {
+        "phase": "cached-followup",
+        "worker_request_id": "98a7c301cd494a349da42ea53d28848a",
+        "response_id": "chatcmpl-68171b2659f34cdd929c8b6c",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 127,
+          "completion_tokens": 1,
+          "ttft_ms": 132.17977399472147,
+          "prefill_tps": 7.565454000851404,
+          "decode_tps": null,
+          "npu_submissions": 175
+        }
+      },
+      {
+        "phase": "streamed-request",
+        "worker_request_id": null,
+        "response_id": "chatcmpl-912c342e561c42f98961dcdd",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 16,
+          "ttft_ms": 366.60627099627163,
+          "prefill_tps": 349.14841923503747,
+          "decode_tps": 16.89745918616861,
+          "npu_submissions": 2884
+        },
+        "stream": {
+          "done": true,
+          "stream_usage": {
+            "prompt_tokens": 128,
+            "completion_tokens": 16,
+            "total_tokens": 144
+          },
+          "chunk_count": 19
+        }
+      },
+      {
+        "phase": "near-512-boundary",
+        "worker_request_id": "1832684708e0428797946dd0857ef350",
+        "response_id": "chatcmpl-327dee56446c45d6810bece7",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 448,
+          "cached_tokens": 0,
+          "completion_tokens": 64,
+          "ttft_ms": 1597.8482840000652,
+          "prefill_tps": 280.3770573752306,
+          "decode_tps": 15.835985875860107,
+          "npu_submissions": 12061
+        }
+      },
+      {
+        "phase": "cancelled-request",
+        "worker_request_id": null,
+        "response_id": "chatcmpl-16a7a210aa384ec8a602dae0",
+        "session_ready": true,
+        "cancellation": {
+          "cancel_sent": true,
+          "done": true,
+          "terminal_error": {
+            "message": "Generation stopped"
+          }
+        }
+      },
+      {
+        "phase": "post-cancel-recovery",
+        "worker_request_id": "4f6d280de7b04d6796d3e6fe4aa7ce0e",
+        "response_id": "chatcmpl-91b4c9ee5f6e4503a831b6b0",
+        "session_ready": true,
+        "worker_metrics": {
+          "prompt_tokens": 128,
+          "cached_tokens": 0,
+          "completion_tokens": 2,
+          "ttft_ms": 367.3444699961692,
+          "prefill_tps": 348.44678620406296,
+          "decode_tps": 17.00863866871124,
+          "npu_submissions": 434
+        }
+      }
+    ]
+  },
+  "measured_summary": {
+    "count": 5,
+    "output_tokens_each": 64,
+    "worker_reported_prefill_proxy_tps": {
+      "median": 332.0540355002908,
+      "min": 329.0889514312742,
+      "max": 356.8979249856017,
+      "samples": [
+        356.8979249856017,
+        329.41812258891497,
+        335.0386854755809,
+        332.0540355002908,
+        329.0889514312742
+      ]
+    },
+    "worker_ttft_ms": {
+      "median": 385.47942899458576,
+      "min": 358.6459630023455,
+      "max": 388.95259000128135,
+      "samples": [
+        358.6459630023455,
+        388.5639290092513,
+        382.04543400206603,
+        385.47942899458576,
+        388.95259000128135
+      ]
+    },
+    "worker_decode_tps": {
+      "median": 16.532671567982003,
+      "min": 16.042837219283438,
+      "max": 16.594560050192598,
+      "samples": [
+        16.290482947127416,
+        16.042837219283438,
+        16.532671567982003,
+        16.592046352357517,
+        16.594560050192598
+      ]
+    },
+    "published_rkllm_reference": {
+      "ttft_ms": 378.31,
+      "prefill_proxy_tps": 338.35,
+      "decode_tps": 16.69
+    }
+  },
+  "qualification": {
+    "functional_requests_passed": true,
+    "api_restored": true,
+    "independent_output_quality_qualified": false,
+    "model_maximum_context_qualified": false,
+    "speed_win": false,
+    "interpretation": "The five measured requests are below the published prefill and decode rates and slower in TTFT by their medians. The result runs with the two replay defaults enabled and no environment overrides, but the comparison is not a paired API treatment and does not isolate their causal effect."
+  },
+  "restoration": {
+    "restored": true,
+    "original_gpu_preserved": true,
+    "original_npu_unloaded_for_target": true,
+    "fresh_original_replies": [
+      {
+        "model_id": "55a95dc3c1b93b72",
+        "response_id": "chatcmpl-217402dbc6e24238b0e19d5a",
+        "prompt_tokens": 15,
+        "completion_tokens": 2
+      },
+      {
+        "model_id": "b4b92c783d8643a1",
+        "response_id": "chatcmpl-a9f3b70e69dd40efb4c8767b",
+        "prompt_tokens": 11,
+        "completion_tokens": 2
+      }
+    ]
+  }
+}

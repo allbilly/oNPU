@@ -1,0 +1,81 @@
+{
+  "complete": true,
+  "boot_id": "196aa54b-db68-42c6-88d1-bfce24aa9668",
+  "server": {
+    "pid": 31595,
+    "start_ticks": "236951",
+    "argv": [
+      "/home/orangepi/oNPU/.venv/bin/python",
+      "-m",
+      "onpu",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8091",
+      "--backend",
+      "/home/orangepi/tinygrad",
+      "--data-dir",
+      "/home/orangepi/oNPU/.data"
+    ]
+  },
+  "settings_modified": false,
+  "original_selection_restored": true,
+  "models": [
+    {
+      "model_id": "55a95dc3c1b93b72",
+      "actual_device": "CL",
+      "context": 40960,
+      "state": "ready",
+      "options": {
+        "context": 40960,
+        "max_tokens": 64,
+        "temperature": 0.6,
+        "profile": "CL",
+        "realize": true,
+        "idle_timeout": 0,
+        "memory_fraction": 0.8,
+        "id": "global",
+        "npu_prefill": "off",
+        "npu_decode": "off",
+        "vision_gpu": false,
+        "speculation": "off",
+        "draft_path": null
+      }
+    },
+    {
+      "model_id": "b4b92c783d8643a1",
+      "actual_device": "CPU+ROCKCHIP",
+      "context": 8192,
+      "state": "ready",
+      "options": {
+        "context": 8192,
+        "max_tokens": 64,
+        "temperature": 0.6,
+        "profile": "ROCKCHIP",
+        "realize": true,
+        "idle_timeout": 0,
+        "memory_fraction": 0.8,
+        "id": "global",
+        "npu_prefill": "auto",
+        "npu_decode": "off",
+        "vision_gpu": false,
+        "speculation": "off",
+        "draft_path": null
+      }
+    }
+  ],
+  "fresh_replies": [
+    {
+      "model_id": "55a95dc3c1b93b72",
+      "completion_tokens": 2
+    },
+    {
+      "model_id": "b4b92c783d8643a1",
+      "completion_tokens": 2
+    }
+  ],
+  "recovery_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/postreboot-api-recovery-v1.json",
+  "recovery_report_sha256": "0351dce99dd9136ddea364bd40c6708e269726dadd2eb2230dde2906e5106a55",
+  "affinity_correction": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/postreboot-api-affinity-correction-v1.json",
+  "scope": "Original GPU/NPU sessions restored after reboot and2tokenfreshrequestsverified. No long-context or all-model speed qualification."
+}

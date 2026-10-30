@@ -1,0 +1,37 @@
+{
+  "scope": "Read-only address linkage from existing RKLLM GDB capture; no buffer-content dump or performance claim.",
+  "capture": "rkllm-w8a8-register-capture-v2/captures/w8a8-prefill-1974.json",
+  "submission": 1974,
+  "DPU_task_index": 28639,
+  "following_FP16_task_index": 28640,
+  "BO": {
+    "handle": 4,
+    "DMA_base": "0xd3703000",
+    "VA_base": "0x7fc8ea0000",
+    "size": 116932608
+  },
+  "source": {
+    "target": "0x2001",
+    "register": "0x5018",
+    "name": "RDMA_SRC_BASE_ADDR",
+    "DMA": "0xd3b23000",
+    "BO_offset": "0x420000",
+    "captured_VA": "0x7fc92c0000"
+  },
+  "destination": {
+    "target": "0x1001",
+    "register": "0x4020",
+    "name": "DST_BASE_ADDR",
+    "DMA": "0xd3f43000",
+    "BO_offset": "0x840000",
+    "captured_VA": "0x7fc96e0000"
+  },
+  "following_CNA": {
+    "FEATURE_DATA_ADDR": "0xd3703000",
+    "DCOMP_ADDR0": "0xd3f43000"
+  },
+  "local_RHS_register": "tinygrad/runtime/ops_rockchip.py _matmul_body uses DCOMP_ADDR0 for rhs",
+  "limitations": "Captured addresses belong to the terminated capture process. Fresh GDB capture must use that run's BO bindings. Tensor dtype, shape, packed bytes, and timing remain unqualified.",
+  "capture_sha256": "fa4b6c5fb4c93c9f18963ebaf588b4ae3b08652907137bf572dcfe57cac814fc",
+  "capture_bindings_verified": true
+}

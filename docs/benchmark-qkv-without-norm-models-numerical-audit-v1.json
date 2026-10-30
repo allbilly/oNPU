@@ -1,0 +1,146 @@
+{
+  "audit": "qkv-without-norm-models-v1 numerical audit",
+  "goal_complete": false,
+  "job_cases_terminal_valid_exit0_cleanup_complete": true,
+  "job_json_sha256": "24f4d7351237e30de446369284332469e38732dc3469603d686a387287c83c22",
+  "job_phase": "restoring",
+  "job_restored_flag": false,
+  "memavailable_before_numpy_bytes": 14145392640,
+  "memavailable_threshold_bytes": 2684354560,
+  "model_rows": [
+    {
+      "cases": [
+        {
+          "npz": "qkv-without-norm-models-v1/results/qwen2-1-control.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/qwen2-1-control.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/qwen2-2-candidate.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/qwen2-2-candidate.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/qwen2-3-candidate.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/qwen2-3-candidate.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/qwen2-4-control.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/qwen2-4-control.json"
+        }
+      ],
+      "generated_sequences_compared": 24,
+      "generated_sequences_equal": true,
+      "model": "Qwen2/0.5B",
+      "previous_ids_exact_all_true": true,
+      "previous_ids_exact_count": 24,
+      "report_sha256": [
+        "35f9bd5b4d1296c7a4f3ada99cc67294979621d0042f4094031903856ec52afd",
+        "2207b3593e62c582b98947f959f39bad6ebccdc29403b90100f944badff36a65",
+        "d194396df74c3549b1eb1baf32c0015e3a594ba9820303f35612691a1a6ca0ed",
+        "b7014841e4c896c3bccc2ff64a96031e17a5e1c29370fc566be170350c4c2c50"
+      ],
+      "teacher_logits_bitwise_equal": true,
+      "teacher_logits_dtype": "float32",
+      "teacher_logits_shape": [
+        32,
+        151936
+      ],
+      "teacher_npz_sha256": [
+        "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+        "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+        "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+        "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e"
+      ]
+    },
+    {
+      "cases": [
+        {
+          "npz": "qkv-without-norm-models-v1/results/minicpm4-1-control.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/minicpm4-1-control.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/minicpm4-2-candidate.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/minicpm4-2-candidate.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/minicpm4-3-candidate.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/minicpm4-3-candidate.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/minicpm4-4-control.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/minicpm4-4-control.json"
+        }
+      ],
+      "generated_sequences_compared": 24,
+      "generated_sequences_equal": true,
+      "model": "MiniCPM4/0.5B",
+      "previous_ids_exact_all_true": true,
+      "previous_ids_exact_count": 24,
+      "report_sha256": [
+        "3065fadb5aa8b49925f3572e4d629f6c9ba9b858e761a521de05c4f4922f73e0",
+        "2720550d42beffbfa2c77c3ffe4e037595dd59f80145438c3161ad644c4cf4f3",
+        "b0bab3666b16fe1f76d5d8efc455d154ef46ccbfd00552e63bd18befd772c7dd",
+        "72736569c854931d2d1722913a4efe71e380275e846209e4d05c450a44b6b272"
+      ],
+      "teacher_logits_bitwise_equal": true,
+      "teacher_logits_dtype": "float32",
+      "teacher_logits_shape": [
+        32,
+        73448
+      ],
+      "teacher_npz_sha256": [
+        "3e49c6fe81c438af183fd84e5b31008eed22a552a1bdb2eaf0c43e79d951a259",
+        "3e49c6fe81c438af183fd84e5b31008eed22a552a1bdb2eaf0c43e79d951a259",
+        "3e49c6fe81c438af183fd84e5b31008eed22a552a1bdb2eaf0c43e79d951a259",
+        "3e49c6fe81c438af183fd84e5b31008eed22a552a1bdb2eaf0c43e79d951a259"
+      ]
+    },
+    {
+      "cases": [
+        {
+          "npz": "qkv-without-norm-models-v1/results/tinyllama-1-control.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/tinyllama-1-control.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/tinyllama-2-candidate.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/tinyllama-2-candidate.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/tinyllama-3-candidate.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/tinyllama-3-candidate.json"
+        },
+        {
+          "npz": "qkv-without-norm-models-v1/results/tinyllama-4-control.teacher-logits.npz",
+          "report": "qkv-without-norm-models-v1/results/tinyllama-4-control.json"
+        }
+      ],
+      "generated_sequences_compared": 24,
+      "generated_sequences_equal": true,
+      "model": "TinyLLAMA/1.1B",
+      "previous_ids_exact_all_true": true,
+      "previous_ids_exact_count": 24,
+      "report_sha256": [
+        "e9f0fba2f0331ab1fe9acb1e75ad69e82f98bb2f7dabc1077aff78fd0a8a3ee7",
+        "8894f76d351317134bd1747deb3d7eda48142d81d0694307da3a98fbec4add4d",
+        "ac3937a4d38c8fd8480e8df08ca45dc648f3fb08862fbb1a316f78f4dc9131a7",
+        "d313d3bd7c3cdfb3bc99edd11875b9376f69e13e691da6c8ce24e515207a0a79"
+      ],
+      "teacher_logits_bitwise_equal": true,
+      "teacher_logits_dtype": "float32",
+      "teacher_logits_shape": [
+        32,
+        32000
+      ],
+      "teacher_npz_sha256": [
+        "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+        "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+        "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+        "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb"
+      ]
+    }
+  ],
+  "planned_cases": 12,
+  "quality_qualified": false,
+  "scope": "local 32-target regression only; no HF/RKLLM qualification",
+  "serving_restoration_verified": false,
+  "valid_terminal_cases": 12
+}

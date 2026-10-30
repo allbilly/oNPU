@@ -1,0 +1,81 @@
+{
+  "schema": "swiglu-rounding-trace-v1",
+  "complete": true,
+  "NPU_used": false,
+  "GPU_used": false,
+  "cases": [
+    {
+      "rows": 17,
+      "hidden": 4864,
+      "variant": "divide",
+      "payload_mismatches": 2,
+      "scale_mismatches": 2,
+      "source_sha256": "bdf3c9e8b5c26c578bea2f89af33a974a1995dec2179d4b82fff4c638a933b52",
+      "bits_equal": false
+    },
+    {
+      "rows": 17,
+      "hidden": 4864,
+      "variant": "multiply",
+      "payload_mismatches": 0,
+      "scale_mismatches": 0,
+      "source_sha256": "73ddf5c9a33dd2bb6415e98e1e2760f76a1e4f65f5653daba829661b9c5bf329",
+      "bits_equal": true
+    },
+    {
+      "rows": 128,
+      "hidden": 4864,
+      "variant": "divide",
+      "payload_mismatches": 14,
+      "scale_mismatches": 14,
+      "source_sha256": "9dec4fe0d9281c4f290b10f898389b535aa8610786bc5c427ca57ee00b9abfe3",
+      "bits_equal": false
+    },
+    {
+      "rows": 128,
+      "hidden": 4864,
+      "variant": "multiply",
+      "payload_mismatches": 0,
+      "scale_mismatches": 0,
+      "source_sha256": "1655b0044df801c93cf1d2d85cb683e267c14e8cbaed2f85d5e1321735a41ae6",
+      "bits_equal": true
+    },
+    {
+      "rows": 128,
+      "hidden": 5632,
+      "variant": "divide",
+      "payload_mismatches": 14,
+      "scale_mismatches": 14,
+      "source_sha256": "32e3408b1a40aa15b7cc3ba415df0adcf86ab6d912d76da0c1f8cc6b2a06700d",
+      "bits_equal": false
+    },
+    {
+      "rows": 128,
+      "hidden": 5632,
+      "variant": "multiply",
+      "payload_mismatches": 0,
+      "scale_mismatches": 0,
+      "source_sha256": "faded887f28112553b4c62ee6ee5e0b19494af8e53088e8acb7d2c27d875b602",
+      "bits_equal": true
+    },
+    {
+      "rows": 65,
+      "hidden": 8960,
+      "variant": "divide",
+      "payload_mismatches": 9,
+      "scale_mismatches": 9,
+      "source_sha256": "59b495d4f1ee784cbdb08cefaf630f42093962b3c41bc2e0f7726ee1f73b75c7",
+      "bits_equal": false
+    },
+    {
+      "rows": 65,
+      "hidden": 8960,
+      "variant": "multiply",
+      "payload_mismatches": 0,
+      "scale_mismatches": 0,
+      "source_sha256": "249d45cc89377d032b3308ab6aa3eae396f34c4762332dc0d924c92affde48c0",
+      "bits_equal": true
+    }
+  ],
+  "scope": "CPU full payload/scales against the existing custom-kernel sigmoid materialization, not the algebraically fused tensor sigmoid."
+}

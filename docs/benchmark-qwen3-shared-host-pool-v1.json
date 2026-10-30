@@ -1,0 +1,1315 @@
+{
+  "kind": "qwen3-shared-host-pool-v1-evidence",
+  "updated_utc": "2026-10-29T03:33:12.723715+00:00",
+  "complete_evidence": true,
+  "production_integrated": false,
+  "default_enabled": false,
+  "speed_cohort_complete": true,
+  "quality_preservation_complete": true,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "all_model_goal_complete": false,
+  "scope": {
+    "implementation": "staged prototype, five host kernel families, scoped active pool with parked fallback outside prefill",
+    "base_numerical_source_count": 295,
+    "prototype_sha256": "14c8f14a26b0f237c674e9bad65cc813c71ccc866a741d0830de1f42eba030e2",
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "context": 512,
+    "warmups_per_process": 3,
+    "measured_trials_per_process": 3,
+    "process_order": [
+      "control",
+      "candidate",
+      "candidate",
+      "control"
+    ],
+    "global_CPU_mask": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "candidate_prefill_main_cpu": 4,
+    "candidate_worker_cpus": [
+      5,
+      6,
+      7
+    ],
+    "clocks": "adaptive",
+    "base_host_flags": [
+      1,
+      1,
+      1
+    ],
+    "same_NPU_recipe_and_FP16_attention": true
+  },
+  "published_RKLLM_reference": {
+    "TTFT_ms": 199.09,
+    "prefill_proxy_TPS": 642.93,
+    "decode_TPS": 32.91
+  },
+  "processes": [
+    {
+      "role": "control",
+      "median_first_token_ms": 253.47427599990624,
+      "median_prefill_tps": 504.982209713649,
+      "median_decode_tps": 37.925209890858135,
+      "teacher_bitwise_equal_control": null,
+      "shared_host_pool_runtime": {
+        "enabled": false,
+        "scope_calls": 0,
+        "active_flag_after": 0,
+        "parked_after": null,
+        "worker_pool_started": false,
+        "dispatch_restored": true,
+        "rewritten_kernels": [],
+        "rewritten_source_metadata": [],
+        "all_five_kernel_families_rewritten": false
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 62.693006,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 42.587299,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 36.917686,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 18.169364,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 17.059594,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 16.513311,
+            "calls": 56
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 15.568332,
+            "calls": 91
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 11.73851,
+            "calls": 147
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 9.572052,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 5.938823,
+            "calls": 63
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 5.785694,
+            "calls": 112
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 5.605448,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 5.107292,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 5.015707,
+            "calls": 55
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 4.855879,
+            "calls": 6
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 3.452108,
+            "calls": 28
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 3.098028,
+            "calls": 147
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 0.936819,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.197747,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.152831,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.146414,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.052207,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.017207,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.00933,
+            "calls": 28
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.00175,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.001166,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/1-control.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 253.47427599990624,
+          "prefill_tps": 504.982209713649,
+          "decode_tps": 37.96728010779778
+        },
+        {
+          "first_token_ms": 256.7671379983949,
+          "prefill_tps": 498.50616008657676,
+          "decode_tps": 37.925209890858135
+        },
+        {
+          "first_token_ms": 246.549640000012,
+          "prefill_tps": 519.1652277407251,
+          "decode_tps": 37.83639705509225
+        }
+      ]
+    },
+    {
+      "role": "candidate",
+      "median_first_token_ms": 230.00103900267277,
+      "median_prefill_tps": 556.5192251088594,
+      "median_decode_tps": 38.05904939926963,
+      "teacher_bitwise_equal_control": true,
+      "shared_host_pool_runtime": {
+        "enabled": true,
+        "scope_calls": 11,
+        "active_flag_after": 0,
+        "parked_after": true,
+        "worker_pool_started": true,
+        "dispatch_restored": true,
+        "rewritten_kernels": [
+          "rockchip_cpu_rmsnorm",
+          "rockchip_dequantize",
+          "rockchip_int8_ffn_pack",
+          "rockchip_prepare_qkv",
+          "rockchip_quantize"
+        ],
+        "rewritten_source_metadata": [
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,4096*i/4,4096*(i+1)/4};",
+            "source_before_sha256": "ed5c8e6d4e60ad1c491c75253167f3f73259516c5947002d624e892a13b906c5",
+            "source_after_sha256": "684cd63a62217b1d6f894966d84a3e1ce7e312c65b331cc5ff3b985efea26d41",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "39ecfb9e04f223815e3fcf515cddad9da88e12c8fb09c00731cc991c5f4c3a7c"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,6144*i/4,6144*(i+1)/4};",
+            "source_before_sha256": "ebba1939609ead9e5c2aa6440e696da8a8f22028e7f91fce91d3d103c66cea20",
+            "source_after_sha256": "0df7ee407a8ac4683acf44990d910bd5cae52e0f60707dafd5c6466e40460c84",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "8ba81cefae2c6f66aa0048503345c0b82e2e12308e63be547d89b6e721e24054"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,1024*i/4,1024*(i+1)/4};",
+            "source_before_sha256": "e8b63023357412384889f2faeebf451f2039c65857ed5b151fb777d5989e453b",
+            "source_after_sha256": "39077f02af097f944b5040d51e478cf6679002f39e70cda72a0a4aa1029e52d2",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "5652ba40abc0a9794565e5d83325a4490e889bf292d3aa74ee8e78567de8916d"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,1024*i/4,1024*(i+1)/4};",
+            "source_before_sha256": "21933630d4f7698af619a43798f2472be0441b694647acaa29caf996bf8d2515",
+            "source_after_sha256": "b462f640636aa0e17950b0d411ecf6d326479f8273c55b4431b7e92651fadb05",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "f96e26bdadc39c518908a6329f7371d8386c6da5e265faf4e5cddb9f5699352f"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,24384*i/4,24384*(i+1)/4};",
+            "source_before_sha256": "7c973fd1938bc84054e808b15fa5be18c341aea5e329bb4fb1625c1b49a74e2f",
+            "source_after_sha256": "4a098d6487ea13a3a88d34e63e8569583473da6f3a35c978a0d2fa992f002bf3",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "a27ebc44bb37352b4e1b5eb07dc237645847bb303207f299f8bde6048bc8a295"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,5632*i/4,5632*(i+1)/4};",
+            "source_before_sha256": "6e605ff4ed2704d2fb47f162de370a5199e918f4305ab9b815b90d10dea16f45",
+            "source_after_sha256": "021d90717f1c5a675db83bfd54f4f32127354fec7e2b1b7867d90c2cbdfa45ce",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "fc5f228c11a3d5d87446f778ec36b8f0409158053bdb037ab1aeb05dba914de2"
+          },
+          {
+            "changed": true,
+            "worker": "norm_worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,src,weight,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "eab85ef50a7eb550cd1bebd9f4ec7b246d5c3c6450b5c475caf2b2b0d1f03123",
+            "source_after_sha256": "234176f8de5a6d3c60713ffd0a475c26869085af873e2aa9790e4164e096eed0",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_cpu_rmsnorm",
+            "binary_sha256": "3869c468b2d7c2d96e91c052874c8247f4f18356dd6dd3725811d2c6805401de"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "871af93c5ff7deca47f8a74299d56b95b0f0998300e3b82dba2342dd978c7caf",
+            "source_after_sha256": "c1b154ccdc6498e0ec31f69bbdac75be11a81ebc7da094c08ce3acb405c6bd19",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "433e598270f3767eff06a8def9e0d9a619ffc492c2e66389a1f7dac541587da4"
+          },
+          {
+            "changed": true,
+            "worker": "prepare_worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,cache,src,qn,kn,freq,first,active,24*i/4,24*(i+1)/4};",
+            "source_before_sha256": "fa6ba78ff5474d23da38d6c33a30e20dde84ad8a35b8f40c0876fb4e0f06a9de",
+            "source_after_sha256": "1b3971992b0f617ce440815d071db6fe8415cde59d923b84f882ce39f593cf8e",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_prepare_qkv",
+            "binary_sha256": "313e81e0869212adbce704d174ff2ebd890a0b4996533665ba486e3b722d92ff"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "8f094bdba7ad6057c0d4a748dee875c1091d85126113543f60f7e1cd0224ac06",
+            "source_after_sha256": "9dc1237165393c7121f893a97697bd2fc8ef3adcce7bad13882396b02ed1f24c",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "cc442c2f0d801d15c98e024e92f5034f3a5ea10269e59fe2a4e2b6833d7dfbcd"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,raw,sa,sw,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "515282d206be60eff9488ef130967c15be9ac431b3d4a3b8879e22aaadd21738",
+            "source_after_sha256": "7be02470a550f393e4b39f9b0677582ecbe6573888ae5842fd7d964f9c584056",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_dequantize",
+            "binary_sha256": "05de835dc2b520cbca62b1dd997fb073a96afb11a9d915c9108ef817285c9173"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,raw,sa,sw,scales,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "263430fa3fc0445884208c0814e4157d9d53d2f7f106a2201faa0bcfae324a02",
+            "source_after_sha256": "d788a965e7cde386eec935c6bd474b5d2f234d44466c2413791bde5798f9aece",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_int8_ffn_pack",
+            "binary_sha256": "6256b6651f30c9bfd2ff6808f635bf34755fc1c91bb3f4719c6971daca20c9fa"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,raw,sa,sw,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "42525b3e4711e8e5862ffebfbea46a15b36e0a0787534f6e94813a67244a5b8f",
+            "source_after_sha256": "62d9b813d9ce9fcbe1d9e7a3a41745c2361bdff37fc5fdd3bdbdcd887ab00c99",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547879473152,
+            "kernel": "rockchip_dequantize",
+            "binary_sha256": "46058603e36609e5789297667e4c8c2bf633989b8456bb4f3cdaa649246bf277"
+          }
+        ],
+        "all_five_kernel_families_rewritten": true
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 38.671522,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 35.118782,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 22.343383,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 17.500907,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 15.774854,
+            "calls": 56
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 14.150295,
+            "calls": 28
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 11.279179,
+            "calls": 147
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 8.625332,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 5.935332,
+            "calls": 91
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 5.391379,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 5.352589,
+            "calls": 112
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 4.848013,
+            "calls": 6
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 4.651724,
+            "calls": 55
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 2.944333,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 2.925668,
+            "calls": 63
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 2.801414,
+            "calls": 147
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 1.879182,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 0.895111,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.201247,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.151956,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.14729,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.054832,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.015456,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.008463,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.001459,
+            "calls": 1
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.001458,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/2-candidate.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 216.51663599914173,
+          "prefill_tps": 591.1785919328037,
+          "decode_tps": 37.8843689897929
+        },
+        {
+          "first_token_ms": 231.24060099871713,
+          "prefill_tps": 553.5360116137655,
+          "decode_tps": 38.07553954360542
+        },
+        {
+          "first_token_ms": 230.00103900267277,
+          "prefill_tps": 556.5192251088594,
+          "decode_tps": 38.05904939926963
+        }
+      ]
+    },
+    {
+      "role": "candidate",
+      "median_first_token_ms": 221.84019799897214,
+      "median_prefill_tps": 576.9919119915006,
+      "median_decode_tps": 37.977217487719976,
+      "teacher_bitwise_equal_control": true,
+      "shared_host_pool_runtime": {
+        "enabled": true,
+        "scope_calls": 11,
+        "active_flag_after": 0,
+        "parked_after": true,
+        "worker_pool_started": true,
+        "dispatch_restored": true,
+        "rewritten_kernels": [
+          "rockchip_cpu_rmsnorm",
+          "rockchip_dequantize",
+          "rockchip_int8_ffn_pack",
+          "rockchip_prepare_qkv",
+          "rockchip_quantize"
+        ],
+        "rewritten_source_metadata": [
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,4096*i/4,4096*(i+1)/4};",
+            "source_before_sha256": "ed5c8e6d4e60ad1c491c75253167f3f73259516c5947002d624e892a13b906c5",
+            "source_after_sha256": "ffcb1048506cec541e79c40ee8dfbb8acf27e61d1e26c8c3c43b898e90e9fc4c",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "7ac07abd951d63c76bec887679682daec778a9f56098bf127aa1437f512065bc"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,6144*i/4,6144*(i+1)/4};",
+            "source_before_sha256": "ebba1939609ead9e5c2aa6440e696da8a8f22028e7f91fce91d3d103c66cea20",
+            "source_after_sha256": "d8bbc31db52eaf129c1c20dee02fbaa13582056c47646744bcb796844a1f07b9",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "19a7d0a76a6dafe7bf1ed37372d816ffd2d24bb5fd1d9107ec0ba2273e40eb88"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,1024*i/4,1024*(i+1)/4};",
+            "source_before_sha256": "e8b63023357412384889f2faeebf451f2039c65857ed5b151fb777d5989e453b",
+            "source_after_sha256": "49a23e9c8523937ad4d4e1714c437b38adc471225d9c82bea17444121f72a384",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "275a17743eaf0f49886b27e9668f463f738a957df13dec674f28f8735e562615"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,1024*i/4,1024*(i+1)/4};",
+            "source_before_sha256": "21933630d4f7698af619a43798f2472be0441b694647acaa29caf996bf8d2515",
+            "source_after_sha256": "f7285dfb25d1cd7ee8726d49a53e2e42544bc5601ed3243bc79482f4c90dbe8a",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "e82df58ce7c69b7b59bc1a1c1b1a052572e57a74671e53dd9c8c3376b2e39730"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,24384*i/4,24384*(i+1)/4};",
+            "source_before_sha256": "7c973fd1938bc84054e808b15fa5be18c341aea5e329bb4fb1625c1b49a74e2f",
+            "source_after_sha256": "1816f9ea9ec669e753083868d75c5744be4f65c889e4b06f22a36dcbddce789e",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "aca78a4855e859d8671feb3e472e23ef3814b85b250dd93fd081e2df3b743461"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,5632*i/4,5632*(i+1)/4};",
+            "source_before_sha256": "6e605ff4ed2704d2fb47f162de370a5199e918f4305ab9b815b90d10dea16f45",
+            "source_after_sha256": "9d694d12f19b0257811f2c0aec351f0e4f649f4e7381bb48c41fc68626bcfc84",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "c2c72eea02cd3df472577c5dd8a68f5337d24051b15feb0fe0769d28f47b346e"
+          },
+          {
+            "changed": true,
+            "worker": "norm_worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,src,weight,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "eab85ef50a7eb550cd1bebd9f4ec7b246d5c3c6450b5c475caf2b2b0d1f03123",
+            "source_after_sha256": "cb4b77cd2ce40156750fa6eef4a15a9dc6f5a8d7ba26db4f67c469a7e380eddd",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_cpu_rmsnorm",
+            "binary_sha256": "fa5a1e7f92cef2bc366fa0635797e76170b37c48e4bff7ef69e420277f25d247"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "871af93c5ff7deca47f8a74299d56b95b0f0998300e3b82dba2342dd978c7caf",
+            "source_after_sha256": "463a96d65ef1de7a29044e19a2dbc3dadab068bfa2749a66dde13370014f6efe",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "09506156c24905f14e862a777108c49c56bea137d518585770903f0ac428d918"
+          },
+          {
+            "changed": true,
+            "worker": "prepare_worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,cache,src,qn,kn,freq,first,active,24*i/4,24*(i+1)/4};",
+            "source_before_sha256": "fa6ba78ff5474d23da38d6c33a30e20dde84ad8a35b8f40c0876fb4e0f06a9de",
+            "source_after_sha256": "b075c6b1e2f3fded7db72b267098f7fdb956531962a273d49dce4e7cd5c6cd42",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_prepare_qkv",
+            "binary_sha256": "3740b79b8d07126316a2a399402fe1b7ec9985584f30586102ffcc434ed90e4a"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){raw,input,scale_out,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "8f094bdba7ad6057c0d4a748dee875c1091d85126113543f60f7e1cd0224ac06",
+            "source_after_sha256": "bcc8d08da99a5410399f58896ac22a2ec5ac23291f97dc70f1d25f6cdc39d3a3",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_quantize",
+            "binary_sha256": "73c8a85d94056be714bc59933c07881e1b6dc8b66a9257dda503990b04428beb"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,raw,sa,sw,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "515282d206be60eff9488ef130967c15be9ac431b3d4a3b8879e22aaadd21738",
+            "source_after_sha256": "99747890e370dfe211e6afe995b224476cc3368f5cb4c4f9058d2b635c07a44c",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_dequantize",
+            "binary_sha256": "913bba5dc83f583abc4bbfebdf9e5e37895b4ec893d3ceac241f1fcfc8772c5e"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,raw,sa,sw,scales,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "263430fa3fc0445884208c0814e4157d9d53d2f7f106a2201faa0bcfae324a02",
+            "source_after_sha256": "47d22aa3348c1fe04589856fbb430442ef3625ddd9692a028de8280c5d079579",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_int8_ffn_pack",
+            "binary_sha256": "53977be0e231b9035124aa80927519620ca3e9c548c5d3b71fab0d59b973a139"
+          },
+          {
+            "changed": true,
+            "worker": "worker",
+            "work_initializer": "for(int i=0;i<4;i++)work[i]=(Work){out,raw,sa,sw,128*i/4,128*(i+1)/4};",
+            "source_before_sha256": "42525b3e4711e8e5862ffebfbea46a15b36e0a0787534f6e94813a67244a5b8f",
+            "source_after_sha256": "fa6ce2424c5c6b81bf6861778d4e111550cc45c2f0b9bf37a606642a74060866",
+            "thread_creates_replaced_per_call": 3,
+            "callback_address": 547838599168,
+            "kernel": "rockchip_dequantize",
+            "binary_sha256": "2a0fe2b94e31a107fba9b7a14f96ba2e6db4ffbb937059a206526d8f390c4f24"
+          }
+        ],
+        "all_five_kernel_families_rewritten": true
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 46.541157,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 44.093237,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 25.675628,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 21.272692,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 19.148511,
+            "calls": 56
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 16.724799,
+            "calls": 28
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 12.995023,
+            "calls": 147
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 10.599889,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 6.60557,
+            "calls": 91
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 6.243029,
+            "calls": 112
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 5.57863,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 5.463714,
+            "calls": 55
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 4.917428,
+            "calls": 6
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 3.787234,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 3.552444,
+            "calls": 63
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 3.433743,
+            "calls": 147
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 2.269711,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 1.039775,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.200955,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.153122,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.147581,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.052791,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.021294,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.01079,
+            "calls": 28
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.001459,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.001458,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/3-candidate.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 221.84019799897214,
+          "prefill_tps": 576.9919119915006,
+          "decode_tps": 37.977217487719976
+        },
+        {
+          "first_token_ms": 211.4622650005913,
+          "prefill_tps": 605.3089424708569,
+          "decode_tps": 38.03149275993981
+        },
+        {
+          "first_token_ms": 226.67887799980235,
+          "prefill_tps": 564.6754612933614,
+          "decode_tps": 36.85981049592159
+        }
+      ]
+    },
+    {
+      "role": "control",
+      "median_first_token_ms": 267.5692889970378,
+      "median_prefill_tps": 478.380760661277,
+      "median_decode_tps": 38.04600666629321,
+      "teacher_bitwise_equal_control": true,
+      "shared_host_pool_runtime": {
+        "enabled": false,
+        "scope_calls": 0,
+        "active_flag_after": 0,
+        "parked_after": null,
+        "worker_pool_started": false,
+        "dispatch_restored": true,
+        "rewritten_kernels": [],
+        "rewritten_source_metadata": [],
+        "all_five_kernel_families_rewritten": false
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 73.937573,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 65.674486,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 46.538227,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 24.173559,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 24.109393,
+            "calls": 91
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 22.214753,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 20.460117,
+            "calls": 56
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 16.464045,
+            "calls": 147
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 12.273441,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 11.968364,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 11.318828,
+            "calls": 63
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 9.252702,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 9.198149,
+            "calls": 112
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 6.280947,
+            "calls": 55
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 5.058596,
+            "calls": 147
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 4.912178,
+            "calls": 6
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 4.480517,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 1.379273,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.240038,
+            "calls": 1
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.202705,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.147582,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.051916,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.025666,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.007288,
+            "calls": 28
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.001458,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.000875,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/4-control.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 280.22568500455236,
+          "prefill_tps": 456.7746885797446,
+          "decode_tps": 38.04600666629321
+        },
+        {
+          "first_token_ms": 251.24057199718663,
+          "prefill_tps": 509.4718539385961,
+          "decode_tps": 38.028544432989555
+        },
+        {
+          "first_token_ms": 267.5692889970378,
+          "prefill_tps": 478.380760661277,
+          "decode_tps": 38.077850994475575
+        }
+      ]
+    }
+  ],
+  "local_result": {
+    "control_process_TTFT_ms": [
+      253.47427599990624,
+      267.5692889970378
+    ],
+    "candidate_process_TTFT_ms": [
+      230.00103900267277,
+      221.84019799897214
+    ],
+    "both_candidates_faster_than_both_controls": true,
+    "prefill_still_below_published_reference": true,
+    "remaining_TTFT_ms_to_published_reference": [
+      30.911039002672766,
+      22.75019799897214
+    ]
+  },
+  "quality": {
+    "targets": 1024,
+    "all_full_vectors_bitwise_prior": true,
+    "repeat_first_sequence_bitwise": true,
+    "PPL": 30.944998197733643,
+    "mean_NLL": 3.432211376950368,
+    "original_FP16_PPL": 30.61051276753029,
+    "ratio_to_original": 1.0109271423430108,
+    "mean_ratio_screen_bound": 1.02,
+    "prior_95pct_sequence_bootstrap_ratio": [
+      0.9870531878438954,
+      1.0358364914478901
+    ],
+    "scope": "Preserves prior sampled text quality; broad/API/VLM/model-max qualification remains incomplete."
+  },
+  "attention_phase_profile": {
+    "prefixes": 16,
+    "stats": {
+      "pack": {
+        "median_ms": 5.4367335,
+        "min_ms": 5.110217,
+        "max_ms": 6.163993,
+        "calls_per_prefix": 28
+      },
+      "inputs_to_device": {
+        "median_ms": 1.561415,
+        "min_ms": 1.530061,
+        "max_ms": 1.741511,
+        "calls_per_prefix": 84
+      },
+      "qk_submit_wait": {
+        "median_ms": 8.825996,
+        "min_ms": 8.499621,
+        "max_ms": 10.032891,
+        "calls_per_prefix": 28
+      },
+      "scores_from_device": {
+        "median_ms": 0.5814315,
+        "min_ms": 0.572243,
+        "max_ms": 0.594117,
+        "calls_per_prefix": 28
+      },
+      "normalize": {
+        "median_ms": 10.657779,
+        "min_ms": 9.269326,
+        "max_ms": 11.060125,
+        "calls_per_prefix": 28
+      },
+      "probabilities_to_device": {
+        "median_ms": 0.900945,
+        "min_ms": 0.894237,
+        "max_ms": 1.061942,
+        "calls_per_prefix": 28
+      },
+      "pv_submit_wait": {
+        "median_ms": 8.2878785,
+        "min_ms": 8.149049,
+        "max_ms": 9.472898,
+        "calls_per_prefix": 28
+      },
+      "result_from_device": {
+        "median_ms": 0.5697635,
+        "min_ms": 0.561743,
+        "max_ms": 0.583618,
+        "calls_per_prefix": 28
+      },
+      "unpack": {
+        "median_ms": 3.431552,
+        "min_ms": 3.321453,
+        "max_ms": 3.882904,
+        "calls_per_prefix": 28
+      },
+      "CPU_helpers": {
+        "median_ms": 19.528983500000002,
+        "min_ms": 17.750578,
+        "max_ms": 20.832279
+      },
+      "NPU_submit_wait": {
+        "median_ms": 17.1176655,
+        "min_ms": 16.655082,
+        "max_ms": 19.505789
+      },
+      "sync": {
+        "median_ms": 3.6011595,
+        "min_ms": 3.580158,
+        "max_ms": 3.981188
+      },
+      "all": {
+        "median_ms": 40.1600145,
+        "min_ms": 38.11824,
+        "max_ms": 44.319256
+      }
+    },
+    "timings_excluded_from_speed_cohort": true
+  },
+  "postprocess_correction": {
+    "generic_owner_exit": 1,
+    "generic_job_complete": false,
+    "actual_workers_all_exit0": true,
+    "failure": "Missing _integer helper in quality report validator after successful quality worker",
+    "independent_validator_all_checks_pass": true,
+    "checks": 28,
+    "raw_reports_and_original_validator_untouched": true,
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3-shared-host-pool-v1/quality-postprocess-v2.json",
+    "no_hardware_rerun": true
+  },
+  "restoration": {
+    "complete": true,
+    "exact_original_options_selection_settings": true,
+    "fresh_models": [
+      "55a95dc3c1b93b72",
+      "b4b92c783d8643a1"
+    ],
+    "receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1-fresh.json"
+  },
+  "artifacts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/1-control.json",
+      "sha256": "18105e84f5b57dad73005a04d2ebaceb7efbbfccba3c28f45c1b2a84981341e3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/1-control.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/2-candidate.json",
+      "sha256": "149e52c08c7f92585cf2c0ed4c8790ec264fbf19df308df79b08af4da2daccd9"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/2-candidate.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/3-candidate.json",
+      "sha256": "e2e976b35a10c371c3d61f53c8cd55389b5d3d7f75ab272055387911345967a9"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/3-candidate.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/4-control.json",
+      "sha256": "6c59c0e381558fa77d91cb51d063a14ace7c2bfd90e2e7c50be2d83ae748f2d4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/4-control.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate.json",
+      "sha256": "df62854bc0a1c574acfd5ba631b2df965b04d9744f085fb778d00463fde357de"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-00.npz",
+      "sha256": "dc4699c867feec6cfb95418091e27c3772d50dbbddf95febb80c07583e6f96dc"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-01.npz",
+      "sha256": "e1428b35f32cf684d895ca2c112e76b7c0bea5ec8c044a10ba4528b63daefe9e"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-02.npz",
+      "sha256": "f383054ac7123bb4796e84b73194f80b2c3b62c5b4d970473d3e8ad9257ea0b9"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-03.npz",
+      "sha256": "2539a449f984e4fe5467b9f3b6438ae57a383b2a2b2aeb1a84fc2bccb4e71179"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-04.npz",
+      "sha256": "cbc126479b629732537b41b52056b69a4424ae7101d2bc7adbae83dd937f70d6"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-05.npz",
+      "sha256": "0da2b21e32ff44b13f29831068a88984b45cca0c7aef284ee8a2f1cb5cafced5"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-06.npz",
+      "sha256": "91501ee74d40af7fb00892d77f9056015acaa9d119cabdef6c248fda1a65eeaf"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-07.npz",
+      "sha256": "9488edc54cf9de11ca2fe3840f160475bbb5a123131a9821fbe2069ab5539a43"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-08.npz",
+      "sha256": "f36a44c21bf9fb8ae7513559e4d710f1cab963173762c234189cf09b0bdd2654"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-09.npz",
+      "sha256": "dbce751241cf65c424b825adef42bfa685314e910612a66e50fd9dae63f57cd2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-10.npz",
+      "sha256": "8f10c48496946ed06601607b906e8c1fad394a6cdfabf28f385b9dcb18fe451b"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-11.npz",
+      "sha256": "730ab6b84130d0c58672d41555c4f752fb2a65750952dfc176c61ef7998a260f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-12.npz",
+      "sha256": "7ed4c436f45598591782d5ba5307864e5a25e3af444fa1e115312fca2cadded1"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-13.npz",
+      "sha256": "73e2d89f9b29ccab3f0219702aeb82d4adf4c06a5467fef4b2d4cd2adb345fb1"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-14.npz",
+      "sha256": "7c75625acb4bd4f189363589b24693a09e654e64e2e6d6a3b1249b81211671e3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/results/5-quality-candidate-logits/wikitext2-qwen3-15.npz",
+      "sha256": "b72e72963b8932b760f5be075a1c2abc6564cd70d9a38ce53eae57e1651eed7f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1/job.json",
+      "sha256": "469e85d47ff2c550188695c66c69f52810d8c34921440af6cb65ceeb14e511d8"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1-owner-terminal.json",
+      "sha256": "d955f8f640c6bc884df1bddde349a696e67724f946a2d4f4977c745cdf1d6999"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-shared-host-pool-v1-fresh.json",
+      "sha256": "87d1037d852c7918edb7d049b3c262f20d05004287dd03f384aac8eb44f3f411"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3-shared-host-pool-v1/quality-postprocess-v2.json",
+      "sha256": "aba7e4f7694abdc93c74c6b3b6bcc190dd33637b7062b2d34dcbd3f2cae8766c"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3-shared-host-pool-v1/validate_quality_report.py",
+      "sha256": "0b444aee09373bb71ae2fbe784a0fd52a731d3206e61ae190d7a7871ffa22568"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3-shared-host-pool-v1/validate_quality_report_v2.py",
+      "sha256": "3b0f88f8aa4263758427b9e303b6bb0c1e79c68cdb1b99329d31d57dd5d97262"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/shared_host_pool_v1.py",
+      "sha256": "14c8f14a26b0f237c674e9bad65cc813c71ccc866a741d0830de1f42eba030e2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-thread-count-v1.json",
+      "sha256": "78a8469d54fa0b5718d02f93dbe3f1f5db7b299c71229f74df8b44749403e611"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-pool-cpu-check-v3.json",
+      "sha256": "29d08f193a157416f25ecb0247c8d7a52081d00e7e0e38120eeb00cd63cc2628"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/shared-host-pool-active-scope-cpu-v1.json",
+      "sha256": "9c9a948b092c8b22625abd020285a80bd6f3ac697762d62f9b653fdaec10f4cc"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "qwen3-cpu-micro-verification-v1",
+  "complete": true,
+  "goal_complete": false,
+  "quality_qualified": false,
+  "model_speed_qualified": false,
+  "backend_changes": false,
+  "device": "CPU",
+  "owner_sessions": {
+    "ffn": 19581,
+    "attention": 72328
+  },
+  "owner_exit_codes": {
+    "ffn": 0,
+    "attention": 0
+  },
+  "scope": "Small isolated CPU-only experiments; both serving sessions retained. No model timing, NPU/RKLLM parity or quality certification. Existing attention tile retained; O3 not ported.",
+  "reports": {
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-cpu-attention-tiles-v1-results.json": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-qwen3-cpu-attention-tiles-v1.json",
+      "sha256": "09aaba2161507f0ba5543a6ff4757b6b45471d861101cfe80f60a70662c63b2e"
+    },
+    "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-ffn-opt-v1-results.json": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-qwen3-ffn-opt-v1.json",
+      "sha256": "efda9ef1971f2f82777acc32cfd44e45728f44691767a161475725afd53c37dd"
+    }
+  },
+  "attention_bitwise_comparisons": 63,
+  "future_NaN_checks": 21,
+  "FFN_bitwise_patterns": 3,
+  "FFN_paired_speedup": 0.9946716639785155,
+  "profile_evidence": {
+    "path": "/home/orangepi/oNPU/docs/benchmark-qwen3-native-profile-verification-v1.json",
+    "sha256": "c823bc14f187c9d2a167178fe4a05a617e78c70cbc2d63b4881b1631cbb0ccaa"
+  }
+}

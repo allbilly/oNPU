@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 split-KV CPU attention and rejected worker head-count experiment",
+  "raw_receipts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-split-kv-cpu-v1.json",
+      "sha256": "78b362d50e1e6453d4c5d765f68476482c6f2c575dba1bb81ab6ca40e90dd391",
+      "complete": true,
+      "scope": "CPU attention component only, identical arithmetic/order per query head, no NPU/GPU opened, no model performance claim. Staged source only.",
+      "opened_devices": [
+        "CPU"
+      ]
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-split-kv-cold-cpu-v1.json",
+      "sha256": "3d441720f737b8acafe4df309757ac5db54f22cd452a23c2d37c8cf2f991cbb7",
+      "complete": true,
+      "scope": "CPU-only28layer rotatingKVcache attention, no NPUinference claim",
+      "opened_devices": [
+        "CPU"
+      ]
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-split-kv-dynamic-cpu-v1.json",
+      "sha256": "2083761aa98cfa80e1585dbc19e1fd5db59120fdb07fc102fac3425bdde7a912",
+      "complete": true,
+      "scope": "CPU-only28rotatingcachelayers,dynamiclength160",
+      "opened_devices": [
+        "CPU"
+      ]
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-heads-paired-v1/results/paired.json",
+      "sha256": "8a817167c631eea913c574f21acdfff342c0ab4bbcadc4bc2fe81a8938079659",
+      "kind": "qwen25-worker-heads-paired-v1",
+      "run_token": "qwen25-worker-heads-paired-v1",
+      "complete": true,
+      "throughput_qualification": false
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-heads-paired-lease-v1/job.json",
+      "sha256": "524db3dd4d6486767d44224adba7b34f3da690ef7b059df8173aff8eeecbf3f2",
+      "phase": "restored",
+      "restored": true,
+      "fresh_reply_count": 2
+    }
+  ],
+  "cpu_component": {
+    "source_sha256": "a9200a7509ba1ee251348e12c819862a3facb29c1ea502f3ea3f9b2a6e3918db",
+    "exact_lengths": [
+      1,
+      15,
+      16,
+      17,
+      128,
+      192,
+      512
+    ],
+    "all_future_cache_poison_checks_passed": true,
+    "cold_rotating_kv": {
+      "layers": 28,
+      "length": 192,
+      "median_ns_control": 1280062.6,
+      "median_ns_split": 888607.9,
+      "speedup": 1.4405257932098061,
+      "relative_reduction_percent": 30.58090284022047
+    },
+    "dynamic_length160": {
+      "median_ns_original": 1041467.95,
+      "median_ns_split_serial_fallback": 680127.4,
+      "median_ns_split_lean": 675781.7,
+      "binary_bytes": [
+        3480,
+        4232,
+        3176
+      ],
+      "exact": true
+    },
+    "interpretation": "CPU-only attention component evidence; the 44% cold-component gain is not a whole-model speed claim."
+  },
+  "paired_worker": {
+    "requests": 18,
+    "warmups_per_arm": 3,
+    "measured_per_arm": 6,
+    "same_64_token_ids_all_requests": true,
+    "all_submissions_11284": true,
+    "variants": {
+      "0": {
+        "prefill_tps": {
+          "median": 328.4012624155165,
+          "min": 325.1607357692026,
+          "max": 333.89532438612605,
+          "values": [
+            328.5476188801516,
+            327.34873354649056,
+            333.89532438612605,
+            328.25490595088144,
+            331.2431159582532,
+            325.1607357692026
+          ]
+        },
+        "decode_tps": {
+          "median": 16.314475027848793,
+          "min": 15.852130517358718,
+          "max": 16.919392555336096,
+          "values": [
+            16.919392555336096,
+            16.67044497891522,
+            16.572794574472265,
+            16.056155481225318,
+            15.98176480429922,
+            15.852130517358718
+          ]
+        },
+        "ttft_ms": {
+          "median": 389.7671540034935,
+          "min": 383.3536759921117,
+          "max": 393.65146501222625,
+          "values": [
+            389.59344899922144,
+            391.0203000123147,
+            383.3536759921117,
+            389.94085900776554,
+            386.42312498996034,
+            393.65146501222625
+          ]
+        },
+        "measured_count": 6,
+        "warmups": 3,
+        "selection": [
+          "two-workers"
+        ],
+        "npu_submissions": [
+          11284
+        ],
+        "split_head_kernel_calls_per_measured_request": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "npu_frequency_start_hz": [
+          "1000000000",
+          "800000000"
+        ]
+      },
+      "1": {
+        "prefill_tps": {
+          "median": 332.14022040766577,
+          "min": 320.50924511531116,
+          "max": 351.2235274893974,
+          "values": [
+            330.9205202929778,
+            333.3599205223538,
+            351.2235274893974,
+            329.36225380691144,
+            337.303317853895,
+            320.50924511531116
+          ]
+        },
+        "decode_tps": {
+          "median": 16.34575163702366,
+          "min": 16.087946291635642,
+          "max": 16.40547626394083,
+          "values": [
+            16.336766058155767,
+            16.40547626394083,
+            16.354737215891557,
+            16.39404723609607,
+            16.28949241185428,
+            16.087946291635642
+          ]
+        },
+        "ttft_ms": {
+          "median": 385.3846005004016,
+          "min": 364.4402780046221,
+          "max": 399.3644550064346,
+          "values": [
+            386.799826999777,
+            383.96937400102615,
+            364.4402780046221,
+            388.6298400029773,
+            379.48040598712396,
+            399.3644550064346
+          ]
+        },
+        "measured_count": 6,
+        "warmups": 3,
+        "selection": [
+          "four-workers"
+        ],
+        "npu_submissions": [
+          11284
+        ],
+        "split_head_kernel_calls_per_measured_request": [
+          28,
+          28,
+          28,
+          28,
+          28,
+          28
+        ],
+        "npu_frequency_start_hz": [
+          "800000000"
+        ]
+      }
+    },
+    "measured_blocks": [
+      {
+        "variant": 0,
+        "block": 0,
+        "selection": "two-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 328.5476188801516,
+        "decode_tps": 16.919392555336096,
+        "ttft_ms": 389.59344899922144,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 0,
+        "npu_frequency_start_hz": "1000000000"
+      },
+      {
+        "variant": 0,
+        "block": 0,
+        "selection": "two-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 327.34873354649056,
+        "decode_tps": 16.67044497891522,
+        "ttft_ms": 391.0203000123147,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 0,
+        "npu_frequency_start_hz": "1000000000"
+      },
+      {
+        "variant": 0,
+        "block": 0,
+        "selection": "two-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 333.89532438612605,
+        "decode_tps": 16.572794574472265,
+        "ttft_ms": 383.3536759921117,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 0,
+        "npu_frequency_start_hz": "1000000000"
+      },
+      {
+        "variant": 0,
+        "block": 3,
+        "selection": "two-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 328.25490595088144,
+        "decode_tps": 16.056155481225318,
+        "ttft_ms": 389.94085900776554,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 0,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 0,
+        "block": 3,
+        "selection": "two-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 331.2431159582532,
+        "decode_tps": 15.98176480429922,
+        "ttft_ms": 386.42312498996034,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 0,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 0,
+        "block": 3,
+        "selection": "two-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 325.1607357692026,
+        "decode_tps": 15.852130517358718,
+        "ttft_ms": 393.65146501222625,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 0,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 1,
+        "block": 1,
+        "selection": "four-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 330.9205202929778,
+        "decode_tps": 16.336766058155767,
+        "ttft_ms": 386.799826999777,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 28,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 1,
+        "block": 1,
+        "selection": "four-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 333.3599205223538,
+        "decode_tps": 16.40547626394083,
+        "ttft_ms": 383.96937400102615,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 28,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 1,
+        "block": 1,
+        "selection": "four-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 351.2235274893974,
+        "decode_tps": 16.354737215891557,
+        "ttft_ms": 364.4402780046221,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 28,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 1,
+        "block": 2,
+        "selection": "four-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 329.36225380691144,
+        "decode_tps": 16.39404723609607,
+        "ttft_ms": 388.6298400029773,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 28,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 1,
+        "block": 2,
+        "selection": "four-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 337.303317853895,
+        "decode_tps": 16.28949241185428,
+        "ttft_ms": 379.48040598712396,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 28,
+        "npu_frequency_start_hz": "800000000"
+      },
+      {
+        "variant": 1,
+        "block": 2,
+        "selection": "four-workers",
+        "generated_tokens": 64,
+        "generated_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+        "prefill_tps": 320.50924511531116,
+        "decode_tps": 16.087946291635642,
+        "ttft_ms": 399.3644550064346,
+        "npu_submissions": 11284,
+        "split_head_kernel_calls": 28,
+        "npu_frequency_start_hz": "800000000"
+      }
+    ],
+    "candidate_median_change_percent": {
+      "prefill_tps": 1.1385333797585995,
+      "decode_tps": 0.1917107913155469
+    },
+    "thermal_and_order_caveat": "Control blocks 0 were observed at 1 GHz NPU and control block 3 at 800 MHz; candidate blocks 1 and 2 were all at 800 MHz. This is a confound. No thermal causality is established; retain every control measurement."
+  },
+  "qualification": {
+    "worker_throughput_qualification": false,
+    "quality_qualified": false,
+    "clear_whole_decode_gain": false,
+    "interpretation": "Control median was 328.401 prefill / 16.3145 decode tok/s and candidate median was 332.140 / 16.3458. The approximately 0.2% decode difference is inconclusive; prefill median lead is about 1.14%. Do not infer causality from these unpaired-frequency blocks."
+  },
+  "removal_and_reproducibility": {
+    "production_head_changes_removed": true,
+    "ONPU_CPU_SPLIT_KV_HEADS_flag_present": false,
+    "staged_v2_status": "NOT RUN; lease expired before queue; no repeat result exists",
+    "current_source_matches_pre_head_api_exact_scale_snapshot": true,
+    "current_source_diff_paths": [],
+    "source_counts": {
+      "tinygrad": 297,
+      "onpu": 12
+    },
+    "source_map_sha256": {
+      "tinygrad": "5bb76460bd2f1fb78200356a45d91ccff9279d58930545ded9b2d32807e2af35",
+      "onpu": "9fb4cb74141f0005ead2c8afd42fe7751d98fe576b209da8ba18f77d51c285bc"
+    }
+  }
+}

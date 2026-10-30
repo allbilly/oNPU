@@ -1,0 +1,506 @@
+{
+  "audit_complete": true,
+  "audit_kind": "qwen2-row-batch-models-v1-numerical-audit",
+  "captured_input_width_summary": [
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-1-control",
+      "swiglu_prefill_rows": 1
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-1-control",
+      "swiglu_prefill_rows": 1
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-2-candidate",
+      "swiglu_prefill_rows": 4
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-2-candidate",
+      "swiglu_prefill_rows": 4
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-3-candidate",
+      "swiglu_prefill_rows": 4
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-3-candidate",
+      "swiglu_prefill_rows": 4
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-4-control",
+      "swiglu_prefill_rows": 1
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-4-control",
+      "swiglu_prefill_rows": 1
+    }
+  ],
+  "captured_raw_source_summary": [
+    {
+      "batch_values": false,
+      "bytes": 8417,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "b3bd2b29145b2c88a926e579dc1ba024507c3b5796fc87504b10e28c424eae27",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "batch_values": false,
+      "bytes": 7855,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "batch_values": true,
+      "bytes": 26875,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "babd675fb7a5f35ce53460df08ee8cac1751285be852c6049b2a9b8bdf12f0f3",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "batch_values": false,
+      "bytes": 7855,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "batch_values": true,
+      "bytes": 26875,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "75c94b9d96405ec81824a4e90444859af9c434e7828e51d1b8022d420d844486",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "batch_values": false,
+      "bytes": 7855,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "batch_values": false,
+      "bytes": 8417,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "177ee5f0459f6f6c806182d0e39f0332dec51b763a67bf4756ccaa2c80f305db",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-4-control"
+    },
+    {
+      "batch_values": false,
+      "bytes": 7855,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-4-control"
+    }
+  ],
+  "checks": {
+    "all24_sequences_equal_pinned_prior_canonical": true,
+    "both_roles_ffn_calls_24_prefill_24_decode_and_teacher_pool_ge192": true,
+    "canonical_prior_report_hash_valid": true,
+    "captured_237_k896_commands_per_phase_and_register_contract": true,
+    "captured_source_hashes_valid_prefill_pool_and_row1_decode_serial": true,
+    "cpu_proof_51_passed_3_skipped_and_8_test_sources_match": true,
+    "five_cases_complete_valid_and_model_abba": true,
+    "four_teacher_arrays_fp32_32x151936_finite": true,
+    "four_teacher_arrays_uint32_bitwise_identical": true,
+    "frozen_job_pins_match_actual_files": true,
+    "hardware_qualification_one_passed_zero_skipped_rockchip_test": true,
+    "hardware_qualification_test_separately_pinned_not_in_cpu_test_cohort": true,
+    "hardware_test_source_asserts_28_exact_outputs_native_replay_and_silu_batch_source": true,
+    "independent_float64_nll_finite_report_consistent_delta_le_1e_7": true,
+    "model_workload_128_input_64_generated_context512_threewarm_threemeasured": true,
+    "only_rows_flag_differs_and_model_structure_flags_match": true,
+    "qualification_source_cohort_matches_current_job": true,
+    "source_count_291_matches_current_manifest_reports_and_cpu_proof": true,
+    "teacher_arrays_match_prior_preferred_optional": true,
+    "teacher_prefix128_and_first32_int32_exact": true
+  },
+  "dataset_refs": [
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-1-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-1-control.json",
+      "report_sha256": "1acef27a4743f3ca86c496975a20e9a9b2f0d4d3b8776109be556aa99321b572"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-2-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-2-candidate.json",
+      "report_sha256": "80b7f987eda0b00d7770d61812dd47abe6a62bb1ef1e7f57df49afc70a36921e"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-3-candidate.json",
+      "report_sha256": "80cb9d742e86a1839d330624aea2a55c0ace04c6229e9c3a23b4b93947a674c5"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-4-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-4-control.json",
+      "report_sha256": "a61fac544e2cf17e4c8a6de788918846d33baf0e21b36e782cd12c74aa79f445"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/grouped-swiglu-models-v2/results/qwen2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/oNPU/docs/benchmark-grouped-swiglu-models-v2-qwen2-3-candidate.json",
+      "report_sha256": "77923b83fca28ed450f7ed8efaaaa3d494ed16798c5e5f441eb4c8b51e02f3a2",
+      "role": "prior_canonical_preferred_optional"
+    }
+  ],
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "qualification_evidence": {
+    "cpu_proof_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-check-v1.json",
+    "cpu_proof_pytest_log": "Running as unit: onpu-ffn-row-batch-cpu-v1-pytest-v1.service\nbringing up nodes...\nbringing up nodes...\n\ns....................s......s.........................                   [100%]\n51 passed, 3 skipped in 18.95s\nFinished with result: success\nMain processes terminated with: code=exited/status=0\nService runtime: 19.722s\nCPU time consumed: 48.984s",
+    "cpu_proof_pytest_log_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/ffn-row-batch-cpu-v1-pytest-v1.log",
+    "cpu_proof_pytest_log_sha256": "a5676bddc3b28b1ab88eb31e885e6f4cc06f3268a957532f5e1498cdac004a38",
+    "cpu_proof_source_count": 291,
+    "cpu_proof_test_source_count": 8,
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qualification.json",
+    "pytest_log": "bringing up nodes...\nbringing up nodes...\n\n.                                                                        [100%]\n1 passed in 10.69s",
+    "pytest_log_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qualification.pytest.log",
+    "pytest_log_sha256": "da66dee6ae645d0270b2e5be92c77004b2befdc0b4a5134fe7bad4cd2ce1e05c",
+    "sha256": "03e37de4942b0255219bfddb5a70d17352acf3761372e958f7e13d7e1107bb85",
+    "test_path": "/home/orangepi/tinygrad/test/runtime/test_rockchip_ffn_pool_hw.py",
+    "test_sha256": "40be7e65c1cc24955bb5832c78023cf7a0d8875580e0649e093779ac1d013efb"
+  },
+  "quality_qualified": false,
+  "restoration_snapshot": {
+    "phase": "restoring",
+    "restored": false
+  },
+  "restoration_verified": false,
+  "source_count": 291,
+  "teacher_logits": {
+    "all_finite": true,
+    "dtype": "float32",
+    "float64_mean_nll_by_case": [
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162
+    ],
+    "float64_mean_nll_max_delta": 0.0,
+    "optional_prior_preferred_bitwise_match": true,
+    "shape": [
+      32,
+      151936
+    ],
+    "uint32_bitwise_identical_across_four": true
+  },
+  "timing_metrics": [
+    {
+      "decode_tps_measured": [
+        42.060032171415415,
+        42.046482274267014,
+        41.97134286209549
+      ],
+      "first_token_ms_measured": [
+        241.86144399573095,
+        246.48340902058408,
+        248.69537199265324
+      ],
+      "prefill_tps_measured": [
+        529.2286272890163,
+        519.3047293065904,
+        514.6858945319709
+      ],
+      "report_median_decode_tps": 42.046482274267014,
+      "report_median_first_token_ms": 246.48340902058408,
+      "report_median_prefill_tps": 519.3047293065904,
+      "role": "control",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-1-control",
+      "swiglu_prefill_rows": 1
+    },
+    {
+      "decode_tps_measured": [
+        41.97578803043378,
+        41.91551201980516,
+        41.91949790792479
+      ],
+      "first_token_ms_measured": [
+        242.79855302302167,
+        237.7627199748531,
+        245.44713398790918
+      ],
+      "prefill_tps_measured": [
+        527.1860083443879,
+        538.3518493291879,
+        521.4972280193963
+      ],
+      "report_median_decode_tps": 41.91949790792479,
+      "report_median_first_token_ms": 242.79855302302167,
+      "report_median_prefill_tps": 527.1860083443879,
+      "role": "candidate",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-2-candidate",
+      "swiglu_prefill_rows": 4
+    },
+    {
+      "decode_tps_measured": [
+        42.09657442467247,
+        42.105453192390364,
+        42.02852470373868
+      ],
+      "first_token_ms_measured": [
+        238.21800400037318,
+        208.68403601343744,
+        244.55406601191498
+      ],
+      "prefill_tps_measured": [
+        537.3229472605248,
+        613.3674738385735,
+        523.4016431923225
+      ],
+      "report_median_decode_tps": 42.09657442467247,
+      "report_median_first_token_ms": 238.21800400037318,
+      "report_median_prefill_tps": 537.3229472605248,
+      "role": "candidate",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-3-candidate",
+      "swiglu_prefill_rows": 4
+    },
+    {
+      "decode_tps_measured": [
+        41.99458227875304,
+        41.98923527530521,
+        41.8098780255516
+      ],
+      "first_token_ms_measured": [
+        247.76905399630778,
+        287.3825640126597,
+        256.98877600370906
+      ],
+      "prefill_tps_measured": [
+        516.6101171048884,
+        445.3993249025413,
+        498.07622725963955
+      ],
+      "report_median_decode_tps": 41.98923527530521,
+      "report_median_first_token_ms": 256.98877600370906,
+      "report_median_prefill_tps": 498.07622725963955,
+      "role": "control",
+      "slug": "qwen2-row-batch-models-v1-qwen2-05b-4-control",
+      "swiglu_prefill_rows": 1
+    }
+  ]
+}

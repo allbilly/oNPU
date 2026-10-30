@@ -1,0 +1,426 @@
+{
+  "schema": "qwen25-exp2-scale-screen-v1",
+  "date_local": "2026-10-30",
+  "status": {
+    "complete": true,
+    "promotion_approved": false,
+    "model_speed_qualified": false,
+    "quality_qualified": false,
+    "api_candidate_tested": false,
+    "independent_quality_pending": true
+  },
+  "hypothesis_and_scope": {
+    "cpu_component": "Exact exponent-bit scaling for normal exp2 inputs speeds the standalone CPU activation/exp2 component.",
+    "model_screen": "Two repeatability processes used the same fast-path recipe; they are not an ABBA/control-candidate treatment comparison.",
+    "no_end_to_end_claim": "CPU component speedup is not an end-to-end model speedup; first full-model process exceeded the prefill reference, repeat median did not."
+  },
+  "cpu_component": {
+    "complete": true,
+    "scope": "CPU-only standalone component; no model speed or quality claim.",
+    "affinity": [
+      4
+    ],
+    "component_speedup": 1.1427410123264263,
+    "component_speedup_percent": 14.274101232642632,
+    "median_ns": {
+      "baseline": 413286.0,
+      "candidate": 361662.0
+    },
+    "bitwise_checks": [
+      {
+        "name": "all_half",
+        "values": 65536,
+        "bitwise_equal": true
+      },
+      {
+        "name": "random_bits",
+        "values": 1048576,
+        "bitwise_equal": true
+      },
+      {
+        "name": "finite_range",
+        "values": 1048576,
+        "bitwise_equal": true
+      },
+      {
+        "name": "edges",
+        "values": 1504,
+        "bitwise_equal": true
+      }
+    ],
+    "all_bitwise_checks_passed": true,
+    "activation_output_check": "probe.py asserts exact baseline/candidate activation outputs before timing",
+    "timing_block_count": 16,
+    "source_artifacts": {
+      "baseline": {
+        "sha256": "aed50e702aeaf9d45e356c95977344284523bddda4bab3ca1ad4c24e1207ce16",
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-v1/baseline.c"
+      },
+      "candidate": {
+        "sha256": "258af1aaf39a41710b0a56cf055d68fe4ef172c1ca477151f094b6f902dfce84",
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-v1/candidate.c"
+      }
+    }
+  },
+  "full_model_processes": [
+    {
+      "name": "scale-screen-v1",
+      "run_token": "08a9af04e50ba3ff1b40e843b5639dc2",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-scale-model-v1/results/candidate.json",
+      "median_ttft_ms": 358.98869499214925,
+      "median_prefill_proxy_tps": 356.55718908585476,
+      "median_decode_tps": 16.854357369937794,
+      "prefill_range_tps": [
+        349.76972309240824,
+        357.366669977123
+      ],
+      "decode_range_tps": [
+        16.811717605816764,
+        16.871751966256653
+      ],
+      "all_6_generated_sequences_match_prior_ids": true,
+      "all_32_full_vocabulary_teacher_rows_exact": true,
+      "teacher_logits_sha256": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed",
+      "local_quality": {
+        "max_abs": 0.0,
+        "relative_l2": 0.0,
+        "mean_NLL_increase": 0.0,
+        "top1_matches": 32
+      },
+      "local_quality_gate_passed": true,
+      "quality_qualified": false,
+      "goal_complete": false,
+      "exp2_fast_path_enabled": true,
+      "exp2_scale_bits_field_in_report": null,
+      "checkpoint_signature_before": [
+        45825,
+        3187226,
+        1894532128,
+        1792560608006432554,
+        1792560608019765698
+      ],
+      "checkpoint_signature_after": [
+        45825,
+        3187226,
+        1894532128,
+        1792560608006432554,
+        1792560608019765698
+      ],
+      "source_file_count": 297,
+      "source_cohort_sha256": "10ed75624066b18e155c55f3010e96338464fd372c1b917e1592265cb4dda78d",
+      "source_snapshot_unchanged_during_run": true
+    },
+    {
+      "name": "scale-repeat-v1",
+      "run_token": "1bebfea5fe209f2224eaccb2e446dec2",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-scale-repeat-v1/results/candidate.json",
+      "median_ttft_ms": 382.91699800174683,
+      "median_prefill_proxy_tps": 334.2760981308437,
+      "median_decode_tps": 16.761823596890792,
+      "prefill_range_tps": [
+        332.2922806570143,
+        358.57784586587223
+      ],
+      "decode_range_tps": [
+        16.533947753851546,
+        16.840642654620407
+      ],
+      "all_6_generated_sequences_match_prior_ids": true,
+      "all_32_full_vocabulary_teacher_rows_exact": true,
+      "teacher_logits_sha256": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed",
+      "local_quality": {
+        "max_abs": 0.0,
+        "relative_l2": 0.0,
+        "mean_NLL_increase": 0.0,
+        "top1_matches": 32
+      },
+      "local_quality_gate_passed": true,
+      "quality_qualified": false,
+      "goal_complete": false,
+      "exp2_fast_path_enabled": true,
+      "exp2_scale_bits_field_in_report": null,
+      "checkpoint_signature_before": [
+        45825,
+        3187226,
+        1894532128,
+        1792560608006432554,
+        1792560608019765698
+      ],
+      "checkpoint_signature_after": [
+        45825,
+        3187226,
+        1894532128,
+        1792560608006432554,
+        1792560608019765698
+      ],
+      "source_file_count": 297,
+      "source_cohort_sha256": "10ed75624066b18e155c55f3010e96338464fd372c1b917e1592265cb4dda78d",
+      "source_snapshot_unchanged_during_run": true
+    }
+  ],
+  "pooled_six_measured_requests": {
+    "measured_requests": 6,
+    "median_ttft_ms": 362.471877495409,
+    "prefill_proxy_tps_from_median_ttft": 353.1308439276678,
+    "median_of_per_request_prefill_rates_tps": 353.1634560891315,
+    "median_decode_tps": 16.826180130218585,
+    "prefill_request_rate_range_tps": [
+      332.2922806570143,
+      358.57784586587223
+    ],
+    "decode_rate_range_tps": [
+      16.533947753851546,
+      16.871751966256653
+    ],
+    "records": [
+      {
+        "process": "scale-screen-v1",
+        "trial_index": 3,
+        "ttft_ms": 358.98869499214925,
+        "prefill_proxy_tps": 356.55718908585476,
+        "decode_tps": 16.854357369937794,
+        "generated_token_count": 64,
+        "previous_ids_exact": true,
+        "npu_prefill_submits": 259,
+        "npu_decode_submits": 11025
+      },
+      {
+        "process": "scale-screen-v1",
+        "trial_index": 4,
+        "ttft_ms": 365.95505999866873,
+        "prefill_proxy_tps": 349.76972309240824,
+        "decode_tps": 16.871751966256653,
+        "generated_token_count": 64,
+        "previous_ids_exact": true,
+        "npu_prefill_submits": 259,
+        "npu_decode_submits": 11025
+      },
+      {
+        "process": "scale-screen-v1",
+        "trial_index": 5,
+        "ttft_ms": 358.17554000823293,
+        "prefill_proxy_tps": 357.366669977123,
+        "decode_tps": 16.811717605816764,
+        "generated_token_count": 64,
+        "previous_ids_exact": true,
+        "npu_prefill_submits": 259,
+        "npu_decode_submits": 11025
+      },
+      {
+        "process": "scale-repeat-v1",
+        "trial_index": 3,
+        "ttft_ms": 356.9657229963923,
+        "prefill_proxy_tps": 358.57784586587223,
+        "decode_tps": 16.761823596890792,
+        "generated_token_count": 64,
+        "previous_ids_exact": true,
+        "npu_prefill_submits": 259,
+        "npu_decode_submits": 11025
+      },
+      {
+        "process": "scale-repeat-v1",
+        "trial_index": 4,
+        "ttft_ms": 385.2030499983812,
+        "prefill_proxy_tps": 332.2922806570143,
+        "decode_tps": 16.840642654620407,
+        "generated_token_count": 64,
+        "previous_ids_exact": true,
+        "npu_prefill_submits": 259,
+        "npu_decode_submits": 11025
+      },
+      {
+        "process": "scale-repeat-v1",
+        "trial_index": 5,
+        "ttft_ms": 382.91699800174683,
+        "prefill_proxy_tps": 334.2760981308437,
+        "decode_tps": 16.533947753851546,
+        "generated_token_count": 64,
+        "previous_ids_exact": true,
+        "npu_prefill_submits": 259,
+        "npu_decode_submits": 11025
+      }
+    ]
+  },
+  "references": {
+    "published_rkllm": {
+      "prefill_proxy_tps": 338.35,
+      "decode_tps": 16.69
+    },
+    "previous_preferred_backend_candidate": {
+      "prefill_proxy_tps": 344.54,
+      "decode_tps": 16.8,
+      "source": "qwen25-exp2-fast-abba-v1 completed candidate cohort"
+    },
+    "first_screen_median": {
+      "prefill_proxy_tps": 356.55718908585476,
+      "decode_tps": 16.854357369937794,
+      "prefill_above_published": true
+    },
+    "repeat_median": {
+      "prefill_proxy_tps": 334.2760981308437,
+      "decode_tps": 16.761823596890792,
+      "prefill_above_published": false
+    },
+    "pooled_median": {
+      "prefill_proxy_tps": 353.1308439276678,
+      "decode_tps": 16.826180130218585,
+      "prefill_above_published": true
+    }
+  },
+  "arithmetic_and_quality": {
+    "both_processes_all_six_64_token_sequences_match_prior_ids": true,
+    "both_processes_32_full_vocabulary_teacher_rows_bitwise_exact": true,
+    "teacher_sha256": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed",
+    "teacher_scope": "Exact local regression against previous preferred INT8 teacher; not an independent FP16/RKLLM quality qualification.",
+    "full_model_quality_gate_passed": true,
+    "quality_qualified": false
+  },
+  "features_and_recipe": {
+    "context": 512,
+    "prompt_tokens": 128,
+    "requested_tokens": 64,
+    "warmups": 3,
+    "runs": 3,
+    "precision": "INT8 weights/activations with FP32 CPU arithmetic",
+    "prefill_chunk_size": 128,
+    "tile_columns": 24576,
+    "exp2_fast_path_enabled_in_reports": true,
+    "exp2_scale_bits_enabled_in_reports": null,
+    "candidate_treatment_in_model_reports": "Reports pin ONPU_EXP2_FAST_PATH=1 and contain no ONPU_EXP2_SCALE_BITS field; they are not an explicit 0-vs-1 scale-bit comparison.",
+    "current_gate": "Current CPU helper exposes ONPU_EXP2_SCALE_BITS (default 0). It gates normal-range exponent-bit scaling; default 0 retains prior FAST_PATH=1 arithmetic until a matched pair is run. The new candidate arm must explicitly set scale_bits=1.",
+    "model_configuration": {
+      "num_blocks": 28,
+      "vocab_size": 151936,
+      "dim": 1536,
+      "n_heads": 12,
+      "n_kv_heads": 2,
+      "head_dim": 128,
+      "hidden_dim": 8960
+    }
+  },
+  "source_and_checkpoint_provenance": {
+    "tinygrad_source_count": 297,
+    "model_source_cohort_sha256": "10ed75624066b18e155c55f3010e96338464fd372c1b917e1592265cb4dda78d",
+    "repeat_source_cohort_sha256": "10ed75624066b18e155c55f3010e96338464fd372c1b917e1592265cb4dda78d",
+    "model_and_repeat_source_maps_equal": true,
+    "source_maps_unchanged_within_each_run": true,
+    "rockchip_cpu_py_sha256_in_measured_source_map": "c2fb3247f06e76a529cd2aaeb217ec05e01e921f3ecff58071bb0a9bd3fa3614",
+    "rockchip_cpu_py_sha256_current_at_documentation": "a45c0b05cc4f3eb5eba1c848a5abf854d15ec68d563a91071c2dec56c93e2bad",
+    "checkpoint_path": "/home/orangepi/vlm-bench/baseline-20261021/qwen2.5-1.5b-instruct-q8_0.gguf",
+    "checkpoint_sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+    "checkpoint_signature": [
+      45825,
+      3187226,
+      1894532128,
+      1792560608006432554,
+      1792560608019765698
+    ],
+    "input_ids_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-fast-abba-v1/qwen25.tokens",
+    "input_ids_sha256": "ea0368b5a22fb71bf8f6be738fcc7f50381f6d57529c4dfcd14c7d1ed21a0efa",
+    "input_tokens": 128
+  },
+  "restoration": {
+    "owner_job_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-lease-v1/job.json",
+    "owner_job_sha256": "e6358b449def8f3385ea44386069f41c0d9463c015eb80134a175463d458a1e1",
+    "owner_phase": "restored",
+    "restored": true,
+    "fresh_reply_count": 2,
+    "fresh_reply_model_ids": [
+      "55a95dc3c1b93b72",
+      "b4b92c783d8643a1"
+    ],
+    "before_snapshot_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-lease-v1/before.json",
+    "before_snapshot_sha256": "554fe68ba848096065a01f2f1ece174fedbd29bcc8e219412dd126aab29016b5"
+  },
+  "next_comparison": {
+    "required_pair": "Matched full-model FAST_PATH=1 with ONPU_EXP2_SCALE_BITS=0 vs 1, same flags/source pins/checkpoint/input/teacher, in ABBA order.",
+    "acceptance": "Require identical six generated sequences and 32 teacher vectors; compare each process and pooled medians against published 338.35 prefill / 16.69 decode.",
+    "api": "Current API candidate remains untested; independent quality and context-maximum qualification remain pending."
+  },
+  "raw_receipts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-scale-cpu-v1.json",
+      "sha256": "a61a64b3dd6e423206feb32caeaf9a53b02101ec0093e4c34932c50bfbab7ee0"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-v1/probe.py",
+      "sha256": "eddf3c6a8bdc59532e68dbdd728611a71d45981510a07cddef76b447a3056e8c"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-v1/baseline.c",
+      "sha256": "aed50e702aeaf9d45e356c95977344284523bddda4bab3ca1ad4c24e1207ce16"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-v1/candidate.c",
+      "sha256": "258af1aaf39a41710b0a56cf055d68fe4ef172c1ca477151f094b6f902dfce84"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-scale-model-v1/results/candidate.json",
+      "sha256": "7a33edda725360b1873e0f838e64fce7001377f2c00bcd14c64bb7fbac780459"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-scale-repeat-v1/results/candidate.json",
+      "sha256": "d60afbf387fe418ca339d0befe6f30d0de3fd98eb78fba24ad0ac1d311be7296"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-scale-model-v1/results/candidate.teacher-logits.npz",
+      "sha256": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-scale-repeat-v1/results/candidate.teacher-logits.npz",
+      "sha256": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/explicit-prefill-pool-models-v1/results/qwen25-3-candidate.teacher-logits.npz",
+      "sha256": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-model-v1/manifest.json",
+      "sha256": "08118781f07891c61f0a6e703aab2d0b3d306a4511785f3d30d6a5c3e99f3f4c"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-model-v1/frozen-pins.json",
+      "sha256": "0491d2e27e61e38bf49d35e900ea54fb7a7bceb78eda24e44eaede67332fb116"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-repeat-v1/manifest.json",
+      "sha256": "ba5b2dd58fa13a7272a768d16520affe160e578322a2498c8066bbbb0ef507aa"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-scale-repeat-v1/frozen-pins.json",
+      "sha256": "810c714606d31732e2c6c7583b9706a7c2139091ce57446942037cc4be17ce77"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen25-exp2-fast-abba-v1/qwen25.tokens",
+      "sha256": "ea0368b5a22fb71bf8f6be738fcc7f50381f6d57529c4dfcd14c7d1ed21a0efa"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-lease-v1/job.json",
+      "sha256": "4037c7df87f8eaf172066d87bd6105abbc95e0da78257cc5f074e59d6127fb75"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-fast-abba-v1/results/qwen25-exp2-fast-abba-v1-2-candidate.json",
+      "sha256": "c2a6c0b61d98a2ff1c0bb42003895964df46c8cdbb79d213efd88dbf55a186b4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-fast-abba-v1/results/qwen25-exp2-fast-abba-v1-3-candidate.json",
+      "sha256": "6c3990aa47740e66ced329e9dfc832606b97c7ec701b545aba9949dffdd2c656"
+    },
+    {
+      "path": "/home/orangepi/oNPU/docs/benchmark-qwen25-worker-profile-v2.json",
+      "sha256": "3d4fd97b69cada949fbc06828c5fb32be94631742a50d836b63edcd50c39d3f5"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-k1536-cbuf-v1/results/cbuf.json",
+      "sha256": "21f4b931a3de4af1b5d1764ebc3f9ae8bd0de1442498e12dd6b5e2d98b3bbbf4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-lease-v1/job.json",
+      "sha256": "e6358b449def8f3385ea44386069f41c0d9463c015eb80134a175463d458a1e1"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-profile-lease-v1/before.json",
+      "sha256": "554fe68ba848096065a01f2f1ece174fedbd29bcc8e219412dd126aab29016b5"
+    }
+  ]
+}

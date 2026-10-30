@@ -1,0 +1,900 @@
+{
+  "audit_complete": true,
+  "checks": {
+    "all_12_arrays_fp32_shape_and_finite": true,
+    "all_12_completed_reports_valid_for_requested_numerical_scope": true,
+    "all_12_npz_file_hashes_match_reports": true,
+    "all_12_recomputed_32_row_NLL_within_1e-7": true,
+    "all_12_report_source_maps_unchanged_across_runs": true,
+    "all_12_target_and_prefix_ids_exact": true,
+    "all_3_model_cohorts_abba_and_24_sequences_exact": true,
+    "four_arrays_per_model_uint32_bitwise_identical": true
+  },
+  "cohort_configuration": {
+    "all_previous_ids_exact_six_true": true,
+    "context": 512,
+    "generated_tokens": 64,
+    "input_tokens": 128,
+    "measured_trials": 3,
+    "per_model_order": "control,candidate,candidate,control (ABBA)",
+    "per_process_trials": 6,
+    "warmup_trials": 3
+  },
+  "cohorts": [
+    {
+      "abba_roles_verified": true,
+      "all_24_generated_sequence_length": 64,
+      "all_24_generated_sequences_exact": true,
+      "all_four_logit_arrays_uint32_bitwise_identical": true,
+      "case_order": [
+        "qwen2-1-control.json",
+        "qwen2-2-candidate.json",
+        "qwen2-3-candidate.json",
+        "qwen2-4-control.json"
+      ],
+      "model": "Qwen2",
+      "reports": [
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-1-control.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-1-control.json",
+          "report_sha256": "4f7aed72059c6f78ecb446f4ab6e9c2b6731a933e1fa789fc080c5898640aaa9",
+          "role": "control",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-2-candidate.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-2-candidate.json",
+          "report_sha256": "dd70d4b6dd72e51ea144bf03439d4b5c8ff55f8296c6a09881d7dd573660f5da",
+          "role": "candidate",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-3-candidate.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-3-candidate.json",
+          "report_sha256": "0e8dc2839d9bca499280ec5a4fd035104861665e4dd7373c8ead82e39b7426fb",
+          "role": "candidate",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 2.220446049250313e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            151936
+          ],
+          "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-4-control.teacher-logits.npz",
+          "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-4-control.json",
+          "report_sha256": "faf2a4a91ac9a1fe7d61a16adf17e686d07797eedbd7adc7ea7f39358f896ebf",
+          "role": "control",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        }
+      ],
+      "roles": [
+        "control",
+        "candidate",
+        "candidate",
+        "control"
+      ],
+      "sequence_count": 24,
+      "unique_logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005"
+    },
+    {
+      "abba_roles_verified": true,
+      "all_24_generated_sequence_length": 64,
+      "all_24_generated_sequences_exact": true,
+      "all_four_logit_arrays_uint32_bitwise_identical": true,
+      "case_order": [
+        "tinyllama-1-control.json",
+        "tinyllama-2-candidate.json",
+        "tinyllama-3-candidate.json",
+        "tinyllama-4-control.json"
+      ],
+      "model": "TinyLlama",
+      "reports": [
+        {
+          "abs_mean_NLL_error": 0.0,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-1-control.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-1-control.json",
+          "report_sha256": "2512330d60fae42b2aff3b4079a384ba06d4e30ee3263825876b067153227a58",
+          "role": "control",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-2-candidate.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-2-candidate.json",
+          "report_sha256": "902d7b2de2faf67983cfd52471a1be3b4a7daf6fe689cba4bcdc73bc2854f7af",
+          "role": "candidate",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-3-candidate.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-3-candidate.json",
+          "report_sha256": "0171ec9f75990ecf7b9af30b0b27d0876549ec2ca5772238d716bb17f3055458",
+          "role": "candidate",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 0.0,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            32000
+          ],
+          "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-4-control.teacher-logits.npz",
+          "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-4-control.json",
+          "report_sha256": "ad8d24dc05e58e6e252d92c81c63bbda9201433cc444063d7bfcddda5256e05a",
+          "role": "control",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        }
+      ],
+      "roles": [
+        "control",
+        "candidate",
+        "candidate",
+        "control"
+      ],
+      "sequence_count": 24,
+      "unique_logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6"
+    },
+    {
+      "abba_roles_verified": true,
+      "all_24_generated_sequence_length": 64,
+      "all_24_generated_sequences_exact": true,
+      "all_four_logit_arrays_uint32_bitwise_identical": true,
+      "case_order": [
+        "internlm2-1-control.json",
+        "internlm2-2-candidate.json",
+        "internlm2-3-candidate.json",
+        "internlm2-4-control.json"
+      ],
+      "model": "InternLM2",
+      "reports": [
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-1-control.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-1-control.json",
+          "report_sha256": "3e8b98a65120b31addf8a8345ba6ed86154f07fd552041e03a183dca7c730190",
+          "role": "control",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-2-candidate.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-2-candidate.json",
+          "report_sha256": "ab706a2f7325018c6dc6fbd3b38272d42526d17942c66b3a329aaa3dd0772232",
+          "role": "candidate",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-3-candidate.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-3-candidate.json",
+          "report_sha256": "4b3056fc22dc96a145ea804feff397c8932fcca3c3f52235e147539b6a93225b",
+          "role": "candidate",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        },
+        {
+          "abs_mean_NLL_error": 4.440892098500626e-16,
+          "context": 512,
+          "generated_tokens_each": 64,
+          "input_tokens": 128,
+          "logits_dtype": "float32",
+          "logits_shape": [
+            32,
+            92544
+          ],
+          "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+          "max_abs_row_NLL_error": 3.552713678800501e-15,
+          "measured_runs": 3,
+          "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-4-control.teacher-logits.npz",
+          "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+          "prefix_ids_exact": true,
+          "previous_ids_exact": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "recomputed_NLL_rows": 32,
+          "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-4-control.json",
+          "report_sha256": "3546a704ce06fc666bcf7e222baac5fa5288803c4726630cbbefeca4530a9d4a",
+          "role": "control",
+          "target_ids_exact": true,
+          "trial_count": 6,
+          "warmups": 3
+        }
+      ],
+      "roles": [
+        "control",
+        "candidate",
+        "candidate",
+        "control"
+      ],
+      "sequence_count": 24,
+      "unique_logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd"
+    }
+  ],
+  "continuation_state": {
+    "job_complete_measurements": true,
+    "job_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/job.json",
+    "owner_process_observed": "1644663       1 Ss   /home/orangepi/tinygrad/.venv/bin/python /home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/supervise-narrow-cbuf-continuation-v2.py",
+    "reason": "The continuation owner is still live and the job is in restoration; this audit does not treat restoration as terminal.",
+    "restoration_verified": false,
+    "restored": false
+  },
+  "excluded_case": {
+    "case": "narrow-cbuf-models-v1 TinyLlama 1 control (sixth planned case)",
+    "included_in_numerical_comparison": false,
+    "reason": "The monitor timed out before a complete measurement report was produced; the case was marked invalid, cleanup completed, and its managed process ended with final_exit_code -9. Its partial report has complete=false and no trials/teacher-logits artifact, so it is excluded.",
+    "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/tinyllama-1-control.json",
+    "report_sha256": "ffc842244f8cd37db8a2d2e107b452ec51e9eeedbafca5a2e2a2262ed8596d2a"
+  },
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "numerical_source_count": 289,
+  "qualification": {
+    "complete": true,
+    "model_speed_qualified": false,
+    "quality_qualified": false,
+    "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qualification.json",
+    "report_sha256": "277421ff8ab331d5502a675535f44fc9b2309f6760be8c765a0dc5028b198897",
+    "test_exit_code": 0
+  },
+  "quality_qualified": false,
+  "report_and_npz_references": [
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-1-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-1-control.json",
+      "report_sha256": "4f7aed72059c6f78ecb446f4ab6e9c2b6731a933e1fa789fc080c5898640aaa9",
+      "role": "control",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-2-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-2-candidate.json",
+      "report_sha256": "dd70d4b6dd72e51ea144bf03439d4b5c8ff55f8296c6a09881d7dd573660f5da",
+      "role": "candidate",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-3-candidate.json",
+      "report_sha256": "0e8dc2839d9bca499280ec5a4fd035104861665e4dd7373c8ead82e39b7426fb",
+      "role": "candidate",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 2.220446049250313e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        151936
+      ],
+      "logits_uint32_sha256": "63cee2a782bf9899be773abd7772a234c237d8b7a7f4b6e64ac613cede3e4005",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-4-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-models-v1/results/qwen2-4-control.json",
+      "report_sha256": "faf2a4a91ac9a1fe7d61a16adf17e686d07797eedbd7adc7ea7f39358f896ebf",
+      "role": "control",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-1-control.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-1-control.json",
+      "report_sha256": "2512330d60fae42b2aff3b4079a384ba06d4e30ee3263825876b067153227a58",
+      "role": "control",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-2-candidate.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-2-candidate.json",
+      "report_sha256": "902d7b2de2faf67983cfd52471a1be3b4a7daf6fe689cba4bcdc73bc2854f7af",
+      "role": "candidate",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-3-candidate.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-3-candidate.json",
+      "report_sha256": "0171ec9f75990ecf7b9af30b0b27d0876549ec2ca5772238d716bb17f3055458",
+      "role": "candidate",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 0.0,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        32000
+      ],
+      "logits_uint32_sha256": "02112e54cbc7b2d5ad5a0c41a40d2f69f8d25d01f787e89019cc521a0ebe99e6",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-4-control.teacher-logits.npz",
+      "npz_sha256": "0f22ac19700bb0eecb424e3729dc1cb947472768ca81d848fbfea0fc6880c7bb",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/tinyllama-4-control.json",
+      "report_sha256": "ad8d24dc05e58e6e252d92c81c63bbda9201433cc444063d7bfcddda5256e05a",
+      "role": "control",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-1-control.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-1-control.json",
+      "report_sha256": "3e8b98a65120b31addf8a8345ba6ed86154f07fd552041e03a183dca7c730190",
+      "role": "control",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-2-candidate.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-2-candidate.json",
+      "report_sha256": "ab706a2f7325018c6dc6fbd3b38272d42526d17942c66b3a329aaa3dd0772232",
+      "role": "candidate",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-3-candidate.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-3-candidate.json",
+      "report_sha256": "4b3056fc22dc96a145ea804feff397c8932fcca3c3f52235e147539b6a93225b",
+      "role": "candidate",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    },
+    {
+      "abs_mean_NLL_error": 4.440892098500626e-16,
+      "context": 512,
+      "generated_tokens_each": 64,
+      "input_tokens": 128,
+      "logits_dtype": "float32",
+      "logits_shape": [
+        32,
+        92544
+      ],
+      "logits_uint32_sha256": "d73eb6414945ec7e8492a0c66694fecd8f52caad41596f06f3d09e14d5d229fd",
+      "max_abs_row_NLL_error": 3.552713678800501e-15,
+      "measured_runs": 3,
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-4-control.teacher-logits.npz",
+      "npz_sha256": "d9f8d78b22b5fa5470a2525867227176cda5ba013e19760e4787a07c82653017",
+      "prefix_ids_exact": true,
+      "previous_ids_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "recomputed_NLL_rows": 32,
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-continuation-v2/results/internlm2-4-control.json",
+      "report_sha256": "3546a704ce06fc666bcf7e222baac5fa5288803c4726630cbbefeca4530a9d4a",
+      "role": "control",
+      "target_ids_exact": true,
+      "trial_count": 6,
+      "warmups": 3
+    }
+  ],
+  "restoration_verified": false,
+  "schema": "narrow-cbuf-combined-numerical-audit-v2",
+  "scope": "Independent read-only numerical/provenance audit; no model performance comparison or publication.",
+  "source_provenance": {
+    "all_before_and_after_maps_equal_common_job_numerical_sources": true,
+    "all_before_and_after_maps_have_289_entries": true,
+    "common_map_sha256": "6e03d793c28c80b7e2f84561fc7ffce3ed3b448a75391b2656c8491ee500584a",
+    "verified_reports": 12
+  }
+}

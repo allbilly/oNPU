@@ -1,0 +1,211 @@
+{
+  "schema": "dpu-layout-series-verification-v1",
+  "complete": true,
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "RKLLM_quality_qualified": false,
+  "canonical_timing_inventory_unchanged": true,
+  "canonical_valid_variants": 80,
+  "driver_source": "https://github.com/rockchip-linux/kernel/blob/develop-6.1/drivers/rknpu/rknpu_job.c",
+  "preferred_variants_unchanged": {
+    "Qwen3/0.6B": "qwen3-matched-f16-shared",
+    "LFM2.5-VL/450M": "lfm25-vl-450m",
+    "MiniCPM4/0.5B": "minicpm4-05b",
+    "Qwen2/0.5B": "qwen2-05b",
+    "Qwen3.5/0.8B": "qwen35-08b-cpu-gdn-models-v1",
+    "TinyLLAMA/1.1B": "tinyllama-11b",
+    "RWKV7/1.5B": "rwkv7-pool-spin-v1-candidate",
+    "Spark-X2.5/1.7B": "spark-x25-17b-gated-attention",
+    "Qwen3-VL/2B": "qwen3-vl-2b-shared",
+    "Qwen2.5/1.5B": "qwen25-15b",
+    "InternLM2/1.8B": "internlm2-18b-shared",
+    "Qwen3.5/2B": "qwen35-2b-cpu-gdn-models-v1",
+    "Gemma2/2B": "gemma2-2b-gelu-static-v1-candidate",
+    "DeepSeekOCR/3B(A570M)": "deepseek-cpu-experts-v1-candidate",
+    "Phi3/3.8B": "phi3-38b-domains-deferred-v1",
+    "MiniCPM3/4B": "minicpm3-mla-attention-v1-candidate",
+    "Qwen3.5/4B": "qwen35-4b-cpu-gdn-models-v1",
+    "Gemma3n/2B": "gemma3n-2b-decode-v5",
+    "Gemma4/E2B": "gemma4-e2b-decode-v5",
+    "TeleChat2/3B": "telechat2-3b-domains-deferred-v1",
+    "ChatGLM3/6B": "chatglm3-6b-mapped-v1"
+  },
+  "discovery": {
+    "report": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-dpu-layout-discovery-v1.json",
+      "sha256": "f54d7b09d1ffbe847387cef9e3ac655a1bd7019acecf5bb933f7d6b437dea9c7"
+    },
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-discovery-v1/job.json",
+      "sha256": "43105123c5f01a69b3b3f626e1b7a8bb4b23caf7b24cbaa43fed38ac2143015b"
+    },
+    "owner": {
+      "session": 41103,
+      "exit_code": 0,
+      "terminal": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-discovery-v1-owner-terminal.json",
+        "sha256": "a0b0cb3cc5669c2e04d46d41c2b0ac9c995b920a082d705d91836313b793a3d6"
+      }
+    },
+    "fresh": {
+      "session": 55650,
+      "exit_code": 0,
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-discovery-v1-fresh.json",
+      "sha256": "67e24bf9898280a0f1dfd128757330e7b1d2f27853b5da1ed97d6bbdf2c6fafc"
+    },
+    "mapping_artifact": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-discovery-v1/results/probe.mapping.npz",
+      "sha256": "22789e2ae77df14e37600f49a3b339155c5d243bd28082cf676733cf6b614f1a"
+    },
+    "fp16_rowmajor_to_N16K32": true,
+    "fp32_hypothesis_supported": false,
+    "guarded_allocations": {
+      "source_bytes": 8388608,
+      "destination_bytes": 8388608,
+      "source_pointer_offset": 4194304,
+      "destination_pointer_offset": 4194304
+    }
+  },
+  "pipeline_v1": {
+    "report": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-dpu-layout-pipeline-v1.json",
+      "sha256": "3edd6134a26e0b252270093866bf9cd9416c59d98055045bf6cce3d143b90658"
+    },
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-pipeline-v1/job.json",
+      "sha256": "df6997c5bc872796ce571f9d69fd14c60524f3456749dae5a6a08f7eb59287e5"
+    },
+    "owner": {
+      "session": 11205,
+      "exit_code": 1,
+      "terminal": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-pipeline-v1-owner-terminal.json",
+        "sha256": "87aed85d4ec57828f7451b7569b7a9397536792003b916f443344e12de291daa"
+      }
+    },
+    "fresh": {
+      "session": 20892,
+      "parent_exit": 1,
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-pipeline-v1-fresh.json",
+      "sha256": "f47776bf67bd1eb0dd802f105186935c7f29e5c51338a99ddd6f6a1328be21e5"
+    },
+    "finite_bit_tests": [
+      {
+        "index": 0,
+        "bitwise_equal": true,
+        "mismatches": 0
+      },
+      {
+        "index": 1,
+        "bitwise_equal": true,
+        "mismatches": 0
+      },
+      {
+        "index": 2,
+        "bitwise_equal": true,
+        "mismatches": 0
+      },
+      {
+        "index": 3,
+        "bitwise_equal": true,
+        "mismatches": 0
+      }
+    ],
+    "consumer_checks": 0,
+    "timing_cases": 0,
+    "validator_checks": {
+      "schema": true,
+      "complete": false,
+      "identity": true,
+      "source_after": true,
+      "primitive_scope": true,
+      "qualification_flags_false": true,
+      "finite_bit_tests": true,
+      "consumer_count": false,
+      "consumer_results": false,
+      "timing_cases": false,
+      "timings": false
+    },
+    "failure": "Consumer chain timed out before consumer checks/timing."
+  },
+  "pipeline_v2": {
+    "report": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-dpu-layout-pipeline-v2.json",
+      "sha256": "6bb9216a2834761c97ba2dfdc6b611e7db9d335af9eab96fab6bc9b67547ad9f"
+    },
+    "job": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-pipeline-v2/job.json",
+      "sha256": "cd0d8a2232ad9848ad05e01d8a5b7eaea95dd8ced9549f50346534e4213f65b5"
+    },
+    "owner": {
+      "session": 20503,
+      "exit_code": 0,
+      "terminal": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-pipeline-v2-owner-terminal.json",
+        "sha256": "b42bf011d492a2a02cfe10c7fb2a801953e5c8e3cca078be2890627c6d174ce4"
+      }
+    },
+    "fresh": {
+      "session": 66701,
+      "exit_code": 0,
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/dpu-layout-pipeline-v2-fresh.json",
+      "sha256": "8834c6a9a934151bfaa7d919656272a02c09e03a6ef5c0043a440efe675418ca"
+    },
+    "timings": [
+      {
+        "groups": 1,
+        "paired_median_control_over_pipeline": 0.8992442659710799,
+        "timing_scope": "Complete CPU input finite-check/copy, CPU packing or DPU packing, all required CPU-to-NPU visibility syncs, matrix execution in same PC chain, output invalidation and CPU copy. Known FP16 finite matrices; no CPU softmax, full attention or model claim."
+      },
+      {
+        "groups": 16,
+        "paired_median_control_over_pipeline": 0.9482928930392982,
+        "timing_scope": "Complete CPU input finite-check/copy, CPU packing or DPU packing, all required CPU-to-NPU visibility syncs, matrix execution in same PC chain, output invalidation and CPU copy. Known FP16 finite matrices; no CPU softmax, full attention or model claim."
+      }
+    ],
+    "finite_bit_tests": [
+      {
+        "index": 0,
+        "bitwise_equal": true,
+        "mismatches": 0
+      },
+      {
+        "index": 1,
+        "bitwise_equal": true,
+        "mismatches": 0
+      },
+      {
+        "index": 2,
+        "bitwise_equal": true,
+        "mismatches": 0
+      },
+      {
+        "index": 3,
+        "bitwise_equal": true,
+        "mismatches": 0
+      }
+    ],
+    "consumer_count": 12,
+    "CPU_chain_validation": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-dpu-command-links-v2.json",
+      "sha256": "d7f2660dc1d3c23855e273cba4ad04e2aa3b7e8810dc875523dc44c17cb5fb20"
+    },
+    "CPU_chain_task_counts": [
+      1,
+      2,
+      16,
+      32
+    ]
+  },
+  "pipeline_v2_recipes": {
+    "dpu_recipe_sha256": "e7e2a1fc52169b8f61b771836842a0e9433f376a95bc26dab6824fde81440687",
+    "matmul_recipe_sha256": "31b3d24c9fdbfc0371fd54def57731aa32e05a7ed950a7d10b3b4c0de250a655",
+    "cpu_helper_sha256": "47b25ca623183823d9c76669cd40639f7040ad6f798da5af097386da388876be"
+  },
+  "scope": "Synthetic DPU packing and matrix consumer operators only; timings include finite input checks/copies, CPU or DPU packing, uploads, matmul, output invalidation and CPU copying. No softmax, attention operation or model path is measured. No RKLLM win. Historical v1 timeout is preserved; v2 is accepted only after its real owner terminal, restored job, fresh-serving record and staged validator pass.",
+  "publisher": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/publish-dpu-layout-series-v1.py",
+    "sha256": "bb41f16874466d869e6fc875f159c6caffa8cd61c342a8ce8007d7bbf64fab1c"
+  }
+}

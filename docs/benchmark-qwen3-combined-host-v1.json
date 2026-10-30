@@ -1,0 +1,1059 @@
+{
+  "kind": "qwen3-combined-host-v1-evidence",
+  "updated_utc": "2026-10-29T02:25:54.713463+00:00",
+  "speed_cohort_complete": true,
+  "quality_preservation_complete": true,
+  "diagnostic_only": true,
+  "model_speed_qualified": false,
+  "all_model_goal_complete": false,
+  "quality_qualified": false,
+  "scope": {
+    "checkpoint_sha256": "6782193cfc9dc18b3ab1db4479893ef2d554650df7b33b460aeefe349e4ce035",
+    "context": 512,
+    "input_tokens": 128,
+    "output_tokens": 64,
+    "warmups_per_process": 3,
+    "measured_per_process": 3,
+    "process_order": [
+      "control",
+      "candidate",
+      "candidate",
+      "control"
+    ],
+    "CPUs": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "clocks": "adaptive; not matched to published RKLLM clocks",
+    "precision": "INT8 projections; FP16 NPU prefill attention; old-row INT8 recipe",
+    "flags_control": [
+      0,
+      0,
+      0
+    ],
+    "flags_candidate": [
+      1,
+      1,
+      1
+    ],
+    "flag_order": [
+      "BORROW_OUTPUTS",
+      "NATIVE_FROM",
+      "SWIGLU_PACK_STATIC_LAYOUT"
+    ]
+  },
+  "published_reference": {
+    "TTFT_ms": 199.09,
+    "prefill_proxy_TPS": 642.93,
+    "decode_TPS": 32.91
+  },
+  "processes": [
+    {
+      "role": "control",
+      "median_first_token_ms": 261.3911830012512,
+      "median_prefill_tps": 489.6875194118055,
+      "median_decode_tps": 37.96399831498763,
+      "teacher_bitwise_equal_control": null,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 0,
+          "borrow_outputs_enabled": false,
+          "profile": [],
+          "borrow_outputs": false,
+          "output_copies": 0,
+          "invalidate_sites": 0,
+          "driver_from_sites": 147
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 0,
+          "borrow_outputs_enabled": false,
+          "profile": [],
+          "borrow_outputs": false,
+          "output_copies": 0,
+          "invalidate_sites": 0,
+          "driver_from_sites": 119
+        }
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 59.944977,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 41.56736,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 29.629933,
+            "calls": 28
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 20.151797,
+            "calls": 147
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 16.001161,
+            "calls": 91
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 15.275793,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 15.146875,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 14.002688,
+            "calls": 56
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 9.073604,
+            "calls": 147
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 7.69433,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 5.522612,
+            "calls": 112
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 5.328664,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 5.307958,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 4.890877,
+            "calls": 6
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 4.742716,
+            "calls": 63
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 4.450761,
+            "calls": 55
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 3.004121,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 0.817525,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.199497,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.151373,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.146706,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.052208,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.017502,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.00671,
+            "calls": 28
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.001459,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.001166,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/1-control.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 265.75473599950783,
+          "prefill_tps": 481.64710788159596,
+          "decode_tps": 38.01833606486079
+        },
+        {
+          "first_token_ms": 261.3911830012512,
+          "prefill_tps": 489.6875194118055,
+          "decode_tps": 37.93096528317476
+        },
+        {
+          "first_token_ms": 250.1656990025367,
+          "prefill_tps": 511.66087321468507,
+          "decode_tps": 37.96399831498763
+        }
+      ]
+    },
+    {
+      "role": "candidate",
+      "median_first_token_ms": 253.19315000160714,
+      "median_prefill_tps": 505.54290271750057,
+      "median_decode_tps": 38.03930549149203,
+      "teacher_bitwise_equal_control": true,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 84,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "output_copies": 84,
+          "invalidate_sites": 84,
+          "driver_from_sites": 63
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 28,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "output_copies": 28,
+          "invalidate_sites": 112,
+          "driver_from_sites": 7
+        }
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 73.726875,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 69.819188,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 47.525136,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 24.792429,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 23.167872,
+            "calls": 91
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 22.525921,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 20.898158,
+            "calls": 56
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 16.928347,
+            "calls": 147
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 11.482145,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 11.192236,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 9.710299,
+            "calls": 63
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 9.225556,
+            "calls": 112
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 8.580397,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 6.456227,
+            "calls": 55
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 4.857921,
+            "calls": 6
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 4.706256,
+            "calls": 28
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 3.959889,
+            "calls": 147
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 1.3886,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.233912,
+            "calls": 1
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.198622,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.146998,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.051624,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.027124,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.010208,
+            "calls": 28
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.00175,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.001167,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/2-candidate.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 253.19315000160714,
+          "prefill_tps": 505.54290271750057,
+          "decode_tps": 37.78779413441724
+        },
+        {
+          "first_token_ms": 251.54146799832233,
+          "prefill_tps": 508.8624194594177,
+          "decode_tps": 38.13243344495794
+        },
+        {
+          "first_token_ms": 261.50143099948764,
+          "prefill_tps": 489.48106903572085,
+          "decode_tps": 38.03930549149203
+        }
+      ]
+    },
+    {
+      "role": "candidate",
+      "median_first_token_ms": 247.63844900007825,
+      "median_prefill_tps": 516.882578278301,
+      "median_decode_tps": 37.679966179819274,
+      "teacher_bitwise_equal_control": true,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 84,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "output_copies": 84,
+          "invalidate_sites": 84,
+          "driver_from_sites": 63
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 28,
+          "borrow_outputs_enabled": true,
+          "profile": [],
+          "borrow_outputs": true,
+          "output_copies": 28,
+          "invalidate_sites": 112,
+          "driver_from_sites": 7
+        }
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 63.947455,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 63.290924,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 34.44702,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 23.809819,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 21.065568,
+            "calls": 91
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 17.978621,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 16.600516,
+            "calls": 56
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 15.436504,
+            "calls": 147
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 11.627101,
+            "calls": 28
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 9.035983,
+            "calls": 147
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 8.920769,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 8.783399,
+            "calls": 112
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 7.354544,
+            "calls": 63
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 7.293586,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 6.445728,
+            "calls": 6
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 6.114402,
+            "calls": 55
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 4.358009,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 1.385395,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.25783,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.172372,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.147289,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.0525,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.023624,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.009332,
+            "calls": 28
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.00175,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.001458,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/3-candidate.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 255.0968270006706,
+          "prefill_tps": 501.7702552594412,
+          "decode_tps": 38.07999796771153
+        },
+        {
+          "first_token_ms": 244.11575700287358,
+          "prefill_tps": 524.3414090573975,
+          "decode_tps": 37.679966179819274
+        },
+        {
+          "first_token_ms": 247.63844900007825,
+          "prefill_tps": 516.882578278301,
+          "decode_tps": 37.03473448248703
+        }
+      ]
+    },
+    {
+      "role": "control",
+      "median_first_token_ms": 271.63755699803005,
+      "median_prefill_tps": 471.21613599598186,
+      "median_decode_tps": 37.92465854223583,
+      "teacher_bitwise_equal_control": true,
+      "native_execution": {
+        "prefill": {
+          "runs": 3,
+          "reason": null,
+          "direct_inputs": 91,
+          "borrowed_outputs": 0,
+          "borrow_outputs_enabled": false,
+          "profile": [],
+          "borrow_outputs": false,
+          "output_copies": 0,
+          "invalidate_sites": 0,
+          "driver_from_sites": 147
+        },
+        "decode": {
+          "runs": 375,
+          "reason": null,
+          "direct_inputs": 119,
+          "borrowed_outputs": 0,
+          "borrow_outputs_enabled": false,
+          "profile": [],
+          "borrow_outputs": false,
+          "output_copies": 0,
+          "invalidate_sites": 0,
+          "driver_from_sites": 119
+        }
+      },
+      "post_timing_prefill_profile": {
+        "scope": "One separate diagnostic request, excluded from timed medians and teacher arrays.",
+        "generated_id": 31113,
+        "calls": [
+          {
+            "name": "CPU:rockchip_int8_ffn_pack",
+            "ms": 68.154673,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_prefill_attention",
+            "ms": 67.632602,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_6144_1024",
+            "ms": 42.320437,
+            "calls": 28
+          },
+          {
+            "name": "COPY:ROCKCHIP->CPU",
+            "ms": 32.153687,
+            "calls": 147
+          },
+          {
+            "name": "CPU:rockchip_prepare_qkv",
+            "ms": 24.550932,
+            "calls": 28
+          },
+          {
+            "name": "CPU:rockchip_quantize",
+            "ms": 24.075235,
+            "calls": 91
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_4096_1024",
+            "ms": 20.107464,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_64_1024_3072",
+            "ms": 19.055435,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_128_512_4",
+            "ms": 12.459504,
+            "calls": 28
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_128_1024_2048",
+            "ms": 10.424871,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_128_256_4",
+            "ms": 9.477548,
+            "calls": 112
+          },
+          {
+            "name": "COPY:CPU->ROCKCHIP",
+            "ms": 9.237515,
+            "calls": 147
+          },
+          {
+            "name": "CPU:rockchip_dequantize",
+            "ms": 8.928937,
+            "calls": 63
+          },
+          {
+            "name": "CPU:rockchip_cpu_rmsnorm",
+            "ms": 8.419699,
+            "calls": 56
+          },
+          {
+            "name": "CPU:E_28toks2A102429",
+            "ms": 6.513683,
+            "calls": 55
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_24384_1024",
+            "ms": 6.437561,
+            "calls": 6
+          },
+          {
+            "name": "CPU:E_16_128_32_4",
+            "ms": 4.708011,
+            "calls": 28
+          },
+          {
+            "name": "CPU:E_49216_4",
+            "ms": 1.365558,
+            "calls": 56
+          },
+          {
+            "name": "ROCKCHIP:rockchip_int8_1_5632_1024",
+            "ms": 0.270371,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_toks_256_4",
+            "ms": 0.228954,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_37984_4",
+            "ms": 0.146998,
+            "calls": 1
+          },
+          {
+            "name": "CPU:gpt2_argmax",
+            "ms": 0.052499,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E",
+            "ms": 0.029461,
+            "calls": 84
+          },
+          {
+            "name": "CPU:E_16_4",
+            "ms": 0.009627,
+            "calls": 28
+          },
+          {
+            "name": "CPU:r_256_4",
+            "ms": 0.00175,
+            "calls": 1
+          },
+          {
+            "name": "CPU:E_256_4",
+            "ms": 0.001459,
+            "calls": 1
+          }
+        ]
+      },
+      "report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/4-control.json",
+      "measured_trials": [
+        {
+          "first_token_ms": 270.4262849983934,
+          "prefill_tps": 473.3267699948637,
+          "decode_tps": 37.92465854223583
+        },
+        {
+          "first_token_ms": 271.63755699803005,
+          "prefill_tps": 471.21613599598186,
+          "decode_tps": 37.89106907773965
+        },
+        {
+          "first_token_ms": 278.91072900092695,
+          "prefill_tps": 458.9282042268607,
+          "decode_tps": 37.94815794200759
+        }
+      ]
+    }
+  ],
+  "quality": {
+    "targets": 1024,
+    "prefixes": 16,
+    "all_full_vectors_bitwise_prior_candidate": true,
+    "repeat_first_sequence_bitwise": true,
+    "sampled_perplexity": 30.944998197733643,
+    "mean_NLL": 3.432211376950368,
+    "prior_candidate_report": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-original-quality-v2/results/candidate.json",
+    "original_FP16_PPL": 30.61051276753029,
+    "PPL_ratio_to_original": 1.0109271423430108,
+    "predeclared_mean_ratio_bound": 1.02,
+    "sampled_mean_quality_screen_passed": true,
+    "inherited_95pct_sequence_bootstrap_ratio": [
+      0.9870531878438954,
+      1.0358364914478901
+    ],
+    "scope": "Preserves prior sampled quality; not broad model/API/VLM/context qualification."
+  },
+  "attention_phase_profile": {
+    "scope": "Instrumented quality prefixes across 28 layers; excluded from speed comparisons. Category medians calculated independently.",
+    "prefixes": 16,
+    "stats": {
+      "pack": {
+        "median_ms": 8.6057945,
+        "min_ms": 8.11492,
+        "max_ms": 9.341942,
+        "calls_per_prefix": 28
+      },
+      "inputs_to_device": {
+        "median_ms": 1.6034134999999998,
+        "min_ms": 1.514894,
+        "max_ms": 1.78439,
+        "calls_per_prefix": 84
+      },
+      "qk_submit_wait": {
+        "median_ms": 7.783449,
+        "min_ms": 7.321304,
+        "max_ms": 8.922826,
+        "calls_per_prefix": 28
+      },
+      "scores_from_device": {
+        "median_ms": 0.5652395,
+        "min_ms": 0.552994,
+        "max_ms": 0.594117,
+        "calls_per_prefix": 28
+      },
+      "normalize": {
+        "median_ms": 18.5602235,
+        "min_ms": 15.013028,
+        "max_ms": 19.191967,
+        "calls_per_prefix": 28
+      },
+      "probabilities_to_device": {
+        "median_ms": 0.964821,
+        "min_ms": 0.902401,
+        "max_ms": 1.069817,
+        "calls_per_prefix": 28
+      },
+      "pv_submit_wait": {
+        "median_ms": 8.090284,
+        "min_ms": 7.689383,
+        "max_ms": 9.195238,
+        "calls_per_prefix": 28
+      },
+      "result_from_device": {
+        "median_ms": 0.530678,
+        "min_ms": 0.522953,
+        "max_ms": 0.542781,
+        "calls_per_prefix": 28
+      },
+      "unpack": {
+        "median_ms": 3.611364,
+        "min_ms": 3.409241,
+        "max_ms": 4.393603,
+        "calls_per_prefix": 28
+      },
+      "CPU_helpers": {
+        "median_ms": 30.9042785,
+        "min_ms": 27.642593,
+        "max_ms": 32.296937
+      },
+      "NPU_submit_wait": {
+        "median_ms": 15.848645,
+        "min_ms": 15.010687,
+        "max_ms": 18.071106
+      },
+      "sync": {
+        "median_ms": 3.6469515,
+        "min_ms": 3.519492,
+        "max_ms": 3.966609
+      },
+      "all": {
+        "median_ms": 50.2729595,
+        "min_ms": 47.986611,
+        "max_ms": 54.25445
+      }
+    }
+  },
+  "preserved_failed_attempt": {
+    "job": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/job.json",
+    "quality_exit": 1,
+    "failure": "SyntaxError: unescaped quote in scope string, before model loading/NPU submission. Four speed cases remain valid."
+  },
+  "restoration": {
+    "first_owner_restored_fresh": true,
+    "quality_owner": 688534,
+    "quality_owner_restored_fresh": true,
+    "status": "both owners terminal; exact options/settings/selection restored; both original models answered fresh requests",
+    "fresh_receipt": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2-fresh.json"
+  },
+  "artifacts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/1-control.json",
+      "sha256": "a9b9c4c2c741b652b57c4b34ef516582dacf08ce8c3e9b31eb85ff6cb6f56c01"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/1-control.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/2-candidate.json",
+      "sha256": "23d88439a7f3674d0ea67a9a21716672a0f6705399714499785760693ff7bfe5"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/2-candidate.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/3-candidate.json",
+      "sha256": "910fca83f41d5c2bb67c73869d4ac7af56b6723675cf5c27a41086cbfd9233e0"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/3-candidate.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/4-control.json",
+      "sha256": "da6ed4d89589e83a45797c6992b060cb0239dbf250e1a1c6608718c237a3a4e3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/results/4-control.teacher-logits.npz",
+      "sha256": "5a05f0a6008130f12efc7c4601d93ff88738c9b7a7aa0242fb80dc853818c1c2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate.json",
+      "sha256": "8af35780909acb31e011a50f02bb50fa121fedf16e6ed4f84ee648afcc3d6b53"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-00.npz",
+      "sha256": "dc4699c867feec6cfb95418091e27c3772d50dbbddf95febb80c07583e6f96dc"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-01.npz",
+      "sha256": "e1428b35f32cf684d895ca2c112e76b7c0bea5ec8c044a10ba4528b63daefe9e"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-02.npz",
+      "sha256": "f383054ac7123bb4796e84b73194f80b2c3b62c5b4d970473d3e8ad9257ea0b9"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-03.npz",
+      "sha256": "2539a449f984e4fe5467b9f3b6438ae57a383b2a2b2aeb1a84fc2bccb4e71179"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-04.npz",
+      "sha256": "cbc126479b629732537b41b52056b69a4424ae7101d2bc7adbae83dd937f70d6"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-05.npz",
+      "sha256": "0da2b21e32ff44b13f29831068a88984b45cca0c7aef284ee8a2f1cb5cafced5"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-06.npz",
+      "sha256": "91501ee74d40af7fb00892d77f9056015acaa9d119cabdef6c248fda1a65eeaf"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-07.npz",
+      "sha256": "9488edc54cf9de11ca2fe3840f160475bbb5a123131a9821fbe2069ab5539a43"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-08.npz",
+      "sha256": "f36a44c21bf9fb8ae7513559e4d710f1cab963173762c234189cf09b0bdd2654"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-09.npz",
+      "sha256": "dbce751241cf65c424b825adef42bfa685314e910612a66e50fd9dae63f57cd2"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-10.npz",
+      "sha256": "8f10c48496946ed06601607b906e8c1fad394a6cdfabf28f385b9dcb18fe451b"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-11.npz",
+      "sha256": "730ab6b84130d0c58672d41555c4f752fb2a65750952dfc176c61ef7998a260f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-12.npz",
+      "sha256": "7ed4c436f45598591782d5ba5307864e5a25e3af444fa1e115312fca2cadded1"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-13.npz",
+      "sha256": "73e2d89f9b29ccab3f0219702aeb82d4adf4c06a5467fef4b2d4cd2adb345fb1"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-14.npz",
+      "sha256": "7c75625acb4bd4f189363589b24693a09e654e64e2e6d6a3b1249b81211671e3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/results/candidate-logits/wikitext2-qwen3-15.npz",
+      "sha256": "b72e72963b8932b760f5be075a1c2abc6564cd70d9a38ce53eae57e1651eed7f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/job.json",
+      "sha256": "568286b30f651ede4a8faae5fc11aed09aa3dd19a2e6128d9055ff005ad71ff9"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1-owner-terminal.json",
+      "sha256": "2fcfe715311b06c42b23285176ea3424d5e6826f7c41c4eea5d97fe98fc7b568"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1-fresh.json",
+      "sha256": "efa4ae1832cc0eee907aaa4b78d8c09d73dd4fc13496e7d487bfbac98acfbb7f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3_combined_quality_v1.py",
+      "sha256": "847c2b0b00124fb545504541d386c60bdc87757c61c2cac6e7050e2208e2629a"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-host-batch-v1/logs/candidate-quality.log",
+      "sha256": "0cadfe8fe2d7191def98a185446707da0924a9f786892aa3c538dbc1c8551d53"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/qwen3_combined_quality_v2.py",
+      "sha256": "ab70b961d118cf8a284e9c3b3312fa063db5a1eefe557b78d3579353d78d20fa"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/staged/attention_phase_metrics_v1.py",
+      "sha256": "1396ff4d10cdee8edc0e563e5aad7a983705e7e67a861ba3a7e3fec52036b852"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/attention-phase-metrics-cpu-compile-v1.json",
+      "sha256": "67db34903fc9287ededf367d008d3b4e899cccd4029989af93250d83c434c24e"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2/job.json",
+      "sha256": "77d4d686f1b2660ad3219b2895414c36b543341339e82ab65600445ff3966eab"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2-owner-terminal.json",
+      "sha256": "1090582618e6c6a2369487ed2f2d4f16544ce123ad980a00e8ddc1ac10d0be30"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen3-combined-quality-v2-fresh.json",
+      "sha256": "f5fb7107d9fce0240931e0b698ac33c33515c869d788687c7fbcabb1e2008016"
+    }
+  ],
+  "complete": true
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "minicpm3-mla-int8-rejected-v1",
+  "complete": true,
+  "goal_complete": false,
+  "candidate_accepted": false,
+  "candidate_preferred": false,
+  "quality_qualified": false,
+  "RKLLM_quality_qualified": false,
+  "timing_completed": true,
+  "local_regression_passed": false,
+  "scope": "32 repeated-prompt teacher targets after one fixed128-token prefix; trained numerical regression against existing INT8 inference, not held-out, FP16 or RKLLM quality qualification.",
+  "quality_gates": {
+    "finite_vectors": true,
+    "relative_rms_at_most_0_01": false,
+    "mean_TV_at_most_0_02": false,
+    "PPL_ratio_at_most_1_02": true
+  },
+  "quality_thresholds": {
+    "relative_rms_max": 0.01,
+    "mean_probability_TV_max": 0.02,
+    "PPL_ratio_max": 1.02
+  },
+  "quality_metrics": {
+    "PPL_candidate_over_control": 0.9617852148270396,
+    "relative_rms_logits": 0.16412410390356522,
+    "mean_probability_TV": 0.06454845096247032,
+    "max_probability_TV": 0.29908975925962167,
+    "argmax_agreement": 0.96875
+  },
+  "timing_metrics": {
+    "control": {
+      "ttft_ms": 12049.753762999899,
+      "prefill_proxy_tok_s": 10.622623708132373,
+      "decode_tok_s": 3.9687520386352086,
+      "peak_rss_mib": 9629.7265625
+    },
+    "candidate": {
+      "ttft_ms": 6450.58880400029,
+      "prefill_proxy_tok_s": 19.843149809924583,
+      "decode_tok_s": 4.806797989794224,
+      "peak_rss_mib": 9747.51171875
+    }
+  },
+  "reports": {
+    "control": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-minicpm3-mla-int8-control-v1.json",
+      "sha256": "b00a0f4f4e901d918795578d4cfd918b968739e9e429031e0d32eeb492522625",
+      "raw_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-int8-model-v1/results/mla-int8-v1-control.json"
+    },
+    "candidate": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-minicpm3-mla-int8-candidate-v1.json",
+      "sha256": "ff24e0e8726e910b8482006b7ac9f88b7add7b1989f0385aaaffb60522173e93",
+      "raw_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-int8-model-v1/results/mla-int8-v1-candidate.json"
+    }
+  },
+  "quality_comparison": {
+    "path": "/home/orangepi/oNPU/docs/benchmark-minicpm3-mla-int8-quality-v1.json",
+    "sha256": "bb7a43791404e07c31cad8b3c2d563c758e67e996a6969b77c06ea6ce0154fe9"
+  },
+  "owner": {
+    "session": 66269,
+    "exit_code": 0
+  },
+  "job": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-int8-model-v1/job.json",
+    "sha256": "43d1ec096a467356c5eaf0b4bd5c47b590caebc6cc782dc9d818638b98dcb4a5"
+  },
+  "fresh_serving": {
+    "session": 66749,
+    "exit_code": 0,
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-int8-model-v1-fresh.json",
+    "sha256": "8bb065fc94dee48cdd0a37c8cbd49e73c821c5dc09d1a5c840861a3930f92839"
+  },
+  "comparison": {
+    "session": 6851,
+    "exit_code": 0
+  },
+  "frozen_source_count": 282,
+  "frozen_pin_count": 294,
+  "source_pins_match": true,
+  "preferred_rows_unchanged": true,
+  "notes": [
+    "Both timing arms are valid, but grouped INT8 candidate fails predeclared local RMS and probability-TV gates; do not promote its timing cells.",
+    "32 repeated-prompt targets are not held-out, FP16, or RKLLM quality qualification. PPL improvement on these targets does not override failed RMS/TV limits.",
+    "Surrounding CPU math and attention remain FP32. Grouped INT8 projection hook stays opt-in.",
+    "No numerical source changes were made after these measurements."
+  ]
+}

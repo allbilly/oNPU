@@ -1,0 +1,200 @@
+{
+  "schema": "SDK-lowK-register-diagnostic-v1",
+  "complete": true,
+  "goal_complete": false,
+  "scope": "Fresh read-only GDB SDK INT8 matrix command capture, M1,N2048,K64/128/256/512. Synthetic exact integer checks, not a model or timing benchmark. SDK single-core recipes; tinygrad model path may use three cores.",
+  "rows": [
+    {
+      "logical_K": 64,
+      "SDK_CNA_depth": 64,
+      "SDK_weight_depth": 64,
+      "tinygrad_model_padded_depth": 512,
+      "SDK_CBUF": "0xb1",
+      "SDK_entries": 1,
+      "SDK_precision_field": 9,
+      "pre_core_mask": 0,
+      "post_core_mask": 1,
+      "register_words": 108,
+      "capture": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-capture-v4/captures/capture-1.json",
+        "sha256": "2bb32f5fc0e2bd3de9ff86a500d75a666a8af080fe7d982e207ef7f141d94c12"
+      }
+    },
+    {
+      "logical_K": 128,
+      "SDK_CNA_depth": 128,
+      "SDK_weight_depth": 128,
+      "tinygrad_model_padded_depth": 512,
+      "SDK_CBUF": "0xb1",
+      "SDK_entries": 2,
+      "SDK_precision_field": 9,
+      "pre_core_mask": 0,
+      "post_core_mask": 1,
+      "register_words": 108,
+      "capture": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-capture-v4/captures/capture-2.json",
+        "sha256": "5624699312c465c9c866e4241972d77b89ef4c82394b75f709474dc69674a634"
+      }
+    },
+    {
+      "logical_K": 256,
+      "SDK_CNA_depth": 256,
+      "SDK_weight_depth": 256,
+      "tinygrad_model_padded_depth": 512,
+      "SDK_CBUF": "0xb1",
+      "SDK_entries": 4,
+      "SDK_precision_field": 9,
+      "pre_core_mask": 0,
+      "post_core_mask": 1,
+      "register_words": 108,
+      "capture": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-capture-v4/captures/capture-3.json",
+        "sha256": "af381f401059ab91041f1a8f2f457561dad99f00810ab89e1221b00f9fa9d36c"
+      }
+    },
+    {
+      "logical_K": 512,
+      "SDK_CNA_depth": 512,
+      "SDK_weight_depth": 512,
+      "tinygrad_model_padded_depth": 512,
+      "SDK_CBUF": "0xb1",
+      "SDK_entries": 8,
+      "SDK_precision_field": 9,
+      "pre_core_mask": 0,
+      "post_core_mask": 1,
+      "register_words": 108,
+      "capture": {
+        "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-capture-v4/captures/capture-4.json",
+        "sha256": "079b32ab336eb78216f80f00dcd64ac71f1e795bf5fd05c31a7d87becad03929"
+      }
+    }
+  ],
+  "SDK_numerical_events": [
+    {
+      "event": "case_end",
+      "m": 1,
+      "n": 2048,
+      "k": 64,
+      "aligned_k": 64,
+      "aligned_n": 2048,
+      "weight_buffer_bytes": 131072,
+      "output_stride": 2048,
+      "exact_int32_match": true,
+      "mismatch_index": 2048,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "event": "case_end",
+      "m": 1,
+      "n": 2048,
+      "k": 128,
+      "aligned_k": 128,
+      "aligned_n": 2048,
+      "weight_buffer_bytes": 262144,
+      "output_stride": 2048,
+      "exact_int32_match": true,
+      "mismatch_index": 2048,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "event": "case_end",
+      "m": 1,
+      "n": 2048,
+      "k": 256,
+      "aligned_k": 256,
+      "aligned_n": 2048,
+      "weight_buffer_bytes": 524288,
+      "output_stride": 2048,
+      "exact_int32_match": true,
+      "mismatch_index": 2048,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "event": "case_end",
+      "m": 1,
+      "n": 2048,
+      "k": 512,
+      "aligned_k": 512,
+      "aligned_n": 2048,
+      "weight_buffer_bytes": 1048576,
+      "output_stride": 2048,
+      "exact_int32_match": true,
+      "mismatch_index": 2048,
+      "expected": 0,
+      "actual": 0
+    }
+  ],
+  "captured_submissions": 4,
+  "captured_tasks": 4,
+  "captured_register_words": 432,
+  "candidate_port": "Qualify physicalK64/128/256 to remove current512-padding for small-depth projections. Examples logical64 can avoid8x paddeddepth, logical96 can usephysical128 afterqualification. No speedup inferred frombytes orregisters.",
+  "layout_differences": {
+    "CNA_0x100c": {
+      "SDK": 0,
+      "tinygrad_rowmajor": 536870912
+    },
+    "CNA_0x107c": {
+      "SDK": 4,
+      "tinygrad_rowmajor": "K/16"
+    },
+    "CNA_0x1080": {
+      "SDK": "0xffffffd",
+      "tinygrad_rowmajor": 0
+    },
+    "DPU_0x4038": {
+      "SDK": 0,
+      "tinygrad_rowmajor": "((N/4-1)<<16)|(N/4-1)"
+    }
+  },
+  "guard_scope": "Captured and qualified only SDKonecoreM1N2048. tinygrad row-major payloads/three-core split andM17/M128 need independent integer/FP32/native replay tests before planner promotion.",
+  "timing_qualified": false,
+  "model_quality_qualified": false,
+  "RKLLM_model_speed_win": false,
+  "root_work": "Reviewed and fixed script/API integration, added independent task/register BO bounds and read-only mapper, retained exclusiveNPUlock, captured/validatedactualSDKstreams. Root retains renderer/numerical optimization work.",
+  "Luna_work": "Source/register inventory, CPP SDK harness, stdlib capture-driver/validator/build/owner scaffolding, CPU-only fake debugger fixture; root reviewed before execution.",
+  "owner": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-sdk-lowk-capture-v4.py",
+    "sha256": "3bb3d72c1e83da086bdb97fbf99fdd4a3dfd4d0392f73cd3a9490a0791413fe3",
+    "session": 30591,
+    "exit_code": 0
+  },
+  "job": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-capture-v4/job.json",
+    "sha256": "5ac759694ce7bf194c412d2939c67eb09bc77f250ca636cb50109b58b63640e4"
+  },
+  "raw": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-capture-v4/results/capture.json",
+    "sha256": "abf033a406d211cf9b9231cda5a526dec3039f7b92c1d7516b3c01861e142cd8"
+  },
+  "fresh": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-capture-v4/serving-verification.json",
+    "sha256": "6c756da7e18c37606b7b16f1dcda906e8d224f39e39d93654bbd1227ff7aa7df",
+    "session": 85425,
+    "exit_code": 0
+  },
+  "GPU_worker_never_unloaded": true,
+  "CPU_only_observer_selftest": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/sdk-lowk-gdb-cpu-selftest-v1/result.json",
+    "sha256": "5145e689b58b757e6d57981a3e4ed7d0ae03438297b59b74598b02290e7a67d1",
+    "SDK_or_NPU_executed": false,
+    "complete": true
+  },
+  "preserved_attempts": [
+    {
+      "run": "sdk-lowk-capture-v1",
+      "result": "ForcedAPIcoremask7 rejected; no registers; restored/fresh."
+    },
+    {
+      "run": "sdk-lowk-capture-v2",
+      "result": "SDKall4integercasespassed; observer rejectedvalidAUTOcoremask0; restored/fresh."
+    },
+    {
+      "run": "sdk-lowk-capture-v3",
+      "result": "SDKall4integercasespassed; observer usedread-onlyGDBnumberattribute; correctedandCPUfixturetested; restored/fresh."
+    }
+  ],
+  "why_registers_not_sufficient": "Current RWKV7 native profile attributes12.5%prefill and72.5%decode toNPUcalls. CPUwork andfailedoutput-qualitygate remain separate materialgaps."
+}

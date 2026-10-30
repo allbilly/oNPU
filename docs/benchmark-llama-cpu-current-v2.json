@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "title": "Current llama.cpp CPU reference for Qwen2.5-1.5B Q8_0",
+  "receipts": {
+    "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/llama-upstream-cpu-ref-v2/results/qwen25.json",
+    "report_sha256": "ea0afd3c30f67aa76194563f6e5d74593ce2edde5dcceb74efbec62bb3b330d7",
+    "build_receipt_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/llama-current-build-v1.json",
+    "build_receipt_sha256": "d11d6d6ebfb9f08df11e24108ba557db986bfb9e23d2480cd754b6c47267ebe5",
+    "source_commit": "0893ec98f5eafad36a43a72cd1c3723d72b0d03a",
+    "source_dirty": false,
+    "version": "version: 0.8.0-dev (build 626, commit 0893ec9)\nbuilt with GNU 11.4.0 for Linux aarch64",
+    "build_directory": "/home/orangepi/rkllama/ggml-org_llama.cpp/build-onpu-cpu-0893ec9",
+    "build_command": "taskset -c 0-3 cmake --build build-onpu-cpu-0893ec9 --target llama-completion llama-bench llama-cli -j4",
+    "build_targets": {
+      "llama-completion": "built successfully",
+      "llama-bench": "built successfully",
+      "llama-cli": "not available: LLAMA_BUILD_SERVER=OFF omits tools/cli"
+    },
+    "checkpoint_path": "/home/orangepi/vlm-bench/baseline-20261021/qwen2.5-1.5b-instruct-q8_0.gguf",
+    "checkpoint_sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+    "executables": {
+      "llama-completion": {
+        "path": "/home/orangepi/rkllama/ggml-org_llama.cpp/build-onpu-cpu-0893ec9/bin/llama-completion",
+        "sha256": "1db722683b6cc7331f9e9219b74dd1edac94ffbaa24ffaa448682c603b65d342"
+      },
+      "llama-bench": {
+        "path": "/home/orangepi/rkllama/ggml-org_llama.cpp/build-onpu-cpu-0893ec9/bin/llama-bench",
+        "sha256": "ae3f9339cd8d5f98c7e0093183082efee3f8a548f11c1ef7c8cc4f858e5d0e79"
+      }
+    },
+    "previous_reference": {
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/llama-upstream-cpu-ref-v1/results/qwen25.json",
+      "report_sha256": "44567678d16b721d94ae6be1b0d499551f8ccedba9af40b1e18c15b58a194d4a",
+      "source_commit": "b92761a515ea31e852e7fbc1fad5f874b46f3718",
+      "version": "version: 0.5.0-dev (build 1, commit b92761a)\nbuilt with GNU 11.4.0 for Linux aarch64",
+      "binary_commit": "b92761a"
+    }
+  },
+  "configuration": {
+    "backend": "CPU only",
+    "gpu_layers": 0,
+    "cpu_affinity": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "checkpoint": "same GGUF as previous reference",
+    "context": 512,
+    "cli_prompt_tokens": 128,
+    "cli_output_budget": 64,
+    "temperature": 0,
+    "seed": 1234,
+    "batch": 128,
+    "ubatch": 128
+  },
+  "execution": {
+    "commands": [
+      {
+        "name": "version",
+        "exit_code": 0
+      },
+      {
+        "name": "smoke",
+        "exit_code": 0
+      },
+      {
+        "name": "cli-0",
+        "exit_code": 0
+      },
+      {
+        "name": "cli-1",
+        "exit_code": 0
+      },
+      {
+        "name": "cli-2",
+        "exit_code": 0
+      },
+      {
+        "name": "bench",
+        "exit_code": 0
+      }
+    ],
+    "all_commands_succeeded": true,
+    "smoke_output_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/llama-upstream-cpu-ref-v2/results/qwen25.smoke.out",
+    "smoke_command_exit_code": 0,
+    "version_command_exit_code": 0,
+    "cli_command_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "cli_prompt_ids_exact": [
+      true,
+      true,
+      true
+    ],
+    "cli_observed_prompt_id_counts": [
+      128,
+      128,
+      128
+    ]
+  },
+  "cli_context512": {
+    "request_count": 3,
+    "prompt_ids_verified_exactly_128_each": true,
+    "prompt_eval_boundary": "Internal prompt-evaluation counter; model loading excluded. This is pure prompt evaluation, not TTFT or the oNPU input/TTFT proxy.",
+    "decode_boundary": "63 evaluated decode tokens for a 64-token output budget; internal decode counter excludes model load.",
+    "prompt_eval_ms_median": 1560.92,
+    "prompt_eval_ms_range": [
+      1508.63,
+      1638.14
+    ],
+    "prompt_eval_tok_s_median": 82.0,
+    "prompt_eval_tok_s_range": [
+      78.14,
+      84.85
+    ],
+    "decode_ms_median": 4941.98,
+    "decode_ms_range": [
+      4407.78,
+      6037.23
+    ],
+    "decode_tok_s_median": 12.75,
+    "decode_tok_s_range": [
+      10.44,
+      14.29
+    ],
+    "trials": [
+      {
+        "prompt_ms": 1508.63,
+        "prompt_eval_tok_s": 84.85,
+        "decode_ms": 4407.78,
+        "decode_evaluated_tokens": 63,
+        "decode_tok_s": 14.29
+      },
+      {
+        "prompt_ms": 1560.92,
+        "prompt_eval_tok_s": 82.0,
+        "decode_ms": 4941.98,
+        "decode_evaluated_tokens": 63,
+        "decode_tok_s": 12.75
+      },
+      {
+        "prompt_ms": 1638.14,
+        "prompt_eval_tok_s": 78.14,
+        "decode_ms": 6037.23,
+        "decode_evaluated_tokens": 63,
+        "decode_tok_s": 10.44
+      }
+    ]
+  },
+  "standard_llama_bench": {
+    "boundary": "Separate synthetic pp128 and tg64 tests; context is derived from test size and not the CLI ctx512 request. Three benchmark samples per mode; these are not complete request timings.",
+    "backend": "CPU",
+    "threads": 4,
+    "gpu_layers": 0,
+    "pp128": {
+      "avg_tok_s": 70.759666,
+      "stddev_tok_s": 3.38738,
+      "sample_tok_s": [
+        66.8485,
+        72.7553,
+        72.6752
+      ]
+    },
+    "tg64": {
+      "avg_tok_s": 10.101472,
+      "stddev_tok_s": 0.699384,
+      "sample_tok_s": [
+        10.4276,
+        9.29859,
+        10.5782
+      ]
+    }
+  },
+  "descriptive_previous_reference": {
+    "note": "Unpaired comparison only; do not infer causality. Previous reference did not verify exact 128 prompt IDs (observed_prompt_ids_count=0). No independent output-quality equivalence test was performed.",
+    "previous_cli_medians": {
+      "prompt_eval_tok_s": 85.89,
+      "decode_tok_s": 14.73
+    },
+    "previous_llama_bench_avg_tok_s": {
+      "pp128": 82.327343,
+      "tg64": 12.192185
+    },
+    "previous_cli_prompt_ids_exact": [
+      false,
+      false,
+      false
+    ]
+  },
+  "qualification": {
+    "same_checkpoint_as_previous": true,
+    "independent_output_quality_qualified": false,
+    "http_api_qualified": false,
+    "lease": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-idle-phase-lease-v1/job.json",
+      "status": "restored",
+      "restored": true,
+      "phase": "restored",
+      "sha256": "43953313d1e8232b5cfa2a13e7c49b3811a35437a99752edfee01c86f9d28ca4",
+      "fresh_reply_count": 2
+    },
+    "interpretation": "Current upstream CPU reference is successfully built and measured with exact prompt token-count verification. This is a descriptive CPU reference only; timing boundaries differ from oNPU and the comparison to the older binary is unpaired."
+  }
+}

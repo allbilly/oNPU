@@ -1,0 +1,38 @@
+{
+  "kind": "CPU-only diagnostic; not model throughput",
+  "date": "2026-10-29",
+  "hypothesis": "Vectorize finite score loading/scaling/max before unchanged softmax",
+  "geometry": {
+    "heads": 16,
+    "capacity": 128,
+    "active": 128,
+    "total": 128,
+    "padded": 128,
+    "context": 512,
+    "row_major": true,
+    "shared_kv": true
+  },
+  "affinity": [
+    4
+  ],
+  "warmups_per_variant": 10,
+  "iterations_per_block": 100,
+  "block_order": [
+    "scalar",
+    "vector",
+    "vector",
+    "scalar"
+  ],
+  "block_median_ms": [
+    1.262314,
+    1.088191,
+    1.0871705,
+    1.260564
+  ],
+  "outputs": "13 CPU tests passed, 3 subtests; 1 hardware test skipped. Exact scalar/vector FP16 probabilities for row-major and blocked layouts, partial/full rows and finite-value rejection.",
+  "source_sha256": {
+    "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_causal_attention.c": "57ea6b67d7c994ea5b8382bdb00892c1c9c8f7575da63a49489a1a1570f4177a",
+    "/home/orangepi/tinygrad/test/runtime/test_rockchip_causal_attention.py": "4370be5e58bf0c0e17ef6811f2f41366b700bdaaa7530864e98620154a30b166"
+  },
+  "conclusion": "Proceed to full-model test; no RKLLM win established."
+}

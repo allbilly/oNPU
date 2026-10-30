@@ -1,0 +1,327 @@
+{
+  "schema": "qwen25-api-affinity-diagnostic-v1",
+  "created_local_date": "2026-10-30",
+  "status": {
+    "functional_complete": true,
+    "serving_speed_win": false,
+    "promotion_approved": false,
+    "quality_comparable": false,
+    "restoration_complete": true
+  },
+  "model": {
+    "name": "Qwen2.5 1.5B Instruct Q8_0",
+    "id": "30b26da5858517f3",
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/qwen2.5-1.5b-instruct-q8_0.gguf",
+    "checkpoint_sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+    "context": 512,
+    "api_load_options": {
+      "profile": "ROCKCHIP",
+      "context": 512,
+      "realize": true,
+      "npu_prefill": "auto",
+      "npu_decode": "auto",
+      "vision_gpu": true,
+      "speculation": "off",
+      "draft_path": null
+    }
+  },
+  "feature_flags": {
+    "required": {
+      "shared_host_pool": true,
+      "zero_pad_views": true,
+      "cpu_tuning": true,
+      "cpu_prefill_layout": true,
+      "cpu_token_inputs": true,
+      "borrow_outputs": true,
+      "borrow_batch": true,
+      "native_from": true,
+      "large_native_from": true,
+      "decode_pool": true,
+      "exp2_fast_path": true
+    },
+    "observed_worker_prefill_features": {
+      "zero_pad_views": true,
+      "cpu_tuning": true,
+      "cpu_prefill_layout": true,
+      "cpu_token_inputs": true,
+      "borrow_outputs": true,
+      "borrow_batch": true,
+      "native_from": true,
+      "large_native_from": true,
+      "decode_pool": true,
+      "exp2_fast_path": true,
+      "shared_host_pool": true
+    },
+    "all_11_active": true
+  },
+  "api_timing": {
+    "case_count": 5,
+    "requests": [
+      {
+        "phase": "measured-1",
+        "response_id": "chatcmpl-08fb090d1fbd47fa915c2054",
+        "worker_metric_id": "f101f2acff7147e7b7a11ef336e0ed53",
+        "prompt_tokens": 128,
+        "completion_tokens": 64,
+        "cached_tokens": 0,
+        "worker_ttft_ms": 1489.4657820113935,
+        "worker_prefill_tps": 85.93685168594284,
+        "worker_decode_tps": 12.048431947103955,
+        "client_wall_seconds": 6.7495975740021095,
+        "npu_submissions": 11284
+      },
+      {
+        "phase": "measured-2",
+        "response_id": "chatcmpl-99cfb1cb6f5246dda9e3fafb",
+        "worker_metric_id": "eff6666091674708b40cf0402f959872",
+        "prompt_tokens": 128,
+        "completion_tokens": 64,
+        "cached_tokens": 0,
+        "worker_ttft_ms": 1508.0330159980804,
+        "worker_prefill_tps": 84.8787782774664,
+        "worker_decode_tps": 12.1653997061582,
+        "client_wall_seconds": 6.712547104994883,
+        "npu_submissions": 11284
+      },
+      {
+        "phase": "measured-3",
+        "response_id": "chatcmpl-e5b9d6af7b354f63b1a4e6d4",
+        "worker_metric_id": "92d6eea4b0cb4061819aca9fb19c4b02",
+        "prompt_tokens": 128,
+        "completion_tokens": 64,
+        "cached_tokens": 0,
+        "worker_ttft_ms": 1095.963211992057,
+        "worker_prefill_tps": 116.79224138129892,
+        "worker_decode_tps": 12.1443640105833,
+        "client_wall_seconds": 6.308506478992058,
+        "npu_submissions": 11284
+      },
+      {
+        "phase": "measured-4",
+        "response_id": "chatcmpl-82164c68985a43baa4e90287",
+        "worker_metric_id": "1173b44547e140318c52a717162758b1",
+        "prompt_tokens": 128,
+        "completion_tokens": 64,
+        "cached_tokens": 0,
+        "worker_ttft_ms": 1492.7321110008052,
+        "worker_prefill_tps": 85.74880854822781,
+        "worker_decode_tps": 12.066755641197222,
+        "client_wall_seconds": 6.739137099008076,
+        "npu_submissions": 11284
+      },
+      {
+        "phase": "measured-5",
+        "response_id": "chatcmpl-f475b04a95764e399c8634ec",
+        "worker_metric_id": "afe656c131194d75bd604de1f5b4ea1b",
+        "prompt_tokens": 128,
+        "completion_tokens": 64,
+        "cached_tokens": 0,
+        "worker_ttft_ms": 1361.6791130043566,
+        "worker_prefill_tps": 94.00158875727021,
+        "worker_decode_tps": 12.095892798245305,
+        "client_wall_seconds": 6.594115801999578,
+        "npu_submissions": 11284
+      }
+    ],
+    "median_worker_ttft_ms": 1489.4657820113935,
+    "median_worker_prefill_tps": 85.93685168594284,
+    "median_worker_decode_tps": 12.095892798245305,
+    "median_client_wall_seconds": 6.712547104994883,
+    "npu_submissions_per_measured_request": [
+      11284
+    ],
+    "observed_submission_split_from_matched_backend": {
+      "prefill": 259,
+      "decode": 11025,
+      "total": 11284,
+      "source": "The 259/11025 split comes from the two completed Qwen ABBA candidate timing reports listed in raw_receipts; the API worker records only total=11284 per measured request."
+    },
+    "comparison": {
+      "published_rkllm": {
+        "ttft_ms": 378.31,
+        "prefill_proxy_tps": 338.35,
+        "decode_tps": 16.69
+      },
+      "matched_backend_candidates": [
+        {
+          "slug": "qwen25-exp2-fast-abba-v1-2-candidate",
+          "prefill_proxy_tps": 341.7983468004161,
+          "decode_tps": 16.834530112722305,
+          "ttft_ms": 374.4898159930017
+        },
+        {
+          "slug": "qwen25-exp2-fast-abba-v1-3-candidate",
+          "prefill_proxy_tps": 345.5929479647918,
+          "decode_tps": 16.774702790909085,
+          "ttft_ms": 370.37792800401803
+        }
+      ],
+      "api_measurement_scope": "API worker-reported timing for the five measured 128-prompt/64-output requests; not an independent quality or matched-output comparison."
+    }
+  },
+  "functional_requests": {
+    "functional_complete": true,
+    "warmups": 3,
+    "measured_requests": 5,
+    "cached_prefix": {
+      "passed": true,
+      "prompt_tokens": 128,
+      "cached_tokens": 127,
+      "completion_tokens": 1,
+      "npu_submissions": 175
+    },
+    "streaming": {
+      "passed": true,
+      "completion_tokens": 16,
+      "chunk_count": 19,
+      "first_content_seconds": 1.484118442007457,
+      "done": true,
+      "terminal_error": null
+    },
+    "near_context_boundary": {
+      "passed": true,
+      "context": 512,
+      "prompt_tokens": 448,
+      "completion_tokens": 64,
+      "npu_submissions": 12061
+    },
+    "cancel_and_recovery": {
+      "cancel_requested": true,
+      "cancel_sent": true,
+      "cancel_terminal_error": {
+        "message": "Generation stopped"
+      },
+      "session_ready_after_cancel": true,
+      "recovery_completion_tokens": 2,
+      "recovery_prompt_tokens": 128,
+      "recovery_npu_submissions": 434,
+      "passed": true
+    }
+  },
+  "affinity_diagnosis": {
+    "reason_recorded_by_correction": "API restarted from CPU0-3 controller inherited its scheduler affinity; this restricted new worker main threads. Corrected parent before next load; no clocks/governors/IRQs changed.",
+    "direct_evidence": {
+      "api_parent_pid": 1630096,
+      "api_parent_affinity_before_correction": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "api_parent_affinity_after_correction": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "original_gpu_worker_affinity_after_correction": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "original_cpu_npu_worker_affinity_after_correction": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "first_target_worker_affinity_recorded": false,
+      "first_target_worker_affinity_mask": null
+    },
+    "inference": "The first API parent was observed with CPU0-3 after the slow measurement. Since workers inherit their parent affinity and use a pin-only-if-intersection policy, an A55-only restriction of the target worker is plausible, but the target worker mask itself was not directly recorded. Treat the performance run as affinity-confounded, not as evidence that the selected recipe is inherently slow.",
+    "correction_scope": "qwen25-api-qualification-v1; preserve slow measurements, rerun under corrected affinity",
+    "correction_created_epoch": 1793293614.2681496,
+    "no_host_tuning_changed": "Correction record says clocks, governors, and IRQs were unchanged."
+  },
+  "restoration": {
+    "restored": true,
+    "selection_restored": true,
+    "settings_restored": true,
+    "original_gpu_preserved": true,
+    "original_npu_unloaded_for_target": true,
+    "fresh_original_replies": [
+      {
+        "model_id": "55a95dc3c1b93b72",
+        "response_id": "chatcmpl-c773176dbbff46c590aaa25d",
+        "prompt_tokens": 15,
+        "completion_tokens": 2
+      },
+      {
+        "model_id": "b4b92c783d8643a1",
+        "response_id": "chatcmpl-6e34fbf063d24b9c875cc868",
+        "prompt_tokens": 11,
+        "completion_tokens": 2
+      }
+    ]
+  },
+  "decision": {
+    "functional_api_path": "passed for the recorded requests at context512",
+    "performance": "not a serving win: API medians are materially slower than published/backend reference; affinity confound identified after measurement.",
+    "quality": "no API output-ID or independent FP16/RKLLM quality comparison is claimed.",
+    "promotion": "false; keep this result as a functional qualification with a performance failure/confound until corrected-affinity follow-up."
+  },
+  "followup": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v2/job.json",
+    "status": "pending corrected-affinity rerun; the job is live/mutable and has not completed.",
+    "mutable_until_restore": true,
+    "hash_policy": "No hash recorded while the follow-up lease/job may still update."
+  },
+  "raw_receipts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v1/job.json",
+      "sha256": "c1ce66f758e11085a63def38dbc14edcea8c7372bb249e74fabe880b0f29e27f"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v1/qualification.json",
+      "sha256": "4bb808c3dd41c09c826b3f77a4b36f760c802048559e59b0906361e022488226"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v1/before.json",
+      "sha256": "cd77cc3e3ffabe2c7c6e82fd0a93762b902bc436a4a7a69e2859a353b81a2697"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-qualification-v1/after.json",
+      "sha256": "1b4da42f219db6fe239271108eab75b80b16e1f87af0f51317e4bd550ebbd772"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/onpu-api-affinity-correction-v1.json",
+      "sha256": "88b900484b5f8b12d60c46be4b12801fabc0677a383cece39087a5180f5fefd3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-lease-v1/job.json",
+      "sha256": "4037c7df87f8eaf172066d87bd6105abbc95e0da78257cc5f074e59d6127fb75"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-fast-abba-v1/results/qwen25-exp2-fast-abba-v1-2-candidate.json",
+      "sha256": "c2a6c0b61d98a2ff1c0bb42003895964df46c8cdbb79d213efd88dbf55a186b4"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-exp2-fast-abba-v1/results/qwen25-exp2-fast-abba-v1-3-candidate.json",
+      "sha256": "6c3990aa47740e66ced329e9dfc832606b97c7ec701b545aba9949dffdd2c656"
+    }
+  ],
+  "receipt_notes": {
+    "job_json": "Final completed API job receipt; phase is restored.",
+    "qualification_json": "Preserved earlier qualification receipt; it still records the transient phase restoring_original_npu. No receipt was rewritten.",
+    "before_after": "Original session/settings snapshots used to verify restore.",
+    "affinity_correction": "Post-measurement correction record; does not retroactively repair the measured affinity."
+  },
+  "source_provenance": {
+    "api_controller_sha256": "a146ce8b04866a0bd1abc5ad4d120118687734f734604a4e1dc74a4980007fb2",
+    "tinygrad_source_count": 297,
+    "onpu_source_count": 12,
+    "tinygrad_source_unchanged_during_api_test": true,
+    "onpu_source_unchanged_during_api_test": true,
+    "batch_exact_teacher_hash": "eacd4233b2158fb9141a1542f6ee4592a02e95160010687e73870cc88eb810ed",
+    "batch_quality_comparison_note": "This is local teacher evidence from backend timing batch; API responses were not directly compared to these logits or to an independent FP16/RKLLM oracle."
+  }
+}

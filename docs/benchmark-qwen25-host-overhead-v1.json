@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 host-overhead diagnostics and qualification scope",
+  "raw_receipts": [
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-decode-profile-v1/results/profile.json",
+      "sha256": "4093b28c5b3a76e215b687ffdad0924accd148306a406ebb0186a4075c225848",
+      "kind": "qwen25-worker-decode-profile-v1",
+      "complete": true,
+      "requests": 5,
+      "diagnostic_only": true
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-decode-profile-v1/results/profile/request-3.pstats",
+      "sha256": "dc9efb67655dcb4892d32a050544b4c85b0f9c56f9ca042f4fb3c7e1d381124e",
+      "profiled_request_index": 3,
+      "profiled_request_id": "profile-3"
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-scalar-copy-v1/results/paired.json",
+      "sha256": "2c91fe886c12cdca75132ec9b67946631bb0704467610c49e9e1ce77bccff72e",
+      "summary": {
+        "kind": "qwen25-worker-scalar-copy-v1",
+        "run_token": "qwen25-worker-scalar-copy-v1",
+        "complete": true,
+        "throughput_qualification": false,
+        "requests": 18,
+        "identical_64_token_output_across_all_requests": true,
+        "sources_unchanged": true,
+        "source_counts": {
+          "tinygrad": 297,
+          "onpu": 12
+        },
+        "source_map_sha256": {
+          "tinygrad": "22fb3eb88df6a1ddd34571eb16aedf3d25c6d2a780850b6ec05c490f00d3ae08",
+          "onpu": "9fb4cb74141f0005ead2c8afd42fe7751d98fe576b209da8ba18f77d51c285bc"
+        },
+        "variants": {
+          "0": {
+            "measured_rows": 6,
+            "warmups": 3,
+            "median_prefill_tps": 334.53341272887985,
+            "median_decode_tps": 15.96602087283263,
+            "median_ttft_ms": 382.63470550009515,
+            "selection": [
+              "genericcopy"
+            ],
+            "npu_submissions": [
+              11284
+            ],
+            "generated_tokens": [
+              64
+            ],
+            "scalar_copy_counters": {
+              "calls": 62,
+              "generic": 62
+            },
+            "deduplicated_guard_counters": null
+          },
+          "1": {
+            "measured_rows": 6,
+            "warmups": 3,
+            "median_prefill_tps": 337.1957032770651,
+            "median_decode_tps": 16.144403710171535,
+            "median_ttft_ms": 379.6091629919829,
+            "selection": [
+              "directcopy"
+            ],
+            "npu_submissions": [
+              11284
+            ],
+            "generated_tokens": [
+              64
+            ],
+            "scalar_copy_counters": {
+              "calls": 62,
+              "generic": 0
+            },
+            "deduplicated_guard_counters": null
+          }
+        }
+      }
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-copy-guards-v1/results/paired.json",
+      "sha256": "2e43da5e9cd326a9dfab7067c55217d6db91b3e8a1325432ebc71aa984caeff0",
+      "summary": {
+        "kind": "qwen25-worker-copy-guards-v1",
+        "run_token": "qwen25-worker-copy-guards-v1",
+        "complete": true,
+        "throughput_qualification": false,
+        "requests": 18,
+        "identical_64_token_output_across_all_requests": true,
+        "sources_unchanged": true,
+        "source_counts": {
+          "tinygrad": 297,
+          "onpu": 12
+        },
+        "source_map_sha256": {
+          "tinygrad": "24404d52875c83f00c3fdef9c495eefcf4cb63e5c49bf3f552b7b7330a6ecc61",
+          "onpu": "9fb4cb74141f0005ead2c8afd42fe7751d98fe576b209da8ba18f77d51c285bc"
+        },
+        "variants": {
+          "0": {
+            "measured_rows": 6,
+            "warmups": 3,
+            "median_prefill_tps": 338.1422862301585,
+            "median_decode_tps": 16.06128189509041,
+            "median_ttft_ms": 378.5397465035203,
+            "selection": [
+              "genericcopy"
+            ],
+            "npu_submissions": [
+              11284
+            ],
+            "generated_tokens": [
+              64
+            ],
+            "scalar_copy_counters": {
+              "calls": 62,
+              "generic": 62
+            },
+            "deduplicated_guard_counters": {
+              "calls": 0,
+              "invalid": 0
+            }
+          },
+          "1": {
+            "measured_rows": 6,
+            "warmups": 3,
+            "median_prefill_tps": 346.5426366212813,
+            "median_decode_tps": 16.08480447493401,
+            "median_ttft_ms": 369.44016300549265,
+            "selection": [
+              "directcopy"
+            ],
+            "npu_submissions": [
+              11284
+            ],
+            "generated_tokens": [
+              64
+            ],
+            "scalar_copy_counters": {
+              "calls": 62,
+              "generic": 0
+            },
+            "deduplicated_guard_counters": {
+              "calls": 64,
+              "invalid": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-host-overhead-cpu-v1.json",
+      "sha256": "0d82fb92359f9fb379f1dc2b4653b95f03bd1c36f00fb7ff72d9575972d8a104",
+      "scope": "CPU-only overhead microbenchmark, not model throughput. Actual scalar snapshot implementation; synthetic validation topology matching526storageguards/175plans sharingoneoutputallocation.",
+      "opened_devices": [
+        "CPU",
+        "PYTHON"
+      ]
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-decode-profile-lease-v1/job.json",
+      "sha256": "333ab9f522226660072d0cffcf480af8fadd690abf9d7ab206658daef66b9f20",
+      "phase": "restored",
+      "restored": true,
+      "cases": [
+        {
+          "slug": "qwen25-worker-decode-profile-v1",
+          "valid": true
+        },
+        {
+          "slug": "qwen25-worker-scalar-copy-v1",
+          "valid": true
+        },
+        {
+          "slug": "qwen25-worker-copy-guards-v1",
+          "valid": true
+        }
+      ],
+      "fresh_reply_count": 2
+    },
+    {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-host-overhead-v1/job.json",
+      "sha256": "3aa1c2ae7bc768039da7b745f4818ade3e13dc3c992eb5a82313ee0814f53e61",
+      "kind": "qwen25-api-host-overhead-v1",
+      "complete": true,
+      "restored": true,
+      "request_records": 13
+    }
+  ],
+  "profile_interpretation": {
+    "copy_input_calls": 62,
+    "copy_input_self_ms": 0.804,
+    "copy_input_cumulative_ms": 103.725,
+    "native_replay_valid_calls": 64,
+    "native_replay_valid_self_ms": 0.729,
+    "native_replay_valid_cumulative_ms": 67.696,
+    "native_replay_call_self_ms": 69.105,
+    "native_replay_call_cumulative_ms": 4088.782,
+    "caveat": "Instrumented cProfile timings are inclusive and perturbed. NativeReplay.__call__ self time includes profiled counters; do not attribute these values as production overhead or subtract cumulative functions to claim a causal bottleneck."
+  },
+  "cpu_microbenchmark": {
+    "copy_median_us": {
+      "generic": 496.428825,
+      "scalar_snapshot": 49.912229999999994
+    },
+    "guard_median_us": {
+      "full_scan": 211.10253,
+      "deduplicated": 57.464839999999995
+    },
+    "synthetic_topology": "526 storage guards, 175 plans sharing one output allocation",
+    "scope": "CPU-only synthetic overhead; not model throughput"
+  },
+  "current_defaults": {
+    "ONPU_REPLAY_SCALAR_COPY": 1,
+    "ONPU_REPLAY_DEDUP_GUARDS": 1,
+    "source_path": "/home/orangepi/tinygrad/tinygrad/llm/kernels/rockchip_replay.py",
+    "source_sha256": "41a6ee22d4173ead9bed66fd4a38fe1040283d489ee5bce7c2a68e5679ca00ba",
+    "activation_evidence": "API-stage source snapshot differs from measured copy-guards source only at tinygrad/llm/kernels/rockchip_replay.py and records exactly these two default argument changes."
+  },
+  "validation_before_literal_default_activation": {
+    "scalar_copy_cases": 3,
+    "deduplicated_guard_cases": 10,
+    "cpu_tests": 32,
+    "subtests": 27,
+    "hardware_skips": 2,
+    "mypy": "pass; 286 source files",
+    "ruff": "pass"
+  },
+  "api_followup": {
+    "status": "complete and restored",
+    "receipt": "docs/benchmark-qwen25-api-host-overhead-v1.json",
+    "raw_job_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-api-host-overhead-v1/job.json",
+    "raw_job_sha256": "3aa1c2ae7bc768039da7b745f4818ade3e13dc3c992eb5a82313ee0814f53e61",
+    "request_records": 13,
+    "measured_requests": 5,
+    "median_worker_prefill_proxy_tps": 332.0540355002908,
+    "median_worker_decode_tps": 16.532671567982003,
+    "median_worker_ttft_ms": 385.47942899458576,
+    "cpu_affinity": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "replay_defaults": {
+      "ONPU_REPLAY_SCALAR_COPY": 1,
+      "ONPU_REPLAY_DEDUP_GUARDS": 1
+    },
+    "environment_overrides": {},
+    "restored_original_sessions_with_fresh_replies": 2
+  },
+  "decision": {
+    "copy_only": "small medians do not establish a repeatable end-to-end decode gain",
+    "combined": "prefill rose in this six-request cohort, but decode changed only from 16.0613 to 16.0848 tok/s (~0.15%); this is tiny/noise, not a clear whole-decode gain.",
+    "qualification": "The completed API follow-up is functionally validated and restored but remains below both published rates; output quality and model-maximum context are unqualified."
+  }
+}

@@ -1,0 +1,477 @@
+{
+  "audit_complete": true,
+  "audit_kind": "qwen2-combined-qkv-models-v1-numerical-audit",
+  "captured_input_width_summary": [
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "candidate",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "candidate",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": [
+          [
+            132,
+            132
+          ]
+        ]
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "prefill",
+      "role": "control",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-4-control"
+    },
+    {
+      "CBUF_by_M": {
+        "1": [
+          [
+            162,
+            162
+          ]
+        ],
+        "128": []
+      },
+      "K_values": [
+        896
+      ],
+      "count": 237,
+      "counts_by_total_N": {
+        "896": 72,
+        "1152": 72,
+        "4480": 3,
+        "9728": 72,
+        "24576": 18
+      },
+      "phase": "decode",
+      "role": "control",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-4-control"
+    }
+  ],
+  "captured_raw_source_summary": [
+    {
+      "batch_values": true,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "52bd3a0ad873a6c847795c2fc1a99ef5040aff3697dfb228b26dbbcfb417aea1",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-1-control",
+      "source_bytes": 26875
+    },
+    {
+      "batch_values": false,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-1-control",
+      "source_bytes": 7855
+    },
+    {
+      "batch_values": true,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "2d90277dab4913eae3acdefa2fe593349bf2d49a3805a11d3fe6850e4d249fcf",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-2-candidate",
+      "source_bytes": 26875
+    },
+    {
+      "batch_values": false,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-2-candidate",
+      "source_bytes": 7855
+    },
+    {
+      "batch_values": true,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "f43326da33645f4c41df7e7f5846c72acd31800c2f8cdee5b3f9df0fdd8e1b65",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-3-candidate",
+      "source_bytes": 26875
+    },
+    {
+      "batch_values": false,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-3-candidate",
+      "source_bytes": 7855
+    },
+    {
+      "batch_values": true,
+      "phase": "prefill",
+      "pool_part": true,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "38209884ba375c15cdf1de9489e0df7790660d90e033918d3fc9435b1b27157e",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-4-control",
+      "source_bytes": 26875
+    },
+    {
+      "batch_values": false,
+      "phase": "decode",
+      "pool_part": false,
+      "pthread_create": false,
+      "row_loop": true,
+      "sha256": "c226ba27f883102a3edc7c345d2b42ae8c96ce3f156bd8fbcbfaaf9087a6070f",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-4-control",
+      "source_bytes": 7855
+    }
+  ],
+  "checks": {
+    "237_k896_commands_each_phase_and_register_contract": true,
+    "all24_sequences_equal_pinned_row_batch_prior": true,
+    "canonical_prior_report_and_previous_teacher_hashes_valid": true,
+    "captured_native_source_hashes_pool_b4_prefill_serial_row1_decode": true,
+    "cpu_proof_current_8_source_paths_match_and51_pass_3_skip": true,
+    "four_reports_complete_valid_and_abba": true,
+    "four_teacher_arrays_fp32_32x151936_finite": true,
+    "four_teacher_arrays_uint32_bitwise_identical": true,
+    "frozen_job_pins_match_actual_files": true,
+    "independent_float64_nll_finite_report_consistent_delta_le_1e_7": true,
+    "pinned_driver_asserts_qnorm_knorm_none_and_biased_joint": true,
+    "preferred_model_flags_and_only_candidate_qkv_without_norm": true,
+    "prepared_qkv_0_controls_24_candidates_native_prefill_24_only": true,
+    "raw_ffn_calls24_both_phases_and_teacher_pool_ge192": true,
+    "source_count_291_matches_current_manifest_reports_and_cpu_proof": true,
+    "teacher_arrays_match_prior_rowbatch_candidate2_optional": true,
+    "teacher_prefix128_and_first32_int32_exact": true,
+    "workload_128_input64_context512_3warm3measured": true
+  },
+  "dataset_refs": [
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-1-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-1-control.json",
+      "report_sha256": "c2401488261d6f4fa68f3405dbca27645422db6ce8c1a6114881940b8afa77cf"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-2-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-2-candidate.json",
+      "report_sha256": "3f9f37bd3f435a5315c0e48a12da13a5c0a8a8c281a9075e4690fb886247ccb5"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-3-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-3-candidate.json",
+      "report_sha256": "b008aafc03aa10a655f59c5fd1ccf2dc63b008d5b20f8d0ca7c57a385a7847ed"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-4-control.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-combined-qkv-models-v1/results/qwen2-combined-qkv-models-v1-qwen2-05b-4-control.json",
+      "report_sha256": "e935a15f90c2111a58ae3f1915ede7fd0e0edad1e13ac437d4ff910fe7aa5ac2"
+    },
+    {
+      "npz_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1/results/qwen2-row-batch-models-v1-qwen2-05b-2-candidate.teacher-logits.npz",
+      "npz_sha256": "fad284d84b34baf62120a037579f634593f5a6bc3b6393a6b0ab36b70bebae4e",
+      "report_path": "/home/orangepi/oNPU/docs/benchmark-qwen2-row-batch-models-v1-qwen2-05b-2-candidate.json",
+      "report_sha256": "80b7f987eda0b00d7770d61812dd47abe6a62bb1ef1e7f57df49afc70a36921e",
+      "role": "prior_canonical_row_batch"
+    }
+  ],
+  "goal_complete": false,
+  "model_speed_qualified": false,
+  "quality_qualified": false,
+  "restoration_snapshot": {
+    "phase": "restoring",
+    "restored": false
+  },
+  "restoration_verified": false,
+  "source_count": 291,
+  "teacher_logits": {
+    "all_finite": true,
+    "dtype": "float32",
+    "float64_mean_nll_by_case": [
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162,
+      0.7093233022609162
+    ],
+    "float64_mean_nll_max_delta": 0.0,
+    "optional_prior_row_batch_teacher_bitwise_match": true,
+    "shape": [
+      32,
+      151936
+    ],
+    "uint32_bitwise_identical_across_four": true
+  },
+  "timing_metrics": [
+    {
+      "decode_tps_measured": [
+        42.041252053638246,
+        41.99836990324324,
+        42.02985674932539
+      ],
+      "first_token_ms_measured": [
+        258.9949039975181,
+        249.66053501702845,
+        247.70668701967224
+      ],
+      "prefill_tps_measured": [
+        494.21821829060616,
+        512.6961695859122,
+        516.7401879216711
+      ],
+      "report_median_decode_tps": 42.02985674932539,
+      "report_median_first_token_ms": 249.66053501702845,
+      "report_median_prefill_tps": 512.6961695859122,
+      "role": "control",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-1-control"
+    },
+    {
+      "decode_tps_measured": [
+        42.083910266425725,
+        42.11518891603873,
+        42.08591918971939
+      ],
+      "first_token_ms_measured": [
+        223.6573580012191,
+        231.91082599805668,
+        236.58588499529287
+      ],
+      "prefill_tps_measured": [
+        572.3039972568321,
+        551.9362860665789,
+        541.0297406480809
+      ],
+      "report_median_decode_tps": 42.08591918971939,
+      "report_median_first_token_ms": 231.91082599805668,
+      "report_median_prefill_tps": 551.9362860665789,
+      "role": "candidate",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-2-candidate"
+    },
+    {
+      "decode_tps_measured": [
+        41.914551040348336,
+        41.91425826526136,
+        41.49079601847855
+      ],
+      "first_token_ms_measured": [
+        253.13890300458297,
+        249.5587450102903,
+        253.1829430081416
+      ],
+      "prefill_tps_measured": [
+        505.6512392237183,
+        512.9052880704382,
+        505.56328352610984
+      ],
+      "report_median_decode_tps": 41.91425826526136,
+      "report_median_first_token_ms": 253.13890300458297,
+      "report_median_prefill_tps": 505.6512392237183,
+      "role": "candidate",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-3-candidate"
+    },
+    {
+      "decode_tps_measured": [
+        42.03476409443709,
+        41.772819939299325,
+        41.722866098581775
+      ],
+      "first_token_ms_measured": [
+        210.76537200133316,
+        227.62785002123564,
+        233.25694000232033
+      ],
+      "prefill_tps_measured": [
+        607.3103887254798,
+        562.3213503446909,
+        548.7510896727305
+      ],
+      "report_median_decode_tps": 41.772819939299325,
+      "report_median_first_token_ms": 227.62785002123564,
+      "report_median_prefill_tps": 562.3213503446909,
+      "role": "control",
+      "slug": "qwen2-combined-qkv-models-v1-qwen2-05b-4-control"
+    }
+  ]
+}

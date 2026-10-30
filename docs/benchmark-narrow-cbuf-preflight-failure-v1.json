@@ -1,0 +1,29 @@
+{
+  "audit_complete": true,
+  "goal_complete": false,
+  "quality_qualified": false,
+  "numeric_pass": false,
+  "trial_submitted": false,
+  "scope": "Probe command guard incorrectly expected one changed word; current command writes CNA_CBUF_CON0 twice. No matrix trial was submitted. This is not evidence against the CBUF allocation.",
+  "job": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-decode-cbuf-v1/job.json",
+    "sha256": "a4b1b6a7a530626344dbcc25579d5785c031beb418d3930eddd29645b7de5e28"
+  },
+  "terminal": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-decode-cbuf-v1-owner-terminal.json",
+    "sha256": "61d095f4407109f6a79680b0729839e8b523a85214487bb4f7395629fe885655"
+  },
+  "fresh": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-decode-cbuf-v1-fresh.json",
+    "sha256": "52dcc788942b75faf03ee0676e9e05b440097820f423be8eb4e17f3e8fc4473e"
+  },
+  "raw": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-decode-cbuf-v1/results/narrow-decode-cbuf-v1.json",
+    "sha256": "d2766ef9a48d60436ba1d387f1cc9890d69b7f29a5912d557d14c00f13699534"
+  },
+  "corrected_structure": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/narrow-cbuf-v2-command-structure.json",
+    "sha256": "97de8b400123a3e9ef3ce2280791a65cfd1d85800a6a2aeebfb6903017407a48"
+  },
+  "original_sessions_restored_and_fresh_checked": true
+}

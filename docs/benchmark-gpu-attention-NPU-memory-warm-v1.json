@@ -1,0 +1,46 @@
+{
+  "complete": true,
+  "scope": "One normal uncached text inference on the already loaded NPU model, outside any attention timing. No reset, direct power-control, or clock-policy write. Observe resulting memory condition.",
+  "model": "b4b92c783d8643a1",
+  "before_dmc": "528000000",
+  "response": {
+    "id": "chatcmpl-692c866ce69e42cab18e03fe",
+    "object": "chat.completion",
+    "created": 1793126867,
+    "model": "b4b92c783d8643a1",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": " Memory"
+        },
+        "finish_reason": "length"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 306,
+      "completion_tokens": 1,
+      "total_tokens": 307
+    }
+  },
+  "samples": [
+    {
+      "seconds": 0,
+      "dmc": "1560000000"
+    },
+    {
+      "after_delay_seconds": 0.25,
+      "dmc": "528000000"
+    },
+    {
+      "after_delay_seconds": 1,
+      "dmc": "528000000"
+    },
+    {
+      "after_delay_seconds": 2,
+      "dmc": "528000000"
+    }
+  ],
+  "sessions_and_settings_unchanged": true
+}

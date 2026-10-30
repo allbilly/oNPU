@@ -1,0 +1,6 @@
+{
+  "complete": true,
+  "runner": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-qwen2-raw-decode-models-v1.py",
+  "exit_code": 0,
+  "recorded_utc": "2026-10-28T05:36:47.412182+00:00"
+}

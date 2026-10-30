@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "title": "Qwen2.5 held-mask worker diagnostic v1",
+  "source_receipt": {
+    "report_path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-held-mask-v1/results/idle.json",
+    "report_sha256": "8230e26df78580adb315f35889e0dce81cd646065da3e71beca8703a5e2a50a8",
+    "kind": "qwen25-worker-held-mask-v1",
+    "run_token": "qwen25-worker-held-mask-v1",
+    "complete": true,
+    "errors": [],
+    "timing_scope": "Unprofiled real worker IPC metrics with mask setter inside generation; HTTP API not measured.",
+    "paths": {
+      "metrics": "requests[].terminal.metrics",
+      "warmup": "requests[].warmup",
+      "block": "requests[].block",
+      "worker_mask": "requests[].mask",
+      "output_ids": "requests[].token_ids"
+    }
+  },
+  "workload": {
+    "model": "qwen2.5-1.5b-instruct",
+    "device": "CPU+ROCKCHIP",
+    "precision": "int8",
+    "context": 512,
+    "prompt_tokens": 128,
+    "completion_tokens": 64,
+    "worker_affinity": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "generation": "ordinary, speculation off"
+  },
+  "design": {
+    "requests_total": 18,
+    "warmup_per_arm": 3,
+    "measured_per_arm": 6,
+    "measured_blocks": {
+      "ordinary_control_mask14": [
+        0,
+        3
+      ],
+      "held_mask10": [
+        1,
+        2
+      ]
+    },
+    "arm_definitions": {
+      "mask14": "ordinary worker scope (control)",
+      "mask10": "held worker scope on CPUs 5 and 7"
+    },
+    "all_requests_exactly_64_output_ids": true,
+    "all_output_id_sequences_identical": true,
+    "common_output_ids_sha256": "41eee63472c4a51c6e1e363b6a0f765b1066ab323ba88912b0994d593d22424c",
+    "common_response_text_sha256": "b26794faf5312198b659c58eefdfbd3da62b52df3526d7a1cb0a5f3e5918f86b"
+  },
+  "measured_arms": {
+    "ordinary_control": {
+      "n": 6,
+      "median": {
+        "ttft_ms": 448.596,
+        "total_seconds": 4.703,
+        "decode_tok_s": 15.037,
+        "prefill_proxy_tok_s": 285.348
+      },
+      "range": {
+        "ttft_ms": [
+          407.518,
+          788.736
+        ],
+        "total_seconds": [
+          4.564,
+          4.998
+        ],
+        "decode_tok_s": [
+          14.765,
+          15.158
+        ],
+        "prefill_proxy_tok_s": [
+          162.285,
+          314.096
+        ]
+      },
+      "blocks": {
+        "0": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 434.943,
+            "total_seconds": 4.606,
+            "decode_tok_s": 15.15,
+            "prefill_proxy_tok_s": 294.292
+          },
+          "range": {
+            "ttft_ms": [
+              407.518,
+              736.377
+            ],
+            "total_seconds": [
+              4.564,
+              4.895
+            ],
+            "decode_tok_s": [
+              15.106,
+              15.158
+            ],
+            "prefill_proxy_tok_s": [
+              173.824,
+              314.096
+            ]
+          }
+        },
+        "3": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 451.724,
+            "total_seconds": 4.712,
+            "decode_tok_s": 14.85,
+            "prefill_proxy_tok_s": 283.359
+          },
+          "range": {
+            "ttft_ms": [
+              445.468,
+              788.736
+            ],
+            "total_seconds": [
+              4.694,
+              4.998
+            ],
+            "decode_tok_s": [
+              14.765,
+              14.968
+            ],
+            "prefill_proxy_tok_s": [
+              162.285,
+              287.338
+            ]
+          }
+        }
+      }
+    },
+    "held_cpu5_7": {
+      "n": 6,
+      "median": {
+        "ttft_ms": 642.807,
+        "total_seconds": 4.717,
+        "decode_tok_s": 15.126,
+        "prefill_proxy_tok_s": 199.252
+      },
+      "range": {
+        "ttft_ms": [
+          405.241,
+          777.446
+        ],
+        "total_seconds": [
+          4.594,
+          4.893
+        ],
+        "decode_tok_s": [
+          14.968,
+          15.753
+        ],
+        "prefill_proxy_tok_s": [
+          164.642,
+          315.862
+        ]
+      },
+      "blocks": {
+        "1": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 658.94,
+            "total_seconds": 4.808,
+            "decode_tok_s": 15.307,
+            "prefill_proxy_tok_s": 194.251
+          },
+          "range": {
+            "ttft_ms": [
+              626.673,
+              777.446
+            ],
+            "total_seconds": [
+              4.626,
+              4.893
+            ],
+            "decode_tok_s": [
+              15.187,
+              15.753
+            ],
+            "prefill_proxy_tok_s": [
+              164.642,
+              204.253
+            ]
+          }
+        },
+        "2": {
+          "n": 3,
+          "median": {
+            "ttft_ms": 411.658,
+            "total_seconds": 4.61,
+            "decode_tok_s": 14.984,
+            "prefill_proxy_tok_s": 310.938
+          },
+          "range": {
+            "ttft_ms": [
+              405.241,
+              668.102
+            ],
+            "total_seconds": [
+              4.594,
+              4.877
+            ],
+            "decode_tok_s": [
+              14.968,
+              15.065
+            ],
+            "prefill_proxy_tok_s": [
+              191.588,
+              315.862
+            ]
+          }
+        }
+      }
+    }
+  },
+  "decision": {
+    "promote": false,
+    "result": "No performance win established; reject held-mask candidate.",
+    "held_decode_median_change_vs_control_percent": 0.592,
+    "reason": "Held median decode is only slightly higher (+0.6%) with overlapping ranges, while measured TTFT and prefill proxy are much worse. Blocks are ordered and show substantial drift; the result does not support a reliable whole-request gain.",
+    "scope_caveat": "Unprofiled real worker IPC metrics with mask setter inside generation. Not HTTP/API timing and not an independent output-quality evaluation. Exact token-ID equality is a same-arithmetic local regression check only.",
+    "thermal_causality": "No causal thermal-throttling claim; correlated sysfs observations do not establish causality."
+  },
+  "cleanup_context": {
+    "rejected_prototype_removed_from_production": true,
+    "pre_experiment_hashes_verified_against_head": true,
+    "saved_rejection_patch": "/home/orangepi/oNPU/M/qwen25-idle-rejected.patch",
+    "new_cpu_arithmetic_promoted": false,
+    "latest_qualified_http_reference": {
+      "prefill_tok_s": 323.31857499643604,
+      "decode_tok_s": 15.823811032887447,
+      "source": "/home/orangepi/oNPU/docs/benchmark-qwen25-api-fast-prefill-v2.json",
+      "interpretation": "Remains the latest actual HTTP/API result; diagnostic worker screens do not supersede it."
+    },
+    "shared_lease": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen25-worker-idle-phase-lease-v1/job.json",
+      "status": "restored",
+      "restored": true,
+      "phase": "restored",
+      "sha256": "43953313d1e8232b5cfa2a13e7c49b3811a35437a99752edfee01c86f9d28ca4",
+      "fresh_reply_count": 2
+    }
+  }
+}

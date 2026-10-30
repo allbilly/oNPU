@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-29",
+  "applied": false,
+  "board": "Orange Pi 5 RK3588S; vendor kernel6.1.99; rknpu/Mali OpenCL stack",
+  "sources": [
+    "https://sbcwiki.com/news/articles/tune-your-rk3588/",
+    "/home/orangepi/rk3588-npu-gpu/README.md",
+    "/home/orangepi/rk3588-npu-gpu/npu/boot/npu-fast-boot.sh",
+    "https://docs.kernel.org/scheduler/sched-util-clamp.html"
+  ],
+  "findings": {
+    "cpu_governor": "ondemand",
+    "uclamp_frequency_requires": "schedutil; old per-thread hint was not a valid frequency-control experiment under ondemand",
+    "npu_effective_irq_cpus": {
+      "36": "0",
+      "37": "0",
+      "38": "0"
+    },
+    "cpu_sleep_latency_us": 220,
+    "wake_helper_already_present": "CPU0 parked spinner active during inference, so idle latency is already partly addressed",
+    "npu_reported_max_Hz": 1000000000,
+    "dmc_range_Hz": [
+      528000000,
+      2112000000
+    ],
+    "gpu_actual_clock": "unverified: debugfs clock summary not readable without root",
+    "repo_driver_compatibility": "mainline rocket/panthor changes are not drop-in replacements for this vendor stack"
+  },
+  "proposed_transient_changes": [
+    {
+      "path": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "before": "ondemand",
+      "proposed": "performance"
+    },
+    {
+      "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor",
+      "before": "ondemand",
+      "proposed": "performance"
+    },
+    {
+      "path": "/sys/devices/system/cpu/cpufreq/policy6/scaling_governor",
+      "before": "ondemand",
+      "proposed": "performance"
+    },
+    {
+      "path": "/sys/class/devfreq/fdab0000.npu/governor",
+      "before": "rknpu_ondemand",
+      "proposed": "performance"
+    },
+    {
+      "path": "/sys/class/devfreq/dmc/governor",
+      "before": "dmc_ondemand",
+      "proposed": "performance"
+    },
+    {
+      "path": "/proc/irq/36/smp_affinity_list",
+      "before": "0-7",
+      "proposed": "6"
+    },
+    {
+      "path": "/proc/irq/37/smp_affinity_list",
+      "before": "0-7",
+      "proposed": "6"
+    },
+    {
+      "path": "/proc/irq/38/smp_affinity_list",
+      "before": "0-7",
+      "proposed": "6"
+    },
+    {
+      "path": "/sys/devices/system/cpu/cpu6/cpuidle/state1/disable",
+      "before": "0",
+      "proposed": "1"
+    }
+  ],
+  "maximum_frequencies": {
+    "little_cpu_Hz": 1800000000,
+    "big_cpu_Hz": 2256000000,
+    "npu_Hz": 1000000000,
+    "dmc_Hz": 2112000000
+  },
+  "excluded": [
+    "overclocking",
+    "voltage writes",
+    "DDR firmware changes",
+    "driver swaps",
+    "boot configuration changes"
+  ],
+  "verification": "Same current best numerical recipe and128input64outputcontext512, paired controls/candidates, saved settings restored in finally; verify effective IRQ routing, actual reported clocks and exact generated IDs. Keep governor-only and IRQ effects distinguishable.",
+  "authorization": {
+    "status": "explicitly authorized",
+    "date": "2026-10-29",
+    "user_answer": "Run temporary tuning and restore"
+  },
+  "execution_blocker": "Root-owned controls; sudo -n true and sudo -n -l require password. No writes performed.",
+  "temporary_helper": "/home/orangepi/oNPU/scripts/temporary_stock_tuning.py"
+}

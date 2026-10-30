@@ -1,0 +1,51 @@
+{
+  "schema": "trained-MLA-projection-trace-verification-v1",
+  "complete": true,
+  "timing_candidate": false,
+  "quality_qualified": false,
+  "goal_complete": false,
+  "scope": "Actual finalsingle-token decoded MLA projections from bitwise-invariant tracedtrainedrun; independentGGUFsourcehashes, GPUpackedcode/scalehashes, NumPyintegerrecipe and originalCPUFloat32dot. Doesnotqualifyotherphasesorwholemodel/RKLLMquality.",
+  "trace_invariant_bitwise": true,
+  "trace_count": 248,
+  "trace_bytes": 6348800,
+  "projection_count": 124,
+  "all_weights_match": true,
+  "all_quant_contracts_match_bitwise": true,
+  "worst_quant_contract_RMS": 0.0,
+  "worst_original_CPU_RMS": 0.0022536776950687057,
+  "reports": {
+    "trace": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-minicpm3-projection-trace-trace-v1.json",
+      "sha256": "97d71409af743bc4675014b3482733c55d0eec1937c862bfeed5c2969a068840"
+    },
+    "analysis": {
+      "path": "/home/orangepi/oNPU/docs/benchmark-minicpm3-projection-trace-analysis-v1.json",
+      "sha256": "17d5c98efb9efc0c1027a2fdf13390df9d17100a991f974def371ae7d24b6213"
+    }
+  },
+  "owner": {
+    "session": 85962,
+    "exit_code": 0,
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/run-mla-projection-trace-v1.py",
+    "sha256": "347261484ef74d029c2a1371691bbffdd2442145fd5678b4021d103165530f8f"
+  },
+  "job": {
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-projection-trace-v1/job.json",
+    "sha256": "97241749115145d409edb35cbdfda97ef3a3a2643c9aac0cfbe3f00250f379f0"
+  },
+  "fresh_serving": {
+    "session": 19314,
+    "exit_code": 0,
+    "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/mla-projection-trace-v1-fresh.json",
+    "sha256": "6f16c569100f2f101a1955d89158112b85d352648fe25cba97d8736863b811a9"
+  },
+  "analysis_exec": {
+    "session": 10430,
+    "exit_code": 0
+  },
+  "notes": [
+    "All124finalsingle-tokenquery/valueoutputs match independentscaledINT8recipe bitwise; allsource,packedweightandscalehashesmatch.",
+    "This doesnotestablishprefillprojectioncorrectness, earlierdecodepositions, wholemodel/RKLLMquality or newthroughput.",
+    "Residualfullmodel stillfailslocalqualitygates; preferredtimingrowsunchanged."
+  ]
+}

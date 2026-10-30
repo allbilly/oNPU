@@ -1,0 +1,114 @@
+{
+  "schema": "npu-expert-activation-residual-status-v1",
+  "updated": "2026-10-27T07:33:56.554816+00:00",
+  "assessment_complete": true,
+  "implementation_qualified": false,
+  "model_speed_measured": false,
+  "quality_qualified": false,
+  "goal_complete": false,
+  "feature_default": false,
+  "intent": "Two activation products A0W0+A1W0 sharing the packed expert atlas; unchanged numerical admission gates.",
+  "CPU_checks": {
+    "tests_passed": 93,
+    "subtests_passed": 80,
+    "hardware_skipped": 16,
+    "mypy_files": 278,
+    "ruff_passed": true,
+    "note": "Observed before subsequent hardware-test coverage/fixture-only edits; production source cohort unchanged afterward."
+  },
+  "model_qualification": {
+    "passed": 3,
+    "failed": 1,
+    "failure": "All-NPU activation-residual synthetic model decode disagrees with independent CPU integer recipe. Existing no-residual and CPU-down residual modes pass.",
+    "max_abs_failed_logits": 0.00152501,
+    "atol": 2e-05,
+    "rtol": 2e-05,
+    "trained_control_candidate_run": false
+  },
+  "operator_qualification": {
+    "raw_routed_geometries": [
+      [
+        2,
+        64,
+        64
+      ],
+      [
+        2,
+        1280,
+        896
+      ],
+      [
+        2,
+        1792,
+        1280
+      ],
+      [
+        6,
+        64,
+        64
+      ],
+      [
+        6,
+        1280,
+        896
+      ],
+      [
+        6,
+        1792,
+        1280
+      ]
+    ],
+    "raw_routed_inputs_per_geometry": 6,
+    "raw_routed_integer_checks_passed": 36,
+    "native_replay_checked": true,
+    "overall_suite_passed": false,
+    "failure": "Compact fixture sliced an existing NPU tensor, requesting unsupported general rendering. Routed scaled checks preceded this failure.",
+    "fixture_fix": "Prepare packed[:groups].copy() on CPU and upload it once.",
+    "fixture_fix_ruff_passed": true,
+    "fixture_fix_hardware_rerun": false
+  },
+  "preferred_benchmark_changed": false,
+  "serving_restored_and_fresh": true,
+  "references": {
+    "npu-expert-model-cpu-check-v6.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-expert-model-cpu-check-v6.json",
+      "sha256": "a6cfed0f323133bb262aa711dcb8335980d0159b51d65792fc5ded07ec451974"
+    },
+    "npu-expert-model-cpu-check-v6-fresh.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-expert-model-cpu-check-v6-fresh.json",
+      "sha256": "09a3acc5c6a7b471535c6c4291e2a0d2dae9cfefca369e21b28740e055dd8315"
+    },
+    "npu-experts-activation-v2/job.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v2/job.json",
+      "sha256": "db9f1d00fa4016f753e327fa0aadd0d53a5df93315b8914a7e20edc8a252d8d0"
+    },
+    "npu-experts-activation-v2-owner-terminal.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v2-owner-terminal.json",
+      "sha256": "d95b8d8d2fed34dbde6089471596679fd49107ef8bcf10f23bcf95c1a7b7cb88"
+    },
+    "npu-experts-activation-v2-fresh.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v2-fresh.json",
+      "sha256": "3e01daa82b500c176ebe6e0aaa77670951be5093171891d0e391c432d0d575cb"
+    },
+    "npu-experts-activation-v2/results/qualification.pytest.log": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v2/results/qualification.pytest.log",
+      "sha256": "e751037a5b676cea9f7d958d3547333f8b447951a165de99bfc863af43bb660e"
+    },
+    "npu-experts-activation-v3/job.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v3/job.json",
+      "sha256": "502d6ad391a5ff0eaac2abf3755844c121405951735521050d1f7c2fbc2970f4"
+    },
+    "npu-experts-activation-v3-owner-terminal.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v3-owner-terminal.json",
+      "sha256": "dd74a234ad508b13cb229b87cf230e28d009178540bb723230e90c963a29a75f"
+    },
+    "npu-experts-activation-v3-fresh.json": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v3-fresh.json",
+      "sha256": "b4f92befaa22d1555d9bdf38e63e34e67dae0cfd6bfe252f07b1eb03533f606d"
+    },
+    "npu-experts-activation-v3/results/qualification.residual.pytest.log": {
+      "path": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/npu-experts-activation-v3/results/qualification.residual.pytest.log",
+      "sha256": "0bedb16febf94e686b793ab8cf4cfdb533686ac47bd0c68874e41d9355099f8f"
+    }
+  }
+}

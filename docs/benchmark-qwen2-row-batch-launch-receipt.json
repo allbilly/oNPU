@@ -1,0 +1,6 @@
+{
+  "pid": 2526622,
+  "start_ticks": "18145008",
+  "supervisor": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/supervise-qwen2-row-batch-models-v1.py",
+  "console": "/home/orangepi/vlm-bench/baseline-20261021/main-task-20261023/qwen2-row-batch-models-v1-console.log"
+}
