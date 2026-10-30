@@ -12,6 +12,7 @@ from collections import deque
 from pathlib import Path
 
 from . import hardware
+from .execution import qualified_cpu_text_profile
 from .library import estimated_memory
 from .speculation import validate_speculation
 from .store import Store
@@ -47,6 +48,7 @@ class Runtime:
 
     def environment(self, profile: str, realize=True, npu_prefill="off", npu_decode="off", vision_gpu=True) -> dict:
         env = dict(os.environ)
+        env.pop("ONPU_CPU_INT8_CHECKPOINT", None)
         env.update(DEV="CPU" if profile == "ROCKCHIP" else profile,
                    PYTHONPATH=os.pathsep.join([str(self.backend), str(Path(__file__).resolve().parent.parent)]),
                    DEBUG="0", REALIZE=str(int(realize)), HALF="1", PYTHONUNBUFFERED="1", BEAM="0",
@@ -96,16 +98,23 @@ class Runtime:
             if options["profile"] not in ("CPU", "CL", "ROCKCHIP"):
                 raise EngineError("Unknown device profile", 400)
             if options["profile"] == "ROCKCHIP" and not options["realize"]:
-                raise EngineError("NPU inference requires prepared FP16 weights", 400)
+                raise EngineError("NPU inference requires model preparation", 400)
             if not options["realize"] and any(options.get(k, "off") != "off" for k in ("npu_prefill", "npu_decode")):
-                raise EngineError("NPU assistance requires prepared FP16 weights", 400)
+                raise EngineError("NPU assistance requires model preparation", 400)
             try:
                 draft_path = await asyncio.to_thread(validate_speculation, model, options)
             except (ValueError, OSError) as exc:
                 raise EngineError(str(exc), 400) from exc
             if draft_path is not None:
                 options = {**options, "draft_path": draft_path}
-            need = await asyncio.to_thread(estimated_memory, model, options["context"], options["realize"], options)
+            try:
+                cpu_checksum, cpu_layout = await asyncio.to_thread(qualified_cpu_text_profile,
+                    Path(model["path"]) if model.get("path") else None, options["context"], options["profile"],
+                    options.get("npu_prefill", "off"), realize=options["realize"])
+            except OSError:
+                cpu_checksum, cpu_layout = None, {}
+            need = await asyncio.to_thread(estimated_memory, model, options["context"],
+                                          False if cpu_layout else options["realize"], options)
             # Estimation can hash a checkpoint while the current worker remains
             # ready. A generation admitted during that await owns the worker.
             if self.active or self.state in ("loading", "preparing"):
@@ -131,12 +140,17 @@ class Runtime:
             self.load_started = time.monotonic()
             self.startup_progress = self.load_started
             try:
+                worker_environment = self.environment(self.profile, options["realize"], options.get("npu_prefill", "off"),
+                                                      options.get("npu_decode", "off"), options.get("vision_gpu", True))
+                if cpu_layout:
+                    assert isinstance(cpu_checksum, str)
+                    worker_environment["ONPU_CPU_INT8_CHECKPOINT"] = cpu_checksum
+                    worker_environment.update(cpu_layout.get("environment", {}))
                 self.process = await asyncio.create_subprocess_exec(
                     self.python, "-m", "onpu.worker", "--model", model["path"], "--context", str(options["context"]),
                     "--realize", str(int(options["realize"])),
                     "--speculation", options.get("speculation", "off"), "--draft-path", options.get("draft_path") or "",
-                    env=self.environment(self.profile, options["realize"], options.get("npu_prefill", "off"), options.get("npu_decode", "off"),
-                                         options.get("vision_gpu", True)),
+                    env=worker_environment,
                     cwd=str(self.backend), stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
                     limit=2 * 1024 * 1024, start_new_session=True)
                 self.readers = [asyncio.create_task(self._events(self.process)), asyncio.create_task(self._logs(self.process))]

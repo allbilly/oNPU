@@ -24,6 +24,14 @@ from .execution import (
     qualified_mali_options,
     qualified_mali_profile,
 )
+from .rockchip_options import (
+    TEXT_INT8_CONTEXTS,
+    checked_text_profile,
+    qwen3_prefill_profile,
+    require_text_backend,
+    text_load_options,
+    text_projection_options,
+)
 from .speculation import MODE as SPECULATIVE_MODE
 from .speculation import (
     configure_request_retention,
@@ -43,13 +51,17 @@ class Cancelled(Exception):
     pass
 
 
-# Qwen3 FP16 GGUF is qualified at 512; the shared SmolVLM checkpoint through 8192.
+# Pinned CPU/NPU execution profiles, with bounded functional qualification.
+# These entries do not assert comparable-quality RKLLM performance or accuracy.
 QUALIFIED_INT8_CHECKPOINTS: frozenset[str] = frozenset({
     "6782193cfc9dc18b3ab1db4479893ef2d554650df7b33b460aeefe349e4ce035",
     "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e",
-})
+    "2d448a9aab894b8e8e18168cf3f490cb9f65632222f29f93514ac9ecc754debe",
+} | TEXT_INT8_CONTEXTS.keys())
 QUALIFIED_INT8_CONTEXTS: dict[str, int] = {
     "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e": 8192,
+    "2d448a9aab894b8e8e18168cf3f490cb9f65632222f29f93514ac9ecc754debe": 512,
+    **TEXT_INT8_CONTEXTS,
 }
 # SmolVLM-256M: complete prepared encoder and W8A8 decoder qualified at context 512.
 QUALIFIED_GPU_VISION_CHECKPOINTS: frozenset[str] = frozenset({
@@ -68,12 +80,17 @@ def mali_profile(path: Path, context: int, profile: str, npu_prefill: str, npu_d
                                   recurrent_checkpoints=QUALIFIED_MALI_RECURRENT_CHECKPOINTS)
 
 
-def npu_precision(path: Path, profile: str, context: int) -> str:
+def npu_profile(path: Path, profile: str, context: int) -> tuple[str, str | None]:
     if profile != "ROCKCHIP" or context > 8192 or not QUALIFIED_INT8_CHECKPOINTS:
-        return "fp16"
+        return "fp16", None
     with path.open("rb") as source:
         checksum = hashlib.file_digest(source, "sha256").hexdigest()
-    return "int8" if checksum in QUALIFIED_INT8_CHECKPOINTS and context <= QUALIFIED_INT8_CONTEXTS.get(checksum, 512) else "fp16"
+    precision = "int8" if checksum in QUALIFIED_INT8_CHECKPOINTS and context <= QUALIFIED_INT8_CONTEXTS.get(checksum, 512) else "fp16"
+    return precision, checksum
+
+
+def npu_precision(path: Path, profile: str, context: int) -> str:
+    return npu_profile(path, profile, context)[0]
 
 
 def vision_gpu_enabled(path: Path, precision: str, requested: bool) -> bool:
@@ -166,9 +183,6 @@ def main():
 
         from jinja2.sandbox import ImmutableSandboxedEnvironment
         from tinygrad import nn
-        from tinygrad.llm.cli import FallbackTemplate, SimpleTokenizer
-        from tinygrad.llm.model import Transformer
-        from tinygrad.llm.serve import Handler
 
         start = time.perf_counter()
         emit("state", state="loading", message="Reading model weights")
@@ -182,7 +196,40 @@ def main():
         validate_speculation({"path": args.model}, speculative_options)
         if args.speculation != "off" and Device.DEFAULT.split(":")[0] != "CL":
             raise ValueError("Experimental DFlash2 requires the OpenCL worker")
-        if checkpoint_path.is_dir():
+        text_checkpoint = not checkpoint_path.is_dir()
+        cpu_npu = Device.DEFAULT == "CPU"
+        npu_prefill, npu_decode = os.environ.get("ONPU_NPU_PREFILL", "off"), os.environ.get("ONPU_NPU_DECODE", "off")
+        precision = "fp16"
+        precision_checksum = None
+        if npu_prefill != "off" or npu_decode != "off":
+            precision_path = checkpoint_path if text_checkpoint else checkpoint_path / "model.safetensors"
+            precision, precision_checksum = npu_profile(precision_path, os.environ.get("ONPU_PROFILE", "CPU"), args.context)
+        cpu_layout = checked_text_profile(precision_checksum, args.context, os.environ.get("ONPU_PROFILE", "CPU"), npu_prefill,
+            cpu_npu=cpu_npu, text_checkpoint=text_checkpoint, precision=precision,
+            expected_checksum=os.environ.get("ONPU_CPU_INT8_CHECKPOINT"))
+        if cpu_npu and text_checkpoint and precision == "int8":
+            cpu_layout.update(qwen3_prefill_profile(precision_checksum, args.context, os.environ.get("ONPU_PROFILE", "CPU"),
+                                                    npu_prefill, npu_decode))
+        if cpu_layout and cpu_npu and text_checkpoint and precision == "int8":
+            npu_prefill = cpu_layout["prefill"]
+            required_environment = cpu_layout.get("environment", {})
+            if os.environ.get("ONPU_CPU_INT8_CHECKPOINT") and any(os.environ.get(key) != value
+                    for key, value in required_environment.items()):
+                raise ValueError("CPU/NPU execution options changed after memory admission")
+            os.environ.update(required_environment)
+        # Tokenizer/model imports can initialize backend ContextVars too.
+        from tinygrad.llm.cli import FallbackTemplate, SimpleTokenizer
+        from tinygrad.llm.model import Transformer
+        from tinygrad.llm.serve import Handler
+        if cpu_layout and cpu_npu and text_checkpoint and precision == "int8":
+            from tinygrad.llm.kernels.rockchip import configure as configure_text
+            require_text_backend(Transformer.from_gguf, configure_text,
+                                 recurrent_scan=cpu_layout.get("cpu_recurrent_scan", False),
+                                 fast_prefill=cpu_layout.get("qwen3_fast_prefill", False),
+                                 swiglu=cpu_layout.get("dense_swiglu", False))
+            if cpu_layout.get("qwen3_fast_prefill") and not bool(getattr(sys.modules[Transformer.__module__], "ONPU_CPU_TOKEN_INPUTS", False)):
+                raise ValueError("This model's accelerated prefill requires a newer token-input backend")
+        if not text_checkpoint:
             from tinygrad.llm.vision import SmolVLM
 
             from .vlm import VisionSession, load_tokenizer
@@ -195,8 +242,8 @@ def main():
                 from tinygrad.llm.kernels.rockchip_decode import prepare_scalar_decode
                 scalar_jit = prepare_scalar_decode(model)
         else:
-            model, kv = Transformer.from_gguf(args.model, args.context, realize=bool(args.realize))
-        npu_prefill, npu_decode = os.environ.get("ONPU_NPU_PREFILL", "off"), os.environ.get("ONPU_NPU_DECODE", "off")
+            model, kv = Transformer.from_gguf(args.model, args.context,
+                **text_load_options(Transformer.from_gguf, cpu_npu=cpu_npu, precision=precision, realize=bool(args.realize)))
         gpu_kernels = None
         if Device.DEFAULT.split(":")[0] == "CL":
             from tinygrad.llm.kernels.mali import configure as configure_mali
@@ -207,28 +254,81 @@ def main():
             if shared_table := prepare_target_table(model, checkpoint_path, args.speculation, checkpoint_sha256=checksum):
                 gpu_kernels["q8_shared_table"] = shared_table
         placement = None
-        precision = "fp16"
         if npu_prefill != "off" or npu_decode != "off":
             from tinygrad.llm.kernels.rockchip import configure
-            cpu_npu = Device.DEFAULT == "CPU"
             if cpu_npu and hasattr(os, "sched_getaffinity"):
                 cores = os.sched_getaffinity(0).intersection({4, 5, 6, 7})
                 if cores:
                     os.sched_setaffinity(0, cores)
             emit("state", state="preparing", message="Preparing NPU weights and measuring optional placement")
-            precision = npu_precision(checkpoint_path, os.environ.get("ONPU_PROFILE", "CPU"), args.context)
             long_cpu = cpu_npu and args.context > 512
             packed_cpu = cpu_npu and precision == "int8" and args.context >= 4096
             placement_rows = (gpu_kernels["prefill_chunk"] if gpu_kernels else
                               vision_session.prefill_chunk if vision_session else prefill_chunks(model.max_context)[-1])
-            placement = configure(model, prefill=npu_prefill, decode=npu_decode, tile_columns=24576,
+            placement_rows = min(placement_rows, cpu_layout.get("prefill_chunk", placement_rows))
+            placement = configure(model, prefill=npu_prefill, decode=npu_decode, tile_columns=cpu_layout.get("tile_columns", 24576),
                                   prefill_rows=placement_rows,
                                   fuse_projections=cpu_npu, cpu_attention=cpu_npu,
                                   native_replay=cpu_npu, fused_ffn=cpu_npu, fused_qkv=cpu_npu,
                                   cpu_norm=cpu_npu, split_down=cpu_npu, precision=precision,
                                   cpu_pool=precision == "int8", cpu_fast_softmax=precision == "int8" or long_cpu,
                                   cache_cleaning=precision == "int8" or long_cpu, wake_helper=precision == "int8" or long_cpu,
-                                  cpu_packed_attention=packed_cpu, cpu_int8_qk=packed_cpu)
+                                  cpu_packed_attention=packed_cpu, cpu_int8_qk=packed_cpu,
+                                  **text_projection_options(configure, cpu_npu=cpu_npu, precision=precision,
+                                      text_checkpoint=text_checkpoint, prefill=npu_prefill, decode=npu_decode,
+                                      recurrent_scan=cpu_layout.get("cpu_recurrent_scan", False),
+                                      fast_prefill=cpu_layout.get("qwen3_fast_prefill", False),
+                                      swiglu=cpu_layout.get("dense_swiglu", False)))
+            if cpu_layout.get("dense_swiglu"):
+                if (placement.get("fused_swiglu_ffn_blocks") != len(model.blk)
+                        or npu_decode == "on" and placement.get("fused_swiglu_decode_blocks") != len(model.blk)):
+                    raise ValueError("This model's fused SwiGLU execution is unavailable in the selected backend")
+                if placement.get("prepared_qkv_blocks") != len(model.blk) or not placement.get("shared_host_pool"):
+                    raise ValueError("This model's shared prefill and prepared QKV execution is unavailable")
+                from tinygrad.llm.kernels.rockchip_cpu import ONPU_CPU_DECODE_POOL, ONPU_CPU_PREFILL_LAYOUT, ONPU_EXP2_FAST_PATH
+                from tinygrad.llm.kernels.rockchip_padding import ONPU_ZERO_PAD_VIEWS
+                from tinygrad.llm.kernels.rockchip_shared_pool import ONPU_PREFILL_CPU_TUNING, ONPU_SHARED_HOST_POOL
+                from tinygrad.helpers import getenv
+                placement["prefill_features"] = {
+                    "cpu_prefill_layout": bool(ONPU_CPU_PREFILL_LAYOUT), "zero_pad_views": bool(ONPU_ZERO_PAD_VIEWS),
+                    "shared_host_pool": bool(ONPU_SHARED_HOST_POOL), "cpu_tuning": bool(ONPU_PREFILL_CPU_TUNING),
+                    "cpu_token_inputs": bool(getattr(sys.modules[Transformer.__module__], "ONPU_CPU_TOKEN_INPUTS", False)),
+                    **{name: bool(getenv(key, 0)) for name, key in (
+                        ("borrow_outputs", "ONPU_REPLAY_BORROW_OUTPUTS"), ("borrow_batch", "ONPU_REPLAY_BORROW_BATCH"),
+                        ("native_from", "ONPU_REPLAY_NATIVE_FROM"))},
+                }
+                if not all(placement["prefill_features"].values()):
+                    raise ValueError("This model's CPU prefill features were not initialized")
+                extra_features = {"large_native_from": ("ONPU_REPLAY_NATIVE_FROM_LARGE", bool(getenv("ONPU_REPLAY_NATIVE_FROM_LARGE", 0))),
+                                  "decode_pool": ("ONPU_CPU_DECODE_POOL", bool(ONPU_CPU_DECODE_POOL)),
+                                  "exp2_fast_path": ("ONPU_EXP2_FAST_PATH", bool(ONPU_EXP2_FAST_PATH))}
+                for name, (key, actual) in extra_features.items():
+                    if actual != (cpu_layout["environment"].get(key, "0") == "1"):
+                        raise ValueError("This model's CPU execution features were not initialized")
+                    placement["prefill_features"][name] = actual
+                placement["prefill_profile"] = cpu_layout["prefill_profile"]
+            if cpu_layout.get("qwen3_fast_prefill"):
+                if placement.get("npu_prefill_attention_blocks") != len(model.blk) or not placement.get("shared_host_pool"):
+                    raise ValueError("This model's accelerated prefill is unavailable in the selected backend")
+                from tinygrad.helpers import getenv
+                from tinygrad.llm.kernels.rockchip_padding import ONPU_ZERO_PAD_VIEWS
+                from tinygrad.llm.kernels.rockchip_shared_pool import (
+                    ONPU_PREFILL_CPU_TUNING,
+                    ONPU_SHARED_HOST_POOL,
+                )
+                placement["prefill_features"] = {
+                    "shared_host_pool": bool(ONPU_SHARED_HOST_POOL), "zero_pad_views": bool(ONPU_ZERO_PAD_VIEWS),
+                    "cpu_tuning": bool(ONPU_PREFILL_CPU_TUNING),
+                    "cpu_token_inputs": bool(getattr(sys.modules[Transformer.__module__], "ONPU_CPU_TOKEN_INPUTS", False)),
+                    **{name: bool(getenv(key, 0)) for name, key in (
+                        ("borrow_outputs", "ONPU_REPLAY_BORROW_OUTPUTS"), ("borrow_batch", "ONPU_REPLAY_BORROW_BATCH"),
+                        ("native_from", "ONPU_REPLAY_NATIVE_FROM"), ("static_layout", "ONPU_SWIGLU_PACK_STATIC_LAYOUT"))},
+                }
+                if not all(placement["prefill_features"].values()):
+                    raise ValueError("This model's accelerated prefill options were not initialized")
+                placement["prefill_profile"] = "qwen3-0.6b-context512"
+            if cpu_layout.get("cpu_recurrent_scan") and placement.get("cpu_recurrent_blocks") != len(model.blk):
+                raise ValueError("The selected backend did not prepare every recurrent block")
             if not placement["decode_layers"] and not placement["prefill_layers"]:
                 if os.environ.get("ONPU_PROFILE") == "ROCKCHIP":
                     raise ValueError("This model has no supported NPU projections. Choose the GPU or CPU profile.")
@@ -285,11 +385,12 @@ def main():
                 setattr(model, attr, checkpoint(getattr(model, attr)))
 
         adaptive_prefill = bool(placement and placement.get("native_replay") and placement["prefill_layers"])
+        prefill_limit = cpu_layout.get("prefill_chunk", model.max_context)
         if adaptive_prefill:
             original_generate = model.generate
             def generate(tokens, chunk_size=None, **kwargs):
                 if chunk_size is None:
-                    chunk_size = prefill_chunk(len(tokens) - model.get_start_pos(tokens), model.max_context)
+                    chunk_size = prefill_chunk(len(tokens) - model.get_start_pos(tokens), min(model.max_context, prefill_limit))
                 return original_generate(tokens, chunk_size=chunk_size, **kwargs)
             model.generate = generate
         elif gpu_kernels and gpu_kernels.get("linear_layers"):
@@ -304,6 +405,7 @@ def main():
         # Optional CPU/NPU placement also prepares each adaptive prompt size.
         chunks_to_warm = (prefill_chunks(model.max_context) if adaptive_prefill else
                           [gpu_kernels["prefill_chunk"]] if gpu_kernels and gpu_kernels.get("linear_layers") else [min(32, model.max_context)])
+        chunks_to_warm = [chunk for chunk in chunks_to_warm if chunk <= prefill_limit]
         native = bool(placement and placement.get("native_replay") and (placement["decode_layers"] or placement["prefill_layers"]))
         stages = len(chunks_to_warm) * 2
         stage = 0

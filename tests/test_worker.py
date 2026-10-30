@@ -46,6 +46,34 @@ def test_int8_context_extension_is_specific_to_the_qualified_checkpoint(tmp_path
     assert worker.npu_precision(path, "ROCKCHIP", 1024) == "fp16"
 
 
+def test_gemma2_execution_profile_is_limited_to_its_pinned_checkpoint_and_512_context(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    from onpu import worker
+
+    path = tmp_path / "model.gguf"
+    path.write_bytes(b"pinned identity is supplied by the checksum fixture")
+    checksum = "2d448a9aab894b8e8e18168cf3f490cb9f65632222f29f93514ac9ecc754debe"
+    monkeypatch.setattr(worker.hashlib, "file_digest", lambda *args: SimpleNamespace(hexdigest=lambda: checksum))
+    assert worker.npu_profile(path, "ROCKCHIP", 512) == ("int8", checksum)
+    assert worker.npu_precision(path, "ROCKCHIP", 513) == "fp16"
+    assert worker.npu_precision(path, "CL", 512) == "fp16"
+
+
+def test_rwkv_int8_selection_is_limited_to_the_checked_checkpoint_and_context(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    from onpu import worker
+    from onpu.rockchip_options import RWKV7_CHECKPOINT
+
+    path = tmp_path / "rwkv.gguf"
+    path.write_bytes(b"identity supplied by checksum fixture")
+    monkeypatch.setattr(worker.hashlib, "file_digest", lambda *args: SimpleNamespace(hexdigest=lambda: RWKV7_CHECKPOINT))
+    assert worker.npu_profile(path, "ROCKCHIP", 512) == ("int8", RWKV7_CHECKPOINT)
+    assert worker.npu_precision(path, "ROCKCHIP", 513) == "fp16"
+    assert worker.npu_precision(path, "CL", 512) == "fp16"
+
+
 def test_vision_gpu_requires_qualified_precision_opt_in_and_driver_support(tmp_path, monkeypatch):
     import hashlib
     import sys

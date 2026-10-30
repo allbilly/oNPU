@@ -15,7 +15,7 @@ from urllib.parse import quote
 
 import httpx
 
-from .execution import qualified_mali_profile
+from .execution import qualified_cpu_text_profile, qualified_mali_profile
 from .speculation import draft_memory, measured_pair_memory
 from .store import Store
 
@@ -223,13 +223,23 @@ def estimated_memory(model: dict, context: int, realize: bool, options: dict | N
     if (pair := measured_pair_memory(model, context, realize, options, refresh=refresh)) is not None:
         # This whole-worker peak already includes the draft; do not reserve it twice.
         return pair
+    path_value = model.get("path")
+    valid_path = isinstance(path_value, (str, Path)) and bool(path_value)
+    if realize and options and valid_path:
+        try:
+            _, layout = qualified_cpu_text_profile(Path(model["path"]), context, options.get("profile", ""),
+                                                   options.get("npu_prefill", "off"), realize=realize, refresh=refresh)
+            if layout:
+                realize = False
+        except OSError:
+            pass
     kv_bytes = 2 if model.get("architecture") in ("qwen3", "llama", "idefics3") else 4
     kv = 2 * model.get("layers", 0) * model.get("kv_heads", 0) * model.get("head_dim", 0) * context * kv_bytes
     # Source, execution and prepared weight layouts, FP16 standard-transformer KV,
     # conservative cache storage for other architectures, and bounded workspace.
     draft = draft_memory(context, options)
     conservative = model["size"] + model.get("parameters", 0) * (4 if realize else 2) + kv + 512 * 1024**2 + draft
-    if (options and model.get("architecture") == "qwen35" and model.get("path")
+    if (options and model.get("architecture") == "qwen35" and valid_path
             and any((model["size"], model.get("parameters")) == record[:2] for record in _UNPACKED_MALI_MEMORY.values())):
         path = Path(model["path"])
         try:

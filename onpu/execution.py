@@ -7,6 +7,8 @@ import threading
 from collections import OrderedDict
 from pathlib import Path
 
+from .rockchip_options import TEXT_INT8_CONTEXTS, text_execution_profile
+
 # Exact projection arithmetic at 256 held-out positions and synthetic 32K/40K
 # cache boundaries. This does not qualify semantic answer quality at 40K.
 QUALIFIED_MALI_CHECKPOINTS: dict[str, int] = {
@@ -62,6 +64,15 @@ def checkpoint_checksum(path: Path, *, refresh: bool = True) -> str:
         while len(_checksum_cache) > 32:
             _checksum_cache.popitem(last=False)
     return digest
+
+
+def qualified_cpu_text_profile(path: Path | None, context: int, profile: str, prefill: str, *,
+                               realize: bool = True, refresh: bool = True) -> tuple[str | None, dict]:
+    if (not realize or path is None or path.suffix != ".gguf" or profile != "ROCKCHIP" or prefill != "auto"
+            or not any(1 <= context <= maximum for maximum in TEXT_INT8_CONTEXTS.values())):
+        return None, {}
+    checksum = checkpoint_checksum(path, refresh=refresh)
+    return checksum, text_execution_profile(checksum, context, profile, prefill)
 
 
 def qualified_mali_profile(path: Path, context: int, profile: str, npu_prefill: str, npu_decode: str, *,
